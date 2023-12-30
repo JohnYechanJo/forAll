@@ -31,4 +31,31 @@ Welcome to the repository of  [**For All**](https://www.instagram.com/for.all_of
 5. **Access the Web Interface**:
    Open your browser and visit `http://localhost:8080/` to view the application.
 
+## Branch and Commit Rule
+
+1. **Branch Naming Convention**:
+   Branches in this repository should be named after the respective functions or features they are associated with.
+   Each branch should be created before starting work on a specific function or feature.
+
+   ### Example:
+   ```
+   feature/customer-input
+   ```
+
+2. **Commit Message Convention**:
+   
+   Commit Message Format:
+   ```
+   [Date Author] Commit Message
+   ```
+
+   ### Example:
+   ```
+   [12.30 승범] Implemented customer input model
+   ```
+
+[12.30] represents the date of the commit.
+승범 is the author's name or identifier.
+Implemented customer input model is a concise and descriptive commit message.
+
 
