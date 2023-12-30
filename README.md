@@ -51,11 +51,7 @@ Welcome to the repository of  [**For All**](https://www.instagram.com/for.all_of
 
    ### Example:
    ```
-   [12.30 승범] Implemented customer input model
+   [12.30 승범] 고객 정보입력 모델 구현
    ```
-
-[12.30] represents the date of the commit.
-승범 is the author's name or identifier.
-Implemented customer input model is a concise and descriptive commit message.
 
 
