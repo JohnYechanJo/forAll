@@ -1,10 +1,11 @@
 HELP.md
 .gradle
 build/
+src/main/frontend/build/
+src/main/frontend/node_modules/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-
 ### STS ###
 .apt_generated
 .classpath
