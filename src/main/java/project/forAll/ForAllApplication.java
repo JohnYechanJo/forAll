@@ -1,4 +1,4 @@
-package com.example.forAll;
+package project.forAll;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
