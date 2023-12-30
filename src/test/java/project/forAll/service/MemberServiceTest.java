@@ -12,6 +12,8 @@ import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// @ RunWith(SpringRunner.class)    Java 버전이 올라가면서 바뀐 듯함
+// 테스트 결과 "Could not open JPA EntityManager for transaction" 오류 발생
 @SpringBootTest
 @Transactional
 public class MemberServiceTest {
