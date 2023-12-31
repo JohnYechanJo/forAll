@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.forAll.domain.Member;
+import project.forAll.form.MemberForm;
 import project.forAll.repository.MemberRepository;
 
 import javax.transaction.Transactional;
@@ -36,5 +37,25 @@ public class MemberService {
 
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
+    }
+
+    /**
+     * MemberForm으로 member 생성
+     * @param mf
+     * @return member
+     */
+    public Member build(final MemberForm mf){
+        final Member member = new Member();
+        member.setRole(mf.getRole());
+        member.setLoginId(mf.getLoginId());
+        member.setLoginPw(mf.getLoginPw());
+        member.setName(mf.getName());
+        member.setBirthday(mf.getBirthday());
+        member.setGender(mf.getGender());
+        member.setEmail(mf.getEmail());
+        member.setPhoneNum(mf.getPhoneNum());
+
+        return member;
+
     }
 }

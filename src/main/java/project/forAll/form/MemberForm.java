@@ -1,24 +1,14 @@
-package project.forAll.domain;
+package project.forAll.form;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import project.forAll.domain.enums.Gender;
 import project.forAll.domain.enums.MemberRole;
 
-import javax.persistence.*;
-
-@Entity
 @Getter @Setter
-public class Member {
-
-    @Id @GeneratedValue
-    // 가입 순서에 따라 1, 2, ... 주어지는 id (저는 항상 필수로 넣었는데 없어도 되면 삭제해주세요)
-    @Column(name = "user_id")
-    private Long id;
-
-    // interface로 쪼개는 방법을 모르겠어서 일단 role로 적어둡니다..
-    // 권한 확인 과정에서 보안상 문제가 발생할까봐 쪼개보려고 했는데, current User를 확인하는 Service를 만들면 그만이고, DB 만들기 까다로워질 수도 있어서
-    // 그냥 role도 좋은것 같습니다
+@NoArgsConstructor
+public class MemberForm {
     private MemberRole role;
     // 로그인 ID
     private String loginId;
@@ -39,4 +29,15 @@ public class Member {
     // @Pattern(regexp = "^\\d{10,11}$", message = "Phone number should be 10 or 11 digits")
     private String phoneNum;
 
+    public MemberForm(final String role, final String loginId, final String loginPw, final String name, final String birthday, final String businessNum, final String gender, final String email, final String phoneNum){
+        setRole(MemberRole.parse(role));
+        setLoginId(loginId);
+        setLoginPw(loginPw);
+        setName(name);
+        setBirthday(birthday);
+        setBusinessNum(businessNum);
+        setGender(Gender.parse(gender));
+        setEmail(email);
+        setPhoneNum(phoneNum);
+    }
 }
