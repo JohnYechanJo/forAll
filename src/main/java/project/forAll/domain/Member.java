@@ -17,8 +17,8 @@ public class Member {
     private Long id;
 
     // interface로 쪼개는 방법을 모르겠어서 일단 role로 적어둡니다..
-    // 권한 확인 과정에서 보안상 문제가 발생할까봐 쪼개보려고 했는데, current User를 확인하는 Service를 만들면 그만이고, DB 만들기 까다로워질 수도 있어서
-    // 그냥 role도 좋은것 같습니다
+    // 권한 확인 과정에서 보안상 문제가 발생할까봐 쪼개보려고 했는데, current User를 확인하는 Service를 만들면 그만이고,
+    // DB 만들기 까다로워질 수도 있어서 그냥 role도 좋은것 같습니다
     private MemberRole role;
     // 로그인 ID
     private String loginId;

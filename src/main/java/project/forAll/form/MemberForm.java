@@ -29,7 +29,9 @@ public class MemberForm {
     // @Pattern(regexp = "^\\d{10,11}$", message = "Phone number should be 10 or 11 digits")
     private String phoneNum;
 
-    public MemberForm(final String role, final String loginId, final String loginPw, final String name, final String birthday, final String businessNum, final String gender, final String email, final String phoneNum){
+    public MemberForm(final String role, final String loginId, final String loginPw, final String name,
+                      final String birthday, final String businessNum, final String gender, final String email,
+                      final String phoneNum){
         setRole(MemberRole.parse(role));
         setLoginId(loginId);
         setLoginPw(loginPw);

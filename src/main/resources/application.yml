@@ -16,7 +16,6 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
       database: mysql
 
-
 server:
   port: 8080
   servlet:
