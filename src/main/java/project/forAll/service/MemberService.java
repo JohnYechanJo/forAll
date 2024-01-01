@@ -3,6 +3,7 @@ package project.forAll.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import project.forAll.domain.Member;
 import project.forAll.domain.enums.Gender;
@@ -12,13 +13,12 @@ import project.forAll.repository.MemberRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
 
@@ -27,15 +27,27 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public Long join(Member member) {
-        // validateDuplicateMember(member);
+    @Transactional
+    public Long saveMember(Member member) {
+        validateDuplicateLoginId(member);
         memberRepository.save(member);
         return member.getId();
     }
 
-    /* 중복 회원을 구별하는 방법 (전화번호? 이름과 생년월일?)
-    private void validateDuplicateMember(Member member) {
-        List<Member> findMembers = memberRepository.findByNum(member.getNum())
+    // 중복 회원을 구별하는 방법 (전화번호? 이름과 생년월일?)
+    private void validateDuplicateLoginId(Member member) {
+        List<Member> findMembers = memberRepository.findByLoginId(member.getLoginId());
+        if (!findMembers.isEmpty()) {
+            throw new IllegalStateException("이미 존재하는 ID입니다.");
+        }
+    }
+
+    /*
+    private void validateDuplicateEmail(Member member) {
+        List<Member> findMembers = memberRepository.findByEmail(member.getEmail());
+        if (!findMembers.isEmpty()) {
+            throw new IllegalStateException("중복된 이메일입니다.");
+        }
     }
      */
 
@@ -45,8 +57,8 @@ public class MemberService {
     }
      */
 
-    public Member findOne(Long id) {
-        return memberRepository.findOne(id);
+    public Member findById(Long id) {
+        return memberRepository.findById(id);
     }
 
     /**
@@ -54,6 +66,7 @@ public class MemberService {
      * @param mf
      * @return member
      */
+    @Transactional
     public Member build(final MemberForm mf){
         final Member member = new Member();
         member.setRole(mf.getRole());
@@ -77,7 +90,7 @@ public class MemberService {
     @Transactional
     public Member update(Long id, String role, String loginId, String loginPw, String name, String birthday,
                              String businessNum, String gender, String email, String phoneNum) {
-        Member member = memberRepository.findOne(id);
+        Member member = memberRepository.findById(id);
         member.setRole(MemberRole.parse(role));
         member.setLoginId(loginId);
         member.setLoginPw(loginPw);

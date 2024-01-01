@@ -50,7 +50,7 @@ public class APIMemberControllerTest {
         Member member = createMember("Owner", "forall", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "남자", "forall@gmail.com",
                 "01010101010");
-        Long memberId = memberService.join(member);
+        Long memberId = memberService.saveMember(member);
 
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/members/"+memberId))
                 .andExpect(status().isOk());
@@ -71,7 +71,7 @@ public class APIMemberControllerTest {
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse().getContentAsString();
-        final Member member = memberService.findOne(Long.parseLong(memberId));
+        final Member member = memberService.findById(Long.parseLong(memberId));
 
         Assert.assertEquals(member.getLoginId(), mf.getLoginId());
     }
