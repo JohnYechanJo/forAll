@@ -36,14 +36,12 @@ public class MemberRepository {
                 .getResultList();
     }
 
-    /* 이메일 입력이 선택이라 이메일 중복은 확인할 필요 없지 않을까요..?
     public List<Member> findByEmail(String email) {
         return em.createQuery("select m from Member m where m.email = :email",
                         Member.class)
                 .setParameter("email", email)
                 .getResultList();
     }
-     */
 
     // Member 삭제
     public void deleteById(Long id) {

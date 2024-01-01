@@ -13,8 +13,6 @@ import project.forAll.repository.MemberRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -30,6 +28,7 @@ public class MemberService {
     @Transactional
     public Long saveMember(Member member) {
         validateDuplicateLoginId(member);
+        validateDuplicateEmail(member);
         memberRepository.save(member);
         return member.getId();
     }
@@ -42,14 +41,12 @@ public class MemberService {
         }
     }
 
-    /*
     private void validateDuplicateEmail(Member member) {
         List<Member> findMembers = memberRepository.findByEmail(member.getEmail());
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("중복된 이메일입니다.");
         }
     }
-     */
 
     /* 필요하다면 admin 사이트를 위해서??
     public List<Member> findMembers() {

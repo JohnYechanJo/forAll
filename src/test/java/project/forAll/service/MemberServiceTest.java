@@ -28,7 +28,7 @@ public class MemberServiceTest {
     @Autowired MemberRepository memberRepository;
 
     @Test
-    public void 회원가입() {
+    public void 회원가입() throws Exception {
 
         // Given
         Member member = createMember("Owner", "forall1", "forall1230", "천승범",
@@ -67,7 +67,27 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void 정보수정() {
+    public void 중복_회원_이메일_예외() throws Exception {
+
+        // Given
+        Member member1 = createMember("Owner", "forall1", "forall1230", "천승범",
+                "20010101", "010101-01-010101", "Male", "forall@gmail.com",
+                "01010101010");
+        Member member2 = createMember("Owner", "forall2", "forall1230", "천승범",
+                "20010101", "010101-01-010101", "Male", "forall@gmail.com",
+                "01010101010");
+
+        // When
+        memberService.saveMember(member1);
+
+        // Then
+        assertThrows(IllegalStateException.class, () -> {
+            memberService.saveMember(member2);
+        });
+    }
+
+    @Test
+    public void 정보수정() throws Exception {
 
         // Given
         Member member = createMember("Customer", "forall", "forall1230", "김윤태",
