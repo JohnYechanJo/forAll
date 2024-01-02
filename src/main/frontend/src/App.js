@@ -11,6 +11,7 @@ import SignUpCompletePage from "./pages/SignUpCompletePage";
 import PersonalInfoModifyPage from './pages/PersonalInfoModifyPage';
 import PlaceInfoModifyPage from './pages/PlaceInfoModifyPage';
 import PersonalInfoModifyPage2 from './pages/PersonalInfoModifyPage2';
+import ErrorPage from "./pages/ErrorPage";
 function App() {
   return (
       <Routes>
@@ -24,6 +25,8 @@ function App() {
           <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
           <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />
           <Route path="/placeInfoModify" element={<PlaceInfoModifyPage />} />
+
+          <Route path="/error" element={<ErrorPage />}/>
       </Routes>
   );
 }
