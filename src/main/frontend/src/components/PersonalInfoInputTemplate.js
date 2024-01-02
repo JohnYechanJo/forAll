@@ -1,7 +1,8 @@
 import {useCallback, useState} from "react";
 import {Gender} from "../utils/enums";
+import axios from "axios";
 
-const PersonalInfoInputTemplate = ({role, setId, setPw, setPwCheck,setName,setEmail,setPhone,setCerifiedNum,setBirthDay,setGender}) => {
+const PersonalInfoInputTemplate = ({role, setId, setPw, setPwCheck,setName,setEmail,setPhone,setCerifiedNum,setBirthDay,setGender, checkDuplicatedId, checkDuplicatedEmail, isCheckedDuplicatedId, isCheckedDuplicatedEmail}) => {
 
     const onChangeId = useCallback((e) => {
         setId(e.target.value);
@@ -39,7 +40,9 @@ const PersonalInfoInputTemplate = ({role, setId, setPw, setPwCheck,setName,setEm
                     placeholder={"아이디를 입력해주세요"}
                     onChange={onChangeId}
                 />
-                <button>중복확인</button>
+                <button onClick={() => checkDuplicatedId()}>중복확인</button>
+                {isCheckedDuplicatedId === true ? <p>중복 확인 완료되었습니다</p> :
+                    ( isCheckedDuplicatedId === false ? <p>중복되는 아이디가 존재합니다</p>: null)}
             </div>
             <div>
                 <h1>비밀번호*</h1>
@@ -70,7 +73,9 @@ const PersonalInfoInputTemplate = ({role, setId, setPw, setPwCheck,setName,setEm
                     placeholder={"예:forall@forall.com"}
                     onChange={onChangeEmail}
                 />
-                <button>중복확인</button>
+                <button onClick={() => checkDuplicatedEmail()}>중복확인</button>
+                {isCheckedDuplicatedEmail === true ? <p>중복 확인 완료되었습니다</p> :
+                    ( isCheckedDuplicatedEmail === false ? <p>중복되는 이메일이 존재합니다</p>: null)}
             </div>
             <div>
                 <h1>휴대폰*</h1>

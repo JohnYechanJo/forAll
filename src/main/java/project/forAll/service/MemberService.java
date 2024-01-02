@@ -34,14 +34,14 @@ public class MemberService {
     }
 
     // 중복 회원을 구별하는 방법 (전화번호? 이름과 생년월일?)
-    private void validateDuplicateLoginId(String loginId) {
+    public void validateDuplicateLoginId(String loginId) {
         List<Member> findMembers = memberRepository.findByLoginId(loginId);
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 ID입니다.");
         }
     }
 
-    private void validateDuplicateEmail(String email) {
+    public void validateDuplicateEmail(String email) {
         List<Member> findMembers = memberRepository.findByEmail(email);
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("중복된 이메일입니다.");

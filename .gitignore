@@ -3,6 +3,7 @@ HELP.md
 build/
 src/main/frontend/build/
 src/main/frontend/node_modules/
+src/main/resources/static/static/js/main*
 !gradle/wrapper/gradle-wrapper.jar
 #!**/src/main/**/build/
 #!**/src/test/**/build/
