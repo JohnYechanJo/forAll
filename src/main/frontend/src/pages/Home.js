@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
     return (
         <div>
-            <h1>HomePage</h1>
+            <img src={process.env.PUBLIC_URL + '/forAllLogo.png'} width = '400px'/>
             <Link to="/login">시작하기</Link>
         </div>
     )
