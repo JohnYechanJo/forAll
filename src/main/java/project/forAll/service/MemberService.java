@@ -27,22 +27,22 @@ public class MemberService {
 
     @Transactional
     public Long saveMember(Member member) {
-        validateDuplicateLoginId(member);
-        validateDuplicateEmail(member);
+        validateDuplicateLoginId(member.getLoginId());
+        validateDuplicateEmail(member.getEmail());
         memberRepository.save(member);
         return member.getId();
     }
 
     // 중복 회원을 구별하는 방법 (전화번호? 이름과 생년월일?)
-    private void validateDuplicateLoginId(Member member) {
-        List<Member> findMembers = memberRepository.findByLoginId(member.getLoginId());
+    private void validateDuplicateLoginId(String loginId) {
+        List<Member> findMembers = memberRepository.findByLoginId(loginId);
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 ID입니다.");
         }
     }
 
-    private void validateDuplicateEmail(Member member) {
-        List<Member> findMembers = memberRepository.findByEmail(member.getEmail());
+    private void validateDuplicateEmail(String email) {
+        List<Member> findMembers = memberRepository.findByEmail(email);
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("중복된 이메일입니다.");
         }
