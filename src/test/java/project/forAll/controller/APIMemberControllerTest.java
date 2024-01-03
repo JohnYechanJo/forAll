@@ -75,6 +75,15 @@ public class APIMemberControllerTest {
 
         Assert.assertEquals(member.getLoginId(), mf.getLoginId());
     }
+
+//    @Test
+//    public void smsTest() throws Exception {
+//
+//        mvc.perform(MockMvcRequestBuilders.post("/send-one"))
+//                .param("servers", servers)
+//                .andExpect(status().isOk());
+//    }
+
     private Member createMember(String role, String loginId, String loginPw, String name, String birthday,
                                 String businessNum, String gender, String email, String phoneNum) {
         Member member = new Member();

@@ -34,7 +34,7 @@ public class APIMemberController extends APIController {
      * @return response (success - 생성된 memberId 반환)
      *                  (fail - 에러 메시지 반환)
      */
-    @PostMapping("/api/members")
+    @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody final MemberForm mf){
         final Member member = memberService.build(mf);
         try{
