@@ -1,33 +1,34 @@
 package project.forAll.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 import project.forAll.domain.Member;
 import project.forAll.domain.enums.Gender;
 import project.forAll.domain.enums.MemberRole;
 import project.forAll.form.MemberForm;
 import project.forAll.repository.MemberRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 @Transactional(readOnly = true)
-public class MemberService {
+public class MemberService extends Service {
 
     @Autowired
     private MemberRepository memberRepository;
 
+    @Override
+    protected JpaRepository getRepository() {
+        return memberRepository;
+    }
     @Transactional
     public Long saveMember(Member member) {
         validateDuplicateLoginId(member.getLoginId());
         validateDuplicateEmail(member.getEmail());
-        memberRepository.save(member);
+        save(member);
         return member.getId();
     }
 
@@ -105,4 +106,6 @@ public class MemberService {
 
         return member;
     }
+
+
 }
