@@ -2,6 +2,8 @@ package project.forAll.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import project.forAll.domain.Member;
 
 import javax.persistence.EntityManager;
@@ -43,6 +45,7 @@ public class MemberRepository {
                 .getResultList();
     }
 
+    /*
     // Member 삭제
     public void deleteById(Long id) {
         // Custom delete query using EntityManager
@@ -50,4 +53,5 @@ public class MemberRepository {
                 .setParameter("id", id)
                 .executeUpdate();
     }
+     */
 }

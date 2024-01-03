@@ -101,15 +101,15 @@ public class MemberService {
         return member;
     }
 
-    /**
-     * Member 삭제
-     * @param id
-     */
-    @Transactional
-    public void delete(Long id) {
-        // Check if the member exists
-        Assert.notNull(id, "Member not found with id: " + id);
-
-        memberRepository.deleteById(id);
-    }
+//    /**
+//     * Member 삭제
+//     * @param id
+//     */
+//    @Transactional
+//    public void delete(Long id) {
+//        // Check if the member exists
+//        Assert.notNull(id, "Member not found with id: " + id);
+//
+//        memberRepository.deleteById(id);
+//    }
 }

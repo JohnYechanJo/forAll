@@ -20,3 +20,8 @@ server:
   port: 8080
   servlet:
     contextPath: /
+
+coolsms:
+  api:
+    key: NCSVXDQ0JANEY4K3
+    secret: OUSJ8FIFCYPI5WL8O8IDLA73CZSVJS7J

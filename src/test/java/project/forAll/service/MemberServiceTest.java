@@ -108,7 +108,7 @@ public class MemberServiceTest {
         assertEquals("20010101 -> 20020202", "20020202", getMember.getBirthday());
     }
 
-    /* delete가 작동 안 함
+    // delete가 작동 안 함
     @Test
     public void 회원탈퇴() {
 
@@ -116,7 +116,7 @@ public class MemberServiceTest {
         Member member = createMember("Customer", "forall", "forall1230", "김윤태",
                 "20010101", "010101-01-010101", "Female", "forall@gmail.com",
                 "01010101010");
-        Long memberId = memberService.join(member);
+        Long memberId = memberService.saveMember(member);
 
         // When
         memberService.delete(memberId);
@@ -124,7 +124,6 @@ public class MemberServiceTest {
         // Then
         assertEquals("Member 삭제", null, memberId);
     }
-     */
 
     private Member createMember(String role, String loginId, String loginPw, String name, String birthday,
                                 String businessNum, String gender, String email, String phoneNum) {
