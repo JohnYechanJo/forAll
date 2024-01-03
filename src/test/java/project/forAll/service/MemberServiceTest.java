@@ -121,7 +121,6 @@ public class MemberServiceTest {
         assertEquals("20010101 -> 20020202", "20020202", getMember.getBirthday());
     }
 
-    // delete가 작동 안 함
     @Test
     public void 회원탈퇴() {
 

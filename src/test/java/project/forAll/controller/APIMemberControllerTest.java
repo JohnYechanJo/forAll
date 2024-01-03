@@ -48,10 +48,10 @@ public class APIMemberControllerTest {
     }
     @Test
     public void getMemberTest() throws Exception {
-        MemberForm mr = new MemberForm("Owner", "forall", "forall1230", "천승범",
+        MemberForm mf = new MemberForm("Owner", "forall", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "남자", "forall@gmail.com",
                 "01010101010");
-        Member member = memberService.build(mr);
+        Member member = memberService.build(mf);
         Long memberId = memberService.saveMember(member);
 
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/members/"+memberId))
@@ -68,8 +68,8 @@ public class APIMemberControllerTest {
                 "01010101010");
 
         final String memberId = mvc.perform(MockMvcRequestBuilders.post("/api/v1/members")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(TestUtil.asJsonString(mf)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(TestUtil.asJsonString(mf)))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse().getContentAsString();
