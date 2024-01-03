@@ -43,13 +43,15 @@ public class APIMemberControllerTest {
 
     @Before
     public void setup(){
+        memberService.deleteAll();
         mvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
     @Test
     public void getMemberTest() throws Exception {
-        Member member = createMember("Owner", "forall", "forall1230", "천승범",
+        MemberForm mr = new MemberForm("Owner", "forall", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "남자", "forall@gmail.com",
                 "01010101010");
+        Member member = memberService.build(mr);
         Long memberId = memberService.saveMember(member);
 
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/members/"+memberId))
@@ -61,8 +63,8 @@ public class APIMemberControllerTest {
 
     @Test
     public void createMemberTest() throws Exception {
-        final MemberForm mf = new MemberForm("Owner", "forall", "forall1230", "천승범",
-                "20010101", "010101-01-010101", "남자", "forall@gmail.com",
+        final MemberForm mf = new MemberForm("Owner", "forall1", "forall1230", "천승범",
+                "20010101", "010101-01-010101", "Male", "forall12@gmail.com",
                 "01010101010");
 
         final String memberId = mvc.perform(MockMvcRequestBuilders.post("/api/v1/members")
@@ -71,23 +73,8 @@ public class APIMemberControllerTest {
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse().getContentAsString();
-        final Member member = memberService.getMemberById(Long.parseLong(memberId)).orElseThrow();
+        final Member member = (Member) memberService.findById(Long.parseLong(memberId));
 
         Assert.assertEquals(member.getLoginId(), mf.getLoginId());
-    }
-    private Member createMember(String role, String loginId, String loginPw, String name, String birthday,
-                                String businessNum, String gender, String email, String phoneNum) {
-        Member member = new Member();
-        member.setRole(MemberRole.parse(role));
-        member.setLoginId(loginId);
-        member.setLoginPw(loginPw);
-        member.setName(name);
-        member.setBirthday(birthday);
-        member.setBusinessNum(businessNum);
-        member.setGender(Gender.parse(gender));
-        member.setEmail(email);
-        member.setPhoneNum(phoneNum);
-        em.persist(member);
-        return member;
     }
 }
