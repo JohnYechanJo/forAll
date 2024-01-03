@@ -1,8 +1,8 @@
-import { useCallback, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import { Gender } from "../utils/enums";
 import axios from "axios";
 
-const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setBirthDay, setGender, checkDuplicatedId, checkDuplicatedEmail, isCheckedDuplicatedId, isCheckedDuplicatedEmail, gender }) => {
+const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear,setMonth,setDay, setGender, checkDuplicatedId, checkDuplicatedEmail, isCheckedDuplicatedId, isCheckedDuplicatedEmail, isCheckPw, gender }) => {
 
     const onChangeId = useCallback((e) => {
         setId(e.target.value);
@@ -46,9 +46,6 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
     const months = [...Array(12).keys()].map(i => i + 1);
     const days = [...Array(31).keys()].map(i => i + 1);
 
-    const [year, setYear] = useState("");
-    const [month, setMonth] = useState("");
-    const [day, setDay] = useState("");
 
     return (
         <div>
@@ -77,6 +74,8 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                     placeholder={"비밀번호를 한번 더 입력해주세요"}
                     onChange={onChangePwCheck}
                 />
+                {isCheckPw === true ? <p>비밀번호가 일치합니다</p> :
+                    (isCheckPw === false ? <p>비밀번호가 일치하지 않습니다</p> : null)}
             </div>
             <div>
                 <h1>이름*</h1>
@@ -144,7 +143,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         <input
                             type="radio"
                             name="gender"
-                            value="male"
+                            value="Male"
                             onChange={onChangeGender}
                         />
                         남자
@@ -153,7 +152,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         <input
                             type="radio"
                             name="gender"
-                            value="female"
+                            value="Female"
                             onChange={onChangeGender}
                         />
                         여자
@@ -162,7 +161,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         <input
                             type="radio"
                             name="gender"
-                            value=""
+                            value="Not Specified"
                             onChange={onChangeGender}
                         />
                         선택안함
