@@ -1,36 +1,54 @@
-import {useCallback, useState} from "react";
-import {Gender} from "../utils/enums";
+import { useCallback, useState } from "react";
+import { Gender } from "../utils/enums";
 import axios from "axios";
 
-const PersonalInfoInputTemplate = ({role, setId, setPw, setPwCheck,setName,setEmail,setPhone,setCerifiedNum,setBirthDay,setGender, checkDuplicatedId, checkDuplicatedEmail, isCheckedDuplicatedId, isCheckedDuplicatedEmail}) => {
+const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setBirthDay, setGender, checkDuplicatedId, checkDuplicatedEmail, isCheckedDuplicatedId, isCheckedDuplicatedEmail, gender }) => {
 
     const onChangeId = useCallback((e) => {
         setId(e.target.value);
-    },[]);
+    }, []);
     const onChangePw = useCallback((e) => {
         setPw(e.target.value);
-    },[]);
+    }, []);
     const onChangePwCheck = useCallback((e) => {
         setPwCheck(e.target.value);
-    },[]);
+    }, []);
     const onChangeName = useCallback((e) => {
         setName(e.target.value);
-    },[]);
+    }, []);
     const onChangeEmail = useCallback((e) => {
         setEmail(e.target.value);
-    },[]);
+    }, []);
     const onChangePhone = useCallback((e) => {
         setPhone(e.target.value);
-    },[]);
+    }, []);
     const onChangeCerifiedNum = useCallback((e) => {
         setCerifiedNum(e.target.value);
-    },[]);
+    }, []);
     const onChangeBirthDay = useCallback((e) => {
         setBirthDay(e.target.value);
-    },[]);
+    }, []);
     const onChangeGender = useCallback((e) => {
         setGender(e.target.value);
-    },[]);
+    }, []);
+    const onChangeYear = (e) => {
+        setYear(e.target.value);
+    };
+
+    const onChangeMonth = (e) => {
+        setMonth(e.target.value);
+    };
+
+    const onChangeDay = (e) => {
+        setDay(e.target.value);
+    };
+    const years = [...Array(121).keys()].map(i => i + 1900).reverse();
+    const months = [...Array(12).keys()].map(i => i + 1);
+    const days = [...Array(31).keys()].map(i => i + 1);
+
+    const [year, setYear] = useState("");
+    const [month, setMonth] = useState("");
+    const [day, setDay] = useState("");
 
     return (
         <div>
@@ -42,7 +60,7 @@ const PersonalInfoInputTemplate = ({role, setId, setPw, setPwCheck,setName,setEm
                 />
                 <button onClick={() => checkDuplicatedId()}>중복확인</button>
                 {isCheckedDuplicatedId === true ? <p>중복 확인 완료되었습니다</p> :
-                    ( isCheckedDuplicatedId === false ? <p>중복되는 아이디가 존재합니다</p>: null)}
+                    (isCheckedDuplicatedId === false ? <p>중복되는 아이디가 존재합니다</p> : null)}
             </div>
             <div>
                 <h1>비밀번호*</h1>
@@ -75,7 +93,7 @@ const PersonalInfoInputTemplate = ({role, setId, setPw, setPwCheck,setName,setEm
                 />
                 <button onClick={() => checkDuplicatedEmail()}>중복확인</button>
                 {isCheckedDuplicatedEmail === true ? <p>중복 확인 완료되었습니다</p> :
-                    ( isCheckedDuplicatedEmail === false ? <p>중복되는 이메일이 존재합니다</p>: null)}
+                    (isCheckedDuplicatedEmail === false ? <p>중복되는 이메일이 존재합니다</p> : null)}
             </div>
             <div>
                 <h1>휴대폰*</h1>
@@ -91,18 +109,65 @@ const PersonalInfoInputTemplate = ({role, setId, setPw, setPwCheck,setName,setEm
                 <button>인증번호 확인</button>
             </div>
             <div>
+            <div>
                 <h1>생년월일*</h1>
-                <input
-                    placeholder={""}
-                    onChange={onChangeBirthDay}
-                />
+                <select onChange={onChangeYear}>
+                    <option value="">년(YYYY)</option>
+                    {years.map(year => (
+                        <option key={year} value={year}>
+                            {year}
+                        </option>
+                    ))}
+                </select>
+                <select onChange={onChangeMonth}>
+                    <option value="">월(MM)</option>
+                    {months.map(month => (
+                        <option key={month} value={month}>
+                            {month}
+                        </option>
+                    ))}
+                </select>
+                <select onChange={onChangeDay}>
+                    <option value="">일(DD)</option>
+                    {days.map(day => (
+                        <option key={day} value={day}>
+                            {day}
+                        </option>
+                    ))}
+                </select>
+            </div>
             </div>
             <div>
                 <h1>성별</h1>
-                <input
-                    placeholder={""}
-                    onChange={onChangeGender}
-                />
+                <div>
+                    <label style={{ display: 'block' }}>
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="male"
+                            onChange={onChangeGender}
+                        />
+                        남자
+                    </label>
+                    <label style={{ display: 'block' }}>
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="female"
+                            onChange={onChangeGender}
+                        />
+                        여자
+                    </label>
+                    <label style={{ display: 'block' }}>
+                        <input
+                            type="radio"
+                            name="gender"
+                            value=""
+                            onChange={onChangeGender}
+                        />
+                        선택안함
+                    </label>
+                </div>
             </div>
         </div>
     )

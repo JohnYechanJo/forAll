@@ -37,6 +37,8 @@ const Sidebar = ({ width = 280, children }) => {
                 <hr style={{width:0}}/>
                 </Link>
                 <button>게스트로 전환</button>
+                <hr style={{width:0}}/>
+                <button>대관 내역 확인</button>
             </div>
         </div>
     );

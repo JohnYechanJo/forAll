@@ -100,7 +100,7 @@ const SignUpPage2 = () => {
                 checkDuplicatedEmail={checkDuplicatedEmail}
                 isCheckedDuplicatedId={isCheckDuplicatedId}
                 isCheckedDuplicatedEmail={isCheckDuplicatedEmail}
-
+                gender = {gender}
             />
             <UseTermsTemplate />
             <Link to="/signUp">
