@@ -25,7 +25,7 @@ const PlaceTemplate = () => {
                 />
             </div>
             <div>
-                <Link to="/signUp">
+                <Link to="/placeInfoModify2">
                     <button>확인</button>
                 </Link>
 
