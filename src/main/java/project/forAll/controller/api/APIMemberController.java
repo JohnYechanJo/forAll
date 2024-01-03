@@ -6,13 +6,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.domain.Member;
 import project.forAll.form.MemberForm;
+import project.forAll.repository.MemberRepository;
 import project.forAll.service.MemberService;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class APIMemberController extends APIController {
 
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
     /**
      * id에 해당하는 member 객체를 반환
@@ -64,5 +68,23 @@ public class APIMemberController extends APIController {
         }catch(final Exception e){
             return new ResponseEntity(errorResponse("Duplicated email : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PutMapping("/members")
+    public ResponseEntity editMember(@RequestBody final MemberForm form){
+        final Member savedMember = memberRepository.findByLoginId(form.getLoginId());
+        try{
+            if (savedMember == null) throw new Exception("No member with loginId " + form.getLoginId());
+
+            final Member member = memberService.build(form);
+            member.setId(savedMember.getId());
+            memberService.save(member);
+
+            return new ResponseEntity(member, HttpStatus.OK);
+        }catch(final Exception e){
+            return new ResponseEntity(errorResponse("Could not update Member : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+
+
     }
 }
