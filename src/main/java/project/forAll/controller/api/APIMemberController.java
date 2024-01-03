@@ -44,4 +44,24 @@ public class APIMemberController extends APIController {
             return new ResponseEntity(errorResponse("Could not create member : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/members/checkId/{id}")
+    public ResponseEntity checkDuplicatedLoginId(@PathVariable("id") final String id){
+        try{
+            memberService.validateDuplicateLoginId(id);
+            return new ResponseEntity(id, HttpStatus.OK);
+        }catch(final Exception e){
+            return new ResponseEntity(errorResponse("Duplicated id : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/members/checkEmail/{email}")
+    public ResponseEntity checkDuplicatedEmail(@PathVariable("email") final String email){
+        try{
+            memberService.validateDuplicateEmail(email);
+            return new ResponseEntity(email, HttpStatus.OK);
+        }catch(final Exception e){
+            return new ResponseEntity(errorResponse("Duplicated email : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
 }
