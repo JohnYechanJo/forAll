@@ -4,10 +4,12 @@ import net.nurigo.sdk.message.model.Message;
 import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import project.forAll.service.AuthenticationDataService;
 
 import javax.annotation.PostConstruct;
 import java.util.Random;
@@ -22,6 +24,8 @@ public class APISmsController extends APIController {
 //    private String apiSecretKey;
 //
     private DefaultMessageService messageService;
+    @Autowired
+    private AuthenticationDataService authenticationDataService;
 //
 //    @PostConstruct
 //    private void init(){
@@ -67,8 +71,20 @@ public class APISmsController extends APIController {
         message.setText("[ForALL] 아래의 인증번호를 입력해주세요\n" + verificationCode);
 //        message.setText("[ForALL] 아래의 인증번호를 입력해주세요\n123456");
 
+        authenticationDataService.saveData(to, verificationCode);
         SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
 
         return response;
+    }
+
+    @GetMapping("/checkSms/{phoneNum}/{certifyNum}")
+    public ResponseEntity checkSms(@PathVariable final String phoneNum, @PathVariable final String certifyNum){
+        try{
+            // 초기 유효시간은 5분(300초)로 설정
+            authenticationDataService.checkData(phoneNum,certifyNum,300L);
+            return new ResponseEntity(phoneNum, HttpStatus.OK);
+        }catch(final Exception e){
+            return new ResponseEntity(errorResponse("Authentication Failed : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
     }
 }
