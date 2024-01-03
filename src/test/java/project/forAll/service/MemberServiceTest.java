@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.Member;
 import project.forAll.domain.enums.Gender;
 import project.forAll.domain.enums.MemberRole;
+import project.forAll.form.MemberForm;
 import project.forAll.repository.MemberRepository;
 
 import javax.persistence.EntityManager;
@@ -31,15 +32,16 @@ public class MemberServiceTest {
     public void 회원가입() throws Exception {
 
         // Given
-        Member member = createMember("Owner", "forall1", "forall1230", "천승범",
+        MemberForm mf = new MemberForm("Owner", "forall1", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "Male", "forall12@gmail.com",
                 "01010101010");
+        Member member = memberService.build(mf);
 
         // When
         Long memberId = memberService.saveMember(member);
 
         // Then
-        Member getMember = memberRepository.findById(memberId);
+        Member getMember = memberService.getMemberById(memberId).orElseThrow();
 
         assertEquals("Member는 Owner", "Owner", getMember.getRole().toString());
         assertEquals("Member는 Male", "Male", getMember.getGender().toString());
@@ -50,12 +52,14 @@ public class MemberServiceTest {
     public void 중복_회원_ID_예외() throws Exception {
 
         // Given
-        Member member1 = createMember("Owner", "forall", "forall1230", "천승범",
+        MemberForm mf1 = new MemberForm("Owner", "forall", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "Male", "forall1@gmail.com",
                 "01010101010");
-        Member member2 = createMember("Owner", "forall", "forall1230", "천승범",
+        MemberForm mf2 = new MemberForm("Owner", "forall", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "Male", "forall2@gmail.com",
                 "01010101010");
+        Member member1 = memberService.build(mf1);
+        Member member2 = memberService.build(mf2);
 
         // When
         memberService.saveMember(member1);
@@ -70,12 +74,14 @@ public class MemberServiceTest {
     public void 중복_회원_이메일_예외() throws Exception {
 
         // Given
-        Member member1 = createMember("Owner", "forall1", "forall1230", "천승범",
+        MemberForm mf1 = new MemberForm("Owner", "forall1", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "Male", "forall@gmail.com",
                 "01010101010");
-        Member member2 = createMember("Owner", "forall2", "forall1230", "천승범",
+        MemberForm mf2 = new MemberForm("Owner", "forall2", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "Male", "forall@gmail.com",
                 "01010101010");
+        Member member1 = memberService.build(mf1);
+        Member member2 = memberService.build(mf2);
 
         // When
         memberService.saveMember(member1);
@@ -90,9 +96,10 @@ public class MemberServiceTest {
     public void 정보수정() throws Exception {
 
         // Given
-        Member member = createMember("Customer", "forall", "forall1230", "김윤태",
+        MemberForm mf = new MemberForm("Customer", "forall", "forall1230", "김윤태",
                 "20010101", "010101-01-010101", "Female", "forall@gmail.com",
                 "01010101010");
+        Member member = memberService.build(mf);
         Long memberId = memberService.saveMember(member);
 
         // When
@@ -101,10 +108,10 @@ public class MemberServiceTest {
                 "01010101010");
 
         // Then
-        Member getMember = memberRepository.findById(memberId);
+        Member getMember = memberService.getMemberById(memberId).orElseThrow();
 
         assertEquals("Customer -> Owner", "Owner", getMember.getRole().toString());
-        assertEquals("Male -> Female", "Male", getMember.getGender().toString());
+        assertEquals("Female -> Male", "Male", getMember.getGender().toString());
         assertEquals("20010101 -> 20020202", "20020202", getMember.getBirthday());
     }
 
@@ -113,30 +120,16 @@ public class MemberServiceTest {
     public void 회원탈퇴() {
 
         // Given
-        Member member = createMember("Customer", "forall", "forall1230", "김윤태",
+        MemberForm mf = new MemberForm("Customer", "forall", "forall1230", "김윤태",
                 "20010101", "010101-01-010101", "Female", "forall@gmail.com",
                 "01010101010");
+        Member member = memberService.build(mf);
         Long memberId = memberService.saveMember(member);
 
         // When
-        memberService.delete(memberId);
+        memberService.deleteMember(memberId);
 
         // Then
         assertEquals("Member 삭제", null, memberId);
-    }
-
-    private Member createMember(String role, String loginId, String loginPw, String name, String birthday,
-                                String businessNum, String gender, String email, String phoneNum) {
-        Member member = new Member();
-        member.setRole(MemberRole.parse(role));
-        member.setLoginId(loginId);
-        member.setLoginPw(loginPw);
-        member.setName(name);
-        member.setBirthday(birthday);
-        member.setBusinessNum(businessNum);
-        member.setGender(Gender.parse(gender));
-        member.setEmail(email);
-        member.setPhoneNum(phoneNum);
-        return member;
     }
 }

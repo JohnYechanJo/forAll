@@ -1,4 +1,4 @@
-package project.forAll.service;
+// package project.forAll.service;
 
 import net.nurigo.sdk.message.model.Message;
 import org.springframework.http.ResponseEntity;

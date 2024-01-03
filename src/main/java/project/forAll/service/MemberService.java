@@ -14,16 +14,14 @@ import project.forAll.repository.MemberRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
-@RequiredArgsConstructor
 public class MemberService {
 
-    @PersistenceContext
-    EntityManager em;
-
-    private final MemberRepository memberRepository;
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Transactional
     public Long saveMember(Member member) {
@@ -49,13 +47,19 @@ public class MemberService {
     }
 
     /* 필요하다면 admin 사이트를 위해서??
-    public List<Member> findMembers() {
+    public List<Member> getAllMembers() {
         return memberRepository.findAll();
     }
      */
 
-    public Member findById(Long id) {
+    @Transactional
+    public Optional<Member> getMemberById(Long id) {
         return memberRepository.findById(id);
+    }
+
+    @Transactional
+    public void deleteMember(Long id) {
+        memberRepository.deleteById(id);
     }
 
     /**
@@ -87,7 +91,7 @@ public class MemberService {
     @Transactional
     public Member update(Long id, String role, String loginId, String loginPw, String name, String birthday,
                              String businessNum, String gender, String email, String phoneNum) {
-        Member member = memberRepository.findById(id);
+        Member member = memberRepository.findById(id).orElseThrow();
         member.setRole(MemberRole.parse(role));
         member.setLoginId(loginId);
         member.setLoginPw(loginPw);
@@ -97,19 +101,8 @@ public class MemberService {
         member.setGender(Gender.parse(gender));
         member.setEmail(email);
         member.setPhoneNum(phoneNum);
+        memberRepository.flush();
 
         return member;
     }
-
-//    /**
-//     * Member 삭제
-//     * @param id
-//     */
-//    @Transactional
-//    public void delete(Long id) {
-//        // Check if the member exists
-//        Assert.notNull(id, "Member not found with id: " + id);
-//
-//        memberRepository.deleteById(id);
-//    }
 }

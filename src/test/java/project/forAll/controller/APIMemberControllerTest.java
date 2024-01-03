@@ -71,7 +71,7 @@ public class APIMemberControllerTest {
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse().getContentAsString();
-        final Member member = memberService.findById(Long.parseLong(memberId));
+        final Member member = memberService.getMemberById(Long.parseLong(memberId)).orElseThrow();
 
         Assert.assertEquals(member.getLoginId(), mf.getLoginId());
     }

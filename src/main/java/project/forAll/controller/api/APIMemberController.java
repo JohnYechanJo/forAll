@@ -22,7 +22,7 @@ public class APIMemberController extends APIController {
      */
     @GetMapping("/members/{id}")
     public ResponseEntity getMember(@PathVariable("id") final Long id){
-        final Member member = memberService.findById(id);
+        final Member member = memberService.getMemberById(id).orElseThrow();
 
         return member == null ? new ResponseEntity(errorResponse("No user found for id " + id), HttpStatus.NOT_FOUND)
             : new ResponseEntity(member, HttpStatus.OK);
@@ -34,7 +34,7 @@ public class APIMemberController extends APIController {
      * @return response (success - 생성된 memberId 반환)
      *                  (fail - 에러 메시지 반환)
      */
-    @PostMapping("/members")
+    @PostMapping("/api/members")
     public ResponseEntity createMember(@RequestBody final MemberForm mf){
         final Member member = memberService.build(mf);
         try{
