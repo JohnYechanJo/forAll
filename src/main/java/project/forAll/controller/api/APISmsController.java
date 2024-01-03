@@ -5,7 +5,7 @@ import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
 import java.util.Random;
 
 @RestController
-public class APISmsController {
+public class APISmsController extends APIController {
     
     // API Key 보안 신경 쓴 코드
 //    @Value("${coolsms.api.key}")
@@ -49,8 +49,8 @@ public class APISmsController {
 //    }
 
     // API Key 보안 신경 안 쓴 상태
-    @PostMapping("/send-one")
-    public SingleMessageSentResponse sendOne(String to) {
+    @PostMapping("/send-one/{to}")
+    public SingleMessageSentResponse sendOne(@PathVariable String to) {
         this.messageService =
                 NurigoApp.INSTANCE.initialize("NCSVXDQ0JANEY4K3", "OUSJ8FIFCYPI5WL8O8IDLA73CZSVJS7J",
                         "https://api.coolsms.co.kr");

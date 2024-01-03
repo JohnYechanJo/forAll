@@ -51,7 +51,7 @@ public class APISmsControllerTest {
         Member getMember = memberService.getMemberById(memberId).orElseThrow();
 
         // Then
-        mvc.perform(MockMvcRequestBuilders.post("/send-one")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/send-one")
                 .param("to", getMember.getPhoneNum()))
                 .andExpect(status().isOk());
     }
