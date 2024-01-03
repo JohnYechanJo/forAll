@@ -25,28 +25,22 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
     const onChangeCerifiedNum = useCallback((e) => {
         setCerifiedNum(e.target.value);
     }, []);
-    const onChangeBirthDay = useCallback((e) => {
-        setBirthDay(e.target.value);
-    }, []);
     const onChangeGender = useCallback((e) => {
         setGender(e.target.value);
     }, []);
     const onChangeYear = (e) => {
         setYear(e.target.value);
     };
-
     const onChangeMonth = (e) => {
         setMonth(e.target.value);
     };
-
     const onChangeDay = (e) => {
         setDay(e.target.value);
     };
     const years = [...Array(121).keys()].map(i => i + 1900).reverse();
     const months = [...Array(12).keys()].map(i => i + 1);
     const days = [...Array(31).keys()].map(i => i + 1);
-
-
+    
     return (
         <div>
             <div>

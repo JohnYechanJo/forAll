@@ -6,7 +6,6 @@ import {useEffect, useState} from "react";
 import {Gender} from "../utils/enums";
 import axios from "axios";
 import useDidMountEffect from "../utils/hooks/useDidMountEffect";
-
 const SignUpPage2 = () => {
     const location = useLocation();
     const data = {...location.state};

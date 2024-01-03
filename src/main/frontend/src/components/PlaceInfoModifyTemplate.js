@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import {Link} from "react-router-dom";
+
 const PlaceTemplate = () => {
     const [id, setId] = useState('');
     const [passwd, setPasswd] = useState('');
@@ -26,7 +27,7 @@ const PlaceTemplate = () => {
             </div>
             <div>
                 <Link to="/placeInfoModify2">
-                    <button>확인</button>
+                    <button className="button">확인</button>
                 </Link>
 
             </div>
