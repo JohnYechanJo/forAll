@@ -1,10 +1,12 @@
 package project.forAll.service;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.Member;
 import project.forAll.domain.enums.Gender;
@@ -28,6 +30,10 @@ public class MemberServiceTest {
     @Autowired MemberService memberService;
     @Autowired MemberRepository memberRepository;
 
+    @Before
+    public void setup(){
+        memberService.deleteAll();
+    }
     @Test
     public void 회원가입() throws Exception {
 
@@ -127,9 +133,9 @@ public class MemberServiceTest {
         Long memberId = memberService.saveMember(member);
 
         // When
-        memberService.deleteMember(memberId);
+        memberService.delete(member);
 
         // Then
-        assertEquals("Member 삭제", null, memberId);
+        assertEquals("Member 삭제", 0, memberService.count());
     }
 }

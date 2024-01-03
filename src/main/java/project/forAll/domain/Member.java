@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-public class Member {
+public class Member extends BassDomain {
 
     @Id @GeneratedValue
     // 가입 순서에 따라 1, 2, ... 주어지는 id (저는 항상 필수로 넣었는데 없어도 되면 삭제해주세요)
