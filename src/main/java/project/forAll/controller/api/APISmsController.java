@@ -113,7 +113,7 @@ public class APISmsController extends APIController {
         }
     }
 
-    @GetMapping("/findId/{id}/{phone}/{cerifiedNum}")
+    @GetMapping("/findPw/{id}/{phone}/{cerifiedNum}")
     public ResponseEntity findPw(@PathVariable final String id, @PathVariable final String phone, @PathVariable final String cerifiedNum){
         try{
             // 초기 유효시간은 5분(300초)로 설정
