@@ -45,7 +45,7 @@ const UseTermsTemplate = () => {
                 textAlign: 'center',
             },
             overlay: {
-                backgroundColor: 'rgba(0, 0, 0, 0.75)' // Add your custom styles here
+                backgroundColor: 'rgba(0, 0, 0, 0.75)' 
             }
         };
     return (
@@ -56,7 +56,7 @@ const UseTermsTemplate = () => {
                 </h2>
                 <div>
                     <text>
-                        <input type="checkbox" checked={checkbox1 && checkbox2} 
+                        <input type="checkbox" checked={checkbox1 && checkbox2} //useTerms 없이 체크박스 1&2로 구현
                         onChange={() => {
                             setCheckbox1(!checkbox1);
                             setCheckbox2(!checkbox2);
