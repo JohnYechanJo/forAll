@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {Gender} from "../utils/enums";
 import axios from "axios";
 import useDidMountEffect from "../utils/hooks/useDidMountEffect";
+import * as regularExpressions from "../utils/regularExpressions";
 const SignUpPage2 = () => {
     const location = useLocation();
     const data = {...location.state};
@@ -26,6 +27,7 @@ const SignUpPage2 = () => {
     const [isCheckDuplicatedId, setIsCheckDuplicatedId] = useState();
     const [isCheckDuplicatedEmail, setIsCheckDuplicatedEmail] = useState();
     const [isCheckPw, setIsCheckPw] = useState();
+    const [isPhoneCerified, setIsPhoneCerified] = useState();
 
     const checkDuplicatedId = () => {
         axios.get("/api/v1/members/checkId/"+id)
@@ -37,13 +39,42 @@ const SignUpPage2 = () => {
 
     };
     const checkDuplicatedEmail = () => {
-        axios.get("/api/v1/members/checkEmail/"+email)
-            .then((response) => {
-                setIsCheckDuplicatedEmail(true);
-            }).catch((response) => {
-            setIsCheckDuplicatedEmail(false);
-        });
+        const emailRule = regularExpressions.email;
+        if (!emailRule.test(email)){
+            alert("이메일 형식을 확인해주세요");
+        }else{
+            axios.get("/api/v1/members/checkEmail/"+email)
+                .then((response) => {
+                    setIsCheckDuplicatedEmail(true);
+                }).catch((response) => {
+                setIsCheckDuplicatedEmail(false);
+            });
+        }
 
+
+    };
+
+    const sendCerifiedNum = () => {
+        const phoneRule = regularExpressions.phoneNum;
+        if (! phoneRule.test(phone)){
+            alert("전화번호 형식을 확인해주세요")
+        }
+        else{
+            axios.post("/api/v1/send-one/"+phone)
+                .then((response) => {
+                    alert("인증번호를 발송했습니다");
+                }).catch((response) => {
+                alert("인증번호를 발송하지 못했습니다");
+            });
+        }
+    };
+    const checkCerifiedNum = () => {
+        axios.get("/api/v1/checkSms/"+phone+"/"+cerifiedNum)
+            .then((response) => {
+                setIsPhoneCerified(true);
+            }).catch((response) => {
+                setIsPhoneCerified(false);
+        });
     };
 
     useDidMountEffect(() => {
@@ -79,6 +110,9 @@ const SignUpPage2 = () => {
         }
         else if (isCheckDuplicatedEmail !== true){
             alert("이메일 중복확인이 필요합니다");
+        }
+        else if (isPhoneCerified !== true){
+            alert("휴대폰 인증이 필요합니다");
         }
         else{
             axios.post("/api/v1/members",
@@ -136,6 +170,9 @@ const SignUpPage2 = () => {
                 isCheckedDuplicatedId={isCheckDuplicatedId}
                 isCheckedDuplicatedEmail={isCheckDuplicatedEmail}
                 isCheckPw={isCheckPw}
+                sendCerifiedNum={sendCerifiedNum}
+                checkCerifiedNum={checkCerifiedNum}
+                isPhoneCerified={isPhoneCerified}
                 gender = {gender}
             />
             <UseTermsTemplate />
