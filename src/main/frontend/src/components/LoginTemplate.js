@@ -32,6 +32,7 @@ const LoginTemplate = () => {
                     }
                 }
                 ).then((res) => {
+                sessionStorage.setItem("user_id", id);
                 navigate('/main');
             }).catch((res) => {
                 alert("로그인에 실패했습니다");

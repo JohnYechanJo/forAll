@@ -24,7 +24,7 @@ const Sidebar = ({ width = 280, children }) => {
                 <button onClick={() => toggleMenu()}
                     className={styles.button} >
                     {isOpen ?
-                        <span>X</span> : <button className={styles.openBtn}>menu</button>
+                        <span>X</span> : <div className={styles.openBtn}>menu</div>
                     }
                 </button>
                 <div className={styles.content}>{children}</div>

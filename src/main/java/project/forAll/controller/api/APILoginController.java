@@ -2,16 +2,20 @@ package project.forAll.controller.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Session;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import project.forAll.controller.SessionManager;
 import project.forAll.domain.Member;
 import project.forAll.form.LoginForm;
 import project.forAll.service.MemberService;
 import project.forAll.web.SessionConst;
+import project.forAll.controller.SessionManager;
 
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,18 +26,18 @@ import javax.servlet.http.HttpSession;
 public class APILoginController extends APIController {
 
     private final MemberService memberService;
+    private final SessionManager sessionManager;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody final LoginForm loginForm, HttpServletRequest request) {
+    public ResponseEntity login(@RequestBody final LoginForm loginForm,HttpServletRequest request, HttpServletResponse response) {
 
         Member loginMember = memberService.findByLoginIdAndLoginPw(loginForm.getLoginId(), loginForm.getLoginPw());
 
         try {
             if (loginMember == null) throw new Exception(loginMember.getLoginId());
-
             HttpSession session = request.getSession();
             session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-
+            sessionManager.createSession(loginMember.getLoginId(), response);
 //            // 쿠키 생성
 //            Cookie idCookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
 //            response.addCookie(idCookie);
@@ -46,7 +50,7 @@ public class APILoginController extends APIController {
 
     @PostMapping("/logout")
     public void logout(HttpServletRequest request) {
-
+        sessionManager.expire(request);
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
