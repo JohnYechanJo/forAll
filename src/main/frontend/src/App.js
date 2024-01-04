@@ -13,11 +13,13 @@ import PlaceInfoModifyPage from './pages/PlaceInfoModifyPage';
 import PersonalInfoModifyPage2 from './pages/PersonalInfoModifyPage2';
 import PlaceInfoModifyPage2 from './pages/PlaceInfoModifyPage2';  
 import ErrorPage from "./pages/ErrorPage";
+import MainPage from "./pages/MainPage";
 function App() {
   return (
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/main" element={<MainPage />}/>
           <Route path="/searchId" element={<SearchIdPage />} />
           <Route path="/searchPw" element={<SearchPwPage />}/>
           <Route path="/signUp" element={<SignUpPage />}/>
