@@ -1,6 +1,5 @@
 import Header from "../components/Header";
 import SearchPwTemplate from "../components/SearchPwTemplate";
-import Sidebar from "../components/Sidebar";
 import {useState} from "react";
 import * as regularExpressions from "../utils/regularExpressions";
 import axios from "axios";
@@ -52,7 +51,6 @@ const SearchPwPage = () => {
                 checkCerifiedNum={checkCerifiedNum}
                 sendCerifiedNum={sendCerifiedNum}
             />
-            <Sidebar />
         </div>
     )
 }
