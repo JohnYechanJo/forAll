@@ -95,7 +95,7 @@ public class APIMemberControllerTest {
                 .content(TestUtil.asJsonString(mf2)))
                 .andExpect(status().isOk());
 
-        Member updatedMember = memberRepository.findByLoginId("forall");
+        Member updatedMember = memberService.findByLoginId("forall");
 
         Assert.assertEquals(updatedMember.getLoginPw(), "forall1231");
 
