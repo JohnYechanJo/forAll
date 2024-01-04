@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import {Link} from "react-router-dom";
 import "./Styles.css";
+import axios from "axios";
 const PersonTemplate = () => {
     const [id, setId] = useState('');
     const [passwd, setPasswd] = useState('');
@@ -17,7 +18,6 @@ const PersonTemplate = () => {
                 <input
                     placeholder="아이디 입력"
                     value={id}
-                    
                 />
                 <input
                     placeholder="비밀번호 입력"
