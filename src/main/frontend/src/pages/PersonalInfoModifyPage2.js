@@ -80,7 +80,7 @@ const PersonalModify2 = () => {
             alert("이메일 중복확인이 필요합니다");
         }
         else {
-            axios.put("/api/v1/members",
+            axios.put("/api/v1/members", //이 부분이 불명확해서 수정이 필요할 수 있음
                 {
                     loginId: id,
                     loginPw: pw,

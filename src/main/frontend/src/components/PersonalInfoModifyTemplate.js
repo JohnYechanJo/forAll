@@ -17,7 +17,7 @@ const PersonTemplate = () => {
                 <input
                     placeholder="아이디 입력"
                     value={id}
-                    onChange={onChangeId}
+                    
                 />
                 <input
                     placeholder="비밀번호 입력"
