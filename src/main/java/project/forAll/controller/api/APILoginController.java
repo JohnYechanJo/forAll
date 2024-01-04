@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import project.forAll.domain.Member;
 import project.forAll.form.LoginForm;
 import project.forAll.service.MemberService;
-import project.forAll.web.SessionConstants;
+import project.forAll.web.SessionConst;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -24,16 +24,19 @@ public class APILoginController extends APIController {
     private final MemberService memberService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody final LoginForm loginForm, HttpServletResponse response) {
+    public ResponseEntity login(@RequestBody final LoginForm loginForm, HttpServletRequest request) {
 
         Member loginMember = memberService.findByLoginIdAndLoginPw(loginForm.getLoginId(), loginForm.getLoginPw());
 
         try {
-            if (loginMember == null) throw new Exception("아이디 또는 비밀번호가 일치하지 않습니다.");
+            if (loginMember == null) throw new Exception(loginMember.getLoginId());
 
-            // 쿠키 생성
-            Cookie idCookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
-            response.addCookie(idCookie);
+            HttpSession session = request.getSession();
+            session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+
+//            // 쿠키 생성
+//            Cookie idCookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
+//            response.addCookie(idCookie);
 
             return new ResponseEntity(loginMember, HttpStatus.OK);
         }catch(final Exception e){
@@ -42,13 +45,19 @@ public class APILoginController extends APIController {
     }
 
     @PostMapping("/logout")
-    public void logout(HttpServletResponse response) {
-        expireCookie(response, "memberId");
+    public void logout(HttpServletRequest request) {
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+//        // 쿠키 만료
+//        expireCookie(response, "memberId");
     }
 
-    private void expireCookie(HttpServletResponse response, String cookieName) {
-        Cookie cookie=new Cookie(cookieName,null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-    }
+//    private void expireCookie(HttpServletResponse response, String cookieName) {
+//        Cookie cookie=new Cookie(cookieName,null);
+//        cookie.setMaxAge(0);
+//        response.addCookie(cookie);
+//    }
 }

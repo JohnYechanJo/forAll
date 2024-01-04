@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 @Transactional
 public class LoginServiceTest {
 
-    @Autowired LoginService loginService;
     @Autowired MemberService memberService;
     @Autowired MemberRepository memberRepository;
 
