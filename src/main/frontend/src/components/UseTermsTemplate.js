@@ -17,14 +17,14 @@ const UseTermsTemplate = () => {
             setModalIsOpen3(false);
         };
         const [everyBox, setEveryBox] = useState(false);
-        const [useTerm, setUseterm] = useState(false);
         const [infoCollect, setInfoCollect] = useState(false);
         const [infoThird, setInfoThird] = useState(false);
         const [infoCoupon, setInfoCoupon] = useState(false);
         const [ageOver14, setAgeOver14] = useState(false);
         const handleCheckBox = () => {
             setEveryBox(!everyBox);
-            setUseterm(!everyBox);
+            setCheckbox1(!everyBox);
+            setCheckbox2(!everyBox);
             setInfoCollect(!everyBox);
             setInfoThird(!everyBox);
             setInfoCoupon(!everyBox);
@@ -45,18 +45,22 @@ const UseTermsTemplate = () => {
                 textAlign: 'center',
             },
             overlay: {
-                backgroundColor: 'rgba(0, 0, 0, 0.75)' // Add your custom styles here
+                backgroundColor: 'rgba(0, 0, 0, 0.75)' 
             }
         };
     return (
         <div>
                 <h1>이용약관동의*</h1>
                 <h2>전체 동의
-                    <input type="checkbox" checked={useTerm} onChange={handleCheckBox} />
+                    <input type="checkbox" checked={everyBox} onChange={handleCheckBox} />
                 </h2>
                 <div>
                     <text>
-                        <input type="checkbox" checked={useTerm} onChange={() => setUseterm(!useTerm)} />
+                        <input type="checkbox" checked={checkbox1 && checkbox2} //useTerms 없이 체크박스 1&2로 구현
+                        onChange={() => {
+                            setCheckbox1(!checkbox1);
+                            setCheckbox2(!checkbox2);
+                        }} />
                         <Modal 
                         isOpen={modalIsOpen1}
                         style={customStyles}
@@ -112,7 +116,7 @@ const UseTermsTemplate = () => {
                         <input type="checkbox" checked={ageOver14} onChange={() => setAgeOver14(!ageOver14)} />
                         만 14세 이상입니다.
                 </div>
-                <button disabled={!useTerm || !infoCollect || !infoThird || !ageOver14} >확인</button>
+                <button disabled={!checkbox1 || !checkbox2 || !infoCollect || !infoThird || !ageOver14} >확인</button>
         </div>
     );
 };
