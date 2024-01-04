@@ -32,9 +32,11 @@ public class MemberService extends Service {
         return member.getId();
     }
 
-    // 중복 회원을 구별하는 방법 (전화번호? 이름과 생년월일?)
     public void validateDuplicateLoginId(String loginId) {
+        // List<Member>에서 Member로 변경
+        // List<Member> findMembers = memberRepository.findByLoginId(loginId);
         List<Member> findMembers = memberRepository.findByLoginId(loginId);
+        // if (!findMembers.isEmpty())에서 변경
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 ID입니다.");
         }
