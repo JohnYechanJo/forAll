@@ -57,7 +57,7 @@ const SignUpPage2 = () => {
     const sendCerifiedNum = () => {
         const phoneRule = regularExpressions.phoneNum;
         if (! phoneRule.test(phone)){
-            alert("전화번호 형식을 확인해주세요")
+            alert("전화번호 형식을 확인해주세요");
         }
         else{
             axios.post("/api/v1/send-one/"+phone)
@@ -84,10 +84,6 @@ const SignUpPage2 = () => {
     useEffect(() => {
         setBirthDay(year+'/'+month+'/'+day);
     }, [year, month, day]);
-
-    useEffect(() => {
-        console.log(gender);
-    }, [gender]);
     const handleButton = () => {
         //Todo : 아이디, 이메일 중복 여부 확인, 비밀번호 확인 여부, 휴대폰 인증 여부, 약관 동의 여부 등 확인
         if (id === ""){
