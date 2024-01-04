@@ -1,6 +1,5 @@
 import Header from "../components/Header";
 import SearchIdTemplate from "../components/SearchIdTemplate";
-import Sidebar from "../components/Sidebar";
 import {useState} from "react";
 import * as regularExpressions from "../utils/regularExpressions";
 import axios from "axios";
@@ -51,7 +50,6 @@ const SearchIdPage = () => {
                 checkCerifiedNum={checkCerifiedNum}
                 sendCerifiedNum={sendCerifiedNum}
             />
-            <Sidebar />
         </div>
     )
 }
