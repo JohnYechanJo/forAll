@@ -77,4 +77,27 @@ public class APIMemberControllerTest {
 
         Assert.assertEquals(member.getLoginId(), mf.getLoginId());
     }
+
+    @Test
+    public void editMemberTest() throws Exception {
+        MemberForm mf = new MemberForm("Owner", "forall", "forall1230", "천승범",
+                "20010101", "010101-01-010101", "남자", "forall@gmail.com",
+                "01010101010");
+        Member member = memberService.build(mf);
+        Long memberId = memberService.saveMember(member);
+
+        MemberForm mf2 = new MemberForm("Owner", "forall", "forall1231", "천승범",
+                "20010101", "010101-01-010101", "남자", "forall@gmail.com",
+                "01010101010");
+
+        mvc.perform(MockMvcRequestBuilders.put("/api/v1/members")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TestUtil.asJsonString(mf2)))
+                .andExpect(status().isOk());
+
+        Member updatedMember = memberService.findByLoginId("forall");
+
+        Assert.assertEquals(updatedMember.getLoginPw(), "forall1231");
+
+    }
 }

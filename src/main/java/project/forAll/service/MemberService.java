@@ -33,18 +33,15 @@ public class MemberService extends Service {
     }
 
     public void validateDuplicateLoginId(String loginId) {
-        // List<Member>에서 Member로 변경
-        // List<Member> findMembers = memberRepository.findByLoginId(loginId);
-        List<Member> findMembers = memberRepository.findByLoginId(loginId);
-        // if (!findMembers.isEmpty())에서 변경
-        if (!findMembers.isEmpty()) {
+        Member findMember = findByLoginId(loginId);
+        if (findMember != null) {
             throw new IllegalStateException("이미 존재하는 ID입니다.");
         }
     }
 
     public void validateDuplicateEmail(String email) {
-        List<Member> findMembers = memberRepository.findByEmail(email);
-        if (!findMembers.isEmpty()) {
+        Member findMember = findByEmail(email);
+        if (findMember != null) {
             throw new IllegalStateException("중복된 이메일입니다.");
         }
     }
@@ -109,5 +106,30 @@ public class MemberService extends Service {
         return member;
     }
 
+    public Member findByLoginId(final String loginId){
+        List<Member> members = memberRepository.findByLoginId(loginId);
+        if (members.isEmpty()) return null;
+        return members.get(0);
+    }
+    public Member findByEmail(final String email){
+        List<Member> members = memberRepository.findByEmail(email);
+        if (members.isEmpty()) return null;
+        return members.get(0);
+    }
+    public Member findByLoginIdAndPhoneNum(final String loginId, final String phoneNum){
+        List<Member> members = memberRepository.findByLoginIdAndPhoneNum(loginId, phoneNum);
+        if (members.isEmpty()) return null;
+        return members.get(0);
+    }
+    public Member findByNameAndPhoneNum(final String name, final String phoneNum){
+        List<Member> members = memberRepository.findByNameAndPhoneNum(name,phoneNum);
+        if (members.isEmpty()) return null;
+        return members.get(0);
+    }
 
+    public Member findByLoginIdAndLoginPw(final String loginId, final String loginPw){
+        List<Member> members = memberRepository.findByLoginIdAndLoginPw(loginId, loginPw);
+        if (members.isEmpty()) return null;
+        return members.get(0);
+    }
 }

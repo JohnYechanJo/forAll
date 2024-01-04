@@ -1,15 +1,14 @@
 package project.forAll.form;
 
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-
-@Data
+@Getter @Setter
+@NoArgsConstructor
 public class LoginForm {
-    @NotBlank
-    private String loginId;
 
-    @NotBlank
+    private String loginId;
     private String loginPw;
+
 }

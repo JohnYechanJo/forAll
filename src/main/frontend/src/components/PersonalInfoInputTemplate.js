@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from "react";
 import { Gender } from "../utils/enums";
 import axios from "axios";
 
-const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear,setMonth,setDay, setGender, checkDuplicatedId, checkDuplicatedEmail, isCheckedDuplicatedId, isCheckedDuplicatedEmail, isCheckPw, gender }) => {
+const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear,setMonth,setDay, setGender, checkDuplicatedId, checkDuplicatedEmail, isCheckedDuplicatedId, isCheckedDuplicatedEmail, isCheckPw, sendCerifiedNum, checkCerifiedNum,isPhoneCerified, gender }) => {
 
     const onChangeId = useCallback((e) => {
         setId(e.target.value);
@@ -25,20 +25,15 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
     const onChangeCerifiedNum = useCallback((e) => {
         setCerifiedNum(e.target.value);
     }, []);
-    const onChangeBirthDay = useCallback((e) => {
-        setBirthDay(e.target.value);
-    }, []);
     const onChangeGender = useCallback((e) => {
         setGender(e.target.value);
     }, []);
     const onChangeYear = (e) => {
         setYear(e.target.value);
     };
-
     const onChangeMonth = (e) => {
         setMonth(e.target.value);
     };
-
     const onChangeDay = (e) => {
         setDay(e.target.value);
     };
@@ -100,12 +95,14 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                     placeholder={"숫자만 입력해주세요"}
                     onChange={onChangePhone}
                 />
-                <button>인증번호 받기</button>
+                <button onClick={() => sendCerifiedNum()}>인증번호 받기</button>
                 <input
                     placeholder={"인증번호 입력"}
                     onChange={onChangeCerifiedNum}
                 />
-                <button>인증번호 확인</button>
+                <button onClick={() => checkCerifiedNum()}>인증번호 확인</button>
+                {isPhoneCerified === true ? <p>인증 완료되었습니다</p> :
+                    (isPhoneCerified === false ? <p>인증 실패했습니다</p> : null)}
             </div>
             <div>
             <div>

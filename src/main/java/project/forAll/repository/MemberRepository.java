@@ -10,6 +10,8 @@ import java.util.List;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     // List<Member>에서 Member로 수정
     List<Member> findByLoginId(String loginId);
-
     List<Member> findByEmail(String email);
+    List<Member> findByLoginIdAndPhoneNum(String loginId, String phoneNum);
+    List<Member> findByNameAndPhoneNum(String name, String phoneNum);
+    List<Member> findByLoginIdAndLoginPw(String loginId, String loginPw);
 }

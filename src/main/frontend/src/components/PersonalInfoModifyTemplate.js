@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import {Link} from "react-router-dom";
+import "./Styles.css";
 const PersonTemplate = () => {
     const [id, setId] = useState('');
     const [passwd, setPasswd] = useState('');
@@ -25,10 +26,11 @@ const PersonTemplate = () => {
                 />
             </div>
             <div>
-                <Link to="/personalInfoModify2">
-                    <button>확인</button>
-                </Link>
-
+                <footer className="footer">
+                    <Link to="/personalInfoModify2">
+                    <button className="button" style={{backgroundColor:"black"}}>확인</button>
+                    </Link>
+                </footer>
             </div>
         </div>
     )
