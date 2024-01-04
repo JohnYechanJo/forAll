@@ -16,7 +16,6 @@ import java.util.List;
 public class APIMemberController extends APIController {
 
     private final MemberService memberService;
-    private final MemberRepository memberRepository;
 
     /**
      * id에 해당하는 member 객체를 반환
@@ -72,7 +71,7 @@ public class APIMemberController extends APIController {
 
     @PutMapping("/members")
     public ResponseEntity editMember(@RequestBody final MemberForm form){
-        final Member savedMember = memberRepository.findByLoginId(form.getLoginId());
+        final Member savedMember = memberService.findByLoginId(form.getLoginId());
         try{
             if (savedMember == null) throw new Exception("No member with loginId " + form.getLoginId());
 
@@ -85,6 +84,7 @@ public class APIMemberController extends APIController {
             return new ResponseEntity(errorResponse("Could not update Member : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
         }
 
-
     }
+
+
 }

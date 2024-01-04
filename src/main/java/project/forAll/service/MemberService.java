@@ -34,14 +34,14 @@ public class MemberService extends Service {
 
     // 중복 회원을 구별하는 방법 (전화번호? 이름과 생년월일?)
     public void validateDuplicateLoginId(String loginId) {
-        Member findMember = memberRepository.findByLoginId(loginId);
+        Member findMember = findByLoginId(loginId);
         if (findMember != null) {
             throw new IllegalStateException("이미 존재하는 ID입니다.");
         }
     }
 
     public void validateDuplicateEmail(String email) {
-        Member findMember = memberRepository.findByEmail(email);
+        Member findMember = findByEmail(email);
         if (findMember != null) {
             throw new IllegalStateException("중복된 이메일입니다.");
         }
@@ -105,6 +105,27 @@ public class MemberService extends Service {
         memberRepository.flush();
 
         return member;
+    }
+
+    public Member findByLoginId(final String loginId){
+        List<Member> members = memberRepository.findByLoginId(loginId);
+        if (members.isEmpty()) return null;
+        return members.get(0);
+    }
+    public Member findByEmail(final String email){
+        List<Member> members = memberRepository.findByEmail(email);
+        if (members.isEmpty()) return null;
+        return members.get(0);
+    }
+    public Member findByLoginIdAndPhoneNum(final String loginId, final String phoneNum){
+        List<Member> members = memberRepository.findByLoginIdAndPhoneNum(loginId, phoneNum);
+        if (members.isEmpty()) return null;
+        return members.get(0);
+    }
+    public Member findByNameAndPhoneNum(final String name, final String phoneNum){
+        List<Member> members = memberRepository.findByNameAndPhoneNum(name,phoneNum);
+        if (members.isEmpty()) return null;
+        return members.get(0);
     }
 
 
