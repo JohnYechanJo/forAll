@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import Modal from "react-modal";
 
-const UseTermsTemplate = () => {
+const UseTermsTemplate = ({setIsUseTermsChecked}) => {
         const [modalIsOpen1, setModalIsOpen1] = useState(false);
         const [modalIsOpen2, setModalIsOpen2] = useState(false);
         const [modalIsOpen3, setModalIsOpen3] = useState(false);
@@ -48,6 +48,12 @@ const UseTermsTemplate = () => {
                 backgroundColor: 'rgba(0, 0, 0, 0.75)' 
             }
         };
+
+    useEffect(() => {
+        if (checkbox1 && checkbox2 && infoCollect && infoThird && ageOver14){
+            setIsUseTermsChecked(true);
+        }
+    }, [checkbox1,checkbox2,infoCollect,infoThird,ageOver14]);
     return (
         <div>
                 <h1>이용약관동의*</h1>

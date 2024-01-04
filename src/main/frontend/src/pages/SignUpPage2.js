@@ -7,6 +7,7 @@ import {Gender} from "../utils/enums";
 import axios from "axios";
 import useDidMountEffect from "../utils/hooks/useDidMountEffect";
 import * as regularExpressions from "../utils/regularExpressions";
+import SignUpInformationTemplate from "../components/SignUpInformationTemplate";
 const SignUpPage2 = () => {
     const location = useLocation();
     const data = {...location.state};
@@ -28,6 +29,8 @@ const SignUpPage2 = () => {
     const [isCheckDuplicatedEmail, setIsCheckDuplicatedEmail] = useState();
     const [isCheckPw, setIsCheckPw] = useState();
     const [isPhoneCerified, setIsPhoneCerified] = useState();
+    const [isAllChecked, setIsAllChecked] = useState(false);
+    const [isUseTermsChecked, setIsUseTermsChecked] = useState(false);
 
     const checkDuplicatedId = () => {
         axios.get("/api/v1/members/checkId/"+id)
@@ -110,7 +113,15 @@ const SignUpPage2 = () => {
         else if (isPhoneCerified !== true){
             alert("휴대폰 인증이 필요합니다");
         }
+        else if (isUseTermsChecked !== true){
+            alert("약관 동의가 필요합니다")
+        }
         else{
+            setIsAllChecked(true);
+        }
+    };
+    const submit = () => {
+        if (isAllChecked){
             axios.post("/api/v1/members",
                 {
                     loginId: id,
@@ -140,13 +151,15 @@ const SignUpPage2 = () => {
                 navigate('/error')
             })
         }
-
-
-
-    };
+    }
     return (
         <div>
-            <Header PageName={"02.정보입력"}/>
+            <div>
+                <Link to={"/signUp"}>
+                    <button>{"<"}</button>
+                </Link>
+                <h1>02.정보입력</h1>
+            </div>
             <PersonalInfoInputTemplate
                 pw = {pw}
                 role={data.role}
@@ -171,13 +184,20 @@ const SignUpPage2 = () => {
                 isPhoneCerified={isPhoneCerified}
                 gender = {gender}
             />
-            <UseTermsTemplate />
+            <UseTermsTemplate
+                setIsUseTermsChecked={setIsUseTermsChecked}
+            />
             <Link to="/signUp">
                 <p>뒤로</p>
             </Link>
             <button
                 onClick={()=>handleButton()}
             >다음</button>
+            {isAllChecked ? <SignUpInformationTemplate
+                setIsAllChecked={setIsAllChecked}
+                submit={submit}
+            /> : null}
+
         </div>
     )
 };
