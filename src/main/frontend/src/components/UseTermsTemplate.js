@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Modal from "react-modal";
 
 const UseTermsTemplate = ({setIsUseTermsChecked}) => {
