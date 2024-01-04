@@ -36,7 +36,27 @@ public class APISmsController extends APIController {
     }
 
     @PostMapping("/send-one/{to}")
-    public ResponseEntity sendOne(@PathVariable  String to) {
+    public SingleMessageSentResponse sendOne(@PathVariable  String to) {
+        Message message = new Message();
+        // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
+        message.setFrom("01049969685");
+        message.setTo(to);
+        Random rand  = new Random();
+        String verificationCode = "";
+        for(int i=0; i<6; i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            verificationCode+=ran;
+        }
+        message.setText("[ForALL] 아래의 인증번호를 입력해주세요\n" + verificationCode);
+
+        authenticationDataService.saveData(to, verificationCode);
+        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+
+        return response;
+    }
+    /* 테스트용 문자인증 서비스 */
+    @PostMapping("/sendTest/{to}")
+    public ResponseEntity sendOneTest(@PathVariable  String to) {
         Message message = new Message();
         // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
         message.setFrom("01049969685");
