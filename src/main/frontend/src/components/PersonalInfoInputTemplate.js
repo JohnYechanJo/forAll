@@ -160,6 +160,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                             name="gender"
                             value="Not Specified"
                             onChange={onChangeGender}
+                            defaultChecked
                         />
                         선택안함
                     </label>

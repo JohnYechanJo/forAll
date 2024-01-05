@@ -23,12 +23,12 @@ const SignUpPage2 = () => {
     const [year, setYear] = useState("");
     const [month, setMonth] = useState("");
     const [day, setDay] = useState("");
-    const [gender, setGender] = useState("");
+    const [gender, setGender] = useState(Gender.NotSpecified);
 
     const [isCheckDuplicatedId, setIsCheckDuplicatedId] = useState();
     const [isCheckDuplicatedEmail, setIsCheckDuplicatedEmail] = useState();
     const [isCheckPw, setIsCheckPw] = useState();
-    const [isPhoneCerified, setIsPhoneCerified] = useState();
+    const [isPhoneCerified, setIsPhoneCerified] = useState(false);
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [isUseTermsChecked, setIsUseTermsChecked] = useState(false);
 
@@ -147,6 +147,7 @@ const SignUpPage2 = () => {
                         role: data.role
                     }
                 });
+
             }).catch((response) => {
                 navigate('/error')
             })
