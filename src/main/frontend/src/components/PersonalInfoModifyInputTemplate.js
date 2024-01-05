@@ -131,7 +131,7 @@ const PersonalInfoModifyInputTemplate = ({ role, name, phone, email,year,month,d
                 <div>
                     <h1>생년월일*</h1>
                     <select onChange={onChangeYear}>
-                        <option value={year}>{year ? year : 년(YYYY)}</option>
+                        <option value={year}>{year ? year : "년(YYYY)"}</option>
                         {years.map(year => (
                             <option key={year} value={year}>
                                 {year}
@@ -139,7 +139,7 @@ const PersonalInfoModifyInputTemplate = ({ role, name, phone, email,year,month,d
                         ))}
                     </select>
                     <select onChange={onChangeMonth}>
-                        <option value={month}>{month ? month : 월(MM)}</option>
+                        <option value={month}>{month ? month : "월(MM)"}</option>
                         {months.map(month => (
                             <option key={month} value={month}>
                                 {month}
@@ -147,7 +147,7 @@ const PersonalInfoModifyInputTemplate = ({ role, name, phone, email,year,month,d
                         ))}
                     </select>
                     <select onChange={onChangeDay}>
-                        <option value={day}>{day ? day : 일(DD)}</option>
+                        <option value={day}>{day ? day : "일(DD)"}</option>
                         {days.map(day => (
                             <option key={day} value={day}>
                                 {day}
