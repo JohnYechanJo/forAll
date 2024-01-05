@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
@@ -16,6 +15,7 @@ import ModifyCompletePage from "./pages/ModifyCompletePage";
 import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
 import HostRegistry from "./pages/HostRegistry";
+import HostRegistryStart from "./pages/HostRegistryStart";
 function App() {
   return (
       <Routes>
@@ -34,6 +34,7 @@ function App() {
           <Route path="/error" element={<ErrorPage />}/>
           <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
           <Route path="/hostRegistry" element={<HostRegistry />} />
+                <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
       </Routes>
   );
 }
