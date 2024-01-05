@@ -15,6 +15,7 @@ import PlaceInfoModifyPage2 from './pages/PlaceInfoModifyPage2';
 import ModifyCompletePage from "./pages/ModifyCompletePage";
 import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
+import HostRegistry from "./pages/HostRegistry";
 function App() {
   return (
       <Routes>
@@ -31,7 +32,8 @@ function App() {
           <Route path="/placeInfoModify" element={<PlaceInfoModifyPage />} />
           <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} /> 
           <Route path="/error" element={<ErrorPage />}/>
-              <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
+          <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
+          <Route path="/hostRegistry" element={<HostRegistry />} />
       </Routes>
   );
 }
