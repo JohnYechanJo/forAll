@@ -15,6 +15,8 @@ import PlaceInfoModifyPage2 from './pages/PlaceInfoModifyPage2';
 import ModifyCompletePage from "./pages/ModifyCompletePage";
 import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
+import PlaceRegisterPage from "./pages/PlaceRegisterPage";
+import PlaceRegisterPage2 from "./pages/PlaceRegisterPage2";
 function App() {
   return (
       <Routes>
@@ -29,9 +31,14 @@ function App() {
           <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
           <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />
           <Route path="/placeInfoModify" element={<PlaceInfoModifyPage />} />
-          <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} /> 
+          <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
+          <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
+          <Route path="/placeRegister" element={<PlaceRegisterPage />}/>
+          <Route path="/placeRegister2" element={<PlaceRegisterPage2 />}/>
+
+
+
           <Route path="/error" element={<ErrorPage />}/>
-              <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
       </Routes>
   );
 }
