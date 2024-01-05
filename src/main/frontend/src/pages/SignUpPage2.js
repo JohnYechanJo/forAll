@@ -28,7 +28,7 @@ const SignUpPage2 = () => {
     const [isCheckDuplicatedId, setIsCheckDuplicatedId] = useState();
     const [isCheckDuplicatedEmail, setIsCheckDuplicatedEmail] = useState();
     const [isCheckPw, setIsCheckPw] = useState();
-    const [isPhoneCerified, setIsPhoneCerified] = useState(false);
+    const [isPhoneCerified, setIsPhoneCerified] = useState();
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [isUseTermsChecked, setIsUseTermsChecked] = useState(false);
 

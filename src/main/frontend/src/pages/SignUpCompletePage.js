@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {user_role} from "../utils/enums";
 
 const SignUpCompletePage = () => {
@@ -17,7 +17,10 @@ const SignUpCompletePage = () => {
             <h1>아이디 {data.id}</h1>
             <h1>이메일 {data.email}</h1>
             {/*시작하기 하면 로그인화면으로 갈지, 바로 로그인 할지*/}
-            <button>시작하기</button>
+            <Link to={"/main"}>
+                <button>시작하기</button>
+            </Link>
+
         </div>
     )
 };
