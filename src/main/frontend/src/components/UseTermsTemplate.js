@@ -106,7 +106,6 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
                         <input type="checkbox" checked={ageOver14} onChange={() => setAgeOver14(!ageOver14)} />
                         만 14세 이상입니다.
                 </div>
-                <button disabled={!checkbox1 || !checkbox2 || !infoCollect || !infoThird || !ageOver14} >확인</button>
         </div>
     );
 };
