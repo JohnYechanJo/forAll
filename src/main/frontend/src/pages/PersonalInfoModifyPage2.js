@@ -135,9 +135,6 @@ const PersonalModify2 = () => {
                 isPhoneCerified={isPhoneCerified}
                 setIsPhoneCerified={setIsPhoneCerified}
             />
-            <Link to="/personalInfoModify">
-                <button>뒤로</button>
-            </Link>
             <UseTermsTemplate
                 setIsUseTermsChecked={setIsUseTermsChecked}
             />
