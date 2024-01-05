@@ -1,23 +1,35 @@
 import { useState, useCallback } from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./Styles.css";
+import axios from "axios";
 const PersonTemplate = () => {
-    const [id, setId] = useState('');
+    const navigate = useNavigate();
+    const id = sessionStorage.getItem("user_id");
     const [passwd, setPasswd] = useState('');
 
-    const onChangeId = useCallback((e) => {
-        setId(e.target.value);
-    },[]);
     const onChangePw = useCallback((e) => {
         setPasswd(e.target.value);
     },[]);
+
+    const checkPw = () => {
+        if (passwd === "") alert("비밀번호를 입력해주세요");
+        else{
+            axios.get("/api/v1/members/"+id+"/"+passwd)
+                .then((res) => {
+                    navigate("/personalInfoModify2",{
+                        state: res.data
+                    })
+                }).catch(()=>{
+                alert("비밀번호가 일치하지 않습니다");
+            });
+        }
+    }
     return (
         <div>
             <div>
                 <input
-                    placeholder="아이디 입력"
                     value={id}
-                    onChange={onChangeId}
+                    disabled={true}
                 />
                 <input
                     placeholder="비밀번호 입력"
@@ -27,9 +39,7 @@ const PersonTemplate = () => {
             </div>
             <div>
                 <footer className="footer">
-                    <Link to="/personalInfoModify2">
-                    <button className="button" style={{backgroundColor:"black"}}>확인</button>
-                    </Link>
+                    <button className="button" style={{backgroundColor:"black"}} onClick={() => checkPw()}>확인</button>
                 </footer>
             </div>
         </div>

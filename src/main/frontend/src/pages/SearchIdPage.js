@@ -1,9 +1,9 @@
 import Header from "../components/Header";
 import SearchIdTemplate from "../components/SearchIdTemplate";
-import Sidebar from "../components/Sidebar";
 import {useState} from "react";
 import * as regularExpressions from "../utils/regularExpressions";
 import axios from "axios";
+import {Link} from "react-router-dom";
 const SearchIdPage = () => {
     const [id, setId] = useState("");
     const [name, setName] = useState('');
@@ -51,7 +51,9 @@ const SearchIdPage = () => {
                 checkCerifiedNum={checkCerifiedNum}
                 sendCerifiedNum={sendCerifiedNum}
             />
-            <Sidebar />
+            <Link to={"/login"}>
+                <button>홈화면</button>
+            </Link>
         </div>
     )
 }

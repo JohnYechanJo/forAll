@@ -4,11 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import project.forAll.controller.SessionManager;
 import project.forAll.domain.Member;
 import project.forAll.form.MemberForm;
 import project.forAll.repository.MemberRepository;
 import project.forAll.service.MemberService;
+import retrofit2.http.Path;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -16,6 +19,7 @@ import java.util.List;
 public class APIMemberController extends APIController {
 
     private final MemberService memberService;
+    private final SessionManager sessionManager;
 
     /**
      * id에 해당하는 member 객체를 반환
@@ -70,9 +74,12 @@ public class APIMemberController extends APIController {
     }
 
     @PutMapping("/members")
-    public ResponseEntity editMember(@RequestBody final MemberForm form){
-        final Member savedMember = memberService.findByLoginId(form.getLoginId());
+    public ResponseEntity editMember(@RequestBody final MemberForm form, HttpServletRequest request){
         try{
+            String loginId = (String) sessionManager.getSession(request);
+            if (!loginId.equals(form.getLoginId())) return new ResponseEntity(errorResponse("Session Disabled"), HttpStatus.SERVICE_UNAVAILABLE);
+
+            final Member savedMember = memberService.findByLoginId(form.getLoginId());
             if (savedMember == null) throw new Exception("No member with loginId " + form.getLoginId());
 
             final Member member = memberService.build(form);
@@ -84,6 +91,17 @@ public class APIMemberController extends APIController {
             return new ResponseEntity(errorResponse("Could not update Member : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    @GetMapping("/members/{id}/{pw}")
+    public ResponseEntity checkIdAndPw(@PathVariable final String id, @PathVariable final String pw){
+        try{
+            final Member member = memberService.findByLoginIdAndLoginPw(id, pw);
+            if (member == null) return new ResponseEntity(errorResponse("Wrong password"), HttpStatus.BAD_REQUEST);
+            else return new ResponseEntity(member, HttpStatus.OK);
+        }catch (final Exception e){
+            return new ResponseEntity(errorResponse("Wrong password"), HttpStatus.BAD_REQUEST);
+        }
     }
 
 

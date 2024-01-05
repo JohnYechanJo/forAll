@@ -1,9 +1,9 @@
 import Header from "../components/Header";
 import SearchPwTemplate from "../components/SearchPwTemplate";
-import Sidebar from "../components/Sidebar";
 import {useState} from "react";
 import * as regularExpressions from "../utils/regularExpressions";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 const SearchPwPage = () => {
     const [pw, setPw] = useState("");
@@ -52,7 +52,9 @@ const SearchPwPage = () => {
                 checkCerifiedNum={checkCerifiedNum}
                 sendCerifiedNum={sendCerifiedNum}
             />
-            <Sidebar />
+            <Link to={"/login"}>
+                <button>홈화면</button>
+            </Link>
         </div>
     )
 }

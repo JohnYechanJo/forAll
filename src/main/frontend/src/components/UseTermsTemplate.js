@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import Modal from "react-modal";
+import "./Styles.css";
+import { ModalStyles } from "./ModalStyles"; 
 
 const UseTermsTemplate = ({setIsUseTermsChecked}) => {
         const [modalIsOpen1, setModalIsOpen1] = useState(false);
@@ -30,25 +32,7 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
             setInfoCoupon(!everyBox);
             setAgeOver14(!everyBox);
         };
-        const customStyles = {
-            content: {
-                top: '50%',
-                left: '50%',
-                right: 'auto',
-                bottom: 'auto',
-                marginRight: '-50%',
-                transform: 'translate(-50%, -50%)',
-                backgroundColor: 'lightgrey', 
-                color: 'black', 
-                width: '80%',
-                height: '50%',
-                textAlign: 'center',
-            },
-            overlay: {
-                backgroundColor: 'rgba(0, 0, 0, 0.75)' 
-            }
-        };
-
+    
     useEffect(() => {
         if (checkbox1 && checkbox2 && infoCollect && infoThird && ageOver14){
             setIsUseTermsChecked(true);
@@ -61,7 +45,7 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
                     <input type="checkbox" checked={everyBox} onChange={handleCheckBox} />
                 </h2>
                 <div>
-                    <text>
+                    <p>
                         <input type="checkbox" checked={checkbox1 && checkbox2} //useTerms 없이 체크박스 1&2로 구현
                         onChange={() => {
                             setCheckbox1(!checkbox1);
@@ -69,7 +53,7 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
                         }} />
                         <Modal 
                         isOpen={modalIsOpen1}
-                        style={customStyles}
+                        style={ModalStyles}
                     >
                         <h1>이용약관</h1>
                         <p>이용약관 내용</p>
@@ -82,41 +66,41 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
                         <button onClick={modalClose1} disabled={!checkbox1 || !checkbox2} >확인</button>
                         </Modal>
                         <button onClick={()=>setModalIsOpen1(true)}>이용약관 보기</button>
-                    </text>
+                    </p>
                 </div>
                 <div>
-                    <text>
+                    <p>
                         <input type="checkbox" checked={infoCollect} onChange={() => setInfoCollect(!infoCollect)} />
                         <Modal 
                         isOpen={modalIsOpen2}
-                        style={customStyles}
+                        style={ModalStyles}
                     >
                         <h1>개인정보 수집,이용 동의</h1>
                         <p>내용</p>
                         <button onClick={modalClose2}>닫기</button>
                         </Modal>
                         <button onClick={() => setModalIsOpen2(true)}>개인정보 수집,이용 동의</button>
-                    </text>
+                    </p>
                 </div>
                 <div>
-                    <text>
+                    <p>
                         <input type="checkbox" checked={infoThird} onChange={() => setInfoThird(!infoThird)} />
                         <Modal 
                         isOpen={modalIsOpen3}
-                        style={customStyles}
+                        style={ModalStyles}
                         >
                         <h1>개인정보 제3자 제공 동의</h1>
                         <p>내용</p>
                         <button onClick={modalClose3}>닫기</button>
                         </Modal>
                         <button onClick={() => setModalIsOpen3(true)}>개인정보 제3자 제공 동의</button>
-                        </text>
+                        </p>
                 </div>
                 <div>
-                    <text>
+                    <p>
                         <input type="checkbox" checked={infoCoupon} onChange={() => setInfoCoupon(!infoCoupon)} />
                         할인쿠폰 등 혜택/정보 수신 동의
-                    </text>
+                    </p>
                 </div>
                 <div>
                         <input type="checkbox" checked={ageOver14} onChange={() => setAgeOver14(!ageOver14)} />
