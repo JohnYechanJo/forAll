@@ -20,9 +20,12 @@ const HostRegistryStart = () => {
             <h1>1. 공간 정보를 알려주세요</h1>
             <h1>2. 이용안내 정보를 입력하세요</h1>
             <h1>3. 예약/정산 정보를 입력하세요</h1>
-            <Link to="/hostRegistry">
+            <div><Link to="/hostRegistry">
                 <button className="button" style={{backgroundColor: "black"}}>공간 등록하기</button>
-            </Link>
+            </Link></div>
+            <div><Link to="/main">
+                <button className="button" style={{backgroundColor: "red"}}>둘러보기</button>
+            </Link></div>
             <footer className="footer">
                 <Modal isOpen={modalIsOpen} style={ModalStyles}>
                     <h1>등록제안서 내용</h1>
