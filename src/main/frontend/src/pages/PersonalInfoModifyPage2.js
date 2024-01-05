@@ -11,7 +11,7 @@ import * as regularExpressions from "../utils/regularExpressions";
 const PersonalModify2 = () => {
     const location = useLocation();
     const data = { ...location.state };
-    const birdDayList = data.birthDay != null ? data.birthDay.split('/') : "//".split("/");
+    const birdDayList = data.birthday != null ? data.birthday.split('/') : "//".split("/");
     const navigate = useNavigate();
     const [pw, setPw] = useState('');
     const [pwCheck, setPwCheck] = useState('');
@@ -82,6 +82,7 @@ const PersonalModify2 = () => {
         else {
             axios.put("/api/v1/members",
                 {
+                    loginId: data.loginId,
                     loginPw: pw,
                     name: name,
                     birthDay: birthDay,

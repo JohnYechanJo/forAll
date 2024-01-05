@@ -2,7 +2,8 @@ import {useCallback, useEffect, useState} from "react";
 import { Gender } from "../utils/enums";
 import axios from "axios";
 import UseTermsTemplate from "./UseTermsTemplate";
-const PersonalInfoModifyInputTemplate = ({ role, name, phone, email, cerifiedNum, setPw,setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear,setMonth,setDay, setGender, isCheckPw, setIsCheckedDuplicatedEmail ,isCheckedDuplicatedEmail, sendCerifiedNum, gender, isPhoneCerified, setIsPhoneCerified }) => {
+const PersonalInfoModifyInputTemplate = ({ role, name, phone, email,year,month,day, cerifiedNum, setPw,setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear,setMonth,setDay, setGender, isCheckPw, setIsCheckedDuplicatedEmail ,isCheckedDuplicatedEmail, sendCerifiedNum, gender, isPhoneCerified, setIsPhoneCerified }) => {
+    console.log(year,month,day);
     const onChangePw = useCallback((e) => {
         setPw(e.target.value);
     }, []);
@@ -104,7 +105,7 @@ const PersonalInfoModifyInputTemplate = ({ role, name, phone, email, cerifiedNum
             <div>
                 <h1>이메일*</h1>
                 <input
-                    defaultValue={prevEmail}
+                    defaultValue={email}
                     onChange={onChangeEmail}
                 />
                 <button onClick={() => checkDuplicatedEmail()} disabled={email===prevEmail}>중복확인</button>
@@ -114,7 +115,7 @@ const PersonalInfoModifyInputTemplate = ({ role, name, phone, email, cerifiedNum
             <div>
                 <h1>휴대폰*</h1>
                 <input
-                    defaultValue={phone}
+                    value={phone}
                     onChange={onChangePhone}
                 />
                 <button onClick={() => sendCerifiedNum()} disabled={phone===prevPhone}>인증번호 받기</button>
@@ -130,7 +131,7 @@ const PersonalInfoModifyInputTemplate = ({ role, name, phone, email, cerifiedNum
                 <div>
                     <h1>생년월일*</h1>
                     <select onChange={onChangeYear}>
-                        <option value="">년(YYYY)</option>
+                        <option value={year}>{year ? year : 년(YYYY)}</option>
                         {years.map(year => (
                             <option key={year} value={year}>
                                 {year}
@@ -138,7 +139,7 @@ const PersonalInfoModifyInputTemplate = ({ role, name, phone, email, cerifiedNum
                         ))}
                     </select>
                     <select onChange={onChangeMonth}>
-                        <option value="">월(MM)</option>
+                        <option value={month}>{month ? month : 월(MM)}</option>
                         {months.map(month => (
                             <option key={month} value={month}>
                                 {month}
@@ -146,7 +147,7 @@ const PersonalInfoModifyInputTemplate = ({ role, name, phone, email, cerifiedNum
                         ))}
                     </select>
                     <select onChange={onChangeDay}>
-                        <option value="">일(DD)</option>
+                        <option value={day}>{day ? day : 일(DD)}</option>
                         {days.map(day => (
                             <option key={day} value={day}>
                                 {day}
