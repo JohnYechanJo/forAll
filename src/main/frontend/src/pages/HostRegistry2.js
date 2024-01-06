@@ -2,7 +2,8 @@ import DropDown from "../components/DropDown";
 import {useCallback, useEffect, useState} from "react";
 import "../style/btnStyles.css";
 import ImageInput from "../components/ImageInput";
-const PlaceRegisterPage3 = () => {
+import {Link} from "react-router-dom";
+const HostRegistry2 = () => {
     const [rentWeek, setRentWeek] = useState("");
     const [rentDays, setRentDays] = useState([]);
     const [rentTimeFrom, setRentTimeFrom] = useState("");
@@ -246,11 +247,11 @@ const PlaceRegisterPage3 = () => {
             </div>
             
             <div>
-                <button>이전</button>
-                <button>저장</button>
+                <Link to="/hostRegistry"><button>이전</button></Link>
+                <Link to="/hostRegistry3"><button>다음</button></Link>
             </div>
         </div>
     )
 };
 
-export default PlaceRegisterPage3;
+export default HostRegistry2;

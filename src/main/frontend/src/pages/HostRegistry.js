@@ -1,15 +1,24 @@
 import {useState} from "react";
 import "../components/Styles.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Modal from "react-modal";
 import ImageInput from "../components/ImageInput";
 import {ModalStyles} from "../components/ModalStyles";
+import DaumPost from "../components/DaumPost";
 const HostRegistry = () => {
     const [inputCount, setInputCount] = useState(0);
     const [inputCount2, setInputCount2] = useState(0);
     const [inputCount3, setInputCount3] = useState(0);
-    const [kitchen, setKitchen] = useState([]);
+    const [inputCount4, setInputCount4] = useState(0);
+    const [placeName, setPlaceName] = useState("");
+    const [placeIntro, setPlaceIntro] = useState("");
+    const [placeIntroDetail, setPlaceIntroDetail] = useState("");
+    const [kitchen, setKitchen] = useState("");
+    const [address, setAddress] = useState(null);
+    const [addressDetail, setAddressDetail] = useState("");
+    const [fullAddress, setFullAddress] = useState("");
+    const [placeInfo, setPlaceInfo] = useState("");
+    const [webSite, setWebSite] = useState("");
     const [imgRepresent, setImgRepresent] = useState("");
     const [imgRight, setImgRight] = useState("");
     const [imgLeft, setImgLeft] = useState("");
@@ -63,26 +72,58 @@ const HostRegistry = () => {
     };
     const onInputHandler = (e) => {
         setInputCount(e.target.value.length);
+        setPlaceName(e.target.value);
     };
     const onInputHandler2 = (e) => {
         setInputCount2(e.target.value.length);
+        setPlaceIntro(e.target.value);
     }
     const onInputHandler3 = (e) => {
         setInputCount3(e.target.value.length);
+        setPlaceIntroDetail(e.target.value);
     }
-
+    const onInputHandler4 = (e) => {
+        setInputCount4(e.target.value.length);
+        setPlaceInfo(e.target.value);
+    }
+    const handleButton = () => {
+        if ((inputCount === 0)||(inputCount2 === 0)||(inputCount3 === 0)){
+            alert("공간에 대한 설명은 필수사항입니다.");
+        } else if (kitchen === "") {
+            alert("주방 특성은 필수사항입니다.");
+        } else if (imgRepresent === "") {
+            alert("대표 이미지는 필수사항입니다.");
+        } else if ((imgRight === "")||(imgLeft === "")||(imgAll === "")||(imgBack === "")||(imgFront === "")||(imgAdditional === "")){
+            alert("홀 사진 항목들은 필수사항입니다.");
+        } else if ((kitchenRight === "")||(kitchenLeft === "")||(kitchenAll === "")||(kitchenBack === "")||(kitchenFront === "")||(kitchenAdditional === "")){
+            alert("주방 사진 항목들은 필수사항입니다.");
+        } else if ((menu1 === "")||(menu2 === "")||(menu3 === "")||(menu4 === "")||(menuAdditional === "")){
+            alert("메뉴 사진 항목들은 필수사항입니다.");
+        } else if(address === ""){
+            alert("주소는 필수사항입니다.");
+        } else if(placeInfo === ""){
+            alert("상세 위치 정보는 필수사항입니다.");
+        } else if(webSite === ""){
+            alert("웹사이트는 필수사항입니다.");}
+        else {
+        //     정보 들고 HostRegistry2로 이동하게 하는 코드 구현
+        }
+    };
     return (
-        <div>
+        <div className="margin"
+             style={{display:"flex",
+                     justifyContent:"space-around",
+                     flexDirection:"column",}}>
             <div>
                 <header style={{textAlign: "center"}}><h3>1. 공간 정보</h3></header>
                 <h4>공간명을 입력해주세요.</h4>
-                <hr/>
+                <hr style={{height: "2px", backgroundColor: "black"}}/>
                 <h4>공간명</h4>
                 <p>
                     <span>{inputCount}</span>
                     <span>/18자</span>
                 </p>
-                <input type="text" placeholder="오스테리아 로에로" style={{width: "75%", height: "40px"}}
+                <input type="text" placeholder="오스테리아 로에로" style={{width: "94vw", height: "3vh"}}
                        onChange={onInputHandler} maxLength="17"/>
                 <h5>❕사용 가능한 특수문자: (,),(-),(.),(@),(/)</h5>
                 <h4>공간 한 줄 소개</h4>
@@ -90,7 +131,7 @@ const HostRegistry = () => {
                     <span>{inputCount2}</span>
                     <span>/18자</span>
                 </p>
-                <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" style={{width: "75%", height: "40px"}}
+                <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" style={{width: "94vw", height: "3vh"}}
                        onChange={onInputHandler2} maxLength="17"/>
                 <h4>공간 소개</h4>
                 <p>
@@ -98,7 +139,7 @@ const HostRegistry = () => {
                     <span>/300자</span>
                     <span style={{color: "red"}}>(최소 20자)</span>
                 </p>
-                <textarea type="text" placeholder="공간에 대한 설명을 기재해주세요." style={{width: "75%", height: "200px"}}
+                <textarea type="text" placeholder="공간에 대한 설명을 기재해주세요." style={{width: "94vw", height: "17vh"}}
                           onChange={onInputHandler3} maxLength="299" minLength="19"/>
                 <div>
                     <h4>주방 특성</h4>
@@ -106,19 +147,17 @@ const HostRegistry = () => {
                         <button className="button"
                                 name="kitchen"
                                 value="open"
-                                disabled= {clicked2 || clicked3}
+                                disabled={clicked2 || clicked3}
                                 style={{
                                     backgroundColor: clicked1 ? "black" : "white",
                                     color: clicked1 ? "white" : "black",
                                     width: "100px",
-
                                     flex: "1",
                                     marginLeft: "10px"
                                 }}
                                 onClick={(event) => {
                                     const selected = event.target.value;
                                     setKitchen(event.target.value);
-                                    console.log(selected);
                                     setClicked1(!clicked1);
                                     if (clicked1 === false) {
                                         setKitchen("");
@@ -136,14 +175,12 @@ const HostRegistry = () => {
                                     backgroundColor: clicked2 ? "black" : "white",
                                     color: clicked2 ? "white" : "black",
                                     width: "100px",
-
                                     flex: "1",
                                     marginLeft: "10px"
                                 }}
                                 onClick={(event) => {
                                     const selected = event.target.value;
                                     setKitchen(event.target.value);
-                                    console.log(selected);
                                     setClicked2(!clicked2);
                                     if (clicked2 === false) {
                                         setKitchen("");
@@ -168,12 +205,10 @@ const HostRegistry = () => {
                                 onClick={(event) => {
                                     const selected = event.target.value;
                                     setKitchen(event.target.value);
-                                    console.log(selected);
                                     setClicked3(!clicked3);
                                     if (clicked3 === false) {
                                         setKitchen("");
                                     }
-                                    ;
                                 }}
                         >
                             폐쇄형
@@ -221,163 +256,210 @@ const HostRegistry = () => {
                         </button>
                     </div>
                 </div>
-                <hr/>
             </div>
             <div>
                 <h4>위치 정보</h4>
+                <hr style={{height:"2px",backgroundColor:"black"}} />
+                <h4>주소(위치)</h4>
+                <DaumPost setAddress={setAddress}/>
+                <h5>
+                    <span>{(address !== null) ? address : null} </span>
+                    <span>
+                        <input type="text"
+                               placeholder="상세 주소"
+                               hidden={(address === null)}
+                               onChange={(e) => {
+                                   setAddressDetail(e.target.value);
+                                   setFullAddress(address + " " + e.target.value);
+                               }}
+                        />
+                    </span>
+                </h5>
+                <h6>
+                    • 공간 주소는 최초 등록 이후 직접 변경할 수 없습니다.
+                </h6>
+                <h6>
+                    • 고객센터를 통해 주소 변경을 요청해주세요.
+                </h6>
+            </div>
+            <div>
+                <h4>상세 위치 정보</h4>
+                <p>
+                    <span>{inputCount4}</span>
+                    <span>/18자</span>
+                </p>
+                <input type="text" placeholder="ex.성수역 4번출구 도보 1분 거리" style={{width: "80vw", height: "3vh"}}
+                       onChange={onInputHandler4} maxLength="17"/>
+                <h6>
+                    • 작성하신 위치정보는 검색에 영향을 미치지 않습니다.
+                </h6>
+                <h6 style={{marginTop: "0px"}}>
+                    • 공간 주소를 입력하시면 반려 처리됩니다.(ex.강남구 대치동, 삼성로 141 등)
+                </h6>
+            </div>
+            <div>
+            <h4>웹사이트</h4>
+                <input type="text" placeholder="웹사이트 URL을 입력해주세요." style={{width: "80vw", height: "3vh"}}
+                       onChange={(e) => setWebSite(e.target.value)}/>
+                <h6>
+                    • 인스타그램, 페이스북, 네이버지도, 카카오지도, 구글지도 등
+                </h6>
+                <h6 style={{marginTop: "0px"}}>
+                    공간을 PR할 수 있는 웹사이트면 무엇이든지 좋습니다.
+                </h6>
             </div>
             <div>
                 <h4>
                     <span>대표 이미지 </span>
-                    <span>2048•1158 권장, 최대 3MB</span>
                 </h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenRepresent}/></span>
                     <ImageInput setImg={setImgRepresent} setHidden={setHiddenRepresent}/>
                 </p>
                 <h4>홀 사진</h4>
-                <hr/>
+                <hr style={{height: "2px", backgroundColor: "black"}}/>
                 <h4>홀 우측면</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenRight}/></span>
                     <ImageInput setImg={setImgRight} setHidden={setHiddenRight}/>
                 </p>
                 <h4>홀 좌측면</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenLeft}/></span>
                     <ImageInput setImg={setImgLeft} setHidden={setHiddenLeft}/>
                 </p>
                 <h4>홀 정면</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenFront}/></span>
                     <ImageInput setImg={setImgFront} setHidden={setHiddenFront}/>
                 </p>
                 <h4>홀 후면</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenBack}/></span>
                     <ImageInput setImg={setImgBack} setHidden={setHiddenBack}/>
                 </p>
                 <h4>홀 전체샷</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenAll}/></span>
                     <ImageInput setImg={setImgAll} setHidden={setHiddenAll}/>
                 </p>
                 <h4>추가사진</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenAdditional}/></span>
                     <ImageInput setImg={setImgAdditional} setHidden={setHiddenAdditional}/>
                 </p>
             </div>
             <div>
+
                 <h4>주방 사진</h4>
-                <hr/>
+                <hr style={{height: "2px", backgroundColor: "black"}}/>
                 <h4>주방 우측면</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenKRight}/></span>
                     <ImageInput setImg={setKitchenRight} setHidden={setHiddenKRight}/>
                 </p>
                 <h4>주방 좌측면</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenKLeft}/></span>
                     <ImageInput setImg={setKitchenLeft} setHidden={setHiddenKLeft}/>
                 </p>
                 <h4>주방 정면</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenKFront}/></span>
                     <ImageInput setImg={setKitchenFront} setHidden={setHiddenKFront}/>
                 </p>
                 <h4>주방 후면</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenKBack}/></span>
                     <ImageInput setImg={setKitchenBack} setHidden={setHiddenKBack}/>
                 </p>
                 <h4>주방 전체샷</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenKAll}/></span>
                     <ImageInput setImg={setKitchenAll} setHidden={setHiddenKAll}/>
                 </p>
                 <h4>추가사진</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenKAdditional}/></span>
                     <ImageInput setImg={setKitchenAdditional} setHidden={setHiddenKAdditional}/>
                 </p>
             </div>
             <div>
                 <h4>메뉴 사진</h4>
-                <hr/>
+                <hr style={{height: "2px", backgroundColor: "black"}}/>
                 <h4>메뉴 1</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenMenu1}/></span>
                     <ImageInput setImg={setMenu1} setHidden={setHiddenMenu1}/>
                 </p>
                 <h4>메뉴 2</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenMenu2}/></span>
                     <ImageInput setImg={setMenu2} setHidden={setHiddenMenu2}/>
                 </p>
                 <h4>메뉴 3</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenMenu3}/></span>
                     <ImageInput setImg={setMenu3} setHidden={setHiddenMenu3}/>
                 </p>
                 <h4>메뉴 4</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenMenu4}/></span>
                     <ImageInput setImg={setMenu4} setHidden={setHiddenMenu4}/>
                 </p>
                 <h4>추가사진</h4>
                 <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "75%", height: "40px", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenMenuAdditional}/></span>
                     <ImageInput setImg={setMenuAdditional} setHidden={setHiddenMenuAdditional}/>
                 </p>
             </div>
-            <div>
+            <div style={{display: "flex",justifyContent:"center", marginBottom:"6vh",marginTop:"3vh"}}>
                 <Link to="/hostRegistryStart">
-                    <button className="button" style={{backgroundColor: "black"}}>이전</button>
+                    <button style={{backgroundColor: "black",color:"white", flex:"1",border:"none", width:"50vw",height:"8vh"}}>이전</button>
                 </Link>
-
-                <Link to="/placeRegisterPage3">
-                    <button className="button" style={{backgroundColor: "red" }} >저장</button>
-                    </Link>
+                <Link to="/hostRegistry2">
+                    <button style={{backgroundColor: "red",color:"white" ,flex:"1",border:"none", width:"50vw",height:"8vh"}}
+                    onClick={handleButton}
+                    >저장</button>
+                </Link>
             </div>
         </div>
-
     );
-};
+}
 export default HostRegistry;
