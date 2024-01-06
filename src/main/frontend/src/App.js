@@ -1,3 +1,4 @@
+import logo from './logo.svg';
 import './App.css';
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
@@ -16,6 +17,8 @@ import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
 import HostRegistry from "./pages/HostRegistry";
 import HostRegistryStart from "./pages/HostRegistryStart";
+import PlaceRegisterPage3 from "./pages/PlaceRegisterPage3";
+import PlaceRegisterPage4 from "./pages/PlaceRegisterPage4";
 function App() {
   return (
       <Routes>
@@ -30,11 +33,17 @@ function App() {
           <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
           <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />
           <Route path="/placeInfoModify" element={<PlaceInfoModifyPage />} />
-          <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} /> 
+          <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
+          <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
+          <Route path="/placeRegister3" element={<PlaceRegisterPage3 />}/>
+          <Route path="/placeRegister4" element={<PlaceRegisterPage4 />}/>
+
+
+
           <Route path="/error" element={<ErrorPage />}/>
           <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
           <Route path="/hostRegistry" element={<HostRegistry />} />
-                <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
+          <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
       </Routes>
   );
 }
