@@ -17,7 +17,6 @@ import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
 import PlaceRegisterPage from "./pages/PlaceRegisterPage";
 import PlaceRegisterPage2 from "./pages/PlaceRegisterPage2";
-import PlaceRegisterPage3 from "./pages/PlaceRegisterPage3";
 function App() {
   return (
       <Routes>
@@ -41,6 +40,9 @@ function App() {
 
 
           <Route path="/error" element={<ErrorPage />}/>
+          <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
+          <Route path="/hostRegistry" element={<HostRegistry />} />
+                <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
       </Routes>
   );
 }

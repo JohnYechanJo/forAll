@@ -1,7 +1,6 @@
 const HostHomeTemplate = () => {
     return (
-        <div>오너 홈화면</div>
+        <div>host 홈 화면</div>
     )
 };
-
 export default HostHomeTemplate;
