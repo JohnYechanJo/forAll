@@ -17,6 +17,7 @@ import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
 import PlaceRegisterPage from "./pages/PlaceRegisterPage";
 import PlaceRegisterPage2 from "./pages/PlaceRegisterPage2";
+import PlaceRegisterPage3 from "./pages/PlaceRegisterPage3";
 function App() {
   return (
       <Routes>
@@ -35,6 +36,7 @@ function App() {
           <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
           <Route path="/placeRegister" element={<PlaceRegisterPage />}/>
           <Route path="/placeRegister2" element={<PlaceRegisterPage2 />}/>
+          <Route path="/placeRegister3" element={<PlaceRegisterPage3 />}/>
 
 
 
