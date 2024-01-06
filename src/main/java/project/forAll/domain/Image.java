@@ -1,16 +1,21 @@
-package project.forAll.domain.place;
+package project.forAll.domain;
 
 import lombok.Getter;
-import project.forAll.domain.BassDomain;
+import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Getter
+@Entity
+@Getter @Setter
 public class Image extends BassDomain {
 
     @Id @GeneratedValue
     @Column(name = "image_id")
     private Long id;
+
+    private String originName;
+    private String imageName;
 }

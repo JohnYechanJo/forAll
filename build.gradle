@@ -32,6 +32,8 @@ dependencies {
 	implementation("com.google.code.gson:gson:2.10.1")
 	implementation("org.hibernate:hibernate-validator:8.0.1.Final")
 	implementation("org.jetbrains:annotations:24.0.0")
+	implementation 'commons-io:commons-io:2.11.0'    /* Apache commons-io */
+	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4' /* Apache Commons FileUpload */
 	testImplementation 'junit:junit:4.13.1'
 	testImplementation 'junit:junit:4.13.1'
 	runtimeOnly("mysql:mysql-connector-java:8.0.33")
