@@ -1,7 +1,8 @@
-package project.forAll.domain;
+package project.forAll.domain.member;
 
 import lombok.Getter;
 import lombok.Setter;
+import project.forAll.domain.BassDomain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import java.time.ZonedDateTime;
 public class AuthenticationData extends BassDomain {
 
     @Id @GeneratedValue
-    @Column(name = "data_id")
+    @Column(name = "auth_id")
     private Long id;
 
     // 전송받은 휴대폰 번호

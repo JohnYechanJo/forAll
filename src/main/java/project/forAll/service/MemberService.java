@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import project.forAll.domain.Member;
-import project.forAll.domain.enums.Gender;
-import project.forAll.domain.enums.MemberRole;
+import project.forAll.domain.member.Member;
+import project.forAll.domain.member.Gender;
+import project.forAll.domain.member.MemberRole;
 import project.forAll.form.MemberForm;
 import project.forAll.repository.MemberRepository;
 

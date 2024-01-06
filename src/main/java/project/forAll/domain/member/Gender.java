@@ -1,4 +1,4 @@
-package project.forAll.domain.enums;
+package project.forAll.domain.member;
 
 import lombok.Getter;
 

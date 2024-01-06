@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import project.forAll.controller.SessionManager;
-import project.forAll.domain.Member;
+import project.forAll.domain.member.Member;
 import project.forAll.repository.MemberRepository;
 import project.forAll.web.SessionConst;
 

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import project.forAll.domain.Member;
+import project.forAll.domain.member.Member;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

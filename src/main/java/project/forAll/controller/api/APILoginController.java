@@ -5,11 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
-import project.forAll.domain.Member;
+import project.forAll.domain.member.Member;
 import project.forAll.form.LoginForm;
 import project.forAll.service.MemberService;
 import project.forAll.web.SessionConst;
-import project.forAll.controller.SessionManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

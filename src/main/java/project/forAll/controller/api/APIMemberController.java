@@ -5,14 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
-import project.forAll.domain.Member;
+import project.forAll.domain.member.Member;
 import project.forAll.form.MemberForm;
-import project.forAll.repository.MemberRepository;
 import project.forAll.service.MemberService;
-import retrofit2.http.Path;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

@@ -1,9 +1,8 @@
-package project.forAll.domain;
+package project.forAll.domain.member;
 
 import lombok.Getter;
 import lombok.Setter;
-import project.forAll.domain.enums.Gender;
-import project.forAll.domain.enums.MemberRole;
+import project.forAll.domain.BassDomain;
 
 import javax.persistence.*;
 
@@ -12,8 +11,8 @@ import javax.persistence.*;
 public class Member extends BassDomain {
 
     @Id @GeneratedValue
-    // 가입 순서에 따라 1, 2, ... 주어지는 id (저는 항상 필수로 넣었는데 없어도 되면 삭제해주세요)
-    @Column(name = "user_id")
+    // 가입 순서에 따라 1, 2, ... 주어지는 id
+    @Column(name = "member_id")
     private Long id;
 
     // interface로 쪼개는 방법을 모르겠어서 일단 role로 적어둡니다..

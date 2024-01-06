@@ -3,8 +3,8 @@ package project.forAll.form;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import project.forAll.domain.enums.Gender;
-import project.forAll.domain.enums.MemberRole;
+import project.forAll.domain.member.Gender;
+import project.forAll.domain.member.MemberRole;
 
 @Getter @Setter
 @NoArgsConstructor

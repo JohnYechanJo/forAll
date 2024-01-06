@@ -4,13 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import project.forAll.domain.AuthenticationData;
+import project.forAll.domain.member.AuthenticationData;
 import project.forAll.repository.AuthenticationDataRepository;
 import project.forAll.util.ZoneTime;
 
-import java.time.Duration;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
 
