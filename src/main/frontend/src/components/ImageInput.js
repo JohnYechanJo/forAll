@@ -1,6 +1,6 @@
-import {useRef, useState} from "react";
-
-const ImageInput = ({setImg}) => {
+import {useRef, useState, useCallback} from "react";
+import "../components/Styles.css";
+const ImageInput = ({setImg, setHidden}) => {
     const [imgFile, setImgFile] = useState("");
     const imgRef = useRef();
     const saveImgFile = () => {
@@ -13,6 +13,13 @@ const ImageInput = ({setImg}) => {
             setImg(imgFile);
         }
     };
+    const onUploadImgButtonClick = useCallback(() => {
+        if (!imgRef.current) {
+            return;
+        }
+        imgRef.current.click();
+        setHidden(true);
+    },[]);
     return (
         <div>
             <label>
@@ -20,7 +27,8 @@ const ImageInput = ({setImg}) => {
                        accept="image/*"
                        onChange={() =>saveImgFile()}
                        ref={imgRef}
-                />파일첨부
+                       style={{ float:"right",  display: "none"}}
+                /><button className="button" style={{fontSize:"14px",backgroundColor:"black",width:"100px",padding:"10px 10px", marginLeft:"10px"}} onClick={onUploadImgButtonClick} >파일 첨부</button>
             </label>
             {imgFile ?
                 <img
