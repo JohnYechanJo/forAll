@@ -41,7 +41,7 @@ public class APIMemberController extends APIController {
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody final MemberForm mf){
         try{
-            final Member member = memberService.build(mf);
+            final Member member = memberService.createMember(mf);
 
             final Long memberId = memberService.saveMember(member);
             return new ResponseEntity(Long.toString(memberId), HttpStatus.OK);
@@ -79,7 +79,7 @@ public class APIMemberController extends APIController {
             final Member savedMember = memberService.findByLoginId(form.getLoginId());
             if (savedMember == null) throw new Exception("No member with loginId " + form.getLoginId());
 
-            final Member member = memberService.build(form);
+            final Member member = memberService.createMember(form);
             member.setId(savedMember.getId());
             memberService.save(member);
 

@@ -48,7 +48,7 @@ public class APIMemberControllerTest {
         MemberForm mf = new MemberForm("Owner", "forall", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "남자", "forall@gmail.com",
                 "01010101010");
-        Member member = memberService.build(mf);
+        Member member = memberService.createMember(mf);
         Long memberId = memberService.saveMember(member);
 
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/members/"+memberId))
@@ -80,7 +80,7 @@ public class APIMemberControllerTest {
         MemberForm mf = new MemberForm("Owner", "forall", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "남자", "forall@gmail.com",
                 "01010101010");
-        Member member = memberService.build(mf);
+        Member member = memberService.createMember(mf);
         Long memberId = memberService.saveMember(member);
 
         MemberForm mf2 = new MemberForm("Owner", "forall", "forall1231", "천승범",

@@ -27,7 +27,7 @@ public class ImageService extends Service{
         String random = UUID.randomUUID().toString();
         // 경로 자동 설정
 //        ClassPathResource resource = new ClassPathResource("static/favicon.ico");
-        String storedImagePath = "src/main/resources/upload/" + random;
+        String storedImagePath = "src/main/resources/upload/spaceImage/" + random;
         try{
             final Image image = new Image();
             image.setOriginName(originName);

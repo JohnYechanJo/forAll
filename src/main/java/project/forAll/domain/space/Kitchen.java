@@ -1,4 +1,4 @@
-package project.forAll.domain.place;
+package project.forAll.domain.space;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,18 +10,16 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "kitchens")
 @Getter @Setter
 public class Kitchen extends BassDomain {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "kitchen_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "space_id")
+    private Space space;
 
     // 화구
     private Integer fireholeNum;

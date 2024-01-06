@@ -9,6 +9,8 @@ import project.forAll.domain.member.MemberRole;
 @Getter @Setter
 @NoArgsConstructor
 public class MemberForm {
+
+    // 호스트 또는 게스트
     private MemberRole role;
     // 로그인 ID
     private String loginId;

@@ -1,4 +1,4 @@
-package project.forAll.domain.place;
+package project.forAll.domain.space;
 
 import lombok.Getter;
 

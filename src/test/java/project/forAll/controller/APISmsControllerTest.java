@@ -41,11 +41,11 @@ public class APISmsControllerTest {
         MemberForm mf = new MemberForm("Owner", "forall1", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "Male", "forall12@gmail.com",
                 "01049969685");
-        Member member = memberService.build(mf);
+        Member member = memberService.createMember(mf);
         Long memberId = memberService.saveMember(member);
 
         // When
-        Member getMember = memberService.getMemberById(memberId).orElseThrow();
+        Member getMember = memberService.findMemberById(memberId).orElseThrow();
 
         // Then
         mvc.perform(MockMvcRequestBuilders.post("/api/v1/send-one")

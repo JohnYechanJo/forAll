@@ -9,7 +9,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.member.Member;
 import project.forAll.form.MemberForm;
-import project.forAll.repository.MemberRepository;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +19,6 @@ import static org.junit.Assert.*;
 public class MemberServiceTest {
 
     @Autowired MemberService memberService;
-    @Autowired MemberRepository memberRepository;
 
     @Before
     public void setup(){
@@ -33,13 +31,13 @@ public class MemberServiceTest {
         MemberForm mf = new MemberForm("Owner", "forall1", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "Male", "forall12@gmail.com",
                 "01010101010");
-        Member member = memberService.build(mf);
+        Member member = memberService.createMember(mf);
 
         // When
         Long memberId = memberService.saveMember(member);
 
         // Then
-        Member getMember = memberService.getMemberById(memberId).orElseThrow();
+        Member getMember = memberService.findMemberById(memberId).orElseThrow();
 
         assertEquals("Member는 Owner", "Owner", getMember.getRole().toString());
         assertEquals("Member는 Male", "Male", getMember.getGender().toString());
@@ -56,8 +54,8 @@ public class MemberServiceTest {
         MemberForm mf2 = new MemberForm("Owner", "forall", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "Male", "forall2@gmail.com",
                 "01010101010");
-        Member member1 = memberService.build(mf1);
-        Member member2 = memberService.build(mf2);
+        Member member1 = memberService.createMember(mf1);
+        Member member2 = memberService.createMember(mf2);
 
         // When
         memberService.saveMember(member1);
@@ -78,8 +76,8 @@ public class MemberServiceTest {
         MemberForm mf2 = new MemberForm("Owner", "forall2", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "Male", "forall@gmail.com",
                 "01010101010");
-        Member member1 = memberService.build(mf1);
-        Member member2 = memberService.build(mf2);
+        Member member1 = memberService.createMember(mf1);
+        Member member2 = memberService.createMember(mf2);
 
         // When
         memberService.saveMember(member1);
@@ -97,16 +95,16 @@ public class MemberServiceTest {
         MemberForm mf = new MemberForm("Customer", "forall", "forall1230", "김윤태",
                 "20010101", "010101-01-010101", "Female", "forall@gmail.com",
                 "01010101010");
-        Member member = memberService.build(mf);
+        Member member = memberService.createMember(mf);
         Long memberId = memberService.saveMember(member);
 
         // When
-        memberService.update(memberId, "Owner", "forall", "forall1230", "김윤태",
+        memberService.updateMember(memberId, "Owner", "forall", "forall1230", "김윤태",
                 "20020202", "010101-01-010101", "Male", "forall@gmail.com",
                 "01010101010");
 
         // Then
-        Member getMember = memberService.getMemberById(memberId).orElseThrow();
+        Member getMember = memberService.findMemberById(memberId).orElseThrow();
 
         assertEquals("Customer -> Owner", "Owner", getMember.getRole().toString());
         assertEquals("Female -> Male", "Male", getMember.getGender().toString());
@@ -120,7 +118,7 @@ public class MemberServiceTest {
         MemberForm mf = new MemberForm("Customer", "forall", "forall1230", "김윤태",
                 "20010101", "010101-01-010101", "Female", "forall@gmail.com",
                 "01010101010");
-        Member member = memberService.build(mf);
+        Member member = memberService.createMember(mf);
         Long memberId = memberService.saveMember(member);
 
         // When

@@ -53,14 +53,10 @@ public class MemberService extends Service {
      */
 
     @Transactional
-    public Optional<Member> getMemberById(Long id) {
+    public Optional<Member> findMemberById(Long id) {
         return memberRepository.findById(id);
     }
 
-    @Transactional
-    public void deleteMember(Long id) {
-        memberRepository.deleteById(id);
-    }
 
     /**
      * MemberForm으로 member 생성
@@ -68,7 +64,7 @@ public class MemberService extends Service {
      * @return member
      */
     @Transactional
-    public Member build(final MemberForm mf){
+    public Member createMember(final MemberForm mf){
         final Member member = new Member();
         member.setRole(mf.getRole());
         member.setLoginId(mf.getLoginId());
@@ -89,7 +85,7 @@ public class MemberService extends Service {
      * @return member
      */
     @Transactional
-    public Member update(Long id, String role, String loginId, String loginPw, String name, String birthday,
+    public Member updateMember(Long id, String role, String loginId, String loginPw, String name, String birthday,
                              String businessNum, String gender, String email, String phoneNum) {
         Member member = memberRepository.findById(id).orElseThrow();
         member.setRole(MemberRole.parse(role));
@@ -104,6 +100,15 @@ public class MemberService extends Service {
         memberRepository.flush();
 
         return member;
+    }
+
+    /**
+     * Member 삭제
+     * @param id
+     */
+    @Transactional
+    public void deleteMember(Long id) {
+        memberRepository.deleteById(id);
     }
 
     public Member findByLoginId(final String loginId){

@@ -26,7 +26,7 @@ public class LoginServiceTest {
         MemberForm mf = new MemberForm("Owner", "forall", "forall1230", "천승범",
                 "20010101", "010101-01-010101", "Male", "forall@gmail.com",
                 "01010101010");
-        Member member = memberService.build(mf);
+        Member member = memberService.createMember(mf);
         Long memberId = memberService.saveMember(member);
 
         // When
