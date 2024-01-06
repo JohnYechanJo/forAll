@@ -3,9 +3,10 @@ import ImageInput from "../components/ImageInput";
 import DropDown from "../components/DropDown";
 import DaumPost from "../components/DaumPost";
 import Modal from "react-modal";
+import {Link} from "react-router-dom";
 
 
-const PlaceRegisterPage4 = () => {
+const HostRegistry3 = () => {
     const emailDatas=  ["직접입력","naver.com", "choi.com", "dreamwiz.com", "empal.com", "gmail.com", "hanafos.com", "hanmail.net", "hanmir.com", "hitel.net", "hotmail.com", "korea.com", "lycos.co.kr", "nate.com"];
     const bankDatas = ["한국은행", "KB국민은행", "신한은행", "우리은행", "하나은행", "SC제일은행", "한국씨티은행", "케이뱅크", "카카오뱅크", "토스뱅크", "한국산업은행", "중소기업은행", "한국수출은행", "NH농협은행", "수협은행", "대구은행", "부산은행", "경남은행", "광주은행", "전북은행", "제주은행"];
 
@@ -167,7 +168,7 @@ const PlaceRegisterPage4 = () => {
                 <p>- 예약 확정 직후 2시간 이내 예약 취소의 건에 대해서는 100% 환불이 적용됩니다.</p>
             </div>
             <div>
-                <button>이전</button>
+                <Link to="/hostRegistry2"><button>이전</button></Link>
                 <button>저장</button>
             </div>
 
@@ -177,4 +178,4 @@ const PlaceRegisterPage4 = () => {
 
     )
 };
-export default PlaceRegisterPage4;
+export default HostRegistry3;
