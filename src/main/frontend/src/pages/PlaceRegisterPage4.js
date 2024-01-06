@@ -1,6 +1,9 @@
 import {useCallback, useEffect, useState} from "react";
 import ImageInput from "../components/ImageInput";
 import DropDown from "../components/DropDown";
+import DaumPost from "../components/DaumPost";
+import Modal from "react-modal";
+
 
 const PlaceRegisterPage4 = () => {
     const emailDatas=  ["직접입력","naver.com", "choi.com", "dreamwiz.com", "empal.com", "gmail.com", "hanafos.com", "hanmail.net", "hanmir.com", "hitel.net", "hotmail.com", "korea.com", "lycos.co.kr", "nate.com"];
@@ -23,6 +26,7 @@ const PlaceRegisterPage4 = () => {
     const [bank, setBank] = useState(bankDatas[0]);
     const [account, setAccount] = useState("");
     const [accountHolder, setAccountHolder] = useState();
+    const [modalOpen, setModalOpen] = useState(false);
 
     const onChangeTradeName = useCallback((e) => {
         if (e.target.value.length <= 28) setTradeName(e.target.value);
@@ -113,9 +117,15 @@ const PlaceRegisterPage4 = () => {
                     <label>
                         <input type={"checkbox"} />공간 정보와 동일
                     </label>
-                    {/*Todo 주소 가져오기*/}
-                    <input />
-                    <button>주소등록</button>
+                    <input value={address} disabled={true}/>
+                    <Modal isOpen={modalOpen}>
+                        <DaumPost setAddress={(e) =>{
+                            setAddress(e);
+                            setModalOpen(false);
+                        }} />
+                        <button onClick={() => setModalOpen(false)}>닫기</button>
+                    </Modal>
+                    <button onClick={() => setModalOpen(true)}>주소등록</button>
                     <input onChange={onChangeExactAddress} placeholder={"상세 주소"}/>
                 </div>
                 <div>
@@ -160,7 +170,11 @@ const PlaceRegisterPage4 = () => {
                 <button>이전</button>
                 <button>저장</button>
             </div>
+
+
         </div>
+
+
     )
 };
 export default PlaceRegisterPage4;
