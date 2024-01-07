@@ -21,10 +21,6 @@ public class Place extends BassDomain {
     // 일단 Space 엔티티를 중간에 추가
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "space_id")
-    private Space space;
-
     // 공간명
     private String name;
     // 공간 한줄소개

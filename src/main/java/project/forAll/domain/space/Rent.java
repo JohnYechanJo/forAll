@@ -14,10 +14,6 @@ public class Rent {
     @Column(name = "rent_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "space_id")
-    private Space space;
-
     // 대관 가능일
     private String ableDate;
     // 이용가능시작시간

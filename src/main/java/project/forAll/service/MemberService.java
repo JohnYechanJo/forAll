@@ -111,6 +111,10 @@ public class MemberService extends Service {
         memberRepository.deleteById(id);
     }
 
+
+    /**
+     * findMember 추가 코드
+     */
     public Member findByLoginId(final String loginId){
         List<Member> members = memberRepository.findByLoginId(loginId);
         if (members.isEmpty()) return null;

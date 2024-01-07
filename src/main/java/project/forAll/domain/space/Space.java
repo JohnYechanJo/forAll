@@ -18,4 +18,16 @@ public class Space {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_id")
+    private Place place;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rent_id")
+    private Rent rent;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "kitchen_id")
+    private Kitchen kitchen;
 }

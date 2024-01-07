@@ -17,10 +17,6 @@ public class Kitchen extends BassDomain {
     @Column(name = "kitchen_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "space_id")
-    private Space space;
-
     // 화구
     private Integer fireholeNum;
     // 주방기계
