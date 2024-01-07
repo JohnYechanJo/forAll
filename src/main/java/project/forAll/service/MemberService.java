@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.member.Gender;
-import project.forAll.domain.member.MemberRole;
 import project.forAll.form.MemberForm;
 import project.forAll.repository.MemberRepository;
 
@@ -66,14 +65,13 @@ public class MemberService extends Service {
     @Transactional
     public Member createMember(final MemberForm mf){
         final Member member = new Member();
-        member.setRole(mf.getRole());
         member.setLoginId(mf.getLoginId());
         member.setLoginPw(mf.getLoginPw());
         member.setName(mf.getName());
-        member.setBirthday(mf.getBirthday());
-        member.setGender(mf.getGender());
         member.setEmail(mf.getEmail());
         member.setPhoneNum(mf.getPhoneNum());
+        member.setBirthday(mf.getBirthday());
+        member.setGender(mf.getGender());
 
         return member;
 
@@ -85,18 +83,16 @@ public class MemberService extends Service {
      * @return member
      */
     @Transactional
-    public Member updateMember(Long id, String role, String loginId, String loginPw, String name, String birthday,
-                             String businessNum, String gender, String email, String phoneNum) {
+    public Member updateMember(Long id, String loginId, String loginPw, String name, String email, String phoneNum,
+                               String birthday, String gender) {
         Member member = memberRepository.findById(id).orElseThrow();
-        member.setRole(MemberRole.parse(role));
         member.setLoginId(loginId);
         member.setLoginPw(loginPw);
         member.setName(name);
-        member.setBirthday(birthday);
-        member.setBusinessNum(businessNum);
-        member.setGender(Gender.parse(gender));
         member.setEmail(email);
         member.setPhoneNum(phoneNum);
+        member.setBirthday(birthday);
+        member.setGender(Gender.parse(gender));
         memberRepository.flush();
 
         return member;

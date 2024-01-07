@@ -30,4 +30,8 @@ public class Space {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "kitchen_id")
     private Kitchen kitchen;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
 }

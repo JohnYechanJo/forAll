@@ -16,24 +16,21 @@ public class Member extends BassDomain {
     private Long id;
 
     // 호스트 또는 게스트
-    private MemberRole role;
+    // private MemberRole role;
     // 로그인 ID
     private String loginId;
     // 로그인 PW
     private String loginPw;
     // 이름
     private String name;
-    // 생년월일
-    // @Pattern(regexp = "^\\d{8}$", message = "Birthday should be 8 digits")
-    private String birthday;
-    // 사업자 등록번호
-    private String businessNum;
-    // 성별
-    private Gender gender;
     // 이메일
     private String email;
     // 전화번호
     // @Pattern(regexp = "^\\d{10,11}$", message = "Phone number should be 10 or 11 digits")
     private String phoneNum;
-
+    // 생년월일
+    // @Pattern(regexp = "^\\d{8}$", message = "Birthday should be 8 digits")
+    private String birthday;
+    // 성별
+    private Gender gender;
 }

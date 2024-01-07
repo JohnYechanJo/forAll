@@ -38,9 +38,8 @@ public class APISmsControllerTest {
     @Test
     public void 문자인증() throws Exception {
         // Given
-        MemberForm mf = new MemberForm("Owner", "forall1", "forall1230", "천승범",
-                "20010101", "010101-01-010101", "Male", "forall12@gmail.com",
-                "01049969685");
+        MemberForm mf = new MemberForm("forall", "forall1230", "천승범", "forall@gmail.com",
+                "01049969685", "20010101", "Male");
         Member member = memberService.createMember(mf);
         Long memberId = memberService.saveMember(member);
 

@@ -45,9 +45,8 @@ public class APIMemberControllerTest {
     }
     @Test
     public void getMemberTest() throws Exception {
-        MemberForm mf = new MemberForm("Owner", "forall", "forall1230", "천승범",
-                "20010101", "010101-01-010101", "남자", "forall@gmail.com",
-                "01010101010");
+        MemberForm mf = new MemberForm("forall", "forall1230", "천승범", "forall@gmail.com",
+                "01010101010", "20010101", "Male");
         Member member = memberService.createMember(mf);
         Long memberId = memberService.saveMember(member);
 
@@ -60,9 +59,8 @@ public class APIMemberControllerTest {
 
     @Test
     public void createMemberTest() throws Exception {
-        final MemberForm mf = new MemberForm("Owner", "forall1", "forall1230", "천승범",
-                "20010101", "010101-01-010101", "Male", "forall12@gmail.com",
-                "01010101010");
+        final MemberForm mf = new MemberForm("forall", "forall1230", "천승범", "forall@gmail.com",
+                "01010101010", "20010101", "Male");
 
         final String memberId = mvc.perform(MockMvcRequestBuilders.post("/api/v1/members")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -77,15 +75,13 @@ public class APIMemberControllerTest {
 
     @Test
     public void editMemberTest() throws Exception {
-        MemberForm mf = new MemberForm("Owner", "forall", "forall1230", "천승범",
-                "20010101", "010101-01-010101", "남자", "forall@gmail.com",
-                "01010101010");
+        MemberForm mf = new MemberForm("forall", "forall1230", "천승범", "forall@gmail.com",
+                "01010101010", "20010101", "Male");
         Member member = memberService.createMember(mf);
         Long memberId = memberService.saveMember(member);
 
-        MemberForm mf2 = new MemberForm("Owner", "forall", "forall1231", "천승범",
-                "20010101", "010101-01-010101", "남자", "forall@gmail.com",
-                "01010101010");
+        MemberForm mf2 = new MemberForm("forall123", "forall1230", "천승범", "forall123@gmail.com",
+                "01010101010", "20010101", "Male");
 
         mvc.perform(MockMvcRequestBuilders.put("/api/v1/members")
                 .contentType(MediaType.APPLICATION_JSON)

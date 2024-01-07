@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import project.forAll.domain.Image;
-import project.forAll.domain.member.Gender;
-import project.forAll.domain.member.MemberRole;
 import project.forAll.domain.space.PlaceKitchenFeat;
 
 @Getter @Setter

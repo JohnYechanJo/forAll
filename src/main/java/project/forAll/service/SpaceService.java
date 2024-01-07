@@ -5,17 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import project.forAll.domain.space.Kitchen;
-import project.forAll.domain.space.Place;
-import project.forAll.domain.space.Rent;
-import project.forAll.domain.space.Space;
+import project.forAll.domain.space.*;
 import project.forAll.domain.space.image.HallImage;
 import project.forAll.domain.space.image.KitImage;
 import project.forAll.domain.space.image.MenuImage;
-import project.forAll.repository.space.KitchenRepository;
-import project.forAll.repository.space.PlaceRepository;
-import project.forAll.repository.space.RentRepository;
-import project.forAll.repository.space.SpaceRepository;
+import project.forAll.repository.space.*;
 import project.forAll.repository.space.image.HallImageRepository;
 import project.forAll.repository.space.image.KitImageRepository;
 import project.forAll.repository.space.image.MenuImageRepository;
@@ -34,6 +28,7 @@ public class SpaceService extends Service {
     @Autowired private MenuImageRepository menuImageRepository;
     @Autowired private RentRepository rentRepository;
     @Autowired private KitchenRepository kitchenRepository;
+    @Autowired private BookingRepository bookingRepository;
 
     @Override protected JpaRepository getRepository() {
         return spaceRepository;
@@ -78,6 +73,12 @@ public class SpaceService extends Service {
         return kitchen.getId();
     }
 
+    @Transactional
+    public Long saveBooking(Booking booking) {
+        bookingRepository.save(booking);
+        return booking.getId();
+    }
+
     /**
      * findSpaceInfoById
      */
@@ -118,5 +119,11 @@ public class SpaceService extends Service {
     public Kitchen findKitchenById(Long id) {
         Space findSpace = spaceRepository.findById(id).orElseThrow();
         return findSpace.getKitchen();
+    }
+
+    @Transactional
+    public Booking findBookingById(Long id) {
+        Space findSpace = spaceRepository.findById(id).orElseThrow();
+        return findSpace.getBooking();
     }
 }

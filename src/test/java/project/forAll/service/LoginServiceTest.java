@@ -23,9 +23,8 @@ public class LoginServiceTest {
     @Test
     public void 로그인() throws Exception {
         // Given
-        MemberForm mf = new MemberForm("Owner", "forall", "forall1230", "천승범",
-                "20010101", "010101-01-010101", "Male", "forall@gmail.com",
-                "01010101010");
+        MemberForm mf = new MemberForm("forall", "forall1230", "천승범", "forall@gmail.com",
+                "01010101010", "20010101", "Male");
         Member member = memberService.createMember(mf);
         Long memberId = memberService.saveMember(member);
 
