@@ -88,7 +88,6 @@ const SignUpPage2 = () => {
         setBirthDay(year+'/'+month+'/'+day);
     }, [year, month, day]);
     const handleButton = () => {
-        //Todo : 아이디, 이메일 중복 여부 확인, 비밀번호 확인 여부, 휴대폰 인증 여부, 약관 동의 여부 등 확인
         if (id === ""){
             alert("아이디는 필수 입력 사항입니다");
         }else if(pw === ""){

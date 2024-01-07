@@ -1,181 +1,197 @@
-import {useCallback, useEffect, useState} from "react";
-import ImageInput from "../components/ImageInput";
 import DropDown from "../components/DropDown";
-import DaumPost from "../components/DaumPost";
+import {useCallback, useEffect, useState} from "react";
+import "../style/btnStyles.css";
+import ImageInput from "../components/ImageInput";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
-import {Link} from "react-router-dom";
-
-
 const HostRegistry3 = () => {
-    const emailDatas=  ["직접입력","naver.com", "choi.com", "dreamwiz.com", "empal.com", "gmail.com", "hanafos.com", "hanmail.net", "hanmir.com", "hitel.net", "hotmail.com", "korea.com", "lycos.co.kr", "nate.com"];
-    const bankDatas = ["한국은행", "KB국민은행", "신한은행", "우리은행", "하나은행", "SC제일은행", "한국씨티은행", "케이뱅크", "카카오뱅크", "토스뱅크", "한국산업은행", "중소기업은행", "한국수출은행", "NH농협은행", "수협은행", "대구은행", "부산은행", "경남은행", "광주은행", "전북은행", "제주은행"];
+    const location = useLocation();
+    const data = {...location.state};
+    const navigate = useNavigate();
 
-    const [payment, setPayment] = useState();
-    const [tradeName, setTradeName] = useState("");
-    const [representative, setRepresentative] = useState("");
-    const [registNum1, setRegistNum1] = useState("");
-    const [registNum2, setRegistNum2] = useState("");
-    const [registNum3, setRegistNum3] = useState("");
-    const [license, setLicense] = useState();
-    const [address, setAddress] = useState();
-    const [exactAddress, setExactAddress] = useState("");
-    const [email1, setEmail1] = useState("");
-    const [email2, setEmail2] = useState(emailDatas[0]);
-    const [phone1, setPhone1] = useState("");
-    const [phone2, setPhone2] = useState("");
-    const [phone3, setPhone3] = useState("");
-    const [bank, setBank] = useState(bankDatas[0]);
-    const [account, setAccount] = useState("");
-    const [accountHolder, setAccountHolder] = useState();
-    const [modalOpen, setModalOpen] = useState(false);
+    const rentWeeksData = ["휴무없음", "매주", "격주(홀수주)", "격주(짝수주)", "매월 첫째주", "매월 둘째주", "매월 셋째주", "매월 넷째주", "매월 마지막주", "매월 말일", "매월(직접지정)"];
+    const days = [...Array(31).keys()].map(i => (i + 1)+"일");
+    const rentTimeFromData = [...Array(25).keys()].map(i => i+"시");
+    const rentTimeToData = [...Array(25).keys()].map(i => i+"시");
+    const floorData = ["지상1층", "지상2층", "지상3층", "지하1층", "지하2층", "지하3층", "직접 입력"];
+    const parkAvaliableData = ["주차불가", "1대", "2대", "3대", "4대", "직접 입력"];
 
-    const onChangeTradeName = useCallback((e) => {
-        if (e.target.value.length <= 28) setTradeName(e.target.value);
-    },[]);
-    const onChangeRepresentative = useCallback((e) => {
-        if (e.target.value.length <= 10) setRepresentative(e.target.value);
-    },[]);
-    const onChangeRegistNum1 = useCallback((e) => {
-        if (e.target.value.length <= 3) setRegistNum1(e.target.value);
-    },[]);
-    const onChangeRegistNum2 = useCallback((e) => {
-        if (e.target.value.length <= 2) setRegistNum2(e.target.value);
-    },[]);
-    const onChangeRegistNum3 = useCallback((e) => {
-        if (e.target.value.length <= 5) setRegistNum3(e.target.value);
-    },[]);
-    const onChangeExactAddress = useCallback((e) => {
-        setExactAddress(e.target.value);
+    const [rentWeek, setRentWeek] = useState("");
+    const [rentDays, setRentDays] = useState([]);
+    const [rentTimeFrom, setRentTimeFrom] = useState("");
+    const [rentTimeTo, setRentTimeTo] = useState("");
+    const [floor, setFloor] = useState("");
+    const [exactFloor, setExactFloor] = useState();
+    const [parkAvaliable, setParkAvaliable] = useState("");
+    const [exactPark, setExactPark] = useState();
+    const [elevator, setElevator] = useState();
+    const [table, setTable] = useState();
+    const [seat, setSeat] = useState();
+    const [price, setPrice] = useState();
+    const [trial, setTrial] = useState();
+    const [morningDelivery, setMorningDelivery] = useState();
+    const [workIn, setWorkIn] = useState();
+    const [alcohol, setAlcohol] = useState();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+    const onChangeFloor = useCallback((e) => {
+        setExactFloor(e.target.value);
     }, []);
-    const onChangeEmail1 = useCallback((e) => {
-        setEmail1(e.target.value);
+    const onChangePark = useCallback((e) => {
+        setExactPark(e.target.value);
     }, []);
-    const onChangeEmail2 = useCallback((e) => {
-        setEmail2(e.target.value);
+    const onChangeTable = useCallback((e) => {
+        setTable(e.target.value);
     }, []);
-    const onChangePhone1 = useCallback((e) => {
-        if (e.target.value.length <= 3) setPhone1(e.target.value);
-    },[]);
-    const onChangePhone2 = useCallback((e) => {
-        if (e.target.value.length <= 4) setPhone2(e.target.value);
-    },[]);
-    const onChangePhone3 = useCallback((e) => {
-        if (e.target.value.length <= 4) setPhone3(e.target.value);
-    },[]);
-    const onChangeAccount = useCallback((e) => {
-        setAccount(e.target.value);
+    const onChangeSeat = useCallback((e) => {
+        setSeat(e.target.value);
     }, []);
-    const onChangeAccountHolder = useCallback((e) => {
-        setAccountHolder(e.target.value);
+    const onChangePrice = useCallback((e) => {
+        setPrice(e.target.value);
     }, []);
-    useEffect(() => {
-        if (email2 === "직접입력") setEmail2("");
-    }, [email2]);
+
+    const handleButton = () => {
+        if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
+            && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
+            && (seat !== undefined) && (price !== undefined) && (trial !== undefined) && (morningDelivery !== undefined)
+            && (workIn !== undefined) && (alcohol !== undefined)){
+            submit();
+        }
+        else setIsModalOpen(true);
+    }
+
+    const submit = () => {
+        navigate("/hostRegistry4",{
+            state: {
+                ...data,
+                rentWeek: rentWeek,
+                rentTimeFrom: rentTimeFrom,
+                rentTimeTo: rentTimeTo,
+                floor: floor,
+                exactFloor: exactFloor,
+                parkAvaliable: parkAvaliable,
+                exactPark: exactPark,
+                elevator: elevator,
+                table: table,
+                seat: seat,
+                price: price,
+                trial: trial,
+                morningDelivery: morningDelivery,
+                workIn: workIn,
+                alcohol: alcohol
+            }
+        });
+    };
     return (
         <div>
-            <h1>3. 예약/정산 정보</h1>
+            <h1>2. 이용 안내</h1>
+            <p>이용 정보를 입력해주세요</p>
             <div>
-                <p>결제 방식을 선택해주세요.*</p>
-                <label>
-                    <input type="radio" name={"payment"} onClick={() => setPayment("바로결제")}/>바로결제
-                </label>
-                <label>
-                    <input type="radio" name={"payment"} onClick={() => setPayment("승인결제")}/>승인결제
-                </label>
+                <p>대관 가능일*</p>
+                <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"}/>
+                {rentWeek === "매월(직접지정)" ? <DropDown dataArr={days} onChange={setRentDays} placeholder={"1일"}/> : (rentWeek !== "" ?
+                    <div>
+                        {/*Todo 버튼으로 rentDay 변경*/}
+                        <button>월</button>
+                        <button>화</button>
+                        <button>수</button>
+                        <button>목</button>
+                        <button>금</button>
+                        <button>토</button>
+                        <button>일</button>
+                    </div>
+                    : null)}
             </div>
             <div>
-                <p>정산 정보를 입력해주세요*</p>
-                {/*Todo 데이터 가져오기*/}
-                <label>
-                    <input type={"checkbox"} />최근 정산 정보와 동일
-                </label>
-                <div>
-                    <p>상호명(개인/법인)*</p>
-                    <p>{tradeName.length}자/28자</p>
-                    <input value={tradeName} onChange={onChangeTradeName} placeholder={"상호명을 입력해주세요"}/>
-                </div>
-                <div>
-                    <p>대표자명*</p>
-                    <p>{representative.length}자/10자</p>
-                    <input value={representative} onChange={onChangeRepresentative} placeholder={"대표자명을 입력해주세요"}/>
-                </div>
-                <div>
-                    <p>사업자 등록번호*</p>
-                    <input value={registNum1} onChange={onChangeRegistNum1}/>-
-                    <input value={registNum2} onChange={onChangeRegistNum2}/>-
-                    <input value={registNum3} onChange={onChangeRegistNum3}/>
-                    <p>- 사업자 등록번호는 필수 입력입니다.</p>
-                    <p>- 정확한 정보를 입력했는지 다시 한 번 확인해주세요.</p>
-                    <p>- 추후, 사업자 정보가 수정된다면 반드시 온라인 상담을 통해 변경 내용을 알려주셔야 합니다.</p>
-                </div>
-                <div>
-                    <p>사업자 등록증 첨부*</p>
-                    <ImageInput setImg={setLicense}/>
-                </div>
-                <div>
-                    <p>사업장 주소*</p>
-                    {/*Todo 데이터 가져오기*/}
-                    <label>
-                        <input type={"checkbox"} />공간 정보와 동일
-                    </label>
-                    <input value={address} disabled={true}/>
-                    <Modal isOpen={modalOpen}>
-                        <DaumPost setAddress={(e) =>{
-                            setAddress(e);
-                            setModalOpen(false);
-                        }} />
-                        <button onClick={() => setModalOpen(false)}>닫기</button>
-                    </Modal>
-                    <button onClick={() => setModalOpen(true)}>주소등록</button>
-                    <input onChange={onChangeExactAddress} placeholder={"상세 주소"}/>
-                </div>
-                <div>
-                    <p>정산용 이메일*</p>
-                    <input onChange={onChangeEmail1}/>
-                    @ <input value={email2} onChange={onChangeEmail2}/>
-                    <DropDown dataArr={emailDatas} onChange={setEmail2}/>
-                </div>
-                <div>
-                    <p>정산용 연락처*</p>
-                    <input value={phone1} onChange={onChangePhone1}/>-
-                    <input value={phone2} onChange={onChangePhone2}/>-
-                    <input value={phone3} onChange={onChangePhone3}/>
-                </div>
+                <p>이용시간*</p>
+                <p>전일</p>
+                <DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"}/>
+                <p>부터, 당일</p>
+                <DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} />
+                <p>까지</p>
             </div>
             <div>
-                <p>계좌 정보를 입력해 주세요</p>
-                <p>- 법인 사업자는 법인 통장계좌를, 개인 사업자는 사업자 명의의 통장 계좌를 입력해주세요. 포 올을 통해 결제된 금액이 해당 계좌로 정산됩니다.</p>
-                <p>은행명*</p>
-                <DropDown dataArr={bankDatas} onChange={setBank}/>
-                <p>계좌번호*</p>
-                <input onChange={onChangeAccount} placeholder={"454102-01-376503"}/>
-                <p>예금주*</p>
-                <input onChange={onChangeAccountHolder}/>
-                <p>- 정확한 정보를 입력했는지 다시 한 번 확인해주세요.</p>
-                <p>- 정산 금액 입금 시, 입금자명은 "포 올"로 확인할 수 있습니다.</p>
+                <p>공간 층수*</p>
+                <DropDown dataArr={floorData} onChange={setFloor} placeholder={"층수 여부를 선택해주세요."}/>
+                {floor === "직접 입력" ? (
+                    <div>
+                        <input onChange={onChangeFloor}/>
+                        <p>층</p>
+                        {exactFloor < 4 ? <p>4 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
+                    </div>
+                ) : null}
             </div>
             <div>
-                <h1>환불 기준을 입력해주세요</h1>
-                <p>이용 8일 전 총 금액의 100% 환불</p>
-                <p>이용 7일 전 총 금액의 100% 환불</p>
-                <p>이용 6일 전 총 금액의 100% 환불</p>
-                <p>이용 5일 전 총 금액의 100% 환불</p>
-                <p>이용 4일 전 총 금액의 100% 환불</p>
-                <p>이용 3일 전 총 금액의 100% 환불</p>
-                <p>이용 2일 전 총 금액의 100% 환불</p>
-                <p>이용 전날 총 금액의 100% 환불</p>
-                <p>이용 당일 총 금액의 100% 환불</p>
-                <p>- 예약 확정 직후 2시간 이내 예약 취소의 건에 대해서는 100% 환불이 적용됩니다.</p>
+                <p>주차 여부*</p>
+                <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"}/>
+                {parkAvaliable === "직접 입력" ? (
+                    <div>
+                        <input onChange={onChangePark}/>
+                        <p>대</p>
+                        {exactPark < 5  ? <p>5 이상의 숫자만 입력하여 주세요. 직접 입력의 층수는 '지상'으로 적용됩니다</p> : null}
+                    </div>
+                ) : null}
             </div>
             <div>
-                <Link to="/hostRegistry2"><button>이전</button></Link>
-                <button>저장</button>
+                <p>엘리베이터 여부*</p>
+                <div className={elevator === true ? "btn_selected" : ""} onClick={() => setElevator(true)}>있음</div>
+                <div className={elevator === false? "btn_selected" : ""} onClick={() => setElevator(false)}>없음</div>
+            </div>
+            <div>
+                <p>테이블</p>
+                <input onChange={onChangeTable} placeholder={"최대 테이블 수를 기준으로 입력해주세요"}/>
+            </div>
+            <div>
+                <p>좌석수</p>
+                <input onChange={onChangeSeat} placeholder={"최대 좌석수를 기준으로 입력해주세요"}/>
+            </div>
+            <div>
+                <p>가격 설정*</p>
+                <input onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"}/>
+                <h1>포올 권장 가격: {seat}개 * 1,5000={seat ? seat*15000 : 0}</h1>
+                <p>포 올 권장가격보다 높이 측정할 경우, 원데이 오너들이 부담스럽게 느낄 수 있어요.</p>
             </div>
 
-
+            <div>
+                <p>가능 여부*</p>
+            </div>
+            <div>
+                <p>트라이얼</p>
+                <div className={trial === true ? "btn_selected" : ""} onClick={() => setTrial(true)}>가능</div>
+                <div className={trial === false? "btn_selected" : ""} onClick={() => setTrial(false)}>불가</div>
+                <p>트라이얼이란?</p>
+            </div>
+            <div>
+                <p>재료 새벽 배달*</p>
+                <div className={morningDelivery === true ? "btn_selected" : ""} onClick={() => setMorningDelivery(true)}>가능</div>
+                <div className={morningDelivery === false? "btn_selected" : ""} onClick={() => setMorningDelivery(false)}>불가</div>
+                <p>새벽배달이란?</p>
+            </div>
+            <div>
+                <p>위크인*</p>
+                <div className={workIn === true ? "btn_selected" : ""} onClick={() => setWorkIn(true)}>가능</div>
+                <div className={workIn === false? "btn_selected" : ""} onClick={() => setWorkIn(false)}>불가</div>
+                <p>워크인이란?</p>
+            </div>
+            <div>
+                <p>주류판매 가능여부*</p>
+                <div className={alcohol === true ? "btn_selected" : ""} onClick={() => setAlcohol(true)}>가능</div>
+                <div className={alcohol === false? "btn_selected" : ""} onClick={() => setAlcohol(false)}>불가</div>
+            </div>
+            
+            <div>
+                <Link to="/hostRegistry"><button>이전</button></Link>
+                <button onClick={handleButton}>다음</button>
+            </div>
+            <Modal isOpen={isModalOpen}>
+                <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
+                <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                <button onClick={() => setIsModalOpen(false)}>뒤로</button>
+                <button onClick={() => submit()}>다음</button>
+            </Modal>
         </div>
-
-
     )
 };
+
 export default HostRegistry3;

@@ -17,8 +17,10 @@ import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
 import HostRegistry from "./pages/HostRegistry";
 import HostRegistryStart from "./pages/HostRegistryStart";
-import HostRegistry2 from "./pages/HostRegistry2";
 import HostRegistry3 from "./pages/HostRegistry3";
+import HostRegistry5 from "./pages/HostRegistry5";
+import HostRegistry4 from "./pages/HostRegistry4";
+import HostRegistry6 from "./pages/HostRegistry6";
 function App() {
   return (
       <Routes>
@@ -35,8 +37,10 @@ function App() {
           <Route path="/placeInfoModify" element={<PlaceInfoModifyPage />} />
           <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
           <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
-          <Route path="/hostRegistry2" element={<HostRegistry2 />}/>
           <Route path="/hostRegistry3" element={<HostRegistry3 />}/>
+          <Route path="/hostRegistry4" element={<HostRegistry4 />}/>
+          <Route path="/hostRegistry5" element={<HostRegistry5 />}/>
+          <Route path="/hostRegistry6" element={<HostRegistry6 />}/>
           <Route path="/error" element={<ErrorPage />}/>
           <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
           <Route path="/hostRegistry" element={<HostRegistry />} />
