@@ -93,6 +93,6 @@ public class SpaceService extends Service {
     public HallImage findHallImageById(Long id) {
         Space findSpace = spaceRepository.findById(id).orElseThrow();
         Place findPlace = findSpace.getPlace();
-        return findPlace.getHallImage();
+        // return findPlace.getHallImage();
     }
 }
