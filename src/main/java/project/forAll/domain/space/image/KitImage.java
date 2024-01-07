@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import project.forAll.domain.BassDomain;
 import project.forAll.domain.Image;
-import project.forAll.domain.space.Place;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,15 +11,11 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-public class KitchenImage extends BassDomain {
+public class KitImage extends BassDomain {
 
     @Id @GeneratedValue
-    @Column(name = "kitchenImage_id")
+    @Column(name = "kitImage_id")
     private Long id;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "place_id")
-    private Place place;
 
     // 주방 우측면
     @OneToOne(fetch = FetchType.LAZY)

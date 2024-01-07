@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import project.forAll.domain.BassDomain;
 import project.forAll.domain.Image;
-import project.forAll.domain.member.Member;
+import project.forAll.domain.space.image.HallImage;
+import project.forAll.domain.space.image.KitImage;
+import project.forAll.domain.space.image.MenuImage;
 
 import javax.persistence.*;
 
@@ -20,6 +22,18 @@ public class Place extends BassDomain {
     // 공통의 id와 공통의 SpaceName까지 확인하는 방식으로 사용할 수도 있겠다 (이 경우 SpaceName이 중복되지 않도록 해야겠다)
     // 일단 Space 엔티티를 중간에 추가
     private Long id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hallImage_id")
+    private HallImage hallImage;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "kitImage_id")
+    private KitImage kitImage;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MenuImage_id")
+    private MenuImage menuImage;
 
     // 공간명
     private String name;

@@ -18,10 +18,6 @@ public class HallImage extends BassDomain {
     @Column(name = "hallImage_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "place_id")
-    private Place place;
-
     // 홀 우측면
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hallRight_id")

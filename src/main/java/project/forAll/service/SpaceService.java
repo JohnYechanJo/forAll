@@ -5,21 +5,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import project.forAll.domain.member.Member;
 import project.forAll.domain.space.Kitchen;
 import project.forAll.domain.space.Place;
 import project.forAll.domain.space.Rent;
 import project.forAll.domain.space.Space;
 import project.forAll.domain.space.image.HallImage;
-import project.forAll.domain.space.image.KitchenImage;
+import project.forAll.domain.space.image.KitImage;
 import project.forAll.domain.space.image.MenuImage;
-import project.forAll.repository.MemberRepository;
 import project.forAll.repository.space.KitchenRepository;
 import project.forAll.repository.space.PlaceRepository;
 import project.forAll.repository.space.RentRepository;
 import project.forAll.repository.space.SpaceRepository;
 import project.forAll.repository.space.image.HallImageRepository;
-import project.forAll.repository.space.image.KitchenImageRepository;
+import project.forAll.repository.space.image.KitImageRepository;
 import project.forAll.repository.space.image.MenuImageRepository;
 
 import java.util.Optional;
@@ -32,7 +30,7 @@ public class SpaceService extends Service {
     @Autowired private SpaceRepository spaceRepository;
     @Autowired private PlaceRepository placeRepository;
     @Autowired private HallImageRepository hallImageRepository;
-    @Autowired private KitchenImageRepository kitchenImageRepository;
+    @Autowired private KitImageRepository kitImageRepository;
     @Autowired private MenuImageRepository menuImageRepository;
     @Autowired private RentRepository rentRepository;
     @Autowired private KitchenRepository kitchenRepository;
@@ -57,9 +55,9 @@ public class SpaceService extends Service {
     }
 
     @Transactional
-    public Long saveKitchenImage(KitchenImage kitchenImage) {
-        kitchenImageRepository.save(kitchenImage);
-        return kitchenImage.getId();
+    public Long saveKitchenImage(KitImage kitImage) {
+        kitImageRepository.save(kitImage);
+        return kitImage.getId();
     }
 
     @Transactional
@@ -81,7 +79,7 @@ public class SpaceService extends Service {
     }
 
     /**
-     *
+     * findSpaceInfoById
      */
     @Transactional
     public Place findPlaceById(Long id) {
@@ -93,6 +91,32 @@ public class SpaceService extends Service {
     public HallImage findHallImageById(Long id) {
         Space findSpace = spaceRepository.findById(id).orElseThrow();
         Place findPlace = findSpace.getPlace();
-        // return findPlace.getHallImage();
+        return findPlace.getHallImage();
+    }
+
+    @Transactional
+    public KitImage findKitImageById(Long id) {
+        Space findSpace = spaceRepository.findById(id).orElseThrow();
+        Place findPlace = findSpace.getPlace();
+        return findPlace.getKitImage();
+    }
+
+    @Transactional
+    public MenuImage findMenuImageById(Long id) {
+        Space findSpace = spaceRepository.findById(id).orElseThrow();
+        Place findPlace = findSpace.getPlace();
+        return findPlace.getMenuImage();
+    }
+
+    @Transactional
+    public Rent findRentById(Long id) {
+        Space findSpace = spaceRepository.findById(id).orElseThrow();
+        return findSpace.getRent();
+    }
+
+    @Transactional
+    public Kitchen findKitchenById(Long id) {
+        Space findSpace = spaceRepository.findById(id).orElseThrow();
+        return findSpace.getKitchen();
     }
 }

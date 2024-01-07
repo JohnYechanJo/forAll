@@ -18,10 +18,6 @@ public class MenuImage extends BassDomain {
     @Column(name = "menuImage_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "place_id")
-    private Place place;
-
     // 메뉴사진 1
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu1_id")
