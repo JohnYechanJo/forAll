@@ -153,11 +153,7 @@ public class SpaceService extends Service {
         Image hallFront = imageService.findById(sf.getHallFront());
         Image hallBack = imageService.findById(sf.getHallBack());
         Image hallEntire = imageService.findById(sf.getHallEntire());
-        List<Image> hallExtra = new ArrayList<>();
-        for (Long hallExtraId : sf.getHallExtra()){
-            Image image = imageService.findById(hallExtraId);
-            if (image != null) hallExtra.add(image);
-        }
+        List<Image> hallExtra = imageService.findListByIds(sf.getHallExtra());
         hallImage.setHallRight(hallRight);
         hallImage.setHallLeft(hallLeft);
         hallImage.setHallFront(hallFront);
@@ -173,11 +169,7 @@ public class SpaceService extends Service {
         Image kitFront = imageService.findById(sf.getKitFront());
         Image kitBack = imageService.findById(sf.getKitBack());
         Image kitEntire = imageService.findById(sf.getKitEntire());
-        List<Image> kitExtra = new ArrayList<>();
-        for (Long kitExtraId : sf.getKitExtra()){
-            Image image = imageService.findById(kitExtraId);
-            if (image != null) kitExtra.add(image);
-        }
+        List<Image> kitExtra = imageService.findListByIds(sf.getKitExtra());
         kitImage.setKitRight(kitRight);
         kitImage.setKitLeft(kitLeft);
         kitImage.setKitFront(kitFront);
@@ -187,11 +179,7 @@ public class SpaceService extends Service {
         saveKitchenImage(kitImage);
         place.setKitImage(kitImage);
 
-        List<Image> menuImage = new ArrayList<>();
-        for (Long menuId : sf.getMenu()){
-            Image image = imageService.findById(menuId);
-            if (image != null) menuImage.add(image);
-        }
+        List<Image> menuImage = imageService.findListByIds(sf.getMenu());
         place.setMenuImage(menuImage);
         savePlace(place);
         space.setPlace(place);
@@ -217,32 +205,16 @@ public class SpaceService extends Service {
         kitchen.setFireholeNum(sf.getFireholeNum());
         kitchen.setEquip(sf.getEquip());
         kitchen.setEquipExtra(sf.getEquipExtra());
-        List<Image> plateImage = new ArrayList<>();
-        for (Long plateImageId : sf.getPlateImage()){
-            Image image = imageService.findById(plateImageId);
-            if(image != null) plateImage.add(image);
-        }
+        List<Image> plateImage = imageService.findListByIds(sf.getPlateImage());
         kitchen.setPlateImage(plateImage);
         kitchen.setPlateNum(sf.getPlateNum());
-        List<Image> cupImage = new ArrayList<>();
-        for (Long cupImageId : sf.getCupImage()){
-            Image image = imageService.findById(cupImageId);
-            if(image != null) cupImage.add(image);
-        }
+        List<Image> cupImage = imageService.findListByIds(sf.getCupImage());
         kitchen.setCupImage(cupImage);
         kitchen.setCupNum(sf.getCupNum());
-        List<Image> cutleryImage = new ArrayList<>();
-        for (Long cutleryImageId : sf.getCutleryImage()){
-            Image image = imageService.findById(cutleryImageId);
-            if(image != null) cutleryImage.add(image);
-        }
+        List<Image> cutleryImage = imageService.findListByIds(sf.getCutleryImage());
         kitchen.setCutleryImage(cutleryImage);
         kitchen.setCutleryNum(sf.getCutleryNum());
-        List<Image> vatImage = new ArrayList<>();
-        for (Long vatImageId : sf.getVatImage()){
-            Image image = imageService.findById(vatImageId);
-            if(image != null) cutleryImage.add(image);
-        }
+        List<Image> vatImage = imageService.findListByIds(sf.getVatImage());
         kitchen.setVatImage(vatImage);
         kitchen.setVatNum(sf.getVatNum());
         saveKitchen(kitchen);

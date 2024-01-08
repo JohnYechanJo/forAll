@@ -10,6 +10,7 @@ import project.forAll.domain.Image;
 import project.forAll.repository.ImageRepository;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,6 +50,17 @@ public class ImageService extends Service{
     }
 
     public Image findById(final Long id){
+        if (id == null) return null;
         return imageRepository.findById(id).orElse(null);
+    }
+
+    public List<Image> findListByIds(final List<Long> ids){
+        if (ids == null) return null;
+        List<Image> images = new ArrayList<>();
+        for (Long id :ids){
+            Image image = findById(id);
+            if (image != null) images.add(image);
+        }
+        return images;
     }
 }

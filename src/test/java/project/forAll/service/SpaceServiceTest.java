@@ -1,37 +1,36 @@
-//package project.forAll.service;
-//
-//import org.junit.Assert;
-//import org.junit.Before;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.test.context.junit4.SpringRunner;
-//import org.springframework.transaction.annotation.Transactional;
-//import project.forAll.domain.space.Place;
-//import project.forAll.form.PlaceForm;
-//import project.forAll.repository.SpaceRepository;
-//
-//import javax.persistence.EntityManager;
-//import javax.persistence.PersistenceContext;
-//
-//import static org.junit.Assert.*;
-//
-//
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
-//@Transactional
-//public class SpaceServiceTest {
-//
-//    @PersistenceContext
-//    EntityManager em;
-//
-//    @Autowired SpaceService spaceService;
-//    @Autowired SpaceRepository spaceRepository;
-//
-////    @Before
-////    public void setup() { spaceService.deleteAll(); }
-//
+package project.forAll.service;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+import project.forAll.domain.Image;
+import project.forAll.domain.space.Place;
+import project.forAll.form.PlaceForm;
+import project.forAll.form.SpaceForm;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import static org.junit.Assert.*;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
+public class SpaceServiceTest {
+
+    @Autowired SpaceService spaceService;
+    @Autowired ImageService imageService;
+
+    @Before
+    public void setup(){
+        spaceService.deleteAll();
+    }
 //    @Test
 //    public void 공간등록() throws Exception {
 //        // Given
@@ -52,4 +51,15 @@
 //
 //        assertEquals("", "오스테리아 로에로", getPlace.getName());
 //    }
-//}
+    @Test
+    public void 빈공간등록() throws Exception{
+        // Given
+        SpaceForm sf = new SpaceForm();
+
+        // When
+        spaceService.build(sf);
+
+        // Then
+        assertEquals(spaceService.count(), 1);
+    }
+}
