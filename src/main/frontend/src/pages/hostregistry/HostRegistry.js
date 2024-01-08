@@ -278,12 +278,12 @@ const HostRegistry = () => {
                 <h4>
                     <span>대표 이미지 </span>
                 </h4>
-                <p>
+                <div>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenRepresent}/></span>
                     <ImageInput setImg={setImgRepresent} setHidden={setHiddenRepresent}/>
-                </p>
+                </div>
             </div>
             <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>
                 <Link to="/hostRegistryStart">
@@ -308,7 +308,7 @@ const HostRegistry = () => {
                         onClick={handleButton}
                 >저장
                 </button>
-                <Modal isOpen={isModalOpen} style={ModalStyles}>
+                <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
                     <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
                     <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
                     <button onClick={() => setIsModalOpen(false)}>뒤로</button>

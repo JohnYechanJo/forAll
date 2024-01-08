@@ -28,6 +28,10 @@ const HostRegistry4 = () => {
     const [bat, setBat] = useState();
     const [countBat, setCountBat] = useState();
 
+    const [hiddenSidePlate, setHiddenSidePlate] = useState(false);
+    const [hiddenCup, setHiddenCup] = useState(false);
+    const [hiddenCutrrary, setHiddenCutrrary] = useState(false);
+    const [hiddenBat, setHiddenBat] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const onChangeFirePit = useCallback((e) => {
@@ -134,22 +138,26 @@ const HostRegistry4 = () => {
 
             <div>
                 <p>앞접시*</p>
-                <ImageInput setImg={setSidePlate}/>
+                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenSidePlate}/>
+                <ImageInput setImg={setSidePlate} setHidden={setHiddenSidePlate}/>
                 <input onChange={onChangeCountSidePlate} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
             <div>
                 <p>물컵*</p>
-                <ImageInput setImg={setCup}/>
+                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenCup}/>
+                <ImageInput setImg={setCup} setHidden={setHiddenCup}/>
                 <input onChange={onChangeCountCup} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
             <div>
                 <p>커트러리*</p>
-                <ImageInput setImg={setCuttrary}/>
+                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenCutrrary}/>
+                <ImageInput setImg={setCuttrary} setHidden={setHiddenCutrrary}/>
                 <input onChange={onChangeCountCuttrary} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
             <div>
                 <p>밧드*</p>
-                <ImageInput setImg={setBat}/>
+                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenBat}/>
+                <ImageInput setImg={setBat} setHidden={setHiddenBat}/>
                 <input onChange={onChangeCountBat} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
 
@@ -157,7 +165,7 @@ const HostRegistry4 = () => {
                 <Link to="/hostRegistry"><button>이전</button></Link>
                 <button onClick={handleButton}>다음</button>
             </div>
-            <Modal isOpen={isModalOpen}>
+            <Modal isOpen={isModalOpen} ariaHideApp={false}>
                 <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
                 <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
                 <button onClick={() => setIsModalOpen(false)}>뒤로</button>

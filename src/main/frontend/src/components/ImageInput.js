@@ -1,16 +1,16 @@
-import {useRef, useState, useCallback} from "react";
+import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
 const ImageInput = ({setImg, setHidden}) => {
     const [imgFile, setImgFile] = useState("");
     const imgRef = useRef();
     const saveImgFile = () => {
+        console.log(imgRef.current);
         const file = imgRef.current.files[0];
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        console.log(reader.result);
+
         reader.onloadend = () => {
             setImgFile(reader.result);
-            setImg(imgFile);
         }
     };
     const onUploadImgButtonClick = useCallback(() => {
@@ -18,8 +18,12 @@ const ImageInput = ({setImg, setHidden}) => {
             return;
         }
         imgRef.current.click();
-        setHidden(true);
+        if (setHidden) setHidden(true);
     },[]);
+
+    useEffect(() => {
+        setImg(imgFile);
+    }, [imgFile]);
     return (
         <div>
             <label>
