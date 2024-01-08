@@ -27,4 +27,24 @@ public class Kitchen extends BassDomain {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "plateImage_id")
     private List<Image> plateImage;
+    // 앞접시 수
+    private Integer plateNum;
+    // 컵 이미지
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cupImage_id")
+    private List<Image> cupImage;
+    // 컵 수
+    private Integer cupNum;
+    // 커트러리 이미지
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cutleryImage_id")
+    private List<Image> cutleryImage;
+    // 커트러리 수
+    private Integer cutleryNum;
+    // 밧드 이미지
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vatImage_id")
+    private List<Image> vatImage;
+    // 밧드 수
+    private Integer vatNum;
 }
