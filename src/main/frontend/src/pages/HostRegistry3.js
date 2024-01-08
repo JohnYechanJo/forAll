@@ -184,7 +184,7 @@ const HostRegistry3 = () => {
                 <Link to="/hostRegistry"><button>이전</button></Link>
                 <button onClick={handleButton}>다음</button>
             </div>
-            <Modal isOpen={isModalOpen}>
+            <Modal isOpen={isModalOpen} ariaHideApp={false}>
                 <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
                 <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
                 <button onClick={() => setIsModalOpen(false)}>뒤로</button>
