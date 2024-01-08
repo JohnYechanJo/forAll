@@ -158,7 +158,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         <input
                             type="radio"
                             name="gender"
-                            value="Not Specified"
+                            value="NotSpecified"
                             onChange={onChangeGender}
                             defaultChecked
                         />

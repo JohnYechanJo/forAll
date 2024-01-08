@@ -181,7 +181,7 @@ const PersonalInfoModifyInputTemplate = ({ role, name, phone, email,year,month,d
                         <input
                             type="radio"
                             name="gender"
-                            value="Not Specified"
+                            value="NotSpecified"
                             onChange={onChangeGender}
                             defaultChecked
                         />
