@@ -1,7 +1,8 @@
 import DropDown from "../components/DropDown";
 import {useCallback, useState} from "react";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {Form, Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
+import ImageUploader from "../utils/imageUploader";
 
 const HostRegistry6 =() => {
     const location = useLocation();
@@ -28,8 +29,10 @@ const HostRegistry6 =() => {
         else if((account !== "") && (accountHolder !== undefined)) submit();
         else setIsModalOpen(true);
     };
-    const submit = () => {
-        console.log(data);
+    const submit = async () => {
+        const log = await ImageUploader(data.license, sessionStorage.getItem("user_id"));
+        console.log(log);
+
     };
     return (
         <div>

@@ -37,7 +37,7 @@ public class MenuImage extends BassDomain {
     // 메뉴 추가사진
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "menuExtra_id")
-    private List<Image> menuExtra = new ArrayList<>();
+    private List<Image> menuExtra;
 
 //    public addImage(Image image) {
 //        this.menuExtra.add(image);
