@@ -9,6 +9,8 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 public class SpaceForm {
+    // 유저 loginId
+    private String userId;
     // 공간명
     private String name;
     // 공간 한줄소개
@@ -90,19 +92,19 @@ public class SpaceForm {
     // 추가 사용가능 기계
     private String equipExtra;
     // 앞접시 이미지
-    private Long plateImage;
+    private List<Long> plateImage;
     // 앞접시 수
     private Integer plateNum;
     // 컵 이미지
-    private Long cupImage;
+    private List<Long> cupImage;
     // 컵 수
     private Integer cupNum;
     // 커트러리 이미지
-    private Long cutleryImage;
+    private List<Long> cutleryImage;
     // 커트러리 수
     private Integer cutleryNum;
     // 밧드 이미지
-    private Long vatImage;
+    private List<Long> vatImage;
     // 밧드 수
     private Integer vatNum;
 

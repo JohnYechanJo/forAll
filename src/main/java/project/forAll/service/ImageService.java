@@ -47,4 +47,8 @@ public class ImageService extends Service{
         if (images.isEmpty()) return null;
         return images.get(0);
     }
+
+    public Image findById(final Long id){
+        return imageRepository.findById(id).orElse(null);
+    }
 }
