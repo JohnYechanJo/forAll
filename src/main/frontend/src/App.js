@@ -37,15 +37,15 @@ function App() {
           <Route path="/placeInfoModify" element={<PlaceInfoModifyPage />} />
           <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
           <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
+              <Route path="/hostRegistry" element={<HostRegistry />} />
+              <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
+              <Route path="/hostRegistry2" element={<HostRegistry2 />} />
           <Route path="/hostRegistry3" element={<HostRegistry3 />}/>
           <Route path="/hostRegistry4" element={<HostRegistry4 />}/>
           <Route path="/hostRegistry5" element={<HostRegistry5 />}/>
           <Route path="/hostRegistry6" element={<HostRegistry6 />}/>
           <Route path="/error" element={<ErrorPage />}/>
           <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
-          <Route path="/hostRegistry" element={<HostRegistry />} />
-          <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
-          <Route path="/hostRegistry2" element={<HostRegistry2 />} />
       </Routes>
   );
 }

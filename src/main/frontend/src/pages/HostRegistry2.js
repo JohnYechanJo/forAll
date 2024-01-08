@@ -34,7 +34,6 @@ const HostRegistry2 = () => {
     const [hiddenKBack, setHiddenKBack] = useState(false);
     const [hiddenKFront, setHiddenKFront] = useState(false);
     const [hiddenKAdditional, setHiddenKAdditional] = useState(false);
-    const [hiddenRepresent, setHiddenRepresent] = useState(false);
     const [hiddenMenu1, setHiddenMenu1] = useState(false);
     const [hiddenMenu2, setHiddenMenu2] = useState(false);
     const [hiddenMenu3, setHiddenMenu3] = useState(false);
