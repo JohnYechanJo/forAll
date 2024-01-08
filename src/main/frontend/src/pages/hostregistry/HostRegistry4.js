@@ -1,5 +1,5 @@
-import DropDown from "../components/DropDown";
-import ImageInput from "../components/ImageInput";
+import DropDown from "../../components/DropDown";
+import ImageInput from "../../components/ImageInput";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useCallback, useState} from "react";
 import Modal from "react-modal";

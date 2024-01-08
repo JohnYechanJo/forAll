@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState, useCallback } from "react";
-import Header from "../components/Header";
-import LoginTemplate from "../components/LoginTemplate";
-import PlaceInfoModifyTemplate from "../components/PlaceInfoModifyTemplate";
+import Header from "../../components/Header";
+import LoginTemplate from "../../components/signup/LoginTemplate";
+import PlaceInfoModifyTemplate from "../../components/modify/PlaceInfoModifyTemplate";
 
 const PlaceInfoModify = () => {
     return (

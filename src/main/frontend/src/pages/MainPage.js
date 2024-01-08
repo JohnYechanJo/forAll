@@ -1,10 +1,10 @@
 import Header from "../components/Header";
-import HostSidebar from "../components/HostSidebar";
+import HostSidebar from "../components/home/HostSidebar";
 import axios from "axios";
 import {user_role} from "../utils/enums";
-import GuestHomeTemplate from "../components/GuestHomeTemplate";
-import HostHomeTemplate from "../components/HostHomeTemplate";
-import GuestSidebar from "../components/GuestSidebar";
+import GuestHomeTemplate from "../components/home/GuestHomeTemplate";
+import HostHomeTemplate from "../components/home/HostHomeTemplate";
+import GuestSidebar from "../components/home/GuestSidebar";
 
 const MainPage = () => {
     if(sessionStorage.getItem("user_id") == null){

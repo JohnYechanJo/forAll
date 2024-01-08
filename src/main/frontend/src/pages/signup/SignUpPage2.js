@@ -1,13 +1,13 @@
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import Header from "../components/Header";
-import PersonalInfoInputTemplate from "../components/PersonalInfoInputTemplate";
-import UseTermsTemplate from "../components/UseTermsTemplate";
+import Header from "../../components/Header";
+import PersonalInfoInputTemplate from "../../components/signup/PersonalInfoInputTemplate";
+import UseTermsTemplate from "../../components/signup/UseTermsTemplate";
 import {useEffect, useState} from "react";
-import {Gender} from "../utils/enums";
+import {Gender} from "../../utils/enums";
 import axios from "axios";
-import useDidMountEffect from "../utils/hooks/useDidMountEffect";
-import * as regularExpressions from "../utils/regularExpressions";
-import SignUpInformationTemplate from "../components/SignUpInformationTemplate";
+import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
+import * as regularExpressions from "../../utils/regularExpressions";
+import SignUpInformationTemplate from "../../components/signup/SignUpInformationTemplate";
 const SignUpPage2 = () => {
     const location = useLocation();
     const data = {...location.state};

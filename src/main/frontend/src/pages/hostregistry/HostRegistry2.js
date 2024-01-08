@@ -1,9 +1,9 @@
 import {useState} from "react";
-import "../components/Styles.css";
+import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
-import ImageInput from "../components/ImageInput";
-import {ModalStyles} from "../components/ModalStyles";
+import ImageInput from "../../components/ImageInput";
+import {ModalStyles} from "../../components/ModalStyles";
 const HostRegistry2 = () => {
     const [imgRight, setImgRight] = useState("");
     const [imgLeft, setImgLeft] = useState("");

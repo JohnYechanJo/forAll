@@ -1,10 +1,10 @@
 import {useState} from "react";
-import "../components/Styles.css";
+import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
-import ImageInput from "../components/ImageInput";
-import {ModalStyles} from "../components/ModalStyles";
-import DaumPost from "../components/DaumPost";
+import ImageInput from "../../components/ImageInput";
+import {ModalStyles} from "../../components/ModalStyles";
+import DaumPost from "../../components/DaumPost";
 const HostRegistry = () => {
     const [inputCount, setInputCount] = useState(0);
     const [inputCount2, setInputCount2] = useState(0);

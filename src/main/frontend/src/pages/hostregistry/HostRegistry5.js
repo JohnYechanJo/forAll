@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useState} from "react";
-import ImageInput from "../components/ImageInput";
-import DropDown from "../components/DropDown";
-import DaumPost from "../components/DaumPost";
+import ImageInput from "../../components/ImageInput";
+import DropDown from "../../components/DropDown";
+import DaumPost from "../../components/DaumPost";
 import Modal from "react-modal";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 
