@@ -9,12 +9,16 @@ const GuestRegistry = () => {
     const location = useLocation();
     const [inputCount, setInputCount] = useState(0);
     const [inputCount2, setInputCount2] = useState(0);
+    const [inputText, setInputText] = useState("");
     const [introduce, setIntroduce] = useState("");
     const [introduceDetail, setIntroduceDetail] = useState("");
-    const [career, setCareer] = useState("");
+    const [career, setCareer] = useState([]);
     const [profileImage, setProfileImage] = useState("");
     const [hidden, setHidden] = useState(false);
     const text1 = "사진을 설명해주세요. \n ex.현재 근무하고 있는 업장에서 찍은 사진입니다."
+    const text2="ex.한식을 새롭게 해석하는 것을 좋아하는 조리학과 대학생입니다.\n" +
+        "한식을 만들 때 전통적인 한식에 국한되어 있는 것을 좋아하지 않고 양식, 일식, 중식 등 " +
+        "다양한 나라의 요리와 접목시키는 것을 좋아합니다."
     const handleButton = () => {
         if ((introduce !== "") && (introduceDetail !== "") && (career !== "") && (profileImage !== "")){
             submit();
@@ -41,6 +45,13 @@ const GuestRegistry = () => {
         setInputCount2(e.target.value.length);
         setIntroduceDetail(e.target.value);
     }
+    const activeEnter = (e) => {
+        if (e.key==="Enter"){
+            const temp =[...career];
+            setCareer(temp.concat(e.target.value));
+            e.target.value="";
+        }
+    }
     return(
         <div className="margin"
              style={{display:"flex",
@@ -66,11 +77,39 @@ const GuestRegistry = () => {
                     <span style={{color: "red"}}>(최소 20자)</span>
                 </p>
             </div>
-            <textarea placeholder="공간에 대한 설명을 기재해주세요."
-                      style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR"}}
+            <textarea placeholder={text2} className="white-space"
+                      style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR", fontSize:"10px"}}
                       onChange={onInputHandler2} maxLength="299" minLength="19"/>
             <h4>최근 경력을 최소 1개 입력해주세요.</h4>
-            <input type="text" placeholder="안심하세요! 언제든지 프로필을 수정할 수 있어요." style={{width: "94vw", height: "3vh"}}/>
+            <input type="text" placeholder="안심하세요! 언제든지 프로필을 수정할 수 있어요."
+                   style={{width: "94vw", height: "3vh"}}
+                   onKeyDown={(e) => {activeEnter(e)}}
+                    onChange={(e)=>{
+                    setInputText(e.target.value);
+            }}/>
+            {career.map((item, index) => (
+                <div key={index}
+                     style={{
+                         display: 'flex',
+                         justifyContent: 'center',
+                         alignItems: 'center',
+                         height: "3vh",
+                         width: '45vw',
+                         border: '2px solid lightgray',
+                         backgroundColor: 'white',
+                         borderRadius: '7px',
+                         marginTop: '5px',
+                         cursor: 'pointer'
+                     }}
+                     onClick={() => {
+                         const newCareer = [...career];
+                         newCareer.splice(index, 1);
+                         setCareer(newCareer);
+                     }}
+                >
+                    {item}
+                </div>
+            ))}
             <h4 style={{marginBottom:"0"}} >프로필 등록 사진</h4>
             <p>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
