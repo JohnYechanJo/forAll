@@ -1,4 +1,4 @@
-import "../components/Styles.css";
+import "../../components/Styles.css";
 const placeInfoModify2 = () => {
     return (
         <div>

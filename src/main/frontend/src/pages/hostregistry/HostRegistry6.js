@@ -1,4 +1,4 @@
-import DropDown from "../components/DropDown";
+import DropDown from "../../components/DropDown";
 import {useCallback, useState} from "react";
 import {Form, Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
@@ -68,7 +68,7 @@ const HostRegistry6 =() => {
             </label>
 
             <div>
-                <Link to="/hostRegistry2"><button>이전</button></Link>
+                <Link to="/hostRegistry5"><button>이전</button></Link>
                 <button onClick={handleButton}>저장</button>
             </div>
 

@@ -21,4 +21,11 @@
     margin-left: 2vw;
     margin-right: 2vw;
 }
-
+.white-space {
+    white-space: pre-line;
+}
+.image{
+    width: 70%;
+    height: 60%;
+    object-fit: cover;
+}

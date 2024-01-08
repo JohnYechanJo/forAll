@@ -1,13 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import PersonalInfoModifyInputTemplate from "../components/PersonalInfoModifyInputTemplate";
+import Header from "../../components/Header";
+import PersonalInfoModifyInputTemplate from "../../components/modify/PersonalInfoModifyInputTemplate";
 import { useEffect, useState } from "react";
-import { Gender } from "../utils/enums";
+import { Gender } from "../../utils/enums";
 import axios from "axios";
-import useDidMountEffect from "../utils/hooks/useDidMountEffect";
-import "../components/Styles.css";
-import UseTermsTemplate from "../components/UseTermsTemplate";
-import * as regularExpressions from "../utils/regularExpressions";
+import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
+import "../../components/Styles.css";
+import UseTermsTemplate from "../../components/signup/UseTermsTemplate";
+import * as regularExpressions from "../../utils/regularExpressions";
 const PersonalModify2 = () => {
     const location = useLocation();
     const data = { ...location.state };

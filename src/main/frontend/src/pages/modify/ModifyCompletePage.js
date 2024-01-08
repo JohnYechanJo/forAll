@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import Modal from "react-modal";
-import {ModalStyles} from "../components/ModalStyles";
+import {ModalStyles} from "../../components/ModalStyles";
 const ModifyCompletePage = () => {
     return (
         <div>
