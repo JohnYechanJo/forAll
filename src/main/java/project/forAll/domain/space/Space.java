@@ -2,6 +2,7 @@ package project.forAll.domain.space;
 
 import lombok.Getter;
 import lombok.Setter;
+import project.forAll.domain.BassDomain;
 import project.forAll.domain.member.Member;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "spaces")
 @Getter @Setter
-public class Space {
+public class Space extends BassDomain {
 
     @Id @GeneratedValue
     @Column(name = "space_id")
