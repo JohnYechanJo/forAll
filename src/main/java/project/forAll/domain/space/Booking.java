@@ -40,4 +40,5 @@ public class Booking extends BassDomain {
     private String accountNum;
     // 예금주
     private String accountHolder;
+
 }
