@@ -2,7 +2,7 @@ import DropDown from "../../components/DropDown";
 import {useCallback, useEffect, useState} from "react";
 import "../../style/btnStyles.css";
 import ImageInputs from "../../components/ImageInputs";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {json, Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
 import "../../components/Styles.css";
@@ -45,6 +45,12 @@ const HostRegistry3 = () => {
     const [isTrial, setIsTrial] = useState(false);
     const [isMorningDelivery, setIsMorningDelivery] = useState(false);
     const [isWorkIn, setIsWorkIn] = useState(false);
+    let recommendedPrice = seat * 15000;
+    let priceString = recommendedPrice.toString();
+    let firstDigits = priceString.slice(0, -4);
+    let randomFourDigits = Math.floor(1000 + Math.random() * 9000);
+    let finalPrice = parseInt(firstDigits + randomFourDigits.toString());
+    const formattedPrice = "₩" + finalPrice.toLocaleString();
     const onChangeFloor = useCallback((e) => {
         setExactFloor(e.target.value);
     }, []);
@@ -82,8 +88,6 @@ const HostRegistry3 = () => {
     const toggleSunDay = useCallback((e) => {
         setSunDay(!sunDay);
     }, [sunDay]);
-
-
     const handleButton = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
             && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
@@ -218,7 +222,9 @@ const HostRegistry3 = () => {
                 <p>가격 설정*</p>
                 <input style={{width: "90vw", height: "3vh", float: "left", marginRight: "2vw"}}
                        onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"}/>
-                <h3>포올 권장 가격: {seat}개 * 15,000={seat ? seat * 15000 : 0}</h3>
+                <h3>
+                    {(seat===undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat<=10) ? "포 올 권장가격 : ₩150,000원" :"포 올 권장가격 :" + formattedPrice + "원"}
+                </h3>
                 <p>포 올 권장가격보다 높이 측정할 경우, 원데이 오너들이 부담스럽게 느낄 수 있어요.</p>
             </div>
 
