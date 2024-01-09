@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./Sidebar.module.css";
-import LoginTemplate from "./LoginTemplate";
+import styles from "../Sidebar.module.css";
+import LoginTemplate from "../signup/LoginTemplate";
 import { Link } from "react-router-dom";
-import {user_role} from "../utils/enums";
+import {user_role} from "../../utils/enums";
 
 const HostSidebar = ({ width = 280, children }) => {
     const [isOpen, setOpen] = useState(false);

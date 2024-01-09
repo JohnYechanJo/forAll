@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import "./LoginTemplate.css";
 import {Link, useNavigate} from "react-router-dom";
-import {user_role} from "../utils/enums";
+import {user_role} from "../../utils/enums";
 import axios from "axios";
 const LoginTemplate = () => {
     const navigate = useNavigate();

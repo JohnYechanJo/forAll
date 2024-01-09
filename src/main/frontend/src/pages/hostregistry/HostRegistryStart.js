@@ -1,8 +1,8 @@
 import {useState} from "react";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
-import "../components/Styles.css";
-import {ModalStyles} from "../components/ModalStyles";
+import "../../components/Styles.css";
+import {ModalStyles} from "../../components/ModalStyles";
 const HostRegistryStart = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalIsOpen2, setModalIsOpen2] = useState(false);

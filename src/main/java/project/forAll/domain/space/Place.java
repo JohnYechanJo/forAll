@@ -9,6 +9,8 @@ import project.forAll.domain.space.image.KitImage;
 import project.forAll.domain.space.image.MenuImage;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -31,9 +33,10 @@ public class Place extends BassDomain {
     @JoinColumn(name = "kitImage_id")
     private KitImage kitImage;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MenuImage_id")
-    private MenuImage menuImage;
+    // 메뉴 사진들
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menuImage_id")
+    private List<Image> menuImage = new ArrayList<>();
 
     // 공간명
     private String name;

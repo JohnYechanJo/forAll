@@ -1,10 +1,10 @@
 import {useState} from "react";
-import "../components/Styles.css";
-import { Link } from "react-router-dom";
+import "../../components/Styles.css";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
-import ImageInput from "../components/ImageInput";
-import {ModalStyles} from "../components/ModalStyles";
-import DaumPost from "../components/DaumPost";
+import ImageInput from "../../components/ImageInput";
+import {ModalStyles} from "../../components/ModalStyles";
+import DaumPost from "../../components/DaumPost";
 const HostRegistry = () => {
     const [inputCount, setInputCount] = useState(0);
     const [inputCount2, setInputCount2] = useState(0);
@@ -20,47 +20,15 @@ const HostRegistry = () => {
     const [placeInfo, setPlaceInfo] = useState("");
     const [webSite, setWebSite] = useState("");
     const [imgRepresent, setImgRepresent] = useState("");
-    const [imgRight, setImgRight] = useState("");
-    const [imgLeft, setImgLeft] = useState("");
-    const [imgAll, setImgAll] = useState("");
-    const [imgBack, setImgBack] = useState("");
-    const [imgFront, setImgFront] = useState("");
-    const [imgAdditional, setImgAdditional] = useState("");
-    const [kitchenRight, setKitchenRight] = useState("");
-    const [kitchenLeft, setKitchenLeft] = useState("");
-    const [kitchenAll, setKitchenAll] = useState("");
-    const [kitchenBack, setKitchenBack] = useState("");
-    const [kitchenFront, setKitchenFront] = useState("");
-    const [kitchenAdditional, setKitchenAdditional] = useState("");
-    const [menu1, setMenu1] = useState("");
-    const [menu2, setMenu2] = useState("");
-    const [menu3, setMenu3] = useState("");
-    const [menu4, setMenu4] = useState("");
-    const [menuAdditional, setMenuAdditional] = useState("");
-    const [hiddenRight, setHiddenRight] = useState(false);
-    const [hiddenLeft, setHiddenLeft] = useState(false);
-    const [hiddenAll, setHiddenAll] = useState(false);
-    const [hiddenBack, setHiddenBack] = useState(false);
-    const [hiddenFront, setHiddenFront] = useState(false);
-    const [hiddenAdditional, setHiddenAdditional] = useState(false);
-    const [hiddenKRight, setHiddenKRight] = useState(false);
-    const [hiddenKLeft, setHiddenKLeft] = useState(false);
-    const [hiddenKAll, setHiddenKAll] = useState(false);
-    const [hiddenKBack, setHiddenKBack] = useState(false);
-    const [hiddenKFront, setHiddenKFront] = useState(false);
-    const [hiddenKAdditional, setHiddenKAdditional] = useState(false);
     const [hiddenRepresent, setHiddenRepresent] = useState(false);
-    const [hiddenMenu1, setHiddenMenu1] = useState(false);
-    const [hiddenMenu2, setHiddenMenu2] = useState(false);
-    const [hiddenMenu3, setHiddenMenu3] = useState(false);
-    const [hiddenMenu4, setHiddenMenu4] = useState(false);
-    const [hiddenMenuAdditional, setHiddenMenuAdditional] = useState(false);
     const [clicked1, setClicked1] = useState(false);
     const [clicked2, setClicked2] = useState(false);
     const [clicked3, setClicked3] = useState(false);
     const [modalIsOpen1, setModalIsOpen1] = useState(false);
     const [modalIsOpen2, setModalIsOpen2] = useState(false);
     const [modalIsOpen3, setModalIsOpen3] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate();
     const modalClose1 = () => {
         setModalIsOpen1(false);
     };
@@ -87,27 +55,25 @@ const HostRegistry = () => {
         setPlaceInfo(e.target.value);
     }
     const handleButton = () => {
-        if ((inputCount === 0)||(inputCount2 === 0)||(inputCount3 === 0)){
-            alert("공간에 대한 설명은 필수사항입니다.");
-        } else if (kitchen === "") {
-            alert("주방 특성은 필수사항입니다.");
-        } else if (imgRepresent === "") {
-            alert("대표 이미지는 필수사항입니다.");
-        } else if ((imgRight === "")||(imgLeft === "")||(imgAll === "")||(imgBack === "")||(imgFront === "")||(imgAdditional === "")){
-            alert("홀 사진 항목들은 필수사항입니다.");
-        } else if ((kitchenRight === "")||(kitchenLeft === "")||(kitchenAll === "")||(kitchenBack === "")||(kitchenFront === "")||(kitchenAdditional === "")){
-            alert("주방 사진 항목들은 필수사항입니다.");
-        } else if ((menu1 === "")||(menu2 === "")||(menu3 === "")||(menu4 === "")||(menuAdditional === "")){
-            alert("메뉴 사진 항목들은 필수사항입니다.");
-        } else if(address === ""){
-            alert("주소는 필수사항입니다.");
-        } else if(placeInfo === ""){
-            alert("상세 위치 정보는 필수사항입니다.");
-        } else if(webSite === ""){
-            alert("웹사이트는 필수사항입니다.");}
-        else {
-        //     정보 들고 HostRegistry2로 이동하게 하는 코드 구현
+        if ((placeName !== "")&&(placeIntro !== "")&&(placeIntroDetail !== "")&&(kitchen!=="")&&(fullAddress!=="")&&(placeInfo!=="")&&(imgRepresent!=="")&&(webSite!=="")){
+            submit();}
+        else{
+            setIsModalOpen(true);
         }
+    };
+    const submit = () => {
+        navigate("/hostRegistry2",{
+            state: {
+                placeName: placeName,
+                placeIntro: placeIntro,
+                placeIntroDetail: placeIntroDetail,
+                kitchen: kitchen,
+                fullAddress: fullAddress,
+                webSite: webSite,
+                placeInfo: placeInfo,
+                imgRepresent: imgRepresent,
+            }
+        });
     };
     return (
         <div className="margin"
@@ -312,152 +278,42 @@ const HostRegistry = () => {
                 <h4>
                     <span>대표 이미지 </span>
                 </h4>
-                <p>
+                <div>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenRepresent}/></span>
                     <ImageInput setImg={setImgRepresent} setHidden={setHiddenRepresent}/>
-                </p>
-                <h4>홀 사진</h4>
-                <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <h4>홀 우측면</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenRight}/></span>
-                    <ImageInput setImg={setImgRight} setHidden={setHiddenRight}/>
-                </p>
-                <h4>홀 좌측면</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenLeft}/></span>
-                    <ImageInput setImg={setImgLeft} setHidden={setHiddenLeft}/>
-                </p>
-                <h4>홀 정면</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenFront}/></span>
-                    <ImageInput setImg={setImgFront} setHidden={setHiddenFront}/>
-                </p>
-                <h4>홀 후면</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenBack}/></span>
-                    <ImageInput setImg={setImgBack} setHidden={setHiddenBack}/>
-                </p>
-                <h4>홀 전체샷</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenAll}/></span>
-                    <ImageInput setImg={setImgAll} setHidden={setHiddenAll}/>
-                </p>
-                <h4>추가사진</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenAdditional}/></span>
-                    <ImageInput setImg={setImgAdditional} setHidden={setHiddenAdditional}/>
-                </p>
+                </div>
             </div>
-            <div>
-
-                <h4>주방 사진</h4>
-                <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <h4>주방 우측면</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenKRight}/></span>
-                    <ImageInput setImg={setKitchenRight} setHidden={setHiddenKRight}/>
-                </p>
-                <h4>주방 좌측면</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenKLeft}/></span>
-                    <ImageInput setImg={setKitchenLeft} setHidden={setHiddenKLeft}/>
-                </p>
-                <h4>주방 정면</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenKFront}/></span>
-                    <ImageInput setImg={setKitchenFront} setHidden={setHiddenKFront}/>
-                </p>
-                <h4>주방 후면</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenKBack}/></span>
-                    <ImageInput setImg={setKitchenBack} setHidden={setHiddenKBack}/>
-                </p>
-                <h4>주방 전체샷</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenKAll}/></span>
-                    <ImageInput setImg={setKitchenAll} setHidden={setHiddenKAll}/>
-                </p>
-                <h4>추가사진</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenKAdditional}/></span>
-                    <ImageInput setImg={setKitchenAdditional} setHidden={setHiddenKAdditional}/>
-                </p>
-            </div>
-            <div>
-                <h4>메뉴 사진</h4>
-                <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <h4>메뉴 1</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenMenu1}/></span>
-                    <ImageInput setImg={setMenu1} setHidden={setHiddenMenu1}/>
-                </p>
-                <h4>메뉴 2</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenMenu2}/></span>
-                    <ImageInput setImg={setMenu2} setHidden={setHiddenMenu2}/>
-                </p>
-                <h4>메뉴 3</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenMenu3}/></span>
-                    <ImageInput setImg={setMenu3} setHidden={setHiddenMenu3}/>
-                </p>
-                <h4>메뉴 4</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenMenu4}/></span>
-                    <ImageInput setImg={setMenu4} setHidden={setHiddenMenu4}/>
-                </p>
-                <h4>추가사진</h4>
-                <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenMenuAdditional}/></span>
-                    <ImageInput setImg={setMenuAdditional} setHidden={setHiddenMenuAdditional}/>
-                </p>
-            </div>
-            <div style={{display: "flex",justifyContent:"center", marginBottom:"6vh",marginTop:"3vh"}}>
+            <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>
                 <Link to="/hostRegistryStart">
-                    <button style={{backgroundColor: "black",color:"white", flex:"1",border:"none", width:"50vw",height:"8vh"}}>이전</button>
+                    <button style={{
+                        backgroundColor: "black",
+                        color: "white",
+                        flex: "1",
+                        border: "none",
+                        width: "50vw",
+                        height: "8vh"
+                    }}>이전
+                    </button>
                 </Link>
-                <Link to="/hostRegistry2">
-                    <button style={{backgroundColor: "red",color:"white" ,flex:"1",border:"none", width:"50vw",height:"8vh"}}
-                    onClick={handleButton}
-                    >저장</button>
-                </Link>
+                <button style={{
+                    backgroundColor: "red",
+                    color: "white",
+                    flex: "1",
+                    border: "none",
+                    width: "50vw",
+                    height: "8vh"
+                }}
+                        onClick={handleButton}
+                >저장
+                </button>
+                <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
+                    <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
+                    <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                    <button onClick={() => setIsModalOpen(false)}>뒤로</button>
+                    <button onClick={() => submit()}>다음</button>
+                </Modal>
             </div>
         </div>
     );

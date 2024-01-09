@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import Modal from "react-modal";
-import "./Styles.css";
-import { ModalStyles } from "./ModalStyles"; 
+import "../Styles.css";
+import { ModalStyles } from "../ModalStyles";
 
 const UseTermsTemplate = ({setIsUseTermsChecked}) => {
         const [modalIsOpen1, setModalIsOpen1] = useState(false);

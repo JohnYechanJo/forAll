@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useState} from "react";
-import ImageInput from "../components/ImageInput";
-import DropDown from "../components/DropDown";
-import DaumPost from "../components/DaumPost";
+import ImageInput from "../../components/ImageInput";
+import DropDown from "../../components/DropDown";
+import DaumPost from "../../components/DaumPost";
 import Modal from "react-modal";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 
@@ -27,6 +27,8 @@ const HostRegistry5 = () => {
     const [phone1, setPhone1] = useState("");
     const [phone2, setPhone2] = useState("");
     const [phone3, setPhone3] = useState("");
+
+    const [hiddenLicense, setHiddenLicense] = useState(false);
     const [modalOpen1, setModalOpen1] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -135,7 +137,8 @@ const HostRegistry5 = () => {
                 </div>
                 <div>
                     <p>사업자 등록증 첨부*</p>
-                    <ImageInput setImg={setLicense}/>
+                    <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenLicense}/>
+                    <ImageInput setImg={setLicense} setHidden={setHiddenLicense}/>
                 </div>
                 <div>
                     <p>사업장 주소*</p>
@@ -173,7 +176,7 @@ const HostRegistry5 = () => {
                 <button onClick={handleButton}>저장</button>
             </div>
 
-            <Modal isOpen={isModalOpen}>
+            <Modal isOpen={isModalOpen} ariaHideApp={false}>
                 <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
                 <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
                 <button onClick={() => setIsModalOpen(false)}>뒤로</button>

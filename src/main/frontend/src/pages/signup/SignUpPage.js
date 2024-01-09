@@ -1,5 +1,5 @@
 import {Link, useNavigate} from "react-router-dom";
-import {user_role} from "../utils/enums";
+import {user_role} from "../../utils/enums";
 
 const SignUpPage = () => {
     const navigate = useNavigate();

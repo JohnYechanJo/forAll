@@ -1,4 +1,4 @@
-import {useRef, useState, useCallback} from "react";
+import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
 const ImageInput = ({setImg, setHidden}) => {
     const [imgFile, setImgFile] = useState("");
@@ -7,10 +7,9 @@ const ImageInput = ({setImg, setHidden}) => {
         const file = imgRef.current.files[0];
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        console.log(reader.result);
+        setImg(imgRef.current.files[0]);
         reader.onloadend = () => {
             setImgFile(reader.result);
-            setImg(imgFile);
         }
     };
     const onUploadImgButtonClick = useCallback(() => {
@@ -18,7 +17,7 @@ const ImageInput = ({setImg, setHidden}) => {
             return;
         }
         imgRef.current.click();
-        setHidden(true);
+        if (setHidden) setHidden(true);
     },[]);
     return (
         <div>
@@ -28,10 +27,10 @@ const ImageInput = ({setImg, setHidden}) => {
                        onChange={() =>saveImgFile()}
                        ref={imgRef}
                        style={{ float:"right",  display: "none"}}
-                /><button className="button" style={{fontSize:"10px",backgroundColor:"black",width:"19vw",height:"4vh",padding:"10px 10px"}} onClick={onUploadImgButtonClick} >파일 첨부</button>
+                /><button className="button" style={{fontSize:"10px",backgroundColor:"black",width:"19vw",height:"4vh",padding:"10px 10px", float:"right", marginLeft:"1vw"}} onClick={onUploadImgButtonClick} >파일 첨부</button>
             </label>
             {imgFile ?
-                <img
+                <img className="image"
                     src={imgFile}
                     alt={"image"}
                 /> : null
