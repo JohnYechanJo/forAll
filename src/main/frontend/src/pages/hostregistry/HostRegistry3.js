@@ -2,7 +2,7 @@ import DropDown from "../../components/DropDown";
 import {useCallback, useEffect, useState} from "react";
 import "../../style/btnStyles.css";
 import ImageInputs from "../../components/ImageInputs";
-import {json, Link, useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
 import "../../components/Styles.css";
@@ -11,7 +11,7 @@ const HostRegistry3 = () => {
     const data = {...location.state};
     const navigate = useNavigate();
 
-    const rentWeeksData = ["휴무없음", "매주", "격주(홀수주)", "격주(짝수주)", "매월 첫째주", "매월 둘째주", "매월 셋째주", "매월 넷째주", "매월 마지막주", "매월 말일", "매월(직접지정)"];
+    const rentWeeksData = ["휴무없음", "매주", "격주(홀수주)", "격주(짝수주)", "매월 첫째주", "매월 둘째주", "매월 셋째주", "매월 넷째주", "매월 마지막주", "매월 말일", "직접지정"];
     const days = [...Array(31).keys()].map(i => (i + 1)+"일");
     const rentTimeFromData = [...Array(25).keys()].map(i => i+"시");
     const rentTimeToData = [...Array(25).keys()].map(i => i+"시");
@@ -45,12 +45,14 @@ const HostRegistry3 = () => {
     const [isTrial, setIsTrial] = useState(false);
     const [isMorningDelivery, setIsMorningDelivery] = useState(false);
     const [isWorkIn, setIsWorkIn] = useState(false);
+
     let recommendedPrice = seat * 15000;
     let priceString = recommendedPrice.toString();
     let firstDigits = priceString.slice(0, -4);
     let randomFourDigits = Math.floor(1000 + Math.random() * 9000);
     let finalPrice = parseInt(firstDigits + randomFourDigits.toString());
     const formattedPrice = "₩" + finalPrice.toLocaleString();
+
     const onChangeFloor = useCallback((e) => {
         setExactFloor(e.target.value);
     }, []);
@@ -88,6 +90,8 @@ const HostRegistry3 = () => {
     const toggleSunDay = useCallback((e) => {
         setSunDay(!sunDay);
     }, [sunDay]);
+
+
     const handleButton = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
             && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
@@ -99,16 +103,24 @@ const HostRegistry3 = () => {
     }
 
     const submit = () => {
+        const rentDayString = [];
+        if (monDay) rentDayString.push("월");
+        if (tuesDay) rentDayString.push("화");
+        if (wednesDay) rentDayString.push("수");
+        if (thursDay) rentDayString.push("목");
+        if (friDay) rentDayString.push("금");
+        if (saturDay) rentDayString.push("토");
+        if (sunDay) rentDayString.push("일");
+        const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDays;
+
         navigate("/hostRegistry4",{
             state: {
                 ...data,
-                rentWeek: rentWeek,
-                rentTimeFrom: rentTimeFrom,
-                rentTimeTo: rentTimeTo,
-                floor: floor,
-                exactFloor: exactFloor,
-                parkAvaliable: parkAvaliable,
-                exactPark: exactPark,
+                rentWeek: rentData,
+                rentTimeFrom: rentTimeFrom !== "" ? rentTimeFrom.split("시")[0] : "",
+                rentTimeTo: rentTimeTo !== "" ? rentTimeFrom.split("시")[0] : "",
+                floor: floor === "직접입력" ? "지상"+exactFloor+"층" : floor,
+                parkAvaliable: parkAvaliable === "직접입력" ? exactPark + "대" : parkAvaliable,
                 elevator: elevator,
                 table: table,
                 seat: seat,
@@ -131,10 +143,9 @@ const HostRegistry3 = () => {
             <div>
                 <p>대관 가능일*</p>
                 <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"}/>
-                {rentWeek === "매월(직접지정)" ?
+                {rentWeek === "직접지정" ?
                     <DropDown dataArr={days} onChange={setRentDays} placeholder={"1일"}/> : (rentWeek !== "휴무없음" ?
                         <div>
-                            {/*Todo 버튼으로 rentDay 변경*/}
                             <div className={monDay ?"btn_selected" : ""} onClick={toggleMonday}>월</div>
                             <div className={tuesDay ?"btn_selected" : ""} onClick={toggleTuesDay}>화</div>
                             <div className={wednesDay ?"btn_selected" : ""} onClick={toggleWednesDay}>수</div>
@@ -175,7 +186,7 @@ const HostRegistry3 = () => {
                     <div>
                         <input onChange={onChangePark}/>
                         <p>대</p>
-                        {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요. 직접 입력의 층수는 '지상'으로 적용됩니다</p> : null}
+                        {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요.</p> : null}
                     </div>
                 ) : null}
             </div>
@@ -222,9 +233,7 @@ const HostRegistry3 = () => {
                 <p>가격 설정*</p>
                 <input style={{width: "90vw", height: "3vh", float: "left", marginRight: "2vw"}}
                        onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"}/>
-                <h3>
-                    {(seat===undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat<=10) ? "포 올 권장가격 : ₩150,000원" :"포 올 권장가격 :" + formattedPrice + "원"}
-                </h3>
+                <h3>{(seat===undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat<=10) ? "포 올 권장가격 : ₩150,000원" :"포 올 권장가격 :" + formattedPrice + "원"}</h3>
                 <p>포 올 권장가격보다 높이 측정할 경우, 원데이 오너들이 부담스럽게 느낄 수 있어요.</p>
             </div>
 

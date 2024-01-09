@@ -9,7 +9,6 @@ src/main/resources/static/static/js/main*
 #!**/src/main/**/build/
 #!**/src/test/**/build/
 ### STS ###
-.env
 .apt_generated
 .classpath
 .factorypath

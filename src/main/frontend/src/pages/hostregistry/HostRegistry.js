@@ -6,6 +6,7 @@ import ImageInputs from "../../components/ImageInputs";
 import {ModalStyles} from "../../components/ModalStyles";
 import DaumPost from "../../components/DaumPost";
 import {KitchenFeat} from "../../utils/enums";
+import ImageInput from "../../components/ImageInput";
 const HostRegistry = () => {
     const [inputCount, setInputCount] = useState(0);
     const [inputCount2, setInputCount2] = useState(0);
@@ -286,7 +287,7 @@ const HostRegistry = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenRepresent}/></span>
-                    <ImageInputs setImg={setImgRepresent} setHidden={setHiddenRepresent}/>
+                    <ImageInput setImg={setImgRepresent} setHidden={setHiddenRepresent}/>
                 </div>
             </div>
             <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>

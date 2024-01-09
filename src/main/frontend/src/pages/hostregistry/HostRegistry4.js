@@ -1,7 +1,7 @@
 import DropDown from "../../components/DropDown";
 import ImageInputs from "../../components/ImageInputs";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import Modal from "react-modal";
 
 const HostRegistry4 = () => {
@@ -11,7 +11,7 @@ const HostRegistry4 = () => {
 
     const firePitData = ["1개","2개","3개","4개","5개","6개","직접 입력"];
 
-    const [firePit, setFirePit] = useState();
+    const [firePit, setFirePit] = useState(firePitData[0]);
     const [exactFirePit, setExactFirePit] = useState();
     const [fryer, setFryer] = useState(false);
     const [oven, setOven] = useState(false);
@@ -19,13 +19,13 @@ const HostRegistry4 = () => {
     const [iceMaker, setIceMaker] = useState(false);
     const [someThing, setSomeThing] = useState(false);
     const [extraMachine, setExtraMachine] = useState("");
-    const [sidePlate, setSidePlate] = useState();
+    const [sidePlate, setSidePlate] = useState([]);
     const [countSidePlate, setCountSidePlate] = useState();
-    const [cup, setCup] = useState();
+    const [cup, setCup] = useState([]);
     const [countCup, setCountCup] = useState();
-    const [cuttrary, setCuttrary] = useState();
+    const [cuttrary, setCuttrary] = useState([]);
     const [countCuttrary, setCountCuttrary] = useState();
-    const [bat, setBat] = useState();
+    const [bat, setBat] = useState([]);
     const [countBat, setCountBat] = useState();
 
     const [hiddenSidePlate, setHiddenSidePlate] = useState(false);
@@ -81,19 +81,19 @@ const HostRegistry4 = () => {
         else setIsModalOpen(true);
     };
     const submit = () => {
+        const equip = [];
+        if (fryer) equip.push("튀김기");
+        if (oven) equip.push("오븐");
+        if (dishWasher) equip.push("식기세척기");
+        if (iceMaker) equip.push("제빙기");
         navigate("/hostRegistry5", {
             state: {
                 ...data,
-                firePit: firePit,
-                exactFirePit: exactFirePit,
-                fryer: fryer,
-                oven: oven,
-                dishWasher: dishWasher,
-                iceMaker: iceMaker,
-                someThing: someThing,
+                firePit: firePit === "직접 입력" ? exactFirePit : (data.firePit ? data.firePit.split("개")[0] : ""),
+                equip: equip.join(","),
                 extraMachine: extraMachine,
                 sidePlate: sidePlate,
-                countSidePlate: sidePlate,
+                countSidePlate: countSidePlate,
                 cup: cup,
                 countCup: countCup,
                 cuttrary: cuttrary,

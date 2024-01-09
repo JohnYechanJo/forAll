@@ -5,6 +5,7 @@ const ImageInputs = ({setImg, setHidden}) => {
     const imgRef = useRef();
     const saveImgFiles = (event) => {
         setImgFiles([...event.target.files].map(file => URL.createObjectURL(file)));
+        setImg([...event.target.files]);
     };
     const onUploadImgButtonClick = useCallback(() => {
         if (!imgRef.current) {

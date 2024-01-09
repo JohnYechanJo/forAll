@@ -9,7 +9,6 @@ const HostRegistry6 =() => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
-
     const bankDatas = ["한국은행", "KB국민은행", "신한은행", "우리은행", "하나은행", "SC제일은행", "한국씨티은행", "케이뱅크", "카카오뱅크", "토스뱅크", "한국산업은행", "중소기업은행", "한국수출은행", "NH농협은행", "수협은행", "대구은행", "부산은행", "경남은행", "광주은행", "전북은행", "제주은행"];
     const [bank, setBank] = useState(bankDatas[0]);
     const [account, setAccount] = useState("");
@@ -40,7 +39,7 @@ const HostRegistry6 =() => {
         const hallFront = await ImageUploader(data.imgFront, userId);
         const hallBack = await ImageUploader(data.imgBack, userId);
         const hallEntire = await ImageUploader(data.imgAll, userId);
-        //hallExtra
+        const hallExtra = await Promise.all(data.imgAdditional.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
 
         //주방 이미지들
         const kitRight = await ImageUploader(data.kitchenRight, userId);
@@ -48,22 +47,14 @@ const HostRegistry6 =() => {
         const kitFront = await ImageUploader(data.kitchenFront, userId);
         const kitBack = await ImageUploader(data.kitchenBack, userId);
         const kitEntire = await ImageUploader(data.kitchenAll, userId);
-        //kitExtra
+        const kitExtra = await Promise.all(data.kitchenAdditional.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
 
-        //menu
+        const menu = await Promise.all([data.menu1, data.menu2, data.menu3, data.menu4, ...data.menuAdditional].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
 
-
-        const ableStartHour = data.rentTimeFrom ? data.rentTimeFrom.split("시")[0] : "";
-        const ableFinHour = data.rentTimeTo ? data.rentTimeTo.split("시")[0] : "";
-        // const floorNum = data.floor ?
-        const fireholeNum = data.firePit ? data.firePit.split("개")[0] : "";
-        //주방 기계
-        const equip = "";
-
-        //sideplate
-        //cup
-        //cuttrary
-        //bat
+        const plateImage = await Promise.all(data.sidePlate.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const cupImage = await Promise.all(data.cup.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const cutleryImage = await Promise.all(data.cuttrary.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const vatImage = await Promise.all(data.bat.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
 
         const businessNum = data.registNum1 + data.registNum2 + data.registNum3;
         const businessImage = await ImageUploader(data.license, userId);
@@ -71,12 +62,12 @@ const HostRegistry6 =() => {
         const payEmail = data.email1 + "@" + data.email2;
         const payPhoneNum = data.phone1 + data.phone2 + data.phone3;
 
-        axios.post("/api/v1/space", {
+        await axios.post("/api/v1/space", {
             userId : userId,
             name : data.placeName,
             spaceBrief: data.placeIntro,
             spaceIntro: data.placeIntroDetail,
-            kitchenFeat: data.kitchen, // 설정
+            kitchenFeat: data.kitchen,
             address: data.fullAddress,
             addressBrief: data.placeInfo,
             website: data.webSite,
@@ -86,14 +77,17 @@ const HostRegistry6 =() => {
             hallFront: hallFront,
             hallBack: hallBack,
             hallEntire: hallEntire,
+            hallExtra: hallExtra,
             kitRight: kitRight,
             kitLeft: kitLeft,
             kitFront: kitFront,
             kitBack: kitBack,
             kitEntire: kitEntire,
-            ableDate: data.rentWeek, //날짜 정리
-            ableStartHour: ableStartHour,
-            ableFinHour: ableFinHour,
+            kitExtra: kitExtra,
+            menu: menu,
+            ableDate: data.rentWeek,
+            ableStartHour: data.rentTimeFrom,
+            ableFinHour: data.rentTimeTo,
             floorNum: data.floor,
             ableParking: data.parkAvaliable,
             haveElevator: data.elevator,
@@ -104,12 +98,16 @@ const HostRegistry6 =() => {
             ableEarlyDeliver: data.morningDelivery,
             ableWorkIn: data.workIn,
             ableDrink: data.alcohol,
-            fireholeNum: fireholeNum,
-            equip: equip,
+            fireholeNum: data.firePit,
+            equip: data.equip,
             equipExtra: data.extraMachine,
+            plateImage: plateImage,
             plateNum: data.countSidePlate,
+            cupImage: cupImage,
             cupNum: data.countCup,
+            cutleryImage: cutleryImage,
             cutleryNum: data.countCuttrary,
+            vatImage: vatImage,
             vatNum: data.countBat,
             payWay: data.payment,
             companyName: data.tradeName,
@@ -118,11 +116,10 @@ const HostRegistry6 =() => {
             businessImage: businessImage,
             businessAddress: businessAddress,
             payEmail: payEmail,
-            payPhoneNum: payPhoneNum
-
-
-
-
+            payPhoneNum: payPhoneNum,
+            bankName: bank,
+            accountNum: account,
+            accountHolder: accountHolder,
         })
             .then((res) => console.log(res))
             .catch((err) => console.error(err));
