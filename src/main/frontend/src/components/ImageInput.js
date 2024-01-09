@@ -4,11 +4,10 @@ const ImageInput = ({setImg, setHidden}) => {
     const [imgFile, setImgFile] = useState("");
     const imgRef = useRef();
     const saveImgFile = () => {
-        console.log(imgRef.current);
         const file = imgRef.current.files[0];
         const reader = new FileReader();
         reader.readAsDataURL(file);
-
+        setImg(imgRef.current.files[0]);
         reader.onloadend = () => {
             setImgFile(reader.result);
         }
@@ -20,10 +19,6 @@ const ImageInput = ({setImg, setHidden}) => {
         imgRef.current.click();
         if (setHidden) setHidden(true);
     },[]);
-
-    useEffect(() => {
-        setImg(imgFile);
-    }, [imgFile]);
     return (
         <div>
             <label>
