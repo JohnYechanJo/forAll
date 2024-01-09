@@ -18,8 +18,15 @@ const HostRegistry3 = () => {
     const floorData = ["지상1층", "지상2층", "지상3층", "지하1층", "지하2층", "지하3층", "직접 입력"];
     const parkAvaliableData = ["주차불가", "1대", "2대", "3대", "4대", "직접 입력"];
 
-    const [rentWeek, setRentWeek] = useState("");
-    const [rentDays, setRentDays] = useState([]);
+    const [rentWeek, setRentWeek] = useState(rentWeeksData[0]);
+    const [rentDays, setRentDays] = useState();
+    const [monDay, setMonDay] = useState(false);
+    const [tuesDay, setTuesDay] = useState(false);
+    const [wednesDay, setWednesDay] = useState(false);
+    const [thursDay, setThursDay] = useState(false);
+    const [friDay, setFriDay] = useState(false);
+    const [saturDay, setSaturDay] = useState(false);
+    const [sunDay, setSunDay] = useState(false);
     const [rentTimeFrom, setRentTimeFrom] = useState("");
     const [rentTimeTo, setRentTimeTo] = useState("");
     const [floor, setFloor] = useState("");
@@ -54,6 +61,29 @@ const HostRegistry3 = () => {
     const onChangePrice = useCallback((e) => {
         setPrice(e.target.value);
     }, []);
+
+    const toggleMonday = useCallback((e) => {
+        setMonDay(!monDay);
+    }, [monDay]);
+    const toggleTuesDay = useCallback((e) => {
+        setTuesDay(!tuesDay);
+    }, [tuesDay]);
+    const toggleWednesDay = useCallback((e) => {
+        setWednesDay(!wednesDay);
+    }, [wednesDay]);
+    const toggleThursDay = useCallback((e) => {
+        setThursDay(!thursDay);
+    }, [thursDay]);
+    const toggleFriDay = useCallback((e) => {
+        setFriDay(!friDay);
+    }, [friDay]);
+    const toggleSaturDay = useCallback((e) => {
+        setSaturDay(!saturDay);
+    }, [saturDay]);
+    const toggleSunDay = useCallback((e) => {
+        setSunDay(!sunDay);
+    }, [sunDay]);
+
 
     const handleButton = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
@@ -99,16 +129,16 @@ const HostRegistry3 = () => {
                 <p>대관 가능일*</p>
                 <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"}/>
                 {rentWeek === "매월(직접지정)" ?
-                    <DropDown dataArr={days} onChange={setRentDays} placeholder={"1일"}/> : (rentWeek !== "" ?
+                    <DropDown dataArr={days} onChange={setRentDays} placeholder={"1일"}/> : (rentWeek !== "휴무없음" ?
                         <div>
                             {/*Todo 버튼으로 rentDay 변경*/}
-                            <button>월</button>
-                            <button>화</button>
-                            <button>수</button>
-                            <button>목</button>
-                            <button>금</button>
-                            <button>토</button>
-                            <button>일</button>
+                            <div className={monDay ?"btn_selected" : ""} onClick={toggleMonday}>월</div>
+                            <div className={tuesDay ?"btn_selected" : ""} onClick={toggleTuesDay}>화</div>
+                            <div className={wednesDay ?"btn_selected" : ""} onClick={toggleWednesDay}>수</div>
+                            <div className={thursDay ?"btn_selected" : ""} onClick={toggleThursDay}>목</div>
+                            <div className={friDay ?"btn_selected" : ""} onClick={toggleFriDay}>금</div>
+                            <div className={saturDay ?"btn_selected" : ""} onClick={toggleSaturDay}>토</div>
+                            <div className={sunDay ?"btn_selected" : ""} onClick={toggleSunDay}>일</div>
                         </div>
                         : null)}
             </div>
@@ -333,7 +363,7 @@ const HostRegistry3 = () => {
             </div>
 
             <div>
-                <Link to="/hostRegistry">
+                <Link to="/hostRegistry2">
                     <button>이전</button>
                 </Link>
                 <button onClick={handleButton}>다음</button>
