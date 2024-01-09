@@ -2,7 +2,7 @@ import DropDown from "../../components/DropDown";
 import {useCallback, useState} from "react";
 import {Form, Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
-import ImageUploader from "../utils/imageUploader";
+import ImageUploader from "../../utils/imageUploader";
 
 const HostRegistry6 =() => {
     const location = useLocation();

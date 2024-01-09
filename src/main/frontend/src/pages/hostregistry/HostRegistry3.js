@@ -38,7 +38,6 @@ const HostRegistry3 = () => {
     const [isTrial, setIsTrial] = useState(false);
     const [isMorningDelivery, setIsMorningDelivery] = useState(false);
     const [isWorkIn, setIsWorkIn] = useState(false);
-
     const onChangeFloor = useCallback((e) => {
         setExactFloor(e.target.value);
     }, []);
