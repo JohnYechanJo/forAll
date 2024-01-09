@@ -4,6 +4,8 @@ import "../../style/btnStyles.css";
 import ImageInput from "../../components/ImageInput";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
+import {ModalStyles} from "../../components/ModalStyles";
+import "../../components/Styles.css";
 const HostRegistry3 = () => {
     const location = useLocation();
     const data = {...location.state};
@@ -33,7 +35,9 @@ const HostRegistry3 = () => {
     const [workIn, setWorkIn] = useState();
     const [alcohol, setAlcohol] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [isTrial, setIsTrial] = useState(false);
+    const [isMorningDelivery, setIsMorningDelivery] = useState(false);
+    const [isWorkIn, setIsWorkIn] = useState(false);
 
     const onChangeFloor = useCallback((e) => {
         setExactFloor(e.target.value);
@@ -84,32 +88,41 @@ const HostRegistry3 = () => {
         });
     };
     return (
-        <div>
+        <div style={{
+            display: "flex",
+            marginLeft: "2vw",
+            flexDirection: "column",
+        }}>
             <h1>2. 이용 안내</h1>
             <p>이용 정보를 입력해주세요</p>
             <div>
                 <p>대관 가능일*</p>
                 <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"}/>
-                {rentWeek === "매월(직접지정)" ? <DropDown dataArr={days} onChange={setRentDays} placeholder={"1일"}/> : (rentWeek !== "" ?
-                    <div>
-                        {/*Todo 버튼으로 rentDay 변경*/}
-                        <button>월</button>
-                        <button>화</button>
-                        <button>수</button>
-                        <button>목</button>
-                        <button>금</button>
-                        <button>토</button>
-                        <button>일</button>
-                    </div>
-                    : null)}
+                {rentWeek === "매월(직접지정)" ?
+                    <DropDown dataArr={days} onChange={setRentDays} placeholder={"1일"}/> : (rentWeek !== "" ?
+                        <div>
+                            {/*Todo 버튼으로 rentDay 변경*/}
+                            <button>월</button>
+                            <button>화</button>
+                            <button>수</button>
+                            <button>목</button>
+                            <button>금</button>
+                            <button>토</button>
+                            <button>일</button>
+                        </div>
+                        : null)}
             </div>
-            <div>
-                <p>이용시간*</p>
-                <p>전일</p>
-                <DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"}/>
-                <p>부터, 당일</p>
-                <DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} />
-                <p>까지</p>
+            <p>이용시간*</p>
+            <div style={{
+                display: "flex",
+                justifyContent: "left",
+                alignItems: "center",
+            }}>
+                <span>전일 </span>
+                <span><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"}/></span>
+                <span> 부터, 당일 </span>
+                <span><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"}/></span>
+                <span> 까지</span>
             </div>
             <div>
                 <p>공간 층수*</p>
@@ -129,59 +142,200 @@ const HostRegistry3 = () => {
                     <div>
                         <input onChange={onChangePark}/>
                         <p>대</p>
-                        {exactPark < 5  ? <p>5 이상의 숫자만 입력하여 주세요. 직접 입력의 층수는 '지상'으로 적용됩니다</p> : null}
+                        {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요. 직접 입력의 층수는 '지상'으로 적용됩니다</p> : null}
                     </div>
                 ) : null}
             </div>
-            <div>
-                <p>엘리베이터 여부*</p>
-                <div className={elevator === true ? "btn_selected" : ""} onClick={() => setElevator(true)}>있음</div>
-                <div className={elevator === false? "btn_selected" : ""} onClick={() => setElevator(false)}>없음</div>
+            <p>엘리베이터 여부*</p>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+
+            }}>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }} className={elevator === true ? "btn_selected" : ""} onClick={() => setElevator(true)}>있음
+                </div>
+
+                <div
+                    style={{
+                        border: "2px solid lightgray",
+                        borderRadius: "0.5px",
+                        width: "47vw",
+                        height: "3vh",
+                        textAlign: "center",
+                        fontFamily: "Noto Sans KR",
+                    }}
+                    className={elevator === false ? "btn_selected" : ""} onClick={() => setElevator(false)}>없음
+                </div>
             </div>
             <div>
                 <p>테이블</p>
-                <input onChange={onChangeTable} placeholder={"최대 테이블 수를 기준으로 입력해주세요"}/>
+                <input style={{width: "90vw", height: "3vh", float: "left"}} onChange={onChangeTable}
+                       placeholder={"최대 테이블 수를 기준으로 입력해주세요"}/>
             </div>
             <div>
                 <p>좌석수</p>
-                <input onChange={onChangeSeat} placeholder={"최대 좌석수를 기준으로 입력해주세요"}/>
+                <input style={{width: "90vw", height: "3vh", float: "left"}} onChange={onChangeSeat}
+                       placeholder={"최대 좌석수를 기준으로 입력해주세요"}/>
             </div>
             <div>
                 <p>가격 설정*</p>
-                <input onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"}/>
-                <h1>포올 권장 가격: {seat}개 * 1,5000={seat ? seat*15000 : 0}</h1>
+                <input style={{width: "90vw", height: "3vh", float: "left", marginRight: "2vw"}}
+                       onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"}/>
+                <h3>포올 권장 가격: {seat}개 * 15,000={seat ? seat * 15000 : 0}</h3>
                 <p>포 올 권장가격보다 높이 측정할 경우, 원데이 오너들이 부담스럽게 느낄 수 있어요.</p>
             </div>
 
             <div>
                 <p>가능 여부*</p>
             </div>
-            <div>
-                <p>트라이얼</p>
-                <div className={trial === true ? "btn_selected" : ""} onClick={() => setTrial(true)}>가능</div>
-                <div className={trial === false? "btn_selected" : ""} onClick={() => setTrial(false)}>불가</div>
-                <p>트라이얼이란?</p>
+            <p>트라이얼</p>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+
+            }}>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={trial === true ? "btn_selected" : ""} onClick={() => setTrial(true)}>가능
+                </div>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={trial === false ? "btn_selected" : ""} onClick={() => setTrial(false)}>불가
+                </div>
             </div>
-            <div>
-                <p>재료 새벽 배달*</p>
-                <div className={morningDelivery === true ? "btn_selected" : ""} onClick={() => setMorningDelivery(true)}>가능</div>
-                <div className={morningDelivery === false? "btn_selected" : ""} onClick={() => setMorningDelivery(false)}>불가</div>
-                <p>새벽배달이란?</p>
+            <Modal isOpen={isTrial} style={ModalStyles} >
+                <header>트라이얼이란?</header>
+                <button onClick={()=>setIsTrial(false)} >닫기</button>
+            </Modal>
+            <button onClick={() => setIsTrial(!isTrial)}
+                    className="detail"
+            >• 트라이얼이란?</button>
+            <p>재료 새벽 배달*</p>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+
+            }}>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={morningDelivery === true ? "btn_selected" : ""}
+                     onClick={() => setMorningDelivery(true)}>가능
+                </div>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={morningDelivery === false ? "btn_selected" : ""}
+                     onClick={() => setMorningDelivery(false)}>불가
+                </div>
             </div>
-            <div>
-                <p>위크인*</p>
-                <div className={workIn === true ? "btn_selected" : ""} onClick={() => setWorkIn(true)}>가능</div>
-                <div className={workIn === false? "btn_selected" : ""} onClick={() => setWorkIn(false)}>불가</div>
-                <p>워크인이란?</p>
+            <Modal isOpen={isMorningDelivery} style={ModalStyles} >
+                <header>새벽배달이란?</header>
+                <button onClick={()=>setIsMorningDelivery(false)} >닫기</button>
+            </Modal>
+            <button onClick={() => setIsMorningDelivery(!isMorningDelivery)}
+                    className="detail"
+            >• 새벽배달이란?</button>
+            <p>워크인*</p>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+
+            }}>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={workIn === true ? "btn_selected" : ""} onClick={() => setWorkIn(true)}>가능
+                </div>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={workIn === false ? "btn_selected" : ""} onClick={() => setWorkIn(false)}>불가
+                </div>
             </div>
-            <div>
-                <p>주류판매 가능여부*</p>
-                <div className={alcohol === true ? "btn_selected" : ""} onClick={() => setAlcohol(true)}>가능</div>
-                <div className={alcohol === false? "btn_selected" : ""} onClick={() => setAlcohol(false)}>불가</div>
+            <Modal isOpen={isWorkIn} style={ModalStyles} >
+                <header>워크인이란?</header>
+                <button onClick={()=>setIsWorkIn(false)} >닫기</button>
+            </Modal>
+            <button onClick={() => setIsWorkIn(!isWorkIn)}
+                    className="detail"
+            >• 워크인이란?</button>
+            <p>주류판매 가능여부*</p>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+
+            }}>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={alcohol === true ? "btn_selected" : ""} onClick={() => setAlcohol(true)}>가능
+                </div>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={alcohol === false ? "btn_selected" : ""} onClick={() => setAlcohol(false)}>불가
+                </div>
             </div>
-            
+
             <div>
-                <Link to="/hostRegistry"><button>이전</button></Link>
+                <Link to="/hostRegistry">
+                    <button>이전</button>
+                </Link>
                 <button onClick={handleButton}>다음</button>
             </div>
             <Modal isOpen={isModalOpen} ariaHideApp={false}>

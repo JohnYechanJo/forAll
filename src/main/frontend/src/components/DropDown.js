@@ -11,7 +11,9 @@ const DropDown = ({dataArr, onChange, placeholder}) => {
     };
     return (
         <div>
-            <select onChange={onChangeData} placeholder={placeholder}>
+            <select onChange={onChangeData} placeholder={placeholder}
+                    style={{width: "100%", height: "3vh", fontSize: "1.5vh", fontFamily: "Noto Sans KR"}}
+            >
                 {dataArr.map(data => (
                     <option key={data} value={data}>
                         {data}

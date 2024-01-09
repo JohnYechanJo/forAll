@@ -40,6 +40,7 @@ const HostRegistry2 = () => {
     const [hiddenMenu4, setHiddenMenu4] = useState(false);
     const [hiddenMenuAdditional, setHiddenMenuAdditional] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen2, setIsModalOpen2] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
     const data = {...location.state};
@@ -179,6 +180,19 @@ const HostRegistry2 = () => {
             <div>
                 <h4>메뉴 사진</h4>
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
+                <button style={{border:"none",
+                    backgroundColor:"white",
+                    color:"gray",
+                    fontSize:"10px",
+                    marginTop:"0",
+                    textUnderlineOffset:"auto",
+                    textDecoration:"underline gray",
+                    }} onClick={() => {setIsModalOpen2(true)}}
+                ><h5>메뉴 사진이 왜 필요한가요?</h5></button>
+                <Modal isOpen={isModalOpen2} style={ModalStyles} ariaHideApp={false}>
+                    <h3>내용</h3>
+                    <button onClick={()=>setIsModalOpen2(false)}>닫기</button>
+                </Modal>
                 <h4>메뉴 1</h4>
                 <div>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
