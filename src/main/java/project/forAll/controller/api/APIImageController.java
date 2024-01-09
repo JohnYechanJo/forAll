@@ -12,7 +12,6 @@ import project.forAll.domain.member.AuthenticationData;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.space.Space;
 import project.forAll.domain.space.image.KitImage;
-import project.forAll.form.ImageForm;
 import project.forAll.service.AuthenticationDataService;
 import project.forAll.service.ImageService;
 import project.forAll.service.MemberService;

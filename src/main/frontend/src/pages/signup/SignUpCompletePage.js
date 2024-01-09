@@ -6,6 +6,10 @@ const SignUpCompletePage = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
+
+    sessionStorage.setItem("user_id", data.id);
+    sessionStorage.setItem("role", data.role);
+
     return (
         <div>
             <Header PageName={"04. 가입 완료"}/>
@@ -17,7 +21,6 @@ const SignUpCompletePage = () => {
             <h1>{data.role === user_role["GUEST"] ? <button onClick={()=>{navigate("/guestRegistryStart");}} >프로필 등록</button> : <button onClick={()=>{navigate("/hostRegistryStart");}} >공간등록 화면으로</button>}</h1>
             <h1>아이디 {data.id}</h1>
             <h1>이메일 {data.email}</h1>
-            {/*시작하기 하면 로그인화면으로 갈지, 바로 로그인 할지*/}
         </div>
     )
 };
