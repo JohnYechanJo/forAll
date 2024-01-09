@@ -6,6 +6,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
 import "../../components/Styles.css";
+import MultipleDatePicker from "react-multiple-datepicker";
 const HostRegistry3 = () => {
     const location = useLocation();
     const data = {...location.state};
@@ -19,7 +20,7 @@ const HostRegistry3 = () => {
     const parkAvaliableData = ["주차불가", "1대", "2대", "3대", "4대", "직접 입력"];
 
     const [rentWeek, setRentWeek] = useState(rentWeeksData[0]);
-    const [rentDays, setRentDays] = useState();
+    const [rentDays, setRentDays] = useState([]);
     const [monDay, setMonDay] = useState(false);
     const [tuesDay, setTuesDay] = useState(false);
     const [wednesDay, setWednesDay] = useState(false);
@@ -111,7 +112,8 @@ const HostRegistry3 = () => {
         if (friDay) rentDayString.push("금");
         if (saturDay) rentDayString.push("토");
         if (sunDay) rentDayString.push("일");
-        const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDays;
+        const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",")
+        const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDaysdata;
 
         navigate("/hostRegistry4",{
             state: {
@@ -132,6 +134,9 @@ const HostRegistry3 = () => {
             }
         });
     };
+    useEffect(() => {
+        console.log(rentDays.toString());
+    }, [rentDays]);
     return (
         <div style={{
             display: "flex",
@@ -144,7 +149,7 @@ const HostRegistry3 = () => {
                 <p>대관 가능일*</p>
                 <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"}/>
                 {rentWeek === "직접지정" ?
-                    <DropDown dataArr={days} onChange={setRentDays} placeholder={"1일"}/> : (rentWeek !== "휴무없음" ?
+                     <MultipleDatePicker onSubmit={setRentDays}/>: (rentWeek !== "휴무없음" ?
                         <div>
                             <div className={monDay ?"btn_selected" : ""} onClick={toggleMonday}>월</div>
                             <div className={tuesDay ?"btn_selected" : ""} onClick={toggleTuesDay}>화</div>
