@@ -23,6 +23,7 @@ import HostRegistry4 from "./pages/hostregistry/HostRegistry4";
 import HostRegistry6 from "./pages/hostregistry/HostRegistry6";
 import GuestRegistryStart from "./pages/guestregistry/GuestRegistryStart";
 import GuestRegistry from "./pages/guestregistry/GuestRegistry";
+import LoginHandeler from "./pages/LoginHandeler";
 function App() {
   return (
       <Routes>
@@ -39,9 +40,9 @@ function App() {
           <Route path="/placeInfoModify" element={<PlaceInfoModifyPage />} />
           <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
           <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
-              <Route path="/hostRegistry" element={<HostRegistry />} />
-              <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
-              <Route path="/hostRegistry2" element={<HostRegistry2 />} />
+          <Route path="/hostRegistry" element={<HostRegistry />} />
+          <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
+          <Route path="/hostRegistry2" element={<HostRegistry2 />} />
           <Route path="/hostRegistry3" element={<HostRegistry3 />}/>
           <Route path="/hostRegistry4" element={<HostRegistry4 />}/>
           <Route path="/hostRegistry5" element={<HostRegistry5 />}/>
@@ -49,7 +50,8 @@ function App() {
           <Route path="/error" element={<ErrorPage />}/>
           <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
           <Route path="/guestRegistryStart" element={<GuestRegistryStart />}/>
-            <Route path="/guestRegistry" element={<GuestRegistry />}/>
+          <Route path="/guestRegistry" element={<GuestRegistry />}/>
+          <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
       </Routes>
   );
 }
