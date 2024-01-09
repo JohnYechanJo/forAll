@@ -34,7 +34,7 @@ public class APILoginController extends APIController {
             sessionManager.createSession(loginMember.getLoginId(), response);
 
             return new ResponseEntity(loginMember, HttpStatus.OK);
-        }catch(final Exception e){
+        } catch (final Exception e) {
             return new ResponseEntity(errorResponse("Could not find member : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
