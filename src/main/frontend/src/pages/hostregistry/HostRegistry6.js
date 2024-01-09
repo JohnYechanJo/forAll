@@ -2,7 +2,8 @@ import DropDown from "../../components/DropDown";
 import {useCallback, useState} from "react";
 import {Form, Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
-import ImageUploader from "../utils/imageUploader";
+import ImageUploader from "../../utils/imageUploader";
+import axios from "axios";
 
 const HostRegistry6 =() => {
     const location = useLocation();
@@ -16,7 +17,7 @@ const HostRegistry6 =() => {
     const [isAgree, setIsAgree] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-
+    console.log(data);
     const onChangeAccount = useCallback((e) => {
         setAccount(e.target.value);
     }, []);
@@ -30,8 +31,101 @@ const HostRegistry6 =() => {
         else setIsModalOpen(true);
     };
     const submit = async () => {
-        const log = await ImageUploader(data.license, sessionStorage.getItem("user_id"));
-        console.log(log);
+        const userId = sessionStorage.getItem("user_id");
+        // 대표 이미지
+        const imgRepresent = await ImageUploader(data.imgRepresent, userId) ;
+        //홀 이미지들
+        const hallRight = await ImageUploader(data.imgRight, userId);
+        const hallLeft = await ImageUploader(data.imgLeft, userId);
+        const hallFront = await ImageUploader(data.imgFront, userId);
+        const hallBack = await ImageUploader(data.imgBack, userId);
+        const hallEntire = await ImageUploader(data.imgAll, userId);
+        //hallExtra
+
+        //주방 이미지들
+        const kitRight = await ImageUploader(data.kitchenRight, userId);
+        const kitLeft = await ImageUploader(data.kitchenLeft, userId);
+        const kitFront = await ImageUploader(data.kitchenFront, userId);
+        const kitBack = await ImageUploader(data.kitchenBack, userId);
+        const kitEntire = await ImageUploader(data.kitchenAll, userId);
+        //kitExtra
+
+        //menu
+
+
+        const ableStartHour = data.rentTimeFrom ? data.rentTimeFrom.split("시")[0] : "";
+        const ableFinHour = data.rentTimeTo ? data.rentTimeTo.split("시")[0] : "";
+        // const floorNum = data.floor ?
+        const fireholeNum = data.firePit ? data.firePit.split("개")[0] : "";
+        //주방 기계
+        const equip = "";
+
+        //sideplate
+        //cup
+        //cuttrary
+        //bat
+
+        const businessNum = data.registNum1 + data.registNum2 + data.registNum3;
+        const businessImage = await ImageUploader(data.license, userId);
+        const businessAddress = data.address + data.exactAddress;
+        const payEmail = data.email1 + "@" + data.email2;
+        const payPhoneNum = data.phone1 + data.phone2 + data.phone3;
+
+        axios.post("/api/v1/space", {
+            userId : userId,
+            name : data.placeName,
+            spaceBrief: data.placeIntro,
+            spaceIntro: data.placeIntroDetail,
+            kitchenFeat: data.kitchen, // 설정
+            address: data.fullAddress,
+            addressBrief: data.placeInfo,
+            website: data.webSite,
+            mainImage: imgRepresent,
+            hallRight: hallRight,
+            hallLeft: hallLeft,
+            hallFront: hallFront,
+            hallBack: hallBack,
+            hallEntire: hallEntire,
+            kitRight: kitRight,
+            kitLeft: kitLeft,
+            kitFront: kitFront,
+            kitBack: kitBack,
+            kitEntire: kitEntire,
+            ableDate: data.rentWeek, //날짜 정리
+            ableStartHour: ableStartHour,
+            ableFinHour: ableFinHour,
+            floorNum: data.floor,
+            ableParking: data.parkAvaliable,
+            haveElevator: data.elevator,
+            tableNum: data.table,
+            seatNum: data.seat,
+            priceSet: data.price,
+            ableTrial: data.trial,
+            ableEarlyDeliver: data.morningDelivery,
+            ableWorkIn: data.workIn,
+            ableDrink: data.alcohol,
+            fireholeNum: fireholeNum,
+            equip: equip,
+            equipExtra: data.extraMachine,
+            plateNum: data.countSidePlate,
+            cupNum: data.countCup,
+            cutleryNum: data.countCuttrary,
+            vatNum: data.countBat,
+            payWay: data.payment,
+            companyName: data.tradeName,
+            ceoName: data.representative,
+            businessNum: businessNum,
+            businessImage: businessImage,
+            businessAddress: businessAddress,
+            payEmail: payEmail,
+            payPhoneNum: payPhoneNum
+
+
+
+
+        })
+            .then((res) => console.log(res))
+            .catch((err) => console.error(err));
 
     };
     return (

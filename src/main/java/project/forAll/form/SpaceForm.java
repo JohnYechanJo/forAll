@@ -121,7 +121,7 @@ public class SpaceForm {
     // 사업자 주소
     private String businessAddress;
     // 정산용 이메일
-    private String payEamil;
+    private String payEmail;
     // 정산용 연락처
     private String payPhoneNum;
 
