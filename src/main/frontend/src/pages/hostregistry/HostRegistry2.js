@@ -2,6 +2,7 @@ import {useState} from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
+import ImageInputs from "../../components/ImageInputs";
 import ImageInput from "../../components/ImageInput";
 import {ModalStyles} from "../../components/ModalStyles";
 const HostRegistry2 = () => {
@@ -128,7 +129,7 @@ const HostRegistry2 = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenAdditional}/></span>
-                    <ImageInput setImg={setImgAdditional} setHidden={setHiddenAdditional}/>
+                    <ImageInputs setImg={setImgAdditional} setHidden={setHiddenAdditional}/>
                 </div>
             </div>
             <div>
@@ -174,7 +175,7 @@ const HostRegistry2 = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenKAdditional}/></span>
-                    <ImageInput setImg={setKitchenAdditional} setHidden={setHiddenKAdditional}/>
+                    <ImageInputs setImg={setKitchenAdditional} setHidden={setHiddenKAdditional}/>
                 </div>
             </div>
             <div>
@@ -226,7 +227,7 @@ const HostRegistry2 = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenMenuAdditional}/></span>
-                    <ImageInput setImg={setMenuAdditional} setHidden={setHiddenMenuAdditional}/>
+                    <ImageInputs setImg={setMenuAdditional} setHidden={setHiddenMenuAdditional}/>
                 </div>
             </div>
             <div style={{display: "flex",justifyContent:"center", marginBottom:"6vh",marginTop:"3vh"}}>

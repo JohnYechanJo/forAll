@@ -1,7 +1,7 @@
 import DropDown from "../../components/DropDown";
 import {useCallback, useEffect, useState} from "react";
 import "../../style/btnStyles.css";
-import ImageInput from "../../components/ImageInput";
+import ImageInputs from "../../components/ImageInputs";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";

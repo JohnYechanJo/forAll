@@ -1,16 +1,10 @@
 import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
-const ImageInput = ({setImg, setHidden}) => {
-    const [imgFile, setImgFile] = useState("");
+const ImageInputs = ({setImg, setHidden}) => {
+    const [imgFiles, setImgFiles] = useState([]);
     const imgRef = useRef();
-    const saveImgFile = () => {
-        const file = imgRef.current.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        setImg(imgRef.current.files[0]);
-        reader.onloadend = () => {
-            setImgFile(reader.result);
-        }
+    const saveImgFiles = (event) => {
+        setImgFiles([...event.target.files].map(file => URL.createObjectURL(file)));
     };
     const onUploadImgButtonClick = useCallback(() => {
         if (!imgRef.current) {
@@ -24,19 +18,21 @@ const ImageInput = ({setImg, setHidden}) => {
             <label>
                 <input type={"file"}
                        accept="image/*"
-                       onChange={() =>saveImgFile()}
+                       multiple
+                       onChange={saveImgFiles}
                        ref={imgRef}
                        style={{ float:"right",  display: "none"}}
                 /><button className="button" style={{fontSize:"10px",backgroundColor:"black",width:"19vw",height:"4vh",padding:"10px 10px", float:"right", marginLeft:"1vw"}} onClick={onUploadImgButtonClick} >파일 첨부</button>
             </label>
-            {imgFile ?
-                <img className="image"
+            {imgFiles.map((imgFile, index) => (
+                <img key={index}
+                     className="image"
                      src={imgFile}
-                     alt={"image"}
-                /> : null
-            }
+                     alt={`image ${index}`}
+                />
+            ))}
         </div>
     )
 };
 
-export default ImageInput;
+export default ImageInputs;

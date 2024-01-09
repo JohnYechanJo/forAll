@@ -1,7 +1,7 @@
 import {useState} from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import ImageInput from "../../components/ImageInput";
+import ImageInputs from "../../components/ImageInputs";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
 const GuestRegistry = () => {
@@ -115,7 +115,7 @@ const GuestRegistry = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hidden}/></span>
-                <ImageInput setImg={setProfileImage} setHidden={setHidden}/>
+                <ImageInputs setImg={setProfileImage} setHidden={setHidden}/>
             </p>
             <textarea placeholder={text1} className="white-space"
                       style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR"}}/>

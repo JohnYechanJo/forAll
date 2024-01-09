@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
-import ImageInput from "../../components/ImageInput";
+import ImageInputs from "../../components/ImageInputs";
 import {ModalStyles} from "../../components/ModalStyles";
 import DaumPost from "../../components/DaumPost";
 import {KitchenFeat} from "../../utils/enums";
@@ -286,7 +286,7 @@ const HostRegistry = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenRepresent}/></span>
-                    <ImageInput setImg={setImgRepresent} setHidden={setHiddenRepresent}/>
+                    <ImageInputs setImg={setImgRepresent} setHidden={setHiddenRepresent}/>
                 </div>
             </div>
             <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>

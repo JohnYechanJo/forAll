@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
-import ImageInput from "../../components/ImageInput";
+import ImageInputs from "../../components/ImageInputs";
 import DropDown from "../../components/DropDown";
 import DaumPost from "../../components/DaumPost";
 import Modal from "react-modal";
@@ -139,7 +139,7 @@ const HostRegistry5 = () => {
                 <div>
                     <p>사업자 등록증 첨부*</p>
                     <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenLicense}/>
-                    <ImageInput setImg={setLicense} setHidden={setHiddenLicense}/>
+                    <ImageInputs setImg={setLicense} setHidden={setHiddenLicense}/>
                 </div>
                 <div>
                     <p>사업장 주소*</p>
