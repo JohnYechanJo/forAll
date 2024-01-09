@@ -1,10 +1,11 @@
-import {useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
 import ImageInput from "../../components/ImageInput";
 import {ModalStyles} from "../../components/ModalStyles";
 import DaumPost from "../../components/DaumPost";
+import {KitchenFeat} from "../../utils/enums";
 const HostRegistry = () => {
     const [inputCount, setInputCount] = useState(0);
     const [inputCount2, setInputCount2] = useState(0);
@@ -13,7 +14,7 @@ const HostRegistry = () => {
     const [placeName, setPlaceName] = useState("");
     const [placeIntro, setPlaceIntro] = useState("");
     const [placeIntroDetail, setPlaceIntroDetail] = useState("");
-    const [kitchen, setKitchen] = useState("");
+    const [kitchen, setKitchen] = useState(KitchenFeat.NotSpecified);
     const [address, setAddress] = useState(null);
     const [addressDetail, setAddressDetail] = useState("");
     const [fullAddress, setFullAddress] = useState("");
@@ -112,7 +113,7 @@ const HostRegistry = () => {
                     <div style={{display: "flex"}}>
                         <button className="button"
                                 name="kitchen"
-                                value="open"
+                                value={KitchenFeat.Open}
                                 disabled={clicked2 || clicked3}
                                 style={{
                                     backgroundColor: clicked1 ? "black" : "white",
@@ -124,18 +125,19 @@ const HostRegistry = () => {
                                 onClick={(event) => {
                                     const selected = event.target.value;
                                     setKitchen(event.target.value);
-                                    setClicked1(!clicked1);
-                                    if (clicked1 === false) {
-                                        setKitchen("");
+                                    if (clicked1 === true) {
+                                        setKitchen(KitchenFeat.NotSpecified);
                                     }
-                                    ;
+                                    setClicked1(!clicked1);
+
+
                                 }}
                         >
                             오픈형
                         </button>
                         <button className="button"
                                 name="kitchen"
-                                value="faced"
+                                value={KitchenFeat.Face}
                                 disabled={clicked1 || clicked3}
                                 style={{
                                     backgroundColor: clicked2 ? "black" : "white",
@@ -147,18 +149,19 @@ const HostRegistry = () => {
                                 onClick={(event) => {
                                     const selected = event.target.value;
                                     setKitchen(event.target.value);
-                                    setClicked2(!clicked2);
-                                    if (clicked2 === false) {
-                                        setKitchen("");
+                                    if (clicked2 === true) {
+                                        setKitchen(KitchenFeat.NotSpecified);
                                     }
-                                    ;
+                                    setClicked2(!clicked2);
+
+
                                 }}
                         >
                             대면형
                         </button>
                         <button className="button"
                                 name="kitchen"
-                                value="closed"
+                                value={KitchenFeat.Close}
                                 disabled={clicked1 || clicked2}
                                 style={{
                                     backgroundColor: clicked3 ? "black" : "white",
@@ -171,10 +174,11 @@ const HostRegistry = () => {
                                 onClick={(event) => {
                                     const selected = event.target.value;
                                     setKitchen(event.target.value);
-                                    setClicked3(!clicked3);
-                                    if (clicked3 === false) {
-                                        setKitchen("");
+                                    if (clicked3 === true) {
+                                        setKitchen(KitchenFeat.NotSpecified);
                                     }
+                                    setClicked3(!clicked3);
+
                                 }}
                         >
                             폐쇄형

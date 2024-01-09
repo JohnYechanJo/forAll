@@ -228,7 +228,7 @@ public class SpaceService extends Service {
         Image bizImage = imageService.findById(sf.getBusinessImage());
         booking.setBizImage(bizImage);
         booking.setBizAddr(sf.getBusinessAddress());
-        booking.setPayEmail(sf.getPayEamil());
+        booking.setPayEmail(sf.getPayEmail());
         booking.setPayPhoneNum(sf.getPayPhoneNum());
         saveBooking(booking);
         space.setBooking(booking);

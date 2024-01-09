@@ -8,8 +8,11 @@ import project.forAll.controller.SessionManager;
 import project.forAll.domain.member.Member;
 import project.forAll.form.MemberForm;
 import project.forAll.service.MemberService;
+import project.forAll.web.SessionConst;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,11 +42,16 @@ public class APIMemberController extends APIController {
      *                  (fail - 에러 메시지 반환)
      */
     @PostMapping("/members")
-    public ResponseEntity createMember(@RequestBody final MemberForm mf){
+    public ResponseEntity createMember(@RequestBody final MemberForm mf,HttpServletRequest request, HttpServletResponse response){
         try{
             final Member member = memberService.createMember(mf);
 
             final Long memberId = memberService.saveMember(member);
+
+            HttpSession session = request.getSession();
+            session.setAttribute(SessionConst.LOGIN_MEMBER, member);
+            sessionManager.createSession(member.getLoginId(), response);
+
             return new ResponseEntity(Long.toString(memberId), HttpStatus.OK);
         }catch(final Exception e){
             return new ResponseEntity(errorResponse("Could not create member : " + e.getMessage()), HttpStatus.BAD_REQUEST);

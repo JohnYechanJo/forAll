@@ -34,4 +34,11 @@ public class Booking extends BassDomain {
     private String payEmail;
     // 정산용 연락처
     private String payPhoneNum;
+    // 은행명
+    private String bankName;
+    // 계좌번호
+    private String accountNum;
+    // 예금주
+    private String accountHolder;
+
 }

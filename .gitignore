@@ -1,6 +1,7 @@
 HELP.md
 .gradle
 build/
+.env
 src/main/frontend/build/
 src/main/frontend/node_modules/
 src/main/resources/static/static/js/main*

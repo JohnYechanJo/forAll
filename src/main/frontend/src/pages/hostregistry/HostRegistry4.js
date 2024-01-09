@@ -162,7 +162,7 @@ const HostRegistry4 = () => {
             </div>
 
             <div>
-                <Link to="/hostRegistry"><button>이전</button></Link>
+                <Link to="/hostRegistry3"><button>이전</button></Link>
                 <button onClick={handleButton}>다음</button>
             </div>
             <Modal isOpen={isModalOpen} ariaHideApp={false}>
