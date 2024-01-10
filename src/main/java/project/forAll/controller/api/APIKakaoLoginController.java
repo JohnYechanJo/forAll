@@ -1,4 +1,8 @@
-<<<<<<< HEAD
+
+package project.forAll.controller.api;
+
+
+
 //package project.forAll.controller.api;
 //
 //import lombok.RequiredArgsConstructor;
@@ -8,13 +12,7 @@
 //import project.forAll.service.KakaoLoginService;
 //
 //import javax.servlet.http.HttpServletRequest;
-//
-//@RestController
-//@RequiredArgsConstructor
-//public class APIKakaoLoginController {
-//
-=======
-package project.forAll.controller.api;
+
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

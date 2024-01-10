@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 //package project.forAll.service;
 //
 //import com.fasterxml.jackson.core.JsonProcessingException;
@@ -184,7 +184,7 @@
 ////        return accessToken;
 ////    }
 //// }
-=======
+
 package project.forAll.service;
 
 import com.google.gson.JsonElement;
