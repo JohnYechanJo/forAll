@@ -2,21 +2,7 @@
 package project.forAll.controller.api;
 
 
-<<<<<<< HEAD
-=======
 
-//package project.forAll.controller.api;
-//
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.*;
-//import project.forAll.dto.LoginResponseDto;
-//import project.forAll.service.KakaoLoginService;
-//
-//import javax.servlet.http.HttpServletRequest;
-
-
->>>>>>> 96b7997 (pull)
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -58,40 +44,10 @@ public class APIKakaoLoginController extends APIController {
         // 3. 사용자 정보 받기
         Map<String, Object> userInfo = kakaoLoginService.getUserInfo(accessToken);
 
-<<<<<<< HEAD
-        String nickname = (String) userInfo.get("nickname");
-=======
-        String nickname = (String)userInfo.get("nickname");
->>>>>>> 96b7997 (pull)
+
 
         // 받은 사용자 정보를 어떻게 프런트에 넘겨주면 되나요?
 
         return new ResponseEntity("", HttpStatus.OK);
     }
-<<<<<<< HEAD
 }
-
-=======
-
->>>>>>> b5cfc12ef8ed0f32aa44fe0f0c9d810668ede1d7
->>>>>>> 96b7997 (pull)
-//    private final KakaoLoginService kakaoLoginService;
-//
-//    @GetMapping("/login/oauth2/callback/kakao")
-//    public ResponseEntity<LoginResponseDto> kakaoLogin(HttpServletRequest request) {
-//        String code = request.getParameter("code");
-//        String kakaoAccessToken = kakaoLoginService.getKakaoAccessToken(code);
-//        return kakaoLoginService.kakaoLogin(kakaoAccessToken);
-//    }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-//
-//
-//}
-=======
-
-
-}
->>>>>>> b5cfc12ef8ed0f32aa44fe0f0c9d810668ede1d7
->>>>>>> 96b7997 (pull)
