@@ -55,14 +55,14 @@ public class APIKakaoLoginController extends APIController {
         // 3. 사용자 정보 받기
         Map<String, Object> userInfo = kakaoLoginService.getUserInfo(accessToken);
 
-        String nickname = (String)userInfo.get("nickname");
+        String nickname = (String) userInfo.get("nickname");
 
         // 받은 사용자 정보를 어떻게 프런트에 넘겨주면 되나요?
 
         return new ResponseEntity("", HttpStatus.OK);
     }
+}
 
->>>>>>> b5cfc12ef8ed0f32aa44fe0f0c9d810668ede1d7
 //    private final KakaoLoginService kakaoLoginService;
 //
 //    @GetMapping("/login/oauth2/callback/kakao")
@@ -71,12 +71,3 @@ public class APIKakaoLoginController extends APIController {
 //        String kakaoAccessToken = kakaoLoginService.getKakaoAccessToken(code);
 //        return kakaoLoginService.kakaoLogin(kakaoAccessToken);
 //    }
-<<<<<<< HEAD
-//
-//
-//}
-=======
-
-
-}
->>>>>>> b5cfc12ef8ed0f32aa44fe0f0c9d810668ede1d7
