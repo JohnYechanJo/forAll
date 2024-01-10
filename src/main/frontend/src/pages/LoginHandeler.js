@@ -10,16 +10,13 @@ const LoginHandeler = (props) => {
     useEffect(() => {
         const kakaoLogin = async () => {
             await axios({
-<<<<<<< HEAD
-                method: "GET",
-                url: `${process.env.REACT_APP_REDIRECT_URL}/?code=${code}`,
-=======
+
                 method: "POST",
                 url: `/api/v1/login/oauth2/callback/kakao`,
                 data:{
                     code: code
                 },
->>>>>>> b5cfc12ef8ed0f32aa44fe0f0c9d810668ede1d7
+
                 headers: {
                     "Content-Type": "application/json;charset=utf-8", //json형태로 데이터를 보내겠다는뜻
                     "Access-Control-Allow-Origin": "*", //이건 cors 에러때문에 넣어둔것. 당신의 프로젝트에 맞게 지워도됨
@@ -30,11 +27,9 @@ const LoginHandeler = (props) => {
                 sessionStorage.setItem("name", res.data.account.kakaoName);
                 //로그인이 성공하면 이동할 페이지
                 navigate("/main");
-<<<<<<< HEAD
-            });
-=======
+
             }).catch((err) => console.error(err));
->>>>>>> b5cfc12ef8ed0f32aa44fe0f0c9d810668ede1d7
+
         };
         kakaoLogin();
     }, [props.history]);
