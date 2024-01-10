@@ -20,7 +20,7 @@ const GuestRegistry = () => {
         "한식을 만들 때 전통적인 한식에 국한되어 있는 것을 좋아하지 않고 양식, 일식, 중식 등 " +
         "다양한 나라의 요리와 접목시키는 것을 좋아합니다."
     const handleButton = () => {
-        if ((introduce !== "") && (introduceDetail !== "") && (career !== "") && (profileImage !== "")){
+        if ((introduce !== "") && (introduceDetail !== "") && (career !== []) && (profileImage !== "")){
             submit();
         }
         else setIsModalOpen(true);
@@ -88,26 +88,39 @@ const GuestRegistry = () => {
                     setInputText(e.target.value);
             }}/>
             {career.map((item, index) => (
-                <div key={index}
-                     style={{
-                         display: 'flex',
-                         justifyContent: 'center',
-                         alignItems: 'center',
-                         height: "3vh",
-                         width: '45vw',
-                         border: '2px solid lightgray',
-                         backgroundColor: 'white',
-                         borderRadius: '7px',
-                         marginTop: '5px',
-                         cursor: 'pointer'
-                     }}
-                     onClick={() => {
-                         const newCareer = [...career];
-                         newCareer.splice(index, 1);
-                         setCareer(newCareer);
-                     }}
-                >
-                    {item}
+                <div style={{ position: 'relative', display: 'inline-block' }}>
+                    <div key={index}
+                         style={{
+                             display: 'flex',
+                             justifyContent: 'center',
+                             alignItems: 'center',
+                             height: "3vh",
+                             width: '45vw',
+                             border: '2px solid lightgray',
+                             backgroundColor: 'white',
+                             borderRadius: '7px',
+                             marginTop: '5px',
+                             cursor: 'pointer'
+                         }}
+                    >
+                        {item}
+                    </div>
+                    <button
+                        style={{
+                            position: 'absolute',
+                            right: '47%',
+                            bottom:"15%",
+                            border: 'none',
+                            backgroundColor: 'white',
+                        }}
+                        onClick={() => {
+                            const newCareer = [...career];
+                            newCareer.splice(index, 1);
+                            setCareer(newCareer);
+                        }}
+                    >
+                        x
+                    </button>
                 </div>
             ))}
             <h4 style={{marginBottom:"0"}} >프로필 등록 사진</h4>
@@ -119,7 +132,7 @@ const GuestRegistry = () => {
             </p>
             <textarea placeholder={text1} className="white-space"
                       style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR"}}/>
-            <div style={{marginTop:"5vh"}} >
+            <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>
                 <Link to="/guestRegistryStart">
                     <button style={{
                         backgroundColor: "black",
@@ -140,9 +153,10 @@ const GuestRegistry = () => {
                     height: "8vh"
                 }}
                         onClick={handleButton}
-                >다음</button>
+                >저장
+                </button>
                 <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                    <p style={{fontSize:"16px"}} >필수 입력사항이 모두 기입되지 않았습니다.</p>
+                    <p style={{fontSize: "16px"}}>필수 입력사항이 모두 기입되지 않았습니다.</p>
                     <button onClick={() => setIsModalOpen(false)}>뒤로</button>
                 </Modal>
             </div>

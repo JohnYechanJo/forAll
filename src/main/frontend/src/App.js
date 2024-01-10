@@ -24,6 +24,7 @@ import HostRegistry6 from "./pages/hostregistry/HostRegistry6";
 import GuestRegistryStart from "./pages/guestregistry/GuestRegistryStart";
 import GuestRegistry from "./pages/guestregistry/GuestRegistry";
 import LoginHandeler from "./pages/LoginHandeler";
+import GuestRegistry2 from "./pages/guestregistry/GuestRegistry2";
 function App() {
   return (
       <Routes>
@@ -52,6 +53,7 @@ function App() {
           <Route path="/guestRegistryStart" element={<GuestRegistryStart />}/>
           <Route path="/guestRegistry" element={<GuestRegistry />}/>
           <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
+            <Route path="/guestRegistry2" element={<GuestRegistry2 />} />
       </Routes>
   );
 }

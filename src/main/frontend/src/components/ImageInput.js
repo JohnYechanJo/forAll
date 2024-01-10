@@ -27,7 +27,7 @@ const ImageInput = ({setImg, setHidden}) => {
                        onChange={() =>saveImgFile()}
                        ref={imgRef}
                        style={{ float:"right",  display: "none"}}
-                /><button className="button" style={{fontSize:"10px",backgroundColor:"black",width:"19vw",height:"4vh",padding:"10px 10px", float:"right", marginLeft:"1vw"}} onClick={onUploadImgButtonClick} >파일 첨부</button>
+                /><button className="button" style={{fontSize:"10px",backgroundColor:"black",width:"19vw",height:"4vh",padding:"10px 10px", float:"right", marginLeft:"3vw"}} onClick={onUploadImgButtonClick} >파일 첨부</button>
             </label>
             {imgFile ?
                 <img className="image"
