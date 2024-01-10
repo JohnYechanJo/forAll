@@ -4,11 +4,15 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import ImageInputs from "../../components/ImageInputs";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
+import axios from "axios";
+import ImageUploader from "../../utils/imageUploader";
 
 const GuestRegistry2 = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const navigate = useNavigate();
     const location = useLocation();
+    const data = {...location.state};
+    const navigate = useNavigate();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedMBTI, setSelectedMBTI] = useState("");
     const [selectedFoodTypes, setSelectedFoodTypes] = useState([]);
     const [selectedIngredient, setSelectedIngredient] = useState([]);
@@ -47,8 +51,21 @@ const GuestRegistry2 = () => {
         else setIsModalOpen(true);
     }
     // backend로 보내는 함수를 구현하면 됨
-    const submit = () => {
+    const submit = async () => {
+        const userId = sessionStorage.getItem("user_id");
+        const picture = await ImageUploader(data.profileImage, userId);
+        axios.post("/api/v1/profile", {
+            userId: userId,
+            introduction: data.introduce,
+            detailIntroduction: data.introduceDetail,
+            career: data.career,
+            picture: picture,
+            pictureExplain: data.imageExplain,
+            mbti: selectedMBTI,
+            cook: selectedFoodTypes,
+            interest: selectedIngredient,
 
+        })
     }
     return(
         <div className="margin"

@@ -1,48 +1,38 @@
-package project.forAll.domain;
+package project.forAll.form;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import project.forAll.domain.Image;
 import project.forAll.domain.member.Member;
-import project.forAll.util.StringListConverter;
 
-import javax.persistence.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.util.List;
 
-@Entity
 @Getter @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Profile extends BassDomain {
-
-    @Id @GeneratedValue
-    @Column(name = "profile_id")
-    private Long id;
+public class ProfileForm {
 
     //사용자
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
-
+    private String userId;
     // 한 줄 소개
     private String introduction;
     // 세부 소개
     private String detailIntroduction;
     // 경력
-    @ElementCollection
     private List<String> career;
     // 프로필 사진
-    @OneToOne(fetch = FetchType.LAZY)
-    private Image picture;
+    private Long picture;
     //프로필 사진 설명
     private String pictureExplain;
     //MBIT
     private String mbti;
     // 요리
-    @ElementCollection
     private List<String> cook;
     // 관심사
-    @ElementCollection
     private List<String> interest;
+
 }

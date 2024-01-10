@@ -1,9 +1,10 @@
-import {useState} from "react";
+import {useState, useCallback} from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import ImageInputs from "../../components/ImageInputs";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
+import ImageInput from "../../components/ImageInput";
 const GuestRegistry = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -14,6 +15,7 @@ const GuestRegistry = () => {
     const [introduceDetail, setIntroduceDetail] = useState("");
     const [career, setCareer] = useState([]);
     const [profileImage, setProfileImage] = useState("");
+    const [imageExplain, setImageExplain] = useState("");
     const [hidden, setHidden] = useState(false);
     const text1 = "사진을 설명해주세요. \n ex.현재 근무하고 있는 업장에서 찍은 사진입니다."
     const text2="ex.한식을 새롭게 해석하는 것을 좋아하는 조리학과 대학생입니다.\n" +
@@ -33,6 +35,7 @@ const GuestRegistry = () => {
                 introduceDetail: introduceDetail,
                 career: career,
                 profileImage: profileImage,
+                imageExplain: imageExplain
             }
 
         });
@@ -45,6 +48,9 @@ const GuestRegistry = () => {
         setInputCount2(e.target.value.length);
         setIntroduceDetail(e.target.value);
     }
+    const handleInput = useCallback((e) => {
+        setImageExplain(e.target.value);
+    },[])
     const activeEnter = (e) => {
         if (e.key==="Enter"){
             const temp =[...career];
@@ -128,9 +134,9 @@ const GuestRegistry = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hidden}/></span>
-                <ImageInputs setImg={setProfileImage} setHidden={setHidden}/>
+                <ImageInput setImg={setProfileImage} setHidden={setHidden}/>
             </p>
-            <textarea placeholder={text1} className="white-space"
+            <textarea placeholder={text1} onChange={handleInput} className="white-space"
                       style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR"}}/>
             <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>
                 <Link to="/guestRegistryStart">
