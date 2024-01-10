@@ -230,6 +230,9 @@ public class SpaceService extends Service {
         booking.setBizAddr(sf.getBusinessAddress());
         booking.setPayEmail(sf.getPayEmail());
         booking.setPayPhoneNum(sf.getPayPhoneNum());
+        booking.setBankName(sf.getBankName());
+        booking.setAccountNum(sf.getAccountNum());
+        booking.setAccountHolder(sf.getAccountHolder());
         saveBooking(booking);
         space.setBooking(booking);
 

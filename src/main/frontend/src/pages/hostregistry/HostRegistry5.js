@@ -1,9 +1,11 @@
 import {useCallback, useEffect, useState} from "react";
-import ImageInput from "../../components/ImageInput";
+import ImageInputs from "../../components/ImageInputs";
 import DropDown from "../../components/DropDown";
 import DaumPost from "../../components/DaumPost";
 import Modal from "react-modal";
 import {Link, useLocation, useNavigate} from "react-router-dom";
+import {PayWay} from "../../utils/enums";
+import ImageInput from "../../components/ImageInput";
 
 
 const HostRegistry5 = () => {
@@ -13,14 +15,14 @@ const HostRegistry5 = () => {
 
     const emailDatas=  ["직접입력","naver.com", "choi.com", "dreamwiz.com", "empal.com", "gmail.com", "hanafos.com", "hanmail.net", "hanmir.com", "hitel.net", "hotmail.com", "korea.com", "lycos.co.kr", "nate.com"];
 
-    const [payment, setPayment] = useState();
+    const [payment, setPayment] = useState(PayWay.NotSpecified);
     const [tradeName, setTradeName] = useState("");
     const [representative, setRepresentative] = useState("");
     const [registNum1, setRegistNum1] = useState("");
     const [registNum2, setRegistNum2] = useState("");
     const [registNum3, setRegistNum3] = useState("");
     const [license, setLicense] = useState();
-    const [address, setAddress] = useState();
+    const [address, setAddress] = useState("");
     const [exactAddress, setExactAddress] = useState("");
     const [email1, setEmail1] = useState("");
     const [email2, setEmail2] = useState(emailDatas[0]);
@@ -104,10 +106,10 @@ const HostRegistry5 = () => {
             <div>
                 <p>결제 방식을 선택해주세요.*</p>
                 <label>
-                    <input type="radio" name={"payment"} onClick={() => setPayment("바로결제")}/>바로결제
+                    <input type="radio" name={"payment"} onClick={() => setPayment(PayWay.QuickPay)}/>바로결제
                 </label>
                 <label>
-                    <input type="radio" name={"payment"} onClick={() => setPayment("승인결제")}/>승인결제
+                    <input type="radio" name={"payment"} onClick={() => setPayment(PayWay.ConfirmPay)}/>승인결제
                 </label>
             </div>
             <div>

@@ -2,6 +2,7 @@ import {useState} from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
+import ImageInputs from "../../components/ImageInputs";
 import ImageInput from "../../components/ImageInput";
 import {ModalStyles} from "../../components/ModalStyles";
 const HostRegistry2 = () => {
@@ -10,18 +11,18 @@ const HostRegistry2 = () => {
     const [imgAll, setImgAll] = useState("");
     const [imgBack, setImgBack] = useState("");
     const [imgFront, setImgFront] = useState("");
-    const [imgAdditional, setImgAdditional] = useState("");
+    const [imgAdditional, setImgAdditional] = useState([]);
     const [kitchenRight, setKitchenRight] = useState("");
     const [kitchenLeft, setKitchenLeft] = useState("");
     const [kitchenAll, setKitchenAll] = useState("");
     const [kitchenBack, setKitchenBack] = useState("");
     const [kitchenFront, setKitchenFront] = useState("");
-    const [kitchenAdditional, setKitchenAdditional] = useState("");
+    const [kitchenAdditional, setKitchenAdditional] = useState([]);
     const [menu1, setMenu1] = useState("");
     const [menu2, setMenu2] = useState("");
     const [menu3, setMenu3] = useState("");
     const [menu4, setMenu4] = useState("");
-    const [menuAdditional, setMenuAdditional] = useState("");
+    const [menuAdditional, setMenuAdditional] = useState([]);
     const [hiddenRight, setHiddenRight] = useState(false);
     const [hiddenLeft, setHiddenLeft] = useState(false);
     const [hiddenAll, setHiddenAll] = useState(false);
@@ -128,7 +129,7 @@ const HostRegistry2 = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenAdditional}/></span>
-                    <ImageInput setImg={setImgAdditional} setHidden={setHiddenAdditional}/>
+                    <ImageInputs setImg={setImgAdditional} setHidden={setHiddenAdditional}/>
                 </div>
             </div>
             <div>
@@ -174,7 +175,7 @@ const HostRegistry2 = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenKAdditional}/></span>
-                    <ImageInput setImg={setKitchenAdditional} setHidden={setHiddenKAdditional}/>
+                    <ImageInputs setImg={setKitchenAdditional} setHidden={setHiddenKAdditional}/>
                 </div>
             </div>
             <div>
@@ -226,7 +227,7 @@ const HostRegistry2 = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenMenuAdditional}/></span>
-                    <ImageInput setImg={setMenuAdditional} setHidden={setHiddenMenuAdditional}/>
+                    <ImageInputs setImg={setMenuAdditional} setHidden={setHiddenMenuAdditional}/>
                 </div>
             </div>
             <div style={{display: "flex",justifyContent:"center", marginBottom:"6vh",marginTop:"3vh"}}>
