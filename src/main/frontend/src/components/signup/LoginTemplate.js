@@ -5,7 +5,6 @@ import {user_role} from "../../utils/enums";
 import axios from "axios";
 const LoginTemplate = () => {
     const navigate = useNavigate();
-    const [role, setRole] = useState(user_role["GUEST"]);
     const [id, setId] = useState('');
     const [passwd, setPasswd] = useState('');
 
@@ -15,7 +14,6 @@ const LoginTemplate = () => {
     const onChangePw = useCallback((e) => {
         setPasswd(e.target.value);
     },[]);
-
     const logIn = () => {
         if (id === "") alert("아이디를 입력해주세요");
         else if(passwd === "") alert("비밀번호를 입력해주세요");
@@ -23,7 +21,7 @@ const LoginTemplate = () => {
             axios.post("/api/v1/login",
                 {
                     loginId: id,
-                    loginPw: passwd
+                    loginPw: passwd,
                 },
                 {
                     headers:{
@@ -33,7 +31,8 @@ const LoginTemplate = () => {
                 }
                 ).then((res) => {
                 sessionStorage.setItem("user_id", id);
-                sessionStorage.setItem("role", role);
+                sessionStorage.setItem("name", res.data.name);
+                console.log(res.data.name);
                 navigate('/main');
             }).catch((res) => {
                 alert("로그인에 실패했습니다");
@@ -42,14 +41,6 @@ const LoginTemplate = () => {
     }
     return (
         <div>
-            <div>
-                <div onClick={()=>setRole(user_role["GUEST"])}>
-                    <span className={role === user_role["GUEST"] ? "selected" : ""}>게스트 로그인</span>
-                </div>
-                <div onClick={()=>setRole(user_role["HOST"])}>
-                    <span className={role === user_role["HOST"] ? "selected" : ""}>호스트 로그인</span>
-                </div>
-            </div>
             <div>
                 <input
                     placeholder="아이디 입력"

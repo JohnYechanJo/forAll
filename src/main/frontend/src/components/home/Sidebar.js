@@ -4,7 +4,7 @@ import LoginTemplate from "../signup/LoginTemplate";
 import { Link } from "react-router-dom";
 import {user_role} from "../../utils/enums";
 
-const GuestSidebar = ({ width = 280, children }) => {
+const Sidebar = ({ width = 280, children }) => {
     const [isOpen, setOpen] = useState(false);
     const [xPosition, setX] = useState(-width);
     const side = useRef();
@@ -20,10 +20,6 @@ const GuestSidebar = ({ width = 280, children }) => {
         }
     };
 
-    const change_role = () => {
-        sessionStorage.setItem("role", user_role.HOST)
-        window.location.href = "/main"
-    }
     return (
         <div className={styles.container}>
             <div ref={side} className={styles.sidebar} style={{ width: `${width}px`, height: '100%', transform: `translatex(${-xPosition}px)` }}>
@@ -37,17 +33,24 @@ const GuestSidebar = ({ width = 280, children }) => {
                 <Link to="/personalInfoModify">
                     <button>개인정보수정</button>
                 </Link>
-                <hr style={{width:0}}/>
-                <button>대관 내역</button>
-                <hr style={{width:0}}/>
+                <hr style={{width: 0}}/>
                 <button>찜한 내역</button>
+                <hr style={{width: "100%", color: "black"}}/>
+                <Link to="/guestRegistryStart">
+                    <button>프로필 등록하기</button>
+                </Link>
                 <hr style={{width:0}}/>
-                <button onClick={() => change_role()}>오너로 전환</button>
-                <hr style={{width:0}}/>
+                <Link to="/HostRegistryStart">
+                    <button>공간정보 등록하기</button>
+                </Link>
+                <hr style={{width:"100%", color:"black"}}/>
+                <Link to="/placeInfoModify">
+                    <button>공간정보수정</button>
+                </Link>
             </div>
         </div>
     );
 };
 
 
-export default GuestSidebar;
+export default Sidebar;

@@ -1,17 +1,14 @@
 import Header from "../components/Header";
-import HostSidebar from "../components/home/HostSidebar";
 import axios from "axios";
 import {user_role} from "../utils/enums";
-import GuestHomeTemplate from "../components/home/GuestHomeTemplate";
-import HostHomeTemplate from "../components/home/HostHomeTemplate";
-import GuestSidebar from "../components/home/GuestSidebar";
+import HomeTemplate from "../components/home/HomeTemplate";
+import Sidebar from "../components/home/Sidebar";
 import "../style/mainpage.css";
 
 const MainPage = () => {
     if(sessionStorage.getItem("user_id") == null){
         window.location.href = "/login";
     }
-    const role = sessionStorage.getItem("role");
     const logOut = () => {
        axios.post("/api/v1/logout")
            .then(() => {
@@ -28,8 +25,8 @@ const MainPage = () => {
                 <button>크루 열기</button>
                 <button>크루지원하기</button>
             </div>
-            {role === user_role.GUEST ? <GuestHomeTemplate />: <HostHomeTemplate />}
-            {role === user_role.GUEST ? <GuestSidebar/>: <HostSidebar />}
+            <HomeTemplate />
+            <Sidebar/>
             <ol>
                 <li>a</li>
                 <li>b</li>

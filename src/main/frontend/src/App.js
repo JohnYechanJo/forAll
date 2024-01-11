@@ -21,6 +21,7 @@ import HostRegistry3 from "./pages/hostregistry/HostRegistry3";
 import HostRegistry5 from "./pages/hostregistry/HostRegistry5";
 import HostRegistry4 from "./pages/hostregistry/HostRegistry4";
 import HostRegistry6 from "./pages/hostregistry/HostRegistry6";
+import HostRegistryComplete from "./pages/hostregistry/HostRegistryComplete";
 import GuestRegistryStart from "./pages/guestregistry/GuestRegistryStart";
 import GuestRegistry from "./pages/guestregistry/GuestRegistry";
 import LoginHandeler from "./pages/LoginHandeler";
@@ -55,7 +56,7 @@ function App() {
           <Route path="/guestRegistry" element={<GuestRegistry />}/>
           <Route path="/guestRegistry2" element={<GuestRegistry2 />} />
           <Route path="/cheat" element={<CheatPage />} />
-
+            <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
 
 
 
