@@ -2,12 +2,11 @@ package project.forAll.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import project.forAll.repository.ChatRepository;
@@ -36,14 +35,14 @@ public class ChatRoomController {
 
     // 채팅방 생성 (리스트로 리다이렉트)
     @PostMapping("/chat/createroom")
-    public String createRoom(@RequestParam String roomName, RedirectAttributes rttr){
+    public ResponseEntity createRoom(@RequestBody String roomName, RedirectAttributes rttr){
 
         ChatRoom chatRoom = repository.createChatRoom(roomName);
         log.info("Create ChatRoom : {}",chatRoom);
 
         rttr.addFlashAttribute("roomName" , chatRoom);
 
-        return "redirect:/";
+        return new ResponseEntity("create", HttpStatus.OK);
     }
 
     // 채팅방 입장 화면
