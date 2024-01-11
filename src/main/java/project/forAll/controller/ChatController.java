@@ -10,11 +10,11 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import project.forAll.repository.ChatRepository;
@@ -24,6 +24,7 @@ import project.forAll.dto.ChatDto;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
+@Component
 public class ChatController {
 
 

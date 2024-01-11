@@ -10,7 +10,7 @@ public class ChatDto {
 
     //메시지 타입 :  입장 채팅
     public enum MessageType{
-        ENTER, TALK, LEAVE
+        ENTER, TALK, LEAVE, QUIT
     }
     private MessageType type; //메시지 타입
     private String roomId;// 방 번호
