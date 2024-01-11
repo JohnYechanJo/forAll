@@ -4,13 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
@@ -18,6 +18,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import project.forAll.domain.member.KakaoMember;
 import project.forAll.repository.KakaoMemberRepository;
+import project.forAll.util.dto.KakaoMemberDto;
 import project.forAll.util.dto.KakaoTokenDto;
 import project.forAll.util.dto.LoginResponseDto;
 
@@ -29,10 +30,6 @@ public class KakaoLoginService extends Service {
 
     @Autowired
     KakaoMemberRepository kakaoMemberRepository;
-    @Value("${kakao.api_key}")
-    String kakaoApiKey;
-    @Value("${kakao.redirect_uri}")
-    String kakaoRedirectUri;
 
     @Override
     protected JpaRepository getRepository() { return kakaoMemberRepository; }
@@ -45,8 +42,8 @@ public class KakaoLoginService extends Service {
         // 본문
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code"); //카카오 공식문서 기준 authorization_code 로 고정
-        params.add("client_id", kakaoApiKey); // 카카오 Dev 앱 REST API 키
-        params.add("redirect_uri",kakaoRedirectUri); // 카카오 Dev redirect uri
+        params.add("client_id", "ef3dbe29e95781d561acb3dfbcab36b1"); // 카카오 Dev 앱 REST API 키
+        params.add("redirect_uri", "http://localhost:3000/login/oauth2/callback/kakao"); // 카카오 Dev redirect uri
         params.add("code", code); // 프론트에서 인가 코드 요청시 받은 인가 코드값
 
         // 헤더와 바디 합치기 위해 Http Entity 객체 생성
@@ -75,13 +72,19 @@ public class KakaoLoginService extends Service {
         return kakaoTokenDto;
     }
 
-    public LoginResponseDto kakaoLogin(String kakaoAccessToken) {
+    public ResponseEntity<LoginResponseDto> kakaoLogin(String kakaoAccessToken) {
+        // 아래 return에서 headers 변수가 없다고 해서 추가
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + kakaoAccessToken);
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
         // 생성한 KakaoMember 가져옴
         KakaoMember kakaoMember = getKakaoInfo(kakaoAccessToken);
 
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         loginResponseDto.setLoginSuccess(true);
         loginResponseDto.setKakaoMember(kakaoMember);
+        log.info("kakaoMember: " + kakaoMember);
 
         KakaoMember existOwner = kakaoMemberRepository.findById(kakaoMember.getId()).orElse(null);
         try {
@@ -90,10 +93,12 @@ public class KakaoLoginService extends Service {
                 kakaoMemberRepository.save(kakaoMember);
             }
             loginResponseDto.setLoginSuccess(true);
-            return loginResponseDto;
+
+            return ResponseEntity.ok().headers(headers).body(loginResponseDto);
+
         } catch (Exception e) {
             loginResponseDto.setLoginSuccess(false);
-            return loginResponseDto;
+            return ResponseEntity.badRequest().body(loginResponseDto);
         }
     }
 
@@ -115,25 +120,30 @@ public class KakaoLoginService extends Service {
                 String.class
         );
 
-        JsonParser jsonParser = new JsonParser();
-        JsonElement element = jsonParser.parse(accountInfoResponse.getBody());
-        String id = element.getAsJsonObject().get("id").getAsString();
-        Long kakaoId = Long.parseLong(id);
+        // JSON Parsing (-> kakaoAccountDto)
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        KakaoMemberDto kakaoMemberDto = null;
+        try {
+            kakaoMemberDto = objectMapper.readValue(accountInfoResponse.getBody(), KakaoMemberDto.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
         // 회원가입 처리하기
+        Long kakaoId = kakaoMemberDto.getId();
         KakaoMember existOwner = kakaoMemberRepository.findById(kakaoId).orElse(null);
         // 처음 로그인이 아닌 경우
         if (existOwner != null) {
-            return existOwner;
-//            return KakaoMember.builder()
-//                    .id(kakaoMemberDto.getId())
-//                    .build();
+            return KakaoMember.builder()
+                    .id(kakaoMemberDto.getId())
+                    .build();
         }
         // 처음 로그인 하는 경우
         else {
-            KakaoMember kakaoMember = new KakaoMember();
-            kakaoMember.setId(kakaoId);
-            return kakaoMember;
+            return KakaoMember.builder()
+                    .build();
         }
     }
 }
