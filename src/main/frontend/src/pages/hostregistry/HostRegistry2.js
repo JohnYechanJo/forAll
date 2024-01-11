@@ -211,7 +211,7 @@ const HostRegistry2 = () => {
                 <h4>메뉴 3</h4>
                 <div>
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
+                                 style={{width: "70vw", height: "3vh", float: "left",}}
                                  hidden={hiddenMenu3}/></span>
                     <ImageInput setImg={setMenu3} setHidden={setHiddenMenu3}/>
                 </div>
@@ -220,7 +220,7 @@ const HostRegistry2 = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hiddenMenu4}/></span>
-                    <ImageInput setImg={setMenu4} setHidden={setHiddenMenu4}/>
+                    <ImageInput  setImg={setMenu4} setHidden={setHiddenMenu4}/>
                 </div>
                 <h4>추가사진</h4>
                 <div>

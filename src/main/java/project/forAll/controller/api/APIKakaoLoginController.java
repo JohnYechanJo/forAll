@@ -25,3 +25,4 @@ public class APIKakaoLoginController extends APIController {
         return kakaoLoginService.kakaoLogin(kakaoAccessToken);
     }
 }
+

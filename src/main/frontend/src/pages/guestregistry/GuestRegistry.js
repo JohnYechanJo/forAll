@@ -1,9 +1,10 @@
-import {useState} from "react";
+import {useState, useCallback} from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import ImageInputs from "../../components/ImageInputs";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
+import ImageInput from "../../components/ImageInput";
 const GuestRegistry = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -14,13 +15,14 @@ const GuestRegistry = () => {
     const [introduceDetail, setIntroduceDetail] = useState("");
     const [career, setCareer] = useState([]);
     const [profileImage, setProfileImage] = useState("");
+    const [imageExplain, setImageExplain] = useState("");
     const [hidden, setHidden] = useState(false);
     const text1 = "사진을 설명해주세요. \n ex.현재 근무하고 있는 업장에서 찍은 사진입니다."
     const text2="ex.한식을 새롭게 해석하는 것을 좋아하는 조리학과 대학생입니다.\n" +
         "한식을 만들 때 전통적인 한식에 국한되어 있는 것을 좋아하지 않고 양식, 일식, 중식 등 " +
         "다양한 나라의 요리와 접목시키는 것을 좋아합니다."
     const handleButton = () => {
-        if ((introduce !== "") && (introduceDetail !== "") && (career !== "") && (profileImage !== "")){
+        if ((introduce !== "") && (introduceDetail !== "") && (career !== []) && (profileImage !== "")){
             submit();
         }
         else setIsModalOpen(true);
@@ -33,6 +35,7 @@ const GuestRegistry = () => {
                 introduceDetail: introduceDetail,
                 career: career,
                 profileImage: profileImage,
+                imageExplain: imageExplain
             }
 
         });
@@ -45,6 +48,9 @@ const GuestRegistry = () => {
         setInputCount2(e.target.value.length);
         setIntroduceDetail(e.target.value);
     }
+    const handleInput = useCallback((e) => {
+        setImageExplain(e.target.value);
+    },[])
     const activeEnter = (e) => {
         if (e.key==="Enter"){
             const temp =[...career];
@@ -88,26 +94,39 @@ const GuestRegistry = () => {
                     setInputText(e.target.value);
             }}/>
             {career.map((item, index) => (
-                <div key={index}
-                     style={{
-                         display: 'flex',
-                         justifyContent: 'center',
-                         alignItems: 'center',
-                         height: "3vh",
-                         width: '45vw',
-                         border: '2px solid lightgray',
-                         backgroundColor: 'white',
-                         borderRadius: '7px',
-                         marginTop: '5px',
-                         cursor: 'pointer'
-                     }}
-                     onClick={() => {
-                         const newCareer = [...career];
-                         newCareer.splice(index, 1);
-                         setCareer(newCareer);
-                     }}
-                >
-                    {item}
+                <div style={{ position: 'relative', display: 'inline-block' }}>
+                    <div key={index}
+                         style={{
+                             display: 'flex',
+                             justifyContent: 'center',
+                             alignItems: 'center',
+                             height: "3vh",
+                             width: '45vw',
+                             border: '2px solid lightgray',
+                             backgroundColor: 'white',
+                             borderRadius: '7px',
+                             marginTop: '5px',
+                             cursor: 'pointer'
+                         }}
+                    >
+                        {item}
+                    </div>
+                    <button
+                        style={{
+                            position: 'absolute',
+                            right: '47%',
+                            bottom:"15%",
+                            border: 'none',
+                            backgroundColor: 'white',
+                        }}
+                        onClick={() => {
+                            const newCareer = [...career];
+                            newCareer.splice(index, 1);
+                            setCareer(newCareer);
+                        }}
+                    >
+                        x
+                    </button>
                 </div>
             ))}
             <h4 style={{marginBottom:"0"}} >프로필 등록 사진</h4>
@@ -115,11 +134,11 @@ const GuestRegistry = () => {
                     <span><input type="text" placeholder="이미지 파일을 추가해주세요."
                                  style={{width: "70vw", height: "3vh", float: "left"}}
                                  hidden={hidden}/></span>
-                <ImageInputs setImg={setProfileImage} setHidden={setHidden}/>
+                <ImageInput setImg={setProfileImage} setHidden={setHidden}/>
             </p>
-            <textarea placeholder={text1} className="white-space"
+            <textarea placeholder={text1} onChange={handleInput} className="white-space"
                       style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR"}}/>
-            <div style={{marginTop:"5vh"}} >
+            <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>
                 <Link to="/guestRegistryStart">
                     <button style={{
                         backgroundColor: "black",
@@ -140,9 +159,10 @@ const GuestRegistry = () => {
                     height: "8vh"
                 }}
                         onClick={handleButton}
-                >다음</button>
+                >저장
+                </button>
                 <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                    <p style={{fontSize:"16px"}} >필수 입력사항이 모두 기입되지 않았습니다.</p>
+                    <p style={{fontSize: "16px"}}>필수 입력사항이 모두 기입되지 않았습니다.</p>
                     <button onClick={() => setIsModalOpen(false)}>뒤로</button>
                 </Modal>
             </div>
