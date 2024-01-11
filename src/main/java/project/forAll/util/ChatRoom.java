@@ -10,8 +10,6 @@ public class ChatRoom {
     private String roomId;  // 채팅방 아이디
     private String roomName;// 채팅방 이름
     private long userCount; // 채팅방 인원수
-
-
     private HashMap<String, String> userList = new HashMap<>();
 
     public ChatRoom create(String roomName) {

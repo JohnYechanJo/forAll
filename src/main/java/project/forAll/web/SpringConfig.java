@@ -9,6 +9,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 @EnableWebSocketMessageBroker
 public class SpringConfig implements WebSocketMessageBrokerConfigurer {
+
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // stomp 접속 url -> /ws-stomp
