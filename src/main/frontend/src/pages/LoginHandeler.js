@@ -10,16 +10,8 @@ const LoginHandeler = (props) => {
     useEffect(() => {
         const kakaoLogin = async () => {
             await axios({
-<<<<<<< HEAD
                 method: "GET",
                 url: `/api/v1/login/oauth2/callback/kakao?code=${code}`,
-=======
-                method: "POST",
-                url: `/api/v1/login/oauth2/callback/kakao`,
-                data:{
-                    code: code
-                },
->>>>>>> 56119f0262ec7be9ab56f5f3e240e89f54e21387
                 headers: {
                     "Content-Type": "application/json;charset=utf-8", //json형태로 데이터를 보내겠다는뜻
                     // "Access-Control-Allow-Origin": "*", //이건 cors 에러때문에 넣어둔것. 당신의 프로젝트에 맞게 지워도됨
