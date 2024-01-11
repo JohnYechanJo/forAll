@@ -10,20 +10,21 @@ const MainPage = () => {
         window.location.href = "/login";
     }
     const logOut = () => {
-       axios.post("/api/v1/logout")
-           .then(() => {
-               sessionStorage.clear();
-               window.location.href = "/login";
-           }).catch((res)=>{
-               console.log(res);
-       });
+        axios.post("/api/v1/logout")
+            .then(() => {
+                sessionStorage.clear();
+                window.location.href = "/login";
+            }).catch((res)=>{
+            console.log(res);
+        });
     };
     return (
         <div>
-            <div className={"header"}>
-                <button>대관하기</button>
-                <button>크루 열기</button>
-                <button>크루지원하기</button>
+            <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
+                <button className="button">대관하기</button>
+                <button className="button">크루 열기</button>
+                <button className="button">크루지원하기</button>
+
             </div>
             <HomeTemplate />
             <Sidebar/>
@@ -37,8 +38,8 @@ const MainPage = () => {
                 <li>g</li>
                 <li>h</li>
             </ol>
-            <button onClick={() => logOut()}>로그아웃</button>
-            <div className={"footer"}>
+            <button onClick={logOut}>로그아웃</button>
+            <div className="footer">
                 <button>검색</button>
                 <button>찜</button>
                 <button>채팅</button>

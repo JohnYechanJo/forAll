@@ -3,10 +3,11 @@ import {useState} from "react";
 import "../../components/Styles.css";
 const HomeTemplate = () => {
     return (
-        <div>
-            <h1>홈페이지</h1>
+        <div style={{marginTop: "10vh"}}>
+            <h1>요리를 위한 대관</h1>
+            <h1>포올과 함께하세요.</h1>
         </div>
-)
+    )
 };
 
 export default HomeTemplate;
