@@ -1,11 +1,15 @@
+/*
 package project.forAll.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import lombok.extern.slf4j.Slf4j;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,28 +22,34 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import project.forAll.domain.member.KakaoMember;
 import project.forAll.repository.KakaoMemberRepository;
+import project.forAll.repository.MemberRepository;
 import project.forAll.util.dto.KakaoMemberDto;
 import project.forAll.util.dto.KakaoTokenDto;
 import project.forAll.util.dto.LoginResponseDto;
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 
 @Component
-@Slf4j
 @Transactional(readOnly = true)
 public class KakaoLoginService extends Service {
 
     @Autowired
-    KakaoMemberRepository kakaoMemberRepository;
+    private KakaoMemberRepository kakaoMemberRepository;
 
     @Override
-    protected JpaRepository getRepository() { return kakaoMemberRepository; }
+    protected JpaRepository getRepository() {
+        return kakaoMemberRepository;
+    }
 
     public KakaoTokenDto getAccessToken(String code) {
-        // 헤더
+        // Http Response Header 객체 생성
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
-        // 본문
+        // Http Response Body 객체 생성
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code"); //카카오 공식문서 기준 authorization_code 로 고정
         params.add("client_id", "ef3dbe29e95781d561acb3dfbcab36b1"); // 카카오 Dev 앱 REST API 키
@@ -49,7 +59,7 @@ public class KakaoLoginService extends Service {
         // 헤더와 바디 합치기 위해 Http Entity 객체 생성
         HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = new HttpEntity<>(params, headers);
 
-        // RestTemplate.exchange(url, HttpMethod.POST, entity, String.class)
+        // 카카오로부터 Access token 받아오기
         RestTemplate rt = new RestTemplate();
         ResponseEntity<String> accessTokenResponse = rt.exchange(
                 "https://kauth.kakao.com/oauth/token",
@@ -78,13 +88,11 @@ public class KakaoLoginService extends Service {
         headers.add("Authorization", "Bearer " + kakaoAccessToken);
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
-        // 생성한 KakaoMember 가져옴
         KakaoMember kakaoMember = getKakaoInfo(kakaoAccessToken);
 
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         loginResponseDto.setLoginSuccess(true);
         loginResponseDto.setKakaoMember(kakaoMember);
-        log.info("kakaoMember: " + kakaoMember);
 
         KakaoMember existOwner = kakaoMemberRepository.findById(kakaoMember.getId()).orElse(null);
         try {
@@ -105,7 +113,7 @@ public class KakaoLoginService extends Service {
     public KakaoMember getKakaoInfo(String kakaoAccessToken) {
         RestTemplate rt = new RestTemplate();
 
-        // 헤더
+        // 필수 헤더 생성
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + kakaoAccessToken);
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
@@ -147,3 +155,4 @@ public class KakaoLoginService extends Service {
         }
     }
 }
+*/

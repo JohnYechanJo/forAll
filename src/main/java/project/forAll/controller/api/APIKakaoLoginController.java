@@ -1,61 +1,27 @@
 package project.forAll.controller.api;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import project.forAll.service.KakaoLoginService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 public class APIKakaoLoginController extends APIController {
 
-    @Value("${kakao.api_key}")
-    private String kakaoApiKey;
-    @Value("${kakao.redirect_uri}")
-    private String kakaoRedirectUri;
-
     private final KakaoLoginService kakaoLoginService;
 
-    @GetMapping("/login/kakao")
-    public ResponseEntity kakaoLoginForm(Model model) {
-        // application.yml에서 불러온 kakaoApiKey와 kakaoRedirectUri를 가져가면 됩니다
-        // 현재는 변수 kakaoApiKey를 쓰면 오류가 떠서 값을 그대로 넣어놨습니다.
-        model.addAttribute("kakaoApiKey", "ef3dbe29e95781d561acb3dfbcab36b1");
-        model.addAttribute("redirectUri", "http://localhost:3000/login/oauth2/callback/kakao");
-        return new ResponseEntity("", HttpStatus.OK);
+    @GetMapping("/login/oauth2/callback/kakao")
+    public ResponseEntity kakaoLogin(HttpServletRequest request) {
+        // 프런트에서 보낸 요청에 있는 code를 받아옴
+        String code = request.getParameter("code");
+        // getAccessToken 함수에 code 인자를 넣고 돌려서 나온 KakaoTokenDto에서 access token 값을 받아옴
+        String kakaoAccessToken = kakaoLoginService.getAccessToken(code).getAccess_token();
+        // 받아온 access token으로 카카오 로그인
+        return kakaoLoginService.kakaoLogin(kakaoAccessToken);
     }
-
-    @PostMapping("/login/oauth2/callback/kakao")
-    public ResponseEntity kakaoLogin(@RequestBody final String code, HttpServletRequest request) {
-        // 1. 인가 코드 받기 (@RequestParam String code)
-
-        // 2. 토큰 받기
-        String accessToken = kakaoLoginService.getAccessToken(code);
-
-        // 3. 사용자 정보 받기
-        Map<String, Object> userInfo = kakaoLoginService.getUserInfo(accessToken);
-
-        String nickname = (String)userInfo.get("nickname");
-
-        // 받은 사용자 정보를 어떻게 프런트에 넘겨주면 되나요?
-
-        return new ResponseEntity("", HttpStatus.OK);
-    }
-
-//    private final KakaoLoginService kakaoLoginService;
-//
-//    @GetMapping("/login/oauth2/callback/kakao")
-//    public ResponseEntity<LoginResponseDto> kakaoLogin(HttpServletRequest request) {
-//        String code = request.getParameter("code");
-//        String kakaoAccessToken = kakaoLoginService.getKakaoAccessToken(code);
-//        return kakaoLoginService.kakaoLogin(kakaoAccessToken);
-//    }
-
-
 }
