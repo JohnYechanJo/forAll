@@ -4,13 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
@@ -84,7 +83,7 @@ public class KakaoLoginService extends Service {
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         loginResponseDto.setLoginSuccess(true);
         loginResponseDto.setKakaoMember(kakaoMember);
-        log.info("kakaoMember: " + kakaoMember);
+        log.info("kakaoMemberId: " + kakaoMember.getId());
 
         KakaoMember existOwner = kakaoMemberRepository.findById(kakaoMember.getId()).orElse(null);
         try {
@@ -93,8 +92,8 @@ public class KakaoLoginService extends Service {
                 kakaoMemberRepository.save(kakaoMember);
             }
             loginResponseDto.setLoginSuccess(true);
-
-            return ResponseEntity.ok().headers(headers).body(loginResponseDto);
+            return new ResponseEntity(loginResponseDto, HttpStatus.OK);
+            // return ResponseEntity.ok().headers(headers).body(loginResponseDto);
 
         } catch (Exception e) {
             loginResponseDto.setLoginSuccess(false);
@@ -120,6 +119,12 @@ public class KakaoLoginService extends Service {
                 String.class
         );
 
+        log.info("Response: " + accountInfoResponse.getBody());
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(accountInfoResponse.getBody());
+        String id = element.getAsJsonObject().get("id").getAsString();
+        log.info("Json: " + id);
+
         // JSON Parsing (-> kakaoAccountDto)
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
@@ -132,7 +137,8 @@ public class KakaoLoginService extends Service {
         }
 
         // 회원가입 처리하기
-        Long kakaoId = kakaoMemberDto.getId();
+        Long kakaoId = Long.parseLong(id);
+        // Long kakaoId = kakaoMemberDto.getId();
         KakaoMember existOwner = kakaoMemberRepository.findById(kakaoId).orElse(null);
         // 처음 로그인이 아닌 경우
         if (existOwner != null) {
@@ -142,8 +148,13 @@ public class KakaoLoginService extends Service {
         }
         // 처음 로그인 하는 경우
         else {
-            return KakaoMember.builder()
-                    .build();
+            KakaoMember kakaoMember = new KakaoMember();
+            kakaoMember.setId(Long.parseLong(id));
+            return kakaoMember;
+
+//            return KakaoMember.builder()
+//                    .id(Long.parseLong(id))
+//                    .build();
         }
     }
 }
