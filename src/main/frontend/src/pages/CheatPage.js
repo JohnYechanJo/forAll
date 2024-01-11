@@ -1,7 +1,8 @@
 import SockJs from "sockjs-client";
 import StompJs from "stompjs";
-import {useState} from "react";
+import {useState, useCallback, useEffect} from "react";
 import axios from "axios";
+import useDidMountEffect from "../utils/hooks/useDidMountEffect";
 const CheatPage =  () => {
     const [roomId, setRoomId] = useState("room");
     let sock = "";
@@ -10,16 +11,24 @@ const CheatPage =  () => {
 
     const [chatId, setChatId] = useState(sessionStorage.getItem("user_id"));
     const [message, setMessage] = useState("");
+
+
     const connect = async (event) => {
-        await axios.post("/chat/createroom", "room");
+        await axios.post("/chat/createroom", "room")
+            .then((res) => setRoomId(res.data))
+            .catch((err) =>console.error(err));
+
+    };
+    useDidMountEffect(async () => {
+        await axios.get("/chat/joinroom/" + roomId);
         sock = new SockJs('/ws-stomp');
         stomp = StompJs.over(sock);
-        // isDuplicatedName();
+        isDuplicatedName();
 
-        // stomp.connect({}, onConnected, (err) => {
-        //     console.error(err);
-        // });
-    };
+        stomp.connect({}, onConnected, (err) => {
+            console.error(err);
+        });
+    }, [roomId]);
     const onConnected = () => {
         stomp.subscribe("/sub/chat/room" + roomId, onMessageReceived);
 
@@ -42,10 +51,8 @@ const CheatPage =  () => {
         setMessage("");
     };
     const isDuplicatedName = () => {
-        axios.get("/chat/duplicateName", {
-            roomId: roomId,
-            username: sessionStorage.getItem("user_id")
-        }).then((res) => {
+        axios.get("/chat/duplicateName/"+roomId+"/"+"abc").then((res) => {
+            console.log(res);
             setChatId(res.data);
         }).catch((err) => console.error(err));
     };

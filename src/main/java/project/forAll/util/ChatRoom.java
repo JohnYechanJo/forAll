@@ -1,10 +1,13 @@
 package project.forAll.util;
 
 import lombok.Data;
+import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.UUID;
 
 @Data
+@Getter
 public class ChatRoom {
 
     private String roomId;  // 채팅방 아이디

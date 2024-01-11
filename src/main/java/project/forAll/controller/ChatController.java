@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.context.event.EventListener;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
@@ -48,7 +50,7 @@ public class ChatController {
         //반환 결과를 socket session 에 userUUID 로 저장
         headerAccessor.getSessionAttributes().put("userUUID",userUUID);
         headerAccessor.getSessionAttributes().put("roomId",chat.getRoomId());
-
+        log.info("User encounter : {}", headerAccessor);
         chat.setMessage(chat.getSender() + "님이 입장하셨습니다.");
         template.convertAndSend("/sub/chat/room/"+chat.getRoomId(),chat);
     }
@@ -86,13 +88,13 @@ public class ChatController {
         if(userName != null){
             log.info("User Disconnected : " + userName);
 
-            ChatDto chat = ChatDto.builder()
-                    .type(ChatDto.MessageType.LEAVE)
-                    .sender(userName)
-                    .message(userName + "님이 퇴장하였습니다.")
-                    .build();
+//            ChatDto chat = ChatDto.builder()
+//                    .type(ChatDto.MessageType.LEAVE)
+//                    .sender(userName)
+//                    .message(userName + "님이 퇴장하였습니다.")
+//                    .build();
 
-            template.convertAndSend("/sub/chat/room/" + roomId,chat);
+//            template.convertAndSend("/sub/chat/room/" + roomId,chat);
         }
     }
 
@@ -105,15 +107,15 @@ public class ChatController {
     }
 
     // 채팅에 참여한 유저 닉네임 중복 확인
-    @GetMapping("/chat/duplicateName")
+    @GetMapping("/chat/duplicateName/{roomId}/{username}")
     @ResponseBody
-    public String isDuplicateName(@RequestParam("roomId")String roomId ,
-                                  @RequestParam("username")String username){
+    public ResponseEntity isDuplicateName(@PathVariable String roomId ,
+                                          @PathVariable String username){
 
         String userName = repository.isDuplicateName(roomId, username);
         log.info("DuplicateName : {}", userName);
 
-        return userName;
+        return new ResponseEntity(userName, HttpStatus.OK);
     }
 
 

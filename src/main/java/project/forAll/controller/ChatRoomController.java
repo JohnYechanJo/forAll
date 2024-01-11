@@ -42,18 +42,18 @@ public class ChatRoomController {
 
         rttr.addFlashAttribute("roomName" , chatRoom);
 
-        return new ResponseEntity("create", HttpStatus.OK);
+        return new ResponseEntity(chatRoom.getRoomId(), HttpStatus.OK);
     }
 
     // 채팅방 입장 화면
     // 파라미터로 넘어오는 roomId를 확인 후 해당 roomId 를 기준으로
     // 채팅방을 찾아서 클라이언트를 chatroom 으로 보낸다.
-    @GetMapping("/chat/joinroom")
-    public String joinRoom(String roomId,Model model){
+    @GetMapping("/chat/joinroom/{room}")
+    public ResponseEntity joinRoom(@PathVariable("room") String roomId,Model model){
 
         log.info("roomId : {}",roomId);
         model.addAttribute("room",repository.findByRoomId(roomId));
 
-        return "chatroom";
+        return new ResponseEntity("join", HttpStatus.OK);
     }
 }
