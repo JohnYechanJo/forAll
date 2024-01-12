@@ -55,6 +55,7 @@ const HostRegistry2 = () => {
             setIsModalOpen(true);
         }
     };
+
     const submit = () => {
         navigate("/hostRegistry3",{
             state: {

@@ -19,6 +19,7 @@ const ImageInput = ({setImg, setHidden}) => {
         imgRef.current.click();
         if (setHidden) setHidden(true);
     },[]);
+
     return (
         <div>
             <label>

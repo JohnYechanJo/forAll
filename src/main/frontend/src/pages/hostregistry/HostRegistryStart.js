@@ -23,6 +23,7 @@ const HostRegistryStart = () => {
             <div><Link to="/hostRegistry">
                 <button className="button" style={{backgroundColor: "black"}}>공간 등록하기</button>
             </Link></div>
+
             <div><Link to="/main">
                 <button className="button" style={{backgroundColor: "red"}}>둘러보기</button>
             </Link></div>
