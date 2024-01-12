@@ -72,18 +72,12 @@ public class KakaoLoginService extends Service {
     }
 
     public ResponseEntity<LoginResponseDto> kakaoLogin(String kakaoAccessToken) {
-        // 아래 return에서 headers 변수가 없다고 해서 추가
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer " + kakaoAccessToken);
-        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-
         // 생성한 KakaoMember 가져옴
         KakaoMember kakaoMember = getKakaoInfo(kakaoAccessToken);
 
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         loginResponseDto.setLoginSuccess(true);
         loginResponseDto.setKakaoMember(kakaoMember);
-        log.info("kakaoMemberId: " + kakaoMember.getId());
 
         KakaoMember existOwner = kakaoMemberRepository.findById(kakaoMember.getId()).orElse(null);
         try {
@@ -93,7 +87,6 @@ public class KakaoLoginService extends Service {
             }
             loginResponseDto.setLoginSuccess(true);
             return new ResponseEntity(loginResponseDto, HttpStatus.OK);
-            // return ResponseEntity.ok().headers(headers).body(loginResponseDto);
 
         } catch (Exception e) {
             loginResponseDto.setLoginSuccess(false);
@@ -119,42 +112,25 @@ public class KakaoLoginService extends Service {
                 String.class
         );
 
-        log.info("Response: " + accountInfoResponse.getBody());
         JsonParser jsonParser = new JsonParser();
         JsonElement element = jsonParser.parse(accountInfoResponse.getBody());
         String id = element.getAsJsonObject().get("id").getAsString();
-        log.info("Json: " + id);
-
-        // JSON Parsing (-> kakaoAccountDto)
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        KakaoMemberDto kakaoMemberDto = null;
-        try {
-            kakaoMemberDto = objectMapper.readValue(accountInfoResponse.getBody(), KakaoMemberDto.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        Long kakaoId = Long.parseLong(id);
 
         // 회원가입 처리하기
-        Long kakaoId = Long.parseLong(id);
-        // Long kakaoId = kakaoMemberDto.getId();
         KakaoMember existOwner = kakaoMemberRepository.findById(kakaoId).orElse(null);
         // 처음 로그인이 아닌 경우
         if (existOwner != null) {
-            return KakaoMember.builder()
-                    .id(kakaoMemberDto.getId())
-                    .build();
+            return existOwner;
+//            return KakaoMember.builder()
+//                    .id(kakaoMemberDto.getId())
+//                    .build();
         }
         // 처음 로그인 하는 경우
         else {
             KakaoMember kakaoMember = new KakaoMember();
-            kakaoMember.setId(Long.parseLong(id));
+            kakaoMember.setId(kakaoId);
             return kakaoMember;
-
-//            return KakaoMember.builder()
-//                    .id(Long.parseLong(id))
-//                    .build();
         }
     }
 }

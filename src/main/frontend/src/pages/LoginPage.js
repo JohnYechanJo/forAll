@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import LoginTemplate from "../components/signup/LoginTemplate";
 import {KAKAO_AUTH_URL} from "../utils/OAuth";
 
+// 아래 <a href={KAKAO_AUTH_URL} className="kakaobtn">로 수정
 const LoginPage = () => {
     return (
         <div>
