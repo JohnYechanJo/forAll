@@ -72,19 +72,13 @@ public class KakaoLoginService extends Service {
         return kakaoTokenDto;
     }
 
-    public ResponseEntity<LoginResponseDto> kakaoLogin(String kakaoAccessToken) {
-        // 아래 return에서 headers 변수가 없다고 해서 추가
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer " + kakaoAccessToken);
-        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-
+    public LoginResponseDto kakaoLogin(String kakaoAccessToken) {
         // 생성한 KakaoMember 가져옴
         KakaoMember kakaoMember = getKakaoInfo(kakaoAccessToken);
 
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         loginResponseDto.setLoginSuccess(true);
         loginResponseDto.setKakaoMember(kakaoMember);
-        log.info("kakaoMember: " + kakaoMember);
 
         KakaoMember existOwner = kakaoMemberRepository.findById(kakaoMember.getId()).orElse(null);
         try {
@@ -93,12 +87,11 @@ public class KakaoLoginService extends Service {
                 kakaoMemberRepository.save(kakaoMember);
             }
             loginResponseDto.setLoginSuccess(true);
-
-            return ResponseEntity.ok().headers(headers).body(loginResponseDto);
+            return loginResponseDto;
 
         } catch (Exception e) {
             loginResponseDto.setLoginSuccess(false);
-            return ResponseEntity.badRequest().body(loginResponseDto);
+            return loginResponseDto;
         }
     }
 
