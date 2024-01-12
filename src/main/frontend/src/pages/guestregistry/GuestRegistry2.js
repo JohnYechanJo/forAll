@@ -65,8 +65,10 @@ const GuestRegistry2 = () => {
             cook: selectedFoodTypes,
             interest: selectedIngredient,
 
-        })
-    }
+        }).then((res) => {
+            navigate("/main");
+        }).catch((err) => console.error(err));
+    };
     return(
         <div className="margin"
              style={{

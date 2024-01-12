@@ -121,7 +121,7 @@ const HostRegistry6 =() => {
             accountNum: account,
             accountHolder: accountHolder,
         })
-            .then((res) => console.log(res))
+            .then((res) => navigate("/main"))
             .catch((err) => console.error(err));
 
     };
