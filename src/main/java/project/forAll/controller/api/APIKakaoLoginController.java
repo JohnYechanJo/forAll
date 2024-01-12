@@ -30,7 +30,7 @@ public class APIKakaoLoginController extends APIController {
         if (loginResponseDto.isLoginSuccess()){
             sessionManager.createSession(loginResponseDto.getKakaoMember().getId(), response);
             return new ResponseEntity(loginResponseDto, HttpStatus.OK);
-        }else{
+        } else {
             return new ResponseEntity(errorResponse("Could not login with kakao"), HttpStatus.BAD_REQUEST);
         }
     }
