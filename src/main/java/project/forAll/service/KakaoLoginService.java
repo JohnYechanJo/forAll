@@ -71,7 +71,7 @@ public class KakaoLoginService extends Service {
         return kakaoTokenDto;
     }
 
-    public ResponseEntity<LoginResponseDto> kakaoLogin(String kakaoAccessToken) {
+    public LoginResponseDto kakaoLogin(String kakaoAccessToken) {
         // 아래 return에서 headers 변수가 없다고 해서 추가
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + kakaoAccessToken);
@@ -92,12 +92,12 @@ public class KakaoLoginService extends Service {
                 kakaoMemberRepository.save(kakaoMember);
             }
             loginResponseDto.setLoginSuccess(true);
-            return new ResponseEntity(loginResponseDto, HttpStatus.OK);
+            return loginResponseDto;
             // return ResponseEntity.ok().headers(headers).body(loginResponseDto);
 
         } catch (Exception e) {
             loginResponseDto.setLoginSuccess(false);
-            return ResponseEntity.badRequest().body(loginResponseDto);
+            return loginResponseDto;
         }
     }
 

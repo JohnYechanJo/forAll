@@ -19,7 +19,7 @@ const LoginHandeler = (props) => {
             }).then((res) => { //백에서 완료후 우리사이트 전용 토큰 넘겨주는게 성공했다면
                 console.log(res);
                 //계속 쓸 정보들( ex: 이름) 등은 localStorage에 저장해두자
-                sessionStorage.setItem("name", res.data.kakaoMember.id);
+                sessionStorage.setItem("user_id", res.data.kakaoMember.id);
                 //로그인이 성공하면 이동할 페이지
                 navigate("/main");
             }).catch((err) => console.error(err));
