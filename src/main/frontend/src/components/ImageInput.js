@@ -1,41 +1,55 @@
 import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
-const ImageInput = ({setImg, setHidden}) => {
+const ImageInput = ({setImg}) => {
+    // 기본 이미지 추후 설정 필요
+    const BaseImgSrc = "favicon.ico";
+
     const [imgFile, setImgFile] = useState("");
     const imgRef = useRef();
     const saveImgFile = () => {
         const file = imgRef.current.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        setImg(imgRef.current.files[0]);
-        reader.onloadend = () => {
-            setImgFile(reader.result);
-        }
+        if (file == null) return;
+        setImg(file);
+        setImgFile(URL.createObjectURL(file));
+
     };
+
+    // 이건 무슨 함수?
     const onUploadImgButtonClick = useCallback(() => {
         if (!imgRef.current) {
             return;
         }
         imgRef.current.click();
-        if (setHidden) setHidden(true);
     },[]);
+    const handleButton = () => {
+        setImgFile(undefined);
+        setImgFile("");
+
+    }
+    const onErrorImg = (e) => {
+        // 기본 이미지 추후 설정 필요
+        e.target.src = BaseImgSrc;
+    }
 
     return (
         <div>
-            <label>
+            <label
+                className={"image"}
+            >
+                <img
+                     src={imgFile}
+                     alt={"image"}
+                     onError={onErrorImg}
+                />
                 <input type={"file"}
                        accept="image/*"
                        onChange={() =>saveImgFile()}
                        ref={imgRef}
-                       style={{ float:"right",  display: "none"}}
-                /><button className="button" style={{fontSize:"10px",backgroundColor:"black",width:"19vw",height:"4vh",padding:"10px 10px", float:"right", marginLeft:"3vw"}} onClick={onUploadImgButtonClick} >파일 첨부</button>
+                       style={{display: "none"}}
+                />
+                <button onClick={handleButton}>X</button>
+
             </label>
-            {imgFile ?
-                <img className="image"
-                     src={imgFile}
-                     alt={"image"}
-                /> : null
-            }
         </div>
     )
 };

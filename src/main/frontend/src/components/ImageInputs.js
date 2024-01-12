@@ -1,38 +1,69 @@
 import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
-const ImageInputs = ({setImg, setHidden}) => {
+import Modal from "react-modal";
+import {ModalStyles} from "./ModalStyles";
+const ImageInputs = ({setImg}) => {
+    // 기본 이미지 추후 설정 필요
+    const BaseImgSrc = "favicon.ico";
+
     const [imgFiles, setImgFiles] = useState([]);
-    const imgRef = useRef();
-    const saveImgFiles = (event) => {
-        setImgFiles([...event.target.files].map(file => URL.createObjectURL(file)));
-        setImg([...event.target.files]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [representImage, setRepresentImage] = useState("");
+    const addImgFile = (event) => {
+        const file = event.target.files[0];
+        if (file == null) return;
+        setImgFiles([...imgFiles, file]);
     };
-    const onUploadImgButtonClick = useCallback(() => {
-        if (!imgRef.current) {
-            return;
-        }
-        imgRef.current.click();
-        if (setHidden) setHidden(true);
-    },[]);
+    const deleteImgFile = (index) => {
+        setImgFiles(imgFiles.filter((_,i) => i !== index));
+    };
+    useEffect(() => {
+        setImg(imgFiles);
+        if (imgFiles[0] !== undefined) setRepresentImage(URL.createObjectURL(imgFiles[0]));
+    }, [imgFiles]);
+    const onErrorImg = (e) => {
+        e.target.src = BaseImgSrc;
+    }
     return (
         <div>
-            <label>
-                <input type={"file"}
-                       accept="image/*"
-                       multiple
-                       onChange={saveImgFiles}
-                       ref={imgRef}
-                       style={{ float:"right",  display: "none"}}
-                /><button className="button" style={{fontSize:"10px",backgroundColor:"black",width:"19vw",height:"4vh",padding:"10px 10px", float:"right", marginLeft:"3vw"}} onClick={onUploadImgButtonClick} >파일 첨부</button>
+            <label className={"image"} onClick={() => setIsModalOpen(true)}>
+                <img
+                    key={0}
+                    src={representImage}
+                    alt={"image"}
+                    onError={onErrorImg}
+                />
             </label>
 
-            {imgFiles.map((imgFile, index) => (
-                <img key={index}
-                     className="image"
-                     src={imgFile}
-                     alt={`image ${index}`}
-                />
-            ))}
+            <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
+                {imgFiles.map((imgFile, index) => (
+                    <div>
+                        <img key={index+1}
+                             className="image"
+                             src={URL.createObjectURL(imgFile)}
+                             alt={`image ${index}`}
+                        />
+                        <button onClick={() => deleteImgFile(index)}>X</button>
+                    </div>
+
+                ))}
+                <label className={"image"}>
+                    <img
+                        src={BaseImgSrc}
+                        alt={"image"}
+                        onError={onErrorImg}
+                    />
+                    <input type={"file"}
+                           accept="image/*"
+                           onChange={addImgFile}
+                           style={{float: "right", display: "none"}}
+                    />
+                </label>
+
+                <button onClick={() => setIsModalOpen(false)}>닫기</button>
+            </Modal>
+
+
         </div>
     )
 };

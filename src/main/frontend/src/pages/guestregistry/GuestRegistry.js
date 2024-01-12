@@ -16,7 +16,7 @@ const GuestRegistry = () => {
     const [career, setCareer] = useState([]);
     const [profileImage, setProfileImage] = useState("");
     const [imageExplain, setImageExplain] = useState("");
-    const [hidden, setHidden] = useState(false);
+
     const text1 = "사진을 설명해주세요. \n ex.현재 근무하고 있는 업장에서 찍은 사진입니다."
     const text2="ex.한식을 새롭게 해석하는 것을 좋아하는 조리학과 대학생입니다.\n" +
         "한식을 만들 때 전통적인 한식에 국한되어 있는 것을 좋아하지 않고 양식, 일식, 중식 등 " +
@@ -131,10 +131,7 @@ const GuestRegistry = () => {
             ))}
             <h4 style={{marginBottom:"0"}} >프로필 등록 사진</h4>
             <p>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hidden}/></span>
-                <ImageInput setImg={setProfileImage} setHidden={setHidden}/>
+                <ImageInput setImg={setProfileImage}/>
             </p>
             <textarea placeholder={text1} onChange={handleInput} className="white-space"
                       style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR"}}/>

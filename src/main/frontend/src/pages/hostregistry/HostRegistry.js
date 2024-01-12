@@ -22,7 +22,6 @@ const HostRegistry = () => {
     const [placeInfo, setPlaceInfo] = useState("");
     const [webSite, setWebSite] = useState("");
     const [imgRepresent, setImgRepresent] = useState("");
-    const [hiddenRepresent, setHiddenRepresent] = useState(false);
     const [clicked1, setClicked1] = useState(false);
     const [clicked2, setClicked2] = useState(false);
     const [clicked3, setClicked3] = useState(false);
@@ -284,10 +283,7 @@ const HostRegistry = () => {
                     <span>대표 이미지 </span>
                 </h4>
                 <div>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenRepresent}/></span>
-                    <ImageInput setImg={setImgRepresent} setHidden={setHiddenRepresent}/>
+                    <ImageInput setImg={setImgRepresent}/>
                 </div>
             </div>
             <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>

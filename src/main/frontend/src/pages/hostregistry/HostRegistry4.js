@@ -28,10 +28,6 @@ const HostRegistry4 = () => {
     const [bat, setBat] = useState([]);
     const [countBat, setCountBat] = useState();
 
-    const [hiddenSidePlate, setHiddenSidePlate] = useState(false);
-    const [hiddenCup, setHiddenCup] = useState(false);
-    const [hiddenCutrrary, setHiddenCutrrary] = useState(false);
-    const [hiddenBat, setHiddenBat] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const onChangeFirePit = useCallback((e) => {
@@ -138,26 +134,22 @@ const HostRegistry4 = () => {
 
             <div>
                 <p>앞접시*</p>
-                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenSidePlate}/>
-                <ImageInputs setImg={setSidePlate} setHidden={setHiddenSidePlate}/>
+                <ImageInputs setImg={setSidePlate}/>
                 <input onChange={onChangeCountSidePlate} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
             <div>
                 <p>물컵*</p>
-                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenCup}/>
-                <ImageInputs setImg={setCup} setHidden={setHiddenCup}/>
+                <ImageInputs setImg={setCup}/>
                 <input onChange={onChangeCountCup} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
             <div>
                 <p>커트러리*</p>
-                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenCutrrary}/>
-                <ImageInputs setImg={setCuttrary} setHidden={setHiddenCutrrary}/>
+                <ImageInputs setImg={setCuttrary}/>
                 <input onChange={onChangeCountCuttrary} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
             <div>
                 <p>밧드*</p>
-                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenBat}/>
-                <ImageInputs setImg={setBat} setHidden={setHiddenBat}/>
+                <ImageInputs setImg={setBat}/>
                 <input onChange={onChangeCountBat} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
 

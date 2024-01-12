@@ -30,7 +30,6 @@ const HostRegistry5 = () => {
     const [phone2, setPhone2] = useState("");
     const [phone3, setPhone3] = useState("");
 
-    const [hiddenLicense, setHiddenLicense] = useState(false);
     const [modalOpen1, setModalOpen1] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -139,8 +138,7 @@ const HostRegistry5 = () => {
                 </div>
                 <div>
                     <p>사업자 등록증 첨부*</p>
-                    <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenLicense}/>
-                    <ImageInput setImg={setLicense} setHidden={setHiddenLicense}/>
+                    <ImageInput setImg={setLicense}/>
                 </div>
                 <div>
                     <p>사업장 주소*</p>
