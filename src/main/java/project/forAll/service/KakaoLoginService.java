@@ -8,6 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,10 @@ public class KakaoLoginService extends Service {
 
     @Autowired
     KakaoMemberRepository kakaoMemberRepository;
+    @Value("${kakao.api_key}")
+    String kakaoApiKey;
+    @Value("${kakao.redirect_uri}")
+    String kakaoRedirectUri;
 
     @Override
     protected JpaRepository getRepository() { return kakaoMemberRepository; }
@@ -40,8 +45,8 @@ public class KakaoLoginService extends Service {
         // 본문
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code"); //카카오 공식문서 기준 authorization_code 로 고정
-        params.add("client_id", "ef3dbe29e95781d561acb3dfbcab36b1"); // 카카오 Dev 앱 REST API 키
-        params.add("redirect_uri", "http://localhost:3000/login/oauth2/callback/kakao"); // 카카오 Dev redirect uri
+        params.add("client_id", kakaoApiKey); // 카카오 Dev 앱 REST API 키
+        params.add("redirect_uri",kakaoRedirectUri); // 카카오 Dev redirect uri
         params.add("code", code); // 프론트에서 인가 코드 요청시 받은 인가 코드값
 
         // 헤더와 바디 합치기 위해 Http Entity 객체 생성
