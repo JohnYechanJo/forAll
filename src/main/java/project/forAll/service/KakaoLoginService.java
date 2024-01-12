@@ -17,7 +17,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import project.forAll.domain.member.KakaoMember;
 import project.forAll.repository.KakaoMemberRepository;
-import project.forAll.util.dto.KakaoMemberDto;
 import project.forAll.util.dto.KakaoTokenDto;
 import project.forAll.util.dto.LoginResponseDto;
 
@@ -71,7 +70,7 @@ public class KakaoLoginService extends Service {
         return kakaoTokenDto;
     }
 
-    public ResponseEntity<LoginResponseDto> kakaoLogin(String kakaoAccessToken) {
+    public LoginResponseDto kakaoLogin(String kakaoAccessToken) {
         // 생성한 KakaoMember 가져옴
         KakaoMember kakaoMember = getKakaoInfo(kakaoAccessToken);
 
@@ -86,11 +85,10 @@ public class KakaoLoginService extends Service {
                 kakaoMemberRepository.save(kakaoMember);
             }
             loginResponseDto.setLoginSuccess(true);
-            return new ResponseEntity(loginResponseDto, HttpStatus.OK);
-
+            return loginResponseDto;
         } catch (Exception e) {
             loginResponseDto.setLoginSuccess(false);
-            return ResponseEntity.badRequest().body(loginResponseDto);
+            return loginResponseDto;
         }
     }
 
