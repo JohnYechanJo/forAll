@@ -131,5 +131,4 @@ public class SpaceForm {
     // 예금주
     private String accountHolder;
 
-
 }

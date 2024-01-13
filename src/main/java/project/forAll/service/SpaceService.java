@@ -3,7 +3,6 @@ package project.forAll.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.Image;
@@ -13,15 +12,12 @@ import project.forAll.domain.space.image.HallImage;
 import project.forAll.domain.space.image.KitImage;
 import project.forAll.domain.space.image.MenuImage;
 import project.forAll.form.SpaceForm;
-import project.forAll.repository.ImageRepository;
 import project.forAll.repository.space.*;
 import project.forAll.repository.space.image.HallImageRepository;
 import project.forAll.repository.space.image.KitImageRepository;
 import project.forAll.repository.space.image.MenuImageRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @Transactional(readOnly = true)
@@ -91,6 +87,13 @@ public class SpaceService extends Service {
     /**
      * findSpaceInfoById
      */
+    @Transactional
+    public Space findByMember(Member member) {
+        List<Space> spaces = spaceRepository.findByMember(member);
+        if (spaces.isEmpty()) return null;
+        return spaces.get(0);
+    }
+
     @Transactional
     public Place findPlaceById(Long id) {
         Space findSpace = spaceRepository.findById(id).orElseThrow();
@@ -238,5 +241,82 @@ public class SpaceService extends Service {
 
         save(space);
         return space;
+    }
+    @Transactional
+    public SpaceForm of(Space space){
+        final SpaceForm sf = new SpaceForm();
+
+        sf.setUserId(space.getMember().getLoginId());
+
+        final Place place = space.getPlace();
+        sf.setName(place.getName());
+        sf.setSpaceBrief(place.getSpaceBrief());
+        sf.setSpaceIntro(place.getSpaceIntro());
+        sf.setKitchenFeat(place.getKitchenFeat().toString());
+        sf.setAddress(place.getAddress());
+        sf.setAddressBrief(place.getAddressBrief());
+        sf.setWebsite(place.getWebsite());
+        sf.setMainImage(imageService.getImageName(place.getMainImage()));
+
+        final HallImage hallImage = place.getHallImage();
+        sf.setHallRight(imageService.getImageName(hallImage.getHallRight()));
+        sf.setHallLeft(imageService.getImageName(hallImage.getHallLeft()));
+        sf.setHallFront(imageService.getImageName(hallImage.getHallFront()));
+        sf.setHallBack(imageService.getImageName(hallImage.getHallBack()));
+        sf.setHallEntire(imageService.getImageName(hallImage.getHallEntire()));
+        sf.setHallExtra(imageService.getImagesNames(hallImage.getHallExtra()));
+
+        final KitImage kitImage = place.getKitImage();
+        sf.setKitRight(imageService.getImageName(kitImage.getKitRight()));
+        sf.setKitLeft(imageService.getImageName(kitImage.getKitLeft()));
+        sf.setKitFront(imageService.getImageName(kitImage.getKitFront()));
+        sf.setKitBack(imageService.getImageName(kitImage.getKitBack()));
+        sf.setKitEntire(imageService.getImageName(kitImage.getKitEntire()));
+        sf.setKitExtra(imageService.getImagesNames(kitImage.getKitExtra()));
+
+        sf.setMenu(imageService.getImagesNames(place.getMenuImage()));
+
+        final Rent rent = space.getRent();
+        sf.setAbleDate(rent.getAbleDate());
+        sf.setAbleStartHour(rent.getAbleStartTime());
+        sf.setAbleFinHour(rent.getAbleFinTime());
+        sf.setFloorNum(rent.getFloorNum());
+        sf.setAbleParking(rent.getAbleParking());
+        sf.setHaveElevator(rent.getHaveElevator());
+        sf.setTableNum(rent.getTableNum());
+        sf.setSeatNum(rent.getSeatNum());
+        sf.setPriceSet(rent.getPriceSet());
+        sf.setAbleTrial(rent.getAbleTrial());
+        sf.setAbleEarlyDeliver(rent.getAbleEarlyDeliver());
+        sf.setAbleWorkIn(rent.getAbleWorkIn());
+        sf.setAbleDrink(rent.getAbleDrink());
+
+        final Kitchen kitchen = space.getKitchen();
+        sf.setFireholeNum(kitchen.getFireholeNum());
+        sf.setEquip(kitchen.getEquip());
+        sf.setEquipExtra(kitchen.getEquipExtra());
+        sf.setPlateImage(imageService.getImagesNames(kitchen.getPlateImage()));
+        sf.setPlateNum(kitchen.getPlateNum());
+        sf.setCupImage(imageService.getImagesNames(kitchen.getCupImage()));
+        sf.setCupNum(kitchen.getCupNum());
+        sf.setCutleryImage(imageService.getImagesNames(kitchen.getCutleryImage()));
+        sf.setCutleryNum(kitchen.getCutleryNum());
+        sf.setVatImage(imageService.getImagesNames(kitchen.getVatImage()));
+        sf.setVatNum(kitchen.getVatNum());
+
+        final Booking booking = space.getBooking();
+        sf.setPayWay(booking.getPayWay().toString());
+        sf.setCompanyName(booking.getCompanyName());
+        sf.setCeoName(booking.getCeoName());
+        sf.setBusinessNum(booking.getBizNum());
+        sf.setBusinessImage(imageService.getImageName(booking.getBizImage()));
+        sf.setBusinessAddress(booking.getBizAddr());
+        sf.setPayEmail(booking.getPayEmail());
+        sf.setPayPhoneNum(booking.getPayPhoneNum());
+        sf.setBankName(booking.getBankName());
+        sf.setAccountNum(booking.getAccountNum());
+        sf.setAccountHolder(booking.getAccountHolder());
+
+        return sf;
     }
 }

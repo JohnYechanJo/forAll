@@ -36,7 +36,7 @@ public class ProfileForm {
         pf.setIntroduction(profile.getIntroduction());
         pf.setDetailIntroduction(profile.getDetailIntroduction());
         pf.setCareer(profile.getCareer());
-        pf.setPicture(profile.getPicture().getImageName());
+        pf.setPicture(profile.getPicture() == null? null : profile.getPicture().getImageName());
         pf.setPictureExplain(profile.getPictureExplain());
         pf.setMbti(profile.getMbti());
         pf.setCook(profile.getCook());
