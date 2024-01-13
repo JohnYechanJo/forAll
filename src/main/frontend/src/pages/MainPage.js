@@ -4,8 +4,13 @@ import {user_role} from "../utils/enums";
 import HomeTemplate from "../components/home/HomeTemplate";
 import Sidebar from "../components/home/Sidebar";
 import "../style/mainpage.css";
+import {useEffect, useState} from "react";
+import Slider from "../components/Slider";
+import {useNavigate} from "react-router-dom";
 
 const MainPage = () => {
+    const navigate = useNavigate();
+    const [spaceData, setSpaceData] = useState([]);
     if(sessionStorage.getItem("user_id") == null){
         window.location.href = "/login";
     }
@@ -18,15 +23,23 @@ const MainPage = () => {
             console.log(res);
         });
     };
+    // 첫 페이지 랜딩 시에만 공간 정보를 불러옴
+    useEffect(() => {
+        axios.get("/api/v1/space/isPublic")
+            .then((res) => setSpaceData(res.data))
+            .catch((err) => console.error(err));
+    }, []);
+
     return (
         <div>
             <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
                 <button className="button">대관하기</button>
                 <button className="button">크루 열기</button>
                 <button className="button">크루지원하기</button>
-
             </div>
             <HomeTemplate />
+            <Slider dataSet={spaceData} navigate={navigate}/>
+
             <Sidebar/>
             <ol>
                 <li>a</li>

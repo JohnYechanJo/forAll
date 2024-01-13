@@ -8,17 +8,21 @@ import project.forAll.controller.SessionManager;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.space.Space;
 import project.forAll.form.SpaceForm;
+import project.forAll.repository.space.SpaceRepository;
 import project.forAll.service.MemberService;
 import project.forAll.service.SpaceService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class APISpaceController extends APIController {
 
     private final SpaceService spaceService;
+    private final SpaceRepository spaceRepository;
     private final SessionManager sessionManager;
     private final MemberService memberService;
 
@@ -51,5 +55,20 @@ public class APISpaceController extends APIController {
             return new ResponseEntity(errorResponse("Could not get space : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    @GetMapping("/space/isPublic")
+    public ResponseEntity getPublicSpaces(){
+        try{
+            List<Space> spaces = spaceRepository.findByIsPublic(true);
+            if (spaces == null) return new ResponseEntity(new ArrayList<>(), HttpStatus.OK);
+            else{
+                List<SpaceForm> spaceForms = spaces.stream().map(space -> spaceService.of(space)).toList();
+                return new ResponseEntity(spaceForms, HttpStatus.OK);
+            }
+
+        }catch(final Exception e){
+            return new ResponseEntity(errorResponse("Could not get public spaces : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
     }
 }
