@@ -32,6 +32,8 @@
     padding: 0px 0px;
     vertical-align: middle;
     cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 .detail{
     border: none;
