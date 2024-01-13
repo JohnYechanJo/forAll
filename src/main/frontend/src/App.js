@@ -27,6 +27,8 @@ import GuestRegistry from "./pages/guestregistry/GuestRegistry";
 import LoginHandeler from "./pages/LoginHandeler";
 import GuestRegistry2 from "./pages/guestregistry/GuestRegistry2";
 import CheatPage from "./pages/CheatPage";
+import ChefInfoModifyPage from './pages/modify/ChefInfoModifyPage';
+import ChefInfoModifyPage2 from './pages/modify/ChefInfoModifyPage2';
 function App() {
   return (
       <Routes>
@@ -57,11 +59,9 @@ function App() {
           <Route path="/guestRegistry2" element={<GuestRegistry2 />} />
           <Route path="/cheat" element={<CheatPage />} />
             <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
-
-
-
+          <Route path="/chefInfoModify" element={<ChefInfoModifyPage />} />
           <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
-
+          <Route path="/chefInfoModify2" element={<ChefInfoModifyPage2 />} />
       </Routes>
   );
 }

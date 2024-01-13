@@ -14,14 +14,7 @@ const ImageInput = ({setImg}) => {
 
     };
 
-    // 이건 무슨 함수?
-    const onUploadImgButtonClick = useCallback(() => {
-        if (!imgRef.current) {
-            return;
-        }
-        imgRef.current.click();
-    },[]);
-    const handleButton = () => {
+const handleButton = () => {
         setImgFile(undefined);
         setImgFile("");
 
@@ -32,10 +25,11 @@ const ImageInput = ({setImg}) => {
     }
 
     return (
-        <div>
-            <label>
+        <div style={{height:"20vh"}}>
+            <label
+            >
                 <img
-                     className={"image"}
+                        className="image"
                      src={imgFile}
                      alt={"image"}
                      onError={onErrorImg}
@@ -49,7 +43,7 @@ const ImageInput = ({setImg}) => {
                 <button onClick={handleButton}>X</button>
 
             </label>
-        </div>
+                    </div>
     )
 };
 
