@@ -2,7 +2,7 @@ import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
 const ImageInput = ({setImg}) => {
     // 기본 이미지 추후 설정 필요
-    const BaseImgSrc = "favicon.ico";
+    const BaseImgSrc = "logo512.png";
 
     const [imgFile, setImgFile] = useState("");
     const imgRef = useRef();
@@ -33,10 +33,9 @@ const ImageInput = ({setImg}) => {
 
     return (
         <div>
-            <label
-                className={"image"}
-            >
+            <label>
                 <img
+                     className={"image"}
                      src={imgFile}
                      alt={"image"}
                      onError={onErrorImg}

@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import {ModalStyles} from "./ModalStyles";
 const ImageInputs = ({setImg}) => {
     // 기본 이미지 추후 설정 필요
-    const BaseImgSrc = "favicon.ico";
+    const BaseImgSrc = "logo512.png";
 
     const [imgFiles, setImgFiles] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,8 +26,9 @@ const ImageInputs = ({setImg}) => {
     }
     return (
         <div>
-            <label className={"image"} onClick={() => setIsModalOpen(true)}>
+            <label onClick={() => setIsModalOpen(true)}>
                 <img
+                    className={"image"}
                     key={0}
                     src={representImage}
                     alt={"image"}
@@ -38,10 +39,11 @@ const ImageInputs = ({setImg}) => {
             <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
                 {imgFiles.map((imgFile, index) => (
                     <div>
-                        <img key={index+1}
-                             className="image"
-                             src={URL.createObjectURL(imgFile)}
-                             alt={`image ${index}`}
+                        <img
+                            key={index+1}
+                            className="image"
+                            src={URL.createObjectURL(imgFile)}
+                            alt={`image ${index}`}
                         />
                         <button onClick={() => deleteImgFile(index)}>X</button>
                     </div>
