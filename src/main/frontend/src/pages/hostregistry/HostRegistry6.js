@@ -8,7 +8,7 @@ import axios from "axios";
 const HostRegistry6 =() => {
     const location = useLocation();
     const data = {...location.state};
-    console.log(data);
+    let isPublic = false;
     const navigate = useNavigate();
     const bankDatas = ["한국은행", "KB국민은행", "신한은행", "우리은행", "하나은행", "SC제일은행", "한국씨티은행", "케이뱅크", "카카오뱅크", "토스뱅크", "한국산업은행", "중소기업은행", "한국수출은행", "NH농협은행", "수협은행", "대구은행", "부산은행", "경남은행", "광주은행", "전북은행", "제주은행"];
     const [bank, setBank] = useState(bankDatas[0]);
@@ -27,7 +27,10 @@ const HostRegistry6 =() => {
 
     const handleButton = () => {
         if (isAgree === false) alert("환불 기준을 동의해주세요");
-        else if((account !== "") && (accountHolder !== undefined)) submit();
+        else if((account !== "") && (accountHolder !== undefined)) {
+            isPublic = true;
+            submit();
+        }
         else setIsModalOpen(true);
     };
     const submit = async () => {
@@ -121,6 +124,7 @@ const HostRegistry6 =() => {
             bankName: bank,
             accountNum: account,
             accountHolder: accountHolder,
+            isPublic: data.isPublic && isPublic
         })
             .then((res) => navigate("/main"))
             .catch((err) => console.error(err));

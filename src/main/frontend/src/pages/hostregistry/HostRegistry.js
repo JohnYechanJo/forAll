@@ -30,6 +30,7 @@ const HostRegistry = () => {
     const [modalIsOpen3, setModalIsOpen3] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
+    let isPublic = false;
     const modalClose1 = () => {
         setModalIsOpen1(false);
     };
@@ -57,6 +58,7 @@ const HostRegistry = () => {
     }
     const handleButton = () => {
         if ((placeName !== "")&&(placeIntro !== "")&&(placeIntroDetail !== "")&&(kitchen!=="")&&(fullAddress!=="")&&(placeInfo!=="")&&(imgRepresent!=="")&&(webSite!=="")){
+            isPublic = true;
             submit();}
         else{
             setIsModalOpen(true);
@@ -73,6 +75,7 @@ const HostRegistry = () => {
                 webSite: webSite,
                 placeInfo: placeInfo,
                 imgRepresent: imgRepresent,
+                isPublic: isPublic,
             }
         });
     };

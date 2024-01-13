@@ -53,6 +53,7 @@ const HostRegistry3 = () => {
     let randomFourDigits = Math.floor(1000 + Math.random() * 9000);
     let finalPrice = parseInt(firstDigits + randomFourDigits.toString());
     const formattedPrice = "₩" + finalPrice.toLocaleString();
+    let isPublic = false;
 
     const onChangeFloor = useCallback((e) => {
         setExactFloor(e.target.value);
@@ -98,6 +99,7 @@ const HostRegistry3 = () => {
             && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
             && (seat !== undefined) && (price !== undefined) && (trial !== undefined) && (morningDelivery !== undefined)
             && (workIn !== undefined) && (alcohol !== undefined)){
+            isPublic = true;
             submit();
         }
         else setIsModalOpen(true);
@@ -115,6 +117,7 @@ const HostRegistry3 = () => {
         const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",")
         const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDaysdata;
 
+        data.isPublic = data.isPublic && isPublic;
         navigate("/hostRegistry4",{
             state: {
                 ...data,

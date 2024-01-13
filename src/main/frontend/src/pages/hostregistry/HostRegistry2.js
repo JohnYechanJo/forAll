@@ -28,10 +28,12 @@ const HostRegistry2 = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const data = {...location.state};
+    let isPublic = false;
     const handleButton = () => {
         if ((imgRight !== "")&&(imgLeft !== "")&&(imgFront !== "") && (imgBack !== "") && (imgAll !== "") && (imgAdditional !== "")
             && (kitchenRight !== "")&&(kitchenLeft !== "")&&(kitchenFront !== "") && (kitchenBack !== "") && (kitchenAll !== "") && (kitchenAdditional !== "")
             && (menu1 !== "")&&(menu2 !== "")&&(menu3 !== "") && (menu4 !== "") && (menuAdditional !== "")){
+            isPublic = true;
             submit();
         }
         else {
@@ -40,6 +42,7 @@ const HostRegistry2 = () => {
     };
 
     const submit = () => {
+        data.isPublic = data.isPublic && isPublic;
         navigate("/hostRegistry3",{
             state: {
                 ...data,

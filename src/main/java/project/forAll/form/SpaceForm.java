@@ -130,5 +130,7 @@ public class SpaceForm {
     private String accountNum;
     // 예금주
     private String accountHolder;
+    // 공개 여부
+    private Boolean isPublic;
 
 }

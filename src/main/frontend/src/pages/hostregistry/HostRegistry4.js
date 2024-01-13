@@ -8,7 +8,7 @@ const HostRegistry4 = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
-
+    let isPublic = false;
     const firePitData = ["1개","2개","3개","4개","5개","6개","직접 입력"];
 
     const [firePit, setFirePit] = useState(firePitData[0]);
@@ -72,6 +72,7 @@ const HostRegistry4 = () => {
     const handleButton = () => {
         if ((firePit !== undefined) && (sidePlate !== undefined) && (countSidePlate !== undefined) && (cup !== undefined) && (countCup !== undefined)
             && (cuttrary !== undefined) && (countCuttrary !== undefined) && (bat !== undefined) && (countBat !== undefined)){
+            isPublic = true;
             submit();
         }
         else setIsModalOpen(true);
@@ -82,6 +83,7 @@ const HostRegistry4 = () => {
         if (oven) equip.push("오븐");
         if (dishWasher) equip.push("식기세척기");
         if (iceMaker) equip.push("제빙기");
+        data.isPublic = data.isPublic && isPublic;
         navigate("/hostRegistry5", {
             state: {
                 ...data,

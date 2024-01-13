@@ -12,7 +12,7 @@ const HostRegistry5 = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
-
+    let isPublic = false;
     const emailDatas=  ["직접입력","naver.com", "choi.com", "dreamwiz.com", "empal.com", "gmail.com", "hanafos.com", "hanmail.net", "hanmir.com", "hitel.net", "hotmail.com", "korea.com", "lycos.co.kr", "nate.com"];
 
     const [payment, setPayment] = useState(PayWay.NotSpecified);
@@ -71,11 +71,13 @@ const HostRegistry5 = () => {
         if ((payment !== undefined) && (tradeName !== "") && (representative !== "") && (registNum1 !== "") && (registNum2 !== "") && (registNum3 !== "")
             && (license !== undefined) && (address !== undefined) && (exactAddress !== "") && (email1 !== "")
             && (phone1 !== "") && (phone2 !== "") && (phone3 !== "")){
+            isPublic = true;
             submit();
         }
         else setIsModalOpen(true);
     };
     const submit = () => {
+        data.isPublic = data.isPublic && isPublic;
         navigate("/hostRegistry6", {
             state: {
                 ...data,

@@ -238,6 +238,7 @@ public class SpaceService extends Service {
         booking.setAccountHolder(sf.getAccountHolder());
         saveBooking(booking);
         space.setBooking(booking);
+        space.setPublic(sf.getIsPublic());
 
         save(space);
         return space;
@@ -316,6 +317,8 @@ public class SpaceService extends Service {
         sf.setBankName(booking.getBankName());
         sf.setAccountNum(booking.getAccountNum());
         sf.setAccountHolder(booking.getAccountHolder());
+
+        sf.setIsPublic(space.isPublic());
 
         return sf;
     }
