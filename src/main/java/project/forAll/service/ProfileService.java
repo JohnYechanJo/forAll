@@ -10,6 +10,8 @@ import project.forAll.domain.member.Member;
 import project.forAll.form.ProfileForm;
 import project.forAll.repository.ProfileRepository;
 
+import java.util.List;
+
 @Component
 @Transactional
 public class ProfileService extends Service {
@@ -39,5 +41,11 @@ public class ProfileService extends Service {
         profile.setInterest(pf.getInterest());
 
         return profile;
+    }
+
+    public Profile findByMember(final Member member){
+        List<Profile> members = profileRepository.findByMember(member);
+        if (members.isEmpty()) return null;
+        return members.get(0);
     }
 }
