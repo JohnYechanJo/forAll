@@ -39,7 +39,7 @@ const PersonTemplate = () => {
             </div>
             <div>
                 <footer className="footer">
-                    <button className="button" style={{backgroundColor:"black"}} onClick={() => checkPw()}>확인</button>
+                    <button className="button" style={{backgroundColor:"black",color:"white"}} onClick={() => checkPw()}>확인</button>
                 </footer>
             </div>
         </div>
