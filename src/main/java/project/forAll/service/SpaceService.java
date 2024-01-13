@@ -144,15 +144,15 @@ public class SpaceService extends Service {
         place.setAddress(sf.getAddress());
         place.setAddressBrief(sf.getAddressBrief());
         place.setWebsite(sf.getWebsite());
-        Image mainImage = imageService.findById(sf.getMainImage());
+        Image mainImage = imageService.findByImageName(sf.getMainImage());
         place.setMainImage(mainImage);
 
         final HallImage hallImage = new HallImage();
-        Image hallRight = imageService.findById(sf.getHallRight());
-        Image hallLeft = imageService.findById(sf.getHallLeft());
-        Image hallFront = imageService.findById(sf.getHallFront());
-        Image hallBack = imageService.findById(sf.getHallBack());
-        Image hallEntire = imageService.findById(sf.getHallEntire());
+        Image hallRight = imageService.findByImageName(sf.getHallRight());
+        Image hallLeft = imageService.findByImageName(sf.getHallLeft());
+        Image hallFront = imageService.findByImageName(sf.getHallFront());
+        Image hallBack = imageService.findByImageName(sf.getHallBack());
+        Image hallEntire = imageService.findByImageName(sf.getHallEntire());
         List<Image> hallExtra = imageService.findListByIds(sf.getHallExtra());
         hallImage.setHallRight(hallRight);
         hallImage.setHallLeft(hallLeft);
@@ -164,11 +164,11 @@ public class SpaceService extends Service {
         place.setHallImage(hallImage);
 
         final KitImage kitImage = new KitImage();
-        Image kitRight = imageService.findById(sf.getKitRight());
-        Image kitLeft = imageService.findById(sf.getKitLeft());
-        Image kitFront = imageService.findById(sf.getKitFront());
-        Image kitBack = imageService.findById(sf.getKitBack());
-        Image kitEntire = imageService.findById(sf.getKitEntire());
+        Image kitRight = imageService.findByImageName(sf.getKitRight());
+        Image kitLeft = imageService.findByImageName(sf.getKitLeft());
+        Image kitFront = imageService.findByImageName(sf.getKitFront());
+        Image kitBack = imageService.findByImageName(sf.getKitBack());
+        Image kitEntire = imageService.findByImageName(sf.getKitEntire());
         List<Image> kitExtra = imageService.findListByIds(sf.getKitExtra());
         kitImage.setKitRight(kitRight);
         kitImage.setKitLeft(kitLeft);
@@ -225,7 +225,7 @@ public class SpaceService extends Service {
         booking.setCompanyName(sf.getCompanyName());
         booking.setCeoName(sf.getCeoName());
         booking.setBizNum(sf.getBusinessNum());
-        Image bizImage = imageService.findById(sf.getBusinessImage());
+        Image bizImage = imageService.findByImageName(sf.getBusinessImage());
         booking.setBizImage(bizImage);
         booking.setBizAddr(sf.getBusinessAddress());
         booking.setPayEmail(sf.getPayEmail());

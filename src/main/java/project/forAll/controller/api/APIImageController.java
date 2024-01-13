@@ -36,8 +36,8 @@ public class APIImageController extends APIController{
             if (savedMember == null) throw new Exception("No member with loginId " + userId);
             if (file == null) return new ResponseEntity("file is null", HttpStatus.BAD_GATEWAY);
 
-            Long imageId = imageService.saveImage(file);
-            return new ResponseEntity(Long.toString(imageId), HttpStatus.OK);
+            String imageName = imageService.saveImage(file);
+            return new ResponseEntity(imageName, HttpStatus.OK);
         }catch(final Exception e){
             return new ResponseEntity(errorResponse("Could not upload Image : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
         }

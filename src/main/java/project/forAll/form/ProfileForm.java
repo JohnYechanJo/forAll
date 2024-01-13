@@ -25,7 +25,7 @@ public class ProfileForm {
     // 경력
     private List<String> career;
     // 프로필 사진
-    private Long picture;
+    private String picture;
     //프로필 사진 설명
     private String pictureExplain;
     //MBIT

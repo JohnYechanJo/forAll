@@ -31,7 +31,7 @@ public class ProfileService extends Service {
         profile.setIntroduction(pf.getIntroduction());
         profile.setDetailIntroduction(pf.getDetailIntroduction());
         profile.setCareer(pf.getCareer());
-        final Image image = imageService.findById(pf.getPicture());
+        final Image image = imageService.findByImageName(pf.getPicture());
         profile.setPicture(image);
         profile.setPictureExplain(pf.getPictureExplain());
         profile.setMbti(pf.getMbti());
