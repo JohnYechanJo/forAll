@@ -35,9 +35,9 @@ public class Profile extends BassDomain {
     // 프로필 사진
     @OneToOne(fetch = FetchType.LAZY)
     private Image picture;
-    //프로필 사진 설명
+    // 프로필 사진 설명
     private String pictureExplain;
-    //MBIT
+    // MBTi
     private String mbti;
     // 요리
     @ElementCollection

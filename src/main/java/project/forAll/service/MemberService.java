@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.member.Gender;
 import project.forAll.form.MemberForm;
-import project.forAll.repository.MemberRepository;
+import project.forAll.repository.member.MemberRepository;
 
 import java.util.List;
 import java.util.Optional;

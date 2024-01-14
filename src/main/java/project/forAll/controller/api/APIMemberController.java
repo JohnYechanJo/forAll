@@ -42,7 +42,7 @@ public class APIMemberController extends APIController {
      *                  (fail - 에러 메시지 반환)
      */
     @PostMapping("/members")
-    public ResponseEntity createMember(@RequestBody final MemberForm mf,HttpServletRequest request, HttpServletResponse response){
+    public ResponseEntity createMember(@RequestBody final MemberForm mf, HttpServletRequest request, HttpServletResponse response){
         try{
             final Member member = memberService.createMember(mf);
 
@@ -95,7 +95,6 @@ public class APIMemberController extends APIController {
         }catch(final Exception e){
             return new ResponseEntity(errorResponse("Could not update Member : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @GetMapping("/members/{id}/{pw}")

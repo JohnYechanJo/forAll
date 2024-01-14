@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.member.AuthenticationData;
-import project.forAll.repository.AuthenticationDataRepository;
+import project.forAll.repository.member.AuthenticationDataRepository;
 import project.forAll.util.ZoneTime;
 
 import java.util.List;

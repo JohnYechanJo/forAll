@@ -1,0 +1,36 @@
+package project.forAll.domain.board;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+import project.forAll.domain.BassDomain;
+import project.forAll.domain.member.Member;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
+@Getter @Setter
+public class Article extends BassDomain {
+
+    @Id @GeneratedValue
+    @Column(name = "article_id")
+    private Long id;
+
+    // 제목
+    private String title;
+    // 내용
+    private String content;
+    // 생성일시 (수정일시)
+    private LocalDateTime writtenAt;
+//    // 수정일시
+//    private LocalDateTime modifiedAt;
+    // 생성자
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "written_by_member_id")
+    private Member writtenBy;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+}

@@ -31,6 +31,7 @@ public class SpaceServiceTest {
     public void setup(){
         spaceService.deleteAll();
     }
+
 //    @Test
 //    public void 공간등록() throws Exception {
 //        // Given
@@ -51,6 +52,7 @@ public class SpaceServiceTest {
 //
 //        assertEquals("", "오스테리아 로에로", getPlace.getName());
 //    }
+
     @Test
     public void 빈공간등록() throws Exception{
         // Given

@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProfileForm {
 
-    //사용자
+    // 사용자
     private String userId;
     // 한 줄 소개
     private String introduction;
@@ -26,9 +26,9 @@ public class ProfileForm {
     private List<String> career;
     // 프로필 사진
     private Long picture;
-    //프로필 사진 설명
+    // 프로필 사진 설명
     private String pictureExplain;
-    //MBIT
+    // MBTI
     private String mbti;
     // 요리
     private List<String> cook;

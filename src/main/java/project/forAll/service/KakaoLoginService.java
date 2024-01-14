@@ -17,7 +17,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import project.forAll.domain.member.KakaoMember;
-import project.forAll.repository.KakaoMemberRepository;
+import project.forAll.repository.member.KakaoMemberRepository;
 import project.forAll.util.dto.KakaoMemberDto;
 import project.forAll.util.dto.KakaoTokenDto;
 import project.forAll.util.dto.LoginResponseDto;

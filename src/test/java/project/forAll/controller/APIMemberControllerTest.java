@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import project.forAll.domain.member.Member;
 import project.forAll.form.MemberForm;
-import project.forAll.repository.MemberRepository;
+import project.forAll.repository.member.MemberRepository;
 import project.forAll.service.MemberService;
 import project.forAll.util.TestUtil;
 

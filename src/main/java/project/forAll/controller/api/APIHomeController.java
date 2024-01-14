@@ -7,7 +7,7 @@
 //import org.springframework.web.bind.annotation.SessionAttribute;
 //import project.forAll.controller.SessionManager;
 //import project.forAll.domain.member.Member;
-//import project.forAll.repository.MemberRepository;
+//import project.forAll.repository.member.MemberRepository;
 //import project.forAll.web.SessionConst;
 //
 //@RestController
