@@ -1,16 +1,15 @@
 import {Swiper, SwiperSlide} from 'swiper/react';
-import SwiperCore, {Autoplay, Pagination} from "swiper";
+import SwiperCore, {Autoplay} from "swiper";
 import 'swiper/css';
-import  './Slider.css'
+import  './Banner.css'
 import {useEffect} from "react"; // 나중에 Styles.css로 합쳐도 무방
-const Slider = ({dataSet, navigate}) => {
+const Banner = ({dataSet, navigate}) => {
     // 왜인지는 모르겠는데 얘만 process 접근이 안됨
     // const SpringAppUrl = process.env.SPRING_APP_URL;
     const SpringAppUrl = "http://localhost:8080"
     SwiperCore.use([Autoplay]);
-
     const handleClick = (data) => {
-        navigate("/rentPlace",data);
+        navigate("/rentSpace/"+data.id,data);
     };
     return (<div>
             <Swiper
@@ -42,4 +41,4 @@ const Slider = ({dataSet, navigate}) => {
     </div>)
 };
 
-export default Slider;
+export default Banner;

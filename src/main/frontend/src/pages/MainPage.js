@@ -5,7 +5,7 @@ import HomeTemplate from "../components/home/HomeTemplate";
 import Sidebar from "../components/home/Sidebar";
 import "../style/mainpage.css";
 import {useEffect, useState} from "react";
-import Slider from "../components/Slider";
+import Banner from "../components/./Banner";
 import {useNavigate} from "react-router-dom";
 
 const MainPage = () => {
@@ -38,7 +38,7 @@ const MainPage = () => {
                 <button className="button">크루지원하기</button>
             </div>
             <HomeTemplate />
-            <Slider dataSet={spaceData} navigate={navigate}/>
+            <Banner dataSet={spaceData} navigate={navigate}/>
 
             <Sidebar/>
             <ol>
