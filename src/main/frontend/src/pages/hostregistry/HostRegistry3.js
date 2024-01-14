@@ -46,13 +46,7 @@ const HostRegistry3 = () => {
     const [isTrial, setIsTrial] = useState(false);
     const [isMorningDelivery, setIsMorningDelivery] = useState(false);
     const [isWorkIn, setIsWorkIn] = useState(false);
-
-    let recommendedPrice = seat * 15000;
-    let priceString = recommendedPrice.toString();
-    let firstDigits = priceString.slice(0, -4);
-    let randomFourDigits = Math.floor(1000 + Math.random() * 9000);
-    let finalPrice = parseInt(firstDigits + randomFourDigits.toString());
-    const formattedPrice = "₩" + finalPrice.toLocaleString();
+    const [formattedPrice, setFormattedPrice] = useState();
     let isPublic = false;
 
     const onChangeFloor = useCallback((e) => {
@@ -140,6 +134,15 @@ const HostRegistry3 = () => {
     useEffect(() => {
         console.log(rentDays.toString());
     }, [rentDays]);
+    useEffect(() => {
+        let recommendedPrice = seat * 15000;
+        let priceString = recommendedPrice.toString();
+        let firstDigits = priceString.slice(0, -4);
+        let randomFourDigits = Math.floor(1000 + Math.random() * 9000);
+        let finalPrice = parseInt(firstDigits + randomFourDigits.toString());
+        const formattedPrice = "₩" + finalPrice.toLocaleString();
+        setFormattedPrice(formattedPrice);
+    }, [seat]);
     return (
         <div style={{
             display: "flex",

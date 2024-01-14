@@ -1,6 +1,6 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import SwiperCore, {Navigation, Pagination} from "swiper";
-import 'swiper/css';
+import 'swiper/swiper.min.css'
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 const ImageSlider = ({images}) => {
