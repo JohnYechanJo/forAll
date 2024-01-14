@@ -22,14 +22,14 @@ const ChefInfoModifyPage = () => {
         "한식을 만들 때 전통적인 한식에 국한되어 있는 것을 좋아하지 않고 양식, 일식, 중식 등 " +
         "다양한 나라의 요리와 접목시키는 것을 좋아합니다."
     const handleButton = () => {
-        if ((introduce !== "") && (introduceDetail !== "") && (career.length !== 0) && (profileImage !== "")){
+        if ((introduce !== "") && (introduceDetail !== "") && (career.length !== 0) && (profileImage !== "") && (sanitaryImage !== "")){
             submit();
         }
         else setIsModalOpen(true);
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
     const submit = () => {
-        navigate("/chefInfoModifyPage2", {
+        navigate("/chefInfoModify2", {
             state: {
                 introduce: introduce,
                 introduceDetail: introduceDetail,
@@ -37,18 +37,22 @@ const ChefInfoModifyPage = () => {
                 profileImage: profileImage,
                 imageExplain: imageExplain
             }
-
         });
     }
-    // useEffect(() => { 백에서 정보 쏴주는 기능 만들면 다시 구현하면 됨.
-    //     axios.get("/api/v1/profile")
-    //         .then((res) => {
-    //             console.log(res.data);
-    //         })
-    //         .catch(() => {
-    //             navigate("/error");
-    //         })
-    // },[])
+    useEffect(() => { 
+        const userId = sessionStorage.getItem("user_id")
+        axios.get("/api/v1/profile/" + userId)
+            .then((res) => {
+                setCareer(res.data.career);
+                setIntroduce(res.data.introduction);
+                setIntroduceDetail(res.data.detailIntroduction);
+                setImageExplain(res.data.pictureExplain);
+                setProfileImage(res.data.picture);
+            })
+            .catch(() => {
+                navigate("/error");
+            })
+    },[])
 
     const onInputHandler = (e) => {
         setInputCount(e.target.value.length);
@@ -144,6 +148,8 @@ const ChefInfoModifyPage = () => {
             ))}
             <h4 style={{marginBottom:"0"}} >프로필 등록 사진</h4>
             <p>
+                <img src={process.env.SPRING_APP_URL+"/upload/"+profileImage} alt="image"
+                style={{width:"20vw", height:"20vh"}}/>
                 <ImageInput setImg={setProfileImage}/>
             </p>
             <textarea placeholder={text1} onChange={handleInput} className="white-space"

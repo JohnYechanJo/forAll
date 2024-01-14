@@ -1,6 +1,6 @@
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Autoplay, Pagination} from "swiper";
-import 'swiper/css';
+import 'swiper/swiper.min.css'
 import  './Slider.css'
 import {useEffect} from "react"; // 나중에 Styles.css로 합쳐도 무방
 const Slider = ({dataSet, navigate}) => {

@@ -1,7 +1,6 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import ImageInputs from "../../components/ImageInputs";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
 import axios from "axios";
@@ -11,8 +10,8 @@ const ChefInfoModifyPage2 = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
-
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen2, setIsModalOpen2] = useState(false);
     const [selectedMBTI, setSelectedMBTI] = useState("");
     const [selectedFoodTypes, setSelectedFoodTypes] = useState([]);
     const [selectedIngredient, setSelectedIngredient] = useState([]);
@@ -50,6 +49,18 @@ const ChefInfoModifyPage2 = () => {
         }
         else setIsModalOpen(true);
     }
+    useEffect(() => {
+        const userId = sessionStorage.getItem("user_id")
+        axios.get("/api/v1/profile/" + userId)
+            .then((res) => {
+                setSelectedMBTI(res.data.mbti);
+                setSelectedFoodTypes(res.data.cook);
+                setSelectedIngredient(res.data.interest);
+            })
+            .catch(() => {
+                navigate("/error");
+            })
+    },[])
     // backend로 보내는 함수를 구현하면 됨
     const submit = async () => {
         const userId = sessionStorage.getItem("user_id");
@@ -64,9 +75,8 @@ const ChefInfoModifyPage2 = () => {
             mbti: selectedMBTI,
             cook: selectedFoodTypes,
             interest: selectedIngredient,
-
         }).then((res) => {
-            navigate("/main");
+            setIsModalOpen2(true);
         }).catch((err) => console.error(err));
     };
     return(
@@ -158,7 +168,7 @@ const ChefInfoModifyPage2 = () => {
                 ))}
             </div>
             <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>
-                <Link to="/guestRegistry">
+                <Link to="/chefInfoModify">
                     <button style={{
                         backgroundColor: "black",
                         color: "white",
@@ -183,6 +193,10 @@ const ChefInfoModifyPage2 = () => {
                 <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
                     <p style={{fontSize:"16px"}} >필수 입력사항이 모두 기입되지 않았습니다.</p>
                     <button onClick={() => setIsModalOpen(false)}>뒤로</button>
+                </Modal>
+                <Modal isOpen={isModalOpen2} style={ModalStyles} ariaHideApp={false}>
+                    <p style={{fontSize:"16px"}} >저장이 완료되었습니다!</p>
+                    <button onClick={() => navigate("/main")}>확인</button>
                 </Modal>
             </div>
         </div>

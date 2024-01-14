@@ -16,13 +16,13 @@ const GuestRegistry = () => {
     const [career, setCareer] = useState([]);
     const [profileImage, setProfileImage] = useState("");
     const [imageExplain, setImageExplain] = useState("");
-
+    const [sanitaryImage, setSanitaryImage] = useState("");
     const text1 = "사진을 설명해주세요. \n ex.현재 근무하고 있는 업장에서 찍은 사진입니다."
     const text2="ex.한식을 새롭게 해석하는 것을 좋아하는 조리학과 대학생입니다.\n" +
         "한식을 만들 때 전통적인 한식에 국한되어 있는 것을 좋아하지 않고 양식, 일식, 중식 등 " +
         "다양한 나라의 요리와 접목시키는 것을 좋아합니다."
     const handleButton = () => {
-        if ((introduce !== "") && (introduceDetail !== "") && (career.length !== 0) && (profileImage !== "")){
+        if ((introduce !== "") && (introduceDetail !== "") && (career.length !== 0) && (profileImage !== "") && (sanitaryImage !== "") ){
             submit();
         }
         else setIsModalOpen(true);
@@ -135,8 +135,18 @@ const GuestRegistry = () => {
             </p>
             <textarea placeholder={text1} onChange={handleInput} className="white-space"
                       style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR"}}/>
+            <div>
+                <h4 style={{marginBottom:"0"}} >보건증 사진</h4>
+                <p>
+                    <ImageInput setImg={setSanitaryImage}/>
+                </p>
+                <div style={{margin:"0", padding:"0px 0px"}} >
+                    <h5 style={{margin:"0", padding:"0px 0px"}}>• 최근 1년내의 보건증을 등록해주세요.</h5>
+                    <h5 style={{margin:"0", padding:"0px 0px"}}>• 대관에 필요한 정보이오니, <span style={{color:"red",textDecoration:"underline",textDecorationColor:"red"}} >필히 등록해주세요!</span></h5>
+                </div>        
+            </div>
             <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>
-                <Link to="/guestRegistryStart">
+            <Link to="/guestRegistryStart">
                     <button style={{
                         backgroundColor: "black",
                         color: "white",
