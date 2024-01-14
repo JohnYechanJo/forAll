@@ -246,7 +246,7 @@ public class SpaceService extends Service {
     @Transactional
     public SpaceForm of(Space space){
         final SpaceForm sf = new SpaceForm();
-
+        sf.setId(space.getId());
         sf.setUserId(space.getMember().getLoginId());
 
         final Place place = space.getPlace();

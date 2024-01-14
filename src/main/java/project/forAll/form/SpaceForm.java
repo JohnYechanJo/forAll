@@ -9,6 +9,8 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 public class SpaceForm {
+    // space Id
+    private Long id;
     // 유저 loginId
     private String userId;
     // 공간명

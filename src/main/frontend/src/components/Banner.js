@@ -1,7 +1,7 @@
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Autoplay, Pagination} from "swiper";
 import 'swiper/swiper.min.css'
-import  './Slider.css'
+import  './Banner.css'
 import {useEffect} from "react"; // 나중에 Styles.css로 합쳐도 무방
 const Slider = ({dataSet, navigate}) => {
     // 왜인지는 모르겠는데 얘만 process 접근이 안됨

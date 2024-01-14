@@ -29,6 +29,10 @@ import GuestRegistry2 from "./pages/guestregistry/GuestRegistry2";
 import CheatPage from "./pages/CheatPage";
 import ChefInfoModifyPage from './pages/modify/ChefInfoModifyPage';
 import ChefInfoModifyPage2 from './pages/modify/ChefInfoModifyPage2';
+import RentSpacePage from "./pages/RentSpace/RentSpacePage";
+import RentSpaceInfo1 from "./pages/RentSpace/RentSpaceInfo1";
+import RentSpaceInfo2 from "./pages/RentSpace/RentSpaceInfo2";
+import RentSpaceInfo3 from "./pages/RentSpace/RentSpaceInfo3";
 function App() {
   return (
       <Routes>
@@ -62,6 +66,10 @@ function App() {
           <Route path="/chefInfoModify" element={<ChefInfoModifyPage />} />
           <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
           <Route path="/chefInfoModify2" element={<ChefInfoModifyPage2 />} />
+          <Route path="/rentSpace/:id" element={<RentSpacePage />} />
+          <Route path="/rentSpaceInfo1/:id" element={<RentSpaceInfo1 />} />
+          <Route path="/rentSpaceInfo2/:id" element={<RentSpaceInfo2 />} />
+          <Route path="/rentSpaceInfo3/:id" element={<RentSpaceInfo3 />} />
       </Routes>
   );
 }
