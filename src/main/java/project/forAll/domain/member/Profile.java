@@ -1,9 +1,11 @@
-package project.forAll.domain;
+package project.forAll.domain.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import project.forAll.domain.BassDomain;
+import project.forAll.domain.Image;
 import project.forAll.domain.member.Member;
 import project.forAll.util.StringListConverter;
 

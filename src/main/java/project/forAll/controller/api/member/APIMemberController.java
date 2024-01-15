@@ -1,10 +1,11 @@
-package project.forAll.controller.api;
+package project.forAll.controller.api.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
+import project.forAll.controller.api.APIController;
 import project.forAll.domain.member.Member;
 import project.forAll.form.MemberForm;
 import project.forAll.service.MemberService;

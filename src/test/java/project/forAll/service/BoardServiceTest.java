@@ -13,6 +13,10 @@ import project.forAll.domain.member.Member;
 import project.forAll.form.ArticleForm;
 import project.forAll.form.CommentForm;
 import project.forAll.form.MemberForm;
+import project.forAll.repository.board.ArticleRepository;
+import project.forAll.repository.member.MemberRepository;
+
+import java.time.LocalDateTime;
 
 import static org.junit.Assert.*;
 
