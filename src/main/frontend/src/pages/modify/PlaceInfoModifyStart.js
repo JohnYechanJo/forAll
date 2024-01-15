@@ -35,7 +35,16 @@ const PlaceInfoModifyStart = () => {
         .catch((err) => console.error(err));
     axios
         .get("/api/v1/space/" + spaceid)
-        .then((res) => setData(res.data))
+        .then((res) =>{ 
+          setData(res.data)
+          setPlaceName(res.data.name)
+          setPlaceIntro(res.data.spaceBrief)
+          setPlaceIntroDetail(res.data.spaceIntro)
+          setKitchen(res.data.KitchenFeat)
+          setPlaceInfo(res.data.addressBrief)
+          setWebSite(res.data.website)
+          setImgRepresent(res.data.imgRepresent)
+        })
         .catch((err) => console.error(err));
   };
   useEffect(() => {

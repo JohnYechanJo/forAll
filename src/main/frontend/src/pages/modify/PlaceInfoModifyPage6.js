@@ -43,7 +43,12 @@ const PlaceInfoModifyPage6 =() => {
             .catch((err) => console.error(err));
         axios
             .get("/api/v1/space/" + spaceid)
-            .then((res) => setDbData(res.data))
+            .then((res) => {
+                setDbData(res.data)
+                setBank(res.data.bankName);
+                setAccount(res.data.accountNum);
+                setAccountHolder(res.data.accountHolder);
+            })
             .catch((err) => console.error(err));
     };
     useEffect(() => {

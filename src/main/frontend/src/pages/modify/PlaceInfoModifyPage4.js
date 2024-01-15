@@ -78,7 +78,25 @@ const PlaceInfoModifyPage4 = () => {
             .catch((err) => console.error(err));
         axios
             .get("/api/v1/space/" + spaceid)
-            .then((res) => setDbData(res.data))
+            .then((res) => {
+                setDbData(res.data)
+                setFirePit(res.data.fireholeNum);
+                setExtraMachine(res.data.equipExtra);
+                setCountSidePlate(res.data.plateNum);
+                setCountCup(res.data.cupNum);
+                setCountCuttrary(res.data.cutleryNum);
+                setCountBat(res.data.vatNum);
+                setSidePlate(res.data.plateImage);
+                setCup(res.data.cupImage);
+                setCuttrary(res.data.cutleryImage);
+                setBat(res.data.vatImage);
+                setDishWasher(res.data.equip.includes("식기세척기"));
+                setFryer(res.data.equip.includes("튀김기"));
+                setOven(res.data.equip.includes("오븐"));
+                setIceMaker(res.data.equip.includes("제빙기"));
+                setExactFirePit(res.data.fireholeNum);
+                setExtraMachine(res.data.equipExtra);
+            })
             .catch((err) => console.error(err));
     };
     useEffect(() => {
@@ -125,7 +143,7 @@ const PlaceInfoModifyPage4 = () => {
             </div>
             <div>
                 <p>화구</p>
-                <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"}/>
+                <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={dbData.fireholeNum} />
                 {firePit === "직접 입력" ? (
                     <div>
                         <input onChange={onChangeFirePit} defaultValue={dbData.fireholeNum}/>
@@ -136,11 +154,11 @@ const PlaceInfoModifyPage4 = () => {
             </div>
             <div>
                 <p>주방기계*</p>
-                {/* <div className={(fryer)||(dbdata.equip.includes("튀김기")) === true ? "btn_selected" : ""} onClick={toggleFryer}>튀김기</div>
-                <div className={(oven)||(dbdata.equip.includes("오븐")) === true ? "btn_selected" : ""} onClick={toggleOven}>오븐</div>
-                <div className={(dishWasher)||(dbdata.equip.includes("식기세척기")) === true ? "btn_selected" : ""} onClick={toggleDishWasher}>식기세척기</div>
-                <div className={(iceMaker)||(dbdata.equip.includes("제빙기")) === true ? "btn_selected" : ""} onClick={toggleIceMaker}>제빙기</div>
-                <div className={someThing === true ? "btn_selected" : ""} onClick={toggleSomeThing}>내용</div> */}
+                <div className={(fryer) === true ? "btn_selected" : ""} onClick={toggleFryer}>튀김기</div>
+                <div className={(oven) === true ? "btn_selected" : ""} onClick={toggleOven}>오븐</div>
+                <div className={(dishWasher) === true ? "btn_selected" : ""} onClick={toggleDishWasher}>식기세척기</div>
+                <div className={(iceMaker) === true ? "btn_selected" : ""} onClick={toggleIceMaker}>제빙기</div>
+                <div className={someThing === true ? "btn_selected" : ""} onClick={toggleSomeThing}>내용</div>
             </div>
                 {/* 이미지 보여주는 건 다시 건드려야 함 */}
             <div>

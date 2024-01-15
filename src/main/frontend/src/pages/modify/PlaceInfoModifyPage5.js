@@ -99,7 +99,22 @@ const PlaceInfoModifyPage5 = () => {
             .catch((err) => console.error(err));
         axios
             .get("/api/v1/space/" + spaceid)
-            .then((res) => setDbData(res.data))
+            .then((res) => {
+                setDbData(res.data)
+                setPayment(res.data.payWay);
+                setTradeName(res.data.companyName);
+                setRepresentative(res.data.ceoName);
+                setRegistNum1(res.data.businessNum.slice(0,3));
+                setRegistNum2(res.data.businessNum.slice(3,5));
+                setRegistNum3(res.data.businessNum.slice(5,10));
+                setLicense(res.data.businessImage);
+                setAddress(res.data.businessAddress);
+                setEmail1(res.data.payEmail.split("@")[0]);
+                setEmail2(res.data.payEmail.split("@")[1]);
+                setPhone1(res.data.payPhoneNum.slice(0,3));
+                setPhone2(res.data.payPhoneNum.slice(3,7));
+                setPhone3(res.data.payPhoneNum.slice(7,11));
+            })
             .catch((err) => console.error(err));
     };
     useEffect(() => {
@@ -114,10 +129,10 @@ const PlaceInfoModifyPage5 = () => {
             <div>
                 <p>결제 방식을 선택해주세요.*</p>
                 <label>
-                    <input type="radio" name={"payment"} onClick={() => setPayment(PayWay.QuickPay)}/>바로결제
+                    <input type="radio" name={"payment"}  defaultChecked={dbdata.payWay===PayWay.QuickPay} onClick={() => setPayment(PayWay.QuickPay)}/>바로결제
                 </label>
                 <label>
-                    <input type="radio" name={"payment"} onClick={() => setPayment(PayWay.ConfirmPay)}/>승인결제
+                    <input type="radio" name={"payment"}  defaultChecked={dbdata.PayWay===PayWay.ConfirmPay} onClick={() => setPayment(PayWay.ConfirmPay)}/>승인결제
                 </label>
             </div>
             <div>
@@ -129,12 +144,12 @@ const PlaceInfoModifyPage5 = () => {
                 <div>
                     <p>상호명(개인/법인)*</p>
                     <p>{tradeName.length}자/28자</p>
-                    <input value={tradeName} defaultValue={data.companyName} disabled={true}/>
+                    <input value={tradeName} defaultValue={dbdata.companyName} disabled={true}/>
                 </div>
                 <div>
                     <p>대표자명*</p>
                     <p>{representative.length}자/10자</p>
-                    <input value={representative} defaultValue={data.ceoName} disabled={true}/>
+                    <input value={representative} defaultValue={dbdata.ceoName} disabled={true}/>
                 </div>
                 <div>
                     <p>사업자 등록번호*</p>
@@ -153,19 +168,19 @@ const PlaceInfoModifyPage5 = () => {
                     <label>
                         <input type={"checkbox"} />공간 정보와 동일
                     </label>
-                    <input defaultValue={data.businessAddress} disabled={true}/>
+                    <input defaultValue={dbdata.businessAddress} disabled={true}/>
                 </div>
                 <div>
                     <p>정산용 이메일*</p>
-                    <input onChange={onChangeEmail1}/>
-                    @ <input value={email2} onChange={onChangeEmail2}/>
+                    <input onChange={onChangeEmail1} defaultValue={email1} />
+                    @ <input value={email2} defaultValue={email2} onChange={onChangeEmail2}/>
                     <DropDown dataArr={emailDatas} onChange={setEmail2}/>
                 </div>
                 <div>
                     <p>정산용 연락처*</p>
-                    <input value={phone1} onChange={onChangePhone1}/>-
-                    <input value={phone2} onChange={onChangePhone2}/>-
-                    <input value={phone3} onChange={onChangePhone3}/>
+                    <input value={phone1} defaultValue={phone1} onChange={onChangePhone1}/>-
+                    <input value={phone2}  defaultValue={phone2} onChange={onChangePhone2}/>-
+                    <input value={phone3} defaultValue={phone3} onChange={onChangePhone3}/>
                 </div>
             </div>
 
