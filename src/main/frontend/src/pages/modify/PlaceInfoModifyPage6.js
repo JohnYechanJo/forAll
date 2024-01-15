@@ -36,12 +36,19 @@ const PlaceInfoModifyPage6 =() => {
         }
         else setIsModalOpen(true);
     };
-    useEffect(() => {
+    const downloadData = async () => {
+        let spaceid;
+        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
+            .then((res) => spaceid = res.data[0])
+            .catch((err) => console.error(err));
         axios
-          .get("/api/v1/space/" + params.id)
-          .then((res) => setDbData(res.data))
-          .catch((err) => console.error(err));
-      }, []);
+            .get("/api/v1/space/" + spaceid)
+            .then((res) => setDbData(res.data))
+            .catch((err) => console.error(err));
+    };
+    useEffect(() => {
+        downloadData();
+    }, []);
     const submit = async () => {
         const userId = sessionStorage.getItem("user_id");
         // 대표 이미지

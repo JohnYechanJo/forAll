@@ -92,12 +92,19 @@ const PlaceInfoModifyPage5 = () => {
             }
         })
     };
-    useEffect(() => {
+    const downloadData = async () => {
+        let spaceid;
+        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
+            .then((res) => spaceid = res.data[0])
+            .catch((err) => console.error(err));
         axios
-          .get("/api/v1/space/" + params.id)
-          .then((res) => setDbData(res.data))
-          .catch((err) => console.error(err));
-      }, []);
+            .get("/api/v1/space/" + spaceid)
+            .then((res) => setDbData(res.data))
+            .catch((err) => console.error(err));
+    };
+    useEffect(() => {
+        downloadData();
+    }, []);
     useEffect(() => {
         if (email2 === "직접입력") setEmail2("");
     }, [email2]);

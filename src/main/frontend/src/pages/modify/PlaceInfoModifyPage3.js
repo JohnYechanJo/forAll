@@ -89,19 +89,26 @@ const PlaceInfoModifyPage3 = () => {
     const toggleSunDay = useCallback((e) => {
         setSunDay(!sunDay);
     }, [sunDay]);
-    useEffect(() => {
+    const downloadData = async () => {
+        let spaceid;
+        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
+            .then((res) => spaceid = res.data[0])
+            .catch((err) => console.error(err));
         axios
-          .get("/api/v1/space/" + params.id)
-          .then((res) => {
-            setDbData(res.data);
-            setElevator(dbData.haveElevator)
-            setTrial(dbData.ableTrial)
-            setMorningDelivery(dbData.ableEarlyDeliver)
-            setWorkIn(dbData.ableWorkIn)
-            setAlcohol(dbData.ableDrink)
-        })
-          .catch((err) => console.error(err));
-      }, []); 
+            .get("/api/v1/space/" + spaceid)
+            .then((res) => {
+                setDbData(res.data);
+                setElevator(dbData.haveElevator)
+                setTrial(dbData.ableTrial)
+                setMorningDelivery(dbData.ableEarlyDeliver)
+                setWorkIn(dbData.ableWorkIn)
+                setAlcohol(dbData.ableDrink)
+            })
+            .catch((err) => console.error(err));
+    };
+    useEffect(() => {
+        downloadData();
+    }, []);
     const handleButton = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
             && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
