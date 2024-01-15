@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {KitchenFeat} from "../../utils/enums";
+import { KitchenFeat } from "../../utils/enums";
 import Modal from "react-modal";
 import { ModalStyles } from "../../components/ModalStyles";
 
@@ -15,22 +15,30 @@ const RentSpaceInfo3 = () => {
       .then((res) => setData(res.data))
       .catch((err) => console.error(err));
   }, []);
-const [modalIsOpen1, setModalIsOpen1] = useState(false);
-const [modalIsOpen2, setModalIsOpen2] = useState(false);
-const [modalIsOpen3, setModalIsOpen3] = useState(false);
-const modalClose1 = () => {
+  const [modalIsOpen1, setModalIsOpen1] = useState(false);
+  const [modalIsOpen2, setModalIsOpen2] = useState(false);
+  const [modalIsOpen3, setModalIsOpen3] = useState(false);
+  const modalClose1 = () => {
     setModalIsOpen1(false);
-};
-const modalClose2 = () => {
+  };
+  const modalClose2 = () => {
     setModalIsOpen2(false);
-};
-const modalClose3 = () => {
+  };
+  const modalClose3 = () => {
     setModalIsOpen3(false);
-};
+  };
   return (
-    <div style={{margin:"2vw"}}>
+    <div style={{ margin: "2vw" }}>
       <h2>• 공간정보</h2>
-        <hr style={{width: "95%", color: "black", border:"1px solid black",backgroundColor:"black" ,height:"2px"}}/>
+      <hr
+        style={{
+          width: "95%",
+          color: "black",
+          border: "1px solid black",
+          backgroundColor: "black",
+          height: "2px",
+        }}
+      />
       <div>
         <div>
           <h4>주방 특성</h4>
@@ -40,9 +48,10 @@ const modalClose3 = () => {
               name="kitchen"
               value={KitchenFeat.Open}
               style={{
-                border:"1px solid gray",
-                backgroundColor: (data.KitchenFeat==="Open") ? "black" : "white",
-                color: (data.KitchenFeat==="Open") ? "white" : "black",
+                border: "1px solid gray",
+                backgroundColor:
+                  data.KitchenFeat === "Open" ? "black" : "white",
+                color: data.KitchenFeat === "Open" ? "white" : "black",
                 width: "100px",
                 flex: "1",
                 marginLeft: "10px",
@@ -55,9 +64,10 @@ const modalClose3 = () => {
               name="kitchen"
               value={KitchenFeat.Face}
               style={{
-                border:"1px solid gray",
-                backgroundColor: (data.KitchenFeat==="Face") ? "black" : "white",
-                color: (data.KitchenFeat==="Face") ? "white" : "black",
+                border: "1px solid gray",
+                backgroundColor:
+                  data.KitchenFeat === "Face" ? "black" : "white",
+                color: data.KitchenFeat === "Face" ? "white" : "black",
                 width: "100px",
                 flex: "1",
                 marginLeft: "10px",
@@ -70,9 +80,10 @@ const modalClose3 = () => {
               name="kitchen"
               value={KitchenFeat.Close}
               style={{
-                border:"1px solid gray",
-                backgroundColor: (data.KitchenFeat==="Close") ? "black" : "white",
-                color: (data.KitchenFeat==="Close")  ? "white" : "black",
+                border: "1px solid gray",
+                backgroundColor:
+                  data.KitchenFeat === "Close" ? "black" : "white",
+                color: data.KitchenFeat === "Close" ? "white" : "black",
                 width: "100px",
                 flex: "1",
                 marginLeft: "10px",
@@ -127,7 +138,16 @@ const modalClose3 = () => {
       </div>
       <div>
         <h4>화구</h4>
-        <div style={{border:"2px solid gray",borderRadius:"2px",width:"100%",height:"3vh"}} >{data.fireholeNum}</div>
+        <div
+          style={{
+            border: "2px solid gray",
+            borderRadius: "2px",
+            width: "100%",
+            height: "3vh",
+          }}
+        >
+          {data.fireholeNum}
+        </div>
       </div>
       <div>
         <h4>확보된 주방기계</h4>
@@ -140,27 +160,148 @@ const modalClose3 = () => {
       </div>
       <div>
         <h4>추가 사용 가능 기계</h4>
-        <div style={{border:"2px solid gray",borderRadius:"2px",width:"100%",height:"10vh"}}>{data.equipExtra}</div>
+        <div
+          style={{
+            border: "2px solid gray",
+            borderRadius: "2px",
+            width: "100%",
+            height: "10vh",
+          }}
+        >
+          {data.equipExtra}개
+        </div>
       </div>
       <div>
         <h4>물컵</h4>
-        <img src={process.env.SPRING_APP_URL+"/upload/"+ data.cupImage} alt="image"/>
-        <div style={{border:"2px solid gray",borderRadius:"2px",width:"100%",height:"3vh"}}>{data.cupNum}</div>
+        <img
+          src={process.env.SPRING_APP_URL + "/upload/" + data.cupImage}
+          alt="image"
+        />
+        <div
+          style={{
+            border: "2px solid gray",
+            borderRadius: "2px",
+            width: "100%",
+            height: "3vh",
+          }}
+        >
+          {data.cupNum}개
+        </div>
       </div>
       <div>
         <h4>앞접시</h4>
-        <img src={process.env.SPRING_APP_URL+"/upload/"+ data.plateImage} alt="image"/>
-        <div style={{border:"2px solid gray",borderRadius:"2px",width:"100%",height:"3vh"}}>{data.plateNum}</div>
+        <img
+          src={process.env.SPRING_APP_URL + "/upload/" + data.plateImage}
+          alt="image"
+        />
+        <div
+          style={{
+            border: "2px solid gray",
+            borderRadius: "2px",
+            width: "100%",
+            height: "3vh",
+          }}
+        >
+          {data.plateNum}개
+        </div>
       </div>
       <div>
         <h4>커트러리</h4>
-        <img src={process.env.SPRING_APP_URL+"/upload/"+ data.cutleryImage} alt="image"/>
-        <div style={{border:"2px solid gray",borderRadius:"2px",width:"100%",height:"3vh"}}>{data.cutleryNum}</div>
+        <img
+          src={process.env.SPRING_APP_URL + "/upload/" + data.cutleryImage}
+          alt="image"
+        />
+        <div
+          style={{
+            border: "2px solid gray",
+            borderRadius: "2px",
+            width: "100%",
+            height: "3vh",
+          }}
+        >
+          {data.cutleryNum}개
+        </div>
       </div>
       <div>
         <h4>밧드</h4>
-        <img src={process.env.SPRING_APP_URL+"/upload/"+ data.vatImage} alt="image"/>
-        <div style={{border:"2px solid gray",borderRadius:"2px",width:"100%",height:"3vh"}}>{data.vatNum}</div>
+        <img
+          src={process.env.SPRING_APP_URL + "/upload/" + data.vatImage}
+          alt="image"
+        />
+        <div
+          style={{
+            border: "2px solid gray",
+            borderRadius: "2px",
+            width: "100%",
+            height: "3vh",
+          }}
+        >
+          {data.vatNum}개
+        </div>
+      </div>
+      <div>
+        <h4>주방사진</h4>
+        <hr
+          style={{
+            width: "95%",
+            color: "black",
+            border: "1px solid black",
+            backgroundColor: "black",
+            height: "2px",
+          }}
+        />
+        <h4>주방 우측면</h4>
+        <img
+          src={process.env.SPRING_APP_URL + "/upload/" + data.kitRight}
+          alt="image"
+        />
+        <h4>주방 좌측면</h4>
+        <img
+          src={process.env.SPRING_APP_URL + "/upload/" + data.kitLeft}
+          alt="image"
+        />
+        <h4>주방 정면</h4>
+        <img
+          src={process.env.SPRING_APP_URL + "/upload/" + data.kitFront}
+          alt="image"
+        />
+        <h4>주방 후면</h4>
+        <img
+          src={process.env.SPRING_APP_URL + "/upload/" + data.kitBack}
+          alt="image"
+        />
+        <h4>주방 전체</h4>
+        <img
+          src={process.env.SPRING_APP_URL + "/upload/" + data.kitEntire}
+          alt="image"
+        />
+        <h4>추가사진</h4>
+        <img
+          src={process.env.SPRING_APP_URL + "/upload/" + data.kitExtra}
+          alt="image"
+        />
+      </div>
+      <div>
+        <h4>메뉴 사진</h4>
+        <hr
+          style={{
+            width: "95%",
+            color: "black",
+            border: "1px solid black",
+            backgroundColor: "black",
+            height: "2px",
+          }}
+        />
+        {/* 메뉴 사진 띄우는 코드 작성, 현재는 data가 없어서 undefined로 나오기 때문에 주석처리 */}
+        {/* {data.menu.map((menuElement, index) => (
+          <div key={index}>
+            <p>메뉴 사진{index + 1}</p>
+            <img
+              src={process.env.SPRING_APP_URL + "/upload/" + menuElement}
+              alt="image"
+            />
+          </div>
+        ))}*/}
       </div>
       <button onClick={() => navigate(-1)}>돌아가기</button>
     </div>
