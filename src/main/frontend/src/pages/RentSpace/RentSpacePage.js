@@ -10,7 +10,7 @@ const RentSpacePage = () => {
     const [data, setData] = useState({});
     const [images1, setImages1] = useState([]);
     const [images2, setImages2] = useState([]);
-    console.log(data)
+    const [equipments, setEquipments] = useState([]);
     useEffect(() => {
         axios.get("/api/v1/space/"+params.id)
             .then((res) => setData(res.data))
@@ -18,7 +18,8 @@ const RentSpacePage = () => {
     }, []);
     useDidMountEffect(() => {
         setImages1([data.mainImage,data.hallRight, data.hallLeft, data.hallFront, data.hallBack, data.hallEntire, ...data.hallExtra]);
-        setImages2([data.kitRight, data.kitLeft, data.kitFront, data.kitBack, data.kitEntire, ...data.kitExtra, ...data.menu, ...data.plateImage, ...data.cupImage, ...data.cutleryImage, ...data.vatImage]);
+        // setImages2([data.kitRight, data.kitLeft, data.kitFront, data.kitBack, data.kitEntire, ...data.kitExtra, ...data.menu, ...data.plateImage, ...data.cupImage, ...data.cutleryImage, ...data.vatImage]);
+        setEquipments(data.equip ? data.equip.split(",") : []);
     }, [data]);
     return(
         <div>
@@ -104,10 +105,28 @@ const RentSpacePage = () => {
                     />
                 </div>
                 <div>
-                    <p>상세사진</p>
-                    <ImageSlider images={images2}/>
-                    <p onClick={() => navigate("/rentSpaceInfo3/"+params.id)}>더 보기</p>
+                    <h4>확보된 주방기계</h4>
+                    <div style={{display:"flex", flexDirection:"row",justifyContent:"space-evenly"}}>
+                        <div className={equipments.includes("튀김기") === true ? "btn_selected" : ""}>튀김기</div>
+                        <div className={equipments.includes("오븐") === true ? "btn_selected" : ""}>오븐</div>
+                        <div className={equipments.includes("식기세척기") === true ? "btn_selected" : ""}>식기세척기</div>
+                        <div className={equipments.includes("제빙기") === true ? "btn_selected" : ""}>제빙기</div>
+                    </div>
                 </div>
+                <div>
+                    <h4>추가 사용 가능 기계</h4>
+                    <div
+                        style={{
+                            border: "2px solid gray",
+                            borderRadius: "2px",
+                            width: "100%",
+                            height: "10vh",
+                        }}
+                    >
+                        {data.equipExtra}
+                    </div>
+                </div>
+                <p onClick={() => navigate("/rentSpaceInfo3/"+params.id)}>더 보기</p>
                 <div>
                     <div>고객센터</div>
                     <button>찜하기</button>
