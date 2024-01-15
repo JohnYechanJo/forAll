@@ -8,9 +8,13 @@ import SignUpPage from "./pages/signup/SignUpPage";
 import SignUpPage2 from "./pages/signup/SignUpPage2";
 import SignUpCompletePage from "./pages/signup/SignUpCompletePage";
 import PersonalInfoModifyPage from './pages/modify/PersonalInfoModifyPage';
-import PlaceInfoModifyPage from './pages/modify/PlaceInfoModifyPage';
+import PlaceInfoModifyStart from './pages/modify/PlaceInfoModifyStart';
 import PersonalInfoModifyPage2 from './pages/modify/PersonalInfoModifyPage2';
 import PlaceInfoModifyPage2 from './pages/modify/PlaceInfoModifyPage2';
+import PlaceInfoModifyPage3 from './pages/modify/PlaceInfoModifyPage3';
+import PlaceInfoModifyPage4 from './pages/modify/PlaceInfoModifyPage4';
+import PlaceInfoModifyPage5 from './pages/modify/PlaceInfoModifyPage5';
+import PlaceInfoModifyPage6 from './pages/modify/PlaceInfoModifyPage6';
 import ModifyCompletePage from "./pages/modify/ModifyCompletePage";
 import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
@@ -46,8 +50,12 @@ function App() {
           <Route path="/signUpComplete" element={<SignUpCompletePage />} />
           <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
           <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />
-          <Route path="/placeInfoModify" element={<PlaceInfoModifyPage />} />
+          <Route path="/placeInfoModifyStart" element={<PlaceInfoModifyStart />} />
           <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
+          <Route path="/placeInfoModify3" element={<PlaceInfoModifyPage3 />} />
+          <Route path="/placeInfoModify4" element={<PlaceInfoModifyPage4 />} />
+          <Route path="/placeInfoModify5" element={<PlaceInfoModifyPage5 />} />
+          <Route path="/placeInfoModify6" element={<PlaceInfoModifyPage6 />} />
           <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
           <Route path="/hostRegistry" element={<HostRegistry />} />
           <Route path="/hostRegistryStart" element={<HostRegistryStart />} />

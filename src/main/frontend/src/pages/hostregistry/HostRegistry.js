@@ -132,8 +132,6 @@ const HostRegistry = () => {
                                         setKitchen(KitchenFeat.NotSpecified);
                                     }
                                     setClicked1(!clicked1);
-
-
                                 }}
                         >
                             오픈형
@@ -156,8 +154,6 @@ const HostRegistry = () => {
                                         setKitchen(KitchenFeat.NotSpecified);
                                     }
                                     setClicked2(!clicked2);
-
-
                                 }}
                         >
                             대면형

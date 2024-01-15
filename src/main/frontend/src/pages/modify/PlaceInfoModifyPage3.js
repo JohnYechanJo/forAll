@@ -2,15 +2,18 @@ import DropDown from "../../components/DropDown";
 import {useCallback, useEffect, useState} from "react";
 import "../../style/btnStyles.css";
 import ImageInputs from "../../components/ImageInputs";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
 import "../../components/Styles.css";
 import MultipleDatePicker from "react-multiple-datepicker";
-const HostRegistry3 = () => {
+import axios from "axios";
+const PlaceInfoModifyPage3 = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
+    const params = useParams();
+    const [dbData, setDbData] = useState({});
 
     const rentWeeksData = ["휴무없음", "매주", "격주(홀수주)", "격주(짝수주)", "매월 첫째주", "매월 둘째주", "매월 셋째주", "매월 넷째주", "매월 마지막주", "매월 말일", "직접지정"];
     const days = [...Array(31).keys()].map(i => (i + 1)+"일");
@@ -48,7 +51,7 @@ const HostRegistry3 = () => {
     const [isWorkIn, setIsWorkIn] = useState(false);
     const [formattedPrice, setFormattedPrice] = useState();
     let isPublic = false;
-
+    
     const onChangeFloor = useCallback((e) => {
         setExactFloor(e.target.value);
     }, []);
@@ -86,8 +89,19 @@ const HostRegistry3 = () => {
     const toggleSunDay = useCallback((e) => {
         setSunDay(!sunDay);
     }, [sunDay]);
-
-
+    useEffect(() => {
+        axios
+          .get("/api/v1/space/" + params.id)
+          .then((res) => {
+            setDbData(res.data);
+            setElevator(dbData.haveElevator)
+            setTrial(dbData.ableTrial)
+            setMorningDelivery(dbData.ableEarlyDeliver)
+            setWorkIn(dbData.ableWorkIn)
+            setAlcohol(dbData.ableDrink)
+        })
+          .catch((err) => console.error(err));
+      }, []); 
     const handleButton = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
             && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
@@ -98,7 +112,6 @@ const HostRegistry3 = () => {
         }
         else setIsModalOpen(true);
     }
-
     const submit = () => {
         const rentDayString = [];
         if (monDay) rentDayString.push("월");
@@ -112,7 +125,7 @@ const HostRegistry3 = () => {
         const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDaysdata;
 
         data.isPublic = data.isPublic && isPublic;
-        navigate("/hostRegistry4",{
+        navigate("/placeInfoModify4",{
             state: {
                 ...data,
                 rentWeek: rentData,
@@ -174,14 +187,14 @@ const HostRegistry3 = () => {
                 alignItems: "center",
             }}>
                 <span>전일 </span>
-                <span><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"}/></span>
+                <span><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={dbData.ableStartHour}/></span>
                 <span> 부터, 당일 </span>
-                <span><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"}/></span>
+                <span><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={dbData.ableFinHour}/></span>
                 <span> 까지</span>
             </div>
             <div>
                 <p>공간 층수*</p>
-                <DropDown dataArr={floorData} onChange={setFloor} placeholder={"층수 여부를 선택해주세요."}/>
+                <DropDown dataArr={floorData} onChange={setFloor} placeholder={"층수 여부를 선택해주세요."} defaultData={dbData.floorNum}/>
                 {floor === "직접 입력" ? (
                     <div>
                         <input onChange={onChangeFloor}/>
@@ -192,7 +205,7 @@ const HostRegistry3 = () => {
             </div>
             <div>
                 <p>주차 여부*</p>
-                <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"}/>
+                <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} defaultData={dbData.ableParking}/>
                 {parkAvaliable === "직접 입력" ? (
                     <div>
                         <input onChange={onChangePark}/>
@@ -215,7 +228,7 @@ const HostRegistry3 = () => {
                     height: "3vh",
                     textAlign: "center",
                     fontFamily: "Noto Sans KR"
-                }} className={elevator === true ? "btn_selected" : ""} onClick={() => setElevator(true)}>있음
+                }} className={(elevator) === true ? "btn_selected" : ""} onClick={() => setElevator(true)}>있음
                 </div>
 
                 <div
@@ -227,25 +240,29 @@ const HostRegistry3 = () => {
                         textAlign: "center",
                         fontFamily: "Noto Sans KR",
                     }}
-                    className={elevator === false ? "btn_selected" : ""} onClick={() => setElevator(false)}>없음
+                    className={(elevator) === false ? "btn_selected" : ""} onClick={() => setElevator(false)}>없음
                 </div>
             </div>
             <div>
                 <p>테이블</p>
                 <input style={{width: "90vw", height: "3vh", float: "left"}} onChange={onChangeTable}
-                       placeholder={"최대 테이블 수를 기준으로 입력해주세요"}/>
+                       placeholder={"최대 테이블 수를 기준으로 입력해주세요"} defaultValue={dbData.tableNum}/>
             </div>
             <div>
                 <p>좌석수</p>
                 <input style={{width: "90vw", height: "3vh", float: "left"}} onChange={onChangeSeat}
-                       placeholder={"최대 좌석수를 기준으로 입력해주세요"}/>
+                       placeholder={"최대 좌석수를 기준으로 입력해주세요"} defaultValue={dbData.seatNum}/>
             </div>
-            <div style={{display:"flex", flexDirection:"column"}}>
+            <div style={{display:"flex", flexDirection:"column"}} >
                 <p>가격 설정*</p>
-                <input style={{width: "90vw", height: "3vh", float: "left", marginRight: "2vw"}}
-                       onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"}/>
-                <h3>{(seat===undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat<=10) ? "포 올 권장가격 : ₩150,000원" :"포 올 권장가격 :" + formattedPrice + "원"}</h3>
-                <p>포 올 권장가격보다 높이 측정할 경우, 원데이 오너들이 부담스럽게 느낄 수 있어요.</p>
+                <div>
+                    <input style={{width: "90vw", height: "3vh", float: "left", marginRight: "2vw"}}
+                       onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} defaultValue={dbData.priceSet}/>
+                </div>
+                <div>
+                    <h3>{(seat===undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat<=10) ? "포 올 권장가격 : ₩150,000원" :"포 올 권장가격 :" + formattedPrice + "원"}</h3>
+                    <p>포 올 권장가격보다 높이 측정할 경우, 원데이 오너들이 부담스럽게 느낄 수 있어요.</p>
+                </div>
             </div>
 
             <div>
@@ -266,7 +283,7 @@ const HostRegistry3 = () => {
                     textAlign: "center",
                     fontFamily: "Noto Sans KR"
                 }}
-                     className={trial === true ? "btn_selected" : ""} onClick={() => setTrial(true)}>가능
+                     className={(trial) === true ? "btn_selected" : ""} onClick={() => setTrial(true)}>가능
                 </div>
                 <div style={{
                     border: "2px solid lightgray",
@@ -276,7 +293,7 @@ const HostRegistry3 = () => {
                     textAlign: "center",
                     fontFamily: "Noto Sans KR"
                 }}
-                     className={trial === false ? "btn_selected" : ""} onClick={() => setTrial(false)}>불가
+                     className={(trial) === false ? "btn_selected" : ""} onClick={() => setTrial(false)}>불가
                 </div>
             </div>
             <Modal isOpen={isTrial} style={ModalStyles} >
@@ -301,7 +318,7 @@ const HostRegistry3 = () => {
                     textAlign: "center",
                     fontFamily: "Noto Sans KR"
                 }}
-                     className={morningDelivery === true ? "btn_selected" : ""}
+                     className={(morningDelivery) === true ? "btn_selected" : ""}
                      onClick={() => setMorningDelivery(true)}>가능
                 </div>
                 <div style={{
@@ -312,7 +329,7 @@ const HostRegistry3 = () => {
                     textAlign: "center",
                     fontFamily: "Noto Sans KR"
                 }}
-                     className={morningDelivery === false ? "btn_selected" : ""}
+                     className={(morningDelivery) === false ? "btn_selected" : ""}
                      onClick={() => setMorningDelivery(false)}>불가
                 </div>
             </div>
@@ -338,7 +355,7 @@ const HostRegistry3 = () => {
                     textAlign: "center",
                     fontFamily: "Noto Sans KR"
                 }}
-                     className={workIn === true ? "btn_selected" : ""} onClick={() => setWorkIn(true)}>가능
+                     className={(workIn) === true ? "btn_selected" : ""} onClick={() => setWorkIn(true)}>가능
                 </div>
                 <div style={{
                     border: "2px solid lightgray",
@@ -348,7 +365,7 @@ const HostRegistry3 = () => {
                     textAlign: "center",
                     fontFamily: "Noto Sans KR"
                 }}
-                     className={workIn === false ? "btn_selected" : ""} onClick={() => setWorkIn(false)}>불가
+                     className={(workIn) === false ? "btn_selected" : ""} onClick={() => setWorkIn(false)}>불가
                 </div>
             </div>
             <Modal isOpen={isWorkIn} style={ModalStyles} >
@@ -373,7 +390,7 @@ const HostRegistry3 = () => {
                     textAlign: "center",
                     fontFamily: "Noto Sans KR"
                 }}
-                     className={alcohol === true ? "btn_selected" : ""} onClick={() => setAlcohol(true)}>가능
+                     className={(alcohol) === true ? "btn_selected" : ""} onClick={() => setAlcohol(true)}>가능
                 </div>
                 <div style={{
                     border: "2px solid lightgray",
@@ -383,12 +400,12 @@ const HostRegistry3 = () => {
                     textAlign: "center",
                     fontFamily: "Noto Sans KR"
                 }}
-                     className={alcohol === false ? "btn_selected" : ""} onClick={() => setAlcohol(false)}>불가
+                     className={(alcohol)  === false ? "btn_selected" : ""} onClick={() => setAlcohol(false)}>불가
                 </div>
             </div>
 
             <div>
-                <Link to="/hostRegistry2">
+                <Link to="/placeInfoModify2">
                     <button>이전</button>
                 </Link>
                 <button onClick={handleButton}>다음</button>
@@ -403,4 +420,4 @@ const HostRegistry3 = () => {
     )
 };
 
-export default HostRegistry3;
+export default PlaceInfoModifyPage3;

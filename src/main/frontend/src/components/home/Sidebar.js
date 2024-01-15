@@ -61,7 +61,7 @@ const Sidebar = ({ width = 280, children }) => {
                     <button className="button" style={{textAlign:"left", width:"35vw"}}>공간정보 등록하기</button>
                 </Link>
                 <hr style={{width: "100%", color: "black"}}/>
-                <Link to="/placeInfoModify">
+                <Link to="/placeInfoModifyStart">
                     <button className="button" style={{textAlign:"left"}}>공간정보수정</button>
                 </Link>
                 <hr style={{width: 0}}/>
