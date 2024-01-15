@@ -135,7 +135,7 @@ public class SpaceService extends Service {
     @Transactional
     public Space build(SpaceForm sf){
         final Space space = new Space();
-
+        if(sf.getId() != null) space.setId(sf.getId());
         Member member = memberService.findByLoginId(sf.getUserId());
         space.setMember(member);
 
@@ -240,7 +240,6 @@ public class SpaceService extends Service {
         space.setBooking(booking);
         space.setPublic(sf.getIsPublic());
 
-        save(space);
         return space;
     }
     @Transactional

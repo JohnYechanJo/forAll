@@ -33,6 +33,7 @@ public class APISpaceController extends APIController {
             if (!loginId.equals(sf.getUserId())) return new ResponseEntity(errorResponse("Session Disabled"), HttpStatus.SERVICE_UNAVAILABLE);
 
             final Space space = spaceService.build(sf);
+            spaceService.save(space);
 
             return new ResponseEntity(Long.toString(space.getId()), HttpStatus.OK);
         }catch(final Exception e){
@@ -97,6 +98,24 @@ public class APISpaceController extends APIController {
             }
         }catch(final Exception e){
             return new ResponseEntity(errorResponse("Could not get user spaces : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/space")
+    public ResponseEntity editSpace(@RequestBody final SpaceForm form, HttpServletRequest request){
+        try{
+            String loginId = (String) sessionManager.getSession(request);
+            if (!loginId.equals(form.getUserId()))
+                return new ResponseEntity(errorResponse("Session Disabled"), HttpStatus.SERVICE_UNAVAILABLE);
+
+            final Member savedMember = memberService.findByLoginId(form.getUserId());
+            if (savedMember == null) throw new Exception("No member with loginId " + form.getUserId());
+
+            final Space space = spaceService.build(form);
+            spaceService.save(space);
+            return new ResponseEntity(Long.toString(space.getId()), HttpStatus.OK);
+        }catch (final Exception e){
+            return new ResponseEntity(errorResponse("Could not edit Space : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 }
