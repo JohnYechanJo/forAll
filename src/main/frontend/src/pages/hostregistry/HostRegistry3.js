@@ -117,7 +117,7 @@ const HostRegistry3 = () => {
                 ...data,
                 rentWeek: rentData,
                 rentTimeFrom: rentTimeFrom !== "" ? rentTimeFrom.split("시")[0] : "",
-                rentTimeTo: rentTimeTo !== "" ? rentTimeFrom.split("시")[0] : "",
+                rentTimeTo: rentTimeTo !== "" ? rentTimeTo.split("시")[0] : "",
                 floor: floor === "직접입력" ? "지상"+exactFloor+"층" : floor,
                 parkAvaliable: parkAvaliable === "직접입력" ? exactPark + "대" : parkAvaliable,
                 elevator: elevator,

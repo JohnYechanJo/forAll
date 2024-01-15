@@ -9,11 +9,12 @@ const DropDown = ({dataArr, onChange, placeholder, defaultData}) => {
     const onChangeData = (e) => {
         onChange(e.target.value);
     };
-//defaultvalue 설정했음
+
     return (
         <div>
-            <select onChange={onChangeData} placeholder={placeholder} defaultValue={defaultData}
+            <select onChange={onChangeData} placeholder={placeholder}
                     style={{width: "100%", height: "3vh", fontSize: "1.5vh", fontFamily: "Noto Sans KR"}}
+                    defaultValue={defaultData}
             >
                 {dataArr.map(data => (
                     <option key={data} value={data}>

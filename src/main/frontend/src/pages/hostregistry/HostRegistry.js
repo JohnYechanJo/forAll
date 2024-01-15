@@ -117,13 +117,13 @@ const HostRegistry = () => {
                         <button className="button"
                                 name="kitchen"
                                 value={KitchenFeat.Open}
-                                disabled={clicked2 || clicked3}
                                 style={{
                                     backgroundColor: clicked1 ? "black" : "white",
                                     color: clicked1 ? "white" : "black",
                                     width: "100px",
                                     flex: "1",
-                                    marginLeft: "10px"
+                                    marginLeft: "10px",
+                                    border: "2px solid gray"
                                 }}
                                 onClick={(event) => {
                                     const selected = event.target.value;
@@ -132,6 +132,8 @@ const HostRegistry = () => {
                                         setKitchen(KitchenFeat.NotSpecified);
                                     }
                                     setClicked1(!clicked1);
+                                    setClicked2(false);
+                                    setClicked3(false);
                                 }}
                         >
                             오픈형
@@ -139,13 +141,13 @@ const HostRegistry = () => {
                         <button className="button"
                                 name="kitchen"
                                 value={KitchenFeat.Face}
-                                disabled={clicked1 || clicked3}
                                 style={{
                                     backgroundColor: clicked2 ? "black" : "white",
                                     color: clicked2 ? "white" : "black",
                                     width: "100px",
                                     flex: "1",
-                                    marginLeft: "10px"
+                                    marginLeft: "10px",
+                                    border: "2px solid gray"
                                 }}
                                 onClick={(event) => {
                                     const selected = event.target.value;
@@ -153,7 +155,9 @@ const HostRegistry = () => {
                                     if (clicked2 === true) {
                                         setKitchen(KitchenFeat.NotSpecified);
                                     }
+                                    setClicked1(false);
                                     setClicked2(!clicked2);
+                                    setClicked3(false);
                                 }}
                         >
                             대면형
@@ -161,14 +165,14 @@ const HostRegistry = () => {
                         <button className="button"
                                 name="kitchen"
                                 value={KitchenFeat.Close}
-                                disabled={clicked1 || clicked2}
                                 style={{
                                     backgroundColor: clicked3 ? "black" : "white",
                                     color: clicked3 ? "white" : "black",
                                     width: "100px",
                                     flex: "1",
                                     marginLeft: "10px",
-                                    marginRight: "10px"
+                                    marginRight: "10px",
+                                    border: "2px solid gray",
                                 }}
                                 onClick={(event) => {
                                     const selected = event.target.value;
@@ -176,8 +180,9 @@ const HostRegistry = () => {
                                     if (clicked3 === true) {
                                         setKitchen(KitchenFeat.NotSpecified);
                                     }
+                                    setClicked1(false);
+                                    setClicked2(false);
                                     setClicked3(!clicked3);
-
                                 }}
                         >
                             폐쇄형

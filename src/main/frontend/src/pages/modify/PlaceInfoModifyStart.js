@@ -30,17 +30,21 @@ const PlaceInfoModifyStart = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const downloadData = async () => {
     let spaceid;
-    await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
-        .then((res) => spaceid = res.data[0])
+    //이 부분에서 userSpace가 있으면 에러 나던데 이거 뒤에 userSpace 붙인 이유가?
+    await axios.get("/api/v1/space/" + sessionStorage.getItem("user_id"))
+        .then((res) => {
+          spaceid = res.data.userId
+        })
         .catch((err) => console.error(err));
     axios
         .get("/api/v1/space/" + spaceid)
         .then((res) =>{ 
+          console.log(res.data)
           setData(res.data)
           setPlaceName(res.data.name)
           setPlaceIntro(res.data.spaceBrief)
           setPlaceIntroDetail(res.data.spaceIntro)
-          setKitchen(res.data.KitchenFeat)
+          setKitchen(res.data.kitchenFeat)
           setPlaceInfo(res.data.addressBrief)
           setWebSite(res.data.website)
           setImgRepresent(res.data.imgRepresent)
@@ -170,8 +174,8 @@ const PlaceInfoModifyStart = () => {
               style={{
                 border: "1px solid gray",
                 backgroundColor:
-                  (data.KitchenFeat === "Open")||clicked1 ? "black" : "white",
-                color: (data.KitchenFeat === "Open")||clicked1? "white" : "black",
+                  (kitchen === "Open")||clicked1 ? "black" : "white",
+                color: (kitchen === "Open")||clicked1? "white" : "black",
                 width: "100px",
                 flex: "1",
                 marginLeft: "10px",
@@ -196,8 +200,8 @@ const PlaceInfoModifyStart = () => {
               style={{
                 border: "1px solid gray",
                 backgroundColor:
-                  (data.KitchenFeat === "Face")||clicked2 ? "black" : "white",
-                color: (data.KitchenFeat === "Face")||clicked2 ? "white" : "black",
+                  (kitchen === "Face")||clicked2 ? "black" : "white",
+                color: (kitchen === "Face")||clicked2 ? "white" : "black",
                 width: "100px",
                 flex: "1",
                 marginLeft: "10px",
@@ -222,8 +226,8 @@ const PlaceInfoModifyStart = () => {
               style={{
                 border: "1px solid gray",
                 backgroundColor:
-                  (data.KitchenFeat === "Close")||clicked3 ? "black" : "white",
-                color: (data.KitchenFeat === "Close")||clicked3 ? "white" : "black",
+                  (kitchen === "Close")||clicked3 ? "black" : "white",
+                color: (kitchen === "Close")||clicked3 ? "white" : "black",
                 width: "100px",
                 flex: "1",
                 marginLeft: "10px",
