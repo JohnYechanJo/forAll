@@ -5,7 +5,7 @@
  * @param defaultData 처음 보여줄 문자열
  * @returns {JSX.Element}
  */
-const DropDown = ({dataArr, onChange, placeholder, defaultData}) => {
+const DropDown = ({dataArr, onChange, placeholder, defaultData, key}) => {
     const onChangeData = (e) => {
         onChange(e.target.value);
     };
@@ -15,6 +15,7 @@ const DropDown = ({dataArr, onChange, placeholder, defaultData}) => {
             <select onChange={onChangeData} placeholder={placeholder}
                     style={{width: "100%", height: "3vh", fontSize: "1.5vh", fontFamily: "Noto Sans KR"}}
                     defaultValue={defaultData}
+                    key={key}
             >
                 {dataArr.map(data => (
                     <option key={data} value={data}>

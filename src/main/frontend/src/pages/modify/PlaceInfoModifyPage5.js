@@ -35,7 +35,6 @@ const PlaceInfoModifyPage5 = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const businessNum=dbdata.businessNum;
-    // let formattedNum = businessNum.replace(/(\d{3})(\d{2})(\d{5})/, '$1-$2-$3'); 이 부분은 replace가 undefined에 적용이 안 되기 때문에 주석처리해놓음
     const onChangeTradeName = useCallback((e) => {
         if (e.target.value.length <= 28) setTradeName(e.target.value);
     },[]);
@@ -94,12 +93,13 @@ const PlaceInfoModifyPage5 = () => {
     };
     const downloadData = async () => {
         let spaceid;
-        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data[0])
+        await axios.get("/api/v1/space/" + sessionStorage.getItem("user_id"))
+            .then((res) => spaceid = res.data.userId)
             .catch((err) => console.error(err));
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
+                console.log(res.data)
                 setDbData(res.data)
                 setPayment(res.data.payWay);
                 setTradeName(res.data.companyName);
@@ -129,10 +129,10 @@ const PlaceInfoModifyPage5 = () => {
             <div>
                 <p>결제 방식을 선택해주세요.*</p>
                 <label>
-                    <input type="radio" name={"payment"}  defaultChecked={dbdata.payWay===PayWay.QuickPay} onClick={() => setPayment(PayWay.QuickPay)}/>바로결제
+                    <input type="radio" name={"payment"}  defaultChecked={(payment===PayWay.QuickPay)} key={payment} onClick={() => setPayment(PayWay.QuickPay)}/>바로결제
                 </label>
                 <label>
-                    <input type="radio" name={"payment"}  defaultChecked={dbdata.PayWay===PayWay.ConfirmPay} onClick={() => setPayment(PayWay.ConfirmPay)}/>승인결제
+                    <input type="radio" name={"payment"}  defaultChecked={(payment===PayWay.ConfirmPay)} key={payment} onClick={() => setPayment(PayWay.ConfirmPay)}/>승인결제
                 </label>
             </div>
             <div>
@@ -153,7 +153,7 @@ const PlaceInfoModifyPage5 = () => {
                 </div>
                 <div>
                     <p>사업자 등록번호*</p>
-                     <input defaultValue={dbdata.businessNum}/>  {/*이 부분은 formattedNum으로 바꿔야 함 */}
+                     <input defaultValue={dbdata.businessNum}/>
                     <p>- 사업자 등록번호는 필수 입력입니다.</p>
                     <p>- 정확한 정보를 입력했는지 다시 한 번 확인해주세요.</p>
                     <p>- 추후, 사업자 정보가 수정된다면 반드시 온라인 상담을 통해 변경 내용을 알려주셔야 합니다.</p>

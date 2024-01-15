@@ -38,8 +38,8 @@ const PlaceInfoModifyPage6 =() => {
     };
     const downloadData = async () => {
         let spaceid;
-        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data[0])
+        await axios.get("/api/v1/space/" + sessionStorage.getItem("user_id"))
+            .then((res) => spaceid = res.data.userId)
             .catch((err) => console.error(err));
         axios
             .get("/api/v1/space/" + spaceid)
@@ -157,7 +157,7 @@ const PlaceInfoModifyPage6 =() => {
                 <p>계좌 정보를 입력해 주세요</p>
                 <p>- 법인 사업자는 법인 통장계좌를, 개인 사업자는 사업자 명의의 통장 계좌를 입력해주세요. 포 올을 통해 결제된 금액이 해당 계좌로 정산됩니다.</p>
                 <p>은행명*</p>
-                <DropDown dataArr={bankDatas} onChange={setBank} defaultData={dbdata.bankName}/>
+                <DropDown dataArr={bankDatas} onChange={setBank} defaultData={dbdata.bankName} key={bank}/>
                 <p>계좌번호*</p>
                 <input onChange={onChangeAccount} placeholder={"454102-01-376503"} defaultValue={dbdata.accountNum}/>
                 <p>예금주*</p>

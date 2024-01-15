@@ -189,7 +189,7 @@ const PlaceInfoModifyPage3 = () => {
                 <p>이용 정보를 입력해주세요</p>
                 <div>
                     <p>대관 가능일*</p>
-                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeek} />
+                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeek} key={rentWeek} />
                     {rentWeek === "직접지정" ?
                          <MultipleDatePicker onSubmit={setRentDays}/>: (rentWeek !== "휴무없음" ?
                             <div>
@@ -209,15 +209,15 @@ const PlaceInfoModifyPage3 = () => {
                     justifyContent: "left",
                     alignItems: "center",
                 }}>
-                    <span>전일 </span>                                   {/* 지금 dropdown 전부 다 defaultdata가 string을 바로 할당하지 않으면 정상적으로 작동하지 않음*/}
-                    <span><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={dbData.ableStartHour+"시"} /></span>
+                    <span>전일 </span>                                  
+                    <span><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={dbData.ableStartHour+"시"} key={rentTimeFrom}/></span>
                     <span> 부터, 당일 </span>
-                    <span><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={dbData.ableFinHour+"시"}/></span>
+                    <span><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={dbData.ableFinHour+"시"} key={rentTimeTo}/></span>
                     <span> 까지</span>
                 </div>
                 <div>
                     <p>공간 층수*</p>
-                    <DropDown dataArr={floorData} onChange={setFloor} placeholder={"층수 여부를 선택해주세요."} defaultData={dbData.floorNum}/>
+                    <DropDown dataArr={floorData} onChange={setFloor} placeholder={"층수 여부를 선택해주세요."} defaultData={dbData.floorNum} key={floor}/>
                     {floor === "직접 입력" ? (
                         <div>
                             <input onChange={onChangeFloor}/>
@@ -228,7 +228,7 @@ const PlaceInfoModifyPage3 = () => {
                 </div>
                 <div>
                     <p>주차 여부*</p>
-                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} defaultData={parkAvaliable} />
+                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} defaultData={parkAvaliable} key={parkAvaliable} />
                     {parkAvaliable === "직접 입력" ? (
                         <div>
                             <input onChange={onChangePark}/>

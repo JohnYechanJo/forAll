@@ -73,8 +73,8 @@ const PlaceInfoModifyPage4 = () => {
     }, []);
     const downloadData = async () => {
         let spaceid;
-        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data[0])
+        await axios.get("/api/v1/space/" + sessionStorage.getItem("user_id"))
+            .then((res) => spaceid = res.data.userId)
             .catch((err) => console.error(err));
         axios
             .get("/api/v1/space/" + spaceid)
@@ -143,7 +143,7 @@ const PlaceInfoModifyPage4 = () => {
             </div>
             <div>
                 <p>화구</p>
-                <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={dbData.fireholeNum} />
+                <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={dbData.fireholeNum} key={firePit}/>
                 {firePit === "직접 입력" ? (
                     <div>
                         <input onChange={onChangeFirePit} defaultValue={dbData.fireholeNum}/>
