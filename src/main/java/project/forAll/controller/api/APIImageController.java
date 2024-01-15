@@ -2,6 +2,8 @@ package project.forAll.controller.api;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +42,17 @@ public class APIImageController extends APIController{
             return new ResponseEntity(imageName, HttpStatus.OK);
         }catch(final Exception e){
             return new ResponseEntity(errorResponse("Could not upload Image : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/image/{id}")
+    public ResponseEntity getImage(@PathVariable(value="id") String imageName){
+        try{
+            String path = "src/main/resources/static/upload/";
+            Resource resource = new FileSystemResource(path + imageName + ".png");
+            return new ResponseEntity(resource, HttpStatus.OK);
+        }catch(final Exception e){
+            return new ResponseEntity(errorResponse("Could not get Image : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 }

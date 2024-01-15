@@ -54,6 +54,7 @@ const GuestRegistry2 = () => {
     const submit = async () => {
         const userId = sessionStorage.getItem("user_id");
         const picture = await ImageUploader(data.profileImage, userId);
+        const certificate = await ImageUploader(data.sanitaryImage, userId);
         axios.post("/api/v1/profile", {
             userId: userId,
             introduction: data.introduce,
@@ -64,6 +65,7 @@ const GuestRegistry2 = () => {
             mbti: selectedMBTI,
             cook: selectedFoodTypes,
             interest: selectedIngredient,
+            certificate: certificate
 
         }).then((res) => {
             navigate("/main");

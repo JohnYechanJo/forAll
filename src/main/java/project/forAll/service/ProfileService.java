@@ -39,6 +39,8 @@ public class ProfileService extends Service {
         profile.setMbti(pf.getMbti());
         profile.setCook(pf.getCook());
         profile.setInterest(pf.getInterest());
+        final Image certificate = imageService.findByImageName(pf.getCertificate());
+        profile.setCertificate(certificate);
 
         return profile;
     }

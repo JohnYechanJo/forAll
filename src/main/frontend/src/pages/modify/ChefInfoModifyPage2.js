@@ -64,14 +64,16 @@ const ChefInfoModifyPage2 = () => {
     // backend로 보내는 함수를 구현하면 됨
     const submit = async () => {
         const userId = sessionStorage.getItem("user_id");
-        const picture = await ImageUploader(data.profileImage, userId);
-        axios.post("/api/v1/profile", {
+        const picture = typeof(data.profileImage) === 'string' ? data.profileImage :  await ImageUploader(data.profileImage, userId);
+        const certificate = typeof(data.certificate) === 'string' ? data.certificate : await ImageUploader(data.certificate, userId);
+        axios.put("/api/v1/profile", {
             userId: userId,
             introduction: data.introduce,
             detailIntroduction: data.introduceDetail,
             career: data.career,
             picture: picture,
             pictureExplain: data.imageExplain,
+            certificate: certificate,
             mbti: selectedMBTI,
             cook: selectedFoodTypes,
             interest: selectedIngredient,

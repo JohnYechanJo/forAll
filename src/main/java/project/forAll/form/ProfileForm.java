@@ -29,6 +29,8 @@ public class ProfileForm {
     private List<String> cook;
     // 관심사
     private List<String> interest;
+    // 보건증 사진
+    private String certificate;
 
     public static ProfileForm of(Profile profile){
         final ProfileForm pf = new ProfileForm();
@@ -41,6 +43,7 @@ public class ProfileForm {
         pf.setMbti(profile.getMbti());
         pf.setCook(profile.getCook());
         pf.setInterest(profile.getInterest());
+        pf.setCertificate(profile.getCertificate() == null? null : profile.getCertificate().getImageName());
 
         return pf;
     }

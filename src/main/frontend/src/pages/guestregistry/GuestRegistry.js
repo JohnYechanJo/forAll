@@ -35,7 +35,8 @@ const GuestRegistry = () => {
                 introduceDetail: introduceDetail,
                 career: career,
                 profileImage: profileImage,
-                imageExplain: imageExplain
+                imageExplain: imageExplain,
+                sanitaryImage: sanitaryImage,
             }
 
         });
@@ -131,14 +132,14 @@ const GuestRegistry = () => {
             ))}
             <h4 style={{marginBottom:"0"}} >프로필 등록 사진</h4>
             <p>
-                <ImageInput setImg={setProfileImage}/>
+                <ImageInput setImg={setProfileImage} val={profileImage}/>
             </p>
             <textarea placeholder={text1} onChange={handleInput} className="white-space"
                       style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR"}}/>
             <div>
                 <h4 style={{marginBottom:"0"}} >보건증 사진</h4>
                 <p>
-                    <ImageInput setImg={setSanitaryImage}/>
+                    <ImageInput setImg={setSanitaryImage} val={sanitaryImage}/>
                 </p>
                 <div style={{margin:"0", padding:"0px 0px"}} >
                     <h5 style={{margin:"0", padding:"0px 0px"}}>• 최근 1년내의 보건증을 등록해주세요.</h5>

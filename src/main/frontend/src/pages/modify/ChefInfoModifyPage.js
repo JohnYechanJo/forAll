@@ -35,7 +35,8 @@ const ChefInfoModifyPage = () => {
                 introduceDetail: introduceDetail,
                 career: career,
                 profileImage: profileImage,
-                imageExplain: imageExplain
+                imageExplain: imageExplain,
+                certificate: sanitaryImage
             }
         });
     }
@@ -48,12 +49,12 @@ const ChefInfoModifyPage = () => {
                 setIntroduceDetail(res.data.detailIntroduction);
                 setImageExplain(res.data.pictureExplain);
                 setProfileImage(res.data.picture);
+                setSanitaryImage(res.data.certificate);
             })
             .catch(() => {
                 navigate("/error");
             })
     },[])
-
     const onInputHandler = (e) => {
         setInputCount(e.target.value.length);
         setIntroduce(e.target.value);
@@ -147,19 +148,13 @@ const ChefInfoModifyPage = () => {
                 </div>
             ))}
             <h4 style={{marginBottom:"0"}} >프로필 등록 사진</h4>
-            <p>
-                <img src={process.env.SPRING_APP_URL+"/upload/"+profileImage} alt="image"
-                style={{width:"20vw", height:"20vh"}}/>
-                <ImageInput setImg={setProfileImage}/>
-            </p>
+            <ImageInput setImg={setProfileImage} val={profileImage}/>
             <textarea placeholder={text1} onChange={handleInput} className="white-space"
                         defaultValue={imageExplain}
                       style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR"}}/>
 
             <h4 style={{marginBottom:"0"}} >보건증 사진</h4>
-            <p>
-                <ImageInput setImg={setSanitaryImage}/>
-            </p>
+            <ImageInput setImg={setSanitaryImage} val={sanitaryImage}/>
             <div style={{margin:"0", padding:"0px 0px"}} >
                 <h5 style={{margin:"0", padding:"0px 0px"}}>• 최근 1년내의 보건증을 등록해주세요.</h5>
                 <h5 style={{margin:"0", padding:"0px 0px"}}>• 대관에 필요한 정보이오니, <span style={{color:"red",textDecoration:"underline",textDecorationColor:"red"}} >필히 등록해주세요!</span></h5>

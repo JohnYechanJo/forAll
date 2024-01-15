@@ -1,23 +1,23 @@
 import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
-const ImageInput = ({setImg}) => {
+const ImageInput = ({setImg, val}) => {
+    const spring_app_url = "http://localhost:8080";
     // 기본 이미지 추후 설정 필요
     const BaseImgSrc = "logo512.png";
-
     const [imgFile, setImgFile] = useState("");
     const imgRef = useRef();
     const saveImgFile = () => {
         const file = imgRef.current.files[0];
         if (file == null) return;
         setImg(file);
-        setImgFile(URL.createObjectURL(file));
-
     };
-
-const handleButton = () => {
+    useEffect(() => {
+        if (val === undefined) setImgFile("");
+        else setImgFile(typeof(val) === "string" ? spring_app_url + "/api/v1/image/"+val : URL.createObjectURL(val));
+    }, [val]);
+    const handleButton = () => {
         setImgFile(undefined);
         setImgFile("");
-
     }
     const onErrorImg = (e) => {
         // 기본 이미지 추후 설정 필요
@@ -29,7 +29,7 @@ const handleButton = () => {
             <label
             >
                 <img
-                        className="image"
+                     className="image"
                      src={imgFile}
                      alt={"image"}
                      onError={onErrorImg}
