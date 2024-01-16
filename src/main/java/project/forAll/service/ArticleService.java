@@ -5,11 +5,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.board.Article;
+import project.forAll.domain.board.Comment;
 import project.forAll.domain.member.Member;
 import project.forAll.form.ArticleForm;
+import project.forAll.form.CommentForm;
 import project.forAll.repository.board.ArticleRepository;
+import project.forAll.repository.board.CommentRepository;
+import project.forAll.repository.board.ReCommentRepository;
+import project.forAll.util.ZoneTime;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -18,6 +24,10 @@ public class ArticleService extends Service {
 
     @Autowired
     private ArticleRepository articleRepository;
+    @Autowired
+    private MemberService memberService;
+    @Autowired
+    private CommentService commentService;
 
     @Override
     protected JpaRepository getRepository() {
@@ -26,13 +36,9 @@ public class ArticleService extends Service {
 
     @Transactional
     public Long saveArticle(Article article) {
-        articleRepository.save(article);
+        save(article);
         return article.getId();
     }
-
-//    public List<Article> findAllArticles() {
-//        return articleRepository.findAll();
-//    }
 
 
     @Transactional
@@ -45,31 +51,29 @@ public class ArticleService extends Service {
      * @return article
      */
     @Transactional
-    public Article createArticle(final ArticleForm af) {
+    public Article build(final ArticleForm af) {
         final Article article = new Article();
+        if (af.getId() != null) article.setId(af.getId());
         article.setTitle(af.getTitle());
         article.setContent(af.getContent());
-        article.setWrittenAt(LocalDateTime.now());
-        article.setWrittenBy(af.getMember());
+        article.setWrittenAt(af.getWrittenAt());
+        article.setWrittenBy(memberService.findByLoginId(af.getUserid()));
 
         return article;
-
     }
 
-    /**
-     * Article 수정
-     * @param id, title, content, createdAt, modifiedAt, member
-     * @return article
-     */
     @Transactional
-    public Article updateArticle(Long id, String title, String content) {
-        Article article = articleRepository.findById(id).orElseThrow();
-        article.setTitle(title);
-        article.setContent(content);
-        article.setWrittenAt(LocalDateTime.now());
-        articleRepository.flush();
+    public ArticleForm of(final Article article){
+        final ArticleForm form = new ArticleForm();
+        form.setId(article.getId());
+        form.setContent(article.getContent());
+        form.setWrittenAt(article.getWrittenAt());
+        form.setUserid(article.getWrittenBy().getLoginId());
 
-        return article;
+        final List<Comment> comments = commentService.findByArticle(article.getId());
+        form.setComments(comments.stream().map(comment -> commentService.of(comment)).toList());
+
+        return form;
     }
 
     /**
@@ -79,5 +83,15 @@ public class ArticleService extends Service {
     @Transactional
     public void deleteArticle(Long id) {
         articleRepository.deleteById(id);
+    }
+
+    /**
+     * 유저의 로그인 아이디가 주어졌을 때, 해당 유저의 모든 글을 불러옴
+     * @param userId 로그인 아이디
+     */
+    @Transactional
+    public List<Article> findByUserId(String userId){
+        final Member member = memberService.findByLoginId(userId);
+        return articleRepository.findByWrittenBy(member);
     }
 }

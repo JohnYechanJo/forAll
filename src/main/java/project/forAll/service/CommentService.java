@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import project.forAll.domain.board.Article;
 import project.forAll.domain.board.Comment;
+import project.forAll.domain.board.ReComment;
 import project.forAll.domain.member.Member;
 import project.forAll.form.CommentForm;
 import project.forAll.repository.board.CommentRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -18,6 +21,12 @@ public class CommentService extends Service {
 
     @Autowired
     private CommentRepository commentRepository;
+    @Autowired
+    private MemberService memberService;
+    @Autowired
+    private ArticleService articleService;
+    @Autowired
+    private ReCommentService recommentService;
 
     @Override
     protected JpaRepository getRepository() {
@@ -26,7 +35,7 @@ public class CommentService extends Service {
 
     @Transactional
     public Long saveComment(Comment comment) {
-        commentRepository.save(comment);
+        save(comment);
         return comment.getId();
     }
 
@@ -40,29 +49,35 @@ public class CommentService extends Service {
      * @return comment
      */
     @Transactional
-    public Comment createComment(final CommentForm cf) {
+    public Comment build(final CommentForm cf) {
         final Comment comment = new Comment();
+        if (cf.getId() != null) comment.setId(cf.getId());
+        comment.setArticle((Article) articleService.findById(cf.getArticleId()));
         comment.setText(cf.getText());
-        comment.setWrittenAt(LocalDateTime.now());
-        comment.setWrittenBy(cf.getMember());
+        comment.setWrittenAt(cf.getWrittenAt());
+        comment.setWrittenBy(memberService.findByLoginId(cf.getUserid()));
 
         return comment;
     }
 
-    /**
-     * Comment 수정
-     * @param id, content, createdAt, modifiedAt, member
-     * @return comment
-     */
     @Transactional
-    public Comment updateComment(Long id, String text, Member member) {
-        Comment comment = commentRepository.findById(id).orElseThrow();
-        comment.setText(text);
-        comment.setWrittenAt(LocalDateTime.now());
-        comment.setWrittenBy(member);
-        commentRepository.flush();
+    public CommentForm of(final Comment comment){
+        final CommentForm form = new CommentForm();
+        form.setId(comment.getId());
+        form.setArticleId(comment.getArticle().getId());
+        form.setText(comment.getText());
+        form.setWrittenAt(comment.getWrittenAt());
+        form.setUserid(comment.getWrittenBy().getLoginId());
 
-        return comment;
+        final List<ReComment> recomments = recommentService.findByComment(comment.getId());
+        form.setRecomments(recomments.stream().map(recomment -> recommentService.of(recomment)).toList());
+
+        return form;
+    }
+    @Transactional
+    public List<Comment> findByArticle(final Long articleId){
+        final Article article = (Article) articleService.findById(articleId);
+        return commentRepository.findByArticle(article);
     }
 
     /**

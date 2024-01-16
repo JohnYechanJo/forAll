@@ -10,6 +10,8 @@ import project.forAll.form.ArticleForm;
 import project.forAll.service.ArticleService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,10 +38,10 @@ public class APIArticleController extends APIController {
      * @param af
      * @return articleId
      */
-    @PostMapping("/articles/")
+    @PostMapping("/articles")
     public ResponseEntity createArticle(@RequestBody final ArticleForm af) {
         try {
-            final Article article = articleService.createArticle(af);
+            final Article article = articleService.build(af);
             final Long articleId = articleService.saveArticle(article);
 
             return new ResponseEntity(Long.toString(articleId), HttpStatus.OK);
@@ -48,20 +50,31 @@ public class APIArticleController extends APIController {
         }
     }
 
-//    @PutMapping("/articles")
-//    public ResponseEntity editArticle(@RequestBody final ArticleForm form, HttpServletRequest request){
-//        try{
-//            // ArticleForm으로부터 Article을 받아오는 코드를 잘 모르겠어서 수정 부탁드려요!
-//            final Article savedArticle = articleService.findById(form.getId());
-//            if (savedArticle == null) throw new Exception("No article " + form.getId());
-//
-//            final Article article = articleService.createArticle(form);
-//            article.setId(savedArticle.getId());
-//            articleService.save(article);
+    @PutMapping("/articles")
+    public ResponseEntity editArticle(@RequestBody final ArticleForm form, HttpServletRequest request){
+        try{
+            // ArticleForm으로부터 Article을 받아오는 코드를 잘 모르겠어서 수정 부탁드려요!
+            final Article savedArticle = (Article) articleService.findById(form.getId());
+            if (savedArticle == null) throw new Exception("No article " + form.getId());
 
-//            return new ResponseEntity(article, HttpStatus.OK);
-//        } catch(final Exception e) {
-//            return new ResponseEntity(errorResponse("Could not update Article : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
-//        }
-//    }
+            final Article article = articleService.build(form);
+            articleService.save(article);
+
+            return new ResponseEntity(article, HttpStatus.OK);
+        } catch(final Exception e) {
+            return new ResponseEntity(errorResponse("Could not update Article : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/articles/user/{id}")
+    public ResponseEntity getUserArticles(@PathVariable(value = "id") final String userId, HttpServletRequest request){
+        try{
+            final List<Article> articles = articleService.findByUserId(userId);
+            final List<ArticleForm> afs = articles.stream().map(article -> articleService.of(article)).toList();
+
+            return new ResponseEntity(afs, HttpStatus.OK);
+        }catch (final Exception e){
+            return new ResponseEntity(errorResponse("Could not get user articles : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

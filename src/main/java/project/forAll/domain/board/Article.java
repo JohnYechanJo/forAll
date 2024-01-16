@@ -8,6 +8,7 @@ import project.forAll.domain.member.Member;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class Article extends BassDomain {
     // 내용
     private String content;
     // 생성일시 (수정일시)
-    private LocalDateTime writtenAt;
+    private String writtenAt;
 //    // 수정일시
 //    private LocalDateTime modifiedAt;
     // 생성자
@@ -31,6 +32,4 @@ public class Article extends BassDomain {
     @JoinColumn(name = "written_by_member_id")
     private Member writtenBy;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    private List<Comment> comments;
 }
