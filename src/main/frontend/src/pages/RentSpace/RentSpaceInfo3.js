@@ -15,7 +15,10 @@ const RentSpaceInfo3 = () => {
     useEffect(() => {
         axios
           .get("/api/v1/space/" + params.id)
-          .then((res) => setData(res.data))
+          .then((res) => {
+              console.log(res.data);
+              setData(res.data)
+          })
           .catch((err) => console.error(err));
     }, []);
     useEffect(() => {
@@ -168,7 +171,7 @@ const RentSpaceInfo3 = () => {
           </div>
           <div>
             <h4>물컵</h4>
-              <ImagesViewer val={data.cupImage} />
+              <ImagesViewer vals={data.cupImage} />
             <div
               style={{
                 border: "2px solid gray",
@@ -182,7 +185,7 @@ const RentSpaceInfo3 = () => {
           </div>
           <div>
             <h4>앞접시</h4>
-              <ImagesViewer val={data.plateImage} />
+              <ImagesViewer vals={data.plateImage} />
             <div
               style={{
                 border: "2px solid gray",
@@ -197,7 +200,7 @@ const RentSpaceInfo3 = () => {
           <div>
             <h4>커트러리</h4>
               <h4>앞접시</h4>
-              <ImagesViewer val={data.cutleryImage} />
+              <ImagesViewer vals={data.cutleryImage} />
             <div
               style={{
                 border: "2px solid gray",
@@ -212,7 +215,7 @@ const RentSpaceInfo3 = () => {
           <div>
             <h4>밧드</h4>
               <h4>앞접시</h4>
-              <ImagesViewer val={data.vatImage} />
+              <ImagesViewer vals={data.vatImage} />
             <div
               style={{
                 border: "2px solid gray",
@@ -246,7 +249,7 @@ const RentSpaceInfo3 = () => {
             <h4>주방 전체</h4>
               <ImageViewer val={data.kitEntire} />
             <h4>추가사진</h4>
-              <ImagesViewer val={data.kitExtra} />
+              <ImagesViewer vals={data.kitExtra} />
           </div>
           <div>
             <h4>메뉴 사진</h4>

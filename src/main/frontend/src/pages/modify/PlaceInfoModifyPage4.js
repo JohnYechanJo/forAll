@@ -143,7 +143,7 @@ const PlaceInfoModifyPage4 = () => {
             </div>
             <div>
                 <p>화구</p>
-                <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={dbData.fireholeNum} key={firePit}/>
+                <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={firePit} key={firePit}/>
                 {firePit === "직접 입력" ? (
                     <div>
                         <input onChange={onChangeFirePit} defaultValue={dbData.fireholeNum}/>

@@ -4,6 +4,7 @@ import axios from "axios";
 import "../../style/btnStyles.css";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
+import ImageViewer from "../../components/ImageViewer";
 
 const RentSpaceInfo2 = () => {
     const params = useParams();
@@ -40,8 +41,7 @@ const RentSpaceInfo2 = () => {
             </div>
             <div>
                 <h4>대표 이미지</h4>
-                <img src={process.env.SPRING_APP_URL+"/upload/"+ data.mainImage} alt="image"
-                style={{width:"20vw", height:"20vh"}}/>
+                <ImageViewer val={data.mainImage} />
             </div>
             <h4>이용시간</h4>
             <div style={{

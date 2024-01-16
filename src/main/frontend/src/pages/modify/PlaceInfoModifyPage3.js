@@ -99,29 +99,29 @@ const PlaceInfoModifyPage3 = () => {
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
                 setDbData(res.data);
-                setElevator(dbData.haveElevator)
-                setTrial(dbData.ableTrial)
-                setMorningDelivery(dbData.ableEarlyDeliver)
-                setWorkIn(dbData.ableWorkIn)
-                setAlcohol(dbData.ableDrink)
-                setRentWeek(dbData.ableDate.split(" ")[0])
-                setRentTimeFrom(dbData.ableDate.split(" ")[1])
-                setRentTimeTo(dbData.ableDate.split(" ")[2])
-                setFloor(dbData.floorNum)
-                setParkAvaliable(dbData.ableParking)
-                setTable(dbData.tableNum)
-                setSeat(dbData.seatNum)
-                setPrice(dbData.priceSet)
-                setExactFloor(dbData.floorNum.split("층")[0].split("지상")[1])
-                setExactPark(dbData.ableParking.split("대")[0])
-                setRentDays(dbData.ableDate.split(" ")[3].split(","))
-                setMonDay(dbData.ableDate.split(" ")[3].split(",").includes("월"))
-                setTuesDay(dbData.ableDate.split(" ")[3].split(",").includes("화"))
-                setWednesDay(dbData.ableDate.split(" ")[3].split(",").includes("수"))
-                setThursDay(dbData.ableDate.split(" ")[3].split(",").includes("목"))
-                setFriDay(dbData.ableDate.split(" ")[3].split(",").includes("금"))
-                setSaturDay(dbData.ableDate.split(" ")[3].split(",").includes("토"))
-                setSunDay(dbData.ableDate.split(" ")[3].split(",").includes("일"))
+                setElevator(res.data.haveElevator)
+                setTrial(res.data.ableTrial)
+                setMorningDelivery(res.data.ableEarlyDeliver)
+                setWorkIn(res.data.ableWorkIn)
+                setAlcohol(res.data.ableDrink)
+                setRentWeek(res.data.ableDate.split(" ")[0])
+                setRentTimeFrom(res.data.ableStartHour)
+                setRentTimeTo(res.data.ableFinHour)
+                setFloor(res.data.floorNum)
+                setParkAvaliable(res.data.ableParking)
+                setTable(res.data.tableNum)
+                setSeat(res.data.seatNum)
+                setPrice(res.data.priceSet)
+                setExactFloor(res.data.floorNum.split("층")[0].split("지상")[1])
+                setExactPark(res.data.ableParking.split("대")[0])
+                setRentDays(res.data.ableDate.split(" ")[1].split(","))
+                setMonDay(res.data.ableDate.split(" ")[1].split(",").includes("월"))
+                setTuesDay(res.data.ableDate.split(" ")[1].split(",").includes("화"))
+                setWednesDay(res.data.ableDate.split(" ")[1].split(",").includes("수"))
+                setThursDay(res.data.ableDate.split(" ")[1].split(",").includes("목"))
+                setFriDay(res.data.ableDate.split(" ")[1].split(",").includes("금"))
+                setSaturDay(res.data.ableDate.split(" ")[1].split(",").includes("토"))
+                setSunDay(res.data.ableDate.split(" ")[1].split(",").includes("일"))
             })
             .catch((err) => console.error(err));
     };
@@ -149,14 +149,13 @@ const PlaceInfoModifyPage3 = () => {
         if (sunDay) rentDayString.push("일");
         const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",")
         const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDaysdata;
-
             data.isPublic = data.isPublic && isPublic;
             navigate("/placeInfoModify4",{
                 state: {
                     ...data,
                     rentWeek: rentData,
-                    rentTimeFrom: rentTimeFrom !== "" ? rentTimeFrom.split("시")[0] : "",
-                    rentTimeTo: rentTimeTo !== "" ? rentTimeTo.split("시")[0] : "",
+                    rentTimeFrom: rentTimeFrom,
+                    rentTimeTo: rentTimeTo,
                     floor: floor === "직접입력" ? "지상"+exactFloor+"층" : floor,
                     parkAvaliable: parkAvaliable === "직접입력" ? exactPark + "대" : parkAvaliable,
                     elevator: elevator,
