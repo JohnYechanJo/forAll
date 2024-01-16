@@ -78,28 +78,28 @@ const HostRegistry2 = () => {
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
                 <h4>홀 우측면</h4>
                 <div>
-                    <ImageInput setImg={setImgRight}/>
+                    <ImageInput setImg={setImgRight} val={imgRight}/>
                 </div>
                 <h4>홀 좌측면</h4>
                 <div>
-                    <ImageInput setImg={setImgLeft}/>
+                    <ImageInput setImg={setImgLeft} val={imgLeft}/>
                 </div>
                 <h4>홀 정면</h4>
                 <div>
-                    <ImageInput setImg={setImgFront}/>
+                    <ImageInput setImg={setImgFront} val={imgFront}/>
                 </div>
                 <h4>홀 후면</h4>
                 <div>
 
-                    <ImageInput setImg={setImgBack}/>
+                    <ImageInput setImg={setImgBack} val={imgBack}/>
                 </div>
                 <h4>홀 전체샷</h4>
                 <div>
-                    <ImageInput setImg={setImgAll}/>
+                    <ImageInput setImg={setImgAll} val={imgAll}/>
                 </div>
                 <h4>추가사진</h4>
                 <div>
-                    <ImageInputs setImg={setImgAdditional}/>
+                    <ImageInputs setImg={setImgAdditional} vals={imgAdditional}/>
                 </div>
             </div>
             <div>
@@ -107,27 +107,27 @@ const HostRegistry2 = () => {
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
                 <h4>주방 우측면</h4>
                 <div>
-                    <ImageInput setImg={setKitchenRight}/>
+                    <ImageInput setImg={setKitchenRight} val={kitchenRight}/>
                 </div>
                 <h4>주방 좌측면</h4>
                 <div>
-                    <ImageInput setImg={setKitchenLeft}/>
+                    <ImageInput setImg={setKitchenLeft} val={kitchenLeft}/>
                 </div>
                 <h4>주방 정면</h4>
                 <div>
-                    <ImageInput setImg={setKitchenFront}/>
+                    <ImageInput setImg={setKitchenFront} val={kitchenFront}/>
                 </div>
                 <h4>주방 후면</h4>
                 <div>
-                    <ImageInput setImg={setKitchenBack}/>
+                    <ImageInput setImg={setKitchenBack} val={kitchenBack}/>
                 </div>
                 <h4>주방 전체샷</h4>
                 <div>
-                    <ImageInput setImg={setKitchenAll}/>
+                    <ImageInput setImg={setKitchenAll} val={kitchenAll}/>
                 </div>
                 <h4>추가사진</h4>
                 <div>
-                    <ImageInputs setImg={setKitchenAdditional}/>
+                    <ImageInputs setImg={setKitchenAdditional} vals={kitchenAdditional}/>
                 </div>
             </div>
             <div>
@@ -148,23 +148,23 @@ const HostRegistry2 = () => {
                 </Modal>
                 <h4>메뉴 1</h4>
                 <div>
-                    <ImageInput setImg={setMenu1}/>
+                    <ImageInput setImg={setMenu1} val={menu1}/>
                 </div>
                 <h4>메뉴 2</h4>
                 <div>
-                    <ImageInput setImg={setMenu2}/>
+                    <ImageInput setImg={setMenu2} val={menu2}/>
                 </div>
                 <h4>메뉴 3</h4>
                 <div>
-                    <ImageInput setImg={setMenu3}/>
+                    <ImageInput setImg={setMenu3} val={menu3}/>
                 </div>
                 <h4>메뉴 4</h4>
                 <div>
-                    <ImageInput  setImg={setMenu4}/>
+                    <ImageInput  setImg={setMenu4} val={menu4}/>
                 </div>
                 <h4>추가사진</h4>
                 <div>
-                    <ImageInputs setImg={setMenuAdditional}/>
+                    <ImageInputs setImg={setMenuAdditional} vals={menuAdditional}/>
                 </div>
             </div>
             <div style={{display: "flex",justifyContent:"center", marginBottom:"6vh",marginTop:"3vh"}}>

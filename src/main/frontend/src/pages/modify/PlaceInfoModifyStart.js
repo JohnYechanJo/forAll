@@ -30,16 +30,12 @@ const PlaceInfoModifyStart = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const downloadData = async () => {
     let spaceid;
-    //이 부분에서 userSpace가 있으면 에러 나던데 이거 뒤에 userSpace 붙인 이유가?
-    await axios.get("/api/v1/space/" + sessionStorage.getItem("user_id"))
-        .then((res) => {
-          spaceid = res.data.userId
-        })
+    await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
+        .then((res) => spaceid = res.data[0])
         .catch((err) => console.error(err));
     axios
         .get("/api/v1/space/" + spaceid)
         .then((res) =>{ 
-          console.log(res.data)
           setData(res.data)
           setPlaceName(res.data.name)
           setPlaceIntro(res.data.spaceBrief)
@@ -47,7 +43,7 @@ const PlaceInfoModifyStart = () => {
           setKitchen(res.data.kitchenFeat)
           setPlaceInfo(res.data.addressBrief)
           setWebSite(res.data.website)
-          setImgRepresent(res.data.imgRepresent)
+          setImgRepresent(res.data.mainImage)
         })
         .catch((err) => console.error(err));
   };
@@ -127,7 +123,7 @@ const PlaceInfoModifyStart = () => {
         <hr style={{ height: "2px", backgroundColor: "black" }} />
         <h4>공간명</h4>
         <p>
-          <span>{inputCount}</span>
+          <span>{placeName.length}</span>
           <span>/18자</span>
         </p>
         <input
@@ -140,7 +136,7 @@ const PlaceInfoModifyStart = () => {
         <h5>❕사용 가능한 특수문자: (,),(-),(.),(@),(/)</h5>
         <h4>공간 한 줄 소개</h4>
         <p>
-          <span>{inputCount2}</span>
+          <span>{placeIntro.length}</span>
           <span>/18자</span>
         </p>
         <input
@@ -152,7 +148,7 @@ const PlaceInfoModifyStart = () => {
         />
         <h4>공간 소개</h4>
         <p>
-          <span>{inputCount3}</span>
+          <span>{placeIntroDetail.length}</span>
           <span>/300자</span>
           <span style={{ color: "red" }}>(최소 20자)</span>
         </p>
@@ -174,8 +170,8 @@ const PlaceInfoModifyStart = () => {
               style={{
                 border: "1px solid gray",
                 backgroundColor:
-                  (kitchen === "Open")||clicked1 ? "black" : "white",
-                color: (kitchen === "Open")||clicked1? "white" : "black",
+                  (kitchen === KitchenFeat.Open)||clicked1 ? "black" : "white",
+                color: (kitchen === KitchenFeat.Open)||clicked1? "white" : "black",
                 width: "100px",
                 flex: "1",
                 marginLeft: "10px",
@@ -200,8 +196,8 @@ const PlaceInfoModifyStart = () => {
               style={{
                 border: "1px solid gray",
                 backgroundColor:
-                  (kitchen === "Face")||clicked2 ? "black" : "white",
-                color: (kitchen === "Face")||clicked2 ? "white" : "black",
+                  (kitchen === KitchenFeat.Face)||clicked2 ? "black" : "white",
+                color: (kitchen === KitchenFeat.Face)||clicked2 ? "white" : "black",
                 width: "100px",
                 flex: "1",
                 marginLeft: "10px",
@@ -226,8 +222,8 @@ const PlaceInfoModifyStart = () => {
               style={{
                 border: "1px solid gray",
                 backgroundColor:
-                  (kitchen === "Close")||clicked3 ? "black" : "white",
-                color: (kitchen === "Close")||clicked3 ? "white" : "black",
+                  (kitchen === KitchenFeat.Close)||clicked3 ? "black" : "white",
+                color: (kitchen === KitchenFeat.Close)||clicked3 ? "white" : "black",
                 width: "100px",
                 flex: "1",
                 marginLeft: "10px",
@@ -338,7 +334,7 @@ const PlaceInfoModifyStart = () => {
           <span>대표 이미지 </span> 
         </h4>
         <div>
-          <ImageInput setImg={setImgRepresent} />
+          <ImageInput setImg={setImgRepresent} val={imgRepresent}/>
         </div>
       </div>
       <div

@@ -140,7 +140,7 @@ const HostRegistry5 = () => {
                 </div>
                 <div>
                     <p>사업자 등록증 첨부*</p>
-                    <ImageInput setImg={setLicense}/>
+                    <ImageInput setImg={setLicense} val={license}/>
                 </div>
                 <div>
                     <p>사업장 주소*</p>

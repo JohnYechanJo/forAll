@@ -287,7 +287,7 @@ const HostRegistry = () => {
                     <span>대표 이미지 </span>
                 </h4>
                 <div>
-                    <ImageInput setImg={setImgRepresent}/>
+                    <ImageInput setImg={setImgRepresent} val={imgRepresent}/>
                 </div>
             </div>
             <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>

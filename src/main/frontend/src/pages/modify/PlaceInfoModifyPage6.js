@@ -8,6 +8,7 @@ import axios from "axios";
 const PlaceInfoModifyPage6 =() => {
     const location = useLocation();
     const data = {...location.state};
+    console.log(data);
     let isPublic = false;
     const navigate = useNavigate();
     const params = useParams();
@@ -44,7 +45,8 @@ const PlaceInfoModifyPage6 =() => {
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
-                setDbData(res.data)
+                console.log(res.data);
+                setDbData(res.data);
                 setBank(res.data.bankName);
                 setAccount(res.data.accountNum);
                 setAccountHolder(res.data.accountHolder);
@@ -64,7 +66,7 @@ const PlaceInfoModifyPage6 =() => {
         const hallFront = await ImageUploader(data.imgFront, userId);
         const hallBack = await ImageUploader(data.imgBack, userId);
         const hallEntire = await ImageUploader(data.imgAll, userId);
-        const hallExtra = await Promise.all(data.imgAdditional.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const hallExtra = data.imgAdditional ? await Promise.all(data.imgAdditional.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
 
         //주방 이미지들
         const kitRight = await ImageUploader(data.kitchenRight, userId);
@@ -72,14 +74,14 @@ const PlaceInfoModifyPage6 =() => {
         const kitFront = await ImageUploader(data.kitchenFront, userId);
         const kitBack = await ImageUploader(data.kitchenBack, userId);
         const kitEntire = await ImageUploader(data.kitchenAll, userId);
-        const kitExtra = await Promise.all(data.kitchenAdditional.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const kitExtra = data.kitchenAdditional ? await Promise.all(data.kitchenAdditional.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
 
-        const menu = await Promise.all([data.menu1, data.menu2, data.menu3, data.menu4, ...data.menuAdditional].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const menu = data.menuAdditional ? await Promise.all([data.menu1, data.menu2, data.menu3, data.menu4, ...data.menuAdditional].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
 
-        const plateImage = await Promise.all(data.sidePlate.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const cupImage = await Promise.all(data.cup.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const cutleryImage = await Promise.all(data.cuttrary.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const vatImage = await Promise.all(data.bat.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const plateImage = data.sidePlate ? await Promise.all(data.sidePlate.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
+        const cupImage = data.cup ? await Promise.all(data.cup.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
+        const cutleryImage = data.cuttrary ? await Promise.all(data.cuttrary.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
+        const vatImage = data.bat ? await Promise.all(data.bat.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
 
         const businessNum = data.registNum1 + data.registNum2 + data.registNum3;
         const businessImage = await ImageUploader(data.license, userId);
@@ -87,7 +89,8 @@ const PlaceInfoModifyPage6 =() => {
         const payEmail = data.email1 + "@" + data.email2;
         const payPhoneNum = data.phone1 + data.phone2 + data.phone3;
 
-        await axios.post("/api/v1/space", {
+        await axios.put("/api/v1/space", {
+            id: dbdata.id,
             userId : userId,
             name : data.placeName,
             spaceBrief: data.placeIntro,

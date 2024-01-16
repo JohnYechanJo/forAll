@@ -91,64 +91,63 @@ const PlaceInfoModifyPage3 = () => {
     }, [sunDay]);
     const downloadData = async () => {
         let spaceid;
-        await axios.get("/api/v1/space/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data.userId)
+        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
+            .then((res) => spaceid = res.data[0])
             .catch((err) => console.error(err));
-            axios
-                .get("/api/v1/space/" + spaceid)
-                .then((res) => {
-                    console.log(res.data);
-                    setDbData(res.data);
-                    setElevator(res.data.haveElevator)
-                    setTrial(res.data.ableTrial)
-                    setMorningDelivery(res.data.ableEarlyDeliver)
-                    setWorkIn(res.data.ableWorkIn)
-                    setAlcohol(res.data.ableDrink)
-                    setRentWeek(res.data.ableDate.split(" ")[0])
-                    setRentTimeFrom(res.data.ableStartHour)
-                    setRentTimeTo(res.data.ableFinHour)
-                    setFloor(res.data.floorNum)
-                    setParkAvaliable(res.data.ableParking)
-                    setTable(res.data.tableNum)
-                    setSeat(res.data.seatNum)
-                    setPrice(res.data.priceSet)
-                    setExactFloor(res.data.floorNum.split("층")[0].split("지상")[1])
-                    setExactPark(res.data.ableParking.split("대")[0])
-                    setRentDays(res.data.ableDate.split(" ")[1].split(","))
-                    setMonDay(res.data.ableDate.split(" ")[1].split(",").includes("월"))
-                    setTuesDay(res.data.ableDate.split(" ")[1].split(",").includes("화"))
-                    setWednesDay(res.data.ableDate.split(" ")[1].split(",").includes("수"))
-                    setThursDay(res.data.ableDate.split(" ")[1].split(",").includes("목"))
-                    setFriDay(res.data.ableDate.split(" ")[1].split(",").includes("금"))
-                    setSaturDay(res.data.ableDate.split(" ")[1].split(",").includes("토"))
-                    setSunDay(res.data.ableDate.split(" ")[1].split(",").includes("일"))
-                })
-                .catch((err) => console.error(err));
-        };
-        useEffect(() => {
-            downloadData();
-        }, []);
-        const handleButton = () => {
-            if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
-                && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
-                && (seat !== undefined) && (price !== undefined) && (trial !== undefined) && (morningDelivery !== undefined)
-                && (workIn !== undefined) && (alcohol !== undefined)){
-                isPublic = true;
-                submit();
-            }
-            else setIsModalOpen(true);
+        axios
+            .get("/api/v1/space/" + spaceid)
+            .then((res) => {
+                setDbData(res.data);
+                setElevator(dbData.haveElevator)
+                setTrial(dbData.ableTrial)
+                setMorningDelivery(dbData.ableEarlyDeliver)
+                setWorkIn(dbData.ableWorkIn)
+                setAlcohol(dbData.ableDrink)
+                setRentWeek(dbData.ableDate.split(" ")[0])
+                setRentTimeFrom(dbData.ableDate.split(" ")[1])
+                setRentTimeTo(dbData.ableDate.split(" ")[2])
+                setFloor(dbData.floorNum)
+                setParkAvaliable(dbData.ableParking)
+                setTable(dbData.tableNum)
+                setSeat(dbData.seatNum)
+                setPrice(dbData.priceSet)
+                setExactFloor(dbData.floorNum.split("층")[0].split("지상")[1])
+                setExactPark(dbData.ableParking.split("대")[0])
+                setRentDays(dbData.ableDate.split(" ")[3].split(","))
+                setMonDay(dbData.ableDate.split(" ")[3].split(",").includes("월"))
+                setTuesDay(dbData.ableDate.split(" ")[3].split(",").includes("화"))
+                setWednesDay(dbData.ableDate.split(" ")[3].split(",").includes("수"))
+                setThursDay(dbData.ableDate.split(" ")[3].split(",").includes("목"))
+                setFriDay(dbData.ableDate.split(" ")[3].split(",").includes("금"))
+                setSaturDay(dbData.ableDate.split(" ")[3].split(",").includes("토"))
+                setSunDay(dbData.ableDate.split(" ")[3].split(",").includes("일"))
+            })
+            .catch((err) => console.error(err));
+    };
+    useEffect(() => {
+        downloadData();
+    }, []);
+    const handleButton = () => {
+        if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
+            && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
+            && (seat !== undefined) && (price !== undefined) && (trial !== undefined) && (morningDelivery !== undefined)
+            && (workIn !== undefined) && (alcohol !== undefined)){
+            isPublic = true;
+            submit();
         }
-        const submit = () => {
-            const rentDayString = [];
-            if (monDay) rentDayString.push("월");
-            if (tuesDay) rentDayString.push("화");
-            if (wednesDay) rentDayString.push("수");
-            if (thursDay) rentDayString.push("목");
-            if (friDay) rentDayString.push("금");
-            if (saturDay) rentDayString.push("토");
-            if (sunDay) rentDayString.push("일");
-            const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",")
-            const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDaysdata;
+        else setIsModalOpen(true);
+    }
+    const submit = () => {
+        const rentDayString = [];
+        if (monDay) rentDayString.push("월");
+        if (tuesDay) rentDayString.push("화");
+        if (wednesDay) rentDayString.push("수");
+        if (thursDay) rentDayString.push("목");
+        if (friDay) rentDayString.push("금");
+        if (saturDay) rentDayString.push("토");
+        if (sunDay) rentDayString.push("일");
+        const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",")
+        const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDaysdata;
 
             data.isPublic = data.isPublic && isPublic;
             navigate("/placeInfoModify4",{
@@ -209,7 +208,7 @@ const PlaceInfoModifyPage3 = () => {
                     justifyContent: "left",
                     alignItems: "center",
                 }}>
-                    <span>전일 </span>                                  
+                    <span>전일 </span>
                     <span><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={dbData.ableStartHour+"시"} key={rentTimeFrom}/></span>
                     <span> 부터, 당일 </span>
                     <span><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={dbData.ableFinHour+"시"} key={rentTimeTo}/></span>
@@ -243,92 +242,92 @@ const PlaceInfoModifyPage3 = () => {
                     justifyContent: "center",
                     alignItems: "center",
 
-                }}>
-                    <div style={{
-                        border: "2px solid lightgray",
-                        borderRadius: "0.5px",
-                        width: "47vw",
-                        height: "3vh",
-                        textAlign: "center",
-                        fontFamily: "Noto Sans KR"
-                    }} className={(elevator) === true ? "btn_selected" : ""} onClick={() => setElevator(true)}>있음
-                    </div>
-
-                    <div
-                        style={{
-                            border: "2px solid lightgray",
-                            borderRadius: "0.5px",
-                            width: "47vw",
-                            height: "3vh",
-                            textAlign: "center",
-                            fontFamily: "Noto Sans KR",
-                        }}
-                        className={(elevator) === false ? "btn_selected" : ""} onClick={() => setElevator(false)}>없음
-                    </div>
-                </div>
-                <div>
-                    <p>테이블</p>
-                    <input style={{width: "90vw", height: "3vh", float: "left"}} onChange={onChangeTable}
-                           placeholder={"최대 테이블 수를 기준으로 입력해주세요"} defaultValue={dbData.tableNum}/>
-                </div>
-                <div>
-                    <p>좌석수</p>
-                    <input style={{width: "90vw", height: "3vh", float: "left"}} onChange={onChangeSeat}
-                           placeholder={"최대 좌석수를 기준으로 입력해주세요"} defaultValue={dbData.seatNum}/>
-                </div>
-                <div style={{display:"flex", flexDirection:"column"}} >
-                    <p>가격 설정*</p>
-                    <div>
-                        <input style={{width: "90vw", height: "3vh", float: "left", marginRight: "2vw"}}
-                           onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} defaultValue={dbData.priceSet}/>
-                    </div>
-                    <div>
-                        <h3>{(seat===undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat<=10) ? "포 올 권장가격 : ₩150,000원" :"포 올 권장가격 :" + formattedPrice + "원"}</h3>
-                        <p>포 올 권장가격보다 높이 측정할 경우, 원데이 오너들이 부담스럽게 느낄 수 있어요.</p>
-                    </div>
-                </div>
-
-                <div>
-                    <p>가능 여부*</p>
-                </div>
-                <p>트라이얼</p>
+            }}>
                 <div style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-
-                }}>
-                    <div style={{
-                        border: "2px solid lightgray",
-                        borderRadius: "0.5px",
-                        width: "47vw",
-                        height: "3vh",
-                        textAlign: "center",
-                        fontFamily: "Noto Sans KR"
-                    }}
-                         className={(trial) === true ? "btn_selected" : ""} onClick={() => setTrial(true)}>가능
-                    </div>
-                    <div style={{
-                        border: "2px solid lightgray",
-                        borderRadius: "0.5px",
-                        width: "47vw",
-                        height: "3vh",
-                        textAlign: "center",
-                        fontFamily: "Noto Sans KR"
-                    }}
-                         className={(trial) === false ? "btn_selected" : ""} onClick={() => setTrial(false)}>불가
-                    </div>
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }} className={(elevator) === true ? "btn_selected" : ""} onClick={() => setElevator(true)}>있음
                 </div>
-                <Modal isOpen={isTrial} style={ModalStyles} >
-                    <header>트라이얼이란?</header>
-                    <button onClick={()=>setIsTrial(false)} >닫기</button>
-                </Modal>
-                <button onClick={() => setIsTrial(!isTrial)}
-                        className="detail"
-                >• 트라이얼이란?</button>
-                <p>재료 새벽 배달*</p>
+
+                <div
+                    style={{
+                        border: "2px solid lightgray",
+                        borderRadius: "0.5px",
+                        width: "47vw",
+                        height: "3vh",
+                        textAlign: "center",
+                        fontFamily: "Noto Sans KR",
+                    }}
+                    className={(elevator) === false ? "btn_selected" : ""} onClick={() => setElevator(false)}>없음
+                </div>
+            </div>
+            <div>
+                <p>테이블</p>
+                <input style={{width: "90vw", height: "3vh", float: "left"}} onChange={onChangeTable}
+                       placeholder={"최대 테이블 수를 기준으로 입력해주세요"} defaultValue={dbData.tableNum}/>
+            </div>
+            <div>
+                <p>좌석수</p>
+                <input style={{width: "90vw", height: "3vh", float: "left"}} onChange={onChangeSeat}
+                       placeholder={"최대 좌석수를 기준으로 입력해주세요"} defaultValue={dbData.seatNum}/>
+            </div>
+            <div style={{display:"flex", flexDirection:"column"}} >
+                <p>가격 설정*</p>
+                <div>
+                    <input style={{width: "90vw", height: "3vh", float: "left", marginRight: "2vw"}}
+                       onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} defaultValue={dbData.priceSet}/>
+                </div>
+                <div>
+                    <h3>{(seat===undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat<=10) ? "포 올 권장가격 : ₩150,000원" :"포 올 권장가격 :" + formattedPrice + "원"}</h3>
+                    <p>포 올 권장가격보다 높이 측정할 경우, 원데이 오너들이 부담스럽게 느낄 수 있어요.</p>
+                </div>
+            </div>
+
+            <div>
+                <p>가능 여부*</p>
+            </div>
+            <p>트라이얼</p>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+
+            }}>
                 <div style={{
-                    display: "flex",
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={(trial) === true ? "btn_selected" : ""} onClick={() => setTrial(true)}>가능
+                </div>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={(trial) === false ? "btn_selected" : ""} onClick={() => setTrial(false)}>불가
+                </div>
+            </div>
+            <Modal isOpen={isTrial} style={ModalStyles} >
+                <header>트라이얼이란?</header>
+                <button onClick={()=>setIsTrial(false)} >닫기</button>
+            </Modal>
+            <button onClick={() => setIsTrial(!isTrial)}
+                    className="detail"
+            >• 트라이얼이란?</button>
+            <p>재료 새벽 배달*</p>
+            <div style={{
+                display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
 

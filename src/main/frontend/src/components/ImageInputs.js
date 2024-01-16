@@ -7,21 +7,22 @@ const ImageInputs = ({setImg, vals}) => {
     // 기본 이미지 추후 설정 필요
     const BaseImgSrc = "logo512.png";
 
-    const [imgFiles, setImgFiles] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [representImage, setRepresentImage] = useState("");
     const addImgFile = (event) => {
         const file = event.target.files[0];
         if (file == null) return;
-        setImgFiles([...imgFiles, file]);
+        setImg([...vals, file]);
     };
     const deleteImgFile = (index) => {
-        setImgFiles(imgFiles.filter((_,i) => i !== index));
+        setImg(vals.filter((_,i) => i !== index));
     };
     useEffect(() => {
-        if (vals === undefined) setImgFiles([]);
+        console.log(vals);
+        if ((!vals) || (!vals[0])) {
+            setRepresentImage("");
+        }
         else{
-            setImg(imgFiles);
             if (vals[0] !== undefined) setRepresentImage(vals[0]);
         }
 
@@ -42,7 +43,7 @@ const ImageInputs = ({setImg, vals}) => {
             </label>
 
             <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                {imgFiles.map((imgFile, index) => (
+                {vals ? vals.map((imgFile, index) => (
                     <div>
                         <img
                             key={index+1}
@@ -53,7 +54,7 @@ const ImageInputs = ({setImg, vals}) => {
                         <button onClick={() => deleteImgFile(index)}>X</button>
                     </div>
 
-                ))}
+                )) : null}
                 <label className={"image"}>
                     <img
                         src={BaseImgSrc}

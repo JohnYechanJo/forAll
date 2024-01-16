@@ -168,22 +168,22 @@ const PlaceInfoModifyPage4 = () => {
 
             <div>
                 <p>앞접시*</p>
-                <ImageInputs setImg={setSidePlate}/>
+                <ImageInputs setImg={setSidePlate} vals={sidePlate}/>
                 <input onChange={onChangeCountSidePlate} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.plateNum} />
             </div>
             <div>
                 <p>물컵*</p>
-                <ImageInputs setImg={setCup}/>
+                <ImageInputs setImg={setCup} vals={cup}/>
                 <input onChange={onChangeCountCup} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.cupNum}/>
             </div>
             <div>
                 <p>커트러리*</p>
-                <ImageInputs setImg={setCuttrary}/>
+                <ImageInputs setImg={setCuttrary} vals={cuttrary}/>
                 <input onChange={onChangeCountCuttrary} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.cutleryNum}/>
             </div>
             <div>
                 <p>밧드*</p>
-                <ImageInputs setImg={setBat}/>
+                <ImageInputs setImg={setBat} vals={bat}/>
                 <input onChange={onChangeCountBat} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.vatNum}/>
             </div>
 

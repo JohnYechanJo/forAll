@@ -22,7 +22,7 @@ const PlaceInfoModifyPage5 = () => {
     const [registNum1, setRegistNum1] = useState("");
     const [registNum2, setRegistNum2] = useState("");
     const [registNum3, setRegistNum3] = useState("");
-    const [license, setLicense] = useState();
+    const [license, setLicense] = useState("");
     const [address, setAddress] = useState("");
     const [exactAddress, setExactAddress] = useState("");
     const [email1, setEmail1] = useState("");
@@ -93,13 +93,12 @@ const PlaceInfoModifyPage5 = () => {
     };
     const downloadData = async () => {
         let spaceid;
-        await axios.get("/api/v1/space/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data.userId)
+        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
+            .then((res) => spaceid = res.data[0])
             .catch((err) => console.error(err));
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
-                console.log(res.data)
                 setDbData(res.data)
                 setPayment(res.data.payWay);
                 setTradeName(res.data.companyName);
@@ -153,14 +152,14 @@ const PlaceInfoModifyPage5 = () => {
                 </div>
                 <div>
                     <p>사업자 등록번호*</p>
-                     <input defaultValue={dbdata.businessNum}/>
+                     <input defaultValue={dbdata.businessNum}/>  {/*Todo 이 부분은 formattedNum으로 바꿔야 함 */}
                     <p>- 사업자 등록번호는 필수 입력입니다.</p>
                     <p>- 정확한 정보를 입력했는지 다시 한 번 확인해주세요.</p>
                     <p>- 추후, 사업자 정보가 수정된다면 반드시 온라인 상담을 통해 변경 내용을 알려주셔야 합니다.</p>
                 </div>
                 <div>
                     <p>사업자 등록증 첨부*</p>
-                    <ImageInput setImg={setLicense}/>
+                    <ImageInput setImg={setLicense} val={license}/>
                 </div>
                 <div>
                     <p>사업장 주소*</p>
