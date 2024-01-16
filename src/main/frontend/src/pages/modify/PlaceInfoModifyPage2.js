@@ -46,8 +46,8 @@ const PlaceInfoModify2 = () => {
     //dbdata에 db에 저장되어 있는 정보들을 담아서 사용한다.
     const downloadData = async () => {
         let spaceid;
-        await axios.get("/api/v1/space/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data.userId)
+        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
+            .then((res) => spaceid = res.data[0])
             .catch((err) => console.error(err));
         axios
             .get("/api/v1/space/" + spaceid)

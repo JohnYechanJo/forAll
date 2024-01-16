@@ -39,8 +39,8 @@ const PlaceInfoModifyPage6 =() => {
     };
     const downloadData = async () => {
         let spaceid;
-        await axios.get("/api/v1/space/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data.userId)
+        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
+            .then((res) => spaceid = res.data[0])
             .catch((err) => console.error(err));
         axios
             .get("/api/v1/space/" + spaceid)

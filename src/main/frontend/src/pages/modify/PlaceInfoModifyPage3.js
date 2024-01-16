@@ -11,6 +11,7 @@ import axios from "axios";
 const PlaceInfoModifyPage3 = () => {
     const location = useLocation();
     const data = {...location.state};
+    console.log(data);
     const navigate = useNavigate();
     const params = useParams();
     const [dbData, setDbData] = useState({});
