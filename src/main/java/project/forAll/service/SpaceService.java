@@ -106,7 +106,7 @@ public class SpaceService extends Service {
         rent.setAbleTrial(sf.getAbleTrial());
         rent.setAbleEarlyDeliver(sf.getAbleEarlyDeliver());
         rent.setAbleWorkIn(sf.getAbleWorkIn());
-        rent.setAbleDate(sf.getAbleDate());
+        rent.setAbleDrink(sf.getAbleDrink());
         saveRent(rent);
         space.setRent(rent);
 
@@ -251,7 +251,7 @@ public class SpaceService extends Service {
         rent.setAbleTrial(sf.getAbleTrial());
         rent.setAbleEarlyDeliver(sf.getAbleEarlyDeliver());
         rent.setAbleWorkIn(sf.getAbleWorkIn());
-        rent.setAbleDate(sf.getAbleDate());
+        rent.setAbleDrink(sf.getAbleDrink());
         saveRent(rent);
         space.setRent(rent);
 

@@ -13,12 +13,14 @@ const RentSpacePage = () => {
     const [equipments, setEquipments] = useState([]);
     useEffect(() => {
         axios.get("/api/v1/space/"+params.id)
-            .then((res) => setData(res.data))
+            .then((res) => {
+                setData(res.data);
+                console.log(res.data);
+            })
             .catch((err) => console.error(err));
     }, []);
     useDidMountEffect(() => {
-        setImages1([data.mainImage,data.hallRight, data.hallLeft, data.hallFront, data.hallBack, data.hallEntire, ...data.hallExtra]);
-        // setImages2([data.kitRight, data.kitLeft, data.kitFront, data.kitBack, data.kitEntire, ...data.kitExtra, ...data.menu, ...data.plateImage, ...data.cupImage, ...data.cutleryImage, ...data.vatImage]);
+        setImages1([data.mainImage, ...data.hallImage]);
         setEquipments(data.equip ? data.equip.split(",") : []);
     }, [data]);
     return(

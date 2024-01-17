@@ -98,6 +98,7 @@ const PlaceInfoModifyPage3 = () => {
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
+                console.log(data);
                 setDbData(res.data);
                 setElevator(res.data.haveElevator)
                 setTrial(res.data.ableTrial)

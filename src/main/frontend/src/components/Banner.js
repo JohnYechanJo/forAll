@@ -6,7 +6,7 @@ import {useEffect} from "react"; // 나중에 Styles.css로 합쳐도 무방
 const Banner = ({dataSet, navigate}) => {
     // 왜인지는 모르겠는데 얘만 process 접근이 안됨
     // const SpringAppUrl = process.env.SPRING_APP_URL;
-    const SpringAppUrl = "http://localhost:8080"
+    const spring_app_url = "http://localhost:8080";
     SwiperCore.use([Autoplay]);
 
     const handleClick = (data) => {
@@ -25,7 +25,7 @@ const Banner = ({dataSet, navigate}) => {
                     return (<SwiperSlide key={idx}>
                         <div onClick={() => handleClick(data)}>
                             <img
-                                src={SpringAppUrl + "/upload/" + data.mainImage + ".png"}
+                                src={spring_app_url + "/api/v1/image/"+data.mainImage}
                                 alt={"image"}
                             />
                             <p>{data.priceSet}원</p>

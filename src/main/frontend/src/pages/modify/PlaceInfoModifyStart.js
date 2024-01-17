@@ -321,7 +321,7 @@ const PlaceInfoModifyStart = () => {
       <div>
         <h4>상세 위치 정보</h4>
         <p>
-          <span>{inputCount4}</span>
+          <span>{placeInfo.length}</span>
           <span>/18자</span>
         </p>
         <input

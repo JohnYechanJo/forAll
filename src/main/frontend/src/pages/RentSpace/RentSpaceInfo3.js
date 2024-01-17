@@ -36,6 +36,11 @@ const RentSpaceInfo3 = () => {
     const modalClose3 = () => {
         setModalIsOpen3(false);
     };
+    const getIdx = (arr, idx) => {
+        if (!arr) return null;
+        else if (arr.length <= idx) return null
+        else return arr[idx]
+    }
       return (
         <div style={{margin:"2vw"}}>
           <h2>• 공간정보</h2>
@@ -227,30 +232,23 @@ const RentSpaceInfo3 = () => {
               {data.vatNum}개
             </div>
           </div>
-          <div>
-            <h4>주방사진</h4>
-            <hr
-              style={{
-                width: "95%",
-                color: "black",
-                border: "1px solid black",
-                backgroundColor: "black",
-                height: "2px",
-              }}
-            />
-            <h4>주방 우측면</h4>
-              <ImageViewer val={data.kitRight} />
-            <h4>주방 좌측면</h4>
-              <ImageViewer val={data.kitLeft} />
-            <h4>주방 정면</h4>
-              <ImageViewer val={data.kitFront} />
-            <h4>주방 후면</h4>
-              <ImageViewer val={data.kitBack} />
-            <h4>주방 전체</h4>
-              <ImageViewer val={data.kitEntire} />
-            <h4>추가사진</h4>
-              <ImagesViewer vals={data.kitExtra} />
-          </div>
+            <div>
+                <h4>주방 사진</h4>
+                <hr style={{height: "2px", backgroundColor: "black"}}/>
+                <div style={{display:'flex', justifyContent:"space-evenly"}}>
+                    <div style={{display:"flex",  flexDirection:"column"}} >
+                        <ImageViewer val={getIdx(data.kitImage,0)}/>
+                    </div>
+                    <div style={{display:"flex", flexDirection:"column"}}>
+
+                        <ImageViewer val={getIdx(data.kitImage,1)}/>
+                    </div>
+                    <div style={{display:"flex", flexDirection:"column"}}>
+
+                        <ImageViewer val={getIdx(data.kitImage,2)}/>
+                    </div>
+                </div>
+            </div>
           <div>
             <h4>메뉴 사진</h4>
             <hr

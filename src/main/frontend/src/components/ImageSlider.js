@@ -4,7 +4,7 @@ import 'swiper/swiper.min.css'
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 const ImageSlider = ({images}) => {
-    const SpringAppUrl = "http://localhost:8080";
+    const spring_app_url = "http://localhost:8080";
     SwiperCore.use([Navigation, Pagination]);
     return(
         <div>
@@ -18,7 +18,7 @@ const ImageSlider = ({images}) => {
                     return(
                         <SwiperSlide key={idx}>
                             <img
-                                src={SpringAppUrl + "/upload/" + image + ".png"}
+                                src={spring_app_url + "/api/v1/image/"+image}
                                 alt={"image"}
                             />
 

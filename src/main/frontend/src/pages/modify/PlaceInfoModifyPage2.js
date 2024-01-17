@@ -140,7 +140,7 @@ const PlaceInfoModify2 = () => {
                         <ImageInput setImg={setMenu1} val={menu1}/>
                     </div>
                     <div style={{display:"flex"}}>
-                        <ImageInputs setImg={setMenuAdditional} val={menuAdditional}/>
+                        <ImageInputs setImg={setMenuAdditional} vals={menuAdditional}/>
                     </div>
                 </div>
             </div>
