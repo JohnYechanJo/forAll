@@ -20,7 +20,7 @@ public class CommentForm {
     // 생성일시 (수정일시)
     private String writtenAt;
     // 생성자
-    private String userid;
+    private String userId;
 
     //대댓글
     private List<ReCommentForm> recomments;

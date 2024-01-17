@@ -27,10 +27,14 @@ public class APIArticleController extends APIController {
      */
     @GetMapping("/articles/{id}")
     public ResponseEntity getArticle(@PathVariable("id") final Long id){
-        final Article article = (Article) articleService.findById(id);
+        try{
+            final Article article = (Article) articleService.findById(id);
+            final ArticleForm form = articleService.of(article);
 
-        return article == null ? new ResponseEntity(errorResponse("No article found for id " + id), HttpStatus.NOT_FOUND)
-                : new ResponseEntity(article, HttpStatus.OK);
+            return new ResponseEntity(form, HttpStatus.OK);
+        }catch (final Exception e){
+            return new ResponseEntity(errorResponse("Could not get article with id " + id + ": " + e.getMessage()), HttpStatus.NOT_FOUND);
+        }
     }
 
     /**
@@ -75,6 +79,16 @@ public class APIArticleController extends APIController {
             return new ResponseEntity(afs, HttpStatus.OK);
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Could not get user articles : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("/articles/category/{category}")
+    public ResponseEntity getCategoryArticles(@PathVariable final String category){
+        try{
+            final List<Article> articles = articleService.findByCategory(category);
+            final List<ArticleForm> afs = articles.stream().map(article -> articleService.of(article)).toList();
+            return new ResponseEntity(afs, HttpStatus.OK);
+        } catch (final Exception e){
+            return new ResponseEntity(errorResponse("Could not get category articles : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 }

@@ -19,10 +19,10 @@ public class ArticleForm {
     private String content;
      // 생성일시 (수정일시)
      private String writtenAt;
-//    // 수정일시
-//    private LocalDateTime modifiedAt;
+    // 카테고리
+    private String category;
     // 생성자
-    private String userid;
+    private String userId;
 
     // 댓글
     private List<CommentForm> comments;

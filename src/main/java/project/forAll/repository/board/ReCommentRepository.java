@@ -8,7 +8,7 @@ import project.forAll.domain.member.Member;
 
 import java.util.List;
 
-public interface ReCommentRepository extends JpaRepository<Comment, Long> {
+public interface ReCommentRepository extends JpaRepository<ReComment, Long> {
     List<ReComment> findByComment(Comment comment);
     List<ReComment> findByWrittenBy(Member member);
 }

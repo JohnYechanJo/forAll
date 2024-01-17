@@ -21,7 +21,7 @@ public class ReCommentService extends Service{
     @Autowired
     private ReCommentRepository recommentRepository;
     @Autowired
-    private CommentService commentService;
+    private CommentRepository commentRepository;
     @Autowired
     private MemberService memberService;
 
@@ -44,10 +44,10 @@ public class ReCommentService extends Service{
     public ReComment build(final ReCommentForm form) {
         final ReComment recomment = new ReComment();
         if (form.getId() != null) recomment.setId(form.getId());
-        recomment.setComment((Comment) commentService.findById(form.getCommentId()));
+        recomment.setComment(commentRepository.findById(form.getCommentId()).orElseThrow(() -> new IllegalArgumentException("comment doesn't exist")));
         recomment.setText(form.getText());
         recomment.setWrittenAt(form.getWrittenAt());
-        recomment.setWrittenBy(memberService.findByLoginId(form.getUserid()));
+        recomment.setWrittenBy(memberService.findByLoginId(form.getUserId()));
 
         return recomment;
     }
@@ -59,14 +59,14 @@ public class ReCommentService extends Service{
         form.setCommentId(recomment.getComment().getId());
         form.setText(recomment.getText());
         form.setWrittenAt(recomment.getWrittenAt());
-        form.setUserid(recomment.getWrittenBy().getLoginId());
+        form.setUserId(recomment.getWrittenBy().getLoginId());
 
         return form;
     }
 
     @Transactional
     public List<ReComment> findByComment(final Long commentId){
-        final Comment comment = (Comment) commentService.findById(commentId);
+        final Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("comment doesn't exist"));
         return recommentRepository.findByComment(comment);
     }
 }

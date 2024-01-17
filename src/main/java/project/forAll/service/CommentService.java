@@ -9,6 +9,7 @@ import project.forAll.domain.board.Comment;
 import project.forAll.domain.board.ReComment;
 import project.forAll.domain.member.Member;
 import project.forAll.form.CommentForm;
+import project.forAll.repository.board.ArticleRepository;
 import project.forAll.repository.board.CommentRepository;
 
 import java.time.LocalDateTime;
@@ -24,7 +25,7 @@ public class CommentService extends Service {
     @Autowired
     private MemberService memberService;
     @Autowired
-    private ArticleService articleService;
+    private ArticleRepository articleRepository;
     @Autowired
     private ReCommentService recommentService;
 
@@ -52,10 +53,10 @@ public class CommentService extends Service {
     public Comment build(final CommentForm cf) {
         final Comment comment = new Comment();
         if (cf.getId() != null) comment.setId(cf.getId());
-        comment.setArticle((Article) articleService.findById(cf.getArticleId()));
+        comment.setArticle(articleRepository.findById(cf.getArticleId()).orElseThrow(() -> new IllegalArgumentException("comment doesn't exist")));
         comment.setText(cf.getText());
         comment.setWrittenAt(cf.getWrittenAt());
-        comment.setWrittenBy(memberService.findByLoginId(cf.getUserid()));
+        comment.setWrittenBy(memberService.findByLoginId(cf.getUserId()));
 
         return comment;
     }
@@ -67,7 +68,7 @@ public class CommentService extends Service {
         form.setArticleId(comment.getArticle().getId());
         form.setText(comment.getText());
         form.setWrittenAt(comment.getWrittenAt());
-        form.setUserid(comment.getWrittenBy().getLoginId());
+        form.setUserId(comment.getWrittenBy().getLoginId());
 
         final List<ReComment> recomments = recommentService.findByComment(comment.getId());
         form.setRecomments(recomments.stream().map(recomment -> recommentService.of(recomment)).toList());
@@ -76,7 +77,7 @@ public class CommentService extends Service {
     }
     @Transactional
     public List<Comment> findByArticle(final Long articleId){
-        final Article article = (Article) articleService.findById(articleId);
+        final Article article = articleRepository.findById(articleId).orElseThrow(() -> new IllegalArgumentException("comment doesn't exist"));
         return commentRepository.findByArticle(article);
     }
 

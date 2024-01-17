@@ -37,7 +37,7 @@ public class APICommentController extends APIController {
      * @param cf
      * @return commentId
      */
-    @PostMapping("/comments/")
+    @PostMapping("/comments")
     public ResponseEntity createComment(@RequestBody final CommentForm cf){
         try{
             final Comment comment = commentService.build(cf);

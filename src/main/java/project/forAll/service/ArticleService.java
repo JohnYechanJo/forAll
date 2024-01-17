@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.board.Article;
+import project.forAll.domain.board.Category;
 import project.forAll.domain.board.Comment;
 import project.forAll.domain.member.Member;
 import project.forAll.form.ArticleForm;
@@ -57,7 +58,8 @@ public class ArticleService extends Service {
         article.setTitle(af.getTitle());
         article.setContent(af.getContent());
         article.setWrittenAt(af.getWrittenAt());
-        article.setWrittenBy(memberService.findByLoginId(af.getUserid()));
+        article.setCategory(Category.parse(af.getCategory()));
+        article.setWrittenBy(memberService.findByLoginId(af.getUserId()));
 
         return article;
     }
@@ -66,10 +68,11 @@ public class ArticleService extends Service {
     public ArticleForm of(final Article article){
         final ArticleForm form = new ArticleForm();
         form.setId(article.getId());
+        form.setTitle(article.getTitle());
         form.setContent(article.getContent());
         form.setWrittenAt(article.getWrittenAt());
-        form.setUserid(article.getWrittenBy().getLoginId());
-
+        form.setUserId(article.getWrittenBy().getLoginId());
+        form.setCategory(article.getCategory().toString());
         final List<Comment> comments = commentService.findByArticle(article.getId());
         form.setComments(comments.stream().map(comment -> commentService.of(comment)).toList());
 
@@ -93,5 +96,9 @@ public class ArticleService extends Service {
     public List<Article> findByUserId(String userId){
         final Member member = memberService.findByLoginId(userId);
         return articleRepository.findByWrittenBy(member);
+    }
+    @Transactional
+    public List<Article> findByCategory(String category){
+        return articleRepository.findByCategory(Category.parse(category));
     }
 }
