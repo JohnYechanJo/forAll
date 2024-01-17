@@ -41,10 +41,10 @@ const HostRegistry6 =() => {
         const kitImage = await Promise.all([data.kitchen1, data.kitchen2, data.kitchen3].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
         const menu = await Promise.all([data.menu1, ...data.menuAdditional].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
 
-        const plateImage = await Promise.all(data.sidePlate.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const cupImage = await Promise.all(data.cup.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const cutleryImage = await Promise.all(data.cuttrary.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const vatImage = await Promise.all(data.bat.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const plateImage = await Promise.all(data.sidePlate.map(async (img) => await ImageUploader(img, userId)));
+        const cupImage = await Promise.all(data.cup.map(async (img) => await ImageUploader(img, userId)));
+        const cutleryImage = await Promise.all(data.cuttrary.map(async (img) => await ImageUploader(img, userId)));
+        const vatImage = await Promise.all(data.bat.map(async (img) => await ImageUploader(img, userId)));
 
         const businessNum = data.registNum1 + data.registNum2 + data.registNum3;
         const businessImage = await ImageUploader(data.license, userId);
