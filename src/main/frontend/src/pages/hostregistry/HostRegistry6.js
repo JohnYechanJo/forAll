@@ -37,23 +37,9 @@ const HostRegistry6 =() => {
         const userId = sessionStorage.getItem("user_id");
         // 대표 이미지
         const imgRepresent = await ImageUploader(data.imgRepresent, userId) ;
-        //홀 이미지들
-        const hallRight = await ImageUploader(data.imgRight, userId);
-        const hallLeft = await ImageUploader(data.imgLeft, userId);
-        const hallFront = await ImageUploader(data.imgFront, userId);
-        const hallBack = await ImageUploader(data.imgBack, userId);
-        const hallEntire = await ImageUploader(data.imgAll, userId);
-        const hallExtra = await Promise.all(data.imgAdditional.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-
-        //주방 이미지들
-        const kitRight = await ImageUploader(data.kitchenRight, userId);
-        const kitLeft = await ImageUploader(data.kitchenLeft, userId);
-        const kitFront = await ImageUploader(data.kitchenFront, userId);
-        const kitBack = await ImageUploader(data.kitchenBack, userId);
-        const kitEntire = await ImageUploader(data.kitchenAll, userId);
-        const kitExtra = await Promise.all(data.kitchenAdditional.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-
-        const menu = await Promise.all([data.menu1, data.menu2, data.menu3, data.menu4, ...data.menuAdditional].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const hallImage = await Promise.all([data.img1, data.img2, data.img3].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const kitImage = await Promise.all([data.kitchen1, data.kitchen2, data.kitchen3].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const menu = await Promise.all([data.menu1, ...data.menuAdditional].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
 
         const plateImage = await Promise.all(data.sidePlate.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
         const cupImage = await Promise.all(data.cup.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
@@ -76,18 +62,8 @@ const HostRegistry6 =() => {
             addressBrief: data.placeInfo,
             website: data.webSite,
             mainImage: imgRepresent,
-            hallRight: hallRight,
-            hallLeft: hallLeft,
-            hallFront: hallFront,
-            hallBack: hallBack,
-            hallEntire: hallEntire,
-            hallExtra: hallExtra,
-            kitRight: kitRight,
-            kitLeft: kitLeft,
-            kitFront: kitFront,
-            kitBack: kitBack,
-            kitEntire: kitEntire,
-            kitExtra: kitExtra,
+            hallImage: hallImage,
+            kitImage: kitImage,
             menu: menu,
             ableDate: data.rentWeek,
             ableStartHour: data.rentTimeFrom,

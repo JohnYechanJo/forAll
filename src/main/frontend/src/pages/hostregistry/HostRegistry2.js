@@ -6,23 +6,17 @@ import ImageInputs from "../../components/ImageInputs";
 import ImageInput from "../../components/ImageInput";
 import {ModalStyles} from "../../components/ModalStyles";
 const HostRegistry2 = () => {
-    const [imgRight, setImgRight] = useState("");
-    const [imgLeft, setImgLeft] = useState("");
-    const [imgAll, setImgAll] = useState("");
-    const [imgBack, setImgBack] = useState("");
-    const [imgFront, setImgFront] = useState("");
-    const [imgAdditional, setImgAdditional] = useState([]);
-    const [kitchenRight, setKitchenRight] = useState("");
-    const [kitchenLeft, setKitchenLeft] = useState("");
-    const [kitchenAll, setKitchenAll] = useState("");
-    const [kitchenBack, setKitchenBack] = useState("");
-    const [kitchenFront, setKitchenFront] = useState("");
-    const [kitchenAdditional, setKitchenAdditional] = useState([]);
+    const [img1, setImg1] = useState("");
+    const [img2, setImg2] = useState("");
+    const [img3, setImg3] = useState("");
+    
+    const [kitchen1, setKitchen1] = useState("");
+    const [kitchen2, setKitchen2] = useState("");
+    const [kitchen3, setKitchen3] = useState("");
+    
     const [menu1, setMenu1] = useState("");
-    const [menu2, setMenu2] = useState("");
-    const [menu3, setMenu3] = useState("");
-    const [menu4, setMenu4] = useState("");
     const [menuAdditional, setMenuAdditional] = useState([]);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpen2, setIsModalOpen2] = useState(false);
     const navigate = useNavigate();
@@ -30,9 +24,7 @@ const HostRegistry2 = () => {
     const data = {...location.state};
     let isPublic = false;
     const handleButton = () => {
-        if ((imgRight !== "")&&(imgLeft !== "")&&(imgFront !== "") && (imgBack !== "") && (imgAll !== "") && (imgAdditional !== "")
-            && (kitchenRight !== "")&&(kitchenLeft !== "")&&(kitchenFront !== "") && (kitchenBack !== "") && (kitchenAll !== "") && (kitchenAdditional !== "")
-            && (menu1 !== "")&&(menu2 !== "")&&(menu3 !== "") && (menu4 !== "") && (menuAdditional !== "")){
+        if ((img1 !== "")&&(img2 !== "")&&(img3 !== "") && (kitchen1 !== "") && (kitchen2 !== "") && (kitchen3 !== "") && (menu1 !== "") && (menuAdditional !== "")) {
             isPublic = true;
             submit();
         }
@@ -46,22 +38,15 @@ const HostRegistry2 = () => {
         navigate("/hostRegistry3",{
             state: {
                 ...data,
-                imgRight: imgRight,
-                imgLeft: imgLeft,
-                imgFront: imgFront,
-                imgBack: imgBack,
-                imgAll: imgAll,
-                imgAdditional: imgAdditional,
-                kitchenLeft: kitchenLeft,
-                kitchenRight: kitchenRight,
-                kitchenFront: kitchenFront,
-                kitchenBack: kitchenBack,
-                kitchenAll: kitchenAll,
-                kitchenAdditional: kitchenAdditional,
+                img1: img1,
+                img2: img2,
+                img3: img3,
+                
+                kitchen1: kitchen1,
+                kitchen2: kitchen2,
+                kitchen3: kitchen3,
                 menu1: menu1,
-                menu2: menu2,
-                menu3: menu3,
-                menu4: menu4,
+                
                 menuAdditional: menuAdditional,
             }
         });
@@ -78,58 +63,34 @@ const HostRegistry2 = () => {
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
                 <div style={{display:'flex', justifyContent:"space-evenly"}}>
                     <div style={{display:"flex",  flexDirection:"column"}} >
-                        <h4>홀 우측면</h4>
-                        <ImageInput setImg={setImgRight} val={imgRight}/>
+                        
+                        <ImageInput setImg={setImg1} val={img1}/>
                     </div>
                     <div style={{display:"flex", flexDirection:"column"}}>
-                        <h4>홀 좌측면</h4>
-                        <ImageInput setImg={setImgLeft} val={imgLeft}/>
+                        
+                        <ImageInput setImg={setImg2} val={img2}/>
                     </div>
-                </div>
-                <h4>홀 정면</h4>
-                <div>
-                    <ImageInput setImg={setImgFront} val={imgFront}/>
-                </div>
-                <h4>홀 후면</h4>
-                <div>
-
-                    <ImageInput setImg={setImgBack} val={imgBack}/>
-                </div>
-                <h4>홀 전체샷</h4>
-                <div>
-                    <ImageInput setImg={setImgAll} val={imgAll}/>
-                </div>
-                <h4>추가사진</h4>
-                <div>
-                    <ImageInputs setImg={setImgAdditional} vals={imgAdditional}/>
+                    <div style={{display:"flex", flexDirection:"column"}}>
+                        
+                        <ImageInput setImg={setImg3} val={img3}/>
+                    </div>
                 </div>
             </div>
             <div>
                 <h4>주방 사진</h4>
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <h4>주방 우측면</h4>
-                <div>
-                    <ImageInput setImg={setKitchenRight} val={kitchenRight}/>
-                </div>
-                <h4>주방 좌측면</h4>
-                <div>
-                    <ImageInput setImg={setKitchenLeft} val={kitchenLeft}/>
-                </div>
-                <h4>주방 정면</h4>
-                <div>
-                    <ImageInput setImg={setKitchenFront} val={kitchenFront}/>
-                </div>
-                <h4>주방 후면</h4>
-                <div>
-                    <ImageInput setImg={setKitchenBack} val={kitchenBack}/>
-                </div>
-                <h4>주방 전체샷</h4>
-                <div>
-                    <ImageInput setImg={setKitchenAll} val={kitchenAll}/>
-                </div>
-                <h4>추가사진</h4>
-                <div>
-                    <ImageInputs setImg={setKitchenAdditional} vals={kitchenAdditional}/>
+                <div style={{display:'flex', justifyContent:"space-evenly"}}>
+                    <div style={{display:"flex",  flexDirection:"column"}} >
+                        <ImageInput setImg={setKitchen1} val={kitchen1}/>
+                    </div>
+                    <div style={{display:"flex", flexDirection:"column"}}>
+                        
+                        <ImageInput setImg={setKitchen2} val={kitchen2}/>
+                    </div>
+                    <div style={{display:"flex", flexDirection:"column"}}>
+                        
+                        <ImageInput setImg={setKitchen3} val={kitchen3}/>
+                    </div>
                 </div>
             </div>
             <div>
@@ -148,25 +109,13 @@ const HostRegistry2 = () => {
                     <h3>내용</h3>
                     <button onClick={()=>setIsModalOpen2(false)}>닫기</button>
                 </Modal>
-                <h4>메뉴 1</h4>
-                <div>
-                    <ImageInput setImg={setMenu1} val={menu1}/>
-                </div>
-                <h4>메뉴 2</h4>
-                <div>
-                    <ImageInput setImg={setMenu2} val={menu2}/>
-                </div>
-                <h4>메뉴 3</h4>
-                <div>
-                    <ImageInput setImg={setMenu3} val={menu3}/>
-                </div>
-                <h4>메뉴 4</h4>
-                <div>
-                    <ImageInput  setImg={setMenu4} val={menu4}/>
-                </div>
-                <h4>추가사진</h4>
-                <div>
-                    <ImageInputs setImg={setMenuAdditional} vals={menuAdditional}/>
+                <div style={{display:'flex', justifyContent:"center"}}>
+                    <div style={{display:"flex",  flexDirection:"column"}} >
+                        <ImageInput setImg={setMenu1} val={menu1}/>
+                    </div>
+                    <div style={{display:"flex"}}>
+                        <ImageInputs setImg={setMenuAdditional} val={menuAdditional}/>
+                    </div>
                 </div>
             </div>
             <div style={{display: "flex",justifyContent:"center", marginBottom:"6vh",marginTop:"3vh"}}>
