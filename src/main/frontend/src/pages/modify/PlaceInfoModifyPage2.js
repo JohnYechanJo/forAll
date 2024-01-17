@@ -25,6 +25,11 @@ const PlaceInfoModify2 = () => {
     const data = {...location.state};
     const [dbData, setDbData] = useState({});
     let isPublic = false;
+    const getIdx = (arr, idx) => {
+        if (!arr) return null;
+        else if (arr.length <= idx) return null
+        else return arr[idx]
+    }
     const handleButton = () => {
         if ((img1 !== "")&&(img2 !== "")&&(img3 !== "") && (kitchen1 !== "") && (kitchen2 !== "") && (kitchen3 !== "") && (menu1 !== "") && (menuAdditional !== "")) {
             isPublic = true;
@@ -44,13 +49,13 @@ const PlaceInfoModify2 = () => {
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
                 setDbData(res.data)
-                setImg1(res.data.hallImage[0]);
-                setImg2(res.data.hallImage[1]);
-                setImg3(res.data.hallImage[2]);
-                setKitchen1(res.data.kitchenImage[0]);
-                setKitchen2(res.data.kitchenImage[1]);
-                setKitchen3(res.data.kitchenImage[2]);
-                setMenu1(res.data.menu[0]);
+                setImg1(getIdx(res.data.hallImage,0));
+                setImg2(getIdx(res.data.hallImage,1));
+                setImg3(getIdx(res.data.hallImage,2));
+                setKitchen1(getIdx(res.data.kitImage,0));
+                setKitchen2(getIdx(res.data.kitImage,1));
+                setKitchen3(getIdx(res.data.kitImage,2));
+                setMenu1(getIdx(res.data.menu,0));
                 setMenuAdditional(res.data.menu.slice(1));
             })
             .catch((err) => console.error(err));

@@ -120,7 +120,7 @@ const PlaceInfoModifyPage4 = () => {
         navigate("/placeInfoModify5", {
             state: {
                 ...data,
-                firePit: firePit === "직접 입력" ? exactFirePit : (data.firePit ? data.firePit.split("개")[0] : ""),
+                firePit: firePit === "직접 입력" ? exactFirePit : (firePit ? firePit.split("개")[0] : ""),
                 equip: equip.join(","),
                 extraMachine: extraMachine,
                 sidePlate: sidePlate,

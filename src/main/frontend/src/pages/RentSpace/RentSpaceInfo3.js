@@ -16,7 +16,6 @@ const RentSpaceInfo3 = () => {
         axios
           .get("/api/v1/space/" + params.id)
           .then((res) => {
-              console.log(res.data);
               setData(res.data)
           })
           .catch((err) => console.error(err));
