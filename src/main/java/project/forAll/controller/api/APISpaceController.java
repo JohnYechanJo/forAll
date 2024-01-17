@@ -111,7 +111,7 @@ public class APISpaceController extends APIController {
             final Member savedMember = memberService.findByLoginId(form.getUserId());
             if (savedMember == null) throw new Exception("No member with loginId " + form.getUserId());
 
-            final Space space = spaceService.build(form);
+            final Space space = spaceService.rebuild(form);
             spaceService.save(space);
             return new ResponseEntity(Long.toString(space.getId()), HttpStatus.OK);
         }catch (final Exception e){

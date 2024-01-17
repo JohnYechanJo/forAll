@@ -321,4 +321,112 @@ public class SpaceService extends Service {
 
         return sf;
     }
+
+    @Transactional
+    public Space rebuild(SpaceForm sf){
+        final Space space = (Space) findById(sf.getId());
+
+        final Place place = space.getPlace();
+        place.setName(sf.getName());
+        place.setSpaceBrief(sf.getSpaceBrief());
+        place.setSpaceIntro(sf.getSpaceIntro());
+        place.setKitchenFeat(PlaceKitchenFeat.parse(sf.getKitchenFeat()));
+        place.setAddress(sf.getAddress());
+        place.setAddressBrief(sf.getAddressBrief());
+        place.setWebsite(sf.getWebsite());
+        Image mainImage = imageService.findByImageName(sf.getMainImage());
+        place.setMainImage(mainImage);
+
+        final HallImage hallImage = place.getHallImage();
+        Image hallRight = imageService.findByImageName(sf.getHallRight());
+        Image hallLeft = imageService.findByImageName(sf.getHallLeft());
+        Image hallFront = imageService.findByImageName(sf.getHallFront());
+        Image hallBack = imageService.findByImageName(sf.getHallBack());
+        Image hallEntire = imageService.findByImageName(sf.getHallEntire());
+        List<Image> hallExtra = imageService.findListByIds(sf.getHallExtra());
+        hallImage.setHallRight(hallRight);
+        hallImage.setHallLeft(hallLeft);
+        hallImage.setHallFront(hallFront);
+        hallImage.setHallBack(hallBack);
+        hallImage.setHallEntire(hallEntire);
+        hallImage.setHallExtra(hallExtra);
+        saveHallImage(hallImage);
+        place.setHallImage(hallImage);
+
+        final KitImage kitImage = place.getKitImage();
+        Image kitRight = imageService.findByImageName(sf.getKitRight());
+        Image kitLeft = imageService.findByImageName(sf.getKitLeft());
+        Image kitFront = imageService.findByImageName(sf.getKitFront());
+        Image kitBack = imageService.findByImageName(sf.getKitBack());
+        Image kitEntire = imageService.findByImageName(sf.getKitEntire());
+        List<Image> kitExtra = imageService.findListByIds(sf.getKitExtra());
+        kitImage.setKitRight(kitRight);
+        kitImage.setKitLeft(kitLeft);
+        kitImage.setKitFront(kitFront);
+        kitImage.setKitBack(kitBack);
+        kitImage.setKitEntire(kitEntire);
+        kitImage.setKitExtra(kitExtra);
+        saveKitchenImage(kitImage);
+        place.setKitImage(kitImage);
+
+        List<Image> menuImage = imageService.findListByIds(sf.getMenu());
+        place.setMenuImage(menuImage);
+        savePlace(place);
+        space.setPlace(place);
+
+        final Rent rent = space.getRent();
+        rent.setAbleDate(sf.getAbleDate());
+        rent.setAbleStartTime(sf.getAbleStartHour());
+        rent.setAbleFinTime(sf.getAbleFinHour());
+        rent.setFloorNum(sf.getFloorNum());
+        rent.setAbleParking(sf.getAbleParking());
+        rent.setHaveElevator(sf.getHaveElevator());
+        rent.setTableNum(sf.getTableNum());
+        rent.setSeatNum(sf.getSeatNum());
+        rent.setPriceSet(sf.getPriceSet());
+        rent.setAbleTrial(sf.getAbleTrial());
+        rent.setAbleEarlyDeliver(sf.getAbleEarlyDeliver());
+        rent.setAbleWorkIn(sf.getAbleWorkIn());
+        rent.setAbleDate(sf.getAbleDate());
+        saveRent(rent);
+        space.setRent(rent);
+
+        final Kitchen kitchen = space.getKitchen();
+        kitchen.setFireholeNum(sf.getFireholeNum());
+        kitchen.setEquip(sf.getEquip());
+        kitchen.setEquipExtra(sf.getEquipExtra());
+        List<Image> plateImage = imageService.findListByIds(sf.getPlateImage());
+        kitchen.setPlateImage(plateImage);
+        kitchen.setPlateNum(sf.getPlateNum());
+        List<Image> cupImage = imageService.findListByIds(sf.getCupImage());
+        kitchen.setCupImage(cupImage);
+        kitchen.setCupNum(sf.getCupNum());
+        List<Image> cutleryImage = imageService.findListByIds(sf.getCutleryImage());
+        kitchen.setCutleryImage(cutleryImage);
+        kitchen.setCutleryNum(sf.getCutleryNum());
+        List<Image> vatImage = imageService.findListByIds(sf.getVatImage());
+        kitchen.setVatImage(vatImage);
+        kitchen.setVatNum(sf.getVatNum());
+        saveKitchen(kitchen);
+        space.setKitchen(kitchen);
+
+        final Booking booking = space.getBooking();
+        booking.setPayWay(BookingPayWay.parse(sf.getPayWay()));
+        booking.setCompanyName(sf.getCompanyName());
+        booking.setCeoName(sf.getCeoName());
+        booking.setBizNum(sf.getBusinessNum());
+        Image bizImage = imageService.findByImageName(sf.getBusinessImage());
+        booking.setBizImage(bizImage);
+        booking.setBizAddr(sf.getBusinessAddress());
+        booking.setPayEmail(sf.getPayEmail());
+        booking.setPayPhoneNum(sf.getPayPhoneNum());
+        booking.setBankName(sf.getBankName());
+        booking.setAccountNum(sf.getAccountNum());
+        booking.setAccountHolder(sf.getAccountHolder());
+        saveBooking(booking);
+        space.setBooking(booking);
+        space.setPublic(sf.getIsPublic());
+
+        return space;
+    }
 }
