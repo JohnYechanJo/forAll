@@ -59,16 +59,16 @@ const PlaceInfoModifyPage6 =() => {
     const submit = async () => {
         const userId = sessionStorage.getItem("user_id");
         // 대표 이미지
-        const imgRepresent = await ImageUploader(data.imgRepresent, userId) ;
-        const hallImage = await Promise.all([data.img1, data.img2, data.img3].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const kitImage = await Promise.all([data.kitchen1, data.kitchen2, data.kitchen3].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const imgRepresent = await ImageUploader(data.imgRepresent, userId);
+        const hallImage = await Promise.all([data.img1, data.img2, data.img3].map(async (img) => await ImageUploader(img, userId)));
+        const kitImage = await Promise.all([data.kitchen1, data.kitchen2, data.kitchen3].map(async (img) => await ImageUploader(img, userId)));
 
-        const menu = data.menuAdditional ? await Promise.all([data.menu1, data.menu2, data.menu3, data.menu4, ...data.menuAdditional].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
+        const menu = data.menuAdditional ? await Promise.all([data.menu1, ...data.menuAdditional].map(async (img) => await ImageUploader(img, userId))) : null;
 
-        const plateImage = data.sidePlate ? await Promise.all(data.sidePlate.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
-        const cupImage = data.cup ? await Promise.all(data.cup.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
-        const cutleryImage = data.cuttrary ? await Promise.all(data.cuttrary.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
-        const vatImage = data.bat ? await Promise.all(data.bat.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId))) : null;
+        const plateImage = data.sidePlate ? await Promise.all(data.sidePlate.map(async (img) => await ImageUploader(img, userId))) : null;
+        const cupImage = data.cup ? await Promise.all(data.cup.map(async (img) => await ImageUploader(img, userId))) : null;
+        const cutleryImage = data.cuttrary ? await Promise.all(data.cuttrary.map(async (img) => await ImageUploader(img, userId))) : null;
+        const vatImage = data.bat ? await Promise.all(data.bat.map(async (img) => await ImageUploader(img, userId))) : null;
 
         const businessNum = data.registNum1 + data.registNum2 + data.registNum3;
         const businessImage = await ImageUploader(data.license, userId);
