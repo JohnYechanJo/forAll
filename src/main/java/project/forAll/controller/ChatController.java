@@ -88,7 +88,7 @@ public class ChatController {
         if(userName != null){
             log.info("User Disconnected : " + userName);
 
-//            ChatDto chat = ChatDto.builder()
+//           ChatDto chat = ChatDto.builder()
 //                    .type(ChatDto.MessageType.LEAVE)
 //                    .sender(userName)
 //                    .message(userName + "님이 퇴장하였습니다.")
