@@ -76,13 +76,15 @@ const HostRegistry2 = () => {
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
                 <h4>홀 사진</h4>
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <h4>홀 우측면</h4>
-                <div>
-                    <ImageInput setImg={setImgRight} val={imgRight}/>
-                </div>
-                <h4>홀 좌측면</h4>
-                <div>
-                    <ImageInput setImg={setImgLeft} val={imgLeft}/>
+                <div style={{display:'flex', justifyContent:"space-evenly"}}>
+                    <div style={{display:"flex",  flexDirection:"column"}} >
+                        <h4>홀 우측면</h4>
+                        <ImageInput setImg={setImgRight} val={imgRight}/>
+                    </div>
+                    <div style={{display:"flex", flexDirection:"column"}}>
+                        <h4>홀 좌측면</h4>
+                        <ImageInput setImg={setImgLeft} val={imgLeft}/>
+                    </div>
                 </div>
                 <h4>홀 정면</h4>
                 <div>

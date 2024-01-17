@@ -68,11 +68,13 @@ const HostRegistry5 = () => {
     },[]);
 
     const handleButton = () => {
-        if ((payment !== undefined) && (tradeName !== "") && (representative !== "") && (registNum1 !== "") && (registNum2 !== "") && (registNum3 !== "")
-            && (license !== undefined) && (address !== undefined) && (exactAddress !== "") && (email1 !== "")
-            && (phone1 !== "") && (phone2 !== "") && (phone3 !== "")){
-            isPublic = true;
-            submit();
+        if ((tradeName==="")||(representative==="")||(registNum1==="")||(registNum2==="")||(registNum3==="")||(license==="")||(address==="")||(exactAddress==="")){
+            alert("상호명, 대표자명, 사업자 등록번호, 사업자 등록증, 사업장 주소는 필수 입력사항입니다.");
+        } else if ((payment !== undefined) && (tradeName !== "") && (representative !== "") && (registNum1 !== "") && (registNum2 !== "") && (registNum3 !== "")
+        && (license !== undefined) && (address !== undefined) && (exactAddress !== "") && (email1 !== "")
+        && (phone1 !== "") && (phone2 !== "") && (phone3 !== "")){
+        isPublic = true;
+        submit();
         }
         else setIsModalOpen(true);
     };
