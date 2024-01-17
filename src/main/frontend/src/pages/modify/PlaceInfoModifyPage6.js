@@ -83,6 +83,7 @@ const PlaceInfoModifyPage6 =() => {
             spaceBrief: data.placeIntro,
             spaceIntro: data.placeIntroDetail,
             kitchenFeat: data.kitchen,
+            address: data.fullAddress,
             addressBrief: data.placeInfo,
             website: data.webSite,
             mainImage: imgRepresent,

@@ -45,3 +45,7 @@
     justify-content:left;
     text-decoration:underline;
 }
+.input{
+    width: 94vw;
+    height: 3vh;
+}

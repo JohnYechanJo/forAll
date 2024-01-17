@@ -18,6 +18,7 @@ const PlaceInfoModifyStart = () => {
   const [placeIntro, setPlaceIntro] = useState("");
   const [placeIntroDetail, setPlaceIntroDetail] = useState("");
   const [kitchen, setKitchen] = useState(KitchenFeat.NotSpecified);
+  const [fullAddress, setFullAddress] = useState("");
   const [placeInfo, setPlaceInfo] = useState("");
   const [webSite, setWebSite] = useState("");
   const [imgRepresent, setImgRepresent] = useState("");
@@ -38,6 +39,7 @@ const PlaceInfoModifyStart = () => {
         .then((res) =>{ 
           setData(res.data)
           setPlaceName(res.data.name)
+          setFullAddress(res.data.address)
           setPlaceIntro(res.data.spaceBrief)
           setPlaceIntroDetail(res.data.spaceIntro)
           setKitchen(res.data.kitchenFeat)
@@ -99,6 +101,7 @@ const PlaceInfoModifyStart = () => {
         placeIntro: placeIntro,
         placeIntroDetail: placeIntroDetail,
         kitchen: kitchen,
+        address: fullAddress,
         webSite: webSite,
         placeInfo: placeInfo,
         imgRepresent: imgRepresent,
@@ -313,7 +316,7 @@ const PlaceInfoModifyStart = () => {
         <hr style={{ height: "2px", backgroundColor: "black" }} />
         <h4>주소(위치)</h4>
         <h5>
-          <span style={{ disabled: true }}>{data.address}</span>
+          <span style={{ disabled: true }}>{fullAddress}</span>
         </h5>
         <h6>• 공간 주소는 최초 등록 이후 직접 변경할 수 없습니다.</h6>
         <h6>• 고객센터를 통해 주소 변경을 요청해주세요.</h6>

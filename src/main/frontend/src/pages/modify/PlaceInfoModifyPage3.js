@@ -1,7 +1,6 @@
 import DropDown from "../../components/DropDown";
 import {useCallback, useEffect, useState} from "react";
 import "../../style/btnStyles.css";
-import ImageInputs from "../../components/ImageInputs";
 import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
@@ -11,7 +10,6 @@ import axios from "axios";
 const PlaceInfoModifyPage3 = () => {
     const location = useLocation();
     const data = {...location.state};
-    console.log(data);
     const navigate = useNavigate();
     const params = useParams();
     const [dbData, setDbData] = useState({});
@@ -52,7 +50,7 @@ const PlaceInfoModifyPage3 = () => {
     const [isWorkIn, setIsWorkIn] = useState(false);
     const [formattedPrice, setFormattedPrice] = useState();
     let isPublic = false;
-    
+
     const onChangeFloor = useCallback((e) => {
         setExactFloor(e.target.value);
     }, []);
@@ -98,7 +96,7 @@ const PlaceInfoModifyPage3 = () => {
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
-                console.log(data);
+                console.log(res.data);
                 setDbData(res.data);
                 setElevator(res.data.haveElevator)
                 setTrial(res.data.ableTrial)
@@ -115,17 +113,18 @@ const PlaceInfoModifyPage3 = () => {
                 setPrice(res.data.priceSet)
                 setExactFloor(res.data.floorNum.split("층")[0].split("지상")[1])
                 setExactPark(res.data.ableParking.split("대")[0])
-                setRentDays(res.data.ableDate.split(" ")[1].split(","))
-                setMonDay(res.data.ableDate.split(" ")[1].split(",").includes("월"))
-                setTuesDay(res.data.ableDate.split(" ")[1].split(",").includes("화"))
-                setWednesDay(res.data.ableDate.split(" ")[1].split(",").includes("수"))
-                setThursDay(res.data.ableDate.split(" ")[1].split(",").includes("목"))
-                setFriDay(res.data.ableDate.split(" ")[1].split(",").includes("금"))
-                setSaturDay(res.data.ableDate.split(" ")[1].split(",").includes("토"))
-                setSunDay(res.data.ableDate.split(" ")[1].split(",").includes("일"))
-            })
+                // 아래 부분은 수정 필요함, 대관 날짜를 직접 지정하면 오류 난다
+                    setRentDays(res.data.ableDate.split(" ")[1].split(","))
+                    setMonDay(res.data.ableDate.split(" ")[1].split(",").includes("월"))
+                    setTuesDay(res.data.ableDate.split(" ")[1].split(",").includes("화"))
+                    setWednesDay(res.data.ableDate.split(" ")[1].split(",").includes("수"))
+                    setThursDay(res.data.ableDate.split(" ")[1].split(",").includes("목"))
+                    setFriDay(res.data.ableDate.split(" ")[1].split(",").includes("금"))
+                    setSaturDay(res.data.ableDate.split(" ")[1].split(",").includes("토"))
+                    setSunDay(res.data.ableDate.split(" ")[1].split(",").includes("일"))
+                
             .catch((err) => console.error(err));
-    };
+    });
     useEffect(() => {
         downloadData();
     }, []);
@@ -148,17 +147,32 @@ const PlaceInfoModifyPage3 = () => {
         if (friDay) rentDayString.push("금");
         if (saturDay) rentDayString.push("토");
         if (sunDay) rentDayString.push("일");
-        const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",")
+    
+        const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",");
         const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDaysdata;
-            data.isPublic = data.isPublic && isPublic;
+        if (!floorData.includes(floor)) {
+            setFloor("지상"+exactFloor+"층");
+        }
+        else{
+            setFloor(floor);
+        }
+        if (!parkAvaliableData.includes(parkAvaliable)) {
+            setParkAvaliable(exactPark+"대");
+        }
+        else{
+            setParkAvaliable(parkAvaliable);
+        }
+        
+        console.log(rentData);
+        data.isPublic = data.isPublic && isPublic;
             navigate("/placeInfoModify4",{
                 state: {
                     ...data,
                     rentWeek: rentData,
                     rentTimeFrom: rentTimeFrom,
                     rentTimeTo: rentTimeTo,
-                    floor: floor === "직접입력" ? "지상"+exactFloor+"층" : floor,
-                    parkAvaliable: parkAvaliable === "직접입력" ? exactPark + "대" : parkAvaliable,
+                    floor: floor,
+                    parkAvaliable: parkAvaliable,
                     elevator: elevator,
                     table: table,
                     seat: seat,
@@ -189,7 +203,7 @@ const PlaceInfoModifyPage3 = () => {
                 <p>이용 정보를 입력해주세요</p>
                 <div>
                     <p>대관 가능일*</p>
-                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeek} key={rentWeek} />
+                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeeksData.includes(rentWeek)?rentWeek:"직접지정"} key={rentWeek} />
                     {rentWeek === "직접지정" ?
                          <MultipleDatePicker onSubmit={setRentDays}/>: (rentWeek !== "휴무없음" ?
                             <div>
@@ -217,10 +231,10 @@ const PlaceInfoModifyPage3 = () => {
                 </div>
                 <div>
                     <p>공간 층수*</p>
-                    <DropDown dataArr={floorData} onChange={setFloor} placeholder={"층수 여부를 선택해주세요."} defaultData={dbData.floorNum} key={floor}/>
-                    {floor === "직접 입력" ? (
+                    <DropDown dataArr={floorData} onChange={setFloor} placeholder={"층수 여부를 선택해주세요."} defaultData={(floorData.includes(floor))?floor:"직접 입력"} key={floor}/>
+                    {!floorData.includes(floor) ? (
                         <div>
-                            <input onChange={onChangeFloor}/>
+                            <input onChange={onChangeFloor} defaultValue={floor.replace("층","").replace("지상","")} />
                             <p>층</p>
                             {exactFloor < 4 ? <p>4 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
                         </div>
@@ -228,10 +242,10 @@ const PlaceInfoModifyPage3 = () => {
                 </div>
                 <div>
                     <p>주차 여부*</p>
-                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} defaultData={parkAvaliable} key={parkAvaliable} />
-                    {parkAvaliable === "직접 입력" ? (
+                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} defaultData={(parkAvaliableData.includes(parkAvaliable))?parkAvaliable:"직접 입력"} key={parkAvaliable} />
+                    {!parkAvaliableData.includes(parkAvaliable)? (
                         <div>
-                            <input onChange={onChangePark}/>
+                            <input onChange={onChangePark} defaultValue={parkAvaliable.replace("대","")}/>
                             <p>대</p>
                             {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요.</p> : null}
                         </div>
@@ -441,6 +455,6 @@ const PlaceInfoModifyPage3 = () => {
             </Modal>
         </div>
     )
-};
+}};
 
 export default PlaceInfoModifyPage3;

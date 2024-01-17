@@ -84,10 +84,17 @@ const HostRegistry4 = () => {
         if (dishWasher) equip.push("식기세척기");
         if (iceMaker) equip.push("제빙기");
         data.isPublic = data.isPublic && isPublic;
+        if (firePit === "직접 입력") {
+            setFirePit(exactFirePit);
+        }
+        else{
+            const num = firePit.split("개")[0];
+            setFirePit(num);
+        }
         navigate("/hostRegistry5", {
             state: {
                 ...data,
-                firePit: firePit === "직접 입력" ? exactFirePit : (data.firePit ? data.firePit.split("개")[0] : ""),
+                firePit: firePit,
                 equip: equip.join(","),
                 extraMachine: extraMachine,
                 sidePlate: sidePlate,
@@ -113,8 +120,8 @@ const HostRegistry4 = () => {
                 <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"}/>
                 {firePit === "직접 입력" ? (
                     <div>
-                        <input onChange={onChangeFirePit}/>
-                        <p>개</p>
+                        <span><input onChange={onChangeFirePit} style={{width:"10vw"}} />개 </span>
+                        
                         {exactFirePit < 7 ? <p>7 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
                     </div>
                 ) : null}

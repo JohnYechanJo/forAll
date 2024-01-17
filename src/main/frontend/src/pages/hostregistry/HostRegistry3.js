@@ -1,7 +1,6 @@
 import DropDown from "../../components/DropDown";
 import {useCallback, useEffect, useState} from "react";
 import "../../style/btnStyles.css";
-import ImageInputs from "../../components/ImageInputs";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
@@ -108,9 +107,21 @@ const HostRegistry3 = () => {
         if (friDay) rentDayString.push("금");
         if (saturDay) rentDayString.push("토");
         if (sunDay) rentDayString.push("일");
-        const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",")
+        
+        const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",");
         const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDaysdata;
-
+        if (!floorData.includes(floor)) {
+            setFloor("지상"+exactFloor+"층");
+        }
+        else{
+            setFloor(floor);
+        }
+        if (!parkAvaliableData.includes(parkAvaliable)) {
+            setParkAvaliable(exactPark+"대");
+        }
+        else{
+            setParkAvaliable(parkAvaliable);
+        }   
         data.isPublic = data.isPublic && isPublic;
         navigate("/hostRegistry4",{
             state: {
@@ -118,8 +129,8 @@ const HostRegistry3 = () => {
                 rentWeek: rentData,
                 rentTimeFrom: rentTimeFrom !== "" ? rentTimeFrom.split("시")[0] : "",
                 rentTimeTo: rentTimeTo !== "" ? rentTimeTo.split("시")[0] : "",
-                floor: floor === "직접입력" ? "지상"+exactFloor+"층" : floor,
-                parkAvaliable: parkAvaliable === "직접입력" ? exactPark + "대" : parkAvaliable,
+                floor: floor,
+                parkAvaliable: parkAvaliable,
                 elevator: elevator,
                 table: table,
                 seat: seat,

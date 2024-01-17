@@ -81,6 +81,7 @@ const PlaceInfoModifyPage4 = () => {
             .then((res) => {
                 setDbData(res.data)
                 setFirePit(res.data.fireholeNum);
+                setExactFirePit(res.data.fireholeNum);
                 setExtraMachine(res.data.equipExtra);
                 setCountSidePlate(res.data.plateNum);
                 setCountCup(res.data.cupNum);
@@ -120,7 +121,7 @@ const PlaceInfoModifyPage4 = () => {
         navigate("/placeInfoModify5", {
             state: {
                 ...data,
-                firePit: firePit === "직접 입력" ? exactFirePit : (firePit ? firePit.split("개")[0] : ""),
+                firePit: firePit >6 ? exactFirePit : firePit,
                 equip: equip.join(","),
                 extraMachine: extraMachine,
                 sidePlate: sidePlate,
@@ -143,8 +144,8 @@ const PlaceInfoModifyPage4 = () => {
             </div>
             <div>
                 <p>화구</p>
-                <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={firePit} key={firePit}/>
-                {firePit === "직접 입력" ? (
+                <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={(firePit>6)?"직접 입력":firePit+"개"} key={firePit}/>
+                {(firePit > 6) ? (
                     <div>
                         <input onChange={onChangeFirePit} defaultValue={dbData.fireholeNum}/>
                         <p>개</p>

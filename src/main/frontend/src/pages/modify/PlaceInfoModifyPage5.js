@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import {Link, useLocation, useNavigate,useParams} from "react-router-dom";
 import {PayWay} from "../../utils/enums";
 import ImageInput from "../../components/ImageInput";
+import "../../components/Styles.css";
 import axios from "axios";
 const PlaceInfoModifyPage5 = () => {
     const location = useLocation();
@@ -61,8 +62,7 @@ const PlaceInfoModifyPage5 = () => {
     },[]);
 
     const handleButton = () => {
-        if ((payment !== undefined) && (tradeName !== "") && (representative !== "") && (registNum1 !== "") && (registNum2 !== "") && (registNum3 !== "")
-            && (license !== undefined) && (address !== undefined) && (exactAddress !== "") && (email1 !== "")
+        if ((payment !== undefined) && (email1 !== "")
             && (phone1 !== "") && (phone2 !== "") && (phone3 !== "")){
             isPublic = true;
             submit();
@@ -99,6 +99,7 @@ const PlaceInfoModifyPage5 = () => {
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
+                console.log(res.data);
                 setDbData(res.data)
                 setPayment(res.data.payWay);
                 setTradeName(res.data.companyName);
@@ -143,16 +144,16 @@ const PlaceInfoModifyPage5 = () => {
                 <div>
                     <p>상호명(개인/법인)*</p>
                     <p>{tradeName.length}자/28자</p>
-                    <input value={tradeName} defaultValue={dbdata.companyName} disabled={true}/>
+                    <input value={tradeName} defaultValue={dbdata.companyName} disabled={true} className="input"/>
                 </div>
                 <div>
                     <p>대표자명*</p>
                     <p>{representative.length}자/10자</p>
-                    <input value={representative} defaultValue={dbdata.ceoName} disabled={true}/>
+                    <input value={representative} defaultValue={dbdata.ceoName} disabled={true} className="input"/>
                 </div>
                 <div>
                     <p>사업자 등록번호*</p>
-                     <input defaultValue={dbdata.businessNum}/>  {/*Todo 이 부분은 formattedNum으로 바꿔야 함 */}
+                     <input defaultValue={registNum1+'-'+registNum2+'-'+registNum3} disabled={true} className="input" key={0}/> 
                     <p>- 사업자 등록번호는 필수 입력입니다.</p>
                     <p>- 정확한 정보를 입력했는지 다시 한 번 확인해주세요.</p>
                     <p>- 추후, 사업자 정보가 수정된다면 반드시 온라인 상담을 통해 변경 내용을 알려주셔야 합니다.</p>
@@ -164,14 +165,12 @@ const PlaceInfoModifyPage5 = () => {
                 <div>
                     <p>사업장 주소*</p>
                     {/*Todo 데이터 가져오기*/}
-                    <label>
-                        <input type={"checkbox"} />공간 정보와 동일
-                    </label>
-                    <input defaultValue={dbdata.businessAddress} disabled={true}/>
+                    
+                    <input defaultValue={dbdata.businessAddress} disabled={true} className="input"/>
                 </div>
                 <div>
                     <p>정산용 이메일*</p>
-                    <input onChange={onChangeEmail1} defaultValue={email1} />
+                    <input onChange={onChangeEmail1} defaultValue={email1}/>
                     @ <input value={email2} defaultValue={email2} onChange={onChangeEmail2}/>
                     <DropDown dataArr={emailDatas} onChange={setEmail2}/>
                 </div>

@@ -97,7 +97,7 @@ const HostRegistry = () => {
                     <span>{inputCount}</span>
                     <span>/18자</span>
                 </p>
-                <input type="text" placeholder="오스테리아 로에로" style={{width: "94vw", height: "3vh"}}
+                <input type="text" placeholder="오스테리아 로에로" className="input"
                        onChange={onInputHandler} maxLength="17"/>
                 <h5>❕사용 가능한 특수문자: (,),(-),(.),(@),(/)</h5>
                 <h4>공간 한 줄 소개</h4>
@@ -105,7 +105,7 @@ const HostRegistry = () => {
                     <span>{inputCount2}</span>
                     <span>/18자</span>
                 </p>
-                <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" style={{width: "94vw", height: "3vh"}}
+                <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" className="input"
                        onChange={onInputHandler2} maxLength="17"/>
                 <h4>공간 소개</h4>
                 <p>
@@ -278,6 +278,7 @@ const HostRegistry = () => {
                                    setAddressDetail(e.target.value);
                                    setFullAddress(address + " " + e.target.value);
                                }}
+                               className="input"
                         />
                     </span>
                 </h5>
