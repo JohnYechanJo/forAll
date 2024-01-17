@@ -49,24 +49,6 @@ public class SpaceService extends Service {
     }
 
     @Transactional
-    public Long saveHallImage(HallImage hallImage) {
-        hallImageRepository.save(hallImage);
-        return hallImage.getId();
-    }
-
-    @Transactional
-    public Long saveKitchenImage(KitImage kitImage) {
-        kitImageRepository.save(kitImage);
-        return kitImage.getId();
-    }
-
-    @Transactional
-    public Long saveMenuImage(MenuImage menuImage) {
-        menuImageRepository.save(menuImage);
-        return menuImage.getId();
-    }
-
-    @Transactional
     public Long saveRent(Rent rent) {
         rentRepository.save(rent);
         return rent.getId();
@@ -82,54 +64,6 @@ public class SpaceService extends Service {
     public Long saveBooking(Booking booking) {
         bookingRepository.save(booking);
         return booking.getId();
-    }
-
-    /**
-     * findSpaceInfoById
-     */
-    @Transactional
-    public Space findByMember(Member member) {
-        List<Space> spaces = spaceRepository.findByMember(member);
-        if (spaces.isEmpty()) return null;
-        return spaces.get(0);
-    }
-
-    @Transactional
-    public Place findPlaceById(Long id) {
-        Space findSpace = spaceRepository.findById(id).orElseThrow();
-        return findSpace.getPlace();
-    }
-
-    @Transactional
-    public HallImage findHallImageById(Long id) {
-        Space findSpace = spaceRepository.findById(id).orElseThrow();
-        Place findPlace = findSpace.getPlace();
-        return findPlace.getHallImage();
-    }
-
-    @Transactional
-    public KitImage findKitImageById(Long id) {
-        Space findSpace = spaceRepository.findById(id).orElseThrow();
-        Place findPlace = findSpace.getPlace();
-        return findPlace.getKitImage();
-    }
-
-    @Transactional
-    public Rent findRentById(Long id) {
-        Space findSpace = spaceRepository.findById(id).orElseThrow();
-        return findSpace.getRent();
-    }
-
-    @Transactional
-    public Kitchen findKitchenById(Long id) {
-        Space findSpace = spaceRepository.findById(id).orElseThrow();
-        return findSpace.getKitchen();
-    }
-
-    @Transactional
-    public Booking findBookingById(Long id) {
-        Space findSpace = spaceRepository.findById(id).orElseThrow();
-        return findSpace.getBooking();
     }
 
     @Transactional
@@ -150,38 +84,10 @@ public class SpaceService extends Service {
         Image mainImage = imageService.findByImageName(sf.getMainImage());
         place.setMainImage(mainImage);
 
-        final HallImage hallImage = new HallImage();
-        Image hallRight = imageService.findByImageName(sf.getHallRight());
-        Image hallLeft = imageService.findByImageName(sf.getHallLeft());
-        Image hallFront = imageService.findByImageName(sf.getHallFront());
-        Image hallBack = imageService.findByImageName(sf.getHallBack());
-        Image hallEntire = imageService.findByImageName(sf.getHallEntire());
-        List<Image> hallExtra = imageService.findListByIds(sf.getHallExtra());
-        hallImage.setHallRight(hallRight);
-        hallImage.setHallLeft(hallLeft);
-        hallImage.setHallFront(hallFront);
-        hallImage.setHallBack(hallBack);
-        hallImage.setHallEntire(hallEntire);
-        hallImage.setHallExtra(hallExtra);
-        saveHallImage(hallImage);
+        List<Image> hallImage = imageService.findListByIds(sf.getHallImage());
         place.setHallImage(hallImage);
-
-        final KitImage kitImage = new KitImage();
-        Image kitRight = imageService.findByImageName(sf.getKitRight());
-        Image kitLeft = imageService.findByImageName(sf.getKitLeft());
-        Image kitFront = imageService.findByImageName(sf.getKitFront());
-        Image kitBack = imageService.findByImageName(sf.getKitBack());
-        Image kitEntire = imageService.findByImageName(sf.getKitEntire());
-        List<Image> kitExtra = imageService.findListByIds(sf.getKitExtra());
-        kitImage.setKitRight(kitRight);
-        kitImage.setKitLeft(kitLeft);
-        kitImage.setKitFront(kitFront);
-        kitImage.setKitBack(kitBack);
-        kitImage.setKitEntire(kitEntire);
-        kitImage.setKitExtra(kitExtra);
-        saveKitchenImage(kitImage);
+        List<Image> kitImage = imageService.findListByIds(sf.getKitImage());
         place.setKitImage(kitImage);
-
         List<Image> menuImage = imageService.findListByIds(sf.getMenu());
         place.setMenuImage(menuImage);
         savePlace(place);
@@ -258,22 +164,8 @@ public class SpaceService extends Service {
         sf.setWebsite(place.getWebsite());
         sf.setMainImage(imageService.getImageName(place.getMainImage()));
 
-        final HallImage hallImage = place.getHallImage();
-        sf.setHallRight(imageService.getImageName(hallImage.getHallRight()));
-        sf.setHallLeft(imageService.getImageName(hallImage.getHallLeft()));
-        sf.setHallFront(imageService.getImageName(hallImage.getHallFront()));
-        sf.setHallBack(imageService.getImageName(hallImage.getHallBack()));
-        sf.setHallEntire(imageService.getImageName(hallImage.getHallEntire()));
-        sf.setHallExtra(imageService.getImagesNames(hallImage.getHallExtra()));
-
-        final KitImage kitImage = place.getKitImage();
-        sf.setKitRight(imageService.getImageName(kitImage.getKitRight()));
-        sf.setKitLeft(imageService.getImageName(kitImage.getKitLeft()));
-        sf.setKitFront(imageService.getImageName(kitImage.getKitFront()));
-        sf.setKitBack(imageService.getImageName(kitImage.getKitBack()));
-        sf.setKitEntire(imageService.getImageName(kitImage.getKitEntire()));
-        sf.setKitExtra(imageService.getImagesNames(kitImage.getKitExtra()));
-
+        sf.setHallImage(imageService.getImagesNames(place.getHallImage()));
+        sf.setKitImage(imageService.getImagesNames(place.getKitImage()));
         sf.setMenu(imageService.getImagesNames(place.getMenuImage()));
 
         final Rent rent = space.getRent();
@@ -337,38 +229,10 @@ public class SpaceService extends Service {
         Image mainImage = imageService.findByImageName(sf.getMainImage());
         place.setMainImage(mainImage);
 
-        final HallImage hallImage = place.getHallImage();
-        Image hallRight = imageService.findByImageName(sf.getHallRight());
-        Image hallLeft = imageService.findByImageName(sf.getHallLeft());
-        Image hallFront = imageService.findByImageName(sf.getHallFront());
-        Image hallBack = imageService.findByImageName(sf.getHallBack());
-        Image hallEntire = imageService.findByImageName(sf.getHallEntire());
-        List<Image> hallExtra = imageService.findListByIds(sf.getHallExtra());
-        hallImage.setHallRight(hallRight);
-        hallImage.setHallLeft(hallLeft);
-        hallImage.setHallFront(hallFront);
-        hallImage.setHallBack(hallBack);
-        hallImage.setHallEntire(hallEntire);
-        hallImage.setHallExtra(hallExtra);
-        saveHallImage(hallImage);
+        List<Image> hallImage = imageService.findListByIds(sf.getHallImage());
         place.setHallImage(hallImage);
-
-        final KitImage kitImage = place.getKitImage();
-        Image kitRight = imageService.findByImageName(sf.getKitRight());
-        Image kitLeft = imageService.findByImageName(sf.getKitLeft());
-        Image kitFront = imageService.findByImageName(sf.getKitFront());
-        Image kitBack = imageService.findByImageName(sf.getKitBack());
-        Image kitEntire = imageService.findByImageName(sf.getKitEntire());
-        List<Image> kitExtra = imageService.findListByIds(sf.getKitExtra());
-        kitImage.setKitRight(kitRight);
-        kitImage.setKitLeft(kitLeft);
-        kitImage.setKitFront(kitFront);
-        kitImage.setKitBack(kitBack);
-        kitImage.setKitEntire(kitEntire);
-        kitImage.setKitExtra(kitExtra);
-        saveKitchenImage(kitImage);
+        List<Image> kitImage = imageService.findListByIds(sf.getKitImage());
         place.setKitImage(kitImage);
-
         List<Image> menuImage = imageService.findListByIds(sf.getMenu());
         place.setMenuImage(menuImage);
         savePlace(place);
