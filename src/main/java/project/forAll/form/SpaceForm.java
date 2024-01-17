@@ -9,6 +9,8 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 public class SpaceForm {
+    // space Id
+    private Long id;
     // 유저 loginId
     private String userId;
     // 공간명
@@ -26,37 +28,16 @@ public class SpaceForm {
     // 웹사이트
     private String website;
     // 대표 이미지
-    private Long mainImage;
+    private String mainImage;
 
-    // 홀 우측면
-    private Long hallRight;
-    // 홀 좌측면
-    private Long hallLeft;
-    // 홀 정면
-    private Long hallFront;
-    // 홀 후면
-    private Long hallBack;
-    // 홀 전체샷
-    private Long hallEntire;
     // 추가사진
-    private List<Long> hallExtra;
+    private List<String> hallImage;
 
-    // 주방 우측면
-    private Long kitRight;
-    // 주방 좌측면
-    private Long kitLeft;
-    // 주방 정면
-    private Long kitFront;
-    // 주방 후면
-    private Long kitBack;
-    // 주방 전체샷
-    private Long kitEntire;
-    // 추가사진
-    private List<Long> kitExtra;
+    // 주방 사진
+    private List<String> kitImage;
 
-    // db에도 메뉴 1,2,3,4로 저장해야 하는가?
     // 메뉴
-    private List<Long> menu;
+    private List<String> menu;
 
     // 대관 가능일
     private String ableDate;
@@ -92,19 +73,19 @@ public class SpaceForm {
     // 추가 사용가능 기계
     private String equipExtra;
     // 앞접시 이미지
-    private List<Long> plateImage;
+    private List<String> plateImage;
     // 앞접시 수
     private Integer plateNum;
     // 컵 이미지
-    private List<Long> cupImage;
+    private List<String> cupImage;
     // 컵 수
     private Integer cupNum;
     // 커트러리 이미지
-    private List<Long> cutleryImage;
+    private List<String> cutleryImage;
     // 커트러리 수
     private Integer cutleryNum;
     // 밧드 이미지
-    private List<Long> vatImage;
+    private List<String> vatImage;
     // 밧드 수
     private Integer vatNum;
 
@@ -117,7 +98,7 @@ public class SpaceForm {
     // 사업자 등록번호
     private String businessNum;
     // 사업자 등록증
-    private Long businessImage;
+    private String businessImage;
     // 사업자 주소
     private String businessAddress;
     // 정산용 이메일
@@ -130,6 +111,7 @@ public class SpaceForm {
     private String accountNum;
     // 예금주
     private String accountHolder;
-
+    // 공개 여부
+    private Boolean isPublic;
 
 }

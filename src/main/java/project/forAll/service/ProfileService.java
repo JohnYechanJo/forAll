@@ -10,6 +10,8 @@ import project.forAll.domain.member.Member;
 import project.forAll.form.ProfileForm;
 import project.forAll.repository.ProfileRepository;
 
+import java.util.List;
+
 @Component
 @Transactional
 public class ProfileService extends Service {
@@ -31,13 +33,21 @@ public class ProfileService extends Service {
         profile.setIntroduction(pf.getIntroduction());
         profile.setDetailIntroduction(pf.getDetailIntroduction());
         profile.setCareer(pf.getCareer());
-        final Image image = imageService.findById(pf.getPicture());
+        final Image image = imageService.findByImageName(pf.getPicture());
         profile.setPicture(image);
         profile.setPictureExplain(pf.getPictureExplain());
         profile.setMbti(pf.getMbti());
         profile.setCook(pf.getCook());
         profile.setInterest(pf.getInterest());
+        final Image certificate = imageService.findByImageName(pf.getCertificate());
+        profile.setCertificate(certificate);
 
         return profile;
+    }
+
+    public Profile findByMember(final Member member){
+        List<Profile> profiles = profileRepository.findByMember(member);
+        if (profiles.isEmpty()) return null;
+        return profiles.get(0);
     }
 }
