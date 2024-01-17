@@ -5,12 +5,12 @@
     color: white;
     padding: 10px 20px;
     text-align: center;
-    text-decoration: none;
     font-size: 16px;
     border-radius: 8px;
     width: 70vw;
+    font-family: "Noto Sans KR", sans-serif;
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 .footer {
     display: flex;
     justify-content: center;
@@ -25,9 +25,15 @@
     white-space: pre-line;
 }
 .image{
-    width: 70%;
-    height: 60%;
+    width: 75%;
+    height: 100%;
     object-fit: cover;
+    display: inline-block;
+    padding: 0px 0px;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 .detail{
     border: none;

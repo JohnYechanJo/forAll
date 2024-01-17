@@ -1,11 +1,18 @@
 import Header from "../components/Header";
 import axios from "axios";
-import {user_role} from "../utils/enums";
+import {MainPageType, user_role} from "../utils/enums";
 import HomeTemplate from "../components/home/HomeTemplate";
 import Sidebar from "../components/home/Sidebar";
 import "../style/mainpage.css";
+import {useEffect, useState} from "react";
+import Banner from "../components/./Banner";
+import {useNavigate} from "react-router-dom";
+import ImageViewer from "../components/ImageViewer";
 
 const MainPage = () => {
+    const navigate = useNavigate();
+    const [spaceData, setSpaceData] = useState([]);
+    const [pageType, setPageType] = useState(MainPageType.BASIC);
     if(sessionStorage.getItem("user_id") == null){
         window.location.href = "/login";
     }
@@ -18,33 +25,38 @@ const MainPage = () => {
             console.log(res);
         });
     };
+    // 첫 페이지 랜딩 시에만 공간 정보를 불러옴
+    useEffect(() => {
+        axios.get("/api/v1/space/isPublic")
+            .then((res) => setSpaceData(res.data))
+            .catch((err) => console.error(err));
+    }, []);
+
     return (
         <div>
             <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
-                <button className="button">대관하기</button>
-                <button className="button">크루 열기</button>
-                <button className="button">크루지원하기</button>
-
+                <button className="button" onClick={() => setPageType(MainPageType.SPACE)}>대관하기</button>
+                <button className="button">커뮤니티</button>
             </div>
             <HomeTemplate />
+            {[MainPageType.BASIC, MainPageType.SPACE].includes(pageType) ?(<div>
+                <p onClick={() => setPageType(MainPageType.SPACE)}>모두보기</p>
+                <Banner dataSet={spaceData} navigate={navigate}/>
+            </div>) : null}
+            {pageType === MainPageType.SPACE ? (
+                <div>
+                    {spaceData.map((data, idx) =>
+                        (<div key={idx}>
+                            <ImageViewer val={data.mainImage} />
+                            <p>{data.priceSet}원</p>
+                            <p>{data.address} | {data.name}</p>
+                        </div>)
+                    )}
+                </div>
+            ) : null}
             <Sidebar/>
-            <ol>
-                <li>a</li>
-                <li>b</li>
-                <li>c</li>
-                <li>d</li>
-                <li>e</li>
-                <li>f</li>
-                <li>g</li>
-                <li>h</li>
-            </ol>
+
             <button onClick={logOut}>로그아웃</button>
-            <div className="footer">
-                <button>검색</button>
-                <button>찜</button>
-                <button>채팅</button>
-                <button>프로필</button>
-            </div>
         </div>
     )
 };

@@ -8,6 +8,7 @@ import axios from "axios";
 const HostRegistry6 =() => {
     const location = useLocation();
     const data = {...location.state};
+    let isPublic = false;
     const navigate = useNavigate();
     const bankDatas = ["한국은행", "KB국민은행", "신한은행", "우리은행", "하나은행", "SC제일은행", "한국씨티은행", "케이뱅크", "카카오뱅크", "토스뱅크", "한국산업은행", "중소기업은행", "한국수출은행", "NH농협은행", "수협은행", "대구은행", "부산은행", "경남은행", "광주은행", "전북은행", "제주은행"];
     const [bank, setBank] = useState(bankDatas[0]);
@@ -26,30 +27,19 @@ const HostRegistry6 =() => {
 
     const handleButton = () => {
         if (isAgree === false) alert("환불 기준을 동의해주세요");
-        else if((account !== "") && (accountHolder !== undefined)) submit();
+        else if((account !== "") && (accountHolder !== undefined)) {
+            isPublic = true;
+            submit();
+        }
         else setIsModalOpen(true);
     };
     const submit = async () => {
         const userId = sessionStorage.getItem("user_id");
         // 대표 이미지
         const imgRepresent = await ImageUploader(data.imgRepresent, userId) ;
-        //홀 이미지들
-        const hallRight = await ImageUploader(data.imgRight, userId);
-        const hallLeft = await ImageUploader(data.imgLeft, userId);
-        const hallFront = await ImageUploader(data.imgFront, userId);
-        const hallBack = await ImageUploader(data.imgBack, userId);
-        const hallEntire = await ImageUploader(data.imgAll, userId);
-        const hallExtra = await Promise.all(data.imgAdditional.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-
-        //주방 이미지들
-        const kitRight = await ImageUploader(data.kitchenRight, userId);
-        const kitLeft = await ImageUploader(data.kitchenLeft, userId);
-        const kitFront = await ImageUploader(data.kitchenFront, userId);
-        const kitBack = await ImageUploader(data.kitchenBack, userId);
-        const kitEntire = await ImageUploader(data.kitchenAll, userId);
-        const kitExtra = await Promise.all(data.kitchenAdditional.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-
-        const menu = await Promise.all([data.menu1, data.menu2, data.menu3, data.menu4, ...data.menuAdditional].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const hallImage = await Promise.all([data.img1, data.img2, data.img3].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const kitImage = await Promise.all([data.kitchen1, data.kitchen2, data.kitchen3].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const menu = await Promise.all([data.menu1, ...data.menuAdditional].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
 
         const plateImage = await Promise.all(data.sidePlate.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
         const cupImage = await Promise.all(data.cup.filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
@@ -72,18 +62,8 @@ const HostRegistry6 =() => {
             addressBrief: data.placeInfo,
             website: data.webSite,
             mainImage: imgRepresent,
-            hallRight: hallRight,
-            hallLeft: hallLeft,
-            hallFront: hallFront,
-            hallBack: hallBack,
-            hallEntire: hallEntire,
-            hallExtra: hallExtra,
-            kitRight: kitRight,
-            kitLeft: kitLeft,
-            kitFront: kitFront,
-            kitBack: kitBack,
-            kitEntire: kitEntire,
-            kitExtra: kitExtra,
+            hallImage: hallImage,
+            kitImage: kitImage,
             menu: menu,
             ableDate: data.rentWeek,
             ableStartHour: data.rentTimeFrom,
@@ -120,6 +100,7 @@ const HostRegistry6 =() => {
             bankName: bank,
             accountNum: account,
             accountHolder: accountHolder,
+            isPublic: data.isPublic && isPublic
         })
             .then((res) => navigate("/main"))
             .catch((err) => console.error(err));

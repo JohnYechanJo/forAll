@@ -15,7 +15,7 @@ const PlaceTemplate = () => {
         else{
             axios.get("/api/v1/members/"+id+"/"+passwd)
                 .then(() => {
-                    window.location.href = "/placeInfoModify2";
+                    window.location.href = "/placeInfoModifyPage";
                 }).catch(()=>{
                     alert("비밀번호가 일치하지 않습니다");
             });
