@@ -30,33 +30,12 @@ public class SpaceForm {
     // 대표 이미지
     private String mainImage;
 
-    // 홀 우측면
-    private String hallRight;
-    // 홀 좌측면
-    private String hallLeft;
-    // 홀 정면
-    private String hallFront;
-    // 홀 후면
-    private String hallBack;
-    // 홀 전체샷
-    private String hallEntire;
     // 추가사진
-    private List<String> hallExtra;
+    private List<String> hallImage;
 
-    // 주방 우측면
-    private String kitRight;
-    // 주방 좌측면
-    private String kitLeft;
-    // 주방 정면
-    private String kitFront;
-    // 주방 후면
-    private String kitBack;
-    // 주방 전체샷
-    private String kitEntire;
-    // 추가사진
-    private List<String> kitExtra;
+    // 주방 사진
+    private List<String> kitImage;
 
-    // db에도 메뉴 1,2,3,4로 저장해야 하는가?
     // 메뉴
     private List<String> menu;
 
