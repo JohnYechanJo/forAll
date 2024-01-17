@@ -2,6 +2,7 @@ import {useParams} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import {BoardCategory} from "../utils/enums";
+import {TimeUtil} from "../utils/TimeUtil";
 
 const PostViewPage = () => {
     const params = useParams();
@@ -16,7 +17,7 @@ const PostViewPage = () => {
         axios.post("/api/v1/comments",{
             articleId: data.id,
             text: comment,
-            writtenAt: new Date().toDateString(),
+            writtenAt: TimeUtil.now(),
             userId: sessionStorage.getItem("user_id")
         }).then(()=>{
             setComment("");
@@ -28,7 +29,7 @@ const PostViewPage = () => {
         axios.post("/api/v1/recomments",{
             commentId: data.comments[commentIdx].id,
             text: recomment,
-            writtenAt: new Date().toDateString(),
+            writtenAt: TimeUtil.now(),
             userId: sessionStorage.getItem("user_id")
         }).then(()=>{
             setRecomment("");
@@ -54,6 +55,7 @@ const PostViewPage = () => {
                 <h1>{data.title}</h1>
                 <p>ID: {data.userId}</p>
                 <p>댓글수 : {data.comments ? data.comments.length : 0}</p>
+                <p>{TimeUtil.getDiffStr(data.writtenAt)}</p>
                 <p>프로필 보기</p> {/*todo : 프로필 연결*/}
                 <p>채팅 보내기</p> {/*todo : 채팅 연결*/}
             </div>
@@ -69,20 +71,28 @@ const PostViewPage = () => {
                 </div>
             ): null}
             {data.comments ? (<div>
-                {data.comments.map((comment, idx) => (
+                {data.comments.sort(((a,b) => {
+                    if(a.writtenAt > b.writtenAt) return -1;
+                    else return 1;
+                })).map((comment, idx) => (
                     <div key={idx}>
                         <p>{comment.userId}</p>
                         <p>{comment.text}</p>
+                        <p>{TimeUtil.getDiffStr(comment.writtenAt)}</p>
                         <p onClick={() => setWriteRecomment(idx)}>대댓글: {comment.recomments ? comment.recomments.length : 0}</p>
                         { writeRecomment === idx ? (<div>
                             <input value={recomment} onChange={onChangeRecomment}/>
                             <button onClick={() => submitRecomment(idx)}>제출</button>
                         </div>) : null}
                         { comment.recomments ? (<div>
-                            {comment.recomments.map((recomment, idx) => (
+                            {comment.recomments.sort(((a,b) => {
+                                if(a.writtenAt > b.writtenAt) return -1;
+                                else return 1;
+                            })).map((recomment, idx) => (
                                 <div key={idx}>
                                     <p>{recomment.userId}</p>
                                     <p>{recomment.text}</p>
+                                    <p>{TimeUtil.getDiffStr(recomment.writtenAt)}</p>
                                 </div>
                             ))}
                         </div>) : null}

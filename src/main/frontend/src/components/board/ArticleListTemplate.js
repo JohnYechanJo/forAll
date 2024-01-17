@@ -1,6 +1,7 @@
 import {useCallback, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {TimeUtil} from "../../utils/TimeUtil";
 
 const ArticleListTemplate = ({category, postList, preview= false}) => {
     const navigate = useNavigate();
@@ -15,11 +16,11 @@ const ArticleListTemplate = ({category, postList, preview= false}) => {
         axios.post("/api/v1/articles",{
             title: postTitle,
             content: postContent,
-            // 추후 new Date(writtenAt)으로 재성성 가능
-            writtenAt: new Date().toDateString(),
+            writtenAt: TimeUtil.now(),
             category: category,
             userId: sessionStorage.getItem("user_id")
-        })
+        }).then(()=>window.location.reload())
+            .catch((err) => console.error(err));
     };
     return (
         <div>
@@ -39,11 +40,16 @@ const ArticleListTemplate = ({category, postList, preview= false}) => {
                 ):null}
                 {postList ? (
                     <div>
-                        {postList.map((post, idx) => (
+                        {/*시간 순 정렬*/}
+                        {postList.sort((a,b) => {
+                            if(a.writtenAt > b.writtenAt) return -1;
+                            else return 1;
+                        }).map((post, idx) => (
                             <div key={idx} onClick={() => navigate("/post/"+post.id)}>
                                 <p>{post.title}</p>
                                 {!preview ? <p>{post.content}</p> : null}
                                 <p>댓글:{post.comments ? post.comments.length : 0}</p>
+                                <p>{TimeUtil.getDiffStr(post.writtenAt)}</p>
                             </div>
                         )
                         )}
