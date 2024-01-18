@@ -13,6 +13,7 @@ import java.util.UUID;
 @Data
 @Getter
 @Entity
+
 public class ChatRoom {
 
     @Id
@@ -20,11 +21,10 @@ public class ChatRoom {
     private String roomName;// 채팅방 이름
     private long userCount; // 채팅방 인원수
     @ElementCollection
-    @CollectionTable(
-            name = "user_list",
-            joinColumns = @JoinColumn(name = "room_id")
-    )
-    private List<User> userList = new ArrayList<>();
+    @CollectionTable(name = "user_list", joinColumns = @JoinColumn(name = "room_id"))
+    @MapKeyColumn(name = "user_id")
+    @Column(name = "user_name")
+    private HashMap<String, String> userList = new HashMap<>();
 
     public static ChatRoom create(String roomName) {
         ChatRoom chatRoom = new ChatRoom();

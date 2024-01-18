@@ -18,7 +18,6 @@ import java.util.*;
 
 import project.forAll.repository.ChatRoomRepository;
 import project.forAll.util.ChatRoom;
-import project.forAll.repository.ChatRepository;  // 추가
 
 
 @Slf4j
