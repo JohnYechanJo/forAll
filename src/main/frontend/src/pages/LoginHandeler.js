@@ -12,7 +12,6 @@ const LoginHandeler = (props) => {
             await axios({
                 method: "GET",
                 url: `http://localhost:3000/api/v1/login/oauth2/callback/kakao?code=${code}`,
-                // url: `${process.env.REACT_APP_REDIRECT_URI}?code=${code}`로 수정
                 headers: {
                     "Content-Type": "application/json;charset=utf-8", //json형태로 데이터를 보내겠다는뜻
                     "Access-Control-Allow-Origin": "*", //이건 cors 에러때문에 넣어둔것. 당신의 프로젝트에 맞게 지워도됨

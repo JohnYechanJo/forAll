@@ -1,4 +1,4 @@
-package project.forAll.controller;
+package project.forAll.controller.api.chat;
 
 
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ import project.forAll.dto.ChatDto;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class ChatController {
+public class APIChatController {
 
 
     // 아래에서 사용되는 convertAndSend 를 사용하기 위해서 서언

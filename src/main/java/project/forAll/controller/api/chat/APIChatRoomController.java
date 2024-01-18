@@ -1,4 +1,4 @@
-package project.forAll.controller;
+package project.forAll.controller.api.chat;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import project.forAll.util.ChatRoom;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class ChatRoomController {
+public class APIChatRoomController {
 
     // ChatRepository Bean 가져오기
     private final ChatRepository repository;

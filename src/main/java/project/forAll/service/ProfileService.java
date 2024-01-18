@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.Image;
-import project.forAll.domain.Profile;
+import project.forAll.domain.member.Profile;
 import project.forAll.domain.member.Member;
 import project.forAll.form.ProfileForm;
 import project.forAll.repository.ProfileRepository;

@@ -88,7 +88,7 @@ const PlaceInfoModifyPage3 = () => {
     const toggleSunDay = useCallback((e) => {
         setSunDay(!sunDay);
     }, [sunDay]);
-    const downloadData = async () => {
+    const DownloadData = async () => {
         let spaceid;
         await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
             .then((res) => spaceid = res.data[0])
@@ -126,7 +126,7 @@ const PlaceInfoModifyPage3 = () => {
             .catch((err) => console.error(err));
     });
     useEffect(() => {
-        downloadData();
+        DownloadData();
     }, []);
     const handleButton = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")

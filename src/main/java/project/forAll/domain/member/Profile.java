@@ -1,9 +1,11 @@
-package project.forAll.domain;
+package project.forAll.domain.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import project.forAll.domain.BassDomain;
+import project.forAll.domain.Image;
 import project.forAll.domain.member.Member;
 import project.forAll.util.StringListConverter;
 
@@ -35,9 +37,9 @@ public class Profile extends BassDomain {
     // 프로필 사진
     @OneToOne(fetch = FetchType.LAZY)
     private Image picture;
-    //프로필 사진 설명
+    // 프로필 사진 설명
     private String pictureExplain;
-    //MBIT
+    // MBTi
     private String mbti;
     // 요리
     @ElementCollection

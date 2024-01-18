@@ -3,6 +3,7 @@ package project.forAll.domain.member;
 import lombok.Getter;
 import lombok.Setter;
 import project.forAll.domain.BassDomain;
+import project.forAll.domain.board.Article;
 
 import javax.persistence.*;
 
@@ -11,9 +12,12 @@ import javax.persistence.*;
 public class Member extends BassDomain {
 
     @Id @GeneratedValue
-    // 가입 순서에 따라 1, 2, ... 주어지는 id
     @Column(name = "member_id")
     private Long id;
+
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "article_id")
+//    private Article article;
 
     // 호스트 또는 게스트
     // private MemberRole role;

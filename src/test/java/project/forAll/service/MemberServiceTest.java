@@ -38,6 +38,7 @@ public class MemberServiceTest {
         // Then
         Member getMember = memberService.findMemberById(memberId).orElseThrow();
 
+        // "Male"과 비교하는 게 아니라 member의 gender와 비교하는 게 정석
         assertEquals("Member는 Male", "Male", getMember.getGender().toString());
         assertEquals("Member의 전화번호 일치", "01010101010", getMember.getPhoneNum());
     }

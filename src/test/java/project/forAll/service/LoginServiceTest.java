@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.member.Member;
 import project.forAll.form.MemberForm;
-import project.forAll.repository.MemberRepository;
+import project.forAll.repository.member.MemberRepository;
 
 import static org.junit.Assert.assertEquals;
 

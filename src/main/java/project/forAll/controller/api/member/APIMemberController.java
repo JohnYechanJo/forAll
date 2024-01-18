@@ -1,10 +1,11 @@
-package project.forAll.controller.api;
+package project.forAll.controller.api.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
+import project.forAll.controller.api.APIController;
 import project.forAll.domain.member.Member;
 import project.forAll.form.MemberForm;
 import project.forAll.service.MemberService;
@@ -42,7 +43,7 @@ public class APIMemberController extends APIController {
      *                  (fail - 에러 메시지 반환)
      */
     @PostMapping("/members")
-    public ResponseEntity createMember(@RequestBody final MemberForm mf,HttpServletRequest request, HttpServletResponse response){
+    public ResponseEntity createMember(@RequestBody final MemberForm mf, HttpServletRequest request, HttpServletResponse response){
         try{
             final Member member = memberService.createMember(mf);
 
@@ -95,7 +96,6 @@ public class APIMemberController extends APIController {
         }catch(final Exception e){
             return new ResponseEntity(errorResponse("Could not update Member : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @GetMapping("/members/{id}/{pw}")

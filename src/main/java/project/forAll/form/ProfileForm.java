@@ -3,7 +3,7 @@ package project.forAll.form;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import project.forAll.domain.Profile;
+import project.forAll.domain.member.Profile;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class ProfileForm {
     private String picture;
     //프로필 사진 설명
     private String pictureExplain;
-    //MBIT
+    // MBTI
     private String mbti;
     // 요리
     private List<String> cook;

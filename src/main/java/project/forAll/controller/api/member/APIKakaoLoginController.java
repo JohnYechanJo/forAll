@@ -1,4 +1,4 @@
-package project.forAll.controller.api;
+package project.forAll.controller.api.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import project.forAll.controller.SessionManager;
+import project.forAll.controller.api.APIController;
 import project.forAll.service.KakaoLoginService;
 import project.forAll.util.dto.LoginResponseDto;
 

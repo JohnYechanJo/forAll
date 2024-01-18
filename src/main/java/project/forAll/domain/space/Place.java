@@ -18,7 +18,6 @@ public class Place extends BassDomain {
 
     @Id @GeneratedValue
     @Column(name = "place_id")
-
     private Long id;
 
     // 홀 사진들

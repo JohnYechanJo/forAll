@@ -1,6 +1,5 @@
-import Header from "../components/Header";
 import axios from "axios";
-import {MainPageType, user_role} from "../utils/enums";
+import {BoardCategory, MainPageType} from "../utils/enums";
 import HomeTemplate from "../components/home/HomeTemplate";
 import Sidebar from "../components/home/Sidebar";
 import "../style/mainpage.css";
@@ -8,11 +7,16 @@ import {useEffect, useState} from "react";
 import Banner from "../components/./Banner";
 import {useNavigate} from "react-router-dom";
 import ImageViewer from "../components/ImageViewer";
+import ArticleListTemplate from "../components/board/ArticleListTemplate";
 
 const MainPage = () => {
     const navigate = useNavigate();
-    const [spaceData, setSpaceData] = useState([]);
     const [pageType, setPageType] = useState(MainPageType.BASIC);
+    const [spaceData, setSpaceData] = useState([]);
+    const [popupData, setPopupData] = useState([]);
+    const [chatData, setChatData] = useState([]);
+    const [recipeData, setRecipeData] = useState([]);
+
     if(sessionStorage.getItem("user_id") == null){
         window.location.href = "/login";
     }
@@ -30,6 +34,24 @@ const MainPage = () => {
         axios.get("/api/v1/space/isPublic")
             .then((res) => setSpaceData(res.data))
             .catch((err) => console.error(err));
+        axios.get("/api/v1/articles/category/" + BoardCategory.Popup)
+            .then((res) => setPopupData(res.data.sort((a,b) => {
+                if(a.writtenAt > b.writtenAt) return -1;
+                else return 1;
+            }).slice(0,3)))
+            .catch((err) => console.error(err));
+        axios.get("/api/v1/articles/category/" + BoardCategory.Chat)
+            .then((res) => setChatData(res.data.sort((a,b) => {
+                if(a.writtenAt > b.writtenAt) return -1;
+                else return 1;
+            }).slice(0,3)))
+            .catch((err) => console.error(err));
+        axios.get("/api/v1/articles/category/" + BoardCategory.Recipe)
+            .then((res) => setRecipeData(res.data.sort((a,b) => {
+                if(a.writtenAt > b.writtenAt) return -1;
+                else return 1;
+            }).slice(0,3)))
+            .catch((err) => console.error(err));
     }, []);
 
     return (
@@ -38,6 +60,7 @@ const MainPage = () => {
                 <button className="button" onClick={() => setPageType(MainPageType.SPACE)}>대관하기</button>
                 <button className="button">커뮤니티</button>
             </div>
+            <Sidebar/>
             <HomeTemplate />
             {[MainPageType.BASIC, MainPageType.SPACE].includes(pageType) ?(<div>
                 <p onClick={() => setPageType(MainPageType.SPACE)}>모두보기</p>
@@ -54,8 +77,19 @@ const MainPage = () => {
                     )}
                 </div>
             ) : null}
-            <Sidebar/>
-
+            {pageType === MainPageType.BASIC ? (
+                <div>
+                    <h1>팝업</h1>
+                    <p onClick={() => navigate("/popup")}>모두보기</p>
+                    <ArticleListTemplate postList={popupData} preview={true}/>
+                    <h1>잡담</h1>
+                    <p onClick={() => navigate("/chat")}>모두보기</p>
+                    <ArticleListTemplate postList={chatData} preview={true}/>
+                    <h1>레시피</h1>
+                    <p onClick={() => navigate("/recipe")}>모두보기</p>
+                    <ArticleListTemplate postList={recipeData} preview={true}/>
+                </div>
+            ) : null}
             <button onClick={logOut}>로그아웃</button>
         </div>
     )
