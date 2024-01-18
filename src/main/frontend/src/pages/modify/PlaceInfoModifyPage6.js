@@ -8,7 +8,6 @@ import axios from "axios";
 const PlaceInfoModifyPage6 =() => {
     const location = useLocation();
     const data = {...location.state};
-    console.log(data);
     let isPublic = false;
     const navigate = useNavigate();
     const params = useParams();
@@ -45,7 +44,6 @@ const PlaceInfoModifyPage6 =() => {
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
-                console.log(res.data);
                 setDbData(res.data);
                 setBank(res.data.bankName);
                 setAccount(res.data.accountNum);

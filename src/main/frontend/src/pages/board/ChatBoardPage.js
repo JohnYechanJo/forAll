@@ -19,7 +19,6 @@ const ChatBoardPage = () => {
     const onChangePostContent = useCallback((e)=>setPostContent(e.target.value),[]);
 
     const UploadPost = async () => {
-        console.log(postImage);
         const userId = sessionStorage.getItem("user_id");
         const imageList = await Promise.all(postImage.map(async (img) => await ImageUploader(img, userId)));
         axios.post("/api/v1/articles", {

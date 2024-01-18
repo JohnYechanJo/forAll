@@ -99,7 +99,6 @@ const PlaceInfoModifyPage5 = () => {
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
-                console.log(res.data);
                 setDbData(res.data)
                 setPayment(res.data.payWay);
                 setTradeName(res.data.companyName);

@@ -1,22 +1,25 @@
 import axios from "axios";
-import {BoardCategory, MainPageType} from "../utils/enums";
+import {BoardCategory} from "../utils/enums";
 import HomeTemplate from "../components/home/HomeTemplate";
 import Sidebar from "../components/home/Sidebar";
 import "../style/mainpage.css";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import Banner from "../components/./Banner";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import ImageViewer from "../components/ImageViewer";
 import ArticleListTemplate from "../components/board/ArticleListTemplate";
 
 const MainPage = () => {
     const navigate = useNavigate();
-    const [pageType, setPageType] = useState(MainPageType.BASIC);
+    const location = useLocation();
+    const data = {...location.state};
     const [spaceData, setSpaceData] = useState([]);
     const [popupData, setPopupData] = useState([]);
     const [chatData, setChatData] = useState([]);
     const [recipeData, setRecipeData] = useState([]);
-
+    const spaceRef = useRef();
+    const boardRef = useRef();
+    const mainPageRef = useRef();
     if(sessionStorage.getItem("user_id") == null){
         window.location.href = "/login";
     }
@@ -26,10 +29,12 @@ const MainPage = () => {
                 sessionStorage.clear();
                 window.location.href = "/login";
             }).catch((res)=>{
-            console.log(res);
+            console.error(res);
         });
     };
-    // 첫 페이지 랜딩 시에만 공간 정보를 불러옴
+    const spaceFocus = () => { spaceRef.current?.scrollIntoView({ behavior: 'smooth' })};
+    const boardFocus = () => { boardRef.current?.scrollIntoView({ behavior: 'smooth' })};
+
     useEffect(() => {
         axios.get("/api/v1/space/isPublic")
             .then((res) => setSpaceData(res.data))
@@ -53,43 +58,33 @@ const MainPage = () => {
             }).slice(0,3)))
             .catch((err) => console.error(err));
     }, []);
-
+    useEffect(() => {
+        if (data.focus === "space") spaceFocus();
+        else if (data.focus === "board") boardFocus();
+    }, [mainPageRef]); // 페이지 전환 후 스크롤 이동에 애먹고 있음
     return (
-        <div>
+        <div ref={mainPageRef}>
             <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
-                <button className="button" onClick={() => setPageType(MainPageType.SPACE)}>대관하기</button>
-                <button className="button">커뮤니티</button>
+                <button className="button" onClick={spaceFocus}>대관하기</button>
+                <button className="button" onClick={boardFocus}>커뮤니티</button>
             </div>
             <Sidebar/>
             <HomeTemplate />
-            {[MainPageType.BASIC, MainPageType.SPACE].includes(pageType) ?(<div>
-                <p onClick={() => setPageType(MainPageType.SPACE)}>모두보기</p>
+            <div ref={spaceRef}>
+                <p onClick={() => navigate("/spaceList")}>모두보기</p>
                 <Banner dataSet={spaceData} navigate={navigate}/>
-            </div>) : null}
-            {pageType === MainPageType.SPACE ? (
-                <div>
-                    {spaceData.map((data, idx) =>
-                        (<div key={idx}>
-                            <ImageViewer val={data.mainImage} />
-                            <p>{data.priceSet}원</p>
-                            <p>{data.address} | {data.name}</p>
-                        </div>)
-                    )}
-                </div>
-            ) : null}
-            {pageType === MainPageType.BASIC ? (
-                <div>
-                    <h1>팝업</h1>
-                    <p onClick={() => navigate("/popup")}>모두보기</p>
-                    <ArticleListTemplate postList={popupData} preview={true}/>
-                    <h1>잡담</h1>
-                    <p onClick={() => navigate("/chat")}>모두보기</p>
-                    <ArticleListTemplate postList={chatData} preview={true}/>
-                    <h1>레시피</h1>
-                    <p onClick={() => navigate("/recipe")}>모두보기</p>
-                    <ArticleListTemplate postList={recipeData} preview={true}/>
-                </div>
-            ) : null}
+            </div>
+            <div ref={boardRef}>
+                <h1>팝업</h1>
+                <p onClick={() => navigate("/popup")}>모두보기</p>
+                <ArticleListTemplate postList={popupData} preview={true}/>
+                <h1>잡담</h1>
+                <p onClick={() => navigate("/chat")}>모두보기</p>
+                <ArticleListTemplate postList={chatData} preview={true}/>
+                <h1>레시피</h1>
+                <p onClick={() => navigate("/recipe")}>모두보기</p>
+                <ArticleListTemplate postList={recipeData} preview={true}/>
+            </div>
             <button onClick={logOut}>로그아웃</button>
         </div>
     )

@@ -96,7 +96,6 @@ const PlaceInfoModifyPage3 = () => {
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
-                console.log(res.data);
                 setDbData(res.data);
                 setElevator(res.data.haveElevator)
                 setTrial(res.data.ableTrial)
@@ -162,8 +161,6 @@ const PlaceInfoModifyPage3 = () => {
         else{
             setParkAvaliable(parkAvaliable);
         }
-        
-        console.log(rentData);
         data.isPublic = data.isPublic && isPublic;
             navigate("/placeInfoModify4",{
                 state: {

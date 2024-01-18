@@ -143,9 +143,6 @@ const HostRegistry3 = () => {
         });
     };
     useEffect(() => {
-        console.log(rentDays.toString());
-    }, [rentDays]);
-    useEffect(() => {
         let recommendedPrice = seat * 15000;
         let priceString = recommendedPrice.toString();
         let firstDigits = priceString.slice(0, -4);

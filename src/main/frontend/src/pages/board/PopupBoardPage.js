@@ -6,8 +6,10 @@ import HomeTemplate from "../../components/home/HomeTemplate";
 import ArticleListTemplate from "../../components/board/ArticleListTemplate";
 import {TimeUtil} from "../../utils/TimeUtil";
 import ImageUploader from "../../utils/imageUploader";
+import {useNavigate} from "react-router-dom";
 
 const PopupBoardPage = () => {
+    const navigate = useNavigate();
     const [postList, setPostList] = useState([]);
     const [newPost, setNewPost] = useState(false);
     const [postTitle, setPostTitle] = useState("");
@@ -19,7 +21,6 @@ const PopupBoardPage = () => {
     const onChangePostContent = useCallback((e)=>setPostContent(e.target.value),[]);
 
     const UploadPost = async () => {
-        console.log(postImage);
         const userId = sessionStorage.getItem("user_id");
         const imageList = await Promise.all(postImage.map(async (img) => await ImageUploader(img, userId)));
         axios.post("/api/v1/articles", {
@@ -47,7 +48,7 @@ const PopupBoardPage = () => {
     return(
         <div>
             <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
-                <button className="button">대관하기</button>
+                <button className="button" onClick={() => navigate("/main",{state: {focus: "space"}})}>대관하기</button>
                 <button className="button">커뮤니티</button>
             </div>
             <Sidebar/>

@@ -41,51 +41,52 @@ import PostViewPage from "./pages/board/PostViewPage";
 import PopupBoardPage from "./pages/board/PopupBoardPage";
 import ChatBoardPage from "./pages/board/ChatBoardPage";
 import RecipeBoardPage from "./pages/board/RecipeBoardPage";
+import SpaceListViewPage from "./pages/RentSpace/SpaceListViewPage";
 function App() {
   return (
       <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/main" element={<MainPage />}/>
-          <Route path="/searchId" element={<SearchIdPage />} />
-          <Route path="/searchPw" element={<SearchPwPage />}/>
-          <Route path="/signUp" element={<SignUpPage />}/>
-          <Route path="/signUp2" element={<SignUpPage2 />}/>
-          <Route path="/signUpComplete" element={<SignUpCompletePage />} />
-          <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
-          <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />
-          <Route path="/placeInfoModifyStart" element={<PlaceInfoModifyStart />} />
-          <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
-          <Route path="/placeInfoModify3" element={<PlaceInfoModifyPage3 />} />
-          <Route path="/placeInfoModify4" element={<PlaceInfoModifyPage4 />} />
-          <Route path="/placeInfoModify5" element={<PlaceInfoModifyPage5 />} />
-          <Route path="/placeInfoModify6" element={<PlaceInfoModifyPage6 />} />
-          <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
-          <Route path="/hostRegistry" element={<HostRegistry />} />
-          <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
-          <Route path="/hostRegistry2" element={<HostRegistry2 />} />
-          <Route path="/hostRegistry3" element={<HostRegistry3 />}/>
-          <Route path="/hostRegistry4" element={<HostRegistry4 />}/>
-          <Route path="/hostRegistry5" element={<HostRegistry5 />}/>
-          <Route path="/hostRegistry6" element={<HostRegistry6 />}/>
-          <Route path="/error" element={<ErrorPage />}/>
-          <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
-          <Route path="/guestRegistryStart" element={<GuestRegistryStart />}/>
-          <Route path="/guestRegistry" element={<GuestRegistry />}/>
-          <Route path="/guestRegistry2" element={<GuestRegistry2 />} />
-          <Route path="/cheat" element={<CheatPage />} />
-            <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
-          <Route path="/post/:id" element={<PostViewPage />} />
-              <Route path="/popup" element={<PopupBoardPage />} />
-              <Route path="/chat" element={<ChatBoardPage />} />
-              <Route path="/recipe" element={<RecipeBoardPage />} />
-          <Route path="/chefInfoModify" element={<ChefInfoModifyPage />} />
-          <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
-          <Route path="/chefInfoModify2" element={<ChefInfoModifyPage2 />} />
-          <Route path="/rentSpace/:id" element={<RentSpacePage />} />
-          <Route path="/rentSpaceInfo1/:id" element={<RentSpaceInfo1 />} />
-          <Route path="/rentSpaceInfo2/:id" element={<RentSpaceInfo2 />} />
-          <Route path="/rentSpaceInfo3/:id" element={<RentSpaceInfo3 />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/main" element={<MainPage />}/>
+        <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
+        <Route path="/searchId" element={<SearchIdPage />} />
+        <Route path="/searchPw" element={<SearchPwPage />}/>
+        <Route path="/signUp" element={<SignUpPage />}/>
+        <Route path="/signUp2" element={<SignUpPage2 />}/>
+        <Route path="/signUpComplete" element={<SignUpCompletePage />} />
+        <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
+        <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />
+        <Route path="/placeInfoModifyStart" element={<PlaceInfoModifyStart />} />
+        <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
+        <Route path="/placeInfoModify3" element={<PlaceInfoModifyPage3 />} />
+        <Route path="/placeInfoModify4" element={<PlaceInfoModifyPage4 />} />
+        <Route path="/placeInfoModify5" element={<PlaceInfoModifyPage5 />} />
+        <Route path="/placeInfoModify6" element={<PlaceInfoModifyPage6 />} />
+        <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
+        <Route path="/hostRegistry" element={<HostRegistry />} />
+        <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
+        <Route path="/hostRegistry2" element={<HostRegistry2 />} />
+        <Route path="/hostRegistry3" element={<HostRegistry3 />}/>
+        <Route path="/hostRegistry4" element={<HostRegistry4 />}/>
+        <Route path="/hostRegistry5" element={<HostRegistry5 />}/>
+        <Route path="/hostRegistry6" element={<HostRegistry6 />}/>
+        <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
+        <Route path="/guestRegistryStart" element={<GuestRegistryStart />}/>
+        <Route path="/guestRegistry" element={<GuestRegistry />}/>
+        <Route path="/guestRegistry2" element={<GuestRegistry2 />} />
+        <Route path="/chefInfoModify" element={<ChefInfoModifyPage />} />
+        <Route path="/chefInfoModify2" element={<ChefInfoModifyPage2 />} />
+        <Route path="/spaceList" element={<SpaceListViewPage />} />
+        <Route path="/rentSpace/:id" element={<RentSpacePage />} />
+        <Route path="/rentSpaceInfo1/:id" element={<RentSpaceInfo1 />} />
+        <Route path="/rentSpaceInfo2/:id" element={<RentSpaceInfo2 />} />
+        <Route path="/rentSpaceInfo3/:id" element={<RentSpaceInfo3 />} />
+        <Route path="/cheat" element={<CheatPage />} />
+        <Route path="/post/:id" element={<PostViewPage />} />
+        <Route path="/popup" element={<PopupBoardPage />} />
+        <Route path="/chat" element={<ChatBoardPage />} />
+        <Route path="/recipe" element={<RecipeBoardPage />} />
+        <Route path="/error" element={<ErrorPage />}/>
       </Routes>
   );
 }
