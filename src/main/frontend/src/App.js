@@ -37,7 +37,10 @@ import RentSpacePage from "./pages/RentSpace/RentSpacePage";
 import RentSpaceInfo1 from "./pages/RentSpace/RentSpaceInfo1";
 import RentSpaceInfo2 from "./pages/RentSpace/RentSpaceInfo2";
 import RentSpaceInfo3 from "./pages/RentSpace/RentSpaceInfo3";
-import PostViewPage from "./pages/PostViewPage";
+import PostViewPage from "./pages/board/PostViewPage";
+import PopupBoardPage from "./pages/board/PopupBoardPage";
+import ChatBoardPage from "./pages/board/ChatBoardPage";
+import RecipeBoardPage from "./pages/board/RecipeBoardPage";
 function App() {
   return (
       <Routes>
@@ -73,8 +76,9 @@ function App() {
           <Route path="/cheat" element={<CheatPage />} />
             <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
           <Route path="/post/:id" element={<PostViewPage />} />
-
-
+              <Route path="/popup" element={<PopupBoardPage />} />
+              <Route path="/chat" element={<ChatBoardPage />} />
+              <Route path="/recipe" element={<RecipeBoardPage />} />
           <Route path="/chefInfoModify" element={<ChefInfoModifyPage />} />
           <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
           <Route path="/chefInfoModify2" element={<ChefInfoModifyPage2 />} />

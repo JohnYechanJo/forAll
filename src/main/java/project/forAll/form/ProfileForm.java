@@ -3,7 +3,7 @@ package project.forAll.form;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import project.forAll.domain.Profile;
+import project.forAll.domain.member.Profile;
 
 import java.util.List;
 

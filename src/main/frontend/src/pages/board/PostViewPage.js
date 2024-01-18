@@ -1,8 +1,8 @@
 import {useParams} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
-import {BoardCategory} from "../utils/enums";
-import {TimeUtil} from "../utils/TimeUtil";
+import {BoardCategory} from "../../utils/enums";
+import {TimeUtil} from "../../utils/TimeUtil";
 
 const PostViewPage = () => {
     const params = useParams();

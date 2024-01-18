@@ -1,9 +1,10 @@
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {TimeUtil} from "../../utils/TimeUtil";
 
 const ArticleListTemplate = ({category, postList, preview= false}) => {
+    console.log(postList);
     const navigate = useNavigate();
     const [newPost, setNewPost] = useState(false);
     const [postTitle, setPostTitle] = useState("");
@@ -40,21 +41,17 @@ const ArticleListTemplate = ({category, postList, preview= false}) => {
                 ):null}
                 {postList ? (
                     <div>
-                        {/*시간 순 정렬*/}
-                        {postList.sort((a,b) => {
-                            if(a.writtenAt > b.writtenAt) return -1;
-                            else return 1;
-                        }).map((post, idx) => (
-                            <div key={idx} onClick={() => navigate("/post/"+post.id)}>
-                                <p>{post.title}</p>
-                                {!preview ? <p>{post.content}</p> : null}
-                                <p>댓글:{post.comments ? post.comments.length : 0}</p>
-                                <p>{TimeUtil.getDiffStr(post.writtenAt)}</p>
-                            </div>
-                        )
+                        {postList.map((post, idx) => (
+                                <div key={idx} onClick={() => navigate("/post/"+post.id)}>
+                                    <p>{post.title}</p>
+                                    {!preview ? <p>{post.content}</p> : null}
+                                    <p>댓글:{post.comments ? post.comments.length : 0}</p>
+                                    <p>{TimeUtil.getDiffStr(post.writtenAt)}</p>
+                                </div>
+                            )
                         )}
                     </div>
-                ): null}
+                ) : null}
             </div>
         </div>
     )
