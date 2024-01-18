@@ -81,13 +81,13 @@ const MainPage = () => {
                 <div>
                     <h1>팝업</h1>
                     <p onClick={() => navigate("/popup")}>모두보기</p>
-                    <ArticleListTemplate category={BoardCategory.Popup} postList={popupData} preview={true}/>
+                    <ArticleListTemplate postList={popupData} preview={true}/>
                     <h1>잡담</h1>
                     <p onClick={() => navigate("/chat")}>모두보기</p>
-                    <ArticleListTemplate category={BoardCategory.Chat} postList={chatData} preview={true}/>
+                    <ArticleListTemplate postList={chatData} preview={true}/>
                     <h1>레시피</h1>
                     <p onClick={() => navigate("/recipe")}>모두보기</p>
-                    <ArticleListTemplate category={BoardCategory.Recipe} postList={recipeData} preview={true}/>
+                    <ArticleListTemplate postList={recipeData} preview={true}/>
                 </div>
             ) : null}
             <button onClick={logOut}>로그아웃</button>

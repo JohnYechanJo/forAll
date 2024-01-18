@@ -3,6 +3,7 @@ import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import {BoardCategory} from "../../utils/enums";
 import {TimeUtil} from "../../utils/TimeUtil";
+import ImageSlider from "../../components/ImageSlider";
 
 const PostViewPage = () => {
     const params = useParams();
@@ -61,6 +62,7 @@ const PostViewPage = () => {
             </div>
             <div>
                 <p>{data.content}</p>
+                <ImageSlider images={data.postImage}/>
                 <p>댓글수 : {data.comments ? data.comments.length : 0}</p>
             </div>
             <button onClick={()=>setWriteComment(true)}>댓글을 남겨주세요</button>

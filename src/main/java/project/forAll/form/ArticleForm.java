@@ -23,7 +23,8 @@ public class ArticleForm {
     private String category;
     // 생성자
     private String userId;
-
+    // 첨부사진
+    private List<String> postImage;
     // 댓글
     private List<CommentForm> comments;
 }

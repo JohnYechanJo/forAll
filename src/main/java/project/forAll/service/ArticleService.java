@@ -29,6 +29,8 @@ public class ArticleService extends Service {
     private MemberService memberService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private ImageService imageService;
 
     @Override
     protected JpaRepository getRepository() {
@@ -60,6 +62,7 @@ public class ArticleService extends Service {
         article.setWrittenAt(af.getWrittenAt());
         article.setCategory(Category.parse(af.getCategory()));
         article.setWrittenBy(memberService.findByLoginId(af.getUserId()));
+        article.setPostImage(imageService.findListByIds(af.getPostImage()));
 
         return article;
     }
@@ -73,6 +76,7 @@ public class ArticleService extends Service {
         form.setWrittenAt(article.getWrittenAt());
         form.setUserId(article.getWrittenBy().getLoginId());
         form.setCategory(article.getCategory().toString());
+        form.setPostImage(imageService.getImagesNames(article.getPostImage()));
         final List<Comment> comments = commentService.findByArticle(article.getId());
         form.setComments(comments.stream().map(comment -> commentService.of(comment)).toList());
 
