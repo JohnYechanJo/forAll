@@ -8,9 +8,13 @@ import SignUpPage from "./pages/signup/SignUpPage";
 import SignUpPage2 from "./pages/signup/SignUpPage2";
 import SignUpCompletePage from "./pages/signup/SignUpCompletePage";
 import PersonalInfoModifyPage from './pages/modify/PersonalInfoModifyPage';
-import PlaceInfoModifyPage from './pages/modify/PlaceInfoModifyPage';
+import PlaceInfoModifyStart from './pages/modify/PlaceInfoModifyStart';
 import PersonalInfoModifyPage2 from './pages/modify/PersonalInfoModifyPage2';
 import PlaceInfoModifyPage2 from './pages/modify/PlaceInfoModifyPage2';
+import PlaceInfoModifyPage3 from './pages/modify/PlaceInfoModifyPage3';
+import PlaceInfoModifyPage4 from './pages/modify/PlaceInfoModifyPage4';
+import PlaceInfoModifyPage5 from './pages/modify/PlaceInfoModifyPage5';
+import PlaceInfoModifyPage6 from './pages/modify/PlaceInfoModifyPage6';
 import ModifyCompletePage from "./pages/modify/ModifyCompletePage";
 import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
@@ -27,6 +31,12 @@ import GuestRegistry from "./pages/guestregistry/GuestRegistry";
 import LoginHandeler from "./pages/LoginHandeler";
 import GuestRegistry2 from "./pages/guestregistry/GuestRegistry2";
 import CheatPage from "./pages/CheatPage";
+import ChefInfoModifyPage from './pages/modify/ChefInfoModifyPage';
+import ChefInfoModifyPage2 from './pages/modify/ChefInfoModifyPage2';
+import RentSpacePage from "./pages/RentSpace/RentSpacePage";
+import RentSpaceInfo1 from "./pages/RentSpace/RentSpaceInfo1";
+import RentSpaceInfo2 from "./pages/RentSpace/RentSpaceInfo2";
+import RentSpaceInfo3 from "./pages/RentSpace/RentSpaceInfo3";
 import PostViewPage from "./pages/PostViewPage";
 function App() {
   return (
@@ -41,8 +51,12 @@ function App() {
           <Route path="/signUpComplete" element={<SignUpCompletePage />} />
           <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
           <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />
-          <Route path="/placeInfoModify" element={<PlaceInfoModifyPage />} />
+          <Route path="/placeInfoModifyStart" element={<PlaceInfoModifyStart />} />
           <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
+          <Route path="/placeInfoModify3" element={<PlaceInfoModifyPage3 />} />
+          <Route path="/placeInfoModify4" element={<PlaceInfoModifyPage4 />} />
+          <Route path="/placeInfoModify5" element={<PlaceInfoModifyPage5 />} />
+          <Route path="/placeInfoModify6" element={<PlaceInfoModifyPage6 />} />
           <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
           <Route path="/hostRegistry" element={<HostRegistry />} />
           <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
@@ -61,8 +75,13 @@ function App() {
           <Route path="/post/:id" element={<PostViewPage />} />
 
 
+          <Route path="/chefInfoModify" element={<ChefInfoModifyPage />} />
           <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
-
+          <Route path="/chefInfoModify2" element={<ChefInfoModifyPage2 />} />
+          <Route path="/rentSpace/:id" element={<RentSpacePage />} />
+          <Route path="/rentSpaceInfo1/:id" element={<RentSpaceInfo1 />} />
+          <Route path="/rentSpaceInfo2/:id" element={<RentSpaceInfo2 />} />
+          <Route path="/rentSpaceInfo3/:id" element={<RentSpaceInfo3 />} />
       </Routes>
   );
 }

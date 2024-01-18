@@ -8,7 +8,7 @@ const HostRegistry4 = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
-
+    let isPublic = false;
     const firePitData = ["1개","2개","3개","4개","5개","6개","직접 입력"];
 
     const [firePit, setFirePit] = useState(firePitData[0]);
@@ -28,10 +28,6 @@ const HostRegistry4 = () => {
     const [bat, setBat] = useState([]);
     const [countBat, setCountBat] = useState();
 
-    const [hiddenSidePlate, setHiddenSidePlate] = useState(false);
-    const [hiddenCup, setHiddenCup] = useState(false);
-    const [hiddenCutrrary, setHiddenCutrrary] = useState(false);
-    const [hiddenBat, setHiddenBat] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const onChangeFirePit = useCallback((e) => {
@@ -76,6 +72,7 @@ const HostRegistry4 = () => {
     const handleButton = () => {
         if ((firePit !== undefined) && (sidePlate !== undefined) && (countSidePlate !== undefined) && (cup !== undefined) && (countCup !== undefined)
             && (cuttrary !== undefined) && (countCuttrary !== undefined) && (bat !== undefined) && (countBat !== undefined)){
+            isPublic = true;
             submit();
         }
         else setIsModalOpen(true);
@@ -86,10 +83,18 @@ const HostRegistry4 = () => {
         if (oven) equip.push("오븐");
         if (dishWasher) equip.push("식기세척기");
         if (iceMaker) equip.push("제빙기");
+        data.isPublic = data.isPublic && isPublic;
+        if (firePit === "직접 입력") {
+            setFirePit(exactFirePit);
+        }
+        else{
+            const num = firePit.split("개")[0];
+            setFirePit(num);
+        }
         navigate("/hostRegistry5", {
             state: {
                 ...data,
-                firePit: firePit === "직접 입력" ? exactFirePit : (data.firePit ? data.firePit.split("개")[0] : ""),
+                firePit: firePit,
                 equip: equip.join(","),
                 extraMachine: extraMachine,
                 sidePlate: sidePlate,
@@ -115,8 +120,8 @@ const HostRegistry4 = () => {
                 <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"}/>
                 {firePit === "직접 입력" ? (
                     <div>
-                        <input onChange={onChangeFirePit}/>
-                        <p>개</p>
+                        <span><input onChange={onChangeFirePit} style={{width:"10vw"}} />개 </span>
+                        
                         {exactFirePit < 7 ? <p>7 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
                     </div>
                 ) : null}
@@ -138,26 +143,22 @@ const HostRegistry4 = () => {
 
             <div>
                 <p>앞접시*</p>
-                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenSidePlate}/>
-                <ImageInputs setImg={setSidePlate} setHidden={setHiddenSidePlate}/>
+                <ImageInputs setImg={setSidePlate} vals={sidePlate}/>
                 <input onChange={onChangeCountSidePlate} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
             <div>
                 <p>물컵*</p>
-                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenCup}/>
-                <ImageInputs setImg={setCup} setHidden={setHiddenCup}/>
+                <ImageInputs setImg={setCup} vals={cup}/>
                 <input onChange={onChangeCountCup} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
             <div>
                 <p>커트러리*</p>
-                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenCutrrary}/>
-                <ImageInputs setImg={setCuttrary} setHidden={setHiddenCutrrary}/>
+                <ImageInputs setImg={setCuttrary} vals={cuttrary}/>
                 <input onChange={onChangeCountCuttrary} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
             <div>
                 <p>밧드*</p>
-                <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenBat}/>
-                <ImageInputs setImg={setBat} setHidden={setHiddenBat}/>
+                <ImageInputs setImg={setBat} vals={bat}/>
                 <input onChange={onChangeCountBat} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
             </div>
 

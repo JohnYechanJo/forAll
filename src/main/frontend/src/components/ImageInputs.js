@@ -1,37 +1,77 @@
 import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
-const ImageInputs = ({setImg, setHidden}) => {
-    const [imgFiles, setImgFiles] = useState([]);
-    const imgRef = useRef();
-    const saveImgFiles = (event) => {
-        setImgFiles([...event.target.files].map(file => URL.createObjectURL(file)));
-        setImg([...event.target.files]);
+import Modal from "react-modal";
+import {ModalStyles} from "./ModalStyles";
+const ImageInputs = ({setImg, vals}) => {
+    const spring_app_url = "http://localhost:8080";
+    // 기본 이미지 추후 설정 필요
+    const BaseImgSrc = "logo512.png";
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [representImage, setRepresentImage] = useState("");
+    const addImgFile = (event) => {
+        const file = event.target.files[0];
+        if (file == null) return;
+        setImg([...vals, file]);
     };
-    const onUploadImgButtonClick = useCallback(() => {
-        if (!imgRef.current) {
-            return;
+    const deleteImgFile = (index) => {
+        setImg(vals.filter((_,i) => i !== index));
+    };
+    useEffect(() => {
+        console.log(vals);
+        if ((!vals) || (!vals[0])) {
+            setRepresentImage("");
         }
-        imgRef.current.click();
-        if (setHidden) setHidden(true);
-    },[]);
+        else{
+            if (vals[0] !== undefined) setRepresentImage(vals[0]);
+        }
+
+    }, [vals]);
+    const onErrorImg = (e) => {
+        e.target.src = BaseImgSrc;
+    }
     return (
         <div>
-            <label>
-                <input type={"file"}
-                       accept="image/*"
-                       multiple
-                       onChange={saveImgFiles}
-                       ref={imgRef}
-                       style={{ float:"right",  display: "none"}}
-                /><button className="button" style={{fontSize:"10px",backgroundColor:"black",width:"19vw",height:"4vh",padding:"10px 10px", float:"right", marginLeft:"3vw"}} onClick={onUploadImgButtonClick} >파일 첨부</button>
-            </label>
-            {imgFiles.map((imgFile, index) => (
-                <img key={index}
-                     className="image"
-                     src={imgFile}
-                     alt={`image ${index}`}
+            <label onClick={() => setIsModalOpen(true)}>
+                <img
+                    className={"image"}
+                    key={0}
+                    src={typeof(representImage) === 'string' ? spring_app_url + "/api/v1/image/"+representImage : URL.createObjectURL(representImage)}
+                    alt={"image"}
+                    onError={onErrorImg}
                 />
-            ))}
+            </label>
+
+            <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
+                {vals ? vals.map((imgFile, index) => (
+                    <div>
+                        <img
+                            key={index+1}
+                            className="image"
+                            src={typeof(imgFile) === 'string' ? spring_app_url + "/api/v1/image/"+imgFile : URL.createObjectURL(imgFile)}
+                            alt={`image ${index}`}
+                        />
+                        <button onClick={() => deleteImgFile(index)}>X</button>
+                    </div>
+
+                )) : null}
+                <label className={"image"}>
+                    <img
+                        src={BaseImgSrc}
+                        alt={"image"}
+                        onError={onErrorImg}
+                    />
+                    <input type={"file"}
+                           accept="image/*"
+                           onChange={addImgFile}
+                           style={{float: "right", display: "none"}}
+                    />
+                </label>
+
+                <button onClick={() => setIsModalOpen(false)}>닫기</button>
+            </Modal>
+
+
         </div>
     )
 };

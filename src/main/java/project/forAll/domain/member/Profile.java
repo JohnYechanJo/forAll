@@ -47,4 +47,7 @@ public class Profile extends BassDomain {
     // 관심사
     @ElementCollection
     private List<String> interest;
+    // 보건증 사진
+    @OneToOne(fetch = FetchType.LAZY)
+    private Image certificate;
 }

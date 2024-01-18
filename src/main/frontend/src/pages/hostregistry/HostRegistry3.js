@@ -1,7 +1,6 @@
 import DropDown from "../../components/DropDown";
 import {useCallback, useEffect, useState} from "react";
 import "../../style/btnStyles.css";
-import ImageInputs from "../../components/ImageInputs";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
@@ -46,13 +45,8 @@ const HostRegistry3 = () => {
     const [isTrial, setIsTrial] = useState(false);
     const [isMorningDelivery, setIsMorningDelivery] = useState(false);
     const [isWorkIn, setIsWorkIn] = useState(false);
-
-    let recommendedPrice = seat * 15000;
-    let priceString = recommendedPrice.toString();
-    let firstDigits = priceString.slice(0, -4);
-    let randomFourDigits = Math.floor(1000 + Math.random() * 9000);
-    let finalPrice = parseInt(firstDigits + randomFourDigits.toString());
-    const formattedPrice = "₩" + finalPrice.toLocaleString();
+    const [formattedPrice, setFormattedPrice] = useState();
+    let isPublic = false;
 
     const onChangeFloor = useCallback((e) => {
         setExactFloor(e.target.value);
@@ -98,6 +92,7 @@ const HostRegistry3 = () => {
             && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
             && (seat !== undefined) && (price !== undefined) && (trial !== undefined) && (morningDelivery !== undefined)
             && (workIn !== undefined) && (alcohol !== undefined)){
+            isPublic = true;
             submit();
         }
         else setIsModalOpen(true);
@@ -112,17 +107,30 @@ const HostRegistry3 = () => {
         if (friDay) rentDayString.push("금");
         if (saturDay) rentDayString.push("토");
         if (sunDay) rentDayString.push("일");
-        const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",")
+        
+        const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",");
         const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDaysdata;
-
+        if (!floorData.includes(floor)) {
+            setFloor("지상"+exactFloor+"층");
+        }
+        else{
+            setFloor(floor);
+        }
+        if (!parkAvaliableData.includes(parkAvaliable)) {
+            setParkAvaliable(exactPark+"대");
+        }
+        else{
+            setParkAvaliable(parkAvaliable);
+        }   
+        data.isPublic = data.isPublic && isPublic;
         navigate("/hostRegistry4",{
             state: {
                 ...data,
                 rentWeek: rentData,
                 rentTimeFrom: rentTimeFrom !== "" ? rentTimeFrom.split("시")[0] : "",
-                rentTimeTo: rentTimeTo !== "" ? rentTimeFrom.split("시")[0] : "",
-                floor: floor === "직접입력" ? "지상"+exactFloor+"층" : floor,
-                parkAvaliable: parkAvaliable === "직접입력" ? exactPark + "대" : parkAvaliable,
+                rentTimeTo: rentTimeTo !== "" ? rentTimeTo.split("시")[0] : "",
+                floor: floor,
+                parkAvaliable: parkAvaliable,
                 elevator: elevator,
                 table: table,
                 seat: seat,
@@ -137,6 +145,15 @@ const HostRegistry3 = () => {
     useEffect(() => {
         console.log(rentDays.toString());
     }, [rentDays]);
+    useEffect(() => {
+        let recommendedPrice = seat * 15000;
+        let priceString = recommendedPrice.toString();
+        let firstDigits = priceString.slice(0, -4);
+        let randomFourDigits = Math.floor(1000 + Math.random() * 9000);
+        let finalPrice = parseInt(firstDigits + randomFourDigits.toString());
+        const formattedPrice = "₩" + finalPrice.toLocaleString();
+        setFormattedPrice(formattedPrice);
+    }, [seat]);
     return (
         <div style={{
             display: "flex",
@@ -234,7 +251,7 @@ const HostRegistry3 = () => {
                 <input style={{width: "90vw", height: "3vh", float: "left"}} onChange={onChangeSeat}
                        placeholder={"최대 좌석수를 기준으로 입력해주세요"}/>
             </div>
-            <div>
+            <div style={{display:"flex", flexDirection:"column"}}>
                 <p>가격 설정*</p>
                 <input style={{width: "90vw", height: "3vh", float: "left", marginRight: "2vw"}}
                        onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"}/>

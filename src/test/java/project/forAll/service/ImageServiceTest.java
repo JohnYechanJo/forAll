@@ -48,10 +48,10 @@ public class ImageServiceTest {
         MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
 
         // When
-        Long imageId = imageService.saveImage(multipartFile);
+        String imageId = imageService.saveImage(multipartFile);
 
         // Then
         Image saveImage = imageRepository.findByOriginName("favicon.ico").get(0);
-        assertEquals(imageId, saveImage.getId());
+        assertEquals(imageId, saveImage.getImageName());
     }
 }

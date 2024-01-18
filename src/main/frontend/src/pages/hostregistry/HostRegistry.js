@@ -22,7 +22,6 @@ const HostRegistry = () => {
     const [placeInfo, setPlaceInfo] = useState("");
     const [webSite, setWebSite] = useState("");
     const [imgRepresent, setImgRepresent] = useState("");
-    const [hiddenRepresent, setHiddenRepresent] = useState(false);
     const [clicked1, setClicked1] = useState(false);
     const [clicked2, setClicked2] = useState(false);
     const [clicked3, setClicked3] = useState(false);
@@ -31,6 +30,7 @@ const HostRegistry = () => {
     const [modalIsOpen3, setModalIsOpen3] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
+    let isPublic = false;
     const modalClose1 = () => {
         setModalIsOpen1(false);
     };
@@ -57,8 +57,13 @@ const HostRegistry = () => {
         setPlaceInfo(e.target.value);
     }
     const handleButton = () => {
-        if ((placeName !== "")&&(placeIntro !== "")&&(placeIntroDetail !== "")&&(kitchen!=="")&&(fullAddress!=="")&&(placeInfo!=="")&&(imgRepresent!=="")&&(webSite!=="")){
-            submit();}
+        if (fullAddress === ""){
+            alert("주소는 필수입력사항입니다.");
+        }
+        else if ((placeName !== "")&&(placeIntro !== "")&&(placeIntroDetail !== "")&&(kitchen!=="")&&(fullAddress!=="")&&(placeInfo!=="")&&(imgRepresent!=="")&&(webSite!=="")){
+            isPublic = true;
+            submit();
+        }
         else{
             setIsModalOpen(true);
         }
@@ -74,6 +79,7 @@ const HostRegistry = () => {
                 webSite: webSite,
                 placeInfo: placeInfo,
                 imgRepresent: imgRepresent,
+                isPublic: isPublic,
             }
         });
     };
@@ -91,7 +97,7 @@ const HostRegistry = () => {
                     <span>{inputCount}</span>
                     <span>/18자</span>
                 </p>
-                <input type="text" placeholder="오스테리아 로에로" style={{width: "94vw", height: "3vh"}}
+                <input type="text" placeholder="오스테리아 로에로" className="input"
                        onChange={onInputHandler} maxLength="17"/>
                 <h5>❕사용 가능한 특수문자: (,),(-),(.),(@),(/)</h5>
                 <h4>공간 한 줄 소개</h4>
@@ -99,7 +105,7 @@ const HostRegistry = () => {
                     <span>{inputCount2}</span>
                     <span>/18자</span>
                 </p>
-                <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" style={{width: "94vw", height: "3vh"}}
+                <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" className="input"
                        onChange={onInputHandler2} maxLength="17"/>
                 <h4>공간 소개</h4>
                 <p>
@@ -111,120 +117,149 @@ const HostRegistry = () => {
                           onChange={onInputHandler3} maxLength="299" minLength="19"/>
                 <div>
                     <h4>주방 특성</h4>
-                    <div style={{display: "flex"}}>
-                        <button className="button"
-                                name="kitchen"
-                                value={KitchenFeat.Open}
-                                disabled={clicked2 || clicked3}
-                                style={{
-                                    backgroundColor: clicked1 ? "black" : "white",
-                                    color: clicked1 ? "white" : "black",
-                                    width: "100px",
-                                    flex: "1",
-                                    marginLeft: "10px"
-                                }}
-                                onClick={(event) => {
-                                    const selected = event.target.value;
-                                    setKitchen(event.target.value);
-                                    if (clicked1 === true) {
-                                        setKitchen(KitchenFeat.NotSpecified);
-                                    }
-                                    setClicked1(!clicked1);
-
-
-                                }}
-                        >
-                            오픈형
-                        </button>
-                        <button className="button"
-                                name="kitchen"
-                                value={KitchenFeat.Face}
-                                disabled={clicked1 || clicked3}
-                                style={{
-                                    backgroundColor: clicked2 ? "black" : "white",
-                                    color: clicked2 ? "white" : "black",
-                                    width: "100px",
-                                    flex: "1",
-                                    marginLeft: "10px"
-                                }}
-                                onClick={(event) => {
-                                    const selected = event.target.value;
-                                    setKitchen(event.target.value);
-                                    if (clicked2 === true) {
-                                        setKitchen(KitchenFeat.NotSpecified);
-                                    }
-                                    setClicked2(!clicked2);
-
-
-                                }}
-                        >
-                            대면형
-                        </button>
-                        <button className="button"
-                                name="kitchen"
-                                value={KitchenFeat.Close}
-                                disabled={clicked1 || clicked2}
-                                style={{
-                                    backgroundColor: clicked3 ? "black" : "white",
-                                    color: clicked3 ? "white" : "black",
-                                    width: "100px",
-                                    flex: "1",
-                                    marginLeft: "10px",
-                                    marginRight: "10px"
-                                }}
-                                onClick={(event) => {
-                                    const selected = event.target.value;
-                                    setKitchen(event.target.value);
-                                    if (clicked3 === true) {
-                                        setKitchen(KitchenFeat.NotSpecified);
-                                    }
-                                    setClicked3(!clicked3);
-
-                                }}
-                        >
-                            폐쇄형
-                        </button>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <Modal
-                            isOpen={modalIsOpen1}
-                            style={ModalStyles}
-                        >
-                            <h3>오픈형 주방이란?</h3>
-                            <p>내용</p>
-                            <button onClick={modalClose1}>닫기</button>
-                        </Modal>
-                        <button onClick={() => setModalIsOpen1(true)}
-                                style={{border: "none", backgroundColor: "white"}}>• 오픈형이 무엇인가요?
-                        </button>
-                    </div>
-                    <div>
-                        <Modal
-                            isOpen={modalIsOpen2}
-                            style={ModalStyles}
-                        >
-                            <h3>대면형 주방이란?</h3>
-                            <p>내용</p>
-                            <button onClick={modalClose2}>닫기</button>
-                        </Modal>
-                        <button onClick={() => setModalIsOpen2(true)}
-                                style={{border: "none", backgroundColor: "white"}}>• 대면형이 무엇인가요?
-                        </button>
-                    </div>
-                    <div>
-                        <Modal
-                            isOpen={modalIsOpen3}
-                            style={ModalStyles}
-                        >
-                            <h3>폐쇄형 주방이란?</h3>
-                            <p>내용</p>
-                            <button onClick={modalClose3}>닫기</button>
-                        </Modal>
-                        <button onClick={() => setModalIsOpen3(true)}
-                                style={{border: "none", backgroundColor: "white"}}>• 폐쇄형이 무엇인가요?
-                        </button>
+                    <div style={{display: "flex",flexDirection:"row", justifyContent:"space-evenly"}}>
+                        <div style={{flexDirection:"column", display:"flex"}} >
+                            <div>
+                                <button className="button"
+                                        name="kitchen"
+                                        value={KitchenFeat.Open}
+                                        style={{
+                                            backgroundColor: clicked1 ? "black" : "white",
+                                            color: clicked1 ? "white" : "black",
+                                            width: "100px",
+                                            flex: "1",
+                                            marginLeft: "10px",
+                                            border: "2px solid gray"
+                                        }}
+                                        onClick={(event) => {
+                                            const selected = event.target.value;
+                                            setKitchen(event.target.value);
+                                            if (clicked1 === true) {
+                                                setKitchen(KitchenFeat.NotSpecified);
+                                            }
+                                            setClicked1(!clicked1);
+                                            setClicked2(false);
+                                            setClicked3(false);
+                                        }}
+                                >
+                                    오픈형
+                                </button>
+                            </div>
+                            <div>
+                                <Modal
+                                    isOpen={modalIsOpen1}
+                                    style={ModalStyles}
+                                >
+                                    <h3 style={{margin:"0px", textAlign:"left"}}>오픈형 주방이란?</h3>
+                                    <hr style={{height: "2px", backgroundColor: "black", width:"100%"}}/>
+                                    <div style={{textAlign:'left', fontSize:'14px'}} >
+                                        <p>• 주방, 홀이 하나로 결합된 형태입니다.</p>
+                                        <p>• 주방과 홀이 결합되면서 음식을 만드는 사람과 가까이할 수 있어
+                                            대면형보다 더 긴밀한 커뮤니케이션이 가능하며, 요리를 하는 동시에 식사가 가능한 형태를 띕니다.
+                                        </p>
+                                    </div>
+                                    <button onClick={modalClose1} >닫기</button>
+                                </Modal>
+                                <button onClick={() => setModalIsOpen1(true)}
+                                        style={{border: "none", backgroundColor: "white", fontSize:"10px"}}>• 오픈형이 무엇인가요?
+                                </button>
+                            </div>
+                        </div>
+                        <div style={{flexDirection:"column"}} >
+                            <div>
+                                <button className="button"
+                                        name="kitchen"
+                                        value={KitchenFeat.Face}
+                                        style={{
+                                            backgroundColor: clicked2 ? "black" : "white",
+                                            color: clicked2 ? "white" : "black",
+                                            width: "100px",
+                                            flex: "1",
+                                            marginLeft: "10px",
+                                            border: "2px solid gray"
+                                        }}
+                                        onClick={(event) => {
+                                            const selected = event.target.value;
+                                            setKitchen(event.target.value);
+                                            if (clicked2 === true) {
+                                                setKitchen(KitchenFeat.NotSpecified);
+                                            }
+                                            setClicked1(false);
+                                            setClicked2(!clicked2);
+                                            setClicked3(false);
+                                        }}
+                                >
+                                    대면형
+                                </button>
+                            </div>
+                            <div>
+                                <Modal
+                                    isOpen={modalIsOpen2}
+                                    style={ModalStyles}
+                                >
+                                    <h3 style={{margin:"0px", textAlign:"left"}} >대면형 주방이란?</h3>
+                                    <hr style={{height: "2px", backgroundColor: "black", width:"100%"}}/>
+                                    <div style={{textAlign:'left', fontSize:'14px'}} >
+                                        <p>• 부엌과 다이닝룸이 한 공간에 자리하는 형태입니다.</p>
+                                        <p>• 식탁이 따로 놓여 있지만, 음식을 만드는 사람의 얼굴을 보며
+                                            대화를 나눌 수 있는 구조입니다.
+                                        </p>
+                                    </div>
+                                    <button onClick={modalClose2}>닫기</button>
+                                </Modal>
+                                <button onClick={() => setModalIsOpen2(true)}
+                                        style={{border: "none", backgroundColor: "white", fontSize:"10px"}}>• 대면형이 무엇인가요?
+                                </button>
+                            </div>
+                        </div>
+                        <div style={{flexDirection:"column"}} >
+                            <div>
+                                <button className="button"
+                                        name="kitchen"
+                                        value={KitchenFeat.Close}
+                                        style={{
+                                            backgroundColor: clicked3 ? "black" : "white",
+                                            color: clicked3 ? "white" : "black",
+                                            width: "100px",
+                                            flex: "1",
+                                            marginLeft: "10px",
+                                            marginRight: "10px",
+                                            border: "2px solid gray",
+                                        }}
+                                        onClick={(event) => {
+                                            const selected = event.target.value;
+                                            setKitchen(event.target.value);
+                                            if (clicked3 === true) {
+                                                setKitchen(KitchenFeat.NotSpecified);
+                                            }
+                                            setClicked1(false);
+                                            setClicked2(false);
+                                            setClicked3(!clicked3);
+                                        }}
+                                >
+                                    폐쇄형
+                                </button>
+                            </div>
+                            <div>
+                                <Modal
+                                    isOpen={modalIsOpen3}
+                                    style={ModalStyles}
+                                >
+                                    <h3 style={{margin:"0px", textAlign:"left"}} >폐쇄형 주방이란?</h3>
+                                    <hr style={{height: "2px", backgroundColor: "black", width:"100%"}}/>
+                                    <div style={{textAlign:'left', fontSize:'14px'}} >
+                                        <p>• 차분하게 조리와 정리에 전념할 수 있습니다.</p>
+                                        <p>• 또한, 조리할 때 발생하는 오염과 냄새, 연기, 소리 등이 거실에 비교적 전달이 되지 않습니다.
+                                        </p>
+                                        <p>• 홀에서는 어수선한 모습이 보이지 않아 쾌적한 매장 환경이 만들어집니다.</p>
+                                    </div>
+                                    <button onClick={modalClose3}>닫기</button>
+                                </Modal>
+                                <button onClick={() => setModalIsOpen3(true)}
+                                        style={{border: "none", backgroundColor: "white", fontSize:"10px"}}>• 폐쇄형이 무엇인가요?
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -243,6 +278,7 @@ const HostRegistry = () => {
                                    setAddressDetail(e.target.value);
                                    setFullAddress(address + " " + e.target.value);
                                }}
+                               className="input"
                         />
                     </span>
                 </h5>
@@ -284,10 +320,7 @@ const HostRegistry = () => {
                     <span>대표 이미지 </span>
                 </h4>
                 <div>
-                    <span><input type="text" placeholder="이미지 파일을 추가해주세요."
-                                 style={{width: "70vw", height: "3vh", float: "left"}}
-                                 hidden={hiddenRepresent}/></span>
-                    <ImageInput setImg={setImgRepresent} setHidden={setHiddenRepresent}/>
+                    <ImageInput setImg={setImgRepresent} val={imgRepresent}/>
                 </div>
             </div>
             <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>

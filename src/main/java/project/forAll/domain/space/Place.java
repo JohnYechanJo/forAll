@@ -20,13 +20,15 @@ public class Place extends BassDomain {
     @Column(name = "place_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    // 홀 사진들
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "hallImage_id")
-    private HallImage hallImage;
+    private List<Image> hallImage = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    // 홀 사진들
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "kitImage_id")
-    private KitImage kitImage;
+    private List<Image> kitImage = new ArrayList<>();
 
     // 메뉴 사진들
     @OneToMany(fetch = FetchType.LAZY)

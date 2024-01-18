@@ -50,26 +50,28 @@ const Sidebar = ({ width = 280, children }) => {
                     </div>
                 </div>
                 <div className={styles.content}>{children}</div>
-                <hr style={{width: 0}}/>
-                <button className="button" style={{textAlign: "left"}}>찜한 내역</button>
-                <hr style={{width: "100%", color: "black"}}/>
-                <Link to="/guestRegistryStart">
-                    <button className="button" style={{textAlign:"left"}} >프로필 등록하기</button>
-                </Link>
-                <hr style={{width: 0}}/>
-                <Link to="/HostRegistryStart">
-                    <button className="button" style={{textAlign:"left", width:"35vw"}}>공간정보 등록하기</button>
-                </Link>
-                <hr style={{width: "100%", color: "black"}}/>
-                <Link to="/placeInfoModify">
-                    <button className="button" style={{textAlign:"left"}}>공간정보수정</button>
-                </Link>
-                <hr style={{width: 0}}/>
-                <button className="button" style={{textAlign:"left"}}>프로필정보 수정</button>
-                <hr style={{width: 0}}/>
-                <Link to="/personalInfoModify">
-                    <button className="button" style={{textAlign:"left"}}>개인정보수정</button>
-                </Link>
+                <div style={{display:"flex",flexDirection:"column", justifyContent:"left"}}>
+                    <button className="button" style={{textAlign: "left"}}>찜한 내역</button>
+                    <hr style={{width: "100%", color: "black"}}/>
+                    <Link to="/guestRegistryStart">
+                        <button className="button" style={{textAlign:"left"}} >셰프 등록하기</button>
+                    </Link>
+                    <Link to="/HostRegistryStart">
+                        <button className="button" style={{textAlign:"left", width:"35vw"}}>공간정보 등록하기</button>
+                    </Link>
+                    <hr style={{width: "100%", color: "black"}}/>
+                    <Link to="/personalInfoModify">
+                        <button className="button" style={{textAlign:"left"}}>개인정보수정</button>
+                    </Link>
+                    <Link to="/placeInfoModifyStart">
+                        <button className="button" style={{textAlign:"left"}}>공간정보수정</button>
+                    </Link>
+                    <Link to="/chefInfoModify">
+                        <button className="button" style={{textAlign:"left"}}>셰프정보 수정</button>
+                    </Link>
+                </div>
+                
+
             </div>
         </div>
     );

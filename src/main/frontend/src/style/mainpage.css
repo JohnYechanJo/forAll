@@ -15,6 +15,8 @@
     width: 100%;
 }
 li { margin:100px 0 100px 0;}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 .button{
     border: none;
     color: black;
@@ -25,4 +27,8 @@ li { margin:100px 0 100px 0;}
     font-size: 13px;
     width: 28vw;
     padding: 1px 3px;
+    font-family: "Noto Sans KR", sans-serif;
 }
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+  }

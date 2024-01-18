@@ -35,4 +35,6 @@ public class Space extends BassDomain {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")
     private Booking booking;
+
+    private boolean isPublic;
 }

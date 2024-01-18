@@ -12,7 +12,7 @@ const HostRegistry5 = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
-
+    let isPublic = false;
     const emailDatas=  ["직접입력","naver.com", "choi.com", "dreamwiz.com", "empal.com", "gmail.com", "hanafos.com", "hanmail.net", "hanmir.com", "hitel.net", "hotmail.com", "korea.com", "lycos.co.kr", "nate.com"];
 
     const [payment, setPayment] = useState(PayWay.NotSpecified);
@@ -30,7 +30,6 @@ const HostRegistry5 = () => {
     const [phone2, setPhone2] = useState("");
     const [phone3, setPhone3] = useState("");
 
-    const [hiddenLicense, setHiddenLicense] = useState(false);
     const [modalOpen1, setModalOpen1] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -69,14 +68,18 @@ const HostRegistry5 = () => {
     },[]);
 
     const handleButton = () => {
-        if ((payment !== undefined) && (tradeName !== "") && (representative !== "") && (registNum1 !== "") && (registNum2 !== "") && (registNum3 !== "")
-            && (license !== undefined) && (address !== undefined) && (exactAddress !== "") && (email1 !== "")
-            && (phone1 !== "") && (phone2 !== "") && (phone3 !== "")){
-            submit();
+        if ((tradeName==="")||(representative==="")||(registNum1==="")||(registNum2==="")||(registNum3==="")||(license==="")||(address==="")||(exactAddress==="")){
+            alert("상호명, 대표자명, 사업자 등록번호, 사업자 등록증, 사업장 주소는 필수 입력사항입니다.");
+        } else if ((payment !== undefined) && (tradeName !== "") && (representative !== "") && (registNum1 !== "") && (registNum2 !== "") && (registNum3 !== "")
+        && (license !== undefined) && (address !== undefined) && (exactAddress !== "") && (email1 !== "")
+        && (phone1 !== "") && (phone2 !== "") && (phone3 !== "")){
+        isPublic = true;
+        submit();
         }
         else setIsModalOpen(true);
     };
     const submit = () => {
+        data.isPublic = data.isPublic && isPublic;
         navigate("/hostRegistry6", {
             state: {
                 ...data,
@@ -139,8 +142,7 @@ const HostRegistry5 = () => {
                 </div>
                 <div>
                     <p>사업자 등록증 첨부*</p>
-                    <input type="text" placeholder="이미지 파일을 추가해주세요." hidden={hiddenLicense}/>
-                    <ImageInput setImg={setLicense} setHidden={setHiddenLicense}/>
+                    <ImageInput setImg={setLicense} val={license}/>
                 </div>
                 <div>
                     <p>사업장 주소*</p>
