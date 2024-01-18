@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import project.forAll.repository.ChatRepository;
-import project.forAll.util.ChatRoom;
+import project.forAll.repository.MultiChatRepository;
+import project.forAll.util.MultiChatRoom;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ import java.util.List;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class ChatRoomController {
+public class MultiChatRoomController {
 
     // ChatRepository Bean 가져오기
-    private final ChatRepository repository;
+    private final MultiChatRepository repository;
 
     // 채팅 리스트 확인
     // "/" 로 요청이 들어오면 전체 채팅방 리스트를 담아서 return
@@ -48,12 +48,12 @@ public class ChatRoomController {
     @PostMapping("/chat/createroom")
     public ResponseEntity createRoom(@RequestBody String roomName, RedirectAttributes rttr){
 
-        ChatRoom chatRoom = repository.createChatRoom(roomName);
-        log.info("Create ChatRoom : {}",chatRoom);
+        MultiChatRoom multiChatRoom = repository.createChatRoom(roomName);
+        log.info("Create ChatRoom : {}", multiChatRoom);
 
-        rttr.addFlashAttribute("roomName" , chatRoom);
+        rttr.addFlashAttribute("roomName" , multiChatRoom);
 
-        return new ResponseEntity(chatRoom.getRoomId(), HttpStatus.OK);
+        return new ResponseEntity(multiChatRoom.getRoomId(), HttpStatus.OK);
     }
 
     // 채팅방 입장 화면

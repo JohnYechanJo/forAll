@@ -2,19 +2,16 @@ package project.forAll.util;
 
 import lombok.Data;
 import lombok.Getter;
-import lombok.Builder;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 @Data
 @Getter
 @Entity
 
-public class ChatRoom {
+public class MultiChatRoom {
 
     @Id
     private String roomId;  // 채팅방 아이디
@@ -26,11 +23,11 @@ public class ChatRoom {
     @Column(name = "user_name")
     private HashMap<String, String> userList = new HashMap<>();
 
-    public static ChatRoom create(String roomName) {
-        ChatRoom chatRoom = new ChatRoom();
-        chatRoom.roomId = UUID.randomUUID().toString();
-        chatRoom.roomName = roomName;
+    public static MultiChatRoom create(String roomName) {
+        MultiChatRoom multiChatRoom = new MultiChatRoom();
+        multiChatRoom.roomId = UUID.randomUUID().toString();
+        multiChatRoom.roomName = roomName;
 
-        return chatRoom;
+        return multiChatRoom;
     }
 }

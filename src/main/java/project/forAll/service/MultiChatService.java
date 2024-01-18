@@ -16,42 +16,42 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.*;
 
-import project.forAll.repository.ChatRoomRepository;
-import project.forAll.util.ChatRoom;
+import project.forAll.repository.MultiChatRoomRepository;
+import project.forAll.util.MultiChatRoom;
 
 
 @Slf4j
 @Data
 @Service
-public class ChatService {
+public class MultiChatService {
     private final ObjectMapper mapper;
-    private Map<String, ChatRoom> chatRooms;
+    private Map<String, MultiChatRoom> chatRooms;
 
     @Autowired  // 추가
-    private ChatRoomRepository chatRoomRepository;  // 추가
+    private MultiChatRoomRepository multiChatRoomRepository;  // 추가
 
     @PostConstruct
     private void init(){
         chatRooms = new LinkedHashMap<>();
     }
 
-    public List<ChatRoom> findAllRoom(){
+    public List<MultiChatRoom> findAllRoom(){
         // MySQL에서 데이터를 가져오도록 수정
-        return new ArrayList<>(chatRoomRepository.findAll());
+        return new ArrayList<>(multiChatRoomRepository.findAll());
     }
 
-    public ChatRoom findRoomById(String roomId){
+    public MultiChatRoom findRoomById(String roomId){
         return chatRooms.get(roomId);
     }
 
-    public ChatRoom createRoom(String name){
+    public MultiChatRoom createRoom(String name){
         String roomId = UUID.randomUUID().toString();
 
         //create를 사용하여 ChatRoom 을 Build
-        ChatRoom room = ChatRoom.create(name);
+        MultiChatRoom room = MultiChatRoom.create(name);
         chatRooms.put(room.getRoomId(),room);//메모리 상의 맵에느 여전히 저장
         //MySQL에 저장
-        chatRoomRepository.save(room);
+        multiChatRoomRepository.save(room);
         return room;
     }
 
