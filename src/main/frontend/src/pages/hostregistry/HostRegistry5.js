@@ -103,6 +103,16 @@ const HostRegistry5 = () => {
     useEffect(() => {
         if (email2 === "직접입력") setEmail2("");
     }, [email2]);
+    const handleCheckBox = () => {
+        if(address === "") {
+            setAddress(data.address);
+            setExactAddress(data.addressDetail);
+        }
+        else {
+            setAddress("");
+            setExactAddress("");
+        }
+    };
     return (
         <div>
             <h1>3. 예약/정산 정보</h1>
@@ -134,9 +144,11 @@ const HostRegistry5 = () => {
                 </div>
                 <div>
                     <p>사업자 등록번호*</p>
-                    <input value={registNum1} onChange={onChangeRegistNum1}/>-
-                    <input value={registNum2} onChange={onChangeRegistNum2}/>-
-                    <input value={registNum3} onChange={onChangeRegistNum3}/>
+                    <div style={{display:"flex"}} >
+                        <input value={registNum1} onChange={onChangeRegistNum1} style={{width:"30%"}} />-
+                        <input value={registNum2} onChange={onChangeRegistNum2} style={{width:"30%"}}/>-
+                        <input value={registNum3} onChange={onChangeRegistNum3} style={{width:"30%"}}/>
+                    </div>
                     <p>- 사업자 등록번호는 필수 입력입니다.</p>
                     <p>- 정확한 정보를 입력했는지 다시 한 번 확인해주세요.</p>
                     <p>- 추후, 사업자 정보가 수정된다면 반드시 온라인 상담을 통해 변경 내용을 알려주셔야 합니다.</p>
@@ -146,12 +158,14 @@ const HostRegistry5 = () => {
                     <ImageInput setImg={setLicense} val={license}/>
                 </div>
                 <div>
-                    <p>사업장 주소*</p>
-                    {/*Todo 데이터 가져오기*/}
-                    <label>
-                        <input type={"checkbox"} />공간 정보와 동일
-                    </label>
-                    <input value={address} disabled={true}/>
+                    <div style={{display:"flex"}} >
+                        <p>사업장 주소*</p>
+                        <label style={{display:"flex",  justifyContent:"center",marginLeft:"5vw"}} >
+                            <input type={"checkbox"} onClick={handleCheckBox} />
+                            <p>공간 정보와 동일</p>
+                        </label>
+                    </div>
+                    <input value={address} disabled={true} style={{height:"3vh", width:"80vw"}} />
                     <Modal isOpen={modalOpen1}>
                         <DaumPost setAddress={(e) =>{
                             setAddress(e);
@@ -159,8 +173,10 @@ const HostRegistry5 = () => {
                         }} />
                         <button onClick={() => setModalOpen1(false)}>닫기</button>
                     </Modal>
-                    <button onClick={() => setModalOpen1(true)}>주소등록</button>
-                    <input onChange={onChangeExactAddress} placeholder={"상세 주소"}/>
+                    <button onClick={() => setModalOpen1(true)} className="button" style={{width:"12vw",height:"3vh",fontSize:"12px",backgroundColor:"black",color:"white"}} >주소등록</button>
+                    <div>
+                        <input onChange={onChangeExactAddress} placeholder={"상세 주소"} value={exactAddress} className="input" />
+                    </div>
                 </div>
                 <div>
                     <p>정산용 이메일*</p>
@@ -170,9 +186,11 @@ const HostRegistry5 = () => {
                 </div>
                 <div>
                     <p>정산용 연락처*</p>
-                    <input value={phone1} onChange={onChangePhone1}/>-
-                    <input value={phone2} onChange={onChangePhone2}/>-
-                    <input value={phone3} onChange={onChangePhone3}/>
+                    <div style={{display:"flex"}} >
+                        <input value={phone1} onChange={onChangePhone1} style={{width:"30%"}}/>-
+                        <input value={phone2} onChange={onChangePhone2} style={{width:"30%"}}/>-
+                        <input value={phone3} onChange={onChangePhone3} style={{width:"30%"}}/>
+                    </div>
                 </div>
             </div>
 

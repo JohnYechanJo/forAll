@@ -79,6 +79,8 @@ const HostRegistry = () => {
                 placeInfo: placeInfo,
                 imgRepresent: imgRepresent,
                 isPublic: isPublic,
+                addressDetail: addressDetail,
+                address: address,
             }
         });
     };

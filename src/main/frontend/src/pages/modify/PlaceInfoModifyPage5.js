@@ -10,7 +10,6 @@ const PlaceInfoModifyPage5 = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
-    const params = useParams();
     const [dbdata, setDbData] = useState({});
 
     let isPublic = false;
@@ -177,9 +176,11 @@ const PlaceInfoModifyPage5 = () => {
                 </div>
                 <div>
                     <p>정산용 연락처*</p>
-                    <input value={phone1} defaultValue={phone1} onChange={onChangePhone1}/>-
-                    <input value={phone2}  defaultValue={phone2} onChange={onChangePhone2}/>-
-                    <input value={phone3} defaultValue={phone3} onChange={onChangePhone3}/>
+                    <div style={{display:"flex"}} >
+                        <input value={phone1} defaultValue={phone1} onChange={onChangePhone1} style={{width:"30%"}} />-
+                        <input value={phone2}  defaultValue={phone2} onChange={onChangePhone2} style={{width:"30%"}}/>-
+                        <input value={phone3} defaultValue={phone3} onChange={onChangePhone3} style={{width:"30%"}}/>
+                    </div>
                 </div>
             </div>
             <div style={{display: "flex"}}>
