@@ -117,6 +117,7 @@ const HostRegistry5 = () => {
             </div>
             <div>
                 <p>정산 정보를 입력해주세요*</p>
+                <hr style={{ height: "2px", backgroundColor: "black" }} />
                 {/*Todo 데이터 가져오기*/}
                 <label>
                     <input type={"checkbox"} />최근 정산 정보와 동일
@@ -175,11 +176,14 @@ const HostRegistry5 = () => {
                 </div>
             </div>
 
-            <div>
-                <Link to="/hostRegistry4"><button>이전</button></Link>
-                <button onClick={handleButton}>저장</button>
+            <div style={{display: "flex"}}>
+                <Link to="/hostRegistry4">
+                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
+                </Link>
+                <button style={{backgroundColor: "grey"}} className="next_button"
+                            onClick={handleButton}
+                >다음</button>
             </div>
-
             <Modal isOpen={isModalOpen} ariaHideApp={false}>
                 <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
                 <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>

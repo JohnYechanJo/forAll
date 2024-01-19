@@ -159,29 +159,13 @@ const ChefInfoModifyPage = () => {
                 <h5 style={{margin:"0", padding:"0px 0px"}}>• 최근 1년내의 보건증을 등록해주세요.</h5>
                 <h5 style={{margin:"0", padding:"0px 0px"}}>• 대관에 필요한 정보이오니, <span style={{color:"red",textDecoration:"underline",textDecorationColor:"red"}} >필히 등록해주세요!</span></h5>
             </div>
-            <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>
+            <div style={{display: "flex"}}>
                 <Link to="/main">
-                    <button style={{
-                        backgroundColor: "black",
-                        color: "white",
-                        flex: "1",
-                        border: "none",
-                        width: "50vw",
-                        height: "8vh"
-                    }}>이전
-                    </button>
+                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 </Link>
-                <button style={{
-                    backgroundColor: "red",
-                    color: "white",
-                    flex: "1",
-                    border: "none",
-                    width: "50vw",
-                    height: "8vh"
-                }}
-                        onClick={handleButton}
-                >저장
-                </button>
+                <button style={{backgroundColor: "grey"}} className="next_button"
+                            onClick={handleButton}
+                >다음</button>
                 <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
                     <p style={{fontSize: "16px"}}>필수 입력사항이 모두 기입되지 않았습니다.</p>
                     <button onClick={() => setIsModalOpen(false)}>뒤로</button>

@@ -4,11 +4,11 @@ import {Link, useLocation, useNavigate,useParams} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
 import Modal from "react-modal";
 import axios from "axios";
+import "../../components/Styles.css";
 const PlaceInfoModifyPage4 = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
-    const params = useParams();
     const [dbData, setDbData] = useState({});
 
     let isPublic = false;
@@ -140,7 +140,8 @@ const PlaceInfoModifyPage4 = () => {
         <div>
             <h1>2. 이용 안내</h1>
             <div>
-                <p>주방 정보*</p>
+                <h4>주방 정보*</h4>
+                <hr style={{ height: "2px", backgroundColor: "black" }} />
             </div>
             <div>
                 <p>화구</p>
@@ -153,44 +154,52 @@ const PlaceInfoModifyPage4 = () => {
                     </div>
                 ) : null}
             </div>
-            <div>
-                <p>주방기계*</p>
-                <div className={(fryer) === true ? "btn_selected" : ""} onClick={toggleFryer}>튀김기</div>
-                <div className={(oven) === true ? "btn_selected" : ""} onClick={toggleOven}>오븐</div>
-                <div className={(dishWasher) === true ? "btn_selected" : ""} onClick={toggleDishWasher}>식기세척기</div>
-                <div className={(iceMaker) === true ? "btn_selected" : ""} onClick={toggleIceMaker}>제빙기</div>
-                <div className={someThing === true ? "btn_selected" : ""} onClick={toggleSomeThing}>내용</div>
+            <p>주방기계*</p>
+            <div style={{display:"flex", justifyContent:"space-around"}} >
+                <button className={(fryer) === true ? "btn_selected" : "btn_not_selected"} onClick={toggleFryer}>튀김기</button>
+                <button className={(oven) === true ? "btn_selected" : "btn_not_selected"} onClick={toggleOven}>오븐</button>
+                <button className={(dishWasher) === true ? "btn_selected" : "btn_not_selected"} onClick={toggleDishWasher}>식기세척기</button>
+                <button className={(iceMaker) === true ? "btn_selected" : "btn_not_selected"} onClick={toggleIceMaker}>제빙기</button>
+                <button className={someThing === true ? "btn_selected" : "btn_not_selected"} onClick={toggleSomeThing}>내용</button>
             </div>
                 {/* 이미지 보여주는 건 다시 건드려야 함 */}
             <div>
                 <p>추가 사용 가능 기계*</p>
                 <input onChange={onChangeExtraMachine} placeholder={"사용 가능한 기계를 입력해주세요. ex) 수비드 기계"} defaultValue={dbData.equipExtra}/>
             </div>
-
-            <div>
-                <p>앞접시*</p>
-                <ImageInputs setImg={setSidePlate} vals={sidePlate}/>
-                <input onChange={onChangeCountSidePlate} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.plateNum} />
+            <h4>매장 물품</h4>
+            <hr style={{ height: "2px", backgroundColor: "black" }} />
+            <div style={{display:"flex"}} >
+                <div>
+                    <p>앞접시*</p>
+                    <ImageInputs setImg={setSidePlate} vals={sidePlate}/>
+                    <input onChange={onChangeCountSidePlate} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.plateNum} />
+                </div>
+                <div>
+                    <p>물컵*</p>
+                    <ImageInputs setImg={setCup} vals={cup}/>
+                    <input onChange={onChangeCountCup} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.cupNum}/>
+                </div>
             </div>
-            <div>
-                <p>물컵*</p>
-                <ImageInputs setImg={setCup} vals={cup}/>
-                <input onChange={onChangeCountCup} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.cupNum}/>
+            <div style={{display:"flex"}} >
+                <div>
+                    <p>커트러리*</p>
+                    <ImageInputs setImg={setCuttrary} vals={cuttrary}/>
+                    <input onChange={onChangeCountCuttrary} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.cutleryNum}/>
+                </div>
+                <div>
+                    <p>밧드*</p>
+                    <ImageInputs setImg={setBat} vals={bat}/>
+                    <input onChange={onChangeCountBat} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.vatNum}/>
+                </div>
             </div>
-            <div>
-                <p>커트러리*</p>
-                <ImageInputs setImg={setCuttrary} vals={cuttrary}/>
-                <input onChange={onChangeCountCuttrary} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.cutleryNum}/>
-            </div>
-            <div>
-                <p>밧드*</p>
-                <ImageInputs setImg={setBat} vals={bat}/>
-                <input onChange={onChangeCountBat} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.vatNum}/>
-            </div>
-
-            <div>
-                <Link to="/placeInfoModify3"><button>이전</button></Link>
-                <button onClick={handleButton}>다음</button>
+            <div style={{display: "flex"}}>
+                <Link to="/placeInfoModify3">
+                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
+                </Link>
+                <button style={{backgroundColor: "grey"}} className="next_button"
+                            onClick={handleButton}
+                >다음</button>
             </div>
             <Modal isOpen={isModalOpen} ariaHideApp={false}>
                 <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>

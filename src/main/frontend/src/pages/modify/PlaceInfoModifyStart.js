@@ -362,41 +362,13 @@ const PlaceInfoModifyStart = () => {
           <ImageInput setImg={setImgRepresent} val={imgRepresent}/>
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: "6vh",
-          marginTop: "3vh",
-        }}
-      >
-        <Link to="/main">
-          <button
-            style={{
-              backgroundColor: "black",
-              color: "white",
-              flex: "1",
-              border: "none",
-              width: "50vw",
-              height: "8vh",
-            }}
-          >
-            이전
-          </button>
-        </Link>
-        <button
-          style={{
-            backgroundColor: "red",
-            color: "white",
-            flex: "1",
-            border: "none",
-            width: "50vw",
-            height: "8vh",
-          }}
-          onClick={handleButton}
-        >
-          저장
-        </button>
+      <div style={{display: "flex"}}>
+                <Link to="/main">
+                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
+                </Link>
+                <button style={{backgroundColor: "grey"}} className="next_button"
+                            onClick={handleButton}
+                >다음</button>
         <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
           <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
           <p>

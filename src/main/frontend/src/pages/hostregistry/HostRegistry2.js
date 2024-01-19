@@ -118,13 +118,13 @@ const HostRegistry2 = () => {
                     </div>
                 </div>
             </div>
-            <div style={{display: "flex",justifyContent:"center", marginBottom:"6vh",marginTop:"3vh"}}>
+            <div style={{display: "flex"}}>
                 <Link to="/hostRegistry">
-                    <button style={{backgroundColor: "black",color:"white", flex:"1",border:"none", width:"50vw",height:"8vh"}}>이전</button>
+                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 </Link>
-                <button style={{backgroundColor: "red",color:"white" ,flex:"1",border:"none", width:"50vw",height:"8vh"}}
+                <button style={{backgroundColor: "grey"}} className="next_button"
                             onClick={handleButton}
-                >저장</button>
+                >다음</button>
             </div>
             <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
                 <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>

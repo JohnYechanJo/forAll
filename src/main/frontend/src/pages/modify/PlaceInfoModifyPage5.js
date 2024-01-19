@@ -1,5 +1,4 @@
 import {useCallback, useEffect, useState} from "react";
-import ImageInputs from "../../components/ImageInputs";
 import DropDown from "../../components/DropDown";
 import Modal from "react-modal";
 import {Link, useLocation, useNavigate,useParams} from "react-router-dom";
@@ -136,6 +135,7 @@ const PlaceInfoModifyPage5 = () => {
             </div>
             <div>
                 <p>정산 정보를 입력해주세요*</p>
+                <hr style={{ height: "2px", backgroundColor: "black" }} />
                 {/*Todo 데이터 가져오기*/}
                 <label>
                     <input type={"checkbox"} />최근 정산 정보와 동일
@@ -152,10 +152,12 @@ const PlaceInfoModifyPage5 = () => {
                 </div>
                 <div>
                     <p>사업자 등록번호*</p>
-                     <input defaultValue={registNum1+'-'+registNum2+'-'+registNum3} disabled={true} className="input" key={0}/> 
-                    <p>- 사업자 등록번호는 필수 입력입니다.</p>
-                    <p>- 정확한 정보를 입력했는지 다시 한 번 확인해주세요.</p>
-                    <p>- 추후, 사업자 정보가 수정된다면 반드시 온라인 상담을 통해 변경 내용을 알려주셔야 합니다.</p>
+                     <input defaultValue={businessNum} disabled={true} className="input"/> 
+                    <div style={{fontSize:"8px",padding:"0px 0px", display:"inline-block"}} >
+                        <p style={{color:"red"}} >• 사업자 등록번호는 필수 입력입니다.</p>
+                        <p>• 정확한 정보를 입력했는지 다시 한 번 확인해주세요.</p>
+                        <p>• 추후, 사업자 정보가 수정된다면 반드시 온라인 상담을 통해 변경 내용을 알려주셔야 합니다.</p>
+                    </div>
                 </div>
                 <div>
                     <p>사업자 등록증 첨부*</p>
@@ -180,12 +182,14 @@ const PlaceInfoModifyPage5 = () => {
                     <input value={phone3} defaultValue={phone3} onChange={onChangePhone3}/>
                 </div>
             </div>
-
-            <div>
-                <Link to="/placeInfoModify4"><button>이전</button></Link>
-                <button onClick={handleButton}>저장</button>
+            <div style={{display: "flex"}}>
+                <Link to="/placeInfoModify4">
+                    <button className="next_button" style={{backgroundColor:"red"}} >이전</button>
+                </Link>
+                <button className="next_button" style={{backgroundColor:"grey"}}
+                            onClick={handleButton}
+                >다음</button>
             </div>
-
             <Modal isOpen={isModalOpen} ariaHideApp={false}>
                 <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
                 <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>

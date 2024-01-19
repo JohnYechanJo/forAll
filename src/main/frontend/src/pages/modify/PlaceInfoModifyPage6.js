@@ -4,7 +4,7 @@ import {Form, Link, useLocation, useNavigate, useParams} from "react-router-dom"
 import Modal from "react-modal";
 import ImageUploader from "../../utils/imageUploader";
 import axios from "axios";
-
+import "../../components/Styles.css";
 const PlaceInfoModifyPage6 =() => {
     const location = useLocation();
     const data = {...location.state};
@@ -134,6 +134,7 @@ const PlaceInfoModifyPage6 =() => {
             <h1>3.예약/정산 정보</h1>
             <div>
                 <p>계좌 정보를 입력해 주세요</p>
+                <hr style={{ height: "2px", backgroundColor: "black" }} />
                 <p>- 법인 사업자는 법인 통장계좌를, 개인 사업자는 사업자 명의의 통장 계좌를 입력해주세요. 포 올을 통해 결제된 금액이 해당 계좌로 정산됩니다.</p>
                 <p>은행명*</p>
                 <DropDown dataArr={bankDatas} onChange={setBank} defaultData={dbdata.bankName} key={bank}/>
@@ -146,6 +147,7 @@ const PlaceInfoModifyPage6 =() => {
             </div>
             <div>
                 <h1>환불 기준을 동의해주세요*</h1>
+                <hr style={{ height: "2px", backgroundColor: "black" }} />
                 <p>{"<업장 휴무일 대관>"}</p>
                 <p>- 셰프 환불 기준은 트라이얼 진행 전과 후로 구분됩니다.</p>
                 <p>1. 트라이얼 전: 100% 환불</p>
@@ -158,15 +160,19 @@ const PlaceInfoModifyPage6 =() => {
                 <p>b. 대관 7일 전: 50% 환불</p>
                 <p>c. 대관 6일전 ~ 당일 : 환불 불가</p>
             </div>
+            <hr style={{ height: "2px", backgroundColor: "black" }} />
             <label>
                 <input type="checkbox" checked={isAgree} onChange={() => setIsAgree(!isAgree)}/>동의합니다
             </label>
 
-            <div>
-                <Link to="/placeInfoModify5"><button>이전</button></Link>
-                <button onClick={handleButton}>저장</button>
+            <div style={{display: "flex"}}>
+                <Link to="/placeInfoModify5">
+                    <button className="next_button" style={{backgroundColor:"red"}} >이전</button>
+                </Link>
+                <button className="next_button" style={{backgroundColor:"grey"}}
+                            onClick={handleButton}
+                >다음</button>
             </div>
-
 
             <Modal isOpen={isModalOpen} ariaHideApp={false}>
                 <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>

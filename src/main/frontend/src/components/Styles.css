@@ -32,7 +32,7 @@
     padding: 0px 0px;
     vertical-align: middle;
     cursor: pointer;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 5px;
 }
 .detail{
@@ -48,4 +48,14 @@
 .input{
     width: 94vw;
     height: 3vh;
+}
+.next_button{
+    justify-content: center;
+    text-align: center;
+    margin-top: 3vh;
+    color: white;
+    flex: 1;
+    border: none;
+    width: 50vw;
+    height: 8vh;
 }
