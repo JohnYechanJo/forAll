@@ -1,4 +1,4 @@
-package project.forAll.util;
+package project.forAll.domain;
 
 import lombok.Data;
 

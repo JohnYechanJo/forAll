@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.*;
 
 import project.forAll.repository.MultiChatRoomRepository;
-import project.forAll.util.MultiChatRoom;
+import project.forAll.domain.MultiChatRoom;
 
 
 @Slf4j

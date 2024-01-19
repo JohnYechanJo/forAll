@@ -1,13 +1,17 @@
 package project.forAll.domain.member;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import project.forAll.domain.BassDomain;
 
 import javax.persistence.*;
 
 @Entity
 @Getter @Setter
+@ToString
+@NoArgsConstructor
 public class Member extends BassDomain {
 
     @Id @GeneratedValue
@@ -33,4 +37,6 @@ public class Member extends BassDomain {
     private String birthday;
     // 성별
     private Gender gender;
+
+
 }

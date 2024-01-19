@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import project.forAll.repository.MultiChatRepository;
-import project.forAll.util.MultiChatRoom;
+import project.forAll.domain.MultiChatRoom;
 
 import java.util.List;
 
