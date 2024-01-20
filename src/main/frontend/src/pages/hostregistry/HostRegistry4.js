@@ -25,8 +25,6 @@ const HostRegistry4 = () => {
     const [countCup, setCountCup] = useState();
     const [cuttrary, setCuttrary] = useState([]);
     const [countCuttrary, setCountCuttrary] = useState();
-    const [bat, setBat] = useState([]);
-    const [countBat, setCountBat] = useState();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -65,13 +63,10 @@ const HostRegistry4 = () => {
     const onChangeCountCuttrary = useCallback((e) => {
         setCountCuttrary(e.target.value);
     }, []);
-    const onChangeCountBat = useCallback((e) => {
-        setCountBat(e.target.value);
-    }, []);
 
     const handleButton = () => {
         if ((firePit !== undefined) && (sidePlate !== undefined) && (countSidePlate !== undefined) && (cup !== undefined) && (countCup !== undefined)
-            && (cuttrary !== undefined) && (countCuttrary !== undefined) && (bat !== undefined) && (countBat !== undefined)){
+            && (cuttrary !== undefined) && (countCuttrary !== undefined)){
             isPublic = true;
             submit();
         }
@@ -103,8 +98,6 @@ const HostRegistry4 = () => {
                 countCup: countCup,
                 cuttrary: cuttrary,
                 countCuttrary: countCuttrary,
-                bat: bat,
-                countBat: countBat
             }
         })
     };
@@ -143,7 +136,7 @@ const HostRegistry4 = () => {
             </div>
             <h4>매장 물품</h4>
             <hr style={{ height: "2px", backgroundColor: "black" }} />
-            <div style={{display:"flex"}} >
+            <div style={{display:"flex", justifyContent:"space-around"}} >
                 <div>
                     <p>앞접시*</p>
                     <ImageInputs setImg={setSidePlate} vals={sidePlate}/>
@@ -160,11 +153,6 @@ const HostRegistry4 = () => {
                     <p>커트러리*</p>
                     <ImageInputs setImg={setCuttrary} vals={cuttrary}/>
                     <input onChange={onChangeCountCuttrary} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
-                </div>
-                <div>
-                    <p>밧드*</p>
-                    <ImageInputs setImg={setBat} vals={bat}/>
-                    <input onChange={onChangeCountBat} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
                 </div>
             </div>
 

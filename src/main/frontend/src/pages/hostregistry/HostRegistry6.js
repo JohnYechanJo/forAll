@@ -89,7 +89,6 @@ const HostRegistry6 =() => {
             cutleryNum: data.countCuttrary,
             vatImage: vatImage,
             vatNum: data.countBat,
-            payWay: data.payment,
             companyName: data.tradeName,
             ceoName: data.representative,
             businessNum: businessNum,

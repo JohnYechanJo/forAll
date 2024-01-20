@@ -1,6 +1,6 @@
 import DropDown from "../../components/DropDown";
 import {useCallback, useState, useEffect} from "react";
-import {Form, Link, useLocation, useNavigate, useParams} from "react-router-dom";
+import {Form, Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
 import ImageUploader from "../../utils/imageUploader";
 import axios from "axios";
@@ -10,7 +10,6 @@ const PlaceInfoModifyPage6 =() => {
     const data = {...location.state};
     let isPublic = false;
     const navigate = useNavigate();
-    const params = useParams();
     const [dbdata, setDbData] = useState({});
 
     const bankDatas = ["한국은행", "KB국민은행", "신한은행", "우리은행", "하나은행", "SC제일은행", "한국씨티은행", "케이뱅크", "카카오뱅크", "토스뱅크", "한국산업은행", "중소기업은행", "한국수출은행", "NH농협은행", "수협은행", "대구은행", "부산은행", "경남은행", "광주은행", "전북은행", "제주은행"];
@@ -66,7 +65,6 @@ const PlaceInfoModifyPage6 =() => {
         const plateImage = data.sidePlate ? await Promise.all(data.sidePlate.map(async (img) => await ImageUploader(img, userId))) : null;
         const cupImage = data.cup ? await Promise.all(data.cup.map(async (img) => await ImageUploader(img, userId))) : null;
         const cutleryImage = data.cuttrary ? await Promise.all(data.cuttrary.map(async (img) => await ImageUploader(img, userId))) : null;
-        const vatImage = data.bat ? await Promise.all(data.bat.map(async (img) => await ImageUploader(img, userId))) : null;
 
         const businessNum = data.registNum1 + data.registNum2 + data.registNum3;
         const businessImage = await ImageUploader(data.license, userId);
@@ -110,9 +108,6 @@ const PlaceInfoModifyPage6 =() => {
             cupNum: data.countCup,
             cutleryImage: cutleryImage,
             cutleryNum: data.countCuttrary,
-            vatImage: vatImage,
-            vatNum: data.countBat,
-            payWay: data.payment,
             companyName: data.tradeName,
             ceoName: data.representative,
             businessNum: businessNum,
