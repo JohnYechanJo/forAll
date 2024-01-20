@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../Sidebar.module.css";
 import LoginTemplate from "../signup/LoginTemplate";
-import { Link } from "react-router-dom";
-
-const Sidebar = ({ width = 280, children }) => {
+import { Link,useNavigate } from "react-router-dom";
+import axios from "axios";
+import sidebarIcon from "../../components/icons/sidebar.png";
+const Sidebar = ({ width = 18.75, children }) => {
     const [isOpen, setOpen] = useState(false);
     const [xPosition, setX] = useState(-width);
     const side = useRef();
-
+    const navigate = useNavigate();
     // button 클릭 시 토글
     const toggleMenu = () => {
         if (xPosition < 0) {
@@ -18,22 +19,27 @@ const Sidebar = ({ width = 280, children }) => {
             setOpen(false);
         }
     };
-
     return (
         <div className={styles.container}>
             <div ref={side} className={styles.sidebar}
-                 style={{width: `${width}px`, height: '100%', transform: `translatex(${-xPosition}px)`}}>
+                 style={{width: `${width}rem`, height: '52.75rem', transform: `translatex(${-xPosition}rem)`, 
+                 fontSize:"0.875rem", fontWeight:"700",flexShrink:"0",textDecorationLine:"underline"
+                 }}>
                 <button onClick={() => toggleMenu()}
-                        className={styles.button}>
+                        className={styles.button}
+                        style={{alignItems:"center",backgroundColor:"transparent",border:"none"}}
+                >
                     {isOpen ?
-                        <span></span> : <div className={styles.openBtn}>ㅡ</div> //메뉴 아이콘 집어넣어야 함
+                        <span></span> : <div className={styles.openBtn} style={{alignContent:"center",justifyContent:"center", display: "flex", alignItems: "center"}} >
+                            <img src={sidebarIcon} alt="sidebar" style={{width:"1.125rem", height:"0.875rem", margin: "auto"}} />
+                        </div> //메뉴 아이콘 집어넣어야 함
                     }
                 </button>
                 <div style={{
-                    height: "30%",
+                    height: "15.625rem",
                     width: "100%",
-                    backgroundColor: "crimson",
-                    color: "white",
+                    border:"1px solid rgba(196,196,196,0.2)",
+                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                 }}>
                     <div style={{
                         display: "flex",
@@ -44,30 +50,51 @@ const Sidebar = ({ width = 280, children }) => {
                         </button>
                     </div>
                     <div>
-                        <h3 style={{textAlign: "center"}}>포 올</h3>
-                        <h4 style={{textAlign:"center"}}>email</h4>
+                        <h3 style={{textAlign: "center"}}>{sessionStorage.getItem("name")}</h3>
+                        <h3 style={{textAlign:"center"}}>{sessionStorage.getItem("email")}</h3>
                     </div>
                 </div>
-                <div className={styles.content}>{children}</div>
                 <div style={{display:"flex",flexDirection:"column", justifyContent:"left"}}>
-                    <button className="button" style={{textAlign: "left"}}>찜한 내역</button>
-                    <hr style={{width: "100%", color: "black"}}/>
-                    <Link to="/guestRegistryStart">
-                        <button className="button" style={{textAlign:"left"}} >셰프 등록하기</button>
-                    </Link>
-                    <Link to="/HostRegistry">
-                        <button className="button" style={{textAlign:"left", width:"35vw"}}>공간정보 등록하기</button>
-                    </Link>
-                    <hr style={{width: "100%", color: "black"}}/>
-                    <Link to="/personalInfoModify">
-                        <button className="button" style={{textAlign:"left"}}>개인정보수정</button>
-                    </Link>
-                    <Link to="/placeInfoModifyStart">
-                        <button className="button" style={{textAlign:"left"}}>공간정보수정</button>
-                    </Link>
-                    <Link to="/chefInfoModify">
-                        <button className="button" style={{textAlign:"left"}}>셰프정보 수정</button>
-                    </Link>
+                    <div style={{height:"6.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
+                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                    display:"flex",flexDirection:"column",justifyContent:"space-around"
+                }}>
+                        <button className="button" >예약 정보</button>
+                        <button className="button" >찜한내역</button>
+                    </div>
+                    <div style={{height:"6.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
+                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                    display:"flex",flexDirection:"column",justifyContent:"space-around"
+                }} >
+                        <Link to="/guestRegistryStart">
+                            <button className="button"  >셰프 등록하기</button>
+                        </Link>
+                        <Link to="/HostRegistry">
+                            <button className="button" >공간 등록하기</button>
+                        </Link>
+                    </div>
+                    <div style={{height:"9.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
+                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                    display:"flex",flexDirection:"column",justifyContent:"space-around"
+                }}>
+                        <button className="button" >채팅함</button>
+                        <button className="button" >고객센터</button>
+                        <button className="button" >내가 쓴 글</button>
+                    </div>
+                    <div style={{height:"9.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
+                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                    display:"flex",flexDirection:"column",justifyContent:"space-around"
+                }}>
+                        <Link to="/personalInfoModify">
+                            <button className="button" >개인 정보수정</button>
+                        </Link>
+                        <Link to="/chefInfoModify">
+                            <button className="button" >셰프 정보수정</button>
+                        </Link>
+                        <Link to="/placeInfoModifyStart">
+                            <button className="button" >공간 정보수정</button>
+                        </Link>
+                    </div>
                 </div>
                 
 

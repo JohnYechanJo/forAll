@@ -16,9 +16,9 @@
   .button {
     position: relative;
     background-color: transparent;
-    left: -40px;
+    left: -2.5rem;
     width: 35px;
-    height: 4vh;
+    height: 3.125rem;
     z-index: 99;
     transition: 0.8s ease;
     border: none;

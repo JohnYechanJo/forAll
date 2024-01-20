@@ -4,7 +4,7 @@
     background-color: white;
     position: fixed;
     top: 0; left: 0;
-    height: 4vh;
+    height: 3.125rem;
     width: 100%;
     border-bottom: 2px solid black;
 }

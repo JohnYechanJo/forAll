@@ -5,7 +5,6 @@ import {user_role} from "../../utils/enums";
 import axios from "axios";
 const LoginTemplate = () => {
     const navigate = useNavigate();
-    const [name, setName] = useState('');
     const [id, setId] = useState('');
     const [passwd, setPasswd] = useState('');
 
@@ -33,6 +32,7 @@ const LoginTemplate = () => {
                 ).then((res) => {
                 sessionStorage.setItem("user_id", id);
                 sessionStorage.setItem("name", res.data.name);
+                sessionStorage.setItem("email", res.data.email);
                 navigate('/');
             }).catch((res) => {
                 alert("로그인에 실패했습니다");
