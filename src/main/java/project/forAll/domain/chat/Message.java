@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import project.forAll.domain.BassDomain;
 
 import javax.persistence.*;
 
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Getter @Setter
 @ToString
 @NoArgsConstructor
-public class Message {
+public class Message extends BassDomain {
     @Id
     @GeneratedValue
     @Column(name = "chatRoom_id")
