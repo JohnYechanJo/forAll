@@ -1,6 +1,5 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import SearchIdPage from "./pages/SearchIdPage";
 import SearchPwPage from "./pages/SearchPwPage";
@@ -19,7 +18,6 @@ import ModifyCompletePage from "./pages/modify/ModifyCompletePage";
 import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
 import HostRegistry from "./pages/hostregistry/HostRegistry";
-import HostRegistryStart from "./pages/hostregistry/HostRegistryStart";
 import HostRegistry2 from "./pages/hostregistry/HostRegistry2";
 import HostRegistry3 from "./pages/hostregistry/HostRegistry3";
 import HostRegistry5 from "./pages/hostregistry/HostRegistry5";
@@ -45,9 +43,8 @@ import SpaceListViewPage from "./pages/RentSpace/SpaceListViewPage";
 function App() {
   return (
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/main" element={<MainPage />}/>
+        <Route path="/" element={<MainPage />}/>
         <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
         <Route path="/searchId" element={<SearchIdPage />} />
         <Route path="/searchPw" element={<SearchPwPage />}/>
@@ -64,7 +61,6 @@ function App() {
         <Route path="/placeInfoModify6" element={<PlaceInfoModifyPage6 />} />
         <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
         <Route path="/hostRegistry" element={<HostRegistry />} />
-        <Route path="/hostRegistryStart" element={<HostRegistryStart />} />
         <Route path="/hostRegistry2" element={<HostRegistry2 />} />
         <Route path="/hostRegistry3" element={<HostRegistry3 />}/>
         <Route path="/hostRegistry4" element={<HostRegistry4 />}/>

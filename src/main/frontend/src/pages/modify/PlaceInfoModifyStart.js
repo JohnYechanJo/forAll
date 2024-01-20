@@ -363,7 +363,7 @@ const PlaceInfoModifyStart = () => {
         </div>
       </div>
       <div style={{display: "flex"}}>
-                <Link to="/main">
+                <Link to="/">
                     <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 </Link>
                 <button style={{backgroundColor: "grey"}} className="next_button"

@@ -34,9 +34,9 @@ const Banner = ({dataSet, navigate}) => {
                     </SwiperSlide>)
                 }) : null}
                 {/* slide가 최소 3개는 있어야 무한으로 돌아감 아래 슬라이드는 그것을 보여주기 위함 */}
-                {/*<SwiperSlide>1</SwiperSlide>*/}
-                {/*<SwiperSlide>1</SwiperSlide>*/}
-                {/*<SwiperSlide>1</SwiperSlide>*/}
+                {/* <SwiperSlide>1</SwiperSlide>
+                <SwiperSlide>1</SwiperSlide>
+                <SwiperSlide>1</SwiperSlide> */}
 
             </Swiper>
     </div>)

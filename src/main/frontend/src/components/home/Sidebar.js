@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "../Sidebar.module.css";
 import LoginTemplate from "../signup/LoginTemplate";
 import { Link } from "react-router-dom";
-import {user_role} from "../../utils/enums";
 
 const Sidebar = ({ width = 280, children }) => {
     const [isOpen, setOpen] = useState(false);
@@ -56,7 +55,7 @@ const Sidebar = ({ width = 280, children }) => {
                     <Link to="/guestRegistryStart">
                         <button className="button" style={{textAlign:"left"}} >셰프 등록하기</button>
                     </Link>
-                    <Link to="/HostRegistryStart">
+                    <Link to="/HostRegistry">
                         <button className="button" style={{textAlign:"left", width:"35vw"}}>공간정보 등록하기</button>
                     </Link>
                     <hr style={{width: "100%", color: "black"}}/>

@@ -182,7 +182,7 @@ const ChefInfoModifyPage2 = () => {
                 </Modal>
                 <Modal isOpen={isModalOpen2} style={ModalStyles} ariaHideApp={false}>
                     <p style={{fontSize:"16px"}} >저장이 완료되었습니다!</p>
-                    <button onClick={() => navigate("/main")}>확인</button>
+                    <button onClick={() => navigate("/")}>확인</button>
                 </Modal>
             </div>
         </div>
