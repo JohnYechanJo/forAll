@@ -5,6 +5,7 @@ import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import StompJs from "stompjs";
 import SockJs from "sockjs-client";
 import {ChatRoomCategory} from "../../utils/enums";
+import ImageUploader from "../../utils/imageUploader";
 
 const ChatRoomPage = () => {
     const location = useLocation();
@@ -15,7 +16,8 @@ const ChatRoomPage = () => {
     const [messageSet, setMessageSet] = useState([]);
     const [partner, setPartner] = useState();
     const [inputMessage, setInputMessage] = useState("");
-    const [inputImage, setInputImage] = useState("");
+    const [inputImage, setInputImage] = useState();
+    const [inputIsImage, setInputIsImage] = useState(false);
     const onChangeMessage = useCallback((e) => {
         setInputMessage(e.target.value);
     }, []);
@@ -54,16 +56,21 @@ const ChatRoomPage = () => {
         const data = JSON.parse(payload.body);
         setMessageSet(prev =>[...prev, data]);
     };
-    const sendMessage = () => {
+    const sendMessage =  async () => {
         const chatMessage = {
             messageContent: inputMessage,
             senderId: sessionStorage.getItem("user_id"),
             targetId: data.partner,
             chatRoomId: roomId,
-            sendTime:  new Date().toJSON()
+            sendTime:  new Date().toJSON(),
+            isImage: inputIsImage
         };
+        if (inputIsImage){
+            chatMessage.messageContent = await ImageUploader(inputImage, sessionStorage.getItem("user_id"));
+        }
         client.current.send("/pub/chat/sendMessage", {}, JSON.stringify(chatMessage));
         setInputMessage("");
+        setInputIsImage("false");
 
     };
     return(
@@ -97,7 +104,17 @@ const ChatRoomPage = () => {
             </div>
             <div>
                 <input value={inputMessage} onChange={onChangeMessage}/>
-                <button>첨부 파일</button>
+                <label>
+                    <input type={"file"}
+                           accept="image/*"
+                           onChange={(e) => {
+                               setInputImage(e.target.files[0]);
+                               setInputIsImage(true);
+                           }}
+                           style={{display: "none"}}
+                    />
+                    <div>첨부파일</div>
+                </label>
                 <button onClick={sendMessage}>전송</button>
             </div>
 

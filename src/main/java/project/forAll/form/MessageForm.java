@@ -15,4 +15,5 @@ public class MessageForm {
     private Long chatRoomId; // 채팅방 번호
     private String sendTime; // 메시지 보낸 시간
     private Boolean readFlag; // 읽음 여부
+    private Boolean isImage; // 사진 여부
 }

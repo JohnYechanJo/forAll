@@ -20,10 +20,11 @@ public class Message extends BassDomain {
 
     private String messageContent; // 메시지 내용
     private boolean readFlag = false; // 읽음 여부
-    private String senderId; // 보낸 회원 번호
-    private String targetId; // 받는 회원 번호
+    private String senderId; // 보낸 회원 아이디
+    private String targetId; // 받는 회원 아이디
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ChatRoom chatRoom; // 채팅방 번호
     private String sendTime; // 메시지 보낸 시간
+    private boolean isImage = false; // 사진 여부
 }

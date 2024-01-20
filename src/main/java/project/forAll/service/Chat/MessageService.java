@@ -33,6 +33,7 @@ public class MessageService extends Service {
         message.setTargetId(form.getTargetId());
         message.setChatRoom(chatRoomRepository.findById(form.getChatRoomId()).orElseThrow(() -> new IllegalArgumentException("chat room doesn't exist")));
         message.setSendTime(form.getSendTime());
+        message.setImage(form.getIsImage());
         return message;
     }
     public MessageForm of(final Message message){
@@ -44,6 +45,7 @@ public class MessageService extends Service {
         form.setChatRoomId(message.getChatRoom().getId());
         form.setSendTime(message.getSendTime());
         form.setReadFlag(message.isReadFlag());
+        form.setIsImage(message.isImage());
         return form;
     }
 }
