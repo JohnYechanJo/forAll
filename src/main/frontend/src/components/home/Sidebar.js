@@ -57,42 +57,42 @@ const Sidebar = ({ width = 18.75, children }) => {
                 <div style={{display:"flex",flexDirection:"column", justifyContent:"left"}}>
                     <div style={{height:"6.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                    display:"flex",flexDirection:"column",justifyContent:"space-around"
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",
                 }}>
-                        <button className="button" >예약 정보</button>
-                        <button className="button" >찜한내역</button>
+                        <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>예약 정보</button>
+                        <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>찜한내역</button>
                     </div>
                     <div style={{height:"6.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around"
                 }} >
                         <Link to="/guestRegistryStart">
-                            <button className="button"  >셰프 등록하기</button>
+                            <button className="button"  style={{textAlign:"left",marginLeft:"2rem"}}>셰프 등록하기</button>
                         </Link>
                         <Link to="/HostRegistry">
-                            <button className="button" >공간 등록하기</button>
+                            <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>공간 등록하기</button>
                         </Link>
                     </div>
                     <div style={{height:"9.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around"
                 }}>
-                        <button className="button" >채팅함</button>
-                        <button className="button" >고객센터</button>
-                        <button className="button" >내가 쓴 글</button>
+                        <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>채팅함</button>
+                        <button className="button" style={{textAlign:"left",marginLeft:"2rem"}} >고객센터</button>
+                        <button className="button" style={{textAlign:"left",marginLeft:"2rem"}} >내가 쓴 글</button>
                     </div>
                     <div style={{height:"9.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around"
                 }}>
                         <Link to="/personalInfoModify">
-                            <button className="button" >개인 정보수정</button>
+                            <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>개인 정보수정</button>
                         </Link>
                         <Link to="/chefInfoModify">
-                            <button className="button" >셰프 정보수정</button>
+                            <button className="button"style={{textAlign:"left",marginLeft:"2rem"}} >셰프 정보수정</button>
                         </Link>
                         <Link to="/placeInfoModifyStart">
-                            <button className="button" >공간 정보수정</button>
+                            <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>공간 정보수정</button>
                         </Link>
                     </div>
                 </div>
