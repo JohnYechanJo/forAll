@@ -28,8 +28,6 @@ const PlaceInfoModifyPage4 = () => {
     const [countCup, setCountCup] = useState();
     const [cuttrary, setCuttrary] = useState([]);
     const [countCuttrary, setCountCuttrary] = useState();
-    const [bat, setBat] = useState([]);
-    const [countBat, setCountBat] = useState();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -68,9 +66,7 @@ const PlaceInfoModifyPage4 = () => {
     const onChangeCountCuttrary = useCallback((e) => {
         setCountCuttrary(e.target.value);
     }, []);
-    const onChangeCountBat = useCallback((e) => {
-        setCountBat(e.target.value);
-    }, []);
+    
     const downloadData = async () => {
         let spaceid;
         await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
@@ -86,11 +82,9 @@ const PlaceInfoModifyPage4 = () => {
                 setCountSidePlate(res.data.plateNum);
                 setCountCup(res.data.cupNum);
                 setCountCuttrary(res.data.cutleryNum);
-                setCountBat(res.data.vatNum);
                 setSidePlate(res.data.plateImage);
                 setCup(res.data.cupImage);
                 setCuttrary(res.data.cutleryImage);
-                setBat(res.data.vatImage);
                 setDishWasher(res.data.equip.includes("식기세척기"));
                 setFryer(res.data.equip.includes("튀김기"));
                 setOven(res.data.equip.includes("오븐"));
@@ -105,7 +99,7 @@ const PlaceInfoModifyPage4 = () => {
     }, []);
     const handleButton = () => {
         if ((firePit !== undefined) && (sidePlate !== undefined) && (countSidePlate !== undefined) && (cup !== undefined) && (countCup !== undefined)
-            && (cuttrary !== undefined) && (countCuttrary !== undefined) && (bat !== undefined) && (countBat !== undefined)){
+            && (cuttrary !== undefined) && (countCuttrary !== undefined)){
             isPublic = true;
             submit();
         }
@@ -130,8 +124,6 @@ const PlaceInfoModifyPage4 = () => {
                 countCup: countCup,
                 cuttrary: cuttrary,
                 countCuttrary: countCuttrary,
-                bat: bat,
-                countBat: countBat
             }
         })
     };
@@ -169,7 +161,7 @@ const PlaceInfoModifyPage4 = () => {
             </div>
             <h4>매장 물품</h4>
             <hr style={{ height: "2px", backgroundColor: "black" }} />
-            <div style={{display:"flex"}} >
+            <div style={{display:"flex", justifyContent:"space-around"}} >
                 <div>
                     <p>앞접시*</p>
                     <ImageInputs setImg={setSidePlate} vals={sidePlate}/>
@@ -181,16 +173,12 @@ const PlaceInfoModifyPage4 = () => {
                     <input onChange={onChangeCountCup} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.cupNum}/>
                 </div>
             </div>
-            <div style={{display:"flex"}} >
+            {/* 하나만 제대로 나올 수 있게 수정해야 함 */}
+            <div style={{display:"inline-grid"}} >
                 <div>
                     <p>커트러리*</p>
                     <ImageInputs setImg={setCuttrary} vals={cuttrary}/>
                     <input onChange={onChangeCountCuttrary} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.cutleryNum}/>
-                </div>
-                <div>
-                    <p>밧드*</p>
-                    <ImageInputs setImg={setBat} vals={bat}/>
-                    <input onChange={onChangeCountBat} placeholder={"최대 개수를 기준으로 입력해주세요"} defaultValue={dbData.vatNum}/>
                 </div>
             </div>
             <div style={{display: "flex"}}>

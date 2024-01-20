@@ -15,7 +15,6 @@ const PlaceInfoModifyPage5 = () => {
     let isPublic = false;
     const emailDatas=  ["직접입력","naver.com", "choi.com", "dreamwiz.com", "empal.com", "gmail.com", "hanafos.com", "hanmail.net", "hanmir.com", "hitel.net", "hotmail.com", "korea.com", "lycos.co.kr", "nate.com"];
 
-    const [payment, setPayment] = useState(PayWay.NotSpecified);
     const [tradeName, setTradeName] = useState("");
     const [representative, setRepresentative] = useState("");
     const [registNum1, setRegistNum1] = useState("");
@@ -60,7 +59,7 @@ const PlaceInfoModifyPage5 = () => {
     },[]);
 
     const handleButton = () => {
-        if ((payment !== undefined) && (email1 !== "")
+        if ((email1 !== "")
             && (phone1 !== "") && (phone2 !== "") && (phone3 !== "")){
             isPublic = true;
             submit();
@@ -72,7 +71,6 @@ const PlaceInfoModifyPage5 = () => {
         navigate("/placeInfoModify6", {
             state: {
                 ...data,
-                payment:payment,
                 tradeName:tradeName,
                 representative:representative,
                 registNum1:registNum1,
@@ -98,7 +96,6 @@ const PlaceInfoModifyPage5 = () => {
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
                 setDbData(res.data)
-                setPayment(res.data.payWay);
                 setTradeName(res.data.companyName);
                 setRepresentative(res.data.ceoName);
                 setRegistNum1(res.data.businessNum.slice(0,3));
@@ -124,21 +121,8 @@ const PlaceInfoModifyPage5 = () => {
         <div>
             <h1>3. 예약/정산 정보</h1>
             <div>
-                <p>결제 방식을 선택해주세요.*</p>
-                <label>
-                    <input type="radio" name={"payment"}  defaultChecked={(payment===PayWay.QuickPay)} key={payment} onClick={() => setPayment(PayWay.QuickPay)}/>바로결제
-                </label>
-                <label>
-                    <input type="radio" name={"payment"}  defaultChecked={(payment===PayWay.ConfirmPay)} key={payment} onClick={() => setPayment(PayWay.ConfirmPay)}/>승인결제
-                </label>
-            </div>
-            <div>
                 <p>정산 정보를 입력해주세요*</p>
                 <hr style={{ height: "2px", backgroundColor: "black" }} />
-                {/*Todo 데이터 가져오기*/}
-                <label>
-                    <input type={"checkbox"} />최근 정산 정보와 동일
-                </label>
                 <div>
                     <p>상호명(개인/법인)*</p>
                     <p>{tradeName.length}자/28자</p>
