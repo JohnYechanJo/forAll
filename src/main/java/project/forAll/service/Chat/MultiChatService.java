@@ -1,4 +1,4 @@
-package project.forAll.service;
+package project.forAll.service.Chat;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,8 +16,8 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.*;
 
-import project.forAll.repository.MultiChatRoomRepository;
-import project.forAll.domain.MultiChatRoom;
+import project.forAll.repository.chat.MultiChatRoomRepository;
+import project.forAll.domain.chat.MultiChatRoom;
 
 
 @Slf4j

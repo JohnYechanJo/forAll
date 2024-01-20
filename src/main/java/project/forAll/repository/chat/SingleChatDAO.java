@@ -1,11 +1,11 @@
-package project.forAll.repository;
+package project.forAll.repository.chat;
 
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import project.forAll.domain.Message;
-import project.forAll.domain.SingleChatRoom;
+import project.forAll.domain.chat.Message;
+import project.forAll.domain.chat.ChatRoom;
 import project.forAll.domain.member.Member;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class SingleChatDAO {
     @Autowired
     private SqlSessionTemplate sqlSession;
 
-    public List<SingleChatRoom> selectRoomList(int memberNo) {
+    public List<ChatRoom> selectRoomList(int memberNo) {
         return sqlSession.selectList("chattingMapper.selectRoomList", memberNo);
     }
 

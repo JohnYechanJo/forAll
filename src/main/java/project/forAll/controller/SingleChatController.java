@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import project.forAll.domain.Message;
-import project.forAll.domain.SingleChatRoom;
+import project.forAll.domain.chat.Message;
+import project.forAll.domain.chat.ChatRoom;
 import project.forAll.domain.member.Member;
-import project.forAll.service.SingleChatService;
+import project.forAll.service.Chat.SingleChatService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +25,7 @@ public class SingleChatController {
     public String chatting(@SessionAttribute("loginMember") Member loginMember, Model model) {
 
         // 현재 개설되어 있는 채팅방 목록 불러오기
-        List<SingleChatRoom> roomList = service.selectRoomList(Math.toIntExact(loginMember.getId()));
+        List<ChatRoom> roomList = service.selectRoomList(Math.toIntExact(loginMember.getId()));
         model.addAttribute("roomList", roomList);
 
         return "chatting/chatting";
@@ -67,7 +67,7 @@ public class SingleChatController {
     // 채팅방 목록 조회
     @GetMapping(value="/chatting/roomList", produces="application/json; charset=UTF-8")
     @ResponseBody
-    public List<SingleChatRoom> selectRoomList(@SessionAttribute("loginMember") Member loginMember) {
+    public List<ChatRoom> selectRoomList(@SessionAttribute("loginMember") Member loginMember) {
         return service.selectRoomList(Math.toIntExact(loginMember.getId()));
     }
 

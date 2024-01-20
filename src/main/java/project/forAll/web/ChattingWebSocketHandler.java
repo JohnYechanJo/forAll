@@ -18,9 +18,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import project.forAll.domain.Message;
+import project.forAll.domain.chat.Message;
 import project.forAll.domain.member.Member;
-import project.forAll.service.SingleChatService;
+import project.forAll.service.Chat.SingleChatService;
 
 
 public class ChattingWebSocketHandler extends TextWebSocketHandler{

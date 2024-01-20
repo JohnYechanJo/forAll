@@ -1,7 +1,7 @@
-package project.forAll.service;
+package project.forAll.service.Chat;
 
-import project.forAll.domain.Message;
-import project.forAll.domain.SingleChatRoom;
+import project.forAll.domain.chat.Message;
+import project.forAll.domain.chat.ChatRoom;
 import project.forAll.domain.member.Member;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Map;
 
 public interface SingleChatService {
 
-    List<SingleChatRoom> selectRoomList(int memberNo);
+    List<ChatRoom> selectRoomList(int memberNo);
 
     int checkChattingNo(Map<String, Integer> map);
 

@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import project.forAll.repository.MultiChatRepository;
-import project.forAll.domain.MultiChatRoom;
+import project.forAll.repository.chat.MultiChatRepository;
+import project.forAll.domain.chat.MultiChatRoom;
 
 import java.util.List;
 

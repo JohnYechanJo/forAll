@@ -1,4 +1,4 @@
-package project.forAll.repository;
+package project.forAll.repository.chat;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import java.util.*;
 
-import project.forAll.domain.MultiChatRoom;
+import project.forAll.domain.chat.MultiChatRoom;
 
 
 @Repository

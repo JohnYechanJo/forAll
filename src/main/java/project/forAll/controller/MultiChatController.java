@@ -19,7 +19,7 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import java.util.List;
 
-import project.forAll.repository.MultiChatRepository;
+import project.forAll.repository.chat.MultiChatRepository;
 import project.forAll.dto.ChatDto;
 
 

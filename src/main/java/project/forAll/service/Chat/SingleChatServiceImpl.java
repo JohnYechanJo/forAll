@@ -1,4 +1,4 @@
-package project.forAll.service;
+package project.forAll.service.Chat;
 
 import java.util.List;
 import java.util.Map;
@@ -6,10 +6,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.forAll.domain.Message;
-import project.forAll.domain.SingleChatRoom;
+import project.forAll.domain.chat.Message;
+import project.forAll.domain.chat.ChatRoom;
 import project.forAll.domain.member.Member;
-import project.forAll.repository.SingleChatDAO;
+import project.forAll.repository.chat.SingleChatDAO;
 
 
 @Service
@@ -19,7 +19,7 @@ public class SingleChatServiceImpl implements SingleChatService {
     private SingleChatDAO dao;
 
     @Override
-    public List<SingleChatRoom> selectRoomList(int memberNo) {
+    public List<ChatRoom> selectRoomList(int memberNo) {
         return dao.selectRoomList(memberNo);
     }
 

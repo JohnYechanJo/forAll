@@ -1,4 +1,4 @@
-package project.forAll.domain;
+package project.forAll.domain.chat;
 
 import lombok.Data;
 import lombok.Getter;
