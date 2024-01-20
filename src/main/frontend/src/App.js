@@ -28,7 +28,6 @@ import GuestRegistryStart from "./pages/guestregistry/GuestRegistryStart";
 import GuestRegistry from "./pages/guestregistry/GuestRegistry";
 import LoginHandeler from "./pages/LoginHandeler";
 import GuestRegistry2 from "./pages/guestregistry/GuestRegistry2";
-import CheatPage from "./pages/CheatPage";
 import ChefInfoModifyPage from './pages/modify/ChefInfoModifyPage';
 import ChefInfoModifyPage2 from './pages/modify/ChefInfoModifyPage2';
 import RentSpacePage from "./pages/RentSpace/RentSpacePage";
@@ -40,6 +39,8 @@ import PopupBoardPage from "./pages/board/PopupBoardPage";
 import ChatBoardPage from "./pages/board/ChatBoardPage";
 import RecipeBoardPage from "./pages/board/RecipeBoardPage";
 import SpaceListViewPage from "./pages/RentSpace/SpaceListViewPage";
+import ChatRoomListPage from "./pages/chat/ChatRoomListPage";
+import ChatRoomPage from "./pages/chat/ChatRoomPage";
 function App() {
   return (
       <Routes>
@@ -77,7 +78,8 @@ function App() {
         <Route path="/rentSpaceInfo1/:id" element={<RentSpaceInfo1 />} />
         <Route path="/rentSpaceInfo2/:id" element={<RentSpaceInfo2 />} />
         <Route path="/rentSpaceInfo3/:id" element={<RentSpaceInfo3 />} />
-        <Route path="/cheat" element={<CheatPage />} />
+          <Route path="/chatList" element={<ChatRoomListPage />} />
+          <Route path="/chatRoom" element={<ChatRoomPage />} />
         <Route path="/post/:id" element={<PostViewPage />} />
         <Route path="/popup" element={<PopupBoardPage />} />
         <Route path="/chat" element={<ChatBoardPage />} />

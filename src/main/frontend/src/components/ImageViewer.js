@@ -6,7 +6,7 @@ const ImageViewer = ({val}) => {
     const BaseImgSrc = "/logo512.png";
     const [imgFile, setImgFile] = useState("");
     useEffect(() => {
-        if (val === undefined) setImgFile("");
+        if (!val) setImgFile("");
         else setImgFile(spring_app_url + "/api/v1/image/"+val);
     }, [val]);
     const onErrorImg = (e) => {
