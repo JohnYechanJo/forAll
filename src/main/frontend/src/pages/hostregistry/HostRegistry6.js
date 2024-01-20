@@ -101,7 +101,7 @@ const HostRegistry6 =() => {
             accountHolder: accountHolder,
             isPublic: data.isPublic && isPublic
         })
-            .then((res) => navigate("/main"))
+            .then((res) => navigate("/"))
             .catch((err) => console.error(err));
 
     };

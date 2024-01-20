@@ -68,7 +68,7 @@ const GuestRegistry2 = () => {
             certificate: certificate
 
         }).then((res) => {
-            navigate("/main");
+            navigate("/");
         }).catch((err) => console.error(err));
     };
     return(

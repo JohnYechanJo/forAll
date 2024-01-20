@@ -48,7 +48,7 @@ const PopupBoardPage = () => {
     return(
         <div>
             <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
-                <button className="button" onClick={() => navigate("/main",{state: {focus: "space"}})}>대관하기</button>
+                <button className="button" onClick={() => navigate("/",{state: {focus: "space"}})}>대관하기</button>
                 <button className="button">커뮤니티</button>
             </div>
             <Sidebar/>

@@ -19,7 +19,7 @@ const SpaceListViewPage = () => {
         <div>
             <div className="header" style={{backgroundColor:"white"}}>
                 <button className="button">대관하기</button>
-                <button className="button" onClick={()=>navigate("/main",{state:{focus:"board"}})}>커뮤니티</button>
+                <button className="button" onClick={()=>navigate("/",{state:{focus:"board"}})}>커뮤니티</button>
             </div>
             <Sidebar/>
             <HomeTemplate />

@@ -10,7 +10,7 @@ const HostRegistryComplete = () => {
             <h3>선사하는 데 동참해주셔서 감사합니다.</h3>
             <div>
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
-                    <Link to="/main">
+                    <Link to="/">
                         <button className="button" style={{backgroundColor: "red"}}>시작하기</button>
                     </Link>
                 </div>

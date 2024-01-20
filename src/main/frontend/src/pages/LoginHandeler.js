@@ -20,7 +20,7 @@ const LoginHandeler = (props) => {
                 //계속 쓸 정보들( ex: 이름) 등은 localStorage에 저장해두자
                 sessionStorage.setItem("user_id", res.data.kakaoMember.id);
                 //로그인이 성공하면 이동할 페이지
-                navigate("/main");
+                navigate("/");
             }).catch((err) => console.error(err));
         };
         kakaoLogin();

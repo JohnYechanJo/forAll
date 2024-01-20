@@ -160,7 +160,7 @@ const ChefInfoModifyPage = () => {
                 <h5 style={{margin:"0", padding:"0px 0px"}}>• 대관에 필요한 정보이오니, <span style={{color:"red",textDecoration:"underline",textDecorationColor:"red"}} >필히 등록해주세요!</span></h5>
             </div>
             <div style={{display: "flex"}}>
-                <Link to="/main">
+                <Link to="/">
                     <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 </Link>
                 <button style={{backgroundColor: "grey"}} className="next_button"
