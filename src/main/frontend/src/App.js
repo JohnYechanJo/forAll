@@ -26,7 +26,8 @@ import GuestRegistryStart from "./pages/guestregistry/GuestRegistryStart";
 import GuestRegistry from "./pages/guestregistry/GuestRegistry";
 import LoginHandeler from "./pages/LoginHandeler";
 import GuestRegistry2 from "./pages/guestregistry/GuestRegistry2";
-import ChatPage from "./pages/ChatPage";
+import ChatRoomListPage from "./pages/chat/ChatRoomListPage";
+import ChatRoomPage from "./pages/chat/ChatRoomPage";
 function App() {
   return (
       <Routes>
@@ -55,7 +56,8 @@ function App() {
           <Route path="/guestRegistryStart" element={<GuestRegistryStart />}/>
           <Route path="/guestRegistry" element={<GuestRegistry />}/>
           <Route path="/guestRegistry2" element={<GuestRegistry2 />} />
-          <Route path="/chat" element={<ChatPage />} />
+          <Route path="/chatList" element={<ChatRoomListPage />} />
+          <Route path="/chatRoom" element={<ChatRoomPage />} />
           <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
 
 

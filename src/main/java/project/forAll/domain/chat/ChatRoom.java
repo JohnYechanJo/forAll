@@ -24,5 +24,7 @@ public class ChatRoom extends BassDomain {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Member> users;
 
+    private ChatRoomCategory category;
+
 }
 

@@ -1,13 +1,25 @@
 import HomeTemplate from "../../components/home/HomeTemplate";
 import Sidebar from "../../components/home/Sidebar";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import {ChatRoomCategory} from "../../utils/enums";
 
 const ChatRoomListPage = () => {
     const navigate = useNavigate();
     const [reservation, setReservation] = useState([]);
     const [board, setBoard] = useState([]);
     const [serviceCenter, setServiceCenter] = useState([]);
+    const userId = sessionStorage.getItem("user_id");
+    useEffect(() => {
+        axios.get("/api/v1/chat/roomlist/"+userId+"/"+ChatRoomCategory.Reservation)
+            .then((res) => setReservation(res.data))
+            .catch((err)=>console.error(err));
+        axios.get("/api/v1/chat/roomlist/"+userId+"/"+ChatRoomCategory.Board)
+            .then((res) => setBoard(res.data))
+            .catch((err)=>console.error(err));
+    }, []);
+
     return (
         <div>
             <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
@@ -20,16 +32,17 @@ const ChatRoomListPage = () => {
                 <h1>예약사항</h1>
                 {reservation ?(
                     <div>
-                        {reservation.map((chat, idx) => (
-                                <div key={idx}>
-                                    <p>아이디</p>
-                                    <p>최근메시지</p>
-                                    <p>최근메시지 시간</p>
-                                    <p>읽지 않은 메시지 개수</p>
+                        {reservation.map((chat, idx) => {
+                            const target = chat.userId1 === userId ? chat.userId2 : chat.userId1;
+                            return (
+                                <div key={idx} onClick={() => navigate("/chatRoom",{state:{partner: target, category: ChatRoomCategory.Reservation}})}>
+                                    <p>{target}</p>
+                                    <p>{chat.lastMessage}</p>
+                                    <p>{chat.sendTime}</p>
+                                    <p>{chat.notReadCount}</p>
                                 </div>
                             )
-
-                        )}
+                        })}
                     </div>
                 ) :null}
             </div>
@@ -37,15 +50,17 @@ const ChatRoomListPage = () => {
                 <h1>게시판</h1>
                 {board ?(
                     <div>
-                        {board.map((chat, idx) => (
-                                <div>
-                                    <p>아이디</p>
-                                    <p>최근메시지</p>
-                                    <p>최근메시지 시간</p>
-                                    <p>읽지 않은 메시지 개수</p>
+                        {board.map((chat, idx) => {
+                            const target = chat.userId1 === userId ? chat.userId2 : chat.userId1;
+                            return (
+                                <div key={idx} onClick={() => navigate("/chatRoom",{state:{partner: target, category: ChatRoomCategory.Board}})} >
+                                    <p>{target}</p>
+                                    <p>{chat.lastMessage}</p>
+                                    <p>{chat.sendTime}</p>
+                                    <p>{chat.notReadCount}</p>
                                 </div>
                             )
-
+                        }
                         )}
                     </div>
                 ) :null}

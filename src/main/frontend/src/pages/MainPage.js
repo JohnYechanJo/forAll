@@ -4,8 +4,10 @@ import {user_role} from "../utils/enums";
 import HomeTemplate from "../components/home/HomeTemplate";
 import Sidebar from "../components/home/Sidebar";
 import "../style/mainpage.css";
+import {useNavigate} from "react-router-dom";
 
 const MainPage = () => {
+    const navigate = useNavigate();
     if(sessionStorage.getItem("user_id") == null){
         window.location.href = "/login";
     }

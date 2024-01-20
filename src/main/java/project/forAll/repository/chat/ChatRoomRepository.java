@@ -4,12 +4,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import project.forAll.domain.chat.ChatRoom;
+import project.forAll.domain.chat.ChatRoomCategory;
 
 import java.util.List;
 
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
     List<ChatRoom> findByUsersLoginId(String userId);
 
+    List<ChatRoom> findByUsersLoginIdAndCategory(String userId, ChatRoomCategory category);
     @Query("SELECT scr FROM ChatRoom scr " +
             "JOIN scr.users user1 " +
             "JOIN scr.users user2 " +
