@@ -57,14 +57,14 @@ const Sidebar = ({ width = 18.75, children }) => {
                 <div style={{display:"flex",flexDirection:"column", justifyContent:"left"}}>
                     <div style={{height:"6.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                    display:"flex",flexDirection:"column",justifyContent:"space-around",
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
                 }}>
                         <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>예약 정보</button>
                         <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>찜한내역</button>
                     </div>
                     <div style={{height:"6.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                    display:"flex",flexDirection:"column",justifyContent:"space-around"
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
                 }} >
                         <Link to="/guestRegistryStart">
                             <button className="button"  style={{textAlign:"left",marginLeft:"2rem"}}>셰프 등록하기</button>
@@ -75,7 +75,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     </div>
                     <div style={{height:"9.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                    display:"flex",flexDirection:"column",justifyContent:"space-around"
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
                 }}>
                         <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>채팅함</button>
                         <button className="button" style={{textAlign:"left",marginLeft:"2rem"}} >고객센터</button>
@@ -83,7 +83,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     </div>
                     <div style={{height:"9.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                    display:"flex",flexDirection:"column",justifyContent:"space-around"
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
                 }}>
                         <Link to="/personalInfoModify">
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>개인 정보수정</button>

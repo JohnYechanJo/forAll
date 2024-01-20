@@ -65,6 +65,9 @@ const MainPage = () => {
     return (
         <div ref={mainPageRef}>
             <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
+                {/* <button className="button" onClick={() => navigate("/")}>
+                    <img src={forAllLogo} alt="forAllLogo" style={{width:"1.875rem", height:"1.875rem"}} />
+                </button> */}
                 <button className="button" onClick={spaceFocus}>대관하기</button>
                 <button className="button" onClick={boardFocus}>커뮤니티</button>
             </div>
@@ -75,14 +78,20 @@ const MainPage = () => {
                 <Banner dataSet={spaceData} navigate={navigate}/>
             </div>
             <div ref={boardRef}>
-                <h1>팝업</h1>
-                <p onClick={() => navigate("/popup")}>모두보기</p>
+                <div style={{display:'flex',justifyContent:'space-between',margin:"0.87rem"}} >
+                    <a style={{fontSize:"1.25rem"}} >• 팝업</a>
+                    <a onClick={() => navigate("/popup")} style={{fontSize:"0.9375rem",textDecorationLine:"underline"}} >모두보기</a>
+                </div>
                 <ArticleListTemplate postList={popupData} preview={true}/>
-                <h1>잡담</h1>
-                <p onClick={() => navigate("/chat")}>모두보기</p>
+                <div style={{display:'flex',justifyContent:'space-between',margin:"0.87rem"}} >
+                    <a style={{fontSize:"1.25rem"}} >• 잡담</a>
+                    <a onClick={() => navigate("/chat")} style={{fontSize:"0.9375rem",textDecorationLine:"underline"}} >모두보기</a>
+                </div>
                 <ArticleListTemplate postList={chatData} preview={true}/>
-                <h1>레시피</h1>
-                <p onClick={() => navigate("/recipe")}>모두보기</p>
+                <div style={{display:'flex',justifyContent:'space-between',margin:"0.87rem"}} >
+                    <a style={{fontSize:"1.25rem"}} >• 레시피</a>
+                    <a onClick={() => navigate("/recipe")} style={{fontSize:"0.9375rem",textDecorationLine:"underline"}} >모두보기</a>
+                </div>
                 <ArticleListTemplate postList={recipeData} preview={true}/>
             </div>
             <button onClick={logOut}>로그아웃</button>

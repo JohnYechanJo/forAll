@@ -6,7 +6,7 @@
     top: 0; left: 0;
     height: 3.125rem;
     width: 100%;
-    border-bottom: 2px solid black;
+    border: 1px solid rgba(196, 196, 196, 0.30);
 }
 .footer {
     position: fixed;

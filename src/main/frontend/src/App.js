@@ -4,7 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import SearchIdPage from "./pages/SearchIdPage";
 import SearchPwPage from "./pages/SearchPwPage";
 import SignUpPage from "./pages/signup/SignUpPage";
-import SignUpPage2 from "./pages/signup/SignUpPage2";
+
 import SignUpCompletePage from "./pages/signup/SignUpCompletePage";
 import PersonalInfoModifyPage from './pages/modify/PersonalInfoModifyPage';
 import PlaceInfoModifyStart from './pages/modify/PlaceInfoModifyStart';
@@ -50,7 +50,7 @@ function App() {
         <Route path="/searchId" element={<SearchIdPage />} />
         <Route path="/searchPw" element={<SearchPwPage />}/>
         <Route path="/signUp" element={<SignUpPage />}/>
-        <Route path="/signUp2" element={<SignUpPage2 />}/>
+
         <Route path="/signUpComplete" element={<SignUpCompletePage />} />
         <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
         <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />

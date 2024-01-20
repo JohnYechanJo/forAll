@@ -3,6 +3,7 @@ import "./LoginTemplate.css";
 import {Link, useNavigate} from "react-router-dom";
 import {user_role} from "../../utils/enums";
 import axios from "axios";
+import "../../components/Styles.css";   
 const LoginTemplate = () => {
     const navigate = useNavigate();
     const [id, setId] = useState('');
@@ -40,15 +41,17 @@ const LoginTemplate = () => {
         }
     }
     return (
-        <div>
-            <div>
+        <div style={{display:"flex",flexDirection:"column" , alignItems:"center",justifyContent:"center"}} >
+            <div style={{display:"flex",flexDirection:"column", margin:"1rem",alignItems:"center",justifyContent:"center"}} >
                 <input
                     placeholder="아이디 입력"
+                    className="input"
                     value={id}
                     onChange={onChangeId}
                 />
                 <input
                     placeholder="비밀번호 입력"
+                    className="input"
                     value={passwd}
                     onChange={onChangePw}
                 />
@@ -60,10 +63,34 @@ const LoginTemplate = () => {
                 </Link>
 
             </div>
-            <div>
-                <Link to="/searchId"><span>아이디 찾기</span></Link>
-                <span>|</span>
-                <Link to="/searchPw"><span>비밀번호 찾기</span></Link>
+            <div  style={{
+                color: "#B0B0B0",
+                textAlign: "center",
+                fontFeatureSettings: "'case' on", 
+                fontSize: "0.9375rem",
+                fontWeight:"500",
+                lineHeight:"1.375rem",
+                textDecorationLine:"underline",
+            }}>
+                <Link to="/searchId"><span style={{
+                color: "#B0B0B0",
+                textAlign: "center",
+                fontFeatureSettings: "'case' on", 
+                fontSize: "0.9375rem",
+                fontWeight:"500",
+                lineHeight:"1.375rem",
+                textDecorationLine:"underline",
+            }}>아이디 찾기</span></Link>
+                <span style={{marginLeft:"0.69rem",marginRight:"0.69rem"}} >|</span>
+                <Link to="/searchPw"><span style={{
+                color: "#B0B0B0",
+                textAlign: "center",
+                fontFeatureSettings: "'case' on", 
+                fontSize: "0.9375rem",
+                fontWeight:"500",
+                lineHeight:"1.375rem",
+                textDecorationLine:"underline",
+            }}>비밀번호 찾기</span></Link>
             </div>
         </div>
     )
