@@ -4,3 +4,5 @@ export const KitchenFeat = {Open:"Open", Face:"Face", Close:"Close", NotSpecifie
 export const PayWay = {QuickPay: "QuickPay", ConfirmPay:"ConfirmPay", NotSpecified:"Not Specified"};
 export const MainPageType = {BASIC: "Basic", SPACE:"Space", COMMUNITY:"Community"};
 export const BoardCategory = {Popup: "Popup", Chat: "Chat", Recipe: "Recipe", NotSpecified: "Not Specified"};
+
+export const ChatRoomCategory = {Reservation:"Reservation",Board:"Board",ServiceCenter:"Service Center", NotSpecified:"Not Specified"};
