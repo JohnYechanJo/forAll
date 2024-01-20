@@ -6,6 +6,7 @@ import StompJs from "stompjs";
 import SockJs from "sockjs-client";
 import {ChatRoomCategory} from "../../utils/enums";
 import ImageUploader from "../../utils/imageUploader";
+import ImageViewer from "../../components/ImageViewer";
 
 const ChatRoomPage = () => {
     const location = useLocation();
@@ -15,6 +16,7 @@ const ChatRoomPage = () => {
     const client = useRef();
     const [messageSet, setMessageSet] = useState([]);
     const [partner, setPartner] = useState();
+    const [partnerData, setPartnerData] = useState();
     const [inputMessage, setInputMessage] = useState("");
     const [inputImage, setInputImage] = useState();
     const [inputIsImage, setInputIsImage] = useState(false);
@@ -37,6 +39,11 @@ const ChatRoomPage = () => {
             .catch((err) => console.error(err));
         connect();
     }, [roomId]);
+    useDidMountEffect(() => {
+        axios.get('/api/v1/profile/'+partner)
+            .then((res) => setPartnerData(res.data))
+            .catch((err) => console.error(err));
+    }, [partner]);
     const connect = (event) => {
         client.current = StompJs.over(new SockJs('/ws-stomp'));
         client.current.connect({}, onConnected, (err) => {
@@ -70,7 +77,7 @@ const ChatRoomPage = () => {
         }
         client.current.send("/pub/chat/sendMessage", {}, JSON.stringify(chatMessage));
         setInputMessage("");
-        setInputIsImage("false");
+        setInputIsImage(false);
 
     };
     return(
@@ -79,9 +86,8 @@ const ChatRoomPage = () => {
             <div>
                 <button onClick={()=>navigate(-1)}>{"<"}</button>
                 {/*Todo 프로필, 찾기, 파일함 기능구현*/}
-                <p>상대방 프로필 사진</p>
+                {partnerData ? (<ImageViewer val={partnerData.picture}/>) : null}
                 <p>{partner}</p>
-                <p>프로필 보기</p>
                 <p>찾기</p>
                 <p>파일함</p>
             </div>
@@ -90,13 +96,17 @@ const ChatRoomPage = () => {
                     <div key={idx}>
                         {message.senderId === partner ? (
                             <div>
-                                <p>상대방 프로필 사진</p>
+                                {partnerData ? (<ImageViewer val={partnerData.picture}/>) : null}
                                 <p>{partner}</p>
-                                <p>{message.messageContent}</p>
+                                {message.isImage ? (
+                                    <ImageViewer val={message.messageContent}/>
+                                ) : (<p>{message.messageContent}</p>)}
                             </div>
                         ):(
                             <div>
-                                <p>{message.messageContent}</p>
+                                {message.isImage ? (
+                                    <ImageViewer val={message.messageContent}/>
+                                ) : (<p>{message.messageContent}</p>)}
                             </div>
                         )}
                     </div>
