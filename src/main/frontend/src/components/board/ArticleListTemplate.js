@@ -3,7 +3,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {TimeUtil} from "../../utils/TimeUtil";
 
-const ArticleListTemplate = ({postList, preview= false}) => {
+const ArticleListTemplate = ({postList, preview=false}) => {
     const navigate = useNavigate();
     return (
         <div>
@@ -14,8 +14,10 @@ const ArticleListTemplate = ({postList, preview= false}) => {
                                 <div key={idx} onClick={() => navigate("/post/"+post.id)}>
                                     <p>{post.title}</p>
                                     {!preview ? <p>{post.content}</p> : null}
-                                    <p>댓글:{post.comments ? post.comments.length : 0}</p>
                                     <p>{TimeUtil.getDiffStr(post.writtenAt)}</p>
+                                    <p>{post.recommend}</p>
+                                    <p>댓글:{post.comments ? post.comments.length : 0}</p>
+
                                 </div>
                             )
                         )}
