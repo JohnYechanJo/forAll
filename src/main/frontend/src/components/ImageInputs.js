@@ -5,7 +5,7 @@ import {ModalStyles} from "./ModalStyles";
 const ImageInputs = ({setImg, vals}) => {
     const spring_app_url = "http://localhost:8080";
     // 기본 이미지 추후 설정 필요
-    const BaseImgSrc = "logo512.png";
+    const BaseImgSrc = "/logo512.png";
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [representImage, setRepresentImage] = useState("");

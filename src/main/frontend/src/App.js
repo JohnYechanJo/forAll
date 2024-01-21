@@ -41,6 +41,8 @@ import RecipeBoardPage from "./pages/board/RecipeBoardPage";
 import SpaceListViewPage from "./pages/RentSpace/SpaceListViewPage";
 import ChatRoomListPage from "./pages/chat/ChatRoomListPage";
 import ChatRoomPage from "./pages/chat/ChatRoomPage";
+import PostEditPage from "./pages/board/PostEditPage";
+import MyPostPage from "./pages/board/MyPostPage";
 function App() {
   return (
       <Routes>
@@ -78,9 +80,11 @@ function App() {
         <Route path="/rentSpaceInfo1/:id" element={<RentSpaceInfo1 />} />
         <Route path="/rentSpaceInfo2/:id" element={<RentSpaceInfo2 />} />
         <Route path="/rentSpaceInfo3/:id" element={<RentSpaceInfo3 />} />
-          <Route path="/chatList" element={<ChatRoomListPage />} />
-          <Route path="/chatRoom" element={<ChatRoomPage />} />
+        <Route path="/chatList" element={<ChatRoomListPage />} />
+        <Route path="/chatRoom" element={<ChatRoomPage />} />
+            <Route path="/mypost" element={<MyPostPage />} />
         <Route path="/post/:id" element={<PostViewPage />} />
+        <Route path="/post/edit" element={<PostEditPage />} />
         <Route path="/popup" element={<PopupBoardPage />} />
         <Route path="/chat" element={<ChatBoardPage />} />
         <Route path="/recipe" element={<RecipeBoardPage />} />

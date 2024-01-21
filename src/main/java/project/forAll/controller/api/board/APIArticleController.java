@@ -75,7 +75,7 @@ public class APIArticleController extends APIController {
             final Article article = articleService.build(form);
             articleService.save(article);
 
-            return new ResponseEntity(article, HttpStatus.OK);
+            return new ResponseEntity(Long.toString(article.getId()), HttpStatus.OK);
         } catch(final Exception e) {
             return new ResponseEntity(errorResponse("Could not update Article : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
         }
