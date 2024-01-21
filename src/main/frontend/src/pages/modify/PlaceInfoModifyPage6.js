@@ -58,8 +58,8 @@ const PlaceInfoModifyPage6 =() => {
         const userId = sessionStorage.getItem("user_id");
         // 대표 이미지
         const imgRepresent = await ImageUploader(data.imgRepresent, userId);
-        const hallImage = await Promise.all([data.img1, data.img2, data.img3].map(async (img) => await ImageUploader(img, userId)));
-        const kitImage = await Promise.all([data.kitchen1, data.kitchen2, data.kitchen3].map(async (img) => await ImageUploader(img, userId)));
+        const hallImage = await Promise.all([data.img1, data.img2, data.img3, ...data.imgAdditional].map(async (img) => await ImageUploader(img, userId)));
+        const kitImage = await Promise.all([data.kitchen1, data.kitchen2, data.kitchen3,...data.kitchenAdditional].map(async (img) => await ImageUploader(img, userId)));
 
         const menu = data.menuAdditional ? await Promise.all([data.menu1, ...data.menuAdditional].map(async (img) => await ImageUploader(img, userId))) : null;
 
@@ -99,7 +99,7 @@ const PlaceInfoModifyPage6 =() => {
             ableTrial: data.trial,
             ableEarlyDeliver: data.morningDelivery,
             ableWorkIn: data.workIn,
-            ableDrink: data.alcohol,
+            ableMiseen: data.miseen,
             fireholeNum: data.firePit,
             equip: data.equip,
             equipExtra: data.extraMachine,

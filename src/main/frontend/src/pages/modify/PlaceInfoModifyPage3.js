@@ -43,11 +43,12 @@ const PlaceInfoModifyPage3 = () => {
     const [trial, setTrial] = useState();
     const [morningDelivery, setMorningDelivery] = useState();
     const [workIn, setWorkIn] = useState();
-    const [alcohol, setAlcohol] = useState();
+    const [miseen, setMiseen] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isTrial, setIsTrial] = useState(false);
     const [isMorningDelivery, setIsMorningDelivery] = useState(false);
     const [isWorkIn, setIsWorkIn] = useState(false);
+    const [isMiseen, setIsMiseen] = useState(false);
     const [formattedPrice, setFormattedPrice] = useState();
     let isPublic = false;
 
@@ -101,7 +102,7 @@ const PlaceInfoModifyPage3 = () => {
                 setTrial(res.data.ableTrial)
                 setMorningDelivery(res.data.ableEarlyDeliver)
                 setWorkIn(res.data.ableWorkIn)
-                setAlcohol(res.data.ableDrink)
+                setMiseen(res.data.ableMiseen)
                 setRentWeek(res.data.ableDate.split(" ")[0])
                 setRentTimeFrom(res.data.ableStartHour)
                 setRentTimeTo(res.data.ableFinHour)
@@ -131,7 +132,7 @@ const PlaceInfoModifyPage3 = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
             && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
             && (seat !== undefined) && (price !== undefined) && (trial !== undefined) && (morningDelivery !== undefined)
-            && (workIn !== undefined) && (alcohol !== undefined)){
+            && (workIn !== undefined) && (miseen !== undefined)){
             isPublic = true;
             submit();
         }
@@ -177,7 +178,7 @@ const PlaceInfoModifyPage3 = () => {
                     trial: trial,
                     morningDelivery: morningDelivery,
                     workIn: workIn,
-                    alcohol: alcohol
+                    miseen: miseen
                 }
             });
         };
@@ -374,6 +375,41 @@ const PlaceInfoModifyPage3 = () => {
             <button onClick={() => setIsMorningDelivery(!isMorningDelivery)}
                     className="detail"
             >• 새벽배달이란?</button>
+            <p>미장*</p>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={(miseen) === true ? "btn_selected" : ""} onClick={() => setMiseen(true)}>가능
+                </div>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={(miseen)  === false ? "btn_selected" : ""} onClick={() => setMiseen(false)}>불가
+                </div>
+            </div>
+            <div style={{display: "flex"}}>
+                <Link to="/placeInfoModify2">
+                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
+                </Link>
+                <button style={{backgroundColor: "grey"}} className="next_button"
+                            onClick={handleButton}
+                >다음</button>
+            </div>
             <p>워크인*</p>
             <div style={{
                 display: "flex",
@@ -401,6 +437,13 @@ const PlaceInfoModifyPage3 = () => {
                 }}
                      className={(workIn) === false ? "btn_selected" : ""} onClick={() => setWorkIn(false)}>불가
                 </div>
+                <Modal isOpen={isMiseen} style={ModalStyles} >
+                <header>미장이란?</header>
+                <button onClick={()=>setIsMiseen(false)} >닫기</button>
+            </Modal>
+            <button onClick={() => setIsMiseen(!isMiseen)}
+                    className="detail"
+            >• 미장이란?</button>
             </div>
             <Modal isOpen={isWorkIn} style={ModalStyles} >
                 <header>워크인이란?</header>
@@ -409,42 +452,7 @@ const PlaceInfoModifyPage3 = () => {
             <button onClick={() => setIsWorkIn(!isWorkIn)}
                     className="detail"
             >• 워크인이란?</button>
-            <p>주류판매 가능여부*</p>
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-
-            }}>
-                <div style={{
-                    border: "2px solid lightgray",
-                    borderRadius: "0.5px",
-                    width: "47vw",
-                    height: "3vh",
-                    textAlign: "center",
-                    fontFamily: "Noto Sans KR"
-                }}
-                     className={(alcohol) === true ? "btn_selected" : ""} onClick={() => setAlcohol(true)}>가능
-                </div>
-                <div style={{
-                    border: "2px solid lightgray",
-                    borderRadius: "0.5px",
-                    width: "47vw",
-                    height: "3vh",
-                    textAlign: "center",
-                    fontFamily: "Noto Sans KR"
-                }}
-                     className={(alcohol)  === false ? "btn_selected" : ""} onClick={() => setAlcohol(false)}>불가
-                </div>
-            </div>
-            <div style={{display: "flex"}}>
-                <Link to="/placeInfoModify2">
-                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
-                </Link>
-                <button style={{backgroundColor: "grey"}} className="next_button"
-                            onClick={handleButton}
-                >다음</button>
-            </div>
+            
             <Modal isOpen={isModalOpen} ariaHideApp={false}>
                 <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
                 <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>

@@ -32,7 +32,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     {isOpen ?
                         <span></span> : <div className={styles.openBtn} style={{alignContent:"center",justifyContent:"center", display: "flex", alignItems: "center"}} >
                             <img src={sidebarIcon} alt="sidebar" style={{width:"1.125rem", height:"0.875rem", margin: "auto"}} />
-                        </div> //메뉴 아이콘 집어넣어야 함
+                        </div>
                     }
                 </button>
                 <div style={{

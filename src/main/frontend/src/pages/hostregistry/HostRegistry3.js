@@ -40,11 +40,12 @@ const HostRegistry3 = () => {
     const [trial, setTrial] = useState();
     const [morningDelivery, setMorningDelivery] = useState();
     const [workIn, setWorkIn] = useState();
-    const [alcohol, setAlcohol] = useState();
+    const [miseen, setMiseen] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isTrial, setIsTrial] = useState(false);
     const [isMorningDelivery, setIsMorningDelivery] = useState(false);
     const [isWorkIn, setIsWorkIn] = useState(false);
+    const [isMiseen, setIsMiseen] = useState(false);
     const [formattedPrice, setFormattedPrice] = useState();
     let isPublic = false;
 
@@ -91,7 +92,7 @@ const HostRegistry3 = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
             && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
             && (seat !== undefined) && (price !== undefined) && (trial !== undefined) && (morningDelivery !== undefined)
-            && (workIn !== undefined) && (alcohol !== undefined)){
+            && (workIn !== undefined) && (miseen !== undefined)){
             isPublic = true;
             submit();
         }
@@ -138,7 +139,7 @@ const HostRegistry3 = () => {
                 trial: trial,
                 morningDelivery: morningDelivery,
                 workIn: workIn,
-                alcohol: alcohol
+                miseen: miseen
             }
         });
     };
@@ -331,6 +332,41 @@ const HostRegistry3 = () => {
             <button onClick={() => setIsMorningDelivery(!isMorningDelivery)}
                     className="detail"
             >• 새벽배달이란?</button>
+            <p>미장*</p>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+
+            }}>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={miseen === true ? "btn_selected" : ""} onClick={() => setMiseen(true)}>가능
+                </div>
+                <div style={{
+                    border: "2px solid lightgray",
+                    borderRadius: "0.5px",
+                    width: "47vw",
+                    height: "3vh",
+                    textAlign: "center",
+                    fontFamily: "Noto Sans KR"
+                }}
+                     className={miseen === false ? "btn_selected" : ""} onClick={() => setMiseen(false)}>불가
+                </div>
+            </div>
+            <Modal isOpen={isMiseen} style={ModalStyles} >
+                <header>미장이란?</header>
+                <button onClick={()=>setIsMiseen(false)} >닫기</button>
+            </Modal>
+            <button onClick={() => setIsMiseen(!isMiseen)}
+                    className="detail"
+            >• 미장이란?</button>
             <p>워크인*</p>
             <div style={{
                 display: "flex",
@@ -366,35 +402,6 @@ const HostRegistry3 = () => {
             <button onClick={() => setIsWorkIn(!isWorkIn)}
                     className="detail"
             >• 워크인이란?</button>
-            <p>주류판매 가능여부*</p>
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-
-            }}>
-                <div style={{
-                    border: "2px solid lightgray",
-                    borderRadius: "0.5px",
-                    width: "47vw",
-                    height: "3vh",
-                    textAlign: "center",
-                    fontFamily: "Noto Sans KR"
-                }}
-                     className={alcohol === true ? "btn_selected" : ""} onClick={() => setAlcohol(true)}>가능
-                </div>
-                <div style={{
-                    border: "2px solid lightgray",
-                    borderRadius: "0.5px",
-                    width: "47vw",
-                    height: "3vh",
-                    textAlign: "center",
-                    fontFamily: "Noto Sans KR"
-                }}
-                     className={alcohol === false ? "btn_selected" : ""} onClick={() => setAlcohol(false)}>불가
-                </div>
-            </div>
-
             <div style={{display: "flex"}}>
                 <Link to="/hostRegistry2">
                     <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
