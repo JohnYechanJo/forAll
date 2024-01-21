@@ -16,4 +16,8 @@ public class ReCommentForm {
     private String writtenAt;
     // 생성자
     private String userId;
+    // 좋아요 수
+    private int recommend;
+    // 좋아요 가능 여부
+    private Boolean recommendAble;
 }

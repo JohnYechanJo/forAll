@@ -68,7 +68,7 @@ public class ArticleService extends Service {
     }
 
     @Transactional
-    public ArticleForm of(final Article article){
+    public ArticleForm of(final Article article, String userId){
         final ArticleForm form = new ArticleForm();
         form.setId(article.getId());
         form.setTitle(article.getTitle());
@@ -77,11 +77,18 @@ public class ArticleService extends Service {
         form.setUserId(article.getWrittenBy().getLoginId());
         form.setCategory(article.getCategory().toString());
         form.setPostImage(imageService.getImagesNames(article.getPostImage()));
-        final List<Comment> comments = commentService.findByArticle(article.getId());
-        form.setComments(comments.stream().map(comment -> commentService.of(comment)).toList());
 
+        final List<Comment> comments = commentService.findByArticle(article.getId());
+        form.setComments(comments.stream().map(comment -> commentService.of(comment, userId)).toList());
+        form.setRecommend(article.getRecommend().size());
+
+        if(userId != null){
+            final Long userLongId = memberService.findByLoginId(userId).getId();
+            form.setRecommendAble(article.getRecommend().contains(userLongId));
+        }
         return form;
     }
+
 
     /**
      * Article 삭제

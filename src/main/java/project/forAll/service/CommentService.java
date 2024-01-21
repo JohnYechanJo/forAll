@@ -62,7 +62,7 @@ public class CommentService extends Service {
     }
 
     @Transactional
-    public CommentForm of(final Comment comment){
+    public CommentForm of(final Comment comment, String userId){
         final CommentForm form = new CommentForm();
         form.setId(comment.getId());
         form.setArticleId(comment.getArticle().getId());
@@ -71,10 +71,16 @@ public class CommentService extends Service {
         form.setUserId(comment.getWrittenBy().getLoginId());
 
         final List<ReComment> recomments = recommentService.findByComment(comment.getId());
-        form.setRecomments(recomments.stream().map(recomment -> recommentService.of(recomment)).toList());
+        form.setRecomments(recomments.stream().map(recomment -> recommentService.of(recomment, userId)).toList());
+        form.setRecommend(comment.getRecommend().size());
 
+        if(userId != null){
+            final Long userLongId = memberService.findByLoginId(userId).getId();
+            form.setRecommendAble(comment.getRecommend().contains(userLongId));
+        }
         return form;
     }
+
     @Transactional
     public List<Comment> findByArticle(final Long articleId){
         final Article article = articleRepository.findById(articleId).orElseThrow(() -> new IllegalArgumentException("comment doesn't exist"));

@@ -53,14 +53,18 @@ public class ReCommentService extends Service{
     }
 
     @Transactional
-    public  ReCommentForm of(final ReComment recomment){
+    public  ReCommentForm of(final ReComment recomment, String userId){
         final ReCommentForm form = new ReCommentForm();
         form.setId(recomment.getId());
         form.setCommentId(recomment.getComment().getId());
         form.setText(recomment.getText());
         form.setWrittenAt(recomment.getWrittenAt());
         form.setUserId(recomment.getWrittenBy().getLoginId());
-
+        form.setRecommend(recomment.getRecommend().size());
+        if(userId != null){
+            final Long userLongId = memberService.findByLoginId(userId).getId();
+            form.setRecommendAble(recomment.getRecommend().contains(userLongId));
+        }
         return form;
     }
 
