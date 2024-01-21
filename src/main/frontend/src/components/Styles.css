@@ -10,21 +10,26 @@
     width: 70vw;
     font-family: "Noto Sans KR", sans-serif;
 }
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
 .footer {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 10vh;
 }
+
 .margin {
     margin-left: 2vw;
     margin-right: 2vw;
 }
+
 .white-space {
     white-space: pre-line;
 }
-.image{
+
+.image {
     width: 6.25rem;
     height: 6.25rem;
     object-fit: cover;
@@ -36,23 +41,26 @@
     border-radius: 5px;
     flex-shrink: 0;
 }
-.detail{
+
+.detail {
     border: none;
     background-color: white;
     color: black;
     font-size: 1.5vh;
     font-family: "Noto Sans KR";
-    display:flex;
-    justify-content:left;
-    text-decoration:underline;
+    display: flex;
+    justify-content: left;
+    text-decoration: underline;
 }
-.input{
+
+.input {
     width: 21.875rem;
     height: 3.125rem;
     flex-shrink: 0;
     margin: 0.5rem
 }
-.inputForRegister{
+
+.inputForRegister {
     width: 21.875rem;
     height: 1.875rem;
     flex-shrink: 0;
@@ -60,7 +68,8 @@
     background: #FFF;
 
 }
-.buttonForRegister{
+
+.buttonForRegister {
     width: 7.125rem;
     height: 2.4375rem;
     flex-shrink: 0;
@@ -68,7 +77,8 @@
     background: #FFF;
     margin-left: 0.94rem;
 }
-.fontForRegister{
+
+.fontForRegister {
     color: #000;
     font-family: "Noto Sans KR";
     font-size: 0.625rem;
@@ -76,7 +86,8 @@
     font-weight: 700;
     line-height: normal;
 }
-.next_button{
+
+.next_button {
     justify-content: center;
     text-align: center;
     margin-top: 3vh;
@@ -85,4 +96,16 @@
     border: none;
     width: 50vw;
     height: 8vh;
+}
+
+.bottom_button {
+    height: 3.125rem;
+    width: 100%;
+    border:none;
+    margin-bottom: 2.75rem;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }

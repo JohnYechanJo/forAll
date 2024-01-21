@@ -2,7 +2,7 @@ import Header from "../../components/Header";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {user_role} from "../../utils/enums";
 import checkIcon from "../../components/icons/check.png";
-
+import "../../components/Styles.css";
 const SignUpCompletePage = () => {
     const location = useLocation();
     const data = {...location.state};
@@ -13,9 +13,16 @@ const SignUpCompletePage = () => {
     sessionStorage.setItem("name", data.name);
     sessionStorage.setItem("email", data.email);
     return (
-        <div style={{alignItems:"center", display:"inline-flex",flexDirection:"column",textAlign:"center" }} >
-            <Header PageName={"04. 가입 완료"}/>
-            <div style={{fontSize:"0.938rem", fontWeight:"400",gap:"7.5rem"}} >
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh"
+        }} >
+            <header>3. 가입완료
+            </header>
+            <div style={{fontSize:"0.938rem", fontWeight:"400",gap:"7.5rem", alignItems:"center", textAlign:"center"}} >
                 <p>축하드립니다!</p>
                 <p>포올의 모든 서비스를 이용하실 수 있습니다.</p>
             </div>
@@ -29,7 +36,7 @@ const SignUpCompletePage = () => {
                 <span style={{fontSize:"0.938rem", fontWeight:"700"}} >이메일</span>
                 <span style={{fontSize:"0.938rem", fontWeight:"400"}} >{data.email}</span>
             </div>
-            <button onClick={()=>{navigate("/toProfile");}} >시작하기</button>
+            <button onClick={()=>{navigate("/toProfile");}} className="bottom_button" style={{backgroundColor:"black"}} >시작하기</button>
             
 
         </div>
