@@ -39,4 +39,7 @@ public class Article extends BassDomain {
     @JoinColumn(name = "postImage_id")
     private List<Image> postImage = new ArrayList<>();
 
+    @ElementCollection
+    private List<Long> recommend;
+
 }

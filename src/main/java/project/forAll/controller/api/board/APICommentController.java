@@ -5,9 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.api.APIController;
+import project.forAll.domain.board.Article;
 import project.forAll.domain.board.Comment;
 import project.forAll.form.CommentForm;
 import project.forAll.service.CommentService;
+import project.forAll.service.MemberService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
 public class APICommentController extends APIController {
 
     private final CommentService commentService;
+    private final MemberService memberService;
 
     /**
      * id에 해당하는 comment 객체를 반환
@@ -69,11 +72,28 @@ public class APICommentController extends APIController {
     public ResponseEntity getArticleComments(@PathVariable(value = "id") final Long articleId){
         try{
             final List<Comment> comments = commentService.findByArticle(articleId);
-            final List<CommentForm> cfs = comments.stream().map(comment -> commentService.of(comment)).toList();
+            final List<CommentForm> cfs = comments.stream().map(comment -> commentService.of(comment, null)).toList();
 
             return new ResponseEntity(cfs, HttpStatus.OK);
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Could not get article comments : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/comments/recommend")
+    public ResponseEntity recommendComment(@RequestParam Long commentId, @RequestParam String userId){
+        try{
+            final Comment comment = (Comment) commentService.findById(commentId);
+            final Long userLongId = memberService.findByLoginId(userId).getId();
+            List<Long> recommends = comment.getRecommend();
+            if (recommends.contains(userLongId)) recommends.remove(userLongId);
+            else recommends.add(userLongId);
+            comment.setRecommend(recommends);
+            commentService.save(comment);
+            return new ResponseEntity(Integer.toString(comment.getRecommend().size()), HttpStatus.OK);
+        }catch(final Exception e){
+            return new ResponseEntity(errorResponse("Could not recommend article : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+
     }
 }

@@ -8,6 +8,7 @@ import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import "../../components/Styles.css";
 import UseTermsTemplate from "../../components/signup/UseTermsTemplate";
 import * as regularExpressions from "../../utils/regularExpressions";
+import Alert from "../../components/Alert";
 const PersonalModify2 = () => {
     const location = useLocation();
     const data = { ...location.state };
@@ -29,6 +30,13 @@ const PersonalModify2 = () => {
     const [isUseTermsChecked, setIsUseTermsChecked] = useState(false);
     const [isPhoneCerified, setIsPhoneCerified] = useState(false);
     const [isAllChecked, setIsAllChecked] = useState(false);
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [alertContent, setAlertContent] = useState("");
+
+    const openAlert = (string) => {
+        setAlertContent(string);
+        setIsAlertOpen(true);
+    };
     useDidMountEffect(() => {
         setIsCheckPw(pw === pwCheck);
     }, [pw, pwCheck]);
@@ -39,14 +47,14 @@ const PersonalModify2 = () => {
     const sendCerifiedNum = () => {
         const phoneRule = regularExpressions.phoneNum;
         if (! phoneRule.test(phone)){
-            alert("전화번호 형식을 확인해주세요");
+            openAlert("전화번호 형식을 확인해주세요");
         }
         else{
             axios.post("/api/v1/send-one/"+phone)
                 .then((response) => {
-                    alert("인증번호를 발송했습니다");
+                    openAlert("인증번호를 발송했습니다");
                 }).catch((response) => {
-                alert("인증번호를 발송하지 못했습니다");
+                openAlert("인증번호를 발송하지 못했습니다");
             });
         }
     };
@@ -60,23 +68,23 @@ const PersonalModify2 = () => {
     };
     const handleButton = () => {
         if (pw === "") {
-             alert("비밀번호는 필수 입력 사항입니다");
+            openAlert("비밀번호는 필수 입력 사항입니다");
         } else if (name === "") {
-             alert("이름은 필수 입력 사항입니다");
+            openAlert("이름은 필수 입력 사항입니다");
         } else if (email === "") {
-             alert("이메일은 필수 입력 사항입니다");
+            openAlert("이메일은 필수 입력 사항입니다");
         } else if (phone === "") {
-             alert("휴대폰 번호는 필수 입력 사항입니다");
+            openAlert("휴대폰 번호는 필수 입력 사항입니다");
         } else if ((year === "") || (month === "") || (day === "")) {
-             alert("생년월일은 필수 입력 사항입니다");
+            openAlert("생년월일은 필수 입력 사항입니다");
         } else if (isCheckPw !== true) {
-             alert("비밀번호가 일치하지 않습니다");
+            openAlert("비밀번호가 일치하지 않습니다");
         } else if (isCheckDuplicatedEmail !== true) {
-            alert("이메일 중복확인이 필요합니다");
+            openAlert("이메일 중복확인이 필요합니다");
         } else if (isPhoneCerified !== true){
-            alert("휴대폰 인증이 필요합니다");
+            openAlert("휴대폰 인증이 필요합니다");
         } else if (isUseTermsChecked !== true){
-            alert("약관 동의가 필요합니다")
+            openAlert("약관 동의가 필요합니다")
         }
         else {
             axios.put("/api/v1/members",
@@ -84,7 +92,7 @@ const PersonalModify2 = () => {
                     loginId: data.loginId,
                     loginPw: pw,
                     name: name,
-                    birthDay: birthDay,
+                    birthday: birthDay,
                     gender: gender,
                     email: email,
                     phoneNum: phone,
@@ -141,6 +149,7 @@ const PersonalModify2 = () => {
             <footer className="footer">
                 <button onClick={() => handleButton()} className="button" style={{ backgroundColor: "black"}}>수정하기</button>
             </footer>
+            <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={alertContent} />
         </div>
     )
 };

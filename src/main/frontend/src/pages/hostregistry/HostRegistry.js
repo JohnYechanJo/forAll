@@ -6,6 +6,7 @@ import {ModalStyles} from "../../components/ModalStyles";
 import DaumPost from "../../components/DaumPost";
 import {KitchenFeat} from "../../utils/enums";
 import ImageInput from "../../components/ImageInput";
+import Alert from "../../components/Alert";
 const HostRegistry = () => {
     const [inputCount, setInputCount] = useState(0);
     const [inputCount2, setInputCount2] = useState(0);
@@ -28,6 +29,7 @@ const HostRegistry = () => {
     const [modalIsOpen2, setModalIsOpen2] = useState(false);
     const [modalIsOpen3, setModalIsOpen3] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
     const navigate = useNavigate();
     let isPublic = false;
     const modalClose1 = () => {
@@ -57,7 +59,7 @@ const HostRegistry = () => {
     }
     const handleButton = () => {
         if (fullAddress === ""){
-            alert("주소는 필수입력사항입니다.");
+            setIsAlertOpen(true);
         }
         else if ((placeName !== "")&&(placeIntro !== "")&&(placeIntroDetail !== "")&&(kitchen!=="")&&(fullAddress!=="")&&(placeInfo!=="")&&(imgRepresent!=="")&&(webSite!=="")){
             isPublic = true;
@@ -337,6 +339,7 @@ const HostRegistry = () => {
                     <button onClick={() => setIsModalOpen(false)}>뒤로</button>
                     <button onClick={() => submit()}>다음</button>
                 </Modal>
+                <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={"주소는 필수입력사항입니다."} />
             </div>
         </div>
     );

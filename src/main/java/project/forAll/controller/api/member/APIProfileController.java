@@ -42,8 +42,6 @@ public class APIProfileController extends APIController {
     @GetMapping("profile/{id}")
     public ResponseEntity getProfile(@PathVariable(value = "id") String userId, HttpServletRequest request){
         try{
-            String loginId = (String) sessionManager.getSession(request);
-            if (!loginId.equals(userId)) return new ResponseEntity(errorResponse("Session Disabled"), HttpStatus.SERVICE_UNAVAILABLE);
             final Member savedMember = memberService.findByLoginId(userId);
             if (savedMember == null) throw new Exception("No member with loginId " + userId);
 

@@ -3,21 +3,28 @@ import "./LoginTemplate.css";
 import {Link, useNavigate} from "react-router-dom";
 import {user_role} from "../../utils/enums";
 import axios from "axios";
-import "../../components/Styles.css";   
+import "../../components/Styles.css";
+import Modal from "react-modal";
+import Alert from "../Alert";
 const LoginTemplate = () => {
     const navigate = useNavigate();
     const [id, setId] = useState('');
     const [passwd, setPasswd] = useState('');
-
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [alertContent, setAlertContent] = useState("");
     const onChangeId = useCallback((e) => {
         setId(e.target.value);
     },[]);
     const onChangePw = useCallback((e) => {
         setPasswd(e.target.value);
     },[]);
+    const openAlert = (string) => {
+        setAlertContent(string);
+        setIsAlertOpen(true);
+    }
     const logIn = () => {
-        if (id === "") alert("아이디를 입력해주세요");
-        else if(passwd === "") alert("비밀번호를 입력해주세요");
+        if (id === "") openAlert("아이디를 입력해주세요");
+        else if(passwd === "") openAlert("비밀번호를 입력해주세요");
         else{
             axios.post("/api/v1/login",
                 {
@@ -36,7 +43,7 @@ const LoginTemplate = () => {
                 sessionStorage.setItem("email", res.data.email);
                 navigate('/');
             }).catch((res) => {
-                alert("로그인에 실패했습니다");
+                openAlert("로그인에 실패했습니다");
             })
         }
     }
@@ -92,6 +99,7 @@ const LoginTemplate = () => {
                 textDecorationLine:"underline",
             }}>비밀번호 찾기</span></Link>
             </div>
+            <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={alertContent} />
         </div>
     )
 }

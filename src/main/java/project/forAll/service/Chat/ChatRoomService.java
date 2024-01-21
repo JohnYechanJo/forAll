@@ -58,7 +58,7 @@ public class ChatRoomService extends Service {
 
         return chatRoom;
     }
-    public ChatRoomForm of(final ChatRoom chatRoom){
+    public ChatRoomForm of(final ChatRoom chatRoom, final String userId){
         final ChatRoomForm form = new ChatRoomForm();
         form.setId(chatRoom.getId());
         form.setUserId1(chatRoom.getUsers().get(0).getLoginId());
@@ -69,8 +69,7 @@ public class ChatRoomService extends Service {
             Message lastMessage = messages.get(messages.size()-1);
             form.setLastMessage(lastMessage.getMessageContent());
             form.setSendTime(lastMessage.getSendTime());
-
-            form.setNotReadCount(messages.stream().filter(message -> !message.isReadFlag()).count());
+            if (userId != null) form.setNotReadCount(messages.stream().filter(message -> !message.isReadFlag() && message.getTargetId().equals(userId)).count());
         }
         return form;
     }

@@ -7,6 +7,8 @@ import ArticleListTemplate from "../../components/board/ArticleListTemplate";
 import {TimeUtil} from "../../utils/TimeUtil";
 import ImageUploader from "../../utils/imageUploader";
 import {useNavigate} from "react-router-dom";
+import ImageViewer from "../../components/ImageViewer";
+import ImagePreView from "../../components/ImagePreView";
 
 const PopupBoardPage = () => {
     const navigate = useNavigate();
@@ -71,6 +73,12 @@ const PopupBoardPage = () => {
                                 <div>첨부파일</div>
                             </label>
                             <button onClick={UploadPost}>글 올리기</button>
+                            <div>
+                                {postImage? postImage.map((img, idx) => (
+                                    <ImagePreView img={img}/>
+                                )) :null}
+                            </div>
+
                         </div>
                     ):null}
                 </div>

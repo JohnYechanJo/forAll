@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import ImageUploader from "../../utils/imageUploader";
 import axios from "axios";
 import "../../components/Styles.css";
+import Alert from "../../components/Alert";
 const PlaceInfoModifyPage6 =() => {
     const location = useLocation();
     const data = {...location.state};
@@ -18,7 +19,7 @@ const PlaceInfoModifyPage6 =() => {
     const [accountHolder, setAccountHolder] = useState();
     const [isAgree, setIsAgree] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
 
     const onChangeAccount = useCallback((e) => {
         setAccount(e.target.value);
@@ -28,7 +29,7 @@ const PlaceInfoModifyPage6 =() => {
     }, []);
 
     const handleButton = () => {
-        if (isAgree === false) alert("환불 기준을 동의해주세요");
+        if (isAgree === false) setIsAlertOpen(true);
         else if((account !== "") && (accountHolder !== undefined)) {
             isPublic = true;
             submit();
@@ -175,6 +176,7 @@ const PlaceInfoModifyPage6 =() => {
                 <button onClick={() => setIsModalOpen(false)}>뒤로</button>
                 <button onClick={() => submit()}>다음</button>
             </Modal>
+            <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={"환불 기준을 동의해주세요"} />
         </div>
     )
 };

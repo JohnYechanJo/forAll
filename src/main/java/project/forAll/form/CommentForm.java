@@ -24,4 +24,8 @@ public class CommentForm {
 
     //대댓글
     private List<ReCommentForm> recomments;
+    // 좋아요 수
+    private int recommend;
+    // 좋아요 가능 여부
+    private Boolean recommendAble;
 }

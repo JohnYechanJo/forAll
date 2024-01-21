@@ -26,6 +26,15 @@ public class MessageService extends Service {
         final List<Message> messages = messageRepository.findByChatRoom(chatRoom);
         return messages.stream().map(message -> of(message)).toList();
     }
+    public void checkMessageList(final List<Long> messageId, final String userId){
+        for(Long id : messageId){
+            final Message message = (Message) findById(id);
+            if (!message.isReadFlag() && message.getTargetId().equals(userId)){
+                message.setReadFlag(true);
+                save(message);
+            }
+        }
+    }
     public Message build(final MessageForm form){
         final Message message = new Message();
         message.setMessageContent(form.getMessageContent());

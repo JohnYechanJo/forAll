@@ -6,6 +6,7 @@ import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import ImageUploader from "../../utils/imageUploader";
 import {TimeUtil} from "../../utils/TimeUtil";
+import ImagePreView from "../../components/ImagePreView";
 
 const RecipeBoardPage = () => {
     const [postList, setPostList] = useState([]);
@@ -69,6 +70,11 @@ const RecipeBoardPage = () => {
                                 <div>첨부파일</div>
                             </label>
                             <button onClick={UploadPost}>글 올리기</button>
+                            <div>
+                                {postImage? postImage.map((img, idx) => (
+                                    <ImagePreView img={img}/>
+                                )) :null}
+                            </div>
                         </div>
                     ):null}
                 </div>

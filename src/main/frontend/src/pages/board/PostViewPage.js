@@ -38,6 +38,42 @@ const PostViewPage = () => {
             updateData();
         }).catch((err) => console.error(err));
     }
+    const handleRecommendArticle = () => {
+        const userId = sessionStorage.getItem("user_id");
+        if (!userId) return;
+        axios.get("/api/v1/articles/recommend",{
+            params:{
+                articleId: data.id,
+                userId: userId
+            }
+        }).then((res) => {
+            updateData();
+        });
+    }
+    const handleRecommendComment = (id) => {
+        const userId = sessionStorage.getItem("user_id");
+        if (!userId) return;
+        axios.get("/api/v1/comments/recommend",{
+            params:{
+                commentId: id,
+                userId: userId
+            }
+        }).then((res) => {
+            updateData();
+        });
+    }
+    const handleRecommendRecomment = (id) => {
+        const userId = sessionStorage.getItem("user_id");
+        if (!userId) return;
+        axios.get("/api/v1/recomments/recommend",{
+            params:{
+                recommentId: id,
+                userId: userId
+            }
+        }).then((res) => {
+            updateData();
+        });
+    }
     const updateData = async () => {
         await axios.get("/api/v1/articles/" + params.id)
             .then((res) => setData(res.data))
@@ -55,8 +91,10 @@ const PostViewPage = () => {
                 {data.category === BoardCategory.Recipe ? <p>레시피</p> : null}
                 <h1>{data.title}</h1>
                 <p>ID: {data.userId}</p>
-                <p>댓글수 : {data.comments ? data.comments.length : 0}</p>
                 <p>{TimeUtil.getDiffStr(data.writtenAt)}</p>
+                <p onClick={handleRecommendArticle}>{data.recommend}</p>
+                <p>댓글수 : {data.comments ? data.comments.length : 0}</p>
+
                 <p>프로필 보기</p> {/*todo : 프로필 연결*/}
                 <p>채팅 보내기</p> {/*todo : 채팅 연결*/}
             </div>
@@ -81,6 +119,7 @@ const PostViewPage = () => {
                         <p>{comment.userId}</p>
                         <p>{comment.text}</p>
                         <p>{TimeUtil.getDiffStr(comment.writtenAt)}</p>
+                        <p onClick={() => handleRecommendComment(comment.id)}>{comment.recommend}</p>
                         <p onClick={() => setWriteRecomment(idx)}>대댓글: {comment.recomments ? comment.recomments.length : 0}</p>
                         { writeRecomment === idx ? (<div>
                             <input value={recomment} onChange={onChangeRecomment}/>
@@ -93,7 +132,8 @@ const PostViewPage = () => {
                             })).map((recomment, idx) => (
                                 <div key={idx}>
                                     <p>{recomment.userId}</p>
-                                    <p>{recomment.text}</p>
+                                    <p>{recomment.text}</p>\
+                                    <p onClick={() => handleRecommendRecomment(recomment.id)}>{recomment.recommend}</p>
                                     <p>{TimeUtil.getDiffStr(recomment.writtenAt)}</p>
                                 </div>
                             ))}

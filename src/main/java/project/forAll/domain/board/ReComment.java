@@ -6,6 +6,8 @@ import project.forAll.domain.BassDomain;
 import project.forAll.domain.member.Member;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Getter @Setter
 public class ReComment extends BassDomain {
@@ -26,4 +28,7 @@ public class ReComment extends BassDomain {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "written_by_member_id")
     private Member writtenBy;
+
+    @ElementCollection
+    private List<Long> recommend;
 }

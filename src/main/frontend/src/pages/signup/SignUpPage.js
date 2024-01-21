@@ -8,6 +8,8 @@ import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import * as regularExpressions from "../../utils/regularExpressions";
 import SignUpInformationTemplate from "../../components/signup/SignUpInformationTemplate";
 import "../../components/Styles.css";
+import Modal from "react-modal";
+import Alert from "../../components/Alert";
 const SignUpPage = () => {
     const navigate = useNavigate();
     const [id, setId] = useState('');
@@ -29,7 +31,13 @@ const SignUpPage = () => {
     const [isPhoneCerified, setIsPhoneCerified] = useState();
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [isUseTermsChecked, setIsUseTermsChecked] = useState(false);
+    const [alertContent, setAlertContent] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const openModal = (string) => {
+        setAlertContent(string);
+        setIsModalOpen(true);
+    }
     const checkDuplicatedId = () => {
         axios.get("/api/v1/members/checkId/"+id)
             .then((response) => {
@@ -42,7 +50,7 @@ const SignUpPage = () => {
     const checkDuplicatedEmail = () => {
         const emailRule = regularExpressions.email;
         if (!emailRule.test(email)){
-            alert("이메일 형식을 확인해주세요");
+            openModal("이메일 형식을 확인해주세요");
         }else{
             axios.get("/api/v1/members/checkEmail/"+email)
                 .then((response) => {
@@ -58,14 +66,14 @@ const SignUpPage = () => {
     const sendCerifiedNum = () => {
         const phoneRule = regularExpressions.phoneNum;
         if (! phoneRule.test(phone)){
-            alert("전화번호 형식을 확인해주세요");
+            openModal("전화번호 형식을 확인해주세요");
         }
         else{
             axios.post("/api/v1/send-one/"+phone)
                 .then((response) => {
-                    alert("인증번호를 발송했습니다");
+                    openModal("인증번호를 발송했습니다");
                 }).catch((response) => {
-                alert("인증번호를 발송하지 못했습니다");
+                openModal("인증번호를 발송하지 못했습니다");
             });
         }
     };
@@ -83,35 +91,36 @@ const SignUpPage = () => {
     }, [pw,pwCheck]);
 
     useEffect(() => {
+        console.log(birthDay);
         setBirthDay(year+'/'+month+'/'+day);
     }, [year, month, day]);
     const handleButton = () => {
         if (id === ""){
-            alert("아이디는 필수 입력 사항입니다");
+            openModal("아이디는 필수 입력 사항입니다");
         }else if(pw === ""){
-            alert("비밀번호는 필수 입력 사항입니다");
+            openModal("비밀번호는 필수 입력 사항입니다");
         }else if(name === ""){
-            alert("이름은 필수 입력 사항입니다");
+            openModal("이름은 필수 입력 사항입니다");
         }else if(email === ""){
-            alert("이메일은 필수 입력 사항입니다");
+            openModal("이메일은 필수 입력 사항입니다");
         }else if(phone === ""){
-            alert("휴대폰 번호는 필수 입력 사항입니다");
+            openModal("휴대폰 번호는 필수 입력 사항입니다");
         }else if((year === "")||(month === "")||(day === "")){
-            alert("생년월일은 필수 입력 사항입니다");
+            openModal("생년월일은 필수 입력 사항입니다");
         }
         else if(isCheckDuplicatedId !== true) {
-            alert("아이디 중복확인이 필요합니다");
+            openModal("아이디 중복확인이 필요합니다");
         }else if(isCheckPw !== true){
-            alert("비밀번호가 일치하지 않습니다");
+            openModal("비밀번호가 일치하지 않습니다");
         }
         else if (isCheckDuplicatedEmail !== true){
-            alert("이메일 중복확인이 필요합니다");
+            openModal("이메일 중복확인이 필요합니다");
         }
         else if (isPhoneCerified !== true){
-            alert("휴대폰 인증이 필요합니다");
+            openModal("휴대폰 인증이 필요합니다");
         }
         else if (isUseTermsChecked !== true){
-            alert("약관 동의가 필요합니다")
+            openModal("약관 동의가 필요합니다")
         }
         else{
             setIsAllChecked(true);
@@ -124,7 +133,7 @@ const SignUpPage = () => {
                     loginId: id,
                     loginPw: pw,
                     name: name,
-                    birthDay: birthDay,
+                    birthday: birthDay,
                     gender: gender,
                     email: email,
                     phoneNum: phone,
@@ -200,6 +209,7 @@ const SignUpPage = () => {
                 setIsAllChecked={setIsAllChecked}
                 submit={submit}
             /> : null}
+            <Alert isOpen={isModalOpen} setIsOpen={setIsModalOpen} content={alertContent} />
 
         </div>
     )

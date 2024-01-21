@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {PayWay} from "../../utils/enums";
 import ImageInput from "../../components/ImageInput";
+import Alert from "../../components/Alert";
 
 
 const HostRegistry5 = () => {
@@ -31,6 +32,7 @@ const HostRegistry5 = () => {
 
     const [modalOpen1, setModalOpen1] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
 
     const onChangeTradeName = useCallback((e) => {
         if (e.target.value.length <= 28) setTradeName(e.target.value);
@@ -68,7 +70,7 @@ const HostRegistry5 = () => {
 
     const handleButton = () => {
         if ((tradeName==="")||(representative==="")||(registNum1==="")||(registNum2==="")||(registNum3==="")||(license==="")||(address==="")||(exactAddress==="")){
-            alert("상호명, 대표자명, 사업자 등록번호, 사업자 등록증, 사업장 주소는 필수 입력사항입니다.");
+            setIsAlertOpen(true);
         } else if ((tradeName !== "") && (representative !== "") && (registNum1 !== "") && (registNum2 !== "") && (registNum3 !== "")
         && (license !== undefined) && (address !== undefined) && (exactAddress !== "") && (email1 !== "")
         && (phone1 !== "") && (phone2 !== "") && (phone3 !== "")){
@@ -193,6 +195,7 @@ const HostRegistry5 = () => {
                 <button onClick={() => setIsModalOpen(false)}>뒤로</button>
                 <button onClick={() => submit()}>다음</button>
             </Modal>
+            <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={"상호명, 대표자명, 사업자 등록번호, 사업자 등록증, 사업장 주소는 필수 입력사항입니다."} />
 
 
         </div>
