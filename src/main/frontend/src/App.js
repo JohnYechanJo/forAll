@@ -4,8 +4,8 @@ import LoginPage from "./pages/LoginPage";
 import SearchIdPage from "./pages/SearchIdPage";
 import SearchPwPage from "./pages/SearchPwPage";
 import SignUpPage from "./pages/signup/SignUpPage";
-
 import SignUpCompletePage from "./pages/signup/SignUpCompletePage";
+import ToProfilePage from './pages/signup/ToProfile';
 import PersonalInfoModifyPage from './pages/modify/PersonalInfoModifyPage';
 import PlaceInfoModifyStart from './pages/modify/PlaceInfoModifyStart';
 import PersonalInfoModifyPage2 from './pages/modify/PersonalInfoModifyPage2';
@@ -24,10 +24,8 @@ import HostRegistry5 from "./pages/hostregistry/HostRegistry5";
 import HostRegistry4 from "./pages/hostregistry/HostRegistry4";
 import HostRegistry6 from "./pages/hostregistry/HostRegistry6";
 import HostRegistryComplete from "./pages/hostregistry/HostRegistryComplete";
-import GuestRegistryStart from "./pages/guestregistry/GuestRegistryStart";
 import GuestRegistry from "./pages/guestregistry/GuestRegistry";
 import LoginHandeler from "./pages/LoginHandeler";
-import GuestRegistry2 from "./pages/guestregistry/GuestRegistry2";
 import ChefInfoModifyPage from './pages/modify/ChefInfoModifyPage';
 import ChefInfoModifyPage2 from './pages/modify/ChefInfoModifyPage2';
 import RentSpacePage from "./pages/RentSpace/RentSpacePage";
@@ -50,8 +48,8 @@ function App() {
         <Route path="/searchId" element={<SearchIdPage />} />
         <Route path="/searchPw" element={<SearchPwPage />}/>
         <Route path="/signUp" element={<SignUpPage />}/>
-
         <Route path="/signUpComplete" element={<SignUpCompletePage />} />
+        <Route path="/toProfile" element={<ToProfilePage />} />
         <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
         <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />
         <Route path="/placeInfoModifyStart" element={<PlaceInfoModifyStart />} />
@@ -68,9 +66,7 @@ function App() {
         <Route path="/hostRegistry5" element={<HostRegistry5 />}/>
         <Route path="/hostRegistry6" element={<HostRegistry6 />}/>
         <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
-        <Route path="/guestRegistryStart" element={<GuestRegistryStart />}/>
         <Route path="/guestRegistry" element={<GuestRegistry />}/>
-        <Route path="/guestRegistry2" element={<GuestRegistry2 />} />
         <Route path="/chefInfoModify" element={<ChefInfoModifyPage />} />
         <Route path="/chefInfoModify2" element={<ChefInfoModifyPage2 />} />
         <Route path="/spaceList" element={<SpaceListViewPage />} />

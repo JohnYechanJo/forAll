@@ -1,179 +1,228 @@
-import {useState, useCallback} from "react";
+import { useState, useCallback } from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import ImageInputs from "../../components/ImageInputs";
 import Modal from "react-modal";
-import {ModalStyles} from "../../components/ModalStyles";
+import { ModalStyles } from "../../components/ModalStyles";
 import ImageInput from "../../components/ImageInput";
+import axios from "axios";
+import ImageUploader from "../../utils/imageUploader";
+
 const GuestRegistry = () => {
     const navigate = useNavigate();
-    const location = useLocation();
-    const [inputCount, setInputCount] = useState(0);
-    const [inputCount2, setInputCount2] = useState(0);
-    const [inputText, setInputText] = useState("");
     const [introduce, setIntroduce] = useState("");
-    const [introduceDetail, setIntroduceDetail] = useState("");
-    const [career, setCareer] = useState([]);
     const [profileImage, setProfileImage] = useState("");
-    const [imageExplain, setImageExplain] = useState("");
-    const [sanitaryImage, setSanitaryImage] = useState("");
-    const text1 = "사진을 설명해주세요. \n ex.현재 근무하고 있는 업장에서 찍은 사진입니다."
-    const text2="ex.한식을 새롭게 해석하는 것을 좋아하는 조리학과 대학생입니다.\n" +
-        "한식을 만들 때 전통적인 한식에 국한되어 있는 것을 좋아하지 않고 양식, 일식, 중식 등 " +
-        "다양한 나라의 요리와 접목시키는 것을 좋아합니다."
+    const [selectedMBTI, setSelectedMBTI] = useState("");
+    const [selectedFoodTypes, setSelectedFoodTypes] = useState([]);
+    const [selectedIngredient, setSelectedIngredient] = useState([]);
+
+    const MBTI_TYPES = [
+        'ISTJ', 'ISFJ', 'INFJ', 'INTJ',
+        'ISTP', 'ISFP', 'INFP', 'INTP',
+        'ESTP', 'ESFP', 'ENFP', 'ENTP',
+        'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ'
+    ];
+    const FOOD_TYPES = [
+        '한식', '양식', '일식', '중식', '동남아', '인도', '멕시칸', '씨푸드', '파스타', '육류',
+        '디저트', '제과', '제빵', '커피', '다이닝', '퓨전', '기타',
+        '와인', '양주', '사케', '칵테일', '전통주',
+    ];
+    const INGREDIENT_TYPES = [
+        '육류', '가공육류', '어류', '해조류', '갑각류', '어패류', '곡류', '채소류', '버섯류', '과실류', '견과류', '콩류', '계란', '유제품류', '약재', '조미료',
+    ];
+    const toggleFoodType = (foodType) => {
+        if (selectedFoodTypes.includes(foodType)) {
+            setSelectedFoodTypes(selectedFoodTypes.filter(type => type !== foodType));
+        } else {
+            setSelectedFoodTypes([...selectedFoodTypes, foodType]);
+        }
+    };
+    const toggleIngredient = (ingredient) => {
+        if (selectedIngredient.includes(ingredient)) {
+            setSelectedIngredient(selectedIngredient.filter(type => type !== ingredient));
+        } else {
+            setSelectedIngredient([...selectedIngredient, ingredient]);
+        }
+    };
     const handleButton = () => {
-        if ((introduce !== "") && (introduceDetail !== "") && (career.length !== 0) && (profileImage !== "") && (sanitaryImage !== "") ){
+        if ((introduce !== "") && (profileImage !== "")) {
             submit();
         }
         else setIsModalOpen(true);
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const submit = () => {
-        navigate("/guestRegistry2", {
-            state: {
-                introduce: introduce,
-                introduceDetail: introduceDetail,
-                career: career,
-                profileImage: profileImage,
-                imageExplain: imageExplain,
-                sanitaryImage: sanitaryImage,
-            }
+    const submit = async () => {
+        const userId = sessionStorage.getItem("user_id");
+        const picture = await ImageUploader(profileImage, userId);
+        axios.post("/api/v1/profile", {
+            userId: userId,
+            introduction: introduce,
+            picture: picture,
+            mbti: selectedMBTI,
+            cook: selectedFoodTypes,
+            interest: selectedIngredient,
 
-        });
-    }
+        }).then((res) => {
+            navigate("/");
+        }).catch((err) => console.error(err));
+    };
+
     const onInputHandler = (e) => {
-        setInputCount(e.target.value.length);
         setIntroduce(e.target.value);
     };
-    const onInputHandler2 = (e) => {
-        setInputCount2(e.target.value.length);
-        setIntroduceDetail(e.target.value);
-    }
-    const handleInput = useCallback((e) => {
-        setImageExplain(e.target.value);
-    },[])
-    const activeEnter = (e) => {
-        if (e.key==="Enter"){
-            const temp =[...career];
-            setCareer(temp.concat(e.target.value));
-            e.target.value="";
-        }
-    }
-    return(
-        <div className="margin"
-             style={{display:"flex",
-                 justifyContent:"space-around",
-                 flexDirection:"column",}}>
-            <header style={{textAlign: "center"}}><h3>1. 자기소개</h3></header>
-            <h4 style={{marginBottom:"0"}} >경력</h4>
-            <hr style={{height: "2px", backgroundColor: "black", width:"95vw"}}/>
-            <div style={{display: "flex", justifyContent: "space-between"}}>
-                <h4 style={{textAlign: "left"}}>본인 한 줄 소개</h4>
-                <p style={{textAlign: "right"}}>
-                    <span>{inputCount}</span>
-                    <span>/18자</span>
-                </p>
+
+    return (
+        <div>
+            <div style={{
+            display: "flex",
+            flexDirection: "column",
+            padding: "1rem",
+            alignItems: "flex-start",
+            gap: "1rem",
+            fontSize: "0.625rem",
+            justifyContent: "center",
+        }}>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+                padding: "1rem",
+                gap: "1rem",
+                fontSize: "0.625rem",
+            }}>
+                <a style={{
+                    textAlign: "center",
+                    fontSize: "0.9375rem",
+                    lineHeight: "1.375rem"
+                }}>프로필 등록</a>
             </div>
-            <input type="text" placeholder="ex.한식 만드는 것을 좋아하는 조리학과 대학생입니다." style={{width: "94vw", height: "3vh"}}
-                   onChange={onInputHandler} maxLength="17"/>
-            <div style={{display: "flex", justifyContent: "space-between"}}>
-                <h4 style={{textAlign: "left"}}>본인 세부소개</h4>
-                <p  style={{textAlign: "right"}}>
-                    <span>{inputCount2}</span>
-                    <span>/300자</span>
-                    <span style={{color: "red"}}>(최소 20자)</span>
-                </p>
+            <div style={{width:"100%"}}>
+            <a className="fontForRegister" >소개<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
+                <hr style={{ height: "2px", backgroundColor: "black"}} />
             </div>
-            <textarea placeholder={text2} className="white-space"
-                      style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR", fontSize:"10px"}}
-                      onChange={onInputHandler2} maxLength="299" minLength="19"/>
-            <h4>최근 경력을 최소 1개 입력해주세요.</h4>
-            <input type="text" placeholder="안심하세요! 언제든지 프로필을 수정할 수 있어요."
-                   style={{width: "94vw", height: "3vh"}}
-                   onKeyDown={(e) => {activeEnter(e)}}
-                    onChange={(e)=>{
-                    setInputText(e.target.value);
-            }}/>
-            {career.map((item, index) => (
-                <div style={{ position: 'relative', display: 'inline-block' }}>
-                    <div key={index}
-                         style={{
-                             display: 'flex',
-                             justifyContent: 'center',
-                             alignItems: 'center',
-                             height: "3vh",
-                             width: '45vw',
-                             border: '2px solid lightgray',
-                             backgroundColor: 'white',
-                             borderRadius: '7px',
-                             marginTop: '5px',
-                             cursor: 'pointer'
-                         }}
-                    >
-                        {item}
-                    </div>
-                    <button
-                        style={{
-                            position: 'absolute',
-                            right: '47%',
-                            bottom:"15%",
-                            border: 'none',
-                            backgroundColor: 'white',
-                        }}
-                        onClick={() => {
-                            const newCareer = [...career];
-                            newCareer.splice(index, 1);
-                            setCareer(newCareer);
-                        }}
-                    >
-                        x
-                    </button>
-                </div>
-            ))}
-            <h4 style={{marginBottom:"0"}} >프로필 등록 사진</h4>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <a className="fontForRegister" >본인 한 줄 소개<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
+            </div>
+            <input type="text" placeholder="ex.한식 퓨전 요리를 선보이는 매장 '브와르'를 운영하고 있습니다." style={{width:"21.875rem", height: "1.875rem" }}
+                onChange={onInputHandler} />
+
+            <a className="fontForRegister" >프로필 등록 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <p>
-                <ImageInput setImg={setProfileImage} val={profileImage}/>
+                <ImageInput setImg={setProfileImage} val={profileImage} />
             </p>
-            <textarea placeholder={text1} onChange={handleInput} className="white-space"
-                      style={{width: "94vw", height: "17vh", fontFamily: "Noto Sans KR"}}/>
-            <div>
-                <h4 style={{marginBottom:"0"}} >보건증 사진</h4>
-                <p>
-                    <ImageInput setImg={setSanitaryImage} val={sanitaryImage}/>
-                </p>
-                <div style={{margin:"0", padding:"0px 0px"}} >
-                    <h5 style={{margin:"0", padding:"0px 0px"}}>• 최근 1년내의 보건증을 등록해주세요.</h5>
-                    <h5 style={{margin:"0", padding:"0px 0px"}}>• 대관에 필요한 정보이오니, <span style={{color:"red",textDecoration:"underline",textDecorationColor:"red"}} >필히 등록해주세요!</span></h5>
-                </div>        
+            <div style={{width:"100%"}} >
+            <a className="fontForRegister" >관심사<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
+                <hr style={{ height: "2px", backgroundColor: "black"}} />
+                <a style={{ marginBottom: "0", fontSize: "0.625rem" }}>• 내 관심사를 프로필에 추가하면 사람들이 유저님을 잘 알아볼 수 있어요.</a>
             </div>
-            <div style={{display: "flex", justifyContent: "center", marginBottom: "6vh", marginTop: "3vh"}}>
-            <Link to="/guestRegistryStart">
-                    <button style={{
-                        backgroundColor: "black",
-                        color: "white",
-                        flex: "1",
-                        border: "none",
-                        width: "50vw",
-                        height: "8vh"
-                    }}>이전
-                    </button>
-                </Link>
+
+            <a style={{ fontSize: "0.625rem" }} >• MBTI 선택으로 오너님의 성격을 대략적으로 알 수 있게 해주세요:)</a>
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: '0.31rem'
+            }}>
+                {MBTI_TYPES.map((mbti, index) => (
+                    <div
+                        key={index}
+                        style={{
+                            display: 'inline-block',
+                            flexShrink: '0',
+                            margin: '1vw',
+                            width: '3.125rem',
+                            height: '1.25rem',
+                            border: '1px solid #C4C4C4',
+                            borderRadius: '0.3125rem',
+                            cursor: selectedMBTI === mbti ? 'default' : 'pointer',
+                            backgroundColor: selectedMBTI === mbti ? 'lightgray' : 'white',
+                            textAlign: 'center',
+                            fontSize: '0.625rem',
+                        }}
+                        onClick={() => setSelectedMBTI(mbti)}
+                    >
+                        {mbti}
+                    </div>
+                ))}
+            </div>
+            <a style={{ fontSize: "0.625rem" }} >• 자신있는 요리를 선택해주세요!</a>
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: '0.31rem'
+            }}>
+                {FOOD_TYPES.map((foodType, index) => (
+                    <div
+                        key={index}
+                        style={{
+                            display: 'inline-block',
+                            flexShrink: '0',
+                            margin: '1vw',
+                            width: '3.125rem',
+                            height: '1.25rem',
+                            border: '1px solid #C4C4C4',
+                            borderRadius: '0.3125rem',
+                            cursor: selectedFoodTypes.includes(foodType) ? 'default' : 'pointer',
+                            backgroundColor: selectedFoodTypes.includes(foodType) ? 'lightgray' : 'white',
+                            textAlign: 'center',
+                            fontSize: '0.625rem',
+                        }}
+                        onClick={() => toggleFoodType(foodType)}
+                    >
+                        {foodType}
+                    </div>
+                ))}
+            </div>
+            <a style={{ fontSize: "0.625rem" }}>• 좋아하는 요리재료를 선택해주세요! 본인과 비슷한 사람을 찾을 수 있답니다.</a>
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: '0.31rem'
+            }}>
+                {INGREDIENT_TYPES.map((ingredient, index) => (
+                    <div
+                        key={index}
+                        style={{
+                            display: 'inline-block',
+                            flexShrink: '0',
+                            margin: '1vw',
+                            width: '3.125rem',
+                            height: '1.25rem',
+                            border: '1px solid #C4C4C4',
+                            borderRadius: '0.3125rem',
+                            cursor: selectedIngredient.includes(ingredient) ? 'default' : 'pointer',
+                            backgroundColor: selectedIngredient.includes(ingredient) ? 'lightgray' : 'white',
+                            textAlign: 'center',
+                            fontSize: '0.625rem',
+                        }}
+                        onClick={() => toggleIngredient(ingredient)}
+                    >
+                        {ingredient}
+                    </div>
+                ))}
+            </div>
+            <div style={{
+                alignItems: "center",
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+            }}>
                 <button style={{
-                    backgroundColor: "red",
+                    backgroundColor: "#FF4F4F",
                     color: "white",
-                    flex: "1",
-                    border: "none",
-                    width: "50vw",
-                    height: "8vh"
+                    height: "3.125rem",
+                    width: "100%",
                 }}
-                        onClick={handleButton}
-                >저장
+                    onClick={handleButton}
+                >저장 후 닫기
                 </button>
                 <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                    <p style={{fontSize: "16px"}}>필수 입력사항이 모두 기입되지 않았습니다.</p>
+                    <p style={{ fontSize: "16px" }}>필수 입력사항이 모두 기입되지 않았습니다.</p>
                     <button onClick={() => setIsModalOpen(false)}>뒤로</button>
                 </Modal>
             </div>
+            </div>
+            
         </div>
     );
 }

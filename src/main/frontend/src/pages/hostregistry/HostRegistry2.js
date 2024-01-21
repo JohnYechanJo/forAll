@@ -9,10 +9,12 @@ const HostRegistry2 = () => {
     const [img1, setImg1] = useState("");
     const [img2, setImg2] = useState("");
     const [img3, setImg3] = useState("");
+    const [imgAdditional, setImgAdditional] = useState([]);
     
     const [kitchen1, setKitchen1] = useState("");
     const [kitchen2, setKitchen2] = useState("");
     const [kitchen3, setKitchen3] = useState("");
+    const [kitchenAdditional, setKitchenAdditional] = useState([]);
     
     const [menu1, setMenu1] = useState("");
     const [menuAdditional, setMenuAdditional] = useState([]);
@@ -41,12 +43,12 @@ const HostRegistry2 = () => {
                 img1: img1,
                 img2: img2,
                 img3: img3,
-                
+                imgAdditional: imgAdditional,
                 kitchen1: kitchen1,
                 kitchen2: kitchen2,
                 kitchen3: kitchen3,
+                kitchenAdditional: kitchenAdditional,
                 menu1: menu1,
-                
                 menuAdditional: menuAdditional,
             }
         });
@@ -55,13 +57,15 @@ const HostRegistry2 = () => {
         <div className="margin"
              style={{display:"flex",
                  justifyContent:"space-around",
-                 flexDirection:"column",}}>
+                 flexDirection:"column",
+                 gap:"1.5rem"
+                 }}>
             <div>
                 <header style={{textAlign: "center"}}><h3>1. 공간 정보</h3></header>
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <h4>홀 사진</h4>
+                <a className="fontForRegister" >홀 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <div style={{display:'flex', justifyContent:"space-evenly"}}>
+                <div style={{display:'flex', justifyContent:"space-around"}}>
                     <div style={{display:"flex",  flexDirection:"column"}} >
                         
                         <ImageInput setImg={setImg1} val={img1}/>
@@ -70,16 +74,20 @@ const HostRegistry2 = () => {
                         
                         <ImageInput setImg={setImg2} val={img2}/>
                     </div>
+                </div>
+                <div style={{display:'flex', justifyContent:"space-around"}}>
                     <div style={{display:"flex", flexDirection:"column"}}>
-                        
                         <ImageInput setImg={setImg3} val={img3}/>
+                    </div>
+                    <div style={{display:"flex", flexDirection:"column"}}>
+                        <ImageInputs setImg={setImgAdditional} vals={imgAdditional}/>
                     </div>
                 </div>
             </div>
             <div>
-                <h4>주방 사진</h4>
+            <a className="fontForRegister" >주방 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <div style={{display:'flex', justifyContent:"space-evenly"}}>
+                <div style={{display:'flex', justifyContent:"space-around"}}>
                     <div style={{display:"flex",  flexDirection:"column"}} >
                         <ImageInput setImg={setKitchen1} val={kitchen1}/>
                     </div>
@@ -87,14 +95,19 @@ const HostRegistry2 = () => {
                         
                         <ImageInput setImg={setKitchen2} val={kitchen2}/>
                     </div>
+                </div>
+                <div style={{display:'flex', justifyContent:"space-around"}}>
                     <div style={{display:"flex", flexDirection:"column"}}>
                         
                         <ImageInput setImg={setKitchen3} val={kitchen3}/>
                     </div>
+                    <div style={{display:"flex", flexDirection:"column"}}>
+                        <ImageInputs setImg={setKitchenAdditional} vals={kitchenAdditional}/>
+                    </div>
                 </div>
             </div>
             <div>
-                <h4>메뉴 사진</h4>
+            <a className="fontForRegister" >메뉴 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
                 <button style={{border:"none",
                     backgroundColor:"white",
@@ -109,7 +122,7 @@ const HostRegistry2 = () => {
                     <h3>내용</h3>
                     <button onClick={()=>setIsModalOpen2(false)}>닫기</button>
                 </Modal>
-                <div style={{display:'flex', justifyContent:"center"}}>
+                <div style={{display:'flex', justifyContent:"space-around"}}>
                     <div style={{display:"flex",  flexDirection:"column"}} >
                         <ImageInput setImg={setMenu1} val={menu1}/>
                     </div>
@@ -120,9 +133,9 @@ const HostRegistry2 = () => {
             </div>
             <div style={{display: "flex"}}>
                 <Link to="/hostRegistry">
-                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
+                    <button style={{backgroundColor: "#FF4F4F"}} className="next_button" >이전</button>
                 </Link>
-                <button style={{backgroundColor: "grey"}} className="next_button"
+                <button style={{backgroundColor: "#525252"}} className="next_button"
                             onClick={handleButton}
                 >다음</button>
             </div>

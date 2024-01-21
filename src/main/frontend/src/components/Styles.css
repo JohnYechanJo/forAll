@@ -25,8 +25,8 @@
     white-space: pre-line;
 }
 .image{
-    width: 75%;
-    height: 100%;
+    width: 6.25rem;
+    height: 6.25rem;
     object-fit: cover;
     display: inline-block;
     padding: 0px 0px;
@@ -34,6 +34,7 @@
     cursor: pointer;
     border: 1px solid black;
     border-radius: 5px;
+    flex-shrink: 0;
 }
 .detail{
     border: none;

@@ -37,8 +37,8 @@ const HostRegistry6 =() => {
         const userId = sessionStorage.getItem("user_id");
         // 대표 이미지
         const imgRepresent = await ImageUploader(data.imgRepresent, userId) ;
-        const hallImage = await Promise.all([data.img1, data.img2, data.img3].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const kitImage = await Promise.all([data.kitchen1, data.kitchen2, data.kitchen3].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const hallImage = await Promise.all([data.img1, data.img2, data.img3, ...data.imgAdditional ].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const kitImage = await Promise.all([data.kitchen1, data.kitchen2, data.kitchen3, ...data.kitchenAdditional].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
         const menu = await Promise.all([data.menu1, ...data.menuAdditional].filter((img) => typeof(img) === 'object').map(async (img) => await ImageUploader(img, userId)));
 
         const plateImage = await Promise.all(data.sidePlate.map(async (img) => await ImageUploader(img, userId)));
