@@ -14,6 +14,7 @@ const ChatRoomPage = () => {
     const navigate = useNavigate();
     const [roomId, setRoomId] = useState("");
     const client = useRef();
+    const [isConnected, setIsConnected] = useState(false);
     const [messageSet, setMessageSet] = useState([]);
     const [partner, setPartner] = useState();
     const [partnerData, setPartnerData] = useState();
@@ -45,7 +46,8 @@ const ChatRoomPage = () => {
             .catch((err) => console.error(err));
     }, [partner]);
     const connect = (event) => {
-        client.current = StompJs.over(new SockJs('/ws-stomp'));
+        const sockjs = new SockJs('/ws-stomp');
+        client.current = StompJs.over(sockjs);
         client.current.connect({}, onConnected, (err) => {
             console.error(err);
         });
@@ -58,12 +60,15 @@ const ChatRoomPage = () => {
         //     sender: chatId,
         //     type: 'ENTER'
         // }));
+        setIsConnected(true);
     };
     const onMessageReceived = (payload) => {
-        const data = JSON.parse(payload.body);
-        setMessageSet(prev =>[...prev, data]);
+        const message = JSON.parse(payload.body);
+        axios.get("/api/v1/chat/check/"+message.id);
+        setMessageSet(prev =>[...prev, message]);
     };
     const sendMessage =  async () => {
+        if (!isConnected) return;
         const chatMessage = {
             messageContent: inputMessage,
             senderId: sessionStorage.getItem("user_id"),
