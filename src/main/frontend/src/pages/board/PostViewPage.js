@@ -103,7 +103,7 @@ const PostViewPage = () => {
                 <ImageSlider images={data.postImage}/>
                 <p>댓글수 : {data.comments ? data.comments.length : 0}</p>
             </div>
-            <button onClick={()=>setWriteComment(true)}>댓글을 남겨주세요</button>
+            <button onClick={()=>setWriteComment(true)} disabled={!sessionStorage.getItem("user_id")}>댓글을 남겨주세요</button>
             {writeComment ? (
                 <div>
                     <input value={comment} onChange={onChangeComment}/>
@@ -120,7 +120,10 @@ const PostViewPage = () => {
                         <p>{comment.text}</p>
                         <p>{TimeUtil.getDiffStr(comment.writtenAt)}</p>
                         <p onClick={() => handleRecommendComment(comment.id)}>{comment.recommend}</p>
-                        <p onClick={() => setWriteRecomment(idx)}>대댓글: {comment.recomments ? comment.recomments.length : 0}</p>
+                        <p onClick={() => {
+                            if(!sessionStorage.getItem("user_id")) return;
+                            setWriteRecomment(idx);
+                        }}>대댓글: {comment.recomments ? comment.recomments.length : 0}</p>
                         { writeRecomment === idx ? (<div>
                             <input value={recomment} onChange={onChangeRecomment}/>
                             <button onClick={() => submitRecomment(idx)}>제출</button>

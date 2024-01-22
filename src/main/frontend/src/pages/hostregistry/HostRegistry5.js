@@ -136,6 +136,7 @@ const HostRegistry5 = () => {
             ableWorkIn: data.workIn,
             ableMiseen: data.miseen,
             fireholeNum: data.firePit,
+            capacity: data.capacity,
             equip: data.equip,
             equipExtra: data.extraMachine,
             plateImage: plateImage,
@@ -279,9 +280,7 @@ const HostRegistry5 = () => {
                 <input type="checkbox" checked={isAgree} onChange={() => setIsAgree(!isAgree)}/>동의합니다
             </label>
             <div style={{display: "flex"}}>
-                <Link to="/hostRegistry4">
-                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
-                </Link>
+                <button onClick={()=>navigate(-1,data)} style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 <button style={{backgroundColor: "grey"}} className="next_button"
                             onClick={handleButton}
                 >다음</button>

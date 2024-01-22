@@ -4,6 +4,7 @@ import axios from "axios";
 import ImageViewer from "../../components/ImageViewer";
 import Sidebar from "../../components/home/Sidebar";
 import HomeTemplate from "../../components/home/HomeTemplate";
+import {AddressUtil} from "../../utils/AddressUtil";
 
 const SpaceListViewPage = () => {
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const SpaceListViewPage = () => {
                     (<div key={idx}>
                         <ImageViewer val={data.mainImage} />
                         <p>{data.priceSet}원</p>
-                        <p>{data.address} | {data.name}</p>
+                        <p>{AddressUtil.extraction(data.address)} | {data.name}</p>
                     </div>)
                 ) : null}
             </div>

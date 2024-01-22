@@ -19,6 +19,8 @@ public class Kitchen extends BassDomain {
 
     // 화구
     private Integer fireholeNum;
+    // 주방 수용 인원
+    private Integer capacity;
     // 주방기계
     private String equip;
     // 추가 사용가능 기계

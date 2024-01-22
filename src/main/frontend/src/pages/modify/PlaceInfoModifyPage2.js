@@ -165,9 +165,7 @@ const PlaceInfoModify2 = () => {
                 </div>
             </div>
             <div style={{display: "flex"}}>
-                <Link to="/placeInfoModifyStart">
-                    <button style={{backgroundColor: "#FF4F4F"}} className="next_button" >이전</button>
-                </Link>
+                <button onClick={()=>navigate(-1,data)} style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 <button style={{backgroundColor: "#525252"}} className="next_button"
                             onClick={handleButton}
                 >다음</button>

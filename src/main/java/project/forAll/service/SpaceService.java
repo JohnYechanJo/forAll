@@ -106,12 +106,15 @@ public class SpaceService extends Service {
         rent.setAbleTrial(sf.getAbleTrial());
         rent.setAbleEarlyDeliver(sf.getAbleEarlyDeliver());
         rent.setAbleWorkIn(sf.getAbleWorkIn());
-        rent.setAbleDrink(sf.getAbleDrink());
+        rent.setAbleMiseen(sf.getAbleMiseen());
+        rent.setAbleMiseenStartTime(sf.getAbleMiseenStartTime());
+        rent.setAbleMiseenFinTime(sf.getAbleMiseenFinTime());
         saveRent(rent);
         space.setRent(rent);
 
         final Kitchen kitchen = new Kitchen();
         kitchen.setFireholeNum(sf.getFireholeNum());
+        kitchen.setCapacity(sf.getCapacity());
         kitchen.setEquip(sf.getEquip());
         kitchen.setEquipExtra(sf.getEquipExtra());
         List<Image> plateImage = imageService.findListByIds(sf.getPlateImage());
@@ -181,10 +184,13 @@ public class SpaceService extends Service {
         sf.setAbleTrial(rent.getAbleTrial());
         sf.setAbleEarlyDeliver(rent.getAbleEarlyDeliver());
         sf.setAbleWorkIn(rent.getAbleWorkIn());
-        sf.setAbleDrink(rent.getAbleDrink());
+        sf.setAbleMiseen(rent.getAbleMiseen());
+        sf.setAbleMiseenStartTime(rent.getAbleMiseenStartTime());
+        sf.setAbleMiseenFinTime(rent.getAbleFinTime());
 
         final Kitchen kitchen = space.getKitchen();
         sf.setFireholeNum(kitchen.getFireholeNum());
+        sf.setCapacity(kitchen.getCapacity());
         sf.setEquip(kitchen.getEquip());
         sf.setEquipExtra(kitchen.getEquipExtra());
         sf.setPlateImage(imageService.getImagesNames(kitchen.getPlateImage()));
@@ -251,12 +257,15 @@ public class SpaceService extends Service {
         rent.setAbleTrial(sf.getAbleTrial());
         rent.setAbleEarlyDeliver(sf.getAbleEarlyDeliver());
         rent.setAbleWorkIn(sf.getAbleWorkIn());
-        rent.setAbleDrink(sf.getAbleDrink());
+        rent.setAbleMiseen(sf.getAbleMiseen());
+        rent.setAbleMiseenStartTime(sf.getAbleMiseenStartTime());
+        rent.setAbleMiseenFinTime(sf.getAbleMiseenFinTime());
         saveRent(rent);
         space.setRent(rent);
 
         final Kitchen kitchen = space.getKitchen();
         kitchen.setFireholeNum(sf.getFireholeNum());
+        kitchen.setCapacity(sf.getCapacity());
         kitchen.setEquip(sf.getEquip());
         kitchen.setEquipExtra(sf.getEquipExtra());
         List<Image> plateImage = imageService.findListByIds(sf.getPlateImage());

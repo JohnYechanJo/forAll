@@ -13,6 +13,7 @@ const HostRegistry4 = () => {
 
     const [firePit, setFirePit] = useState(firePitData[0]);
     const [exactFirePit, setExactFirePit] = useState();
+    const [capacity, setCapacity] = useState();
     const [fryer, setFryer] = useState(false);
     const [oven, setOven] = useState(false);
     const [dishWasher, setDishWasher] = useState(false);
@@ -30,6 +31,9 @@ const HostRegistry4 = () => {
 
     const onChangeFirePit = useCallback((e) => {
         setExactFirePit(e.target.value);
+    }, []);
+    const onChangeCapacity = useCallback((e) => {
+        setCapacity(e.target.value);
     }, []);
     const toggleFryer = useCallback(() => {
         if (fryer === true) setFryer(false);
@@ -65,7 +69,7 @@ const HostRegistry4 = () => {
     }, []);
 
     const handleButton = () => {
-        if ((firePit !== undefined) && (sidePlate !== undefined) && (countSidePlate !== undefined) && (cup !== undefined) && (countCup !== undefined)
+        if ((firePit !== undefined) && (capacity !== undefined) && (sidePlate !== undefined) && (countSidePlate !== undefined) && (cup !== undefined) && (countCup !== undefined)
             && (cuttrary !== undefined) && (countCuttrary !== undefined)){
             isPublic = true;
             submit();
@@ -79,17 +83,11 @@ const HostRegistry4 = () => {
         if (dishWasher) equip.push("식기세척기");
         if (iceMaker) equip.push("제빙기");
         data.isPublic = data.isPublic && isPublic;
-        if (firePit === "직접 입력") {
-            setFirePit(exactFirePit);
-        }
-        else{
-            const num = firePit.split("개")[0];
-            setFirePit(num);
-        }
         navigate("/hostRegistry5", {
             state: {
                 ...data,
-                firePit: firePit,
+                firePit: firePit === "직접 입력" ? exactFirePit : firePit.split("개")[0],
+                capacity: capacity,
                 equip: equip.join(","),
                 extraMachine: extraMachine,
                 sidePlate: sidePlate,
@@ -119,6 +117,10 @@ const HostRegistry4 = () => {
                         {exactFirePit < 7 ? <p>7 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
                     </div>
                 ) : null}
+            </div>
+            <div>
+                <p>주방 수용 인원 수</p>
+                <span><input val={capacity} onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{width:"10vw"}}/>명</span>
             </div>
             <div>
                 <p>주방기계*</p>
@@ -157,9 +159,7 @@ const HostRegistry4 = () => {
             </div>
 
             <div style={{display: "flex"}}>
-                <Link to="/hostRegistry3">
-                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
-                </Link>
+                <button onClick={()=>navigate(-1,data)} style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 <button style={{backgroundColor: "grey"}} className="next_button"
                             onClick={handleButton}
                 >다음</button>

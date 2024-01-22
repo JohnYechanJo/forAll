@@ -63,11 +63,17 @@ public class SpaceForm {
     private Boolean ableEarlyDeliver;
     // 워크인 가능 여부
     private Boolean ableWorkIn;
-    // 주류판매 가능 여부
-    private Boolean ableDrink;
+    // 미장 가능 여부
+    private Boolean ableMiseen;
+    // 미장 이용가능시작시간
+    private Integer ableMiseenStartTime;
+    // 미장 이용가능종료시간
+    private Integer ableMiseenFinTime;
 
     // 화구
     private Integer fireholeNum;
+    // 주방 수용 인원
+    private Integer capacity;
     // 주방기계
     private String equip;
     // 추가 사용가능 기계

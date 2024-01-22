@@ -5,8 +5,8 @@ import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
 import "../../components/Styles.css";
-import MultipleDatePicker from "react-multiple-datepicker";
 import axios from "axios";
+import MultipleDatePicker from "react-multiple-datepicker";
 const PlaceInfoModifyPage3 = () => {
     const location = useLocation();
     const data = {...location.state};
@@ -459,9 +459,7 @@ const PlaceInfoModifyPage3 = () => {
                     className="detail"
             >• 워크인이란?</button>
             <div style={{display: "flex"}}>
-                <Link to="/placeInfoModify2">
-                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
-                </Link>
+                <button onClick={()=>navigate(-1,data)}  style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 <button style={{backgroundColor: "grey"}} className="next_button"
                             onClick={handleButton}
                 >다음</button>

@@ -2,7 +2,8 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Autoplay, Pagination} from "swiper";
 import 'swiper/swiper.min.css'
 import  './Banner.css'
-import {useEffect} from "react"; // 나중에 Styles.css로 합쳐도 무방
+import {useEffect} from "react";
+import {AddressUtil} from "../utils/AddressUtil"; // 나중에 Styles.css로 합쳐도 무방
 const Banner = ({dataSet, navigate}) => {
     // 왜인지는 모르겠는데 얘만 process 접근이 안됨
     // const SpringAppUrl = process.env.SPRING_APP_URL;
@@ -29,7 +30,7 @@ const Banner = ({dataSet, navigate}) => {
                                 alt={"image"}
                             />
                             <p>{data.priceSet}원</p>
-                            <p>{data.address} | {data.name}</p>
+                            <p>{AddressUtil.extraction(data.address)} | {data.name}</p>
                         </div>
                     </SwiperSlide>)
                 }) : null}
