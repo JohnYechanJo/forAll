@@ -83,17 +83,10 @@ const HostRegistry4 = () => {
         if (dishWasher) equip.push("식기세척기");
         if (iceMaker) equip.push("제빙기");
         data.isPublic = data.isPublic && isPublic;
-        if (firePit === "직접 입력") {
-            setFirePit(exactFirePit);
-        }
-        else{
-            const num = firePit.split("개")[0];
-            setFirePit(num);
-        }
         navigate("/hostRegistry5", {
             state: {
                 ...data,
-                firePit: firePit,
+                firePit: firePit === "직접 입력" ? exactFirePit : firePit.split("개")[0],
                 capacity: capacity,
                 equip: equip.join(","),
                 extraMachine: extraMachine,
@@ -166,9 +159,7 @@ const HostRegistry4 = () => {
             </div>
 
             <div style={{display: "flex"}}>
-                <Link to="/hostRegistry3">
-                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
-                </Link>
+                <button onClick={()=>navigate(-1,data)} style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 <button style={{backgroundColor: "grey"}} className="next_button"
                             onClick={handleButton}
                 >다음</button>

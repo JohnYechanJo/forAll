@@ -192,9 +192,7 @@ const PlaceInfoModifyPage4 = () => {
                 </div>
             </div>
             <div style={{display: "flex"}}>
-                <Link to="/placeInfoModify3">
-                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
-                </Link>
+                <button onClick={()=>navigate(-1,data)} style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 <button style={{backgroundColor: "grey"}} className="next_button"
                             onClick={handleButton}
                 >다음</button>

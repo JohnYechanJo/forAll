@@ -285,9 +285,7 @@ const PlaceInfoModifyPage5 = () => {
                 <input type="checkbox" checked={isAgree} onChange={() => setIsAgree(!isAgree)} />동의합니다
             </label>
             <div style={{ display: "flex" }}>
-                <Link to="/placeInfoModify4">
-                    <button className="next_button" style={{ backgroundColor: "red" }} >이전</button>
-                </Link>
+                <button onClick={()=>navigate(-1,data)} style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 <button className="next_button" style={{ backgroundColor: "grey" }}
                     onClick={handleButton}
                 >다음</button>

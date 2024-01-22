@@ -19,6 +19,16 @@ const Sidebar = ({ width = 18.75, children }) => {
             setOpen(false);
         }
     };
+    const logIn = () => navigate("/login");
+    const logOut = () => {
+        axios.post("/api/v1/logout")
+            .then(() => {
+                sessionStorage.clear();
+                window.location.href = "/";
+            }).catch((res)=>{
+            console.error(res);
+        });
+    };
     return (
         <div className={styles.container}>
             <div ref={side} className={styles.sidebar}
@@ -99,6 +109,9 @@ const Sidebar = ({ width = 18.75, children }) => {
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>공간 정보수정</button>
                         </Link>
                     </div>
+                </div>
+                <div>
+                    {sessionStorage.getItem("user_id") ? (<button onClick={logOut}>로그아웃</button>) : (<button onClick={logIn}>로그인</button>)}
                 </div>
                 
 

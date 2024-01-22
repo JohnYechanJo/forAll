@@ -20,18 +20,6 @@ const MainPage = () => {
     const spaceRef = useRef();
     const boardRef = useRef();
     const mainPageRef = useRef();
-    if(sessionStorage.getItem("user_id") == null){
-        window.location.href = "/login";
-    }
-    const logOut = () => {
-        axios.post("/api/v1/logout")
-            .then(() => {
-                sessionStorage.clear();
-                window.location.href = "/login";
-            }).catch((res)=>{
-            console.error(res);
-        });
-    };
     const spaceFocus = () => { spaceRef.current?.scrollIntoView({ behavior: 'smooth' })};
     const boardFocus = () => { boardRef.current?.scrollIntoView({ behavior: 'smooth' })};
 
@@ -94,7 +82,6 @@ const MainPage = () => {
                 </div>
                 <ArticleListTemplate postList={recipeData} preview={true}/>
             </div>
-            <button onClick={logOut}>로그아웃</button>
         </div>
     )
 };

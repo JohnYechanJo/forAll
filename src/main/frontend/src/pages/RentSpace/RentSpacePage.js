@@ -4,6 +4,7 @@ import axios from "axios";
 import ImageSlider from "../../components/ImageSlider";
 import {KitchenFeat} from "../../utils/enums";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
+import {AddressUtil} from "../../utils/AddressUtil";
 const RentSpacePage = () => {
     const params = useParams();
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ const RentSpacePage = () => {
                 <ImageSlider images={images1}/>
             </div>
             <div>
-                <h1>{data.address} | {data.name}</h1>
+                <h1>{AddressUtil.extraction(data.address)} | {data.name}</h1>
                 <p>{data.priceSet}원 | {data.ableDate}</p>
                 {/*Todo : 관리자 채팅 연결*/}
                 <p>*영업일 대관 시 800,000원 | 별도 문의 바람</p>

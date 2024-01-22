@@ -55,7 +55,7 @@ const ChatBoardPage = () => {
             <div>
                 <h1>잡담</h1>
                 <div>
-                    <button onClick={()=>setNewPost(true)}>새 글을 작성해주세요!</button>
+                    <button onClick={()=>setNewPost(true)} disabled={!sessionStorage.getItem("user_id")}>새 글을 작성해주세요!</button>
                     {newPost ? (
                         <div>
                             <input value={postTitle} onChange={onChangePostTitle} placeholder={"글 제목"}/>
