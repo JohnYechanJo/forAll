@@ -76,7 +76,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
                 }} >
-                        <Link to="/guestRegistry">
+                        <Link to="/chefRegistry">
                             <button className="button"  style={{textAlign:"left",marginLeft:"2rem"}}>셰프 등록하기</button>
                         </Link>
                         <Link to="/hostRegistryStart">

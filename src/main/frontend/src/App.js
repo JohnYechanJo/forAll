@@ -24,6 +24,7 @@ import HostRegistry4 from "./pages/hostregistry/HostRegistry4";
 import HostRegistryComplete from "./pages/hostregistry/HostRegistryComplete";
 import GuestRegistry from "./pages/guestregistry/GuestRegistry";
 import LoginHandeler from "./pages/LoginHandeler";
+import ChefRegistry from "./pages/chefregistry/ChefRegisty";
 import ChefInfoModifyPage from './pages/modify/ChefInfoModifyPage';
 import ChefInfoModifyPage2 from './pages/modify/ChefInfoModifyPage2';
 import RentSpacePage from "./pages/RentSpace/RentSpacePage";
@@ -85,6 +86,7 @@ function App() {
         <Route path="/recipe" element={<RecipeBoardPage />} />
         <Route path="/error" element={<ErrorPage />}/>
         <Route path="/notification" element={<Notification />}/>
+        <Route path="/chefRegistry" element={<ChefRegistry />} />
       </Routes>
   );
 }
