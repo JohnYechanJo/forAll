@@ -40,6 +40,7 @@ import ChatRoomPage from "./pages/chat/ChatRoomPage";
 import PostEditPage from "./pages/board/PostEditPage";
 import MyPostPage from "./pages/board/MyPostPage";
 import HostRegistryStartPage from "./pages/hostregistry/HostRegistryStartPage";
+import Notification from './pages/signup/Notification';
 function App() {
   return (
       <Routes>
@@ -83,6 +84,7 @@ function App() {
         <Route path="/chat" element={<ChatBoardPage />} />
         <Route path="/recipe" element={<RecipeBoardPage />} />
         <Route path="/error" element={<ErrorPage />}/>
+        <Route path="/notification" element={<Notification />}/>
       </Routes>
   );
 }

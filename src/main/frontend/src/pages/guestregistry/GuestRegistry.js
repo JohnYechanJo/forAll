@@ -63,7 +63,7 @@ const GuestRegistry = () => {
             interest: selectedIngredient,
 
         }).then((res) => {
-            navigate("/");
+            navigate("/notification");
         }).catch((err) => console.error(err));
     };
 

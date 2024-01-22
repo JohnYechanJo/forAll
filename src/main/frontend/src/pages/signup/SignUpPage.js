@@ -145,7 +145,7 @@ const SignUpPage = () => {
                     }
                 }
             ).then((response) => {
-                navigate('/signUpComplete',{
+                navigate('/guestRegistry',{
                     state: {
                         id: id,
                         name: name,
