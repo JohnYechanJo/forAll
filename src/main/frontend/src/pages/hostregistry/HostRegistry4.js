@@ -13,6 +13,7 @@ const HostRegistry4 = () => {
 
     const [firePit, setFirePit] = useState(firePitData[0]);
     const [exactFirePit, setExactFirePit] = useState();
+    const [capacity, setCapacity] = useState();
     const [fryer, setFryer] = useState(false);
     const [oven, setOven] = useState(false);
     const [dishWasher, setDishWasher] = useState(false);
@@ -30,6 +31,9 @@ const HostRegistry4 = () => {
 
     const onChangeFirePit = useCallback((e) => {
         setExactFirePit(e.target.value);
+    }, []);
+    const onChangeCapacity = useCallback((e) => {
+        setCapacity(e.target.value);
     }, []);
     const toggleFryer = useCallback(() => {
         if (fryer === true) setFryer(false);
@@ -65,7 +69,7 @@ const HostRegistry4 = () => {
     }, []);
 
     const handleButton = () => {
-        if ((firePit !== undefined) && (sidePlate !== undefined) && (countSidePlate !== undefined) && (cup !== undefined) && (countCup !== undefined)
+        if ((firePit !== undefined) && (capacity !== undefined) && (sidePlate !== undefined) && (countSidePlate !== undefined) && (cup !== undefined) && (countCup !== undefined)
             && (cuttrary !== undefined) && (countCuttrary !== undefined)){
             isPublic = true;
             submit();
@@ -90,6 +94,7 @@ const HostRegistry4 = () => {
             state: {
                 ...data,
                 firePit: firePit,
+                capacity: capacity,
                 equip: equip.join(","),
                 extraMachine: extraMachine,
                 sidePlate: sidePlate,
@@ -119,6 +124,10 @@ const HostRegistry4 = () => {
                         {exactFirePit < 7 ? <p>7 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
                     </div>
                 ) : null}
+            </div>
+            <div>
+                <p>주방 수용 인원 수</p>
+                <span><input val={capacity} onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{width:"10vw"}}/>명</span>
             </div>
             <div>
                 <p>주방기계*</p>

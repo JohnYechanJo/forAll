@@ -134,6 +134,7 @@ const HostRegistry5 = () => {
             ableWorkIn: data.workIn,
             ableMiseen: data.miseen,
             fireholeNum: data.firePit,
+            capacity: data.capacity,
             equip: data.equip,
             equipExtra: data.extraMachine,
             plateImage: plateImage,

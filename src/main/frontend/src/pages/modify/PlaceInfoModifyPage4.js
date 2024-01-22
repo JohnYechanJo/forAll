@@ -15,6 +15,7 @@ const PlaceInfoModifyPage4 = () => {
     const firePitData = ["1개","2개","3개","4개","5개","6개","직접 입력"];
 
     const [firePit, setFirePit] = useState(firePitData[0]);
+    const [capacity, setCapacity] = useState();
     const [exactFirePit, setExactFirePit] = useState();
     const [fryer, setFryer] = useState(false);
     const [oven, setOven] = useState(false);
@@ -33,6 +34,9 @@ const PlaceInfoModifyPage4 = () => {
 
     const onChangeFirePit = useCallback((e) => {
         setExactFirePit(e.target.value);
+    }, []);
+    const onChangeCapacity = useCallback((e) => {
+        setCapacity(e.target.value);
     }, []);
     const toggleFryer = useCallback(() => {
         if (fryer === true) setFryer(false);
@@ -78,6 +82,7 @@ const PlaceInfoModifyPage4 = () => {
                 setDbData(res.data)
                 setFirePit(res.data.fireholeNum);
                 setExactFirePit(res.data.fireholeNum);
+                setCapacity(res.data.capacity);
                 setExtraMachine(res.data.equipExtra);
                 setCountSidePlate(res.data.plateNum);
                 setCountCup(res.data.cupNum);
@@ -116,6 +121,7 @@ const PlaceInfoModifyPage4 = () => {
             state: {
                 ...data,
                 firePit: firePit >6 ? exactFirePit : firePit,
+                capacity: capacity,
                 equip: equip.join(","),
                 extraMachine: extraMachine,
                 sidePlate: sidePlate,
@@ -145,6 +151,10 @@ const PlaceInfoModifyPage4 = () => {
                         {exactFirePit < 7 ? <p>7 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
                     </div>
                 ) : null}
+            </div>
+            <div>
+                <p>주방 수용 인원 수</p>
+                <span><input val={capacity} onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{width:"10vw"}}/>명</span>
             </div>
             <p>주방기계*</p>
             <div style={{display:"flex", justifyContent:"space-around"}} >

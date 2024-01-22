@@ -7,7 +7,7 @@ const ModifyCompletePage = () => {
             <Modal isOpen={true}
             style={ModalStyles}>
                 <h1>수정되었습니다!</h1>
-                <Link to="/main">확인</Link>
+                <Link to="/">확인</Link>
             </Modal>
         </div>
     )

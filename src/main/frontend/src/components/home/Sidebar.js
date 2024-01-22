@@ -66,7 +66,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
                 }} >
-                        <Link to="/guestRegistryStart">
+                        <Link to="/guestRegistry">
                             <button className="button"  style={{textAlign:"left",marginLeft:"2rem"}}>셰프 등록하기</button>
                         </Link>
                         <Link to="/HostRegistry">
@@ -77,9 +77,13 @@ const Sidebar = ({ width = 18.75, children }) => {
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
                 }}>
-                        <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>채팅함</button>
-                        <button className="button" style={{textAlign:"left",marginLeft:"2rem"}} >고객센터</button>
-                        <button className="button" style={{textAlign:"left",marginLeft:"2rem"}} >내가 쓴 글</button>
+                        <Link to="/chatList">
+                            <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>채팅함</button>
+                        </Link>
+                            <button className="button" style={{textAlign:"left",marginLeft:"2rem"}} >고객센터</button>
+                        <Link to="/mypost">
+                            <button className="button" style={{textAlign:"left",marginLeft:"2rem"}} >내가 쓴 글</button>
+                        </Link>
                     </div>
                     <div style={{height:"9.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",

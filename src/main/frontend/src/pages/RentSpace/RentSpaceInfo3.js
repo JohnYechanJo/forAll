@@ -151,6 +151,10 @@ const RentSpaceInfo3 = () => {
               {data.fireholeNum}
             </div>
           </div>
+            <div>
+                <p>수용 가능 주방 인원 수</p>
+                <p>{data.capacity}</p>
+            </div>
           <div>
             <h4>확보된 주방기계</h4>
                 <div style={{display:"flex", flexDirection:"row",justifyContent:"space-evenly"}}>

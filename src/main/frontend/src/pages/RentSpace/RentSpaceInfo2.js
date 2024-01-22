@@ -212,7 +212,7 @@ const RentSpaceInfo2 = () => {
             <button onClick={() => setIsWorkIn(!isWorkIn)}
                     className="detail"
             >• 워크인이란?</button>
-            <h4>주류판매 가능여부*</h4>
+            <h4>미장*</h4>
             <div style={{
                 display: "flex",
                 justifyContent: "center",
@@ -227,7 +227,7 @@ const RentSpaceInfo2 = () => {
                     textAlign: "center",
                     fontFamily: "Noto Sans KR"
                 }}
-                     className={data.ableDrink === true ? "btn_selected" : ""}>가능
+                     className={data.ableMiseen === true ? "btn_selected" : ""}>가능
                 </div>
                 <div style={{
                     border: "2px solid lightgray",
@@ -237,7 +237,7 @@ const RentSpaceInfo2 = () => {
                     textAlign: "center",
                     fontFamily: "Noto Sans KR"
                 }}
-                     className={data.ableDrink === false ? "btn_selected" : ""}>불가
+                     className={data.ableMiseen === false ? "btn_selected" : ""}>불가
                 </div>
             </div>
         </div>
