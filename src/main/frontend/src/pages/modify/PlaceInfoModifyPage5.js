@@ -247,7 +247,7 @@ const PlaceInfoModifyPage5 = () => {
                 <div style={{ display: "flex" }} >
                     <div style={{ margin: "0.62rem" }}>
                         <p>은행명*</p>
-                        <DropDown dataArr={bankDatas} onChange={setBank} defaultData={dbdata.bankName} key={bank} />
+                        <DropDown dataArr={bankDatas} onChange={setBank} defaultData={dbdata.bankName} val={bank} />
                     </div>
                     <div style={{ margin: "0.62rem" }}>
                         <p>계좌번호*</p>
