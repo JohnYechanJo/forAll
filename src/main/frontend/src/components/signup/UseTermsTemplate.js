@@ -21,7 +21,6 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
         const [everyBox, setEveryBox] = useState(false);
         const [infoCollect, setInfoCollect] = useState(false);
         const [infoThird, setInfoThird] = useState(false);
-        const [infoCoupon, setInfoCoupon] = useState(false);
         const [ageOver14, setAgeOver14] = useState(false);
         const handleCheckBox = () => {
             setEveryBox(!everyBox);
@@ -29,7 +28,6 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
             setCheckbox2(!everyBox);
             setInfoCollect(!everyBox);
             setInfoThird(!everyBox);
-            setInfoCoupon(!everyBox);
             setAgeOver14(!everyBox);
         };
     
@@ -97,14 +95,8 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
                         </p>
                 </div>
                 <div>
-                    <p>
-                        <input type="checkbox" checked={infoCoupon} onChange={() => setInfoCoupon(!infoCoupon)} />
-                        할인쿠폰 등 혜택/정보 수신 동의
-                    </p>
-                </div>
-                <div>
                         <input type="checkbox" checked={ageOver14} onChange={() => setAgeOver14(!ageOver14)} />
-                        만 14세 이상입니다.
+                        본인은 만 14세 이상입니다.
                 </div>
         </div>
     );
