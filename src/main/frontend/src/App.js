@@ -39,6 +39,7 @@ import ChatRoomListPage from "./pages/chat/ChatRoomListPage";
 import ChatRoomPage from "./pages/chat/ChatRoomPage";
 import PostEditPage from "./pages/board/PostEditPage";
 import MyPostPage from "./pages/board/MyPostPage";
+import HostRegistryStartPage from "./pages/hostregistry/HostRegistryStartPage";
 function App() {
   return (
       <Routes>
@@ -58,6 +59,7 @@ function App() {
         <Route path="/placeInfoModify4" element={<PlaceInfoModifyPage4 />} />
         <Route path="/placeInfoModify5" element={<PlaceInfoModifyPage5 />} />
         <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
+        <Route path="/hostRegistryStart" element={<HostRegistryStartPage />}/>
         <Route path="/hostRegistry" element={<HostRegistry />} />
         <Route path="/hostRegistry2" element={<HostRegistry2 />} />
         <Route path="/hostRegistry3" element={<HostRegistry3 />}/>
