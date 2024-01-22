@@ -104,7 +104,7 @@
     border:none;
     margin-bottom: 2.75rem;
     color: white;
-    position: fixed;
+    position: relative;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
