@@ -41,6 +41,8 @@ const HostRegistry3 = () => {
     const [morningDelivery, setMorningDelivery] = useState();
     const [workIn, setWorkIn] = useState();
     const [miseen, setMiseen] = useState();
+    const [miseenTimeFrom, setMiseenTimeFrom] = useState("");
+    const [miseenTimeTo, setMiseenTimeTo] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isTrial, setIsTrial] = useState(false);
     const [isMorningDelivery, setIsMorningDelivery] = useState(false);
@@ -92,7 +94,7 @@ const HostRegistry3 = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
             && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
             && (seat !== undefined) && (price !== undefined) && (trial !== undefined) && (morningDelivery !== undefined)
-            && (workIn !== undefined) && (miseen !== undefined)){
+            && (workIn !== undefined) && (miseen !== undefined)&&(miseenTimeFrom !== "") && (miseenTimeTo !== "")){
             isPublic = true;
             submit();
         }
@@ -130,6 +132,8 @@ const HostRegistry3 = () => {
                 rentWeek: rentData,
                 rentTimeFrom: rentTimeFrom !== "" ? rentTimeFrom.split("시")[0] : "",
                 rentTimeTo: rentTimeTo !== "" ? rentTimeTo.split("시")[0] : "",
+                miseenTimeFrom: miseenTimeFrom !== "" ? miseenTimeFrom.split("시")[0] : "",
+                miseenTimeTo: miseenTimeTo !== "" ? miseenTimeTo.split("시")[0] : "",
                 floor: floor,
                 parkAvaliable: parkAvaliable,
                 elevator: elevator,
@@ -358,6 +362,15 @@ const HostRegistry3 = () => {
                     fontFamily: "Noto Sans KR"
                 }}
                      className={miseen === false ? "btn_selected" : ""} onClick={() => setMiseen(false)}>불가
+                </div>
+            </div>
+            <div hidden={!miseen}>
+                <div  style={{display:"flex"}}>
+                    <span>대관전일</span>
+                    <span><DropDown dataArr={rentTimeFromData} onChange={setMiseenTimeFrom} placeholder={"00시"} width="5.25rem"/></span>
+                    <span> 부터, 당일 </span>
+                    <span><DropDown dataArr={rentTimeToData} onChange={setMiseenTimeTo} placeholder={"24시"} width="5.25rem"/></span>
+                    <span> 까지</span>
                 </div>
             </div>
             <Modal isOpen={isMiseen} style={ModalStyles} >

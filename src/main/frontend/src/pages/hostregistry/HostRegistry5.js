@@ -123,6 +123,8 @@ const HostRegistry5 = () => {
             ableDate: data.rentWeek,
             ableStartHour: data.rentTimeFrom,
             ableFinHour: data.rentTimeTo,
+            ableStartMiseenHour: data.miseenTimeFrom,
+            ableFinMiseenHour: data.miseenTimeTo,
             floorNum: data.floor,
             ableParking: data.parkAvaliable,
             haveElevator: data.elevator,

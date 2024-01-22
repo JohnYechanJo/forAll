@@ -20,7 +20,8 @@ const PlaceInfoModifyPage3 = () => {
     const rentTimeToData = [...Array(25).keys()].map(i => i+"시");
     const floorData = ["지상1층", "지상2층", "지상3층", "지하1층", "지하2층", "지하3층", "직접 입력"];
     const parkAvaliableData = ["주차불가", "1대", "2대", "3대", "4대", "직접 입력"];
-
+    const [miseenTimeFrom, setMiseenTimeFrom] = useState("");
+    const [miseenTimeTo, setMiseenTimeTo] = useState("");
     const [rentWeek, setRentWeek] = useState(rentWeeksData[0]);
     const [rentDays, setRentDays] = useState([]);
     const [monDay, setMonDay] = useState(false);
@@ -104,6 +105,8 @@ const PlaceInfoModifyPage3 = () => {
                 setWorkIn(res.data.ableWorkIn)
                 setMiseen(res.data.ableMiseen)
                 setRentWeek(res.data.ableDate.split(" ")[0])
+                setMiseenTimeFrom(res.data.ableStartMiseenHour)
+                setMiseenTimeTo(res.data.ableFinMiseenHour)
                 setRentTimeFrom(res.data.ableStartHour)
                 setRentTimeTo(res.data.ableFinHour)
                 setFloor(res.data.floorNum)
@@ -169,6 +172,8 @@ const PlaceInfoModifyPage3 = () => {
                     rentWeek: rentData,
                     rentTimeFrom: rentTimeFrom,
                     rentTimeTo: rentTimeTo,
+                    miseenTimeFrom: miseenTimeFrom,
+                    miseenTimeTo: miseenTimeTo,
                     floor: floor,
                     parkAvaliable: parkAvaliable,
                     elevator: elevator,
@@ -402,14 +407,22 @@ const PlaceInfoModifyPage3 = () => {
                      className={(miseen)  === false ? "btn_selected" : ""} onClick={() => setMiseen(false)}>불가
                 </div>
             </div>
-            <div style={{display: "flex"}}>
-                <Link to="/placeInfoModify2">
-                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
-                </Link>
-                <button style={{backgroundColor: "grey"}} className="next_button"
-                            onClick={handleButton}
-                >다음</button>
+            <div hidden={!miseen}>
+                <div  style={{display:"flex"}}>
+                    <span>대관전일</span>
+                    <span><DropDown dataArr={rentTimeFromData} onChange={setMiseenTimeFrom} placeholder={"00시"} width="5.25rem"/></span>
+                    <span> 부터, 당일 </span>
+                    <span><DropDown dataArr={rentTimeToData} onChange={setMiseenTimeTo} placeholder={"24시"} width="5.25rem"/></span>
+                    <span> 까지</span>
+                </div>
             </div>
+            <Modal isOpen={isMiseen} style={ModalStyles} >
+                <header>미장이란?</header>
+                <button onClick={()=>setIsMiseen(false)} >닫기</button>
+            </Modal>
+            <button onClick={() => setIsMiseen(!isMiseen)}
+                    className="detail"
+            >• 미장이란?</button>
             <p>워크인*</p>
             <div style={{
                 display: "flex",
@@ -437,13 +450,6 @@ const PlaceInfoModifyPage3 = () => {
                 }}
                      className={(workIn) === false ? "btn_selected" : ""} onClick={() => setWorkIn(false)}>불가
                 </div>
-                <Modal isOpen={isMiseen} style={ModalStyles} >
-                <header>미장이란?</header>
-                <button onClick={()=>setIsMiseen(false)} >닫기</button>
-            </Modal>
-            <button onClick={() => setIsMiseen(!isMiseen)}
-                    className="detail"
-            >• 미장이란?</button>
             </div>
             <Modal isOpen={isWorkIn} style={ModalStyles} >
                 <header>워크인이란?</header>
@@ -452,7 +458,14 @@ const PlaceInfoModifyPage3 = () => {
             <button onClick={() => setIsWorkIn(!isWorkIn)}
                     className="detail"
             >• 워크인이란?</button>
-            
+            <div style={{display: "flex"}}>
+                <Link to="/placeInfoModify2">
+                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
+                </Link>
+                <button style={{backgroundColor: "grey"}} className="next_button"
+                            onClick={handleButton}
+                >다음</button>
+            </div>
             <Modal isOpen={isModalOpen} ariaHideApp={false}>
                 <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
                 <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
