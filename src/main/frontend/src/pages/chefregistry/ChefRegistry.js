@@ -144,7 +144,7 @@ const ChefRegistry = () => {
                     <button onClick={() => setIsModalOpen(false)}>뒤로</button>
                 </Modal>
                 <Modal isOpen={isModalOpen2} style={ModalStyles} ariaHideApp={false}>
-                    <p style={{fontSize: "16px"}}>셰프정보가 수정되었습니다!</p>
+                    <p style={{fontSize: "16px"}}>셰프정보가 등록되었습니다!</p>
                     <button onClick={() => navigate("/")}>확인</button>
                 </Modal>
             </div>
