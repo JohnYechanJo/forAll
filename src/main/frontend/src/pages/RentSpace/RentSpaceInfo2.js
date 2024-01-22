@@ -240,6 +240,18 @@ const RentSpaceInfo2 = () => {
                      className={data.ableMiseen === false ? "btn_selected" : ""}>불가
                 </div>
             </div>
+            {data.ableMiseen ?(
+                <div>
+                    <div  style={{display:"flex"}}>
+                        <span>대관전일</span>
+                        <span>{data.ableMiseenStartTime}</span>
+                        <span> 부터, 당일 </span>
+                        <span>{data.ableMiseenFinTime}</span>
+                        <span> 까지</span>
+                    </div>
+                </div>
+            ) : null}
+
         </div>
         <button onClick={() => navigate(-1)}>돌아가기</button>
     </div>)
