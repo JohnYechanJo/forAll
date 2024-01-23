@@ -8,6 +8,8 @@ import project.forAll.domain.Image;
 import project.forAll.domain.member.ChefProfile;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.member.Profile;
+import project.forAll.dto.ChefProfilePublicDTO;
+import project.forAll.dto.ProfilePublicDTO;
 import project.forAll.form.ChefProfileForm;
 import project.forAll.form.ProfileForm;
 import project.forAll.repository.member.ChefProfileRepository;
@@ -52,5 +54,13 @@ public class ChefProfileService extends Service {
         List<ChefProfile> chefProfiles = chefProfileRepository.findByProfile(profile);
         if (chefProfiles.isEmpty()) return null;
         return chefProfiles.get(0);
+    }
+
+    public ChefProfilePublicDTO convertToChefProfilePublicDTO(ChefProfile chefProfile) {
+        ChefProfilePublicDTO chefProfilePublicDTO = new ChefProfilePublicDTO();
+        chefProfilePublicDTO.setId(chefProfile.getId());
+        chefProfilePublicDTO.setCareer(chefProfile.getCareer());
+
+        return chefProfilePublicDTO;
     }
 }

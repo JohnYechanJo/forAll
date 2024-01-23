@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
 import project.forAll.controller.api.APIController;
 import project.forAll.domain.member.Member;
+import project.forAll.dto.MemberPublicDTO;
 import project.forAll.form.MemberForm;
 import project.forAll.service.MemberService;
 import project.forAll.web.SessionConst;
@@ -107,5 +108,18 @@ public class APIMemberController extends APIController {
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Wrong password"), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/members/{id}")
+    public ResponseEntity getMemberForPublic(@PathVariable("id") final Long id){
+        final Member member = (Member) memberService.findById(id);
+
+        if (member == null) return new ResponseEntity(errorResponse("No user found for id " + id),
+                HttpStatus.NOT_FOUND);
+
+        // Convert Member to MemberPublicDTO
+        MemberPublicDTO memberPublicDTO = memberService.convertToMemberPublicDTO(member);
+
+        return new ResponseEntity(memberPublicDTO, HttpStatus.OK);
     }
 }

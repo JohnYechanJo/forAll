@@ -8,6 +8,8 @@ import project.forAll.controller.SessionManager;
 import project.forAll.controller.api.APIController;
 import project.forAll.domain.member.Profile;
 import project.forAll.domain.member.Member;
+import project.forAll.dto.MemberPublicDTO;
+import project.forAll.dto.ProfilePublicDTO;
 import project.forAll.form.ProfileForm;
 import project.forAll.service.MemberService;
 import project.forAll.service.ProfileService;
@@ -70,5 +72,19 @@ public class APIProfileController extends APIController {
         }catch(final Exception e){
             return new ResponseEntity(errorResponse("Could not update Member : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    // session 확인할 필요 없어서 해당 코드 제거
+    @GetMapping("/profile/{id}")
+    public ResponseEntity getProfileForPublic(@PathVariable("id") final Long id){
+        final Profile profile = (Profile) profileService.findById(id);
+
+        if (profile == null) return new ResponseEntity(errorResponse("No profile found for id " + id),
+                HttpStatus.NOT_FOUND);
+
+        // Convert Member to MemberPublicDTO
+        ProfilePublicDTO profilePublicDTO = profileService.convertToProfilePublicDTO(profile);
+
+        return new ResponseEntity(profilePublicDTO, HttpStatus.OK);
     }
 }

@@ -9,6 +9,8 @@ import project.forAll.controller.api.APIController;
 import project.forAll.domain.member.ChefProfile;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.member.Profile;
+import project.forAll.dto.ChefProfilePublicDTO;
+import project.forAll.dto.ProfilePublicDTO;
 import project.forAll.form.ChefProfileForm;
 import project.forAll.form.ProfileForm;
 import project.forAll.service.ChefProfileService;
@@ -79,5 +81,18 @@ public class APIChefProfileController extends APIController {
             return new ResponseEntity(errorResponse("Could not update Member : "+ e.getMessage()),
                     HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/chefProfile/{id}")
+    public ResponseEntity getChefProfileForPublic(@PathVariable("id") final Long id){
+        final ChefProfile chefProfile = (ChefProfile) chefProfileService.findById(id);
+
+        if (chefProfile == null) return new ResponseEntity(errorResponse("No chefprofile found for id " + id),
+                HttpStatus.NOT_FOUND);
+
+        // Convert Member to MemberPublicDTO
+        ChefProfilePublicDTO chefProfilePublicDTO = chefProfileService.convertToChefProfilePublicDTO(chefProfile);
+
+        return new ResponseEntity(chefProfilePublicDTO, HttpStatus.OK);
     }
 }
