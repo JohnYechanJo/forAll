@@ -102,7 +102,7 @@ const HostRegistry4 = () => {
 
     return (
         <div>
-            <h1>2. 이용 안내</h1>
+            <h1>(2/4) 이용 안내</h1>
             <div>
                 <h4>주방 정보*</h4>
                 <hr style={{ height: "2px", backgroundColor: "black" }} />
@@ -120,7 +120,7 @@ const HostRegistry4 = () => {
             </div>
             <div>
                 <p>주방 수용 인원 수</p>
-                <span><input val={capacity} onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{width:"10vw"}}/>명</span>
+                <span><input val={capacity} onChange={onChangeCapacity} placeholder={"주방이 수용할 수 있는 최대 인원수를 입력해 주세요."} style={{width:"10vw"}}/>명</span>
             </div>
             <div>
                 <p>주방기계*</p>
@@ -134,7 +134,7 @@ const HostRegistry4 = () => {
 
             <div>
                 <p>추가 사용 가능 기계*</p>
-                <input onChange={onChangeExtraMachine} placeholder={"사용 가능한 기계를 입력해주세요. ex) 수비드 기계"}/>
+                <input onChange={onChangeExtraMachine} placeholder={"사용할 수 있는 기계를 입력해주세요. ex) 수비드 기계"}/>
             </div>
             <h4>매장 물품</h4>
             <hr style={{ height: "2px", backgroundColor: "black" }} />
@@ -142,19 +142,19 @@ const HostRegistry4 = () => {
                 <div>
                     <p>앞접시*</p>
                     <ImageInputs setImg={setSidePlate} vals={sidePlate}/>
-                    <input onChange={onChangeCountSidePlate} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
+                    <input onChange={onChangeCountSidePlate} placeholder={"최대 개수"}/>
                 </div>
                 <div>
                     <p>물컵*</p>
                     <ImageInputs setImg={setCup} vals={cup}/>
-                    <input onChange={onChangeCountCup} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
+                    <input onChange={onChangeCountCup} placeholder={"최대 개수"}/>
                 </div>
             </div>
             <div style={{display:"flex"}} >
                 <div>
                     <p>커트러리*</p>
                     <ImageInputs setImg={setCuttrary} vals={cuttrary}/>
-                    <input onChange={onChangeCountCuttrary} placeholder={"최대 개수를 기준으로 입력해주세요"}/>
+                    <input onChange={onChangeCountCuttrary} placeholder={"최대 개수"}/>
                 </div>
             </div>
 

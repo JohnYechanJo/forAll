@@ -15,7 +15,6 @@ const HostRegistry3 = () => {
     const days = [...Array(31).keys()].map(i => (i + 1)+"일");
     const rentTimeFromData = [...Array(25).keys()].map(i => i+"시");
     const rentTimeToData = [...Array(25).keys()].map(i => i+"시");
-    const floorData = ["지상1층", "지상2층", "지상3층", "지하1층", "지하2층", "지하3층", "직접 입력"];
     const parkAvaliableData = ["주차불가", "1대", "2대", "3대", "4대", "직접 입력"];
 
     const [rentWeek, setRentWeek] = useState(rentWeeksData[0]);
@@ -29,9 +28,7 @@ const HostRegistry3 = () => {
     const [sunDay, setSunDay] = useState(false);
     const [rentTimeFrom, setRentTimeFrom] = useState("");
     const [rentTimeTo, setRentTimeTo] = useState("");
-    const [floor, setFloor] = useState("");
-    const [exactFloor, setExactFloor] = useState();
-    const [parkAvaliable, setParkAvaliable] = useState("");
+    const [parkAvaliable, setParkAvaliable] = useState();
     const [exactPark, setExactPark] = useState();
     const [elevator, setElevator] = useState();
     const [table, setTable] = useState();
@@ -51,9 +48,7 @@ const HostRegistry3 = () => {
     const [formattedPrice, setFormattedPrice] = useState();
     let isPublic = false;
 
-    const onChangeFloor = useCallback((e) => {
-        setExactFloor(e.target.value);
-    }, []);
+
     const onChangePark = useCallback((e) => {
         setExactPark(e.target.value);
     }, []);
@@ -92,7 +87,7 @@ const HostRegistry3 = () => {
 
     const handleButton = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
-            && (floor !== "") && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
+            && (parkAvaliable) && (elevator !== undefined) && (table !== undefined)
             && (seat !== undefined) && (price !== undefined) && (trial !== undefined) && (morningDelivery !== undefined)
             && (workIn !== undefined) && (miseen !== undefined)&&(miseenTimeFrom !== "") && (miseenTimeTo !== "")){
             isPublic = true;
@@ -113,18 +108,7 @@ const HostRegistry3 = () => {
         
         const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0,4).join(" ")).join(",");
         const rentData = rentWeek !== "직접지정" ? rentWeek + " " +rentDayString.join(",") : rentDaysdata;
-        if (!floorData.includes(floor)) {
-            setFloor("지상"+exactFloor+"층");
-        }
-        else{
-            setFloor(floor);
-        }
-        if (!parkAvaliableData.includes(parkAvaliable)) {
-            setParkAvaliable(exactPark+"대");
-        }
-        else{
-            setParkAvaliable(parkAvaliable);
-        }   
+        const park = parkAvaliableData.includes(parkAvaliable) ? parkAvaliable : exactPark+"대";
         data.isPublic = data.isPublic && isPublic;
         navigate("/hostRegistry4",{
             state: {
@@ -134,8 +118,7 @@ const HostRegistry3 = () => {
                 rentTimeTo: rentTimeTo !== "" ? rentTimeTo.split("시")[0] : "",
                 miseenTimeFrom: miseenTimeFrom !== "" ? miseenTimeFrom.split("시")[0] : "",
                 miseenTimeTo: miseenTimeTo !== "" ? miseenTimeTo.split("시")[0] : "",
-                floor: floor,
-                parkAvaliable: parkAvaliable,
+                parkAvaliable: park,
                 elevator: elevator,
                 table: table,
                 seat: seat,
@@ -162,7 +145,7 @@ const HostRegistry3 = () => {
             marginLeft: "2vw",
             flexDirection: "column",
         }}>
-            <h1>2. 이용 안내</h1>
+            <h1>(2/4) 이용 안내</h1>
             <p>이용 정보를 입력해주세요</p>
             <div>
                 <p>대관 가능일*</p>
@@ -180,28 +163,17 @@ const HostRegistry3 = () => {
                         </div>
                         : null)}
             </div>
-            <p>이용시간*</p>
+            <p>입 퇴실 시간*</p>
             <div style={{
                 display: "flex",
                 justifyContent: "left",
                 alignItems: "center",
             }}>
-                <span>전일 </span>
+                <span>대관 당일 </span>
                 <span><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"}/></span>
                 <span> 부터, 당일 </span>
                 <span><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"}/></span>
                 <span> 까지</span>
-            </div>
-            <div>
-                <p>공간 층수*</p>
-                <DropDown dataArr={floorData} onChange={setFloor} placeholder={"층수 여부를 선택해주세요."}/>
-                {floor === "직접 입력" ? (
-                    <div>
-                        <input onChange={onChangeFloor}/>
-                        <p>층</p>
-                        {exactFloor < 4 ? <p>4 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
-                    </div>
-                ) : null}
             </div>
             <div>
                 <p>주차 여부*</p>
@@ -366,7 +338,7 @@ const HostRegistry3 = () => {
             </div>
             <div hidden={!miseen}>
                 <div  style={{display:"flex"}}>
-                    <span>대관전일</span>
+                    <span>대관 전일</span>
                     <span><DropDown dataArr={rentTimeFromData} onChange={setMiseenTimeFrom} placeholder={"00시"} width="5.25rem"/></span>
                     <span> 부터, 당일 </span>
                     <span><DropDown dataArr={rentTimeToData} onChange={setMiseenTimeTo} placeholder={"24시"} width="5.25rem"/></span>

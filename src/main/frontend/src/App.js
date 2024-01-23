@@ -11,14 +11,14 @@ import PersonalInfoModifyPage2 from './pages/modify/PersonalInfoModifyPage2';
 import PlaceInfoModifyPage2 from './pages/modify/PlaceInfoModifyPage2';
 import PlaceInfoModifyPage3 from './pages/modify/PlaceInfoModifyPage3';
 import PlaceInfoModifyPage4 from './pages/modify/PlaceInfoModifyPage4';
-import PlaceInfoModifyPage5 from './pages/modify/PlaceInfoModifyPage5';
+import PlaceInfoModifyPage6 from './pages/modify/PlaceInfoModifyPage6';
 import ModifyCompletePage from "./pages/modify/ModifyCompletePage";
 import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
 import HostRegistry from "./pages/hostregistry/HostRegistry";
 import HostRegistry2 from "./pages/hostregistry/HostRegistry2";
 import HostRegistry3 from "./pages/hostregistry/HostRegistry3";
-import HostRegistry5 from "./pages/hostregistry/HostRegistry5";
+import HostRegistry6 from "./pages/hostregistry/HostRegistry6";
 import HostRegistry4 from "./pages/hostregistry/HostRegistry4";
 import HostRegistryComplete from "./pages/hostregistry/HostRegistryComplete";
 import HostRegistryCheckingPage from './pages/hostregistry/HostRegistryChecking';
@@ -43,6 +43,9 @@ import PostEditPage from "./pages/board/PostEditPage";
 import MyPostPage from "./pages/board/MyPostPage";
 import HostRegistryStartPage from "./pages/hostregistry/HostRegistryStartPage";
 import Notification from './pages/signup/Notification';
+import HostRegistry5 from "./pages/hostregistry/HostRegistry5";
+import PlaceInfoModifyPage5 from "./pages/modify/PlaceInfoModifyPage5";
+
 function App() {
   return (
       <Routes>
@@ -60,6 +63,7 @@ function App() {
         <Route path="/placeInfoModify3" element={<PlaceInfoModifyPage3 />} />
         <Route path="/placeInfoModify4" element={<PlaceInfoModifyPage4 />} />
         <Route path="/placeInfoModify5" element={<PlaceInfoModifyPage5 />} />
+        <Route path="/placeInfoModify6" element={<PlaceInfoModifyPage6 />} />
         <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
         <Route path="/hostRegistryStart" element={<HostRegistryStartPage />}/>
         <Route path="/hostRegistry" element={<HostRegistry />} />
@@ -67,6 +71,7 @@ function App() {
         <Route path="/hostRegistry3" element={<HostRegistry3 />}/>
         <Route path="/hostRegistry4" element={<HostRegistry4 />}/>
         <Route path="/hostRegistry5" element={<HostRegistry5 />}/>
+        <Route path="/hostRegistry6" element={<HostRegistry6 />}/>
         <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
         <Route path="/hostRegistryChecking" element={<HostRegistryCheckingPage />} />
         <Route path="/guestRegistry" element={<GuestRegistry />}/>

@@ -3,9 +3,12 @@ package project.forAll.domain.space;
 import lombok.Getter;
 import lombok.Setter;
 import project.forAll.domain.BassDomain;
+import project.forAll.domain.Image;
 import project.forAll.domain.member.Member;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "spaces")
@@ -36,5 +39,10 @@ public class Space extends BassDomain {
     @JoinColumn(name = "booking_id")
     private Booking booking;
 
+    private String closeGuide;
+    // 마감 사진들
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "closeImage_id")
+    private List<Image> closeImage = new ArrayList<>();
     private boolean isPublic;
 }

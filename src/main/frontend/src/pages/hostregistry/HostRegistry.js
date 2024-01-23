@@ -92,7 +92,7 @@ const HostRegistry = () => {
                      justifyContent:"space-around",
                      flexDirection:"column",}}>
             <div>
-                <header style={{textAlign: "center"}}><h3>1. 공간 정보</h3></header>
+                <header style={{textAlign: "center"}}><h3>(1/4) 공간 정보</h3></header>
                 <h4>공간명을 입력해주세요.</h4>
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
                 <h4>공간명</h4>
@@ -116,7 +116,7 @@ const HostRegistry = () => {
                     <span>/300자</span>
                     <span style={{color: "red"}}>(최소 20자)</span>
                 </p>
-                <textarea type="text" placeholder="공간에 대한 설명을 기재해주세요." style={{width: "94vw", height: "17vh"}}
+                <textarea type="text" placeholder="공간에 대한 설명을 기재해 주세요." style={{width: "94vw", height: "17vh"}}
                           onChange={onInputHandler3} maxLength="299" minLength="19"/>
                 <div>
                     <h4>주방 특성</h4>
@@ -298,7 +298,7 @@ const HostRegistry = () => {
                     <span>{inputCount4}</span>
                     <span>/18자</span>
                 </p>
-                <input type="text" placeholder="ex.성수역 4번출구 도보 1분 거리" style={{width: "80vw", height: "3vh"}}
+                <input type="text" placeholder="ex.성수역 4번 출구 도보 1분 거리" style={{width: "80vw", height: "3vh"}}
                        onChange={onInputHandler4} maxLength="17"/>
                 <h6>
                     • 작성하신 위치정보는 검색에 영향을 미치지 않습니다.
@@ -312,7 +312,7 @@ const HostRegistry = () => {
                 <input type="text" placeholder="웹사이트 URL을 입력해주세요." style={{width: "80vw", height: "3vh"}}
                        onChange={(e) => setWebSite(e.target.value)}/>
                 <h6>
-                    • 인스타그램, 페이스북, 네이버지도, 카카오지도, 구글지도 등
+                    • 인스타그램, 페이스북, 네이버 지도, 카카오 지도, 구글 지도 등
                 </h6>
                 <h6 style={{marginTop: "0px"}}>
                     공간을 PR할 수 있는 웹사이트면 무엇이든지 좋습니다.
@@ -320,7 +320,7 @@ const HostRegistry = () => {
             </div>
             <div>
                 <h4>
-                    <span>대표 이미지 </span>
+                    <span>대표 이미지</span>
                 </h4>
                 <div>
                     <ImageInput setImg={setImgRepresent} val={imgRepresent}/>

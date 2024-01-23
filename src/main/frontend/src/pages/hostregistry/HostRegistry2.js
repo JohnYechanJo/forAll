@@ -61,7 +61,7 @@ const HostRegistry2 = () => {
                  gap:"1.5rem"
                  }}>
             <div>
-                <header style={{textAlign: "center"}}><h3>1. 공간 정보</h3></header>
+                <header style={{textAlign: "center"}}><h3>(1/4) 공간 정보</h3></header>
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
                 <a className="fontForRegister" >홀 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
