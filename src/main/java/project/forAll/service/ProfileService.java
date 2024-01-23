@@ -7,8 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.Image;
 import project.forAll.domain.member.Profile;
 import project.forAll.domain.member.Member;
+import project.forAll.dto.MemberPublicDTO;
+import project.forAll.dto.ProfilePublicDTO;
 import project.forAll.form.ProfileForm;
-import project.forAll.repository.ProfileRepository;
+import project.forAll.repository.member.ProfileRepository;
 
 import java.util.List;
 
@@ -31,16 +33,11 @@ public class ProfileService extends Service {
         final Member member = memberService.findByLoginId(pf.getUserId());
         profile.setMember(member);
         profile.setIntroduction(pf.getIntroduction());
-        profile.setDetailIntroduction(pf.getDetailIntroduction());
-        profile.setCareer(pf.getCareer());
-        final Image image = imageService.findByImageName(pf.getPicture());
-        profile.setPicture(image);
-        profile.setPictureExplain(pf.getPictureExplain());
+        final Image image = imageService.findByImageName(pf.getProfilePhoto());
+        profile.setProfilePhoto(image);
         profile.setMbti(pf.getMbti());
         profile.setCook(pf.getCook());
-        profile.setInterest(pf.getInterest());
-        final Image certificate = imageService.findByImageName(pf.getCertificate());
-        profile.setCertificate(certificate);
+        profile.setCookItem(pf.getCookItem());
 
         return profile;
     }
@@ -49,5 +46,18 @@ public class ProfileService extends Service {
         List<Profile> profiles = profileRepository.findByMember(member);
         if (profiles.isEmpty()) return null;
         return profiles.get(0);
+    }
+
+    public ProfilePublicDTO convertToProfilePublicDTO(Profile profile) {
+        ProfilePublicDTO profilePublicDTO = new ProfilePublicDTO();
+        profilePublicDTO.setId(profile.getId());
+        profilePublicDTO.setIntroduction(profile.getIntroduction());
+        profilePublicDTO.setProfilePhoto(profile.getProfilePhoto() == null ?
+                null : profile.getProfilePhoto().getImageName());
+        profilePublicDTO.setMbti(profile.getMbti());
+        profilePublicDTO.setCook(profile.getCook());
+        profilePublicDTO.setCookItem(profile.getCookItem());
+
+        return profilePublicDTO;
     }
 }

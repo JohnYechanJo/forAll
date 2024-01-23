@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.member.Gender;
+import project.forAll.dto.MemberPublicDTO;
 import project.forAll.form.MemberForm;
 import project.forAll.repository.member.MemberRepository;
 
@@ -136,5 +137,18 @@ public class MemberService extends Service {
         List<Member> members = memberRepository.findByLoginIdAndLoginPw(loginId, loginPw);
         if (members.isEmpty()) return null;
         return members.get(0);
+    }
+
+    public MemberPublicDTO convertToMemberPublicDTO(Member member) {
+        MemberPublicDTO memberPublicDTO = new MemberPublicDTO();
+        memberPublicDTO.setId(member.getId());
+        memberPublicDTO.setLoginId(member.getLoginId());
+        memberPublicDTO.setName(member.getName());
+        memberPublicDTO.setEmail(member.getEmail());
+        memberPublicDTO.setPhoneNum(member.getPhoneNum());
+        memberPublicDTO.setBirthday(member.getBirthday());
+        memberPublicDTO.setGender(member.getGender());
+
+        return memberPublicDTO;
     }
 }

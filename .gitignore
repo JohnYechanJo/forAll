@@ -41,3 +41,6 @@ out/
 .vscode/
 
 *.yml
+.env
+.pem
+.DS_Store
