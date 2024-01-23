@@ -6,6 +6,8 @@ import axios from "axios";
 import sidebarIcon from "../../components/icons/sidebar.png";
 import login from "../../components/icons/login.png";
 import logout from "../../components/icons/logout.png";
+import xmark from "../../components/icons/xmark.png";
+import alarm from "../../components/icons/alarm.png";
 const Sidebar = ({ width = 18.75, children }) => {
     const [isOpen, setOpen] = useState(false);
     const [xPosition, setX] = useState(-width);
@@ -50,18 +52,19 @@ const Sidebar = ({ width = 18.75, children }) => {
                     }
                 </button>
                 <div style={{
-                    height: "15.625rem",
+                    height: "13.625rem",
                     width: "100%",
                     border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                 }}>
                     <div style={{
                         display: "flex",
-                        justifyContent:"flex-end"
+                        justifyContent:"flex-end",
                     }}>
-                        <button onClick={() => toggleMenu()} className="button"
-                                style={{backgroundColor: "transparent", width: "10vw", height: "5vh", fontSize:"20px"}}>X
-                        </button>
+                        <div style={{backgroundColor: "transparent",marginRight:'1rem'}}>
+                            <img src={alarm} alt="alarm" style={{width: "0.99931rem", height: "1.5rem",marginRight:'1rem', objectFit: "contain"}} />
+                            <img src={xmark} alt="xmark" style={{width:"1.5rem", height:"1.5rem", objectFit: "contain"}} onClick={() => toggleMenu()}  />
+                        </div>
                     </div>
                     <div>
                         <div style={{width:'5.25rem',height:'5.25rem',borderRadius:'50%',flexShrink:'0',fill:'#FFF',strokeWidth:'1px',stroke:"#C4C4C4",
@@ -69,19 +72,19 @@ const Sidebar = ({ width = 18.75, children }) => {
                     }}>
                         {/* 이 자리에 불러온 대표이미지를 넣으면 됨 */}
                         </div>
-                        <h3 style={{textAlign: "center"}}>{sessionStorage.getItem("name")}</h3>
-                        <h3 style={{textAlign:"center"}}>{sessionStorage.getItem("email")}</h3>
+                        <p style={{textAlign: "center"}}>{sessionStorage.getItem("name")}</p>
+                        <p style={{textAlign:"center"}}>{sessionStorage.getItem("email")}</p>
                     </div>
                 </div>
                 <div style={{display:"flex",flexDirection:"column", justifyContent:"left"}}>
-                    <div style={{height:"6.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
+                    <div style={{height:"5.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
                         <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>예약 정보</button>
                         <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>찜한내역</button>
                     </div>
-                    <div style={{height:"6.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
+                    <div style={{height:"5.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"rem"
                 }} >
@@ -92,7 +95,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>공간 등록하기</button>
                         </Link>
                     </div>
-                    <div style={{height:"9.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
+                    <div style={{height:"7.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
@@ -104,7 +107,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}} >내가 쓴 글</button>
                         </Link>
                     </div>
-                    <div style={{height:"9.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
+                    <div style={{height:"7.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
