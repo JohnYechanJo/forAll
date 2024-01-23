@@ -36,7 +36,7 @@ const SignUpCompletePage = () => {
                 <span style={{fontSize:"0.938rem", fontWeight:"700"}} >이메일</span>
                 <span style={{fontSize:"0.938rem", fontWeight:"400"}} >{data.email}</span>
             </div>
-            <button onClick={()=>{navigate("/");}} className="bottom_button" style={{backgroundColor:"black"}} >시작하기</button>
+            <button onClick={()=>{navigate("/");}} className="bottom_button" style={{backgroundColor:"black",position:"fixed"}} >시작하기</button>
             
 
         </div>

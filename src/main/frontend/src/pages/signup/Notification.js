@@ -23,7 +23,7 @@ const Notification = () => {
             <div>
                 <p>• 저장공간</p>
             </div>
-            <button className="bottom_button" style={{backgroundColor:"#FF2929"}} onClick={()=>{navigate("/signUpComplete")}} >시작하기</button>
+            <button className="bottom_button" style={{backgroundColor:"#FF2929",position:"fixed"}} onClick={()=>{navigate("/signUpComplete")}} >가입하기</button>
         </div>
     )
 };

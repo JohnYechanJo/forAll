@@ -53,9 +53,9 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                     onChange={onChangeId}
                 />
                 <button onClick={() => checkDuplicatedId()} className="buttonForRegister" >중복확인</button>
-                {isCheckedDuplicatedId === true ? <p>중복 확인 완료되었습니다</p> :
-                    (isCheckedDuplicatedId === false ? <p>중복되는 아이디가 존재합니다</p> : null)}
             </div>
+            {isCheckedDuplicatedId === true ? <p>중복 확인 완료되었습니다</p> :
+                    (isCheckedDuplicatedId === false ? <p>중복되는 아이디가 존재합니다</p> : null)}
             <a className="fontForRegister"  >비밀번호<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{marginBottom:"2.5rem", display:"flex" }}>
                 <input
@@ -67,7 +67,6 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
             </div>
             <a className="fontForRegister"  >비밀번호 확인<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{marginBottom:"2.5rem"}}>
-            
                 <input
                     className="inputForRegister"
                     type="password"
@@ -94,9 +93,9 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                     onChange={onChangeEmail}
                 />
                 <button onClick={() => checkDuplicatedEmail()} className="buttonForRegister">중복확인</button>
-                {isCheckedDuplicatedEmail === true ? <p>중복 확인 완료되었습니다</p> :
-                    (isCheckedDuplicatedEmail === false ? <p>중복되는 이메일이 존재합니다</p> : null)}
             </div>
+            {isCheckedDuplicatedEmail === true ? <p>중복 확인 완료되었습니다</p> :
+                    (isCheckedDuplicatedEmail === false ? <p>중복되는 이메일이 존재합니다</p> : null)}
             <a className="fontForRegister" >휴대폰<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{justifyContent:"space-between",display:"flex"}}>
                 <input

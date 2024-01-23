@@ -95,7 +95,7 @@ const GuestRegistry = () => {
                     textAlign: "center",
                     fontSize: "0.9375rem",
                     lineHeight: "1.375rem"
-                }}>프로필 등록</a>
+                }}>2. 프로필 등록</a>
             </div>
             <div style={{width:"100%"}}>
             <a className="fontForRegister" >소개<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
@@ -207,22 +207,16 @@ const GuestRegistry = () => {
                 justifyContent: "center",
                 width: "100%",
             }}>
-                <button style={{
-                    backgroundColor: "#FF4F4F",
-                    color: "white",
-                    height: "3.125rem",
-                    width: "100%",
-                }}
-                    onClick={handleButton}
-                >저장 후 닫기
-                </button>
                 <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
                     <p style={{ fontSize: "16px" }}>필수 입력사항이 모두 기입되지 않았습니다.</p>
                     <button onClick={() => setIsModalOpen(false)}>뒤로</button>
                 </Modal>
             </div>
             </div>
-            
+            <button className="bottom_button" style={{ backgroundColor: "#FF4F4F", width: "100%",marginBottom:"0" }}
+                    onClick={handleButton}
+                >저장 후 닫기
+                </button>
         </div>
     );
 }
