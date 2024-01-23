@@ -43,6 +43,10 @@ import PostEditPage from "./pages/board/PostEditPage";
 import MyPostPage from "./pages/board/MyPostPage";
 import HostRegistryStartPage from "./pages/hostregistry/HostRegistryStartPage";
 import Notification from './pages/signup/Notification';
+import RentSpacePage2 from "./pages/RentSpace/RentSpacePage2";
+import React from "react";
+import RentSpacePage3 from "./pages/RentSpace/RentSpacePage3";
+import RentSpaceComplete from "./pages/RentSpace/RentSpaceComplete";
 function App() {
   return (
       <Routes>
@@ -76,6 +80,9 @@ function App() {
         <Route path="/rentSpaceInfo1/:id" element={<RentSpaceInfo1 />} />
         <Route path="/rentSpaceInfo2/:id" element={<RentSpaceInfo2 />} />
         <Route path="/rentSpaceInfo3/:id" element={<RentSpaceInfo3 />} />
+        <Route path="/rentSpace2" element={<RentSpacePage2 />} />
+        <Route path="/rentSpace3" element={<RentSpacePage3 />} />
+        <Route path="/rentSpaceComplete" element={<RentSpaceComplete />} />
         <Route path="/chatList" element={<ChatRoomListPage />} />
         <Route path="/chatRoom" element={<ChatRoomPage />} />
             <Route path="/mypost" element={<MyPostPage />} />

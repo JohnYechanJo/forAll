@@ -24,6 +24,21 @@ const RentSpacePage = () => {
         setImages1([data.mainImage, ...data.hallImage]);
         setEquipments(data.equip ? data.equip.split(",") : []);
     }, [data]);
+
+    const submit = () => {
+        // Todo 셰프 등록이 되었는지 확인
+        navigate("/rentSpace2", {state:{
+                spaceId: data.id,
+                spaceName: data.name,
+                spaceAddress: data.address,
+                spaceImage: data.mainImage,
+                ableTrial: data.ableTrial,
+                ableStartHour: data.ableStartHour,
+                ableFinHour: data.ableFinHour,
+                priceSet: data.priceSet,
+                capacity: data.capacity,
+            }});
+    }
     return(
         <div>
             <div>
@@ -133,7 +148,7 @@ const RentSpacePage = () => {
                 <div>
                     <div>고객센터</div>
                     <button>찜하기</button>
-                    <button>예약하기</button>
+                    <button onClick={submit}>예약하기</button>
                 </div>
 
             </div>
