@@ -122,9 +122,9 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
             </div>
             <div>
             <a className="fontForRegister" >생년월일<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-            <div style={{marginBottom:"2.5rem"}}>
+            <div style={{marginBottom:"2.5rem",display:'flex'}}>
             
-                <select onChange={onChangeYear}>
+                <select onChange={onChangeYear} style={{height:'2.5rem',border:'1px solid #D9D9D9', width:'30%',margin:'0.5rem'}} >
                     <option value="">년(YYYY)</option>
                     {years.map(year => (
                         <option key={year} value={year}>
@@ -132,7 +132,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         </option>
                     ))}
                 </select>
-                <select onChange={onChangeMonth}>
+                <select onChange={onChangeMonth} style={{height:'2.5rem',border:'1px solid #D9D9D9', width:'30%',margin:'0.5rem'}}>
                     <option value="">월(MM)</option>
                     {months.map(month => (
                         <option key={month} value={month}>
@@ -140,7 +140,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         </option>
                     ))}
                 </select>
-                <select onChange={onChangeDay}>
+                <select onChange={onChangeDay} style={{height:'2.5rem',border:'1px solid #D9D9D9', width:'30%',margin:'0.5rem'}}>
                     <option value="">일(DD)</option>
                     {days.map(day => (
                         <option key={day} value={day}>
@@ -151,25 +151,27 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
             </div>
             </div>
             <a className="fontForRegister" >성별<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-            <div style={{marginBottom:"2.5rem"}}>
-                <div>
-                    <label style={{ display: 'block' }}>
-                        <input
+            <div style={{height:'3rem'}}>
+                <div >
+                    <input
                             type="radio"
                             name="gender"
                             value="Male"
                             onChange={onChangeGender}
+                            id="male"
                         />
-                        <span className="fontForRegister" >남자</span>
+                    <label for='male' style={{display:'block',marginBottom:'1rem',marginTop:'1rem'}}>
+                        <em></em><span className="fontForRegister" >남자</span>
                     </label>
-                    <label style={{ display: 'block' }}>
-                        <input
+                    <input
                             type="radio"
                             name="gender"
                             value="Female"
                             onChange={onChangeGender}
+                            id="female"
                         />
-                        <span className="fontForRegister" >여자</span>
+                    <label for='female' style={{display:'block'}}>
+                        <em></em><span className="fontForRegister" >여자</span>
                     </label>
                 </div>
             </div>

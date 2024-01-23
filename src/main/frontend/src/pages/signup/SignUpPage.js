@@ -159,7 +159,8 @@ const SignUpPage = () => {
         }
     }
     return (
-        <div style={{
+        <div>
+            <div style={{
             display:"flex",
             flexDirection:"column",
             alignItems:"center",
@@ -167,11 +168,14 @@ const SignUpPage = () => {
             marginLeft:"1rem",
             marginRight:"1rem",
         }} >
-            <div>
-                <Link to={"/logIn"}>
-                    <button>{"<"}</button>
-                </Link>
-                <h1>1.정보 입력</h1>
+            <div style={{
+                textAlign:"center",
+                fontSize:"0.9375rem",
+                lineHeight:"1.375rem",
+                fontWeight:"400",
+                letterSpacing:"-0.0255rem",
+            }}>
+                <div style={{marginTop:'2.75rem',fontSize:'0.9375rem'}} >1.정보 입력</div>
             </div>
             <PersonalInfoInputTemplate
                 pw = {pw}
@@ -199,12 +203,7 @@ const SignUpPage = () => {
             <UseTermsTemplate
                 setIsUseTermsChecked={setIsUseTermsChecked}
             />
-            <Link to="/logIn">
-                <p>뒤로</p>
-            </Link>
-            <button
-                onClick={()=>handleButton()}
-            >다음</button>
+            
             {isAllChecked ? <SignUpInformationTemplate
                 setIsAllChecked={setIsAllChecked}
                 submit={submit}
@@ -212,6 +211,17 @@ const SignUpPage = () => {
             <Alert isOpen={isModalOpen} setIsOpen={setIsModalOpen} content={alertContent} />
 
         </div>
+        <div style={{display:'flex',width:'100%',margin:'0px',marginTop:'4rem'}}>
+        <button style={{marginLeft:'auto',backgroundColor:"#FF4F4F",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}
+        onClick={() => navigate('/login')}
+        >
+            이전</button>
+        <button style={{marginLeft:'auto',backgroundColor:"#525252",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}
+            onClick={()=>handleButton()}
+        >다음</button>
+        </div>
+        </div>
+        
     )
 };
 

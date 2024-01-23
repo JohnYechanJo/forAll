@@ -18,9 +18,10 @@ const SignUpCompletePage = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            height: "100vh"
+            height: "100vh",
+            position: "relative",
         }} >
-            <header>4. 가입완료
+            <header style={{top:'2.75rem',position: 'absolute',fontSize:'0.9375rem'}} >4. 가입완료
             </header>
             <div style={{fontSize:"0.938rem", fontWeight:"400",gap:"7.5rem", alignItems:"center", textAlign:"center"}} >
                 <p>축하드립니다!</p>

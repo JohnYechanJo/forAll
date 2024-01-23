@@ -23,7 +23,7 @@ const GuestRegistry = () => {
         'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ'
     ];
     const FOOD_TYPES = [
-        '한식', '양식', '일식', '중식', '동남아', '인도', '멕시칸', '씨푸드', '파스타', '육류',
+        '한식', '양식', '일식', '중식', '동남아', '인도', '멕시칸', '해산물', '파스타', '육류',
         '디저트', '제과', '제빵', '커피', '다이닝', '퓨전', '기타',
         '와인', '양주', '사케', '칵테일', '전통주',
     ];
@@ -74,6 +74,12 @@ const GuestRegistry = () => {
     return (
         <div>
             <div style={{
+                    textAlign: "center",
+                    fontSize: "0.9375rem",
+                    lineHeight: "1.375rem",
+                    marginTop: "2.5rem",
+                }}>2. 프로필 등록</div>
+            <div style={{
             display: "flex",
             flexDirection: "column",
             padding: "1rem",
@@ -91,12 +97,8 @@ const GuestRegistry = () => {
                 gap: "1rem",
                 fontSize: "0.625rem",
             }}>
-                <a style={{
-                    textAlign: "center",
-                    fontSize: "0.9375rem",
-                    lineHeight: "1.375rem"
-                }}>2. 프로필 등록</a>
             </div>
+            
             <div style={{width:"100%"}}>
             <a className="fontForRegister" >소개<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 <hr style={{ height: "2px", backgroundColor: "black"}} />
@@ -145,7 +147,7 @@ const GuestRegistry = () => {
                     </div>
                 ))}
             </div>
-            <a style={{ fontSize: "0.625rem" }} >• 자신있는 요리를 선택해주세요!</a>
+            <a style={{ fontSize: "0.625rem" }} >• 자신 있는 요리를 선택해주세요!</a>
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
@@ -213,10 +215,16 @@ const GuestRegistry = () => {
                 </Modal>
             </div>
             </div>
-            <button className="bottom_button" style={{ backgroundColor: "#FF4F4F", width: "100%",marginBottom:"0" }}
-                    onClick={handleButton}
-                >저장 후 닫기
-                </button>
+            
+                <div style={{display:'flex',width:'100%',margin:'0px',marginTop:'4rem'}}>
+                <button style={{marginLeft:'auto',backgroundColor:"#FF4F4F",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}
+                onClick={() => navigate('/signUp')}
+                >
+                    이전</button>
+                <button style={{marginLeft:'auto',backgroundColor:"#525252",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}
+                    onClick={()=>handleButton()}
+                >다음</button>
+                </div>
         </div>
     );
 }
