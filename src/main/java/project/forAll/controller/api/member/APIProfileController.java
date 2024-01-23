@@ -92,4 +92,5 @@ public class APIProfileController extends APIController {
 
         return new ResponseEntity(profilePublicDTO, HttpStatus.OK);
     }
+
 }
