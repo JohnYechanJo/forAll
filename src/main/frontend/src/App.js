@@ -43,6 +43,8 @@ import PostEditPage from "./pages/board/PostEditPage";
 import MyPostPage from "./pages/board/MyPostPage";
 import HostRegistryStartPage from "./pages/hostregistry/HostRegistryStartPage";
 import Notification from './pages/signup/Notification';
+import FAQ from "./pages/FAQ";
+import EntryPartnership from "./pages/EntryPartnership";
 function App() {
   return (
       <Routes>
@@ -89,6 +91,9 @@ function App() {
         <Route path="/chefRegistry" element={<ChefRegistry />} />
         <Route path="/chefRegistryChecking" element={<ChefRegistryCheckingPage />} />
         <Route path="/chefRegistryComplete" element={<ChefRegistryComplete />} />
+            <Route path="/FAQ" element={<FAQ />} />
+            <Route path="EntryPartnership" element={<EntryPartnership />} />
+
       </Routes>
   );
 }
