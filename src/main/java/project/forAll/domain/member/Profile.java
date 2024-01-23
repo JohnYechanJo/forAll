@@ -39,7 +39,7 @@ public class Profile extends BassDomain {
     private Image picture;
     // 프로필 사진 설명
     private String pictureExplain;
-    // MBTi
+    // MBTI
     private String mbti;
     // 요리
     @ElementCollection
