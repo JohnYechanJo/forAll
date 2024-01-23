@@ -45,6 +45,8 @@ import HostRegistryStartPage from "./pages/hostregistry/HostRegistryStartPage";
 import Notification from './pages/signup/Notification';
 import HostRegistry5 from "./pages/hostregistry/HostRegistry5";
 import PlaceInfoModifyPage5 from "./pages/modify/PlaceInfoModifyPage5";
+import FAQ from "./pages/FAQ";
+import EntryPartnership from "./pages/EntryPartnership";
 
 function App() {
   return (
@@ -94,6 +96,9 @@ function App() {
         <Route path="/chefRegistry" element={<ChefRegistry />} />
         <Route path="/chefRegistryChecking" element={<ChefRegistryCheckingPage />} />
         <Route path="/chefRegistryComplete" element={<ChefRegistryComplete />} />
+            <Route path="/FAQ" element={<FAQ />} />
+            <Route path="/EntryPartnership" element={<EntryPartnership />} />
+
       </Routes>
   );
 }

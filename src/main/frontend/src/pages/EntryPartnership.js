@@ -21,7 +21,7 @@ const EntryPartnership = () => {
             </div>
             <Sidebar/>
             <HomeTemplate />
-            <div>
+            <div style={{fontFamily: "Noto Sans KR"}}>
                 <h1 style={{fontSize: "0.9375rem"}}>• 입점 및 제휴 문의</h1>
                 <div>
                     <p style={{fontSize: "0.625rem"}}>• 사업자등록증/영업신고증을 보유한 오너라면 For ALL 공간 등록이 가능합니다.</p>

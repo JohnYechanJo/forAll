@@ -24,7 +24,7 @@ const FAQ = () => {
             </div>
             <Sidebar/>
             <HomeTemplate />
-            <div>
+            <div style={{fontFamily: "Noto Sans KR"}}>
                 <h1 style={{fontSize: "0.9375rem"}}>• 자주 묻는 질문</h1>
                 <div>
                     <p style={{fontSize: "0.625rem"}}>
