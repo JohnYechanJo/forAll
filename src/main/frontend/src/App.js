@@ -94,6 +94,9 @@ function App() {
         <Route path="/chefRegistry" element={<ChefRegistry />} />
         <Route path="/chefRegistryChecking" element={<ChefRegistryCheckingPage />} />
         <Route path="/chefRegistryComplete" element={<ChefRegistryComplete />} />
+            <Route path="/FAQ" element={<FAQ />} />
+            <Route path="EntryPartnership" element={<EntryPartnership />} />
+
       </Routes>
   );
 }
