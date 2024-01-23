@@ -12,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 public class ChefProfileForm {
 
-    private Long id;
+    // 사용자
+    private String userId;
     // 경력
     private List<String> career;
     // 보건증 사진
@@ -26,7 +27,7 @@ public class ChefProfileForm {
 
     public static ChefProfileForm cf(ChefProfile chefProfile){
         final ChefProfileForm cf = new ChefProfileForm();
-        // cf.setId(chefProfile.getId());
+        cf.setUserId(chefProfile.getProfile().getMember().getLoginId());
         cf.setCareer(chefProfile.getCareer());
         cf.setCertificatePhoto(chefProfile.getCertificatePhoto() == null? null : chefProfile.getCertificatePhoto().getImageName());
         cf.setAccountBank(chefProfile.getAccountBank());

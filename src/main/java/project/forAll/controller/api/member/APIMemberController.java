@@ -108,6 +108,4 @@ public class APIMemberController extends APIController {
             return new ResponseEntity(errorResponse("Wrong password"), HttpStatus.BAD_REQUEST);
         }
     }
-
-
 }

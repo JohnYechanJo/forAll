@@ -13,6 +13,8 @@ import project.forAll.form.ProfileForm;
 import project.forAll.repository.member.ChefProfileRepository;
 import project.forAll.repository.member.ProfileRepository;
 
+import java.util.List;
+
 @Component
 @Transactional
 public class ChefProfileService extends Service {
@@ -41,5 +43,14 @@ public class ChefProfileService extends Service {
         chefProfile.setAccountHolder(cf.getAccountHolder());
 
         return chefProfile;
+    }
+
+    public ChefProfile findByMember(final Member member){
+        List<Profile> profiles = profileRepository.findByMember(member);
+        if (profiles.isEmpty()) return null;
+        Profile profile = profiles.get(0);
+        List<ChefProfile> chefProfiles = chefProfileRepository.findByProfile(profile);
+        if (chefProfiles.isEmpty()) return null;
+        return chefProfiles.get(0);
     }
 }

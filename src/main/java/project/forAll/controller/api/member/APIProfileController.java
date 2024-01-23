@@ -22,7 +22,7 @@ public class APIProfileController extends APIController {
     private final SessionManager sessionManager;
     private final MemberService memberService;
 
-    @PostMapping("profile")
+    @PostMapping("/profile")
     public ResponseEntity createProfile(@RequestBody final ProfileForm pf, HttpServletRequest request){
         try{
             String loginId = (String) sessionManager.getSession(request);
@@ -39,14 +39,14 @@ public class APIProfileController extends APIController {
         }
     }
 
-    @GetMapping("profile/{id}")
+    @GetMapping("/profile/{id}")
     public ResponseEntity getProfile(@PathVariable(value = "id") String userId, HttpServletRequest request){
         try{
             final Member savedMember = memberService.findByLoginId(userId);
             if (savedMember == null) throw new Exception("No member with loginId " + userId);
 
             final Profile profile = profileService.findByMember(savedMember);
-            return new ResponseEntity(ProfileForm.of(profile), HttpStatus.OK);
+            return new ResponseEntity(ProfileForm.pf(profile), HttpStatus.OK);
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Could not get profile : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
@@ -66,7 +66,7 @@ public class APIProfileController extends APIController {
             profile.setId(savedprofile.getId());
             memberService.save(profile);
 
-            return new ResponseEntity(ProfileForm.of(profile), HttpStatus.OK);
+            return new ResponseEntity(ProfileForm.pf(profile), HttpStatus.OK);
         }catch(final Exception e){
             return new ResponseEntity(errorResponse("Could not update Member : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
         }
