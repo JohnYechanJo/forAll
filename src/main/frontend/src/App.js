@@ -12,7 +12,6 @@ import PlaceInfoModifyPage2 from './pages/modify/PlaceInfoModifyPage2';
 import PlaceInfoModifyPage3 from './pages/modify/PlaceInfoModifyPage3';
 import PlaceInfoModifyPage4 from './pages/modify/PlaceInfoModifyPage4';
 import PlaceInfoModifyPage6 from './pages/modify/PlaceInfoModifyPage6';
-import ModifyCompletePage from "./pages/modify/ModifyCompletePage";
 import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
 import HostRegistry from "./pages/hostregistry/HostRegistry";
@@ -47,6 +46,9 @@ import HostRegistry5 from "./pages/hostregistry/HostRegistry5";
 import PlaceInfoModifyPage5 from "./pages/modify/PlaceInfoModifyPage5";
 import FAQ from "./pages/FAQ";
 import EntryPartnership from "./pages/EntryPartnership";
+import ChefInfoModifyCompletePage from "./pages/modify/ChefInfoModifyCompletePage";
+import PersonalModifyCompletePage from "./pages/modify/PersonalModifyCompletePage";
+import PlaceInfoModifyCompletePage from "./pages/modify/PlaceInfoModifyCompletePage";
 
 function App() {
   return (
@@ -66,8 +68,10 @@ function App() {
         <Route path="/placeInfoModify4" element={<PlaceInfoModifyPage4 />} />
         <Route path="/placeInfoModify5" element={<PlaceInfoModifyPage5 />} />
         <Route path="/placeInfoModify6" element={<PlaceInfoModifyPage6 />} />
-        <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
-        <Route path="/hostRegistryStart" element={<HostRegistryStartPage />}/>
+        <Route path="/chefInfoModifyComplete" element={<ChefInfoModifyCompletePage />}/>
+            <Route path="/personalModifyComplete" element={<PersonalModifyCompletePage />}/>
+            <Route path="/placeInfoModifyComplete" element={<PlaceInfoModifyCompletePage />}/>
+            <Route path="/hostRegistryStart" element={<HostRegistryStartPage />}/>
         <Route path="/hostRegistry" element={<HostRegistry />} />
         <Route path="/hostRegistry2" element={<HostRegistry2 />} />
         <Route path="/hostRegistry3" element={<HostRegistry3 />}/>

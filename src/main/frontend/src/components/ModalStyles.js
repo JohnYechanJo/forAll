@@ -9,7 +9,7 @@ export const ModalStyles = {
         backgroundColor: 'white', 
         color: 'black', 
         width: '21.625rem',
-        height: '50%',
+        height: '12.5rem',
         textAlign: 'center',
     },
     overlay: {

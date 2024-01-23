@@ -161,10 +161,7 @@ const ChefInfoModifyPage = () => {
                     <p style={{fontSize: "16px"}}>필수 입력사항이 모두 기입되지 않았습니다.</p>
                     <button onClick={() => setIsModalOpen(false)}>뒤로</button>
                 </Modal>
-                <Modal isOpen={isModalOpen2} style={ModalStyles} ariaHideApp={false}>
-                    <p style={{fontSize: "16px"}}>셰프정보가 등록되었습니다!</p>
-                    <button onClick={() => navigate("/")}>확인</button>
-                </Modal>
+
             </div>
             </div>
         </div>
