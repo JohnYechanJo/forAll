@@ -8,7 +8,7 @@ import project.forAll.domain.Image;
 import project.forAll.domain.member.Profile;
 import project.forAll.domain.member.Member;
 import project.forAll.form.ProfileForm;
-import project.forAll.repository.ProfileRepository;
+import project.forAll.repository.member.ProfileRepository;
 
 import java.util.List;
 
@@ -31,16 +31,11 @@ public class ProfileService extends Service {
         final Member member = memberService.findByLoginId(pf.getUserId());
         profile.setMember(member);
         profile.setIntroduction(pf.getIntroduction());
-        profile.setDetailIntroduction(pf.getDetailIntroduction());
-        profile.setCareer(pf.getCareer());
-        final Image image = imageService.findByImageName(pf.getPicture());
-        profile.setPicture(image);
-        profile.setPictureExplain(pf.getPictureExplain());
+        final Image image = imageService.findByImageName(pf.getProfilePhoto());
+        profile.setProfilePhoto(image);
         profile.setMbti(pf.getMbti());
         profile.setCook(pf.getCook());
-        profile.setInterest(pf.getInterest());
-        final Image certificate = imageService.findByImageName(pf.getCertificate());
-        profile.setCertificate(certificate);
+        profile.setCookItem(pf.getCookItem());
 
         return profile;
     }
