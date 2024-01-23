@@ -48,7 +48,7 @@ const LoginTemplate = () => {
         }
     }
     return (
-        <div style={{display:"flex",flexDirection:"column" , alignItems:"center",justifyContent:"center"}} >
+        <div style={{display:"flex",flexDirection:"column" , alignItems:"center",justifyContent:"center",padding:'1rem',gap:'4rem'}} >
             <div style={{display:"flex",flexDirection:"column", margin:"1rem",alignItems:"center",justifyContent:"center"}} >
                 <input
                     placeholder="아이디 입력"
@@ -64,13 +64,11 @@ const LoginTemplate = () => {
                 />
             </div>
             <div>
-                <button onClick={() => logIn()}>로그인</button>
+                <button onClick={() => logIn()} style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',backgroundColor:'#616161',marginBottom:'0.5rem'}} >로그인</button>
                 <Link to="/signUp">
-                    <button>회원가입</button>
+                    <button style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',border:'1px solid #000',backgroundColor:'white'}}>회원가입</button>
                 </Link>
-
-            </div>
-            <div  style={{
+                <div  style={{
                 color: "#B0B0B0",
                 textAlign: "center",
                 fontFeatureSettings: "'case' on", 
@@ -99,6 +97,8 @@ const LoginTemplate = () => {
                 textDecorationLine:"underline",
             }}>비밀번호 찾기</span></Link>
             </div>
+            </div>
+            
             <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={alertContent} />
         </div>
     )

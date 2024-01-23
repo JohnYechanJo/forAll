@@ -375,7 +375,7 @@ const HostRegistry3 = () => {
             </div>
             <Modal isOpen={isMiseen} style={ModalStyles} >
                 <header>미장이란?</header>
-                <button onClick={()=>setIsMiseen(false)} >닫기</button>
+                                <button onClick={()=>setIsMiseen(false)} >닫기</button>
             </Modal>
             <button onClick={() => setIsMiseen(!isMiseen)}
                     className="detail"
