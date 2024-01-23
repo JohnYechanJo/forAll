@@ -4,6 +4,8 @@ import LoginTemplate from "../signup/LoginTemplate";
 import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
 import sidebarIcon from "../../components/icons/sidebar.png";
+import login from "../../components/icons/login.png";
+import logout from "../../components/icons/logout.png";
 const Sidebar = ({ width = 18.75, children }) => {
     const [isOpen, setOpen] = useState(false);
     const [xPosition, setX] = useState(-width);
@@ -29,10 +31,12 @@ const Sidebar = ({ width = 18.75, children }) => {
             console.error(res);
         });
     };
+    // 대표이미지 불러와서 띄우기
+
     return (
         <div className={styles.container}>
             <div ref={side} className={styles.sidebar}
-                 style={{width: `${width}rem`, height: '52.75rem', transform: `translatex(${-xPosition}rem)`, 
+                 style={{width: `${width}rem`, height: '100vh', transform: `translatex(${-xPosition}rem)`, 
                  fontSize:"0.875rem", fontWeight:"700",flexShrink:"0",textDecorationLine:"underline"
                  }}>
                 <button onClick={() => toggleMenu()}
@@ -60,6 +64,11 @@ const Sidebar = ({ width = 18.75, children }) => {
                         </button>
                     </div>
                     <div>
+                        <div style={{width:'5.25rem',height:'5.25rem',borderRadius:'50%',flexShrink:'0',fill:'#FFF',strokeWidth:'1px',stroke:"#C4C4C4",
+                    filter:'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',alignItems:"center",justifyContent:"center", display: "flex", margin: "auto"
+                    }}>
+                        {/* 이 자리에 불러온 대표이미지를 넣으면 됨 */}
+                        </div>
                         <h3 style={{textAlign: "center"}}>{sessionStorage.getItem("name")}</h3>
                         <h3 style={{textAlign:"center"}}>{sessionStorage.getItem("email")}</h3>
                     </div>
@@ -67,14 +76,14 @@ const Sidebar = ({ width = 18.75, children }) => {
                 <div style={{display:"flex",flexDirection:"column", justifyContent:"left"}}>
                     <div style={{height:"6.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
                         <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>예약 정보</button>
                         <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>찜한내역</button>
                     </div>
                     <div style={{height:"6.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"rem"
                 }} >
                         <Link to="/chefRegistry">
                             <button className="button"  style={{textAlign:"left",marginLeft:"2rem"}}>셰프 등록하기</button>
@@ -85,7 +94,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     </div>
                     <div style={{height:"9.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
                         <Link to="/chatList">
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>채팅함</button>
@@ -97,7 +106,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     </div>
                     <div style={{height:"9.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
                         <Link to="/personalInfoModify">
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>개인 정보수정</button>
@@ -109,9 +118,18 @@ const Sidebar = ({ width = 18.75, children }) => {
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>공간 정보수정</button>
                         </Link>
                     </div>
+                    <div style={{height:"2rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
+                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
+                }}>
+                    {sessionStorage.getItem("user_id") ? (<div onClick={logOut}>
+                        <img src={logout} alt="logout" style={{height:"1.125rem", width:"0.875rem", margin: "auto",border:'none',backgroundColor:'white',fontSize:'0.875rem',fontWeight:'700',marginLeft:'2rem'}} />
+                        <a style={{marginLeft:'0.5rem'}}>로그아웃</a>
+                        </div>) : (<div onClick={logIn}>
+                        <img src={login}alt="login" style={{height:"1.125rem", width:"0.875rem", margin: "auto",border:'none',backgroundColor:'white',fontSize:'0.875rem',fontWeight:'700'}} />
+                        로그인 ㅣ 회원가입
+                        </div>)}
                 </div>
-                <div>
-                    {sessionStorage.getItem("user_id") ? (<button onClick={logOut}>로그아웃</button>) : (<button onClick={logIn}>로그인</button>)}
                 </div>
                 
 
