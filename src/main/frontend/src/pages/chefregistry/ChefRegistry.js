@@ -29,7 +29,6 @@ const ChefRegistry = () => {
         setAccountHolder(e.target.value);
     }, []);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isModalOpen2, setIsModalOpen2] = useState(false);
     const submit = async () => {
         const userId = sessionStorage.getItem("user_id");
         const certificate = await ImageUploader(sanitaryImage, userId);
@@ -41,7 +40,7 @@ const ChefRegistry = () => {
             account: account,
             accountHolder: accountHolder,
         }).then((res) => {
-            setIsModalOpen2(true);
+            navigate("/chefRegistryChecking");
         }).catch((err) => console.error(err));
     };
     const activeEnter = (e) => {
@@ -142,10 +141,6 @@ const ChefRegistry = () => {
                 <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
                     <p style={{fontSize: "16px"}}>필수 입력사항이 모두 기입되지 않았습니다.</p>
                     <button onClick={() => setIsModalOpen(false)}>뒤로</button>
-                </Modal>
-                <Modal isOpen={isModalOpen2} style={ModalStyles} ariaHideApp={false}>
-                    <p style={{fontSize: "16px"}}>셰프정보가 등록되었습니다!</p>
-                    <button onClick={() => navigate("/")}>확인</button>
                 </Modal>
             </div>
             <button style={{

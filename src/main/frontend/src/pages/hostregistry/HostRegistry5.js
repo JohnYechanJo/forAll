@@ -157,7 +157,7 @@ const HostRegistry5 = () => {
             accountHolder: accountHolder,
             isPublic: data.isPublic && isPublic
         })
-            .then((res) => navigate("/hostRegistryComplete"))
+            .then((res) => navigate("/hostRegistryChecking"))
             .catch((err) => console.error(err));
 
     };

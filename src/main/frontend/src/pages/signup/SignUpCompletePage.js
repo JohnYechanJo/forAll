@@ -20,7 +20,7 @@ const SignUpCompletePage = () => {
             alignItems: "center",
             height: "100vh"
         }} >
-            <header>3. 가입완료
+            <header>4. 가입완료
             </header>
             <div style={{fontSize:"0.938rem", fontWeight:"400",gap:"7.5rem", alignItems:"center", textAlign:"center"}} >
                 <p>축하드립니다!</p>
