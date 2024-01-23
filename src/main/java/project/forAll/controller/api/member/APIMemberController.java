@@ -45,7 +45,7 @@ public class APIMemberController extends APIController {
      */
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody final MemberForm mf, HttpServletRequest request, HttpServletResponse response){
-        try{
+        try {
             final Member member = memberService.createMember(mf);
 
             final Long memberId = memberService.saveMember(member);
@@ -55,36 +55,38 @@ public class APIMemberController extends APIController {
             sessionManager.createSession(member.getLoginId(), response);
 
             return new ResponseEntity(Long.toString(memberId), HttpStatus.OK);
-        }catch(final Exception e){
-            return new ResponseEntity(errorResponse("Could not create member : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        } catch(final Exception e) {
+            return new ResponseEntity(errorResponse("Could not create member : " + e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/members/checkId/{id}")
     public ResponseEntity checkDuplicatedLoginId(@PathVariable("id") final String id){
-        try{
+        try {
             memberService.validateDuplicateLoginId(id);
             return new ResponseEntity(id, HttpStatus.OK);
-        }catch(final Exception e){
+        } catch(final Exception e) {
             return new ResponseEntity(errorResponse("Duplicated id : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/members/checkEmail/{email}")
     public ResponseEntity checkDuplicatedEmail(@PathVariable("email") final String email){
-        try{
+        try {
             memberService.validateDuplicateEmail(email);
             return new ResponseEntity(email, HttpStatus.OK);
-        }catch(final Exception e){
+        } catch(final Exception e) {
             return new ResponseEntity(errorResponse("Duplicated email : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("/members")
     public ResponseEntity editMember(@RequestBody final MemberForm form, HttpServletRequest request){
-        try{
+        try {
             String loginId = (String) sessionManager.getSession(request);
-            if (!loginId.equals(form.getLoginId())) return new ResponseEntity(errorResponse("Session Disabled"), HttpStatus.SERVICE_UNAVAILABLE);
+            if (!loginId.equals(form.getLoginId())) return new ResponseEntity(errorResponse("Session Disabled"),
+                    HttpStatus.SERVICE_UNAVAILABLE);
 
             final Member savedMember = memberService.findByLoginId(form.getLoginId());
             if (savedMember == null) throw new Exception("No member with loginId " + form.getLoginId());
@@ -94,18 +96,19 @@ public class APIMemberController extends APIController {
             memberService.save(member);
 
             return new ResponseEntity(member, HttpStatus.OK);
-        }catch(final Exception e){
-            return new ResponseEntity(errorResponse("Could not update Member : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
+        } catch(final Exception e) {
+            return new ResponseEntity(errorResponse("Could not update Member : "+ e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/members/{id}/{pw}")
     public ResponseEntity checkIdAndPw(@PathVariable final String id, @PathVariable final String pw){
-        try{
+        try {
             final Member member = memberService.findByLoginIdAndLoginPw(id, pw);
             if (member == null) return new ResponseEntity(errorResponse("Wrong password"), HttpStatus.BAD_REQUEST);
             else return new ResponseEntity(member, HttpStatus.OK);
-        }catch (final Exception e){
+        } catch (final Exception e) {
             return new ResponseEntity(errorResponse("Wrong password"), HttpStatus.BAD_REQUEST);
         }
     }
