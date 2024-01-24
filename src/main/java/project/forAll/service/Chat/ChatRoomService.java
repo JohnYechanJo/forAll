@@ -32,7 +32,7 @@ public class ChatRoomService extends Service {
     }
 
     public ChatRoom getChatRoom(String userId1, String userId2, String category){
-        List<ChatRoom> chatRoom = chatRoomRepository.findByUserLoginIds(userId1, userId2);
+        List<ChatRoom> chatRoom = chatRoomRepository.findByUserLoginIdsAndCategory(userId1, userId2, ChatRoomCategory.parse(category));
         if (chatRoom.isEmpty()){
             final ChatRoom newRoom = new ChatRoom();
             List<Member> users = new ArrayList<>();
