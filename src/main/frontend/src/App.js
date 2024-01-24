@@ -6,8 +6,10 @@ import SearchPwPage from "./pages/SearchPwPage";
 import SignUpPage from "./pages/signup/SignUpPage";
 import SignUpCompletePage from "./pages/signup/SignUpCompletePage";
 
+
 import PlaceInfoModifyStart from './pages/modify/PlaceInfoModifyStart';
 import PersonalInfoModifyPage from './pages/modify/PersonalInfoModifyPage';
+
 
 import PlaceInfoModifyPage2 from './pages/modify/PlaceInfoModifyPage2';
 import PlaceInfoModifyPage3 from './pages/modify/PlaceInfoModifyPage3';
@@ -23,7 +25,9 @@ import HostRegistry4 from "./pages/hostregistry/HostRegistry4";
 import HostRegistryComplete from "./pages/hostregistry/HostRegistryComplete";
 import HostRegistryCheckingPage from './pages/hostregistry/HostRegistryChecking';
 
+
 import GuestRegistry from "./pages/signup/GuestRegistry";
+
 
 import LoginHandeler from "./pages/LoginHandeler";
 import ChefRegistry from './pages/chefregistry/ChefRegistry';
@@ -50,6 +54,7 @@ import PlaceInfoModifyPage5 from "./pages/modify/PlaceInfoModifyPage5";
 import FAQ from "./pages/FAQ";
 import EntryPartnership from "./pages/EntryPartnership";
 
+
 import ProfileModifyPage from "./pages/modify/ProfileModifyPage";
 import ProfileViewPage from "./pages/ProfileViewPage";
 
@@ -61,6 +66,7 @@ import ReservationListPage from "./pages/Reservation/ReservationListPage";
 import AssuranceReady from "./pages/Reservation/AssuranceReady";
 import AssuranceReadyView from "./pages/Reservation/AssuranceReadyView";
 import AssuranceFinish from "./pages/Reservation/AssuranceFinish";
+
 
 function App() {
   return (
@@ -74,12 +80,18 @@ function App() {
         <Route path="/signUpComplete" element={<SignUpCompletePage />} />
         <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
 
+        <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />
+
         <Route path="/placeInfoModifyStart" element={<PlaceInfoModifyStart />} />
         <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
         <Route path="/placeInfoModify3" element={<PlaceInfoModifyPage3 />} />
         <Route path="/placeInfoModify4" element={<PlaceInfoModifyPage4 />} />
         <Route path="/placeInfoModify5" element={<PlaceInfoModifyPage5 />} />
         <Route path="/placeInfoModify6" element={<PlaceInfoModifyPage6 />} />
+
+        <Route path="/chefInfoModifyComplete" element={<ChefInfoModifyCompletePage />}/>
+            <Route path="/personalModifyComplete" element={<PersonalModifyCompletePage />}/>
+            <Route path="/placeInfoModifyComplete" element={<PlaceInfoModifyCompletePage />}/>
 
             <Route path="/hostRegistryStart" element={<HostRegistryStartPage />}/>
         <Route path="/hostRegistry" element={<HostRegistry />} />
@@ -92,7 +104,9 @@ function App() {
         <Route path="/hostRegistryChecking" element={<HostRegistryCheckingPage />} />
         <Route path="/guestRegistry" element={<GuestRegistry />}/>
 
+
         <Route path="/profileModify" element={<ProfileModifyPage />}/>
+
 
         <Route path="/chefInfoModify" element={<ChefInfoModifyPage />} />
         <Route path="/spaceList" element={<SpaceListViewPage />} />
@@ -100,6 +114,7 @@ function App() {
         <Route path="/rentSpaceInfo1/:id" element={<RentSpaceInfo1 />} />
         <Route path="/rentSpaceInfo2/:id" element={<RentSpaceInfo2 />} />
         <Route path="/rentSpaceInfo3/:id" element={<RentSpaceInfo3 />} />
+
 
         <Route path="/rentSpace2" element={<RentSpacePage2 />} />
         <Route path="/rentSpace3" element={<RentSpacePage3 />} />
@@ -109,6 +124,11 @@ function App() {
             <Route path="/profile/:id" element={<ProfileViewPage />} />
             <Route path="/mypost" element={<MyPostPage />} />
         <Route path="/mypost" element={<MyPostPage />} />
+
+
+        <Route path="/chatList" element={<ChatRoomListPage />} />
+        <Route path="/chatRoom" element={<ChatRoomPage />} />
+            <Route path="/mypost" element={<MyPostPage />} />
 
         <Route path="/post/:id" element={<PostViewPage />} />
         <Route path="/post/edit" element={<PostEditPage />} />
@@ -122,6 +142,7 @@ function App() {
         <Route path="/chefRegistryComplete" element={<ChefRegistryComplete />} />
             <Route path="/FAQ" element={<FAQ />} />
             <Route path="/EntryPartnership" element={<EntryPartnership />} />
+
 
 
         <Route path="/reservationList" element={<ReservationListPage />} />

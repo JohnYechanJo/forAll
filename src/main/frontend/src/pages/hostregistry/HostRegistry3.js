@@ -165,6 +165,7 @@ const HostRegistry3 = () => {
                         </div>
                         : null)}
             </div>
+
             <p>입•퇴실 시간*</p>
 
             <div style={{

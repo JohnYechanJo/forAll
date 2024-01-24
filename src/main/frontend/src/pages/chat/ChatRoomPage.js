@@ -42,6 +42,7 @@ const ChatRoomPage = () => {
     }, [roomId]);
     useDidMountEffect(() => {
 
+
         axios.get("/api/v1/profile/public/"+partner)
 
             .then((res) => setPartnerData(res.data))
@@ -98,6 +99,7 @@ const ChatRoomPage = () => {
                     <ImageViewer val={partnerData.profilePhoto}/>
                 </div>) : null}
 
+
                 <p>{partner}</p>
                 <p>찾기</p>
                 <p>파일함</p>
@@ -108,7 +110,9 @@ const ChatRoomPage = () => {
                         {message.senderId === partner ? (
                             <div>
 
+
                                 {partnerData ? (<ImageViewer val={partnerData.profilePhoto}/>) : null}
+
 
                                 <p>{partner}</p>
                                 {message.isImage ? (

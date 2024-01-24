@@ -1,7 +1,9 @@
 import {useEffect, useRef, useState} from "react";
 
 
+
 const ImageViewer = ({val,style}) => {
+
 
     const spring_app_url = "http://localhost:8080";
     // 기본 이미지 추후 설정 필요
@@ -24,6 +26,7 @@ const ImageViewer = ({val,style}) => {
                     onError={onErrorImg}
 
                     style={style}
+
 
                 />
             </label>

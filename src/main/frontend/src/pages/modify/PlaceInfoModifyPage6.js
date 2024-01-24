@@ -281,7 +281,6 @@ const PlaceInfoModifyPage6 = () => {
                 <p>• 4) 대관 4일 전~당일:환불 불가</p>
             </div>
             <hr style={{ height: "2px", backgroundColor: "black" }} />
-<<<<<<< HEAD
             <input
                         type="checkbox"
                         onChange={() => setIsAgree(!isAgree)}
@@ -291,11 +290,7 @@ const PlaceInfoModifyPage6 = () => {
                     <label for='agree' style={{ display: 'block', marginBottom: '1rem', marginTop: '1rem' }}>
                         <em></em><span className="fontForRegister" >동의합니다</span>
                     </label>
-=======
-            <label>
-                <input type="checkbox" checked={isAgree} onChange={() => setIsAgree(!isAgree)} />동의합니다
-            </label>
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+
             <div style={{ display: "flex" }}>
                 <button onClick={()=>navigate(-1,data)} style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 <button className="next_button" style={{ backgroundColor: "grey" }}
@@ -317,11 +312,9 @@ const PlaceInfoModifyPage6 = () => {
                 <p style={{
                     color: "#000", fontFamily: "Noto Sans KR", fontSize: "0.9375rem",
                     fontStyle: "normal", fontWeight: "400", lineHeight: "normal"
-<<<<<<< HEAD
+
                 }}>공간정보가 수정되었습니다!</p>
-=======
-                }}>공정보가 수정되었습니다!</p>
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+
                 <hr/>
                 <button onClick={() => navigate("/")}>확인</button>
             </Modal>

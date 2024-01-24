@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import PersonalInfoModifyInputTemplate from "../../components/modify/PersonalInfoModifyInputTemplate";
@@ -50,8 +49,8 @@ const PersonalModify = () => {
                 .then((response) => {
                     openAlert("인증번호를 발송했습니다");
                 }).catch((response) => {
-                    openAlert("인증번호를 발송하지 못했습니다");
-                });
+                openAlert("인증번호를 발송하지 못했습니다");
+            });
         }
     };
     const checkCerifiedNum = () => {
@@ -59,8 +58,8 @@ const PersonalModify = () => {
             .then((response) => {
                 setIsPhoneCerified(true);
             }).catch((response) => {
-                setIsPhoneCerified(false);
-            });
+            setIsPhoneCerified(false);
+        });
     };
     useEffect(() => {
         const id = sessionStorage.getItem("user_id");
@@ -73,8 +72,8 @@ const PersonalModify = () => {
                 setGender(res.data.gender);
                 console.log(res.data);
             }).catch((res) => {
-                openAlert("회원 정보를 불러오는데 실패했습니다");
-            })
+            openAlert("회원 정보를 불러오는데 실패했습니다");
+        })
     }, []);
 
     const handleButton = () => {
@@ -172,36 +171,17 @@ const PersonalModify = () => {
             </div>
             <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem' }}>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#FF4F4F", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                    onClick={() => navigate('/')}
+                        onClick={() => navigate('/')}
                 >
                     이전</button>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#525252", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                    onClick={() => handleButton()}
+                        onClick={() => handleButton()}
                 >다음</button>
             </div>
 
             <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={alertContent} />
-=======
-import { Link } from "react-router-dom";
-import { useState, useCallback } from "react";
-import Header from "../../components/Header";
-import LoginTemplate from "../../components/signup/LoginTemplate";
-import PersonalInfoModifyTemplate from "../../components/modify/PersonalInfoModifyTemplate";
-
-//사이드바에서 개인정보수정 버튼 누르면 여기로 route되게 한 다음 여기랑 PersonalInfoModifyTemplate랑 이 파일로 로그인하게 한다.
-const PersonalInfoModify = () => {
-    return (
-        <div>
-            <Header PageName={"개인정보수정"} />
-            <h1>PersonalInfoModifyPage</h1>
-            <PersonalInfoModifyTemplate />
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
         </div>
     )
 };
 
-<<<<<<< HEAD
 export default PersonalModify;
-=======
-export default PersonalInfoModify;
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)

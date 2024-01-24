@@ -38,6 +38,7 @@ public class Member extends BassDomain {
     // 성별
     private Gender gender;
 
+
     // 셰프 펜딩 여부
     private ChefPending chefPending = ChefPending.NOTCREATED;
 

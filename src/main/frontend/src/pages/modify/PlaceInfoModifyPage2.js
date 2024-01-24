@@ -11,12 +11,12 @@ const PlaceInfoModify2 = () => {
     const [img2, setImg2] = useState("");
     const [img3, setImg3] = useState("");
     const [imgAdditional, setImgAdditional] = useState([]);
-    
+
     const [kitchen1, setKitchen1] = useState("");
     const [kitchen2, setKitchen2] = useState("");
     const [kitchen3, setKitchen3] = useState("");
     const [kitchenAdditional, setKitchenAdditional] = useState([]);
-    
+
     const [menu1, setMenu1] = useState("");
     const [menuAdditional, setMenuAdditional] = useState([]);
 
@@ -87,13 +87,12 @@ const PlaceInfoModify2 = () => {
     };
     return (
         <div className="margin"
-<<<<<<< HEAD
-            style={{
-                display: "flex",
-                justifyContent: "space-around",
-                flexDirection: "column",
-                gap: "1.5rem"
-            }}>
+             style={{
+                 display: "flex",
+                 justifyContent: "space-around",
+                 flexDirection: "column",
+                 gap: "1.5rem"
+             }}>
             <div >
                 <header style={{ textAlign: "center" }}><h3>1. 공간 정보</h3></header>
                 <a className="fontForRegister" >홀 사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
@@ -111,39 +110,10 @@ const PlaceInfoModify2 = () => {
                     </div>
                     <div style={{ display: "flex", flexDirection: "column" }}>
                         <ImageInputs setImg={setImgAdditional} vals={imgAdditional} />
-=======
-             style={{display:"flex",
-                 justifyContent:"space-around",
-                 flexDirection:"column",
-                 gap:"1.5rem"
-                 }}>
-            <div>
-                <header style={{textAlign: "center"}}><h3>(1/4)공간 정보</h3></header>
-                <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <a className="fontForRegister" >홀 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-                <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <div style={{display:'flex', justifyContent:"space-around"}}>
-                    <div style={{display:"flex",  flexDirection:"column"}} >
-                        
-                        <ImageInput setImg={setImg1} val={img1}/>
-                    </div>
-                    <div style={{display:"flex", flexDirection:"column"}}>
-                        
-                        <ImageInput setImg={setImg2} val={img2}/>
-                    </div>
-                </div>
-                <div style={{display:'flex', justifyContent:"space-around"}}>
-                    <div style={{display:"flex", flexDirection:"column"}}>
-                        <ImageInput setImg={setImg3} val={img3}/>
-                    </div>
-                    <div style={{display:"flex", flexDirection:"column"}}>
-                        <ImageInputs setImg={setImgAdditional} vals={imgAdditional}/>
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
                     </div>
                 </div>
             </div>
             <div>
-<<<<<<< HEAD
                 <a className="fontForRegister" >주방 사진<span className="fontForRegister" style={{ color: "#FF2929"}} >*</span></a>
                 <hr style={{ height: "2px", backgroundColor: "black" }} />
                 <a className="fontForRegister" style={{ color: '#7B7B7B' }}>홈페이지에 노출될 사진입니다. 오너님의 공간이 돋보일 수 있도록 예쁘게 찍어주세요!</a>
@@ -161,31 +131,10 @@ const PlaceInfoModify2 = () => {
                     </div>
                     <div style={{ display: "flex", flexDirection: "column" }}>
                         <ImageInputs setImg={setKitchenAdditional} vals={kitchenAdditional} />
-=======
-            <a className="fontForRegister" >주방 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-                <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <div style={{display:'flex', justifyContent:"space-around"}}>
-                    <div style={{display:"flex",  flexDirection:"column"}} >
-                        <ImageInput setImg={setKitchen1} val={kitchen1}/>
-                    </div>
-                    <div style={{display:"flex", flexDirection:"column"}}>
-                        
-                        <ImageInput setImg={setKitchen2} val={kitchen2}/>
-                    </div>
-                </div>
-                <div style={{display:'flex', justifyContent:"space-around"}}>
-                    <div style={{display:"flex", flexDirection:"column"}}>
-                        
-                        <ImageInput setImg={setKitchen3} val={kitchen3}/>
-                    </div>
-                    <div style={{display:"flex", flexDirection:"column"}}>
-                        <ImageInputs setImg={setKitchenAdditional} vals={kitchenAdditional}/>
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
                     </div>
                 </div>
             </div>
             <div>
-<<<<<<< HEAD
                 <a className="fontForRegister" >메뉴 사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                 <hr style={{ height: "2px", backgroundColor: "black" }} />
                 <button style={{
@@ -214,37 +163,7 @@ const PlaceInfoModify2 = () => {
             <div style={{ display: "flex" }}>
                 <button onClick={() => navigate(-1, data)} style={{ backgroundColor: "red" }} className="next_button" >이전</button>
                 <button style={{ backgroundColor: "#525252" }} className="next_button"
-                    onClick={handleButton}
-=======
-            <a className="fontForRegister" >메뉴 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-                <hr style={{height: "2px", backgroundColor: "black"}}/>
-                <button style={{border:"none",
-                    backgroundColor:"white",
-                    color:"gray",
-                    fontSize:"10px",
-                    marginTop:"0",
-                    textUnderlineOffset:"auto",
-                    textDecoration:"underline gray",
-                    }} onClick={() => {setIsModalOpen2(true)}}
-                ><h5>메뉴 사진이 왜 필요한가요?</h5></button>
-                <Modal isOpen={isModalOpen2} style={ModalStyles} ariaHideApp={false}>
-                    <h3>내용</h3>
-                    <button onClick={()=>setIsModalOpen2(false)}>닫기</button>
-                </Modal>
-                <div style={{display:'flex', justifyContent:"space-around"}}>
-                    <div style={{display:"flex",  flexDirection:"column"}} >
-                        <ImageInput setImg={setMenu1} val={menu1}/>
-                    </div>
-                    <div style={{display:"flex"}}>
-                        <ImageInputs setImg={setMenuAdditional} vals={menuAdditional}/>
-                    </div>
-                </div>
-            </div>
-            <div style={{display: "flex"}}>
-                <button onClick={()=>navigate(-1,data)} style={{backgroundColor: "red"}} className="next_button" >이전</button>
-                <button style={{backgroundColor: "#525252"}} className="next_button"
-                            onClick={handleButton}
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+                        onClick={handleButton}
                 >다음</button>
             </div>
             <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>

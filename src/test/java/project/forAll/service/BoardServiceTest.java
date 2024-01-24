@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 //package project.forAll.service;
 //
 //import org.junit.Before;
@@ -59,6 +60,8 @@
 //        assertNotNull(getArticle.getWrittenAt());
 //    }
 =======
+=======
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
 package project.forAll.service;
 
 import org.junit.Before;
@@ -118,7 +121,10 @@ public class BoardServiceTest {
         assertEquals("게시글 내용 작성 확인", "For ALL입니다.", getArticle.getContent());
         assertNotNull(getArticle.getWrittenAt());
     }
+<<<<<<< HEAD
 >>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+=======
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
 
     // 게시글수정, 댓글작성 모두 아래 오류 발생
     // Batch update returned unexpected row count from update [0]; actual row count: 4; expected: 1;
@@ -171,7 +177,11 @@ public class BoardServiceTest {
 //    }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //}
 =======
 }
 >>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+=======
+}
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)

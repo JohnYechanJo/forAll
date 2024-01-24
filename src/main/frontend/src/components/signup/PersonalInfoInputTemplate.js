@@ -55,7 +55,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                 <button onClick={() => checkDuplicatedId()} className="buttonForRegister" >중복확인</button>
             </div>
             {isCheckedDuplicatedId === true ? <p>중복 확인 완료되었습니다</p> :
-                    (isCheckedDuplicatedId === false ? <p>중복되는 아이디가 존재합니다</p> : null)}
+                (isCheckedDuplicatedId === false ? <p>중복되는 아이디가 존재합니다</p> : null)}
             <a className="fontForRegister"  >비밀번호<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{marginBottom:"2.5rem", display:"flex" }}>
                 <input
@@ -95,87 +95,81 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                 <button onClick={() => checkDuplicatedEmail()} className="buttonForRegister">중복확인</button>
             </div>
             {isCheckedDuplicatedEmail === true ? <p>중복 확인 완료되었습니다</p> :
-                    (isCheckedDuplicatedEmail === false ? <p>중복되는 이메일이 존재합니다</p> : null)}
+                (isCheckedDuplicatedEmail === false ? <p>중복되는 이메일이 존재합니다</p> : null)}
             <a className="fontForRegister" >휴대폰<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{justifyContent:"space-between",display:"flex"}}>
                 <input
-                style={{width:"14.0625rem",marginBottom:"0.625rem"}}
+                    style={{width:"14.0625rem",marginBottom:"0.625rem"}}
                     className="inputForRegister"
                     placeholder={"숫자만 입력해주세요"}
                     onChange={onChangePhone}
                 />
                 <button onClick={() => sendCerifiedNum()} className="buttonForRegister"
-                style={{backgroundColor:"#616161",color:"white"}}
+                        style={{backgroundColor:"#616161",color:"white"}}
                 >인증번호 받기</button>
             </div>
             <div style={{marginBottom:"2.5rem",justifyContent:"space-between",display:"flex"}}>
-            <input  className="inputForRegister"
-                style={{width:"14.0625rem"}}
-                    placeholder={"인증번호 입력"}
-                    onChange={onChangeCerifiedNum}
+                <input  className="inputForRegister"
+                        style={{width:"14.0625rem"}}
+                        placeholder={"인증번호 입력"}
+                        onChange={onChangeCerifiedNum}
                 />
                 <button onClick={() => checkCerifiedNum()} className="buttonForRegister"
-                style={{backgroundColor:"#616161",color:"white"}}
+                        style={{backgroundColor:"#616161",color:"white"}}
                 >인증번호 확인</button>
-<<<<<<< HEAD
             </div>
             {isPhoneCerified === true ? <p>인증 완료되었습니다</p> :
-                    (isPhoneCerified === false ? <p>인증 실패했습니다</p> : null)}
-=======
-                {isPhoneCerified === true ? <p>인증 완료되었습니다</p> :
-                    (isPhoneCerified === false ? <p>인증 실패했습니다</p> : null)}
-            </div>
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+                (isPhoneCerified === false ? <p>인증 실패했습니다</p> : null)}
             <div>
-            <a className="fontForRegister" >생년월일<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-            <div style={{marginBottom:"2.5rem",display:'flex'}}>
-            
-                <select onChange={onChangeYear} style={{height:'2.5rem',border:'1px solid #D9D9D9', width:'30%',margin:'0.5rem'}} >
-                    <option value="">년(YYYY)</option>
-                    {years.map(year => (
-                        <option key={year} value={year}>
-                            {year}
-                        </option>
-                    ))}
-                </select>
-                <select onChange={onChangeMonth} style={{height:'2.5rem',border:'1px solid #D9D9D9', width:'30%',margin:'0.5rem'}}>
-                    <option value="">월(MM)</option>
-                    {months.map(month => (
-                        <option key={month} value={month}>
-                            {month}
-                        </option>
-                    ))}
-                </select>
-                <select onChange={onChangeDay} style={{height:'2.5rem',border:'1px solid #D9D9D9', width:'30%',margin:'0.5rem'}}>
-                    <option value="">일(DD)</option>
-                    {days.map(day => (
-                        <option key={day} value={day}>
-                            {day}
-                        </option>
-                    ))}
-                </select>
-            </div>
+                <a className="fontForRegister" >생년월일<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
+                <div style={{marginBottom:"2.5rem",display:'flex'}}>
+
+                    <select onChange={onChangeYear} style={{height:'2.5rem',border:'1px solid #D9D9D9', width:'30%',margin:'0.5rem'}} >
+                        <option value="">년(YYYY)</option>
+                        {years.map(year => (
+                            <option key={year} value={year}>
+                                {year}
+                            </option>
+                        ))}
+                    </select>
+                    <select onChange={onChangeMonth} style={{height:'2.5rem',border:'1px solid #D9D9D9', width:'30%',margin:'0.5rem'}}>
+                        <option value="">월(MM)</option>
+                        {months.map(month => (
+                            <option key={month} value={month}>
+                                {month}
+                            </option>
+                        ))}
+                    </select>
+                    <select onChange={onChangeDay} style={{height:'2.5rem',border:'1px solid #D9D9D9', width:'30%',margin:'0.5rem'}}>
+                        <option value="">일(DD)</option>
+                        {days.map(day => (
+                            <option key={day} value={day}>
+                                {day}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </div>
             <a className="fontForRegister" >성별<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{height:'3rem'}}>
                 <div >
                     <input
-                            type="radio"
-                            name="gender"
-                            value="Male"
-                            onChange={onChangeGender}
-                            id="male"
-                        />
+                        type="radio"
+                        name="gender"
+                        value="Male"
+                        onChange={onChangeGender}
+                        id="male"
+                    />
                     <label for='male' style={{display:'block',marginBottom:'1rem',marginTop:'1rem'}}>
                         <em></em><span className="fontForRegister" >남자</span>
                     </label>
                     <input
-                            type="radio"
-                            name="gender"
-                            value="Female"
-                            onChange={onChangeGender}
-                            id="female"
-                        />
+                        type="radio"
+                        name="gender"
+                        value="Female"
+                        onChange={onChangeGender}
+                        id="female"
+                    />
                     <label for='female' style={{display:'block'}}>
                         <em></em><span className="fontForRegister" >여자</span>
                     </label>

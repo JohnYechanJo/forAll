@@ -38,7 +38,11 @@
     vertical-align: middle;
     cursor: pointer;
     border: 1px solid black;
+<<<<<<< HEAD
 
+=======
+    border-radius: 5px;
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
     flex-shrink: 0;
 }
 
@@ -55,12 +59,19 @@
 
 .input {
     width: 21.875rem;
+<<<<<<< HEAD
 
     height: 1.875rem;
     flex-shrink: 0;
     margin: 0.5rem;
     border: 1px solid #D9D9D9;
 
+=======
+    height: 3.125rem;
+    flex-shrink: 0;
+    margin: 0.5rem;
+    border: 2px solid #D9D9D9;
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
 }
 
 .inputForRegister {

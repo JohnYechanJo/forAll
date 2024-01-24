@@ -3,7 +3,9 @@ import {useNavigate, useParams} from 'react-router-dom';
 import axios from "axios";
 import ImageSlider from "../../components/ImageSlider";
 
+
 import {ChatRoomCategory, KitchenFeat} from "../../utils/enums";
+
 
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import {AddressUtil} from "../../utils/AddressUtil";
@@ -19,6 +21,7 @@ const RentSpacePage = () => {
             .then((res) => {
                 setData(res.data);
 
+
                 // console.log(res.data);
 
             })
@@ -28,6 +31,7 @@ const RentSpacePage = () => {
         setImages1([data.mainImage, ...data.hallImage]);
         setEquipments(data.equip ? data.equip.split(",") : []);
     }, [data]);
+
 
 
     const submit = () => {
@@ -45,6 +49,7 @@ const RentSpacePage = () => {
             }});
     }
 
+
     return(
         <div>
             <div>
@@ -55,6 +60,7 @@ const RentSpacePage = () => {
                 <p>{data.priceSet}원 | {data.ableDate}</p>
                 {/*Todo : 관리자 채팅 연결*/}
                 <p>*영업일 대관 시 800,000원 | 별도 문의 바람</p>
+
 
                 <p onClick={()=>navigate("/profile/"+data.userId)}>프로필 보기</p>
                 <p onClick={()=> {
@@ -167,7 +173,9 @@ const RentSpacePage = () => {
                     <div>고객센터</div>
                     <button>찜하기</button>
 
+
                     <button onClick={submit}>예약하기</button>
+
 
                 </div>
 

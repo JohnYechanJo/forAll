@@ -27,6 +27,7 @@ public class APIProfileController extends APIController {
 
     private final ProfileService profileService;
 
+
     private final ChefProfileService chefProfileService;
     private final SessionManager sessionManager;
     private final MemberService memberService;
@@ -38,6 +39,7 @@ public class APIProfileController extends APIController {
             if (!loginId.equals(pf.getUserId())) return new ResponseEntity(errorResponse("Session Disabled"),
                     HttpStatus.SERVICE_UNAVAILABLE);
 
+
             final Member savedMember = memberService.findByLoginId(pf.getUserId());
             if (savedMember == null) throw new Exception("No member with loginId " + pf.getUserId());
 
@@ -45,6 +47,7 @@ public class APIProfileController extends APIController {
             profileService.save(profile);
 
             return new ResponseEntity(Long.toString(profile.getId()), HttpStatus.OK);
+
 
         } catch(final Exception e) {
             return new ResponseEntity(errorResponse("Could not create profile : " + e.getMessage()),
@@ -56,15 +59,18 @@ public class APIProfileController extends APIController {
     public ResponseEntity getProfile(@PathVariable(value = "id") String userId, HttpServletRequest request){
         try {
 
+
             final Member savedMember = memberService.findByLoginId(userId);
             if (savedMember == null) throw new Exception("No member with loginId " + userId);
 
             final Profile profile = profileService.findByMember(savedMember);
 
+
             return new ResponseEntity(ProfileForm.pf(profile), HttpStatus.OK);
         } catch (final Exception e) {
             return new ResponseEntity(errorResponse("Could not get profile : " + e.getMessage()),
                     HttpStatus.BAD_REQUEST);
+
 
         }
     }
@@ -72,10 +78,12 @@ public class APIProfileController extends APIController {
     @PutMapping("/profile")
     public ResponseEntity editProfile(@RequestBody final ProfileForm form, HttpServletRequest request){
 
+
         try {
             String loginId = (String) sessionManager.getSession(request);
             if (!loginId.equals(form.getUserId())) return new ResponseEntity(errorResponse("Session Disabled"),
                     HttpStatus.SERVICE_UNAVAILABLE);
+
 
 
             final Member savedMember = memberService.findByLoginId(form.getUserId());
@@ -119,6 +127,7 @@ public class APIProfileController extends APIController {
         }
 
     }
+
 
 
 }

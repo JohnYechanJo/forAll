@@ -20,10 +20,9 @@ src/main/resources/static/static/js/main*
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-<<<<<<< HEAD
+
 src/main/resources/static/upload/*.png
-=======
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+
 
 ### IntelliJ IDEA ###
 .idea
@@ -45,8 +44,10 @@ out/
 .vscode/
 
 
+
 *.yml
 .env
 .pem
 .DS_Store
+
 

@@ -14,6 +14,7 @@ import project.forAll.form.ProfileForm;
 import project.forAll.repository.member.ProfileRepository;
 
 
+
 import java.util.List;
 
 @Component
@@ -36,11 +37,13 @@ public class ProfileService extends Service {
         profile.setMember(member);
         profile.setIntroduction(pf.getIntroduction());
 
+
         final Image image = imageService.findByImageName(pf.getProfilePhoto());
         profile.setProfilePhoto(image);
         profile.setMbti(pf.getMbti());
         profile.setCook(pf.getCook());
         profile.setCookItem(pf.getCookItem());
+
 
         return profile;
     }
@@ -50,6 +53,7 @@ public class ProfileService extends Service {
         if (profiles.isEmpty()) return null;
         return profiles.get(0);
     }
+
 
 
     public ProfilePublicDTO convertToProfilePublicDTO(Profile profile) {
@@ -65,4 +69,3 @@ public class ProfileService extends Service {
         return profilePublicDTO;
     }
 }
-

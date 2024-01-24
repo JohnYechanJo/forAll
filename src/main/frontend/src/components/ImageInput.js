@@ -1,6 +1,7 @@
 import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
 
+
 import xmark from "./icons/xmark.png";
 
 const ImageInput = ({setImg, val}) => {
@@ -43,6 +44,7 @@ const ImageInput = ({setImg, val}) => {
                        ref={imgRef}
                        style={{display: "none"}}
                 />
+
 
                 <a onClick={handleButton}>
                     <img src={xmark} alt="xmark" style={{width:"1.5rem", height:"1.5rem"}} />

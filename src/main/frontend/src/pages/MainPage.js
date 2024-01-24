@@ -9,6 +9,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import ImageViewer from "../components/ImageViewer";
 import ArticleListTemplate from "../components/board/ArticleListTemplate";
 
+
 import ToolBar from "../components/home/ToolBar";
 
 const MainPage = () => {
@@ -62,6 +63,7 @@ const MainPage = () => {
                 <button className="button" onClick={boardFocus}>커뮤니티</button>
             </div>
             <Sidebar/>
+
 
             <ToolBar/>
 

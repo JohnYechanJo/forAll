@@ -4,6 +4,7 @@ import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import {BoardCategory, ChatRoomCategory} from "../../utils/enums";
 
+
 import {TimeUtil} from "../../utils/TimeUtil";
 import ImageSlider from "../../components/ImageSlider";
 
@@ -111,6 +112,7 @@ const PostViewPage = () => {
                         }
                     })
                 }}>채팅 보내기</p>
+
 
             </div>
             <div>

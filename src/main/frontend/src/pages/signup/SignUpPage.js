@@ -7,9 +7,13 @@ import axios from "axios";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import * as regularExpressions from "../../utils/regularExpressions";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import SignUpInformationTemplate from "../../components/signup/SignUpInformationTemplate";
 >>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+=======
+import SignUpInformationTemplate from "../../components/signup/SignUpInformationTemplate";
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
 import "../../components/Styles.css";
 import Modal from "react-modal";
 import Alert from "../../components/Alert";
@@ -28,9 +32,13 @@ const SignUpPage = () => {
     const [day, setDay] = useState("");
     const [gender, setGender] = useState(Gender.NotSpecified);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+=======
+
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
     const [isCheckDuplicatedId, setIsCheckDuplicatedId] = useState();
     const [isCheckDuplicatedEmail, setIsCheckDuplicatedEmail] = useState();
     const [isCheckPw, setIsCheckPw] = useState();
@@ -57,10 +65,14 @@ const SignUpPage = () => {
         const emailRule = regularExpressions.email;
         if (!emailRule.test(email)){
 <<<<<<< HEAD
+<<<<<<< HEAD
             openModal("이메일 형식을 확인해주세요.");
 =======
             openModal("이메일 형식을 확인해주세요");
 >>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+=======
+            openModal("이메일 형식을 확인해주세요");
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
         }else{
             axios.get("/api/v1/members/checkEmail/"+email)
                 .then((response) => {
@@ -77,14 +89,19 @@ const SignUpPage = () => {
         const phoneRule = regularExpressions.phoneNum;
         if (! phoneRule.test(phone)){
 <<<<<<< HEAD
+<<<<<<< HEAD
             openModal("전화번호 형식을 확인해주세요.");
 =======
             openModal("전화번호 형식을 확인해주세요");
 >>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+=======
+            openModal("전화번호 형식을 확인해주세요");
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
         }
         else{
             axios.post("/api/v1/send-one/"+phone)
                 .then((response) => {
+<<<<<<< HEAD
 <<<<<<< HEAD
                     openModal("인증번호를 발송했습니다.");
                 }).catch((response) => {
@@ -94,6 +111,11 @@ const SignUpPage = () => {
                 }).catch((response) => {
                 openModal("인증번호를 발송하지 못했습니다");
 >>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+=======
+                    openModal("인증번호를 발송했습니다");
+                }).catch((response) => {
+                openModal("인증번호를 발송하지 못했습니다");
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
             });
         }
     };
@@ -116,6 +138,7 @@ const SignUpPage = () => {
     }, [year, month, day]);
     const handleButton = () => {
         if (id === ""){
+<<<<<<< HEAD
 <<<<<<< HEAD
             openModal("아이디는 필수 입력 사항입니다.");
         }else if(pw === ""){
@@ -152,6 +175,8 @@ const SignUpPage = () => {
             navigate('/guestRegistry',{
                 state: {
 =======
+=======
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
             openModal("아이디는 필수 입력 사항입니다");
         }else if(pw === ""){
             openModal("비밀번호는 필수 입력 사항입니다");
@@ -186,7 +211,10 @@ const SignUpPage = () => {
         if (isAllChecked){
             axios.post("/api/v1/members",
                 {
+<<<<<<< HEAD
 >>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+=======
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
                     loginId: id,
                     loginPw: pw,
                     name: name,
@@ -194,11 +222,14 @@ const SignUpPage = () => {
                     gender: gender,
                     email: email,
 <<<<<<< HEAD
+<<<<<<< HEAD
                     phoneNum: phone
                 }
             });
 
 =======
+=======
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
                     phoneNum: phone,
                 },
                 {
@@ -220,7 +251,10 @@ const SignUpPage = () => {
                 navigate('/error')
             })
         }
+<<<<<<< HEAD
 >>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+=======
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
     }
     return (
         <div>
@@ -268,13 +302,19 @@ const SignUpPage = () => {
                 setIsUseTermsChecked={setIsUseTermsChecked}
             />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
             
             {isAllChecked ? <SignUpInformationTemplate
                 setIsAllChecked={setIsAllChecked}
                 submit={submit}
             /> : null}
+<<<<<<< HEAD
 >>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+=======
+>>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
             <Alert isOpen={isModalOpen} setIsOpen={setIsModalOpen} content={alertContent} />
 
         </div>

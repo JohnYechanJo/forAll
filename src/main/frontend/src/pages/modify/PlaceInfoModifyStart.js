@@ -38,10 +38,9 @@ const PlaceInfoModifyStart = () => {
         .get("/api/v1/space/" + spaceid)
         .then((res) =>{ 
           setData(res.data)
-<<<<<<< HEAD
+
           console.log(res.data)
-=======
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+
           setPlaceName(res.data.name)
           setFullAddress(res.data.address)
           setPlaceIntro(res.data.spaceBrief)

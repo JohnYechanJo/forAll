@@ -33,12 +33,14 @@ const ChefRegistry = () => {
         const userId = sessionStorage.getItem("user_id");
         const certificate = await ImageUploader(sanitaryImage, userId);
 
+
         axios.post("/api/v1/chefProfile", {
             userId: userId,
             career: career,
             certificatePhoto: certificate,
             accountBank: bank,
             accountNum: account,
+
             accountHolder: accountHolder,
         }).then((res) => {
             navigate("/chefRegistryChecking");

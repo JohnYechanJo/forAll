@@ -26,6 +26,7 @@ const SearchPwPage = () => {
 
             openAlert("전화번호 형식을 확인해주세요.");
 
+
         }
         else{
             axios.post("/api/v1/send-one/"+phone)
@@ -35,6 +36,7 @@ const SearchPwPage = () => {
                     setIsSendCerifiedNum(true);
                 }).catch((response) => {
                 openAlert("인증번호를 발송하지 못했습니다.");
+
 
             });
         }

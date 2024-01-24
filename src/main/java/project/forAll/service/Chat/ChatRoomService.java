@@ -32,11 +32,9 @@ public class ChatRoomService extends Service {
     }
 
     public ChatRoom getChatRoom(String userId1, String userId2, String category){
-<<<<<<< HEAD
+
         List<ChatRoom> chatRoom = chatRoomRepository.findByUserLoginIdsAndCategory(userId1, userId2, ChatRoomCategory.parse(category));
-=======
-        List<ChatRoom> chatRoom = chatRoomRepository.findByUserLoginIds(userId1, userId2);
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
+
         if (chatRoom.isEmpty()){
             final ChatRoom newRoom = new ChatRoom();
             List<Member> users = new ArrayList<>();
