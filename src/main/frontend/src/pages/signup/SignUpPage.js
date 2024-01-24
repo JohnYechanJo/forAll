@@ -23,7 +23,6 @@ const SignUpPage = () => {
     const [month, setMonth] = useState("");
     const [day, setDay] = useState("");
     const [gender, setGender] = useState(Gender.NotSpecified);
-
     const [isCheckDuplicatedId, setIsCheckDuplicatedId] = useState();
     const [isCheckDuplicatedEmail, setIsCheckDuplicatedEmail] = useState();
     const [isCheckPw, setIsCheckPw] = useState();
@@ -49,7 +48,7 @@ const SignUpPage = () => {
     const checkDuplicatedEmail = () => {
         const emailRule = regularExpressions.email;
         if (!emailRule.test(email)){
-            openModal("이메일 형식을 확인해주세요");
+            openModal("이메일 형식을 확인해주세요.");
         }else{
             axios.get("/api/v1/members/checkEmail/"+email)
                 .then((response) => {
@@ -65,14 +64,14 @@ const SignUpPage = () => {
     const sendCerifiedNum = () => {
         const phoneRule = regularExpressions.phoneNum;
         if (! phoneRule.test(phone)){
-            openModal("전화번호 형식을 확인해주세요");
+            openModal("전화번호 형식을 확인해주세요.");
         }
         else{
             axios.post("/api/v1/send-one/"+phone)
                 .then((response) => {
-                    openModal("인증번호를 발송했습니다");
+                    openModal("인증번호를 발송했습니다.");
                 }).catch((response) => {
-                openModal("인증번호를 발송하지 못했습니다");
+                openModal("인증번호를 발송하지 못했습니다.");
             });
         }
     };
@@ -95,31 +94,31 @@ const SignUpPage = () => {
     }, [year, month, day]);
     const handleButton = () => {
         if (id === ""){
-            openModal("아이디는 필수 입력 사항입니다");
+            openModal("아이디는 필수 입력 사항입니다.");
         }else if(pw === ""){
-            openModal("비밀번호는 필수 입력 사항입니다");
+            openModal("비밀번호는 필수 입력 사항입니다.");
         }else if(name === ""){
-            openModal("이름은 필수 입력 사항입니다");
+            openModal("이름은 필수 입력 사항입니다.");
         }else if(email === ""){
-            openModal("이메일은 필수 입력 사항입니다");
+            openModal("이메일은 필수 입력 사항입니다.");
         }else if(phone === ""){
-            openModal("휴대폰 번호는 필수 입력 사항입니다");
+            openModal("휴대폰 번호는 필수 입력 사항입니다.");
         }else if((year === "")||(month === "")||(day === "")){
-            openModal("생년월일은 필수 입력 사항입니다");
+            openModal("생년월일은 필수 입력 사항입니다.");
         }
         else if(isCheckDuplicatedId !== true) {
-            openModal("아이디 중복확인이 필요합니다");
+            openModal("아이디 중복확인이 필요합니다.");
         }else if(isCheckPw !== true){
-            openModal("비밀번호가 일치하지 않습니다");
+            openModal("비밀번호가 일치하지 않습니다.");
         }
         else if (isCheckDuplicatedEmail !== true){
-            openModal("이메일 중복확인이 필요합니다");
+            openModal("이메일 중복확인이 필요합니다.");
         }
         else if (isPhoneCerified !== true){
-            openModal("휴대폰 인증이 필요합니다");
+            openModal("휴대폰 인증이 필요합니다.");
         }
         else if (isUseTermsChecked !== true){
-            openModal("약관 동의가 필요합니다")
+            openModal("약관 동의가 필요합니다.")
         }
         else{
             setIsAllChecked(true);

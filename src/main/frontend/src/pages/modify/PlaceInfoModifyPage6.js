@@ -281,9 +281,15 @@ const PlaceInfoModifyPage6 = () => {
                 <p>• 4) 대관 4일 전~당일:환불 불가</p>
             </div>
             <hr style={{ height: "2px", backgroundColor: "black" }} />
-            <label>
-                <input type="checkbox" checked={isAgree} onChange={() => setIsAgree(!isAgree)} />동의합니다
-            </label>
+            <input
+                        type="checkbox"
+                        onChange={() => setIsAgree(!isAgree)}
+                        id="agree"
+                        checked={isAgree}
+                    />
+                    <label for='agree' style={{ display: 'block', marginBottom: '1rem', marginTop: '1rem' }}>
+                        <em></em><span className="fontForRegister" >동의합니다</span>
+                    </label>
             <div style={{ display: "flex" }}>
                 <button onClick={()=>navigate(-1,data)} style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 <button className="next_button" style={{ backgroundColor: "grey" }}
@@ -305,7 +311,7 @@ const PlaceInfoModifyPage6 = () => {
                 <p style={{
                     color: "#000", fontFamily: "Noto Sans KR", fontSize: "0.9375rem",
                     fontStyle: "normal", fontWeight: "400", lineHeight: "normal"
-                }}>공정보가 수정되었습니다!</p>
+                }}>공간정보가 수정되었습니다!</p>
                 <hr/>
                 <button onClick={() => navigate("/")}>확인</button>
             </Modal>
