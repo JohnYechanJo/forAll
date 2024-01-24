@@ -22,4 +22,6 @@ public class ProfilePublicDTO {
     private List<String> cook;
     // 요리재료
     private List<String> cookItem;
+    // 경력
+    private List<String> career;
 }

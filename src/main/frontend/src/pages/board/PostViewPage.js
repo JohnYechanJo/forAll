@@ -1,11 +1,12 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
-import {BoardCategory} from "../../utils/enums";
+import {BoardCategory, ChatRoomCategory} from "../../utils/enums";
 import {TimeUtil} from "../../utils/TimeUtil";
 import ImageSlider from "../../components/ImageSlider";
 
 const PostViewPage = () => {
+    const navigate = useNavigate();
     const params = useParams();
     const [data, setData] = useState([]);
     const [writeComment, setWriteComment] = useState(false);
@@ -95,8 +96,16 @@ const PostViewPage = () => {
                 <p onClick={handleRecommendArticle}>{data.recommend}</p>
                 <p>댓글수 : {data.comments ? data.comments.length : 0}</p>
 
-                <p>프로필 보기</p> {/*todo : 프로필 연결*/}
-                <p>채팅 보내기</p> {/*todo : 채팅 연결*/}
+                <p onClick={()=>navigate("/profile/"+data.userId)}>프로필 보기</p>
+                <p onClick={()=> {
+                    if (!sessionStorage.getItem("user_id")) return;
+                    navigate("/chatRoom", {
+                        state: {
+                            partner: data.userId,
+                            category: ChatRoomCategory.Board
+                        }
+                    })
+                }}>채팅 보내기</p>
             </div>
             <div>
                 <p>{data.content}</p>
