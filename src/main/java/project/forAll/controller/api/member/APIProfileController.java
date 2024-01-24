@@ -6,11 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
 import project.forAll.controller.api.APIController;
+import project.forAll.domain.member.ChefPending;
+import project.forAll.domain.member.ChefProfile;
 import project.forAll.domain.member.Profile;
 import project.forAll.domain.member.Member;
 import project.forAll.dto.MemberPublicDTO;
 import project.forAll.dto.ProfilePublicDTO;
 import project.forAll.form.ProfileForm;
+import project.forAll.service.ChefProfileService;
 import project.forAll.service.MemberService;
 import project.forAll.service.ProfileService;
 
@@ -21,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 public class APIProfileController extends APIController {
 
     private final ProfileService profileService;
+    private final ChefProfileService chefProfileService;
     private final SessionManager sessionManager;
     private final MemberService memberService;
 
@@ -81,16 +85,29 @@ public class APIProfileController extends APIController {
 
     // session 확인할 필요 없어서 해당 코드 제거
     @GetMapping("/profile/public/{id}")
-    public ResponseEntity getProfileForPublic(@PathVariable("id") final Long id){
-        final Profile profile = (Profile) profileService.findById(id);
+    public ResponseEntity getProfileForPublic(@PathVariable("id") final String userId){
+        try{
+            final Member member = memberService.findByLoginId(userId);
+            if (member == null) return new ResponseEntity(errorResponse("No member found for id " + userId),
+                    HttpStatus.NOT_FOUND);
+            final Profile profile = profileService.findByMember(member);
+            if (profile == null) return new ResponseEntity(errorResponse("No profile found for id " + userId),
+                    HttpStatus.NOT_FOUND);
 
-        if (profile == null) return new ResponseEntity(errorResponse("No profile found for id " + id),
-                HttpStatus.NOT_FOUND);
+            // Convert Member to MemberPublicDTO
+            ProfilePublicDTO profilePublicDTO = profileService.convertToProfilePublicDTO(profile);
 
-        // Convert Member to MemberPublicDTO
-        ProfilePublicDTO profilePublicDTO = profileService.convertToProfilePublicDTO(profile);
+            // chef라면, 경력을 DTO에 추가
+            if (member.getChefPending() == ChefPending.APPROVE){
+                final ChefProfile chefProfile = chefProfileService.findByMember(member);
+                profilePublicDTO.setCareer(chefProfile.getCareer());
+            }
 
-        return new ResponseEntity(profilePublicDTO, HttpStatus.OK);
+            return new ResponseEntity(profilePublicDTO, HttpStatus.OK);
+        }catch (final Exception e){
+            return new ResponseEntity(errorResponse("Coult not get public profile : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+
     }
 
 }
