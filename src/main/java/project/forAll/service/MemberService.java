@@ -145,9 +145,10 @@ public class MemberService extends Service {
         memberPublicDTO.setLoginId(member.getLoginId());
         memberPublicDTO.setName(member.getName());
         memberPublicDTO.setEmail(member.getEmail());
-        memberPublicDTO.setPhoneNum(member.getPhoneNum());
-        memberPublicDTO.setBirthday(member.getBirthday());
-        memberPublicDTO.setGender(member.getGender());
+//        memberPublicDTO.setPhoneNum(member.getPhoneNum());
+//        memberPublicDTO.setBirthday(member.getBirthday());
+//        memberPublicDTO.setGender(member.getGender());
+        memberPublicDTO.setChefPending(member.getChefPending().toString());
 
         return memberPublicDTO;
     }

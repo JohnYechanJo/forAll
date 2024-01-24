@@ -37,16 +37,15 @@ const PlaceInfoModifyStart = () => {
     axios
         .get("/api/v1/space/" + spaceid)
         .then((res) =>{ 
-          setData(res.data)
-          console.log(res.data)
-          setPlaceName(res.data.name)
-          setFullAddress(res.data.address)
-          setPlaceIntro(res.data.spaceBrief)
-          setPlaceIntroDetail(res.data.spaceIntro)
-          setKitchen(res.data.kitchenFeat)
-          setPlaceInfo(res.data.addressBrief)
-          setWebSite(res.data.website)
-          setImgRepresent(res.data.mainImage)
+          setData(res.data);
+          setPlaceName(res.data.name);
+          setFullAddress(res.data.address);
+          setPlaceIntro(res.data.spaceBrief);
+          setPlaceIntroDetail(res.data.spaceIntro);
+          setKitchen(res.data.kitchenFeat);
+          setPlaceInfo(res.data.addressBrief);
+          setWebSite(res.data.website);
+          setImgRepresent(res.data.mainImage);
         })
         .catch((err) => console.error(err));
   };
