@@ -9,6 +9,8 @@ import ImageUploader from "../../utils/imageUploader";
 import {useNavigate} from "react-router-dom";
 import ImageViewer from "../../components/ImageViewer";
 import ImagePreView from "../../components/ImagePreView";
+import updownImg from "../../components/icons/updown.jpg";
+import pencilImg from "../../components/icons/pencil.jpg";
 
 const PopupBoardPage = () => {
     const navigate = useNavigate();
@@ -56,18 +58,50 @@ const PopupBoardPage = () => {
             <Sidebar/>
             <HomeTemplate />
             <div>
-                <h1 style={{fontSize: '0.875rem', fontStyle: 'normal', fontWeight: '700', lineHeight: 'normal',
-                    letterSpacing: '-0.01031rem'}}>• 팝업</h1>
+                <div style={{
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                    width: '100%', height: '3.125rem', flexShrink: 0, border: '1px solid #C4C4C4', background: '#FFF'
+                }}>
+                    <h1 style={{
+                        fontSize: '0.875rem', fontStyle: 'normal', fontWeight: '700', lineHeight: 'normal',
+                        letterSpacing: '-0.01031rem', marginLeft: '0.1rem'
+                    }}>• 팝업</h1>
+                    <img src={updownImg} alt="updownImg" style={{
+                        width: '0.625rem', height: '0.625rem',
+                        flexShrink: 0, marginRight: '1rem'
+                    }}/>
+                </div>
+                <div style={{
+                    display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%',
+                    height: '3.125rem', flexShrink: 0, border: '1px solid #C4C4C4', background: '#FFF'
+                }}>
+                    <div onClick={() => setNewPost(true)}
+                         style={{
+                             display: 'flex', alignItems: 'center', width: '21.875rem', height: '1.875rem',
+                             flexShrink: 0, border: '1px solid #C4C4C4', background: '#FFF'
+                         }}>
+                        <img src={pencilImg} alt="pencilImg" style={{
+                            width: '0.625rem', height: '0.625rem',
+                            flexShrink: 0, marginLeft: '1rem', marginRight: '0.4rem'
+                        }}/>
+                        <p style={{
+                            fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
+                            lineHeight: 'normal', letterSpacing: '-0.01031rem'
+                        }}>새 글을 작성해주세요!</p>
+                        {/*<a onClick={() => setNewPost(true)}*/}
+                        {/*    disabled={!sessionStorage.getItem("user_id")}>새 글을 작성해주세요!</a>*/}
+                    </div>
+                </div>
                 <div>
-                    <button onClick={()=>setNewPost(true)} disabled={!sessionStorage.getItem("user_id")}>새 글을 작성해주세요!</button>
                     {newPost ? (
                         <div>
                             <input value={postTitle} onChange={onChangePostTitle} placeholder={"글 제목"}/>
-                            <input value={postContent} onChange={onChangePostContent} placeholder={postContentPlaceholder}/>
+                            <input value={postContent} onChange={onChangePostContent}
+                                   placeholder={postContentPlaceholder}/>
                             <label>
                                 <input type={"file"}
                                        accept="image/*"
-                                       onChange={(e) =>setPostImage(Array.from(e.target.files))}
+                                       onChange={(e) => setPostImage(Array.from(e.target.files))}
                                        style={{display: "none"}}
                                        multiple={true}
                                 />
@@ -75,15 +109,36 @@ const PopupBoardPage = () => {
                             </label>
                             <button onClick={UploadPost}>글 올리기</button>
                             <div>
-                                {postImage? postImage.map((img, idx) => (
+                                {postImage ? postImage.map((img, idx) => (
                                     <ImagePreView img={img}/>
-                                )) :null}
+                                )) : null}
                             </div>
 
                         </div>
-                    ):null}
+                    ) : null}
                 </div>
-                <ArticleListTemplate postList={postList} />
+                <ArticleListTemplate postList={postList}/>
+                <div style={{
+                    display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                    width: '8.5625rem', height: '4.3125rem', fontSize: '1rem', fontStyle: 'normal',
+                    fontWeight: '700', lineHeight: 'normal', letterSpacing: '-0.01031rem',
+                    marginLeft: '1.5rem', marginTop: '4.5rem'
+                }}>
+                    <a onClick={() => navigate("/")}>• 자주 묻는 질문</a>
+                    <a onClick={() => navigate("/")}>• 입점 및 제휴 문의</a>
+                </div>
+                <div style={{
+                    display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
+                    width: '12.4375rem', height: '5rem', fontSize: '0.4375rem', fontStyle: 'normal',
+                    fontWeight: '700', lineHeight: 'normal', letterSpacing: '-0.01031rem', marginLeft: '1.5rem',
+                    marginTop: '2.5rem'
+                }}>
+                    <p style={{margin: '0.1rem 0'}}>주식회사 포 올</p>
+                    <p style={{margin: '0.1rem 0'}}>대표 : 김대원 | 개인정보관리 책임자 : 김대원</p>
+                    <p style={{margin: '0.1rem 0'}}>이메일 : for.official.all@gmail.com | 대표번호 : 010-9019-7733</p>
+                    <p style={{margin: '0.1rem 0'}}>주소 : 서울시 관악구 관악로 17길</p>
+                    <p style={{margin: '0.1rem 0'}}>사업자등록번호 :</p>
+                </div>
             </div>
         </div>
     )

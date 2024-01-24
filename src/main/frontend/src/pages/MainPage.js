@@ -71,7 +71,7 @@ const MainPage = () => {
                     border: '1px solid rgba(196, 196, 196, 0.20)', background: '#FFF',
                     width: '100%', height: '3.125rem', flexShrink: 0}}>
                     <a style={{fontSize: "1.25rem", fontStyle: 'normal', fontWeight: '400',
-                        lineHeight: 'normal', letterSpacing: '-0.01031rem'}}>• 팝업</a>
+                        lineHeight: 'normal', letterSpacing: '-0.01031rem', marginLeft: '0.1rem'}}>• 팝업</a>
                     <a onClick={() => navigate("/popup")}
                        style={{fontSize: "0.9375rem", textDecorationLine: "underline", fontStyle: 'normal',
                            fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
@@ -82,7 +82,7 @@ const MainPage = () => {
                     border: '1px solid rgba(196, 196, 196, 0.20)', background: '#FFF',
                     width: '100%', height: '3.125rem', flexShrink: 0}}>
                     <a style={{fontSize: "1.25rem", fontStyle: 'normal', fontWeight: '400',
-                        lineHeight: 'normal', letterSpacing: '-0.01031rem'}}>• 잡담</a>
+                        lineHeight: 'normal', letterSpacing: '-0.01031rem', marginLeft: '0.1rem'}}>• 잡담</a>
                     <a onClick={() => navigate("/chat")}
                        style={{fontSize: "0.9375rem", textDecorationLine: "underline", fontStyle: 'normal',
                            fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
@@ -93,7 +93,7 @@ const MainPage = () => {
                     border: '1px solid rgba(196, 196, 196, 0.20)', background: '#FFF',
                     width: '100%', height: '3.125rem', flexShrink: 0}}>
                     <a style={{fontSize: "1.25rem", fontStyle: 'normal', fontWeight: '400',
-                        lineHeight: 'normal', letterSpacing: '-0.01031rem'}}>• 레시피</a>
+                        lineHeight: 'normal', letterSpacing: '-0.01031rem', marginLeft: '0.1rem'}}>• 레시피</a>
                     <a onClick={() => navigate("/recipe")}
                        style={{fontSize: "0.9375rem", textDecorationLine: "underline", fontStyle: 'normal',
                            fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
