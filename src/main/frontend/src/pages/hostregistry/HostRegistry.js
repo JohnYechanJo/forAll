@@ -160,24 +160,26 @@ const HostRegistry = () => {
                                         lineHeight: "normal"
                                     }}>
                                         <br/>
+                                        <div style={{display:"flex", justifyContent: "space-between" }}>
                                         <a style={{textAlign: "left"}}>오픈형 주방이란?</a><a
                                         style={{textAlign: "right"}} onClick={() => setModalIsOpen1(false)}>x</a>
-                                        <hr style={{ height: "1px", backgroundColor: "black" }}/>
+                                        </div>
+                                            <hr style={{ height: "1px", backgroundColor: "black" }}/>
                                         <p style={{
                                             textAlign: 'left',
-                                            paddingLeft: "1.5rem",
-                                            paddingRight: "1.5rem"
+                                            paddingLeft: "1rem",
+                                            paddingRight: "1rem"
                                         }}>•&ensp;주방, 홀이 하나로 결합된 형태입니다.</p>
                                         <p style={{
                                             textAlign: 'left',
-                                            paddingLeft: "1.5rem",
-                                            paddingRight: "1.5rem"
+                                            paddingLeft: "1rem",
+                                            paddingRight: "1rem"
                                         }}>•&ensp;주방과 홀이 결합되면서 음식을 만드는 사람과 가까이할 수 있어
                                             대면형보다 더 긴밀한 커뮤니케이션이 가능하며, 요리를 하는 동시에 식사가 가능한 형태를 띕니다.
                                         </p>
                                     </div>
-                                    <div class="bottom_button">
-                                        <a style={{ fontSize: "0.8rem"}} onClick={() => setModalIsOpen1(false)}>닫기</a>
+                                    <div class="bottom_button_fixed">
+                                        <a onClick={() => setModalIsOpen1(false)}>닫기</a>
                                     </div>
 
                                 </Modal>
@@ -228,23 +230,25 @@ const HostRegistry = () => {
                                         lineHeight: "normal"
                                     }}>
                                         <br/>
+                                        <div style={{display:"flex", justifyContent: "space-between" }}>
                                         <a style={{textAlign: "left"}}>대면형 주방이란?</a><a
                                         style={{textAlign: "right"}} onClick={() => setModalIsOpen2(false)}>x</a>
-                                        <hr style={{ height: "1px", backgroundColor: "black" }}/>
+                                        </div>
+                                            <hr style={{ height: "1px", backgroundColor: "black" }}/>
                                         <p style={{
                                             textAlign: 'left',
-                                            paddingLeft: "1.5rem",
-                                            paddingRight: "1.5rem"
+                                            paddingLeft: "1rem",
+                                            paddingRight: "1rem"
                                         }}>•&ensp;부엌과 다이닝룸이 한 공간에 자리하는 형태입니다.</p>
                                         <p style={{
                                             textAlign: 'left',
-                                            paddingLeft: "1.5rem",
-                                            paddingRight: "1.5rem"
+                                            paddingLeft: "1rem",
+                                            paddingRight: "1rem"
                                         }}>•&ensp;식탁이 따로 놓여 있지만, 음식을 만드는 사람의 얼굴을 보며
                                             대화를 나눌 수 있는 구조입니다.</p>
                                     </div>
-                                    <div class="bottom_button">
-                                        <a style={{ fontSize: "0.8rem"}} onClick={() => setModalIsOpen2(false)}>닫기</a>
+                                    <div class="bottom_button_fixed">
+                                        <a onClick={() => setModalIsOpen2(false)}>닫기</a>
                                     </div>
                                 </Modal>
                                 <button onClick={() => setModalIsOpen2(true)}
@@ -295,28 +299,30 @@ const HostRegistry = () => {
                                         lineHeight: "normal"
                                     }}>
                                         <br/>
+                                        <div style={{display:"flex", justifyContent: "space-between" }}>
                                         <a style={{textAlign: "left"}}>폐쇄형 주방이란?</a><a
                                         style={{textAlign: "right"}} onClick={() => setModalIsOpen3(false)}>x</a>
-                                        <hr style={{ height: "1px", backgroundColor: "black" }}/>
+                                        </div>
+                                            <hr style={{ height: "1px", backgroundColor: "black" }}/>
                                         <p style={{
                                             textAlign: 'left',
-                                            paddingLeft: "1.5rem",
-                                            paddingRight: "1.5rem"
+                                            paddingLeft: "1rem",
+                                            paddingRight: "1rem"
                                         }}>•&ensp;차분하게 조리와 정리에 전념할 수 있습니다.</p>
                                         <p style={{
                                             textAlign: 'left',
-                                            paddingLeft: "1.5rem",
-                                            paddingRight: "1.5rem"
+                                            paddingLeft: "1rem",
+                                            paddingRight: "1rem"
                                         }}>•&ensp;또한, 조리할 때 발생하는 오염과 냄새, 연기, 소리 등이 거실에 비교적 전달이 되지 않습니다.
                                         </p>
                                         <p style={{
                                             textAlign: 'left',
-                                            paddingLeft: "1.5rem",
-                                            paddingRight: "1.5rem"
+                                            paddingLeft: "1rem",
+                                            paddingRight: "1rem"
                                         }}>•&ensp;홀에서는 어수선한 모습이 보이지 않아 쾌적한 매장 환경이 만들어집니다.</p>
                                     </div>
-                                    <div class="bottom_button">
-                                        <a style={{ fontSize: "0.8rem"}} onClick={() => setModalIsOpen3(false)}>닫기</a>
+                                    <div  class="bottom_button_fixed">
+                                        <a  onClick={() => setModalIsOpen3(false)}>닫기</a>
                                     </div>
 
                                 </Modal>
