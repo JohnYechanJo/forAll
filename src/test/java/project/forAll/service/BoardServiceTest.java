@@ -108,4 +108,4 @@
 //        assertEquals("댓글 내용 확인", "For ALL입니다.", getComment.getText());
 //    }
 
-}
+//}

@@ -6,7 +6,6 @@ import {Gender} from "../../utils/enums";
 import axios from "axios";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import * as regularExpressions from "../../utils/regularExpressions";
-import SignUpInformationTemplate from "../../components/signup/SignUpInformationTemplate";
 import "../../components/Styles.css";
 import Modal from "react-modal";
 import Alert from "../../components/Alert";
@@ -124,6 +123,7 @@ const SignUpPage = () => {
         }
         else{
             setIsAllChecked(true);
+            submit();
         }
     };
     const submit = () => {
