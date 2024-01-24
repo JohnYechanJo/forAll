@@ -127,7 +127,6 @@ const SignUpPage = () => {
         }
     };
     const submit = () => {
-        if (isAllChecked){
             navigate('/guestRegistry',{
                 state: {
                     loginId: id,
@@ -139,7 +138,7 @@ const SignUpPage = () => {
                     phoneNum: phone
                 }
             });
-        }
+
     }
     return (
         <div>

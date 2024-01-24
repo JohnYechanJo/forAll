@@ -49,6 +49,7 @@ import ChefInfoModifyCompletePage from "./pages/modify/ChefInfoModifyCompletePag
 import PersonalModifyCompletePage from "./pages/modify/PersonalModifyCompletePage";
 import PlaceInfoModifyCompletePage from "./pages/modify/PlaceInfoModifyCompletePage";
 import ProfileModifyPage from "./pages/modify/ProfileModifyPage";
+import ProfileViewPage from "./pages/ProfileViewPage";
 
 function App() {
   return (
@@ -89,6 +90,7 @@ function App() {
         <Route path="/rentSpaceInfo3/:id" element={<RentSpaceInfo3 />} />
         <Route path="/chatList" element={<ChatRoomListPage />} />
         <Route path="/chatRoom" element={<ChatRoomPage />} />
+            <Route path="/profile/:id" element={<ProfileViewPage />} />
             <Route path="/mypost" element={<MyPostPage />} />
         <Route path="/post/:id" element={<PostViewPage />} />
         <Route path="/post/edit" element={<PostEditPage />} />

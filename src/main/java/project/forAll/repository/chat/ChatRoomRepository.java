@@ -17,4 +17,13 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
             "JOIN scr.users user2 " +
             "WHERE user1.loginId = :loginId1 AND user2.loginId = :loginId2")
     List<ChatRoom> findByUserLoginIds(@Param("loginId1") String loginId1, @Param("loginId2") String loginId2);
+
+    @Query("SELECT scr FROM ChatRoom scr " +
+            "JOIN scr.users user1 " +
+            "JOIN scr.users user2 " +
+            "WHERE user1.loginId = :loginId1 AND user2.loginId = :loginId2 AND scr.category = :category")
+    List<ChatRoom> findByUserLoginIdsAndCategory(
+            @Param("loginId1") String loginId1,
+            @Param("loginId2") String loginId2,
+            @Param("category") ChatRoomCategory category);
 }

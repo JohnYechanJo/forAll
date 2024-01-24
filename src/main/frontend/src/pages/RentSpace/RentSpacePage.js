@@ -2,7 +2,7 @@ import {useState, useCallback, useEffect} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
 import axios from "axios";
 import ImageSlider from "../../components/ImageSlider";
-import {KitchenFeat} from "../../utils/enums";
+import {ChatRoomCategory, KitchenFeat} from "../../utils/enums";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import {AddressUtil} from "../../utils/AddressUtil";
 const RentSpacePage = () => {
@@ -16,7 +16,7 @@ const RentSpacePage = () => {
         axios.get("/api/v1/space/"+params.id)
             .then((res) => {
                 setData(res.data);
-                console.log(res.data);
+                // console.log(res.data);
             })
             .catch((err) => console.error(err));
     }, []);
@@ -34,6 +34,16 @@ const RentSpacePage = () => {
                 <p>{data.priceSet}원 | {data.ableDate}</p>
                 {/*Todo : 관리자 채팅 연결*/}
                 <p>*영업일 대관 시 800,000원 | 별도 문의 바람</p>
+                <p onClick={()=>navigate("/profile/"+data.userId)}>프로필 보기</p>
+                <p onClick={()=> {
+                    if (!sessionStorage.getItem("user_id")) return;
+                    navigate("/chatRoom", {
+                        state: {
+                            partner: data.userId,
+                            category: ChatRoomCategory.Reservation
+                        }
+                    })
+                }}>채팅 보내기</p>
             </div>
             <div>
                 <h1>공간 소개</h1>

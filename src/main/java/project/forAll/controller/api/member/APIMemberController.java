@@ -40,6 +40,24 @@ public class APIMemberController extends APIController {
         return member == null ? new ResponseEntity(errorResponse("No user found for id " + id), HttpStatus.NOT_FOUND)
             : new ResponseEntity(member, HttpStatus.OK);
     }
+    /**
+     * id에 해당하는 member 객체를 반환
+     *
+     * @param userId member의 userid
+     * @return member 객체
+     */
+    @GetMapping("/members/user/{id}")
+    public ResponseEntity getMemberByLoginId(@PathVariable("id") final String userId, HttpServletRequest request){
+        String loginId = (String) sessionManager.getSession(request);
+        if (!loginId.equals(userId)) return new ResponseEntity(errorResponse("Session Disabled"),
+                HttpStatus.SERVICE_UNAVAILABLE);
+
+        final Member member = memberService.findByLoginId(userId);
+
+        return member == null ? new ResponseEntity(errorResponse("No user found for id " + userId), HttpStatus.NOT_FOUND)
+                : new ResponseEntity(member, HttpStatus.OK);
+    }
+
 
     /**
      * 주어진 memberForm에 맞춰 member 생성 후, db에 저장

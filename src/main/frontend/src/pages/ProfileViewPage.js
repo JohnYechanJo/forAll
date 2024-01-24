@@ -1,21 +1,15 @@
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import ImageUploader from "../../utils/imageUploader";
-import ImageInput from "../../components/ImageInput";
+import ImageInput from "../components/ImageInput";
 import Modal from "react-modal";
-import {ModalStyles} from "../../components/ModalStyles";
+import {ModalStyles} from "../components/ModalStyles";
+import ImageViewer from "../components/ImageViewer";
 
-const ProfileModifyPage = () => {
-    const location = useLocation();
-    const data = {...location.state};
+const ProfileViewPage = () => {
     const navigate = useNavigate();
-
-    const [introduce, setIntroduce] = useState("");
-    const [profileImage, setProfileImage] = useState("");
-    const [selectedMBTI, setSelectedMBTI] = useState("");
-    const [selectedFoodTypes, setSelectedFoodTypes] = useState([]);
-    const [selectedIngredient, setSelectedIngredient] = useState([]);
+    const params = useParams();
+    const [profile, setProfile] = useState({});
 
     const MBTI_TYPES = [
         'ISTJ', 'ISFJ', 'INFJ', 'INTJ',
@@ -31,68 +25,21 @@ const ProfileModifyPage = () => {
     const INGREDIENT_TYPES = [
         '육류', '가공육류', '어류', '해조류', '갑각류', '어패류', '곡류', '채소류', '버섯류', '과실류', '견과류', '콩류', '계란', '유제품류', '약재', '조미료',
     ];
-    const toggleFoodType = (foodType) => {
-        if (selectedFoodTypes.includes(foodType)) {
-            setSelectedFoodTypes(selectedFoodTypes.filter(type => type !== foodType));
-        } else {
-            setSelectedFoodTypes([...selectedFoodTypes, foodType]);
-        }
-    };
-    const toggleIngredient = (ingredient) => {
-        if (selectedIngredient.includes(ingredient)) {
-            setSelectedIngredient(selectedIngredient.filter(type => type !== ingredient));
-        } else {
-            setSelectedIngredient([...selectedIngredient, ingredient]);
-        }
-    };
-    const handleButton = () => {
-        if (introduce && profileImage) {
-            submit();
-        }
-        else setIsModalOpen(true);
-    }
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const submit = async () => {
-        const userId = sessionStorage.getItem("user_id");
-        const picture = await ImageUploader(profileImage, userId);
-        axios.put("/api/v1/profile", {
-            userId: userId,
-            introduction: introduce,
-            profilePhoto: picture,
-            mbti: selectedMBTI,
-            cook: selectedFoodTypes,
-            cookItem: selectedIngredient,
-        }).then(() => navigate('/modifyComplete'))
-            .catch((err) => console.error(err));
-
-    };
 
     useEffect(() => {
-        const userId = sessionStorage.getItem("user_id");
-        axios.get("/api/v1/profile/"+userId)
-            .then((res) => {
-                console.log(res.data);
-                setIntroduce(res.data.introduction);
-                setProfileImage(res.data.profilePhoto);
-                setSelectedMBTI(res.data.mbti ? res.data.mbti : "");
-                setSelectedFoodTypes(res.data.cook ? res.data.cook : []);
-                setSelectedIngredient(res.data.cookItem ? res.data.cookItem : []);
-            })
+        axios.get("/api/v1/profile/public/"+params.id)
+            .then((res) => setProfile(res.data))
             .catch((err) => console.error(err));
     }, []);
-
-    const onInputHandler = (e) => {
-        setIntroduce(e.target.value);
-    };
-
     return (
         <div>
+            <button onClick={()=>navigate(-1)}>{"<"}</button>
             <div style={{
                 textAlign: "center",
                 fontSize: "0.9375rem",
                 lineHeight: "1.375rem",
                 marginTop: "2.5rem",
-            }}>2. 프로필 등록</div>
+            }}>프로필</div>
             <div style={{
                 display: "flex",
                 flexDirection: "column",
@@ -120,12 +67,12 @@ const ProfileModifyPage = () => {
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <a className="fontForRegister" >본인 한 줄 소개<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 </div>
-                <input type="text" value={introduce} placeholder="ex.한식 퓨전 요리를 선보이는 매장 '브와르'를 운영하고 있습니다." style={{width:"21.875rem", height: "1.875rem" }}
-                       onChange={onInputHandler} />
+                <input type="text"style={{width:"21.875rem", height: "1.875rem" }}
+                       value={profile.introduction}  disabled={true}/>
 
                 <a className="fontForRegister" >프로필 등록 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 <p>
-                    <ImageInput setImg={setProfileImage} val={profileImage} />
+                    <ImageViewer val={profile.profilePhoto} />
                 </p>
                 <div style={{width:"100%"}} >
                     <a className="fontForRegister" >관심사<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
@@ -150,12 +97,10 @@ const ProfileModifyPage = () => {
                                 height: '1.25rem',
                                 border: '1px solid #C4C4C4',
                                 borderRadius: '0.3125rem',
-                                cursor: selectedMBTI === mbti ? 'default' : 'pointer',
-                                backgroundColor: selectedMBTI === mbti ? 'lightgray' : 'white',
+                                backgroundColor: profile.mbti === mbti ? 'lightgray' : 'white',
                                 textAlign: 'center',
                                 fontSize: '0.625rem',
                             }}
-                            onClick={() => setSelectedMBTI(mbti)}
                         >
                             {mbti}
                         </div>
@@ -178,12 +123,10 @@ const ProfileModifyPage = () => {
                                 height: '1.25rem',
                                 border: '1px solid #C4C4C4',
                                 borderRadius: '0.3125rem',
-                                cursor: selectedFoodTypes.includes(foodType) ? 'default' : 'pointer',
-                                backgroundColor: selectedFoodTypes.includes(foodType) ? 'lightgray' : 'white',
+                                backgroundColor: profile.cook ? (profile.cook.includes(foodType) ? 'lightgray' : 'white'):"white",
                                 textAlign: 'center',
                                 fontSize: '0.625rem',
                             }}
-                            onClick={() => toggleFoodType(foodType)}
                         >
                             {foodType}
                         </div>
@@ -206,40 +149,43 @@ const ProfileModifyPage = () => {
                                 height: '1.25rem',
                                 border: '1px solid #C4C4C4',
                                 borderRadius: '0.3125rem',
-                                cursor: selectedIngredient.includes(ingredient) ? 'default' : 'pointer',
-                                backgroundColor: selectedIngredient.includes(ingredient) ? 'lightgray' : 'white',
+                                backgroundColor: profile.cookItem ? (profile.cookItem.includes(ingredient) ? 'lightgray' : 'white') : 'white',
                                 textAlign: 'center',
                                 fontSize: '0.625rem',
                             }}
-                            onClick={() => toggleIngredient(ingredient)}
                         >
                             {ingredient}
                         </div>
                     ))}
                 </div>
-                <div style={{
-                    alignItems: "center",
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "100%",
-                }}>
-                    <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                        <p style={{ fontSize: "16px" }}>필수 입력사항이 모두 기입되지 않았습니다.</p>
-                        <button onClick={() => setIsModalOpen(false)}>뒤로</button>
-                    </Modal>
-                </div>
-            </div>
+                {profile.career ? (<div>
+                    <h4 style={{marginBottom:"0"}} >경력</h4>
+                    <hr style={{height: "2px", backgroundColor: "black", width:"95vw"}}/>
+                    {profile.career.map((item, index) => (
+                        <div style={{ position: 'relative', display: 'inline-block' }}>
+                            <div key={index}
+                                 style={{
+                                     display: 'flex',
+                                     justifyContent: 'center',
+                                     alignItems: 'center',
+                                     height: "3vh",
+                                     width: '45vw',
+                                     border: '2px solid lightgray',
+                                     backgroundColor: 'white',
+                                     borderRadius: '7px',
+                                     marginTop: '5px',
+                                 }}
+                            >
+                                {item}
+                            </div>
+                        </div>
+                    ))}
+                </div>):null}
 
-            <div style={{display:'flex',width:'100%',margin:'0px',marginTop:'4rem'}}>
-                <button style={{marginLeft:'auto',backgroundColor:"#FF4F4F",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}
-                        onClick={() => navigate(-1)}
-                >
-                    이전</button>
-                <button style={{marginLeft:'auto',backgroundColor:"#525252",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}
-                        onClick={()=>handleButton()}
-                >다음</button>
+
             </div>
         </div>
     );
 };
-export default ProfileModifyPage;
+
+export default ProfileViewPage;
