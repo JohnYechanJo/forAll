@@ -1,5 +1,6 @@
 import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
+import xmark from "./icons/xmark.png";
 const ImageInput = ({setImg, val}) => {
     const spring_app_url = "http://localhost:8080";
     // 기본 이미지 추후 설정 필요
@@ -41,7 +42,9 @@ const ImageInput = ({setImg, val}) => {
                        ref={imgRef}
                        style={{display: "none"}}
                 />
-                <button onClick={handleButton}>X</button>
+                <a onClick={handleButton}>
+                    <img src={xmark} alt="xmark" style={{width:"1.5rem", height:"1.5rem"}} />
+                </a>
 
             </label>
                     </div>

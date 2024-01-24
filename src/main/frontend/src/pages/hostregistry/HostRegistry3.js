@@ -180,7 +180,7 @@ const HostRegistry3 = () => {
                         </div>
                         : null)}
             </div>
-            <p>이용시간*</p>
+            <p>입•퇴실 시간*</p>
             <div style={{
                 display: "flex",
                 justifyContent: "left",
