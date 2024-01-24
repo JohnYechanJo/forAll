@@ -14,7 +14,7 @@ const DropDown = ({dataArr, onChange, placeholder, defaultData, val,width}) => {
         <div>
             <select onChange={onChangeData} placeholder={placeholder}
                     style={{width: {width}, height: "1.875rem", fontSize: "0.75rem",lineHeight:"1.375rem" ,fontFamily: "Noto Sans KR"}}
-                    defaultValue={defaultData}
+                    value={defaultData}
                     key={val}
             >
                 {dataArr.map(data => (

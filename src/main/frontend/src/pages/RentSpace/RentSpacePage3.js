@@ -5,6 +5,7 @@ import {ModalStyles} from "../../components/ModalStyles";
 import Modal from "react-modal";
 import Calendar from "../../components/Calender";
 import axios from "axios";
+import {TimeUtil} from "../../utils/TimeUtil";
 
 const RentSpacePage3 = () => {
     const location = useLocation();
@@ -30,8 +31,8 @@ const RentSpacePage3 = () => {
         axios.post("/api/v1/reservation", {
             member: sessionStorage.getItem("user_id"),
             space: data.spaceId,
-            rentDay: rentDay.toString(),
-            trialDay: trialDay.toString(),
+            rentDay: TimeUtil.parse(rentDay.toString()),
+            trialDay: TimeUtil.parse(trialDay.toString()),
             chefNum: chefNum
         }).then(()=>navigate("/rentSpaceComplete"))
             .catch((err) => console.error(err));
