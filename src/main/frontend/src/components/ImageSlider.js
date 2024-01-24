@@ -1,8 +1,9 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import SwiperCore, {Navigation, Pagination} from "swiper";
+import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import 'swiper/components/navigation/navigation.min.css';
+import 'swiper/components/pagination/pagination.min.css';
 const ImageSlider = ({images}) => {
     const spring_app_url = "http://localhost:8080";
     SwiperCore.use([Navigation, Pagination]);

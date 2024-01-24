@@ -41,4 +41,8 @@ public class Profile extends BassDomain {
     // 요리재료
     @ElementCollection
     private List<String> cookItem;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 24a33c3 ([])
