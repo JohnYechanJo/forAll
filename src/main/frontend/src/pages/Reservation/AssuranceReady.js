@@ -9,6 +9,8 @@ import axios from "axios";
 import ImageViewer from "../../components/ImageViewer";
 import ImagesViewer from "../../components/ImagesViewer";
 import ImageUploader from "../../utils/imageUploader";
+import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
+import {ReservationModalStyles} from "../../components/ReservationModalStyles";
 
 const AssuranceReady = () => {
     const location = useLocation();
@@ -97,34 +99,74 @@ const AssuranceReady = () => {
             </div>
             <button onClick={handleButton}>보내기</button>
 
-            <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                <h1>꼭 해야하나요?</h1>
-                <p>네. 마감 기록을 상세히 기록할 수록 셰프님의 대관이 확실히 보장 받을 수 있습니다.</p>
-                <p>기록한 내용은 오너가 사고 발생에 대한 손해 배상 청구시 증빙자료가 됩니다.</p>
-                <p>‘오너 마감 가이드’ 에서 명시된 사항을 꼭 숙지하시고, 그대로 이행해 주세요.</p>
-                <p>안전하고 아름다운 대관문화를 만드시는 셰프님이 포 올의 얼굴입니다.</p>
-                <button onClick={()=>setIsModalOpen(false)}>닫기</button>
+            <Modal isOpen={isModalOpen} style={ReservationModalStyles} ariaHideApp={false}>
+                <div style={{
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "0.625rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal"
+                }}>
+                    <br/>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <a style={{textAlign: "left"}}>꼭 해야하나요?</a><a style={{textAlign: "right"}}
+                                                                      onClick={() => setIsModalOpen(false)}>x</a>
+                    </div>
+                    <hr style={{height: "1px", backgroundColor: "black"}}/>
+                    <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;네. <strong>마감
+                        기록</strong>을 상세히 기록할 수록 셰프님의 대관이 확실히 보장 받을 수 있습니다.
+                    </p>
+                    <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;기록한 내용은 오너가 사고 발생에
+                        대한 손해 배상 청구시 증빙자료가 됩니다.</p>
+                    <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;<strong>‘오너 마감
+                        가이드’</strong> 에서 명시된 사항을 꼭 숙지하시고, 그대로 이행해 주세요.</p>
+                    <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;안전하고 아름다운 대관문화를
+                        만드시는 셰프님이 포 올의 얼굴입니다.</p>
+                    <div className="bottom_button_fixed">
+                        <a style={{fontSize: "0.8rem"}} onClick={() => setIsModalOpen(false)}>닫기</a>
+                    </div>
+                </div>
             </Modal>
-            <Alert content={"필수 요소들이 입력되어야 합니다."} isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} />
+            <Alert content={"필수 요소들이 입력되어야 합니다."} isOpen={isAlertOpen} setIsOpen={setIsAlertOpen}/>
             {isGuidOpen ? (
                 <div>
                     <h1>마감 안내</h1>
                     <p>오너 마감 가이드</p>
                     <p>숙지 사항</p>
-                    <textarea content={spaceData.closeGuide} />
+                    <textarea content={spaceData.closeGuide}/>
                     <p>사진</p>
                     <ImageViewer val={spaceData.closeImage ? spaceData.closeImage[0] : null}/>
                     <p>추가 사진</p>
                     <ImagesViewer vals={spaceData.closeImage ? spaceData.closeImage.slice(1) : []}/>
-                    <button onClick={()=>setIsGuidOpen(false)}>닫기</button>
+                    <button onClick={() => setIsGuidOpen(false)}>닫기</button>
                 </div>
-            ):null}
-            <Modal isOpen={completeModal} style={ModalStyles} ariaHideApp={false}>
-                <h1>감사합니다.</h1>
-                <p>꼼꼼히 확인해주셔서 감사합니다.</p>
-                <p>안전하고 아름다운 대관 문화를 만드는 셰프님이</p>
-                <p>포 올의 얼굴입니다.</p>
-                <button onClick={()=>navigate("/")}>닫기</button>
+            ) : null}
+            <Modal isOpen={completeModal} style={ExplanationModalStyles} ariaHideApp={false}>
+                <div style={{
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "0.625rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal"
+                }}>
+                    <br/>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <a style={{textAlign: "left"}}>감사합니다.</a><a style={{textAlign: "right"}}
+                                                                    onClick={() => setCompleteModal(false)}>x</a>
+                    </div>
+                    <hr style={{height: "1px", backgroundColor: "black"}}/>
+                    <a style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;꼼꼼히 확인해주셔서 감사합니다.
+                    </a>
+                    <a style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;안전하고 아름다운 대관 문화를
+                        만드는 셰프님이
+                    </a>
+                    <a style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;포 올의 얼굴입니다.</a>
+                    <div className="bottom_button_relative">
+                        <a style={{fontSize: "0.8rem"}} onClick={() => setCompleteModal(false)}>닫기</a>
+                    </div>
+                </div>
             </Modal>
         </div>
     )
