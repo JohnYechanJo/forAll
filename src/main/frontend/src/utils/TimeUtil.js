@@ -1,9 +1,24 @@
 export const TimeUtil = {
     now: () => new Date().toJSON(),
+    parse: (str) => new Date(str).toJSON(),
+    setHour: (str, hour) => {
+        const date = new Date(str);
+        date.setHours(hour);
+        return date.toJSON();
+    },
+    checkPast: (json) => {
+        const from = new Date(json).getTime();
+        const now = new Date().getTime();
+        return now - from > 0;
+    },
+    checkToday: (json) => {
+        const date = new Date().toJSON().split("T")[0]
+        return date === json.split("T")[0];
+    },
     getDiffSecond: (json) => {
         const from = new Date(json).getTime();
         const now = new Date().getTime();
-        return Math.floor((now - from)/1000);
+        return Math.floor(Math.abs(now - from)/1000);
     },
     getDiffStr: (json) => {
         const from = new Date(json).getTime();
