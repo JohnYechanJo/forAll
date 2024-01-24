@@ -7,6 +7,7 @@ import DaumPost from "../../components/DaumPost";
 import { KitchenFeat } from "../../utils/enums";
 import ImageInput from "../../components/ImageInput";
 import Alert from "../../components/Alert";
+import ForAllLogo from "../../components/ForAllLogo";
 const HostRegistry = () => {
     const [inputCount, setInputCount] = useState(0);
     const [inputCount2, setInputCount2] = useState(0);
@@ -88,16 +89,17 @@ const HostRegistry = () => {
     };
     return (
         <div
-        className="fontForRegister"
+            className="fontForRegister"
             style={{
                 display: "flex",
                 justifyContent: "space-around",
                 flexDirection: "column",
 
             }}>
+                <header style={{ textAlign: "center" }}><h3>(1/4) 공간 정보</h3></header>
+                <ForAllLogo/>
             <div style={{ padding: '1rem', width: '100%' }}>
                 <div>
-                    <header style={{ textAlign: "center" }}><h3>(1/4) 공간 정보</h3></header>
                     <h4>공간명을 입력해주세요.</h4>
                     <hr style={{ height: "2px", backgroundColor: "black" }} />
                     <h4>공간명</h4>
@@ -333,22 +335,29 @@ const HostRegistry = () => {
                 </div>
             </div>
             <div style={{ position: 'fixed', bottom: 0, width: '100%', display: 'flex', justifyContent: 'space-between' }}>
-    <button style={{ backgroundColor: "#FF4F4F", width: '50%', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-        onClick={() => navigate('/hostRegistryStart')}
-    >
-        이전
-    </button>
-    <button style={{ backgroundColor: "#525252", width: '50%', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-        onClick={() => handleButton()}
-    >
-        다음
-    </button>
-</div>
-            <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
-                <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
-                <button onClick={() => setIsModalOpen(false)}>뒤로</button>
-                <button onClick={() => submit()}>다음</button>
+                <button style={{ backgroundColor: "#FF4F4F", width: '50%', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+                    onClick={() => navigate('/hostRegistryStart')}
+                >
+                    이전
+                </button>
+                <button style={{ backgroundColor: "#525252", width: '50%', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+                    onClick={() => handleButton()}
+                >
+                    다음
+                </button>
+            </div>
+            <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalStyles} >
+                <p style={{ fontSize: '0.9375rem' }}>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
+                <p style={{ fontSize: '0.9375rem' }}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem', borderTop: '1px solid #C4C4C4' }}>
+                    <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+                        onClick={() => setIsModalOpen(false)}
+                    >
+                        뒤로</button>
+                    <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+                        onClick={() => submit()}
+                    >다음</button>
+                </div>
             </Modal>
             <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={"주소는 필수입력사항입니다."} />
 

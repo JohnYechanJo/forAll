@@ -5,7 +5,7 @@
  * @param defaultData 처음 보여줄 문자열
  * @returns {JSX.Element}
  */
-const DropDown = ({dataArr, onChange, placeholder, defaultData, val,width}) => {
+const DropDown = ({dataArr, onChange, placeholder, defaultData, val, width}) => {
     const onChangeData = (e) => {
         onChange(e.target.value);
     };
@@ -13,7 +13,7 @@ const DropDown = ({dataArr, onChange, placeholder, defaultData, val,width}) => {
     return (
         <div>
             <select onChange={onChangeData} placeholder={placeholder}
-                    style={{width: {width}, height: "1.875rem", fontSize: "0.75rem",lineHeight:"1.375rem" ,fontFamily: "Noto Sans KR"}}
+                    style={{width: width, height: "1.875rem", fontSize: "0.75rem",lineHeight:"1.375rem" ,fontFamily: "Noto Sans KR",border: "1px solid #D9D9D9"}}
                     defaultValue={defaultData}
                     key={val}
             >
