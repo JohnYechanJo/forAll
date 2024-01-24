@@ -38,6 +38,7 @@ const PlaceInfoModifyStart = () => {
         .get("/api/v1/space/" + spaceid)
         .then((res) =>{ 
           setData(res.data)
+          console.log(res.data)
           setPlaceName(res.data.name)
           setFullAddress(res.data.address)
           setPlaceIntro(res.data.spaceBrief)

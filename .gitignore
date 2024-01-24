@@ -20,6 +20,7 @@ src/main/resources/static/static/js/main*
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+src/main/resources/static/upload/*.png
 
 ### IntelliJ IDEA ###
 .idea

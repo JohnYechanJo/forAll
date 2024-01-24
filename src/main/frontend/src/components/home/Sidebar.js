@@ -111,7 +111,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
-                        <Link to="/personalInfoModify2">
+                        <Link to="/personalInfoModify">
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>개인 정보수정</button>
                         </Link>
                         <Link to="/chefInfoModify">
@@ -129,8 +129,8 @@ const Sidebar = ({ width = 18.75, children }) => {
                         <img src={logout} alt="logout" style={{height:"1.125rem", width:"0.875rem", margin: "auto",border:'none',backgroundColor:'white',fontSize:'0.875rem',fontWeight:'700',marginLeft:'2rem'}} />
                         <a style={{marginLeft:'0.5rem'}}>로그아웃</a>
                         </div>) : (<div onClick={logIn}>
-                        <img src={login}alt="login" style={{height:"1.125rem", width:"0.875rem", margin: "auto",border:'none',backgroundColor:'white',fontSize:'0.875rem',fontWeight:'700'}} />
-                        로그인 ㅣ 회원가입
+                        <img src={login}alt="login" style={{height:"1.125rem", width:"0.875rem", margin: "auto",border:'none',backgroundColor:'white',fontSize:'0.875rem',fontWeight:'700',marginLeft:'2rem'}} />
+                        <a style={{marginLeft:'0.5rem'}}>로그인 ㅣ 회원가입</a>
                         </div>)}
                 </div>
                 </div>

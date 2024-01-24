@@ -8,7 +8,7 @@ import Banner from "../components/./Banner";
 import {useLocation, useNavigate} from "react-router-dom";
 import ImageViewer from "../components/ImageViewer";
 import ArticleListTemplate from "../components/board/ArticleListTemplate";
-
+import ToolBar from "../components/home/ToolBar";
 const MainPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -60,6 +60,7 @@ const MainPage = () => {
                 <button className="button" onClick={boardFocus}>커뮤니티</button>
             </div>
             <Sidebar/>
+            <ToolBar/>
             <HomeTemplate />
             <div ref={spaceRef}>
                 <p onClick={() => navigate("/spaceList")}>모두보기</p>
