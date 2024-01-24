@@ -147,7 +147,7 @@ const GuestRegistry = () => {
                     </div>
                 ))}
             </div>
-            <a style={{ fontSize: "0.625rem" }} >• 자신 있는 요리를 선택해주세요!</a>
+            <a style={{ fontSize: "0.625rem" }} >• 자신 있는 분야를 선택해주세요!</a>
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
@@ -175,7 +175,7 @@ const GuestRegistry = () => {
                     </div>
                 ))}
             </div>
-            <a style={{ fontSize: "0.625rem" }}>• 좋아하는 요리재료를 선택해주세요! 본인과 비슷한 사람을 찾을 수 있답니다.</a>
+            <a style={{ fontSize: "0.625rem" }}>• 좋아하는 요리재료를 선택해주세요! </a>
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',

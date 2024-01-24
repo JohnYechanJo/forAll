@@ -47,6 +47,10 @@ import HostRegistry5 from "./pages/hostregistry/HostRegistry5";
 import PlaceInfoModifyPage5 from "./pages/modify/PlaceInfoModifyPage5";
 import FAQ from "./pages/FAQ";
 import EntryPartnership from "./pages/EntryPartnership";
+import ChefInfoModifyCompletePage from "./pages/modify/ChefInfoModifyCompletePage";
+import PersonalModifyCompletePage from "./pages/modify/PersonalModifyCompletePage";
+import PlaceInfoModifyCompletePage from "./pages/modify/PlaceInfoModifyCompletePage";
+
 function App() {
   return (
       <Routes>
@@ -65,8 +69,10 @@ function App() {
         <Route path="/placeInfoModify4" element={<PlaceInfoModifyPage4 />} />
         <Route path="/placeInfoModify5" element={<PlaceInfoModifyPage5 />} />
         <Route path="/placeInfoModify6" element={<PlaceInfoModifyPage6 />} />
-        <Route path="/modifyComplete" element={<ModifyCompletePage />}/>
-        <Route path="/hostRegistryStart" element={<HostRegistryStartPage />}/>
+        <Route path="/chefInfoModifyComplete" element={<ChefInfoModifyCompletePage />}/>
+            <Route path="/personalModifyComplete" element={<PersonalModifyCompletePage />}/>
+            <Route path="/placeInfoModifyComplete" element={<PlaceInfoModifyCompletePage />}/>
+            <Route path="/hostRegistryStart" element={<HostRegistryStartPage />}/>
         <Route path="/hostRegistry" element={<HostRegistry />} />
         <Route path="/hostRegistry2" element={<HostRegistry2 />} />
         <Route path="/hostRegistry3" element={<HostRegistry3 />}/>
@@ -96,7 +102,7 @@ function App() {
         <Route path="/chefRegistryChecking" element={<ChefRegistryCheckingPage />} />
         <Route path="/chefRegistryComplete" element={<ChefRegistryComplete />} />
             <Route path="/FAQ" element={<FAQ />} />
-            <Route path="EntryPartnership" element={<EntryPartnership />} />
+            <Route path="/EntryPartnership" element={<EntryPartnership />} />
 
       </Routes>
   );
