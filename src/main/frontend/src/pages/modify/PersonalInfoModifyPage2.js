@@ -32,7 +32,6 @@ const PersonalModify2 = () => {
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [alertContent, setAlertContent] = useState("");
-
     const openAlert = (string) => {
         setAlertContent(string);
         setIsAlertOpen(true);
@@ -104,14 +103,11 @@ const PersonalModify2 = () => {
                     }
                 }
             ).then((response) => {
-                navigate('/modifyComplete');
+                navigate('/profileModify');
             }).catch((response) => {
                 navigate('/error')
             })
         }
-
-
-
     };
     return (
         <div>

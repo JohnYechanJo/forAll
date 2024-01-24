@@ -9,6 +9,8 @@ import axios from "axios";
 import ImageUploader from "../../utils/imageUploader";
 
 const GuestRegistry = () => {
+    const location = useLocation();
+    const data = {...location.state};
     const navigate = useNavigate();
     const [introduce, setIntroduce] = useState("");
     const [profileImage, setProfileImage] = useState("");
@@ -45,26 +47,44 @@ const GuestRegistry = () => {
         }
     };
     const handleButton = () => {
-        if ((introduce !== "") && (profileImage !== "")) {
+        if (introduce && profileImage) {
             submit();
         }
         else setIsModalOpen(true);
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
     const submit = async () => {
-        const userId = sessionStorage.getItem("user_id");
-        const picture = await ImageUploader(profileImage, userId);
-        axios.post("/api/v1/profile", {
-            userId: userId,
-            introduction: introduce,
-            picture: picture,
-            mbti: selectedMBTI,
-            cook: selectedFoodTypes,
-            interest: selectedIngredient,
+        axios.post("/api/v1/members",{
+            loginId: data.loginId,
+            loginPw: data.loginPw,
+            name: data.name,
+            email: data.email,
+            phoneNum: data.phoneNum,
+            birthday: data.birthday,
+            gender: data.gender
+        }).then(async ()=>{
+            sessionStorage.setItem("user_id", data.loginId);
+            sessionStorage.setItem("name", data.name);
+            sessionStorage.setItem("email", data.email);
+            const picture = await ImageUploader(profileImage, data.loginId);
+            axios.post("/api/v1/profile", {
+                userId: data.loginId,
+                introduction: introduce,
+                picture: picture,
+                mbti: selectedMBTI,
+                cook: selectedFoodTypes,
+                interest: selectedIngredient,
 
-        }).then((res) => {
-            navigate("/notification");
+            }).then((res) => {
+                navigate("/notification",{state:{
+                        id: data.loginId,
+                        name: data.name,
+                        email: data.email,
+                        profileImg: data.picture,
+                    }});
+            }).catch((err) => console.error(err));
         }).catch((err) => console.error(err));
+
     };
 
     const onInputHandler = (e) => {
@@ -147,7 +167,7 @@ const GuestRegistry = () => {
                     </div>
                 ))}
             </div>
-            <a style={{ fontSize: "0.625rem" }} >• 자신 있는 요리를 선택해주세요!</a>
+            <a style={{ fontSize: "0.625rem" }} >• 자신 있는 분야를 선택해주세요!</a>
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
@@ -175,7 +195,7 @@ const GuestRegistry = () => {
                     </div>
                 ))}
             </div>
-            <a style={{ fontSize: "0.625rem" }}>• 좋아하는 요리재료를 선택해주세요! 본인과 비슷한 사람을 찾을 수 있답니다.</a>
+            <a style={{ fontSize: "0.625rem" }}>• 좋아하는 요리재료를 선택해주세요! </a>
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',

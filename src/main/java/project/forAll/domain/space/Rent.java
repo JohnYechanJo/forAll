@@ -20,8 +20,6 @@ public class Rent {
     private Integer ableStartTime;
     // 이용가능종료시간
     private Integer ableFinTime;
-    // 공간 층수
-    private String floorNum;
     // 주차 여부
     private String ableParking;
     // 엘리베이터 여부

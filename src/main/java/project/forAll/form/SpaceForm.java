@@ -45,8 +45,6 @@ public class SpaceForm {
     private Integer ableStartHour;
     // 이용가능 종료시간
     private Integer ableFinHour;
-    // 공간 층수
-    private String floorNum;
     // 주차 여부
     private String ableParking;
     // 엘리베이터 여부
@@ -117,6 +115,10 @@ public class SpaceForm {
     private String accountNum;
     // 예금주
     private String accountHolder;
+    // 마감 사항
+    private String closeGuide;
+    // 마감 사진들
+    private List<String> closeImage;
     // 공개 여부
     private Boolean isPublic;
 

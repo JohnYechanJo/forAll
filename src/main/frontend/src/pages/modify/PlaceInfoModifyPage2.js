@@ -85,7 +85,6 @@ const PlaceInfoModify2 = () => {
             }
         });
     };
-    // 이미지는 하나도 구현 안 했음
     return (
         <div className="margin"
             style={{

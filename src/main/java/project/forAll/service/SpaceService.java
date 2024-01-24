@@ -97,7 +97,6 @@ public class SpaceService extends Service {
         rent.setAbleDate(sf.getAbleDate());
         rent.setAbleStartTime(sf.getAbleStartHour());
         rent.setAbleFinTime(sf.getAbleFinHour());
-        rent.setFloorNum(sf.getFloorNum());
         rent.setAbleParking(sf.getAbleParking());
         rent.setHaveElevator(sf.getHaveElevator());
         rent.setTableNum(sf.getTableNum());
@@ -147,6 +146,10 @@ public class SpaceService extends Service {
         booking.setAccountHolder(sf.getAccountHolder());
         saveBooking(booking);
         space.setBooking(booking);
+
+        space.setCloseGuide(sf.getCloseGuide());
+        List<Image> closeImage = imageService.findListByIds(sf.getCloseImage());
+        space.setCloseImage(closeImage);
         space.setPublic(sf.getIsPublic());
 
         return space;
@@ -175,7 +178,6 @@ public class SpaceService extends Service {
         sf.setAbleDate(rent.getAbleDate());
         sf.setAbleStartHour(rent.getAbleStartTime());
         sf.setAbleFinHour(rent.getAbleFinTime());
-        sf.setFloorNum(rent.getFloorNum());
         sf.setAbleParking(rent.getAbleParking());
         sf.setHaveElevator(rent.getHaveElevator());
         sf.setTableNum(rent.getTableNum());
@@ -215,6 +217,8 @@ public class SpaceService extends Service {
         sf.setAccountNum(booking.getAccountNum());
         sf.setAccountHolder(booking.getAccountHolder());
 
+        sf.setCloseGuide(space.getCloseGuide());
+        sf.setCloseImage(imageService.getImagesNames(space.getCloseImage()));
         sf.setIsPublic(space.isPublic());
 
         return sf;
@@ -248,7 +252,6 @@ public class SpaceService extends Service {
         rent.setAbleDate(sf.getAbleDate());
         rent.setAbleStartTime(sf.getAbleStartHour());
         rent.setAbleFinTime(sf.getAbleFinHour());
-        rent.setFloorNum(sf.getFloorNum());
         rent.setAbleParking(sf.getAbleParking());
         rent.setHaveElevator(sf.getHaveElevator());
         rent.setTableNum(sf.getTableNum());
@@ -298,6 +301,10 @@ public class SpaceService extends Service {
         booking.setAccountHolder(sf.getAccountHolder());
         saveBooking(booking);
         space.setBooking(booking);
+
+        space.setCloseGuide(sf.getCloseGuide());
+        List<Image> closeImage = imageService.findListByIds(sf.getCloseImage());
+        space.setCloseImage(closeImage);
         space.setPublic(sf.getIsPublic());
 
         return space;

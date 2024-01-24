@@ -13,7 +13,6 @@ const ImageInput = ({setImg, val}) => {
         setImg(file);
     };
     useEffect(() => {
-        console.log(val);
         if (!val) setImgFile("");
         else setImgFile(typeof(val) === "string" ? spring_app_url + "/api/v1/image/"+val : URL.createObjectURL(val));
     }, [val]);

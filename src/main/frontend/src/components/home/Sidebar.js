@@ -91,7 +91,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                         <Link to="/chefRegistry">
                             <button className="button"  style={{textAlign:"left",marginLeft:"2rem"}}>셰프 등록하기</button>
                         </Link>
-                        <Link to="/hostRegistryStart">
+                        <Link to="/hostRegistry">
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>공간 등록하기</button>
                         </Link>
                     </div>

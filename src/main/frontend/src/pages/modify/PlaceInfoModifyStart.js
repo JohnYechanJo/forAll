@@ -120,7 +120,7 @@ const PlaceInfoModifyStart = () => {
     >
       <div>
         <header style={{ textAlign: "center" }}>
-          <h3>1. 공간 정보</h3>
+          <h3>(1/4)공간 정보</h3>
         </header>
         <h4>공간명을 입력해주세요.</h4>
         <hr style={{ height: "2px", backgroundColor: "black" }} />

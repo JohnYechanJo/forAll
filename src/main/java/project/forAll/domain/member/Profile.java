@@ -29,25 +29,16 @@ public class Profile extends BassDomain {
 
     // 한 줄 소개
     private String introduction;
-    // 세부 소개
-    private String detailIntroduction;
-    // 경력
-    @ElementCollection
-    private List<String> career;
+    // 헷갈림 방지로 picture에서 profilePhoto로 변수명 변경
     // 프로필 사진
     @OneToOne(fetch = FetchType.LAZY)
-    private Image picture;
-    // 프로필 사진 설명
-    private String pictureExplain;
-    // MBTi
+    private Image profilePhoto;
+    // MBTI
     private String mbti;
     // 요리
     @ElementCollection
     private List<String> cook;
-    // 관심사
+    // 요리재료
     @ElementCollection
-    private List<String> interest;
-    // 보건증 사진
-    @OneToOne(fetch = FetchType.LAZY)
-    private Image certificate;
+    private List<String> cookItem;
 }

@@ -66,19 +66,34 @@ const MainPage = () => {
                 <Banner dataSet={spaceData} navigate={navigate}/>
             </div>
             <div ref={boardRef}>
-                <div style={{display:'flex',justifyContent:'space-between',margin:"0.87rem"}} >
-                    <a style={{fontSize:"1.25rem"}} >• 팝업</a>
-                    <a onClick={() => navigate("/popup")} style={{fontSize:"0.9375rem",textDecorationLine:"underline"}} >모두보기</a>
+                <div style={{display: 'flex', justifyContent: 'space-between', margin: "0.87rem"}}>
+                    <a style={{fontSize: "1.25rem"}}>• 팝업</a>
+                    <a onClick={() => navigate("/popup")}
+                       style={{fontSize: "0.9375rem", textDecorationLine: "underline"}}>모두보기</a>
                 </div>
                 <ArticleListTemplate postList={popupData} preview={true}/>
-                <div style={{display:'flex',justifyContent:'space-between',margin:"0.87rem"}} >
-                    <a style={{fontSize:"1.25rem"}} >• 잡담</a>
-                    <a onClick={() => navigate("/chat")} style={{fontSize:"0.9375rem",textDecorationLine:"underline"}} >모두보기</a>
+                <div style={{display: 'flex', justifyContent: 'space-between', margin: "0.87rem"}}>
+                    <a style={{fontSize: "1.25rem"}}>• 잡담</a>
+                    <a onClick={() => navigate("/chat")}
+                       style={{fontSize: "0.9375rem", textDecorationLine: "underline"}}>모두보기</a>
                 </div>
                 <ArticleListTemplate postList={chatData} preview={true}/>
-                <div style={{display:'flex',justifyContent:'space-between',margin:"0.87rem"}} >
-                    <a style={{fontSize:"1.25rem"}} >• 레시피</a>
-                    <a onClick={() => navigate("/recipe")} style={{fontSize:"0.9375rem",textDecorationLine:"underline"}} >모두보기</a>
+                <div style={{display: 'flex', justifyContent: 'space-between', margin: "0.87rem"}}>
+                    <a style={{fontSize: "1.25rem"}}>• 레시피</a>
+                    <a onClick={() => navigate("/recipe")}
+                       style={{fontSize: "0.9375rem", textDecorationLine: "underline"}}>모두보기</a>
+                </div>
+                <ArticleListTemplate postList={recipeData} preview={true}/>
+                <div style={{display: 'flex', justifyContent: 'space-between', margin: "0.87rem"}}>
+                    <a style={{fontSize: "1.25rem"}}>• 자주 묻는 질문</a>
+                    <a onClick={() => navigate("/FAQ")}
+                       style={{fontSize: "0.9375rem", textDecorationLine: "underline"}}>모두보기</a>
+                </div>
+                <ArticleListTemplate postList={recipeData} preview={true}/>
+                <div style={{display: 'flex', justifyContent: 'space-between', margin: "0.87rem"}}>
+                    <a style={{fontSize: "1.25rem"}}>• 입점 및 제휴 문의</a>
+                    <a onClick={() => navigate("/EntryPartnership")}
+                       style={{fontSize: "0.9375rem", textDecorationLine: "underline"}}>모두보기</a>
                 </div>
                 <ArticleListTemplate postList={recipeData} preview={true}/>
             </div>

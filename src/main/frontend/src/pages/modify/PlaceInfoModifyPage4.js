@@ -136,7 +136,7 @@ const PlaceInfoModifyPage4 = () => {
 
     return (
         <div>
-            <h1>2. 이용 안내</h1>
+            <h1>(2/4)이용 안내</h1>
             <div>
                 <h4>주방 정보*</h4>
                 <hr style={{ height: "2px", backgroundColor: "black" }} />

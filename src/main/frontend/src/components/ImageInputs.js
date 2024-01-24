@@ -18,7 +18,6 @@ const ImageInputs = ({setImg, vals}) => {
         setImg(vals.filter((_,i) => i !== index));
     };
     useEffect(() => {
-        console.log(vals);
         if ((!vals) || (!vals[0])) {
             setRepresentImage("");
         }
