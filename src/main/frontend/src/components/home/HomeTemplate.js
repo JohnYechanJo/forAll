@@ -3,7 +3,7 @@ import {useState} from "react";
 import "../../components/Styles.css";
 const HomeTemplate = () => {
     return (
-        <div style={{fontSize:"1.875rem",fontWeight:"700",marginTop:"3.125rem",boxShadow: '-4px 4px 4px 0px rgba(0, 0, 0, 0.25) inset, 4px -4px 4px 0px rgba(0, 0, 0, 0.25) inset', 
+        <div style={{fontSize:"1.875rem",fontWeight:"700",marginTop:"3.125rem",boxShadow: '-4px 4px 4px 0px rgba(0, 0, 0, 0.25) inset, 4px -4px 4px 0px rgba(0, 0, 0, 0.25) inset',
         display:"flex", flexDirection:"column"
     }}>
             <p>
