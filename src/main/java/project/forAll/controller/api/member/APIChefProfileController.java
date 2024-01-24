@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
 import project.forAll.controller.api.APIController;
+import project.forAll.domain.member.ChefPending;
 import project.forAll.domain.member.ChefProfile;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.member.Profile;
@@ -39,7 +40,8 @@ public class APIChefProfileController extends APIController {
 
             final ChefProfile chefProfile = chefProfileService.build(cf);
             chefProfileService.save(chefProfile);
-
+            savedMember.setChefPending(ChefPending.PENDING);
+            memberService.save(savedMember);
             return new ResponseEntity(Long.toString(chefProfile.getId()), HttpStatus.OK);
         } catch(final Exception e) {
             return new ResponseEntity(errorResponse("Could not create profile : " + e.getMessage()),
@@ -47,7 +49,7 @@ public class APIChefProfileController extends APIController {
         }
     }
 
-    @GetMapping("/chefProfile/{id}")
+    @GetMapping("/chefProfile/user/{id}")
     public ResponseEntity getChefProfile(@PathVariable(value = "id") String userId, HttpServletRequest request){
         try {
             final Member savedMember = memberService.findByLoginId(userId);
@@ -83,7 +85,7 @@ public class APIChefProfileController extends APIController {
         }
     }
 
-    @GetMapping("/chefProfile/{id}")
+    @GetMapping("/chefProfile/public/{id}")
     public ResponseEntity getChefProfileForPublic(@PathVariable("id") final Long id){
         final ChefProfile chefProfile = (ChefProfile) chefProfileService.findById(id);
 

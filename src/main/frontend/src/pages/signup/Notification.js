@@ -1,7 +1,9 @@
 import "../../components/Styles.css";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const Notification = () => {
+    const location = useLocation();
+    const data = {...location.state};
     const navigate = useNavigate();
     return (
         <div style={{ display: "inline-flex", flexDirection: "column", justifyContent: "center", textAlign: "left", gap: '2rem', width: '100%', fontSize: '0.9375rem',padding:'1rem' }} >
@@ -46,7 +48,12 @@ const Notification = () => {
                     <p>대관 시작 전 매장 확인 시 촬영한 사진이 저장됩니다.</p>
                 </div>
             </div>
-            <button className="bottom_button" style={{ backgroundColor: "#FF2929", position: "fixed" }} onClick={() => { navigate("/signUpComplete") }} >가입하기</button>
+            <button className="bottom_button" style={{ backgroundColor: "#FF2929", position: "fixed" }} onClick={() => { navigate("/signUpComplete",{state:{
+                    id: data.loginId,
+                    name: data.name,
+                    email: data.email,
+                    profileImg: data.profileImg,
+                }}) }} >가입하기</button>
         </div>
     )
 };

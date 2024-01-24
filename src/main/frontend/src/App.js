@@ -21,7 +21,7 @@ import HostRegistry6 from "./pages/hostregistry/HostRegistry6";
 import HostRegistry4 from "./pages/hostregistry/HostRegistry4";
 import HostRegistryComplete from "./pages/hostregistry/HostRegistryComplete";
 import HostRegistryCheckingPage from './pages/hostregistry/HostRegistryChecking';
-import GuestRegistry from "./pages/guestregistry/GuestRegistry";
+import GuestRegistry from "./pages/signup/GuestRegistry";
 import LoginHandeler from "./pages/LoginHandeler";
 import ChefRegistry from './pages/chefregistry/ChefRegistry';
 import ChefRegistryCheckingPage from './pages/chefregistry/ChefRegistryChecking';

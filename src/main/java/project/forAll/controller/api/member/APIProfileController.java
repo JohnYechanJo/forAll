@@ -80,7 +80,7 @@ public class APIProfileController extends APIController {
     }
 
     // session 확인할 필요 없어서 해당 코드 제거
-    @GetMapping("/profile/{id}")
+    @GetMapping("/profile/public/{id}")
     public ResponseEntity getProfileForPublic(@PathVariable("id") final Long id){
         final Profile profile = (Profile) profileService.findById(id);
 

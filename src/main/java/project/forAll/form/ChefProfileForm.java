@@ -30,7 +30,7 @@ public class ChefProfileForm {
     public static ChefProfileForm cf(ChefProfile chefProfile){
         final ChefProfileForm cf = new ChefProfileForm();
         cf.setId(chefProfile.getId());
-        cf.setUserId(chefProfile.getProfile().getMember().getLoginId());
+        cf.setUserId(chefProfile.getMember().getLoginId());
         cf.setCareer(chefProfile.getCareer());
         cf.setCertificatePhoto(chefProfile.getCertificatePhoto() == null? null : chefProfile.getCertificatePhoto().getImageName());
         cf.setAccountBank(chefProfile.getAccountBank());

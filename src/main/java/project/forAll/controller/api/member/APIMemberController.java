@@ -6,21 +6,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
 import project.forAll.controller.api.APIController;
+import project.forAll.domain.member.ChefPending;
 import project.forAll.domain.member.Member;
 import project.forAll.dto.MemberPublicDTO;
 import project.forAll.form.MemberForm;
+import project.forAll.repository.member.MemberRepository;
 import project.forAll.service.MemberService;
 import project.forAll.web.SessionConst;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class APIMemberController extends APIController {
 
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
     private final SessionManager sessionManager;
 
     /**
@@ -113,7 +117,7 @@ public class APIMemberController extends APIController {
         }
     }
 
-    @GetMapping("/members/{id}")
+    @GetMapping("/members/public/{id}")
     public ResponseEntity getMemberForPublic(@PathVariable("id") final Long id){
         final Member member = (Member) memberService.findById(id);
 
@@ -124,5 +128,22 @@ public class APIMemberController extends APIController {
         MemberPublicDTO memberPublicDTO = memberService.convertToMemberPublicDTO(member);
 
         return new ResponseEntity(memberPublicDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/members/pendingList")
+    public ResponseEntity getPendingMember(){
+        // Todo 어드민 권한 확인
+        List<Member> members = memberRepository.findByChefPending(ChefPending.PENDING);
+        return new ResponseEntity(members, HttpStatus.OK);
+    }
+    @GetMapping("/members/checkChef/{id}")
+    public ResponseEntity checkWhetherChef(@PathVariable(value = "id") final String userId){
+        try{
+            final Member member = memberService.findByLoginId(userId);
+            if (member == null) throw new Exception("there's no member with id "+ userId);
+            return new ResponseEntity(member.getChefPending().toString(), HttpStatus.OK);
+        }catch (final Exception e){
+            return new ResponseEntity(errorResponse("Could not check member was chef :" + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
     }
 }

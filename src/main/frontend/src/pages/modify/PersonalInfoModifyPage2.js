@@ -32,7 +32,7 @@ const PersonalModify2 = () => {
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [alertContent, setAlertContent] = useState("");
-
+    console.log(data);
     const openAlert = (string) => {
         setAlertContent(string);
         setIsAlertOpen(true);

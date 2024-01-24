@@ -9,6 +9,8 @@ import axios from "axios";
 import ImageUploader from "../../utils/imageUploader";
 
 const GuestRegistry = () => {
+    const location = useLocation();
+    const data = {...location.state};
     const navigate = useNavigate();
     const [introduce, setIntroduce] = useState("");
     const [profileImage, setProfileImage] = useState("");
@@ -45,26 +47,44 @@ const GuestRegistry = () => {
         }
     };
     const handleButton = () => {
-        if ((introduce !== "") && (profileImage !== "")) {
+        if (introduce && profileImage) {
             submit();
         }
         else setIsModalOpen(true);
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
     const submit = async () => {
-        const userId = sessionStorage.getItem("user_id");
-        const picture = await ImageUploader(profileImage, userId);
-        axios.post("/api/v1/profile", {
-            userId: userId,
-            introduction: introduce,
-            picture: picture,
-            mbti: selectedMBTI,
-            cook: selectedFoodTypes,
-            interest: selectedIngredient,
+        axios.post("/api/v1/members",{
+            loginId: data.loginId,
+            loginPw: data.loginPw,
+            name: data.name,
+            email: data.email,
+            phoneNum: data.phoneNum,
+            birthday: data.birthday,
+            gender: data.gender
+        }).then(async ()=>{
+            sessionStorage.setItem("user_id", data.loginId);
+            sessionStorage.setItem("name", data.name);
+            sessionStorage.setItem("email", data.email);
+            const picture = await ImageUploader(profileImage, data.loginId);
+            axios.post("/api/v1/profile", {
+                userId: data.loginId,
+                introduction: introduce,
+                picture: picture,
+                mbti: selectedMBTI,
+                cook: selectedFoodTypes,
+                interest: selectedIngredient,
 
-        }).then((res) => {
-            navigate("/notification");
+            }).then((res) => {
+                navigate("/notification",{state:{
+                        id: data.loginId,
+                        name: data.name,
+                        email: data.email,
+                        profileImg: data.picture,
+                    }});
+            }).catch((err) => console.error(err));
         }).catch((err) => console.error(err));
+
     };
 
     const onInputHandler = (e) => {

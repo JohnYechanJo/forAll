@@ -24,9 +24,7 @@ public class ChefProfileService extends Service {
     @Autowired
     private ChefProfileRepository chefProfileRepository;
     @Autowired
-    private ProfileRepository profileRepository;
-    @Autowired
-    private ProfileService profileService;
+    private MemberService memberService;
     @Autowired
     private ImageService imageService;
     @Override
@@ -34,9 +32,8 @@ public class ChefProfileService extends Service {
 
     public ChefProfile build(final ChefProfileForm cf){
         final ChefProfile chefProfile = new ChefProfile();
-
-        chefProfile.setProfile(profileRepository.findById(cf.getId()).orElseThrow(()
-                -> new IllegalArgumentException("profile doesn't exist")));
+        if (cf.getId() != null) chefProfile.setId(cf.getId());
+        chefProfile.setMember(memberService.findByLoginId(cf.getUserId()));
         chefProfile.setCareer(cf.getCareer());
         final Image image = imageService.findByImageName(cf.getCertificatePhoto());
         chefProfile.setCertificatePhoto(image);
@@ -48,10 +45,7 @@ public class ChefProfileService extends Service {
     }
 
     public ChefProfile findByMember(final Member member){
-        List<Profile> profiles = profileRepository.findByMember(member);
-        if (profiles.isEmpty()) return null;
-        Profile profile = profiles.get(0);
-        List<ChefProfile> chefProfiles = chefProfileRepository.findByProfile(profile);
+        List<ChefProfile> chefProfiles = chefProfileRepository.findByMember(member);
         if (chefProfiles.isEmpty()) return null;
         return chefProfiles.get(0);
     }

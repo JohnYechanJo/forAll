@@ -17,9 +17,8 @@ public class ChefProfile extends BassDomain {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id")
-    private Profile profile;
-
+    @JoinColumn(name = "member_id")
+    private Member member;
     // 경력
     @ElementCollection
     private List<String> career;

@@ -33,25 +33,25 @@ const ChefInfoModifyPage = () => {
     const submit = async () => {
         const userId = sessionStorage.getItem("user_id");
         const certificate = await ImageUploader(sanitaryImage, userId);
-        axios.put("/api/v1/profile", {
+        axios.put("/api/v1/chefProfile", {
             userId: userId,
             career: career,
-            certificate: certificate,
-            bank: bank,
-            account: account,
+            certificatePhoto: certificate,
+            accountBank: bank,
+            accountNum: account,
             accountHolder: accountHolder,
         }).then((res) => {
-            setIsModalOpen2(true);
+            navigate("/");
         }).catch((err) => console.error(err));
     };
     useEffect(() => { 
-        const userId = sessionStorage.getItem("user_id")
-        axios.get("/api/v1/profile/" + userId)
+        const userId = sessionStorage.getItem("user_id");
+        axios.get("/api/v1/chefProfile/user/" + userId)
             .then((res) => {
-                setCareer(res.data.career);
-                setSanitaryImage(res.data.certificate);
-                setBank(res.data.bank);
-                setAccount(res.data.account);
+                setCareer(res.data.career?res.data.career:[]);
+                setSanitaryImage(res.data.certificatePhoto);
+                setBank(res.data.accountBank);
+                setAccount(res.data.accountNum);
                 setAccountHolder(res.data.accountHolder);
             })
             .catch(() => {
@@ -75,7 +75,6 @@ const ChefInfoModifyPage = () => {
             <hr style={{height: "2px", backgroundColor: "black", width:"95vw"}}/>
             <h4>최근 경력을 최소 1개 입력해주세요.</h4>
             <input type="text" placeholder="안심하세요! 언제든지 프로필을 수정할 수 있어요."
-                    defaultValue={career}
                    style={{width: "94vw", height: "3vh"}}
                    onKeyDown={(e) => {activeEnter(e)}}
                     onChange={(e)=>{
@@ -136,13 +135,13 @@ const ChefInfoModifyPage = () => {
                     </div>
                     <div style={{ margin: "0.62rem" }}>
                         <p>계좌번호*</p>
-                        <input onChange={onChangeAccount} placeholder={"454102-01-376503"} defaultValue={account} key={account}
+                        <input onChange={onChangeAccount} placeholder={"454102-01-376503"} value={account}
                             style={{ width: "9.375rem", height: "1.875rem", flexShrink: "0" }}
                         />
                     </div>
                     <div style={{ margin: "0.62rem" }}>
                         <p>예금주*</p>
-                        <input onChange={onChangeAccountHolder} defaultValue={accountHolder} key={accountHolder} placeholder={"홍길동"}
+                        <input onChange={onChangeAccountHolder} value={accountHolder} placeholder={"홍길동"}
                             style={{ width: "4.375rem", height: "1.875rem", flexShrink: "0" }}
                         />
                     </div>
