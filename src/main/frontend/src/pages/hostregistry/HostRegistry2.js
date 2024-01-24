@@ -136,9 +136,11 @@ const HostRegistry2 = () => {
                         <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;셰프님들이 예약
                             시 매장의 다양한 <a style={{textDecorationLine: "underline"}}>플레이트 종류가</a> 선택이유가 될 수 있으니, 다양한 메뉴를
                             올려주세요.</p>
-                        <div style={{textAlign: 'center'}}>
-                            <button onClick={() => setIsModalOpen2(false)}>닫기</button>
+
+                        <div className="bottom_button">
+                            <a style={{ fontSize: "0.8rem"}} onClick={() => setIsModalOpen2(false)}>닫기</a>
                         </div>
+
                     </div>
                 </Modal>
                 <div style={{display: 'flex', justifyContent:"space-around"}}>

@@ -176,8 +176,8 @@ const HostRegistry = () => {
                                             대면형보다 더 긴밀한 커뮤니케이션이 가능하며, 요리를 하는 동시에 식사가 가능한 형태를 띕니다.
                                         </p>
                                     </div>
-                                    <div style={{textAlign: 'center'}}>
-                                        <button onClick={() => setModalIsOpen1(false)}>닫기</button>
+                                    <div class="bottom_button">
+                                        <a style={{ fontSize: "0.8rem"}} onClick={() => setModalIsOpen1(false)}>닫기</a>
                                     </div>
 
                                 </Modal>
@@ -243,8 +243,8 @@ const HostRegistry = () => {
                                         }}>•&ensp;식탁이 따로 놓여 있지만, 음식을 만드는 사람의 얼굴을 보며
                                             대화를 나눌 수 있는 구조입니다.</p>
                                     </div>
-                                    <div style={{textAlign: 'center'}}>
-                                        <button onClick={() => setModalIsOpen2(false)}>닫기</button>
+                                    <div class="bottom_button">
+                                        <a style={{ fontSize: "0.8rem"}} onClick={() => setModalIsOpen2(false)}>닫기</a>
                                     </div>
                                 </Modal>
                                 <button onClick={() => setModalIsOpen2(true)}
@@ -315,8 +315,8 @@ const HostRegistry = () => {
                                             paddingRight: "1.5rem"
                                         }}>•&ensp;홀에서는 어수선한 모습이 보이지 않아 쾌적한 매장 환경이 만들어집니다.</p>
                                     </div>
-                                    <div style={{textAlign: 'center'}}>
-                                        <button onClick={() => setModalIsOpen3(false)}>닫기</button>
+                                    <div class="bottom_button">
+                                        <a style={{ fontSize: "0.8rem"}} onClick={() => setModalIsOpen3(false)}>닫기</a>
                                     </div>
 
                                 </Modal>
