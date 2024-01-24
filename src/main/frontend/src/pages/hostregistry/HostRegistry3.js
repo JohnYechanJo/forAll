@@ -288,8 +288,8 @@ const HostRegistry3 = () => {
                     </p>
                     <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;트라이얼
                         시간은 <strong>‘셰프와 채팅’</strong>을 통해 정해주세요.</p>
-                    <div style={{textAlign: 'center'}}>
-                        <button onClick={() => setIsTrial(false)}>닫기</button>
+                    <div class="bottom_button">
+                        <a style={{ fontSize: "0.8rem"}} onClick={() => setIsTrial(false)}>닫기</a>
                     </div>
                 </div>
 
@@ -349,8 +349,8 @@ const HostRegistry3 = () => {
                     <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;팝업 당일 대관 이용자에게 <a
                         style={{textDecorationLine: "underline"}}>사용할 수 있는 냉장고</a>를 비워주어 공간 확보를 부탁드립니다.
                     </p>
-                    <div style={{textAlign: 'center'}}>
-                        <button onClick={() => setIsMorningDelivery(false)}>닫기</button>
+                    <div class="bottom_button">
+                        <a style={{ fontSize: "0.8rem"}} onClick={() => setIsMorningDelivery(false)}>닫기</a>
                     </div>
                 </div>
             </Modal>
@@ -413,8 +413,8 @@ const HostRegistry3 = () => {
                     </p>
                     <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;팝업 레스토랑에서 고객에게 식사를 제공하기 전에 사전 준비를 완벽하게 해야 하므로 필요한 준비과정입니다.
                     </p>
-                    <div style={{textAlign: 'center'}}>
-                        <button onClick={() => setIsMiseen(false)}>닫기</button>
+                    <div class="bottom_button">
+                        <a style={{ fontSize: "0.8rem"}} onClick={() => setIsMiseen(false)}>닫기</a>
                     </div>
                 </div>
             </Modal>
@@ -470,8 +470,8 @@ const HostRegistry3 = () => {
                     <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;<a style={{color: "red"}}>안심하세요! </a><a>팝업 레스토랑은 배너 또는 공지를 통해 공간과 무관한 영업이 진행된다는 점이 명시됩니다.
                     </a>
                     </p>
-                    <div style={{textAlign: 'center'}}>
-                        <button onClick={() => setIsWorkIn(false)}>닫기</button>
+                    <div className="bottom_button">
+                        <a style={{ fontSize: "0.8rem"}} onClick={() => setIsWorkIn(false)}>닫기</a>
                     </div>
                 </div>
             </Modal>
