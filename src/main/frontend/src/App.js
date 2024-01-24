@@ -49,6 +49,7 @@ import EntryPartnership from "./pages/EntryPartnership";
 import ChefInfoModifyCompletePage from "./pages/modify/ChefInfoModifyCompletePage";
 import PersonalModifyCompletePage from "./pages/modify/PersonalModifyCompletePage";
 import PlaceInfoModifyCompletePage from "./pages/modify/PlaceInfoModifyCompletePage";
+import ProfileModifyPage from "./pages/modify/ProfileModifyPage";
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
         <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
         <Route path="/hostRegistryChecking" element={<HostRegistryCheckingPage />} />
         <Route path="/guestRegistry" element={<GuestRegistry />}/>
+        <Route path="/profileModify" element={<ProfileModifyPage />}/>
         <Route path="/chefInfoModify" element={<ChefInfoModifyPage />} />
         <Route path="/spaceList" element={<SpaceListViewPage />} />
         <Route path="/rentSpace/:id" element={<RentSpacePage />} />

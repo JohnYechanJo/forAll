@@ -17,7 +17,7 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 public class ProfileForm {
-
+    private Long id;
     // 사용자
     private String userId;
     // 한 줄 소개
@@ -33,6 +33,7 @@ public class ProfileForm {
 
     public static ProfileForm pf(Profile profile){
         final ProfileForm pf = new ProfileForm();
+        pf.setId(profile.getId());
         pf.setUserId(profile.getMember().getLoginId());
         pf.setIntroduction(profile.getIntroduction());
         pf.setProfilePhoto(profile.getProfilePhoto() == null? null : profile.getProfilePhoto().getImageName());
