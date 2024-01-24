@@ -278,20 +278,25 @@ const HostRegistry3 = () => {
                     lineHeight: "normal"
                 }}>
                     <br/>
-                    <a style={{textAlign: "left"}}>트라이얼이란?</a><a style={{textAlign: "right"}} onClick={() => setIsTrial(false)}>x</a>
-                    <hr style={{ height: "1px", backgroundColor: "black" }}/>
-                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;트라이얼은 대관 당일 기준
-                        일주일 전 셰프가 업장에 방문하여 직접 요리해볼 수 있게끔 최소 3시간 정도 공간 활용을 허용하는 것을 의미합니다.
-                    </p>
-                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;트라이얼 시 <a
-                        style={{textDecorationLine: "underline"}}>업장 이용 인수인계 및 주의사항</a> 을 안내함으로 더욱 안전한 대관을 보장할 수 있습니다.
-                    </p>
-                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;트라이얼
-                        시간은 <strong>‘셰프와 채팅’</strong>을 통해 정해주세요.</p>
-                    <div class="bottom_button">
-                        <a style={{ fontSize: "0.8rem"}} onClick={() => setIsTrial(false)}>닫기</a>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <a style={{textAlign: "left"}}>트라이얼이란?</a><a style={{textAlign: "right"}}
+                                                                     onClick={() => setIsTrial(false)}>x</a>
                     </div>
-                </div>
+                        <hr style={{height: "1px", backgroundColor: "black"}}/>
+                        <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;트라이얼은 대관 당일
+                            기준
+                            일주일 전 셰프가 업장에 방문하여 직접 요리해볼 수 있게끔 최소 3시간 정도 공간 활용을 허용하는 것을 의미합니다.
+                        </p>
+                        <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;트라이얼 시 <a
+                            style={{textDecorationLine: "underline"}}>업장 이용 인수인계 및 주의사항</a> 을 안내함으로 더욱 안전한 대관을 보장할 수
+                            있습니다.
+                        </p>
+                        <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;트라이얼
+                            시간은 <strong>‘셰프와 채팅’</strong>을 통해 정해주세요.</p>
+                        <div class="bottom_button_relative">
+                            <a style={{fontSize: "0.8rem"}} onClick={() => setIsTrial(false)}>닫기</a>
+                        </div>
+                    </div>
 
             </Modal>
 
@@ -341,18 +346,22 @@ const HostRegistry3 = () => {
                     lineHeight: "normal"
                 }}>
                     <br/>
-                    <a style={{textAlign: "left"}}>새벽배달이란?</a> <a style={{textAlign: "right"}} onClick={() => setIsMorningDelivery(false)}>x</a>
-                    <hr style={{ height: "1px", backgroundColor: "black" }}/>
-                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;
-                        식재료 대리 수령은 대관일 전날 또는 셰프와 업주 협의 하에 식재료 사전 보관이 가능한지를 의미합니다.
-                    </p>
-                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;팝업 당일 대관 이용자에게 <a
-                        style={{textDecorationLine: "underline"}}>사용할 수 있는 냉장고</a>를 비워주어 공간 확보를 부탁드립니다.
-                    </p>
-                    <div class="bottom_button">
-                        <a style={{ fontSize: "0.8rem"}} onClick={() => setIsMorningDelivery(false)}>닫기</a>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <a style={{textAlign: "left"}}>새벽배달이란?</a> <a style={{textAlign: "right"}}
+                                                                      onClick={() => setIsMorningDelivery(false)}>x</a>
                     </div>
-                </div>
+                        <hr style={{height: "1px", backgroundColor: "black"}}/>
+                        <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;
+                            식재료 대리 수령은 대관일 전날 또는 셰프와 업주 협의 하에 식재료 사전 보관이 가능한지를 의미합니다.
+                        </p>
+                        <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;팝업 당일 대관
+                            이용자에게 <a
+                                style={{textDecorationLine: "underline"}}>사용할 수 있는 냉장고</a>를 비워주어 공간 확보를 부탁드립니다.
+                        </p>
+                        <div class="bottom_button_fixed">
+                            <a style={{fontSize: "0.8rem"}} onClick={() => setIsMorningDelivery(false)}>닫기</a>
+                        </div>
+                    </div>
             </Modal>
             <button onClick={() => setIsMorningDelivery(!isMorningDelivery)}
                     className="detail"
@@ -406,17 +415,21 @@ const HostRegistry3 = () => {
                     lineHeight: "normal"
                 }}>
                     <br/>
-                    <a style={{textAlign: "left"}}>미장이란?</a><a style={{textAlign: "right"}}
-                                                                 onClick={() => setIsMiseen(false)}>x</a>
-                    <hr style={{ height: "1px", backgroundColor: "black" }}/>
-                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;미장 플라세는 영업을 위한 사전 재료 준비를 뜻합니다.
-                    </p>
-                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;팝업 레스토랑에서 고객에게 식사를 제공하기 전에 사전 준비를 완벽하게 해야 하므로 필요한 준비과정입니다.
-                    </p>
-                    <div class="bottom_button">
-                        <a style={{ fontSize: "0.8rem"}} onClick={() => setIsMiseen(false)}>닫기</a>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <a style={{textAlign: "left"}}>미장이란?</a><a style={{textAlign: "right"}}
+                                                                   onClick={() => setIsMiseen(false)}>x</a>
                     </div>
-                </div>
+                        <hr style={{height: "1px", backgroundColor: "black"}}/>
+                        <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;미장 플라세는 영업을
+                            위한 사전 재료 준비를 뜻합니다.
+                        </p>
+                        <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;팝업 레스토랑에서
+                            고객에게 식사를 제공하기 전에 사전 준비를 완벽하게 해야 하므로 필요한 준비과정입니다.
+                        </p>
+                        <div class="bottom_button_fixed">
+                            <a style={{fontSize: "0.8rem"}} onClick={() => setIsMiseen(false)}>닫기</a>
+                        </div>
+                    </div>
             </Modal>
             <button onClick={() => setIsMiseen(!isMiseen)}
                     className="detail"
@@ -461,19 +474,23 @@ const HostRegistry3 = () => {
                     lineHeight: "normal"
                 }}>
                     <br/>
-                    <a style={{textAlign: "left"}}>워크인이란?</a><a style={{textAlign: "right"}}
-                                                               onClick={() => setIsWorkIn(false)}>x</a>
-                    <hr style={{ height: "1px", backgroundColor: "black" }}/>
-                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;워크인은 대관 당일 기준 '팝업 레스토랑' 사전 예약을 하지 않은 손님이 공간을 방문하는 경우를 의미합니다.
-
-                    </p>
-                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;<a style={{color: "red"}}>안심하세요! </a><a>팝업 레스토랑은 배너 또는 공지를 통해 공간과 무관한 영업이 진행된다는 점이 명시됩니다.
-                    </a>
-                    </p>
-                    <div className="bottom_button">
-                        <a style={{ fontSize: "0.8rem"}} onClick={() => setIsWorkIn(false)}>닫기</a>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <a style={{textAlign: "left"}}>워크인이란?</a><a style={{textAlign: "right"}}
+                                                                    onClick={() => setIsWorkIn(false)}>x</a>
                     </div>
-                </div>
+                        <hr style={{height: "1px", backgroundColor: "black"}}/>
+                        <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;워크인은 대관 당일
+                            기준 '팝업 레스토랑' 사전 예약을 하지 않은 손님이 공간을 방문하는 경우를 의미합니다.
+
+                        </p>
+                        <p style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;<a
+                            style={{color: "red"}}>안심하세요! </a><a>팝업 레스토랑은 배너 또는 공지를 통해 공간과 무관한 영업이 진행된다는 점이 명시됩니다.
+                        </a>
+                        </p>
+                        <div className="bottom_button_fixed">
+                            <a style={{fontSize: "0.8rem"}} onClick={() => setIsWorkIn(false)}>닫기</a>
+                        </div>
+                    </div>
             </Modal>
             <button onClick={() => setIsWorkIn(!isWorkIn)}
                     className="detail"
