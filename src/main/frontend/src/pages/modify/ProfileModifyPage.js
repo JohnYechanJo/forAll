@@ -232,7 +232,7 @@ const ProfileModifyPage = () => {
 
             <div style={{display:'flex',width:'100%',margin:'0px',marginTop:'4rem'}}>
                 <button style={{marginLeft:'auto',backgroundColor:"#FF4F4F",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}
-                        onClick={() => navigate('/signUp')}
+                        onClick={() => navigate(-1)}
                 >
                     이전</button>
                 <button style={{marginLeft:'auto',backgroundColor:"#525252",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}

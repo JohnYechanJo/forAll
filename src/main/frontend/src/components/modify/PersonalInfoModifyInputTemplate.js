@@ -150,7 +150,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
             <div>
                 <a className="fontForRegister" >생년월일<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                 <div style={{ marginBottom: "2.5rem", display: 'flex' }}>
-                    <select onChange={onChangeYear} style={{ height: '2.5rem', border: '1px solid #D9D9D9', width: '30%', margin: '0.5rem' }}>
+                    <select onChange={onChangeYear} style={{ height: '2.5rem', border: '1px solid #D9D9D9', width: '30%', margin: '0.5rem' }} value={year}>
                         <option value="">년(YYYY)</option>
                         {years.map(year => (
                             <option key={year} value={year}>
@@ -158,7 +158,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                             </option>
                         ))}
                     </select>
-                    <select onChange={onChangeMonth} style={{ height: '2.5rem', border: '1px solid #D9D9D9', width: '30%', margin: '0.5rem' }}>
+                    <select onChange={onChangeMonth} style={{ height: '2.5rem', border: '1px solid #D9D9D9', width: '30%', margin: '0.5rem' }} value={month}>
                         <option value="">월(MM)</option>
                         {months.map(month => (
                             <option key={month} value={month}>
@@ -166,7 +166,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                             </option>
                         ))}
                     </select>
-                    <select onChange={onChangeDay} style={{ height: '2.5rem', border: '1px solid #D9D9D9', width: '30%', margin: '0.5rem' }}>
+                    <select onChange={onChangeDay} style={{ height: '2.5rem', border: '1px solid #D9D9D9', width: '30%', margin: '0.5rem' }} value={day}>
                         <option value="">일(DD)</option>
                         {days.map(day => (
                             <option key={day} value={day}>
@@ -185,6 +185,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                         value="Male"
                         onChange={onChangeGender}
                         id="male"
+                        checked={gender === "Male"}
                     />
                     <label for='male' style={{ display: 'block', marginBottom: '1rem', marginTop: '1rem' }}>
                         <em></em><span className="fontForRegister" >남자</span>
@@ -195,6 +196,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                         value="Female"
                         onChange={onChangeGender}
                         id="female"
+                        checked={gender === "Female"}
                     />
                     <label for='female' style={{ display: 'block' }}>
                         <em></em><span className="fontForRegister" >여자</span>

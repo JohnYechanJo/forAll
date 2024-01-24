@@ -62,20 +62,20 @@ const PersonalModify2 = () => {
                 setIsPhoneCerified(false);
             });
     };
-    // useEffect(() => {   이 부분이 api 가져오는 부분
-    //     const id = sessionStorage.getItem("user_id");
-    //     axios.get("/api/v1/members/" + id)
-    //         .then((res) => {
-    //             setPhone(res.data.phoneNum);
-    //             setYear(res.data.birthday.split('/')[0]);
-    //             setMonth(res.data.birthday.split('/')[1]);
-    //             setDay(res.data.birthday.split('/')[2]);
-    //             setGender(res.data.gender);
-    //             console.log(res.data);
-    //         }).catch((res) => {
-    //             openAlert("회원 정보를 불러오는데 실패했습니다");
-    //         })
-    // }, []);
+    useEffect(() => {
+        const id = sessionStorage.getItem("user_id");
+        axios.get("/api/v1/members/user/" + id)
+            .then((res) => {
+                setPhone(res.data.phoneNum);
+                setYear(res.data.birthday.split('/')[0]);
+                setMonth(res.data.birthday.split('/')[1]);
+                setDay(res.data.birthday.split('/')[2]);
+                setGender(res.data.gender);
+                console.log(res.data);
+            }).catch((res) => {
+                openAlert("회원 정보를 불러오는데 실패했습니다");
+            })
+    }, []);
 
     const handleButton = () => {
         if (pw === "") {
