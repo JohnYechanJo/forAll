@@ -132,12 +132,11 @@ const AssuranceFinish = () => {
                     <h1>마감 안내</h1>
                     <p>오너 마감 가이드</p>
                     <p>숙지 사항</p>
-                    {/*Todo merge 이후 데이터 입력*/}
-                    {/*<textarea content={} />*/}
-                    {/*<p>사진</p>*/}
-                    {/*<ImageViewer />*/}
-                    {/*<p>추가 사진</p>*/}
-                    {/*<ImagesViewer />*/}
+                    <textarea content={spaceData.closeGuide} />
+                    <p>사진</p>
+                    <ImageViewer val={spaceData.closeImage ? spaceData.closeImage[0] : null}/>
+                    <p>추가 사진</p>
+                    <ImagesViewer vals={spaceData.closeImage ? spaceData.closeImage.slice(1) : []}/>
                     <button onClick={()=>setIsGuidOpen(false)}>닫기</button>
                 </div>
             ):null}
