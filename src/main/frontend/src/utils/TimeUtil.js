@@ -1,5 +1,6 @@
 export const TimeUtil = {
     now: () => new Date().toJSON(),
+<<<<<<< HEAD
     parse: (str) => new Date(str).toJSON(),
     setHour: (str, hour) => {
         const date = new Date(str);
@@ -19,6 +20,12 @@ export const TimeUtil = {
         const from = new Date(json).getTime();
         const now = new Date().getTime();
         return Math.floor(Math.abs(now - from)/1000);
+=======
+    getDiffSecond: (json) => {
+        const from = new Date(json).getTime();
+        const now = new Date().getTime();
+        return Math.floor((now - from)/1000);
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
     },
     getDiffStr: (json) => {
         const from = new Date(json).getTime();

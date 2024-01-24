@@ -6,14 +6,20 @@ import axios from "axios";
 import "../../components/Styles.css";
 import Modal from "react-modal";
 import Alert from "../Alert";
+<<<<<<< HEAD
 import { ModalStyles } from "../../components/ModalStyles";
+=======
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
 const LoginTemplate = () => {
     const navigate = useNavigate();
     const [id, setId] = useState('');
     const [passwd, setPasswd] = useState('');
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [alertContent, setAlertContent] = useState("");
+<<<<<<< HEAD
     const [isOpen, setIsOpen] = useState(false);
+=======
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
     const onChangeId = useCallback((e) => {
         setId(e.target.value);
     },[]);
@@ -45,7 +51,11 @@ const LoginTemplate = () => {
                 sessionStorage.setItem("email", res.data.email);
                 navigate('/');
             }).catch((res) => {
+<<<<<<< HEAD
                 setIsOpen(true);
+=======
+                openAlert("로그인에 실패했습니다");
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
             })
         }
     }
@@ -61,18 +71,27 @@ const LoginTemplate = () => {
                 <input
                     placeholder="비밀번호 입력"
                     className="input"
+<<<<<<< HEAD
                     type="password"
+=======
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
                     value={passwd}
                     onChange={onChangePw}
                 />
             </div>
             <div>
+<<<<<<< HEAD
                 <div style={{display:'flex',flexDirection:'column'}}>
+=======
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
                 <button onClick={() => logIn()} style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',backgroundColor:'#616161',marginBottom:'0.5rem'}} >로그인</button>
                 <Link to="/signUp">
                     <button style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',border:'1px solid #000',backgroundColor:'white'}}>회원가입</button>
                 </Link>
+<<<<<<< HEAD
                 </div>
+=======
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
                 <div  style={{
                 color: "#B0B0B0",
                 textAlign: "center",
@@ -103,6 +122,7 @@ const LoginTemplate = () => {
             }}>비밀번호 찾기</span></Link>
             </div>
             </div>
+<<<<<<< HEAD
             <Modal isOpen={isOpen} style={ModalStyles}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
                     <path
@@ -114,6 +134,9 @@ const LoginTemplate = () => {
                 <hr/>
                 <button onClick={()=>setIsOpen(false)} style={{width:'100%',height:'3.125rem',backgroundColor:'white',border:'none'}} >확인</button>
             </Modal>
+=======
+            
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
             <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={alertContent} />
         </div>
     )

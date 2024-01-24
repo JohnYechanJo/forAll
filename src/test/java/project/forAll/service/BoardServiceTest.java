@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //package project.forAll.service;
 //
 //import org.junit.Before;
@@ -57,6 +58,67 @@
 //        assertEquals("게시글 내용 작성 확인", "For ALL입니다.", getArticle.getContent());
 //        assertNotNull(getArticle.getWrittenAt());
 //    }
+=======
+package project.forAll.service;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+import project.forAll.domain.board.Article;
+import project.forAll.domain.board.Comment;
+import project.forAll.domain.member.Member;
+import project.forAll.form.ArticleForm;
+import project.forAll.form.CommentForm;
+import project.forAll.form.MemberForm;
+import project.forAll.repository.board.ArticleRepository;
+import project.forAll.repository.member.MemberRepository;
+
+import java.time.LocalDateTime;
+
+import static org.junit.Assert.*;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
+public class BoardServiceTest {
+
+    @Autowired MemberService memberService;
+    @Autowired ArticleService articleService;
+    @Autowired CommentService commentService;
+
+    @Before
+    public void setup(){
+        memberService.deleteAll();
+        articleService.deleteAll();
+        commentService.deleteAll();
+    }
+
+    @Test
+    public void 게시글작성() throws Exception {
+
+        // Given
+        MemberForm mf = new MemberForm("forall", "forall1230", "천승범", "forall@gmail.com",
+                "01010101010", "20010101", "Male");
+        Member member = memberService.createMember(mf);
+
+        // When
+        ArticleForm af = new ArticleForm("안녕하세요", "For ALL입니다.", member);
+        Article article = articleService.createArticle(af);
+        Long articleId = articleService.saveArticle(article);
+
+        // Then
+        Article getArticle = articleService.findArticleById(articleId).orElseThrow();
+
+        assertEquals("게시글 제목 작성 확인", "안녕하세요", getArticle.getTitle());
+        assertEquals("게시글 내용 작성 확인", "For ALL입니다.", getArticle.getContent());
+        assertNotNull(getArticle.getWrittenAt());
+    }
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
 
     // 게시글수정, 댓글작성 모두 아래 오류 발생
     // Batch update returned unexpected row count from update [0]; actual row count: 4; expected: 1;
@@ -108,4 +170,8 @@
 //        assertEquals("댓글 내용 확인", "For ALL입니다.", getComment.getText());
 //    }
 
+<<<<<<< HEAD
 //}
+=======
+}
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)

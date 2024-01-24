@@ -41,7 +41,9 @@ const ChatRoomPage = () => {
         connect();
     }, [roomId]);
     useDidMountEffect(() => {
+
         axios.get("/api/v1/profile/public/"+partner)
+
             .then((res) => setPartnerData(res.data))
             .catch((err) => console.error(err));
     }, [partner]);
@@ -90,10 +92,12 @@ const ChatRoomPage = () => {
             <h1>{data.category === ChatRoomCategory.Reservation ? "채팅창 > 예약사항" : "채팅창 > 게시판"}</h1>
             <div>
                 <button onClick={()=>navigate(-1)}>{"<"}</button>
+
                 {/*Todo 찾기, 파일함 기능구현*/}
                 {partnerData ? (<div onClick={()=>navigate("/profile/"+partner)}>
                     <ImageViewer val={partnerData.profilePhoto}/>
                 </div>) : null}
+
                 <p>{partner}</p>
                 <p>찾기</p>
                 <p>파일함</p>
@@ -103,7 +107,9 @@ const ChatRoomPage = () => {
                     <div key={idx}>
                         {message.senderId === partner ? (
                             <div>
+
                                 {partnerData ? (<ImageViewer val={partnerData.profilePhoto}/>) : null}
+
                                 <p>{partner}</p>
                                 {message.isImage ? (
                                     <ImageViewer val={message.messageContent}/>

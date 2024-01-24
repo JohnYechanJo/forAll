@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -5,6 +6,7 @@ import Modal from "react-modal";
 import { ModalStyles } from "../../components/ModalStyles";
 import DaumPost from "../../components/DaumPost";
 import { KitchenFeat } from "../../utils/enums";
+
 import ImageInput from "../../components/ImageInput";
 import Alert from "../../components/Alert";
 const HostRegistry = () => {
@@ -58,6 +60,7 @@ const HostRegistry = () => {
         setPlaceInfo(e.target.value);
     }
     const handleButton = () => {
+
         if (fullAddress === "") {
             setIsAlertOpen(true);
         }
@@ -66,11 +69,14 @@ const HostRegistry = () => {
             submit();
         }
         else {
+
             setIsModalOpen(true);
         }
     };
     const submit = () => {
+
         navigate("/hostRegistry2", {
+
             state: {
                 placeName: placeName,
                 placeIntro: placeIntro,
@@ -87,6 +93,7 @@ const HostRegistry = () => {
         });
     };
     return (
+
         <div
         className="fontForRegister"
             style={{
@@ -129,6 +136,7 @@ const HostRegistry = () => {
                             <div style={{ flexDirection: "column", display: "flex" }} >
                                 <div>
                                     <button className="button"
+
                                         name="kitchen"
                                         value={KitchenFeat.Open}
                                         style={{
@@ -149,80 +157,7 @@ const HostRegistry = () => {
                                             setClicked2(false);
                                             setClicked3(false);
                                         }}
-                                    >
-                                        오픈형
-                                    </button>
-                                </div>
-                                <div>
-                                    <Modal
-                                        isOpen={modalIsOpen1}
-                                        style={ModalStyles}
-                                    >
-                                        <h3 style={{ margin: "0px", textAlign: "left" }}>오픈형 주방이란?</h3>
-                                        <hr style={{ height: "2px", backgroundColor: "black", width: "100%" }} />
-                                        <div style={{ textAlign: 'left', fontSize: '14px' }} >
-                                            <p>• 주방, 홀이 하나로 결합된 형태입니다.</p>
-                                            <p>• 주방과 홀이 결합되면서 음식을 만드는 사람과 가까이할 수 있어
-                                                대면형보다 더 긴밀한 커뮤니케이션이 가능하며, 요리를 하는 동시에 식사가 가능한 형태를 띕니다.
-                                            </p>
-                                        </div>
-                                        <button onClick={modalClose1} >닫기</button>
-                                    </Modal>
-                                    <button onClick={() => setModalIsOpen1(true)}
-                                        style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 오픈형이 무엇인가요?
-                                    </button>
-                                </div>
-                            </div>
-                            <div style={{ flexDirection: "column" }} >
-                                <div>
-                                    <button className="button"
-                                        name="kitchen"
-                                        value={KitchenFeat.Face}
-                                        style={{
-                                            backgroundColor: clicked2 ? "black" : "white",
-                                            color: clicked2 ? "white" : "black",
-                                            width: "100px",
-                                            flex: "1",
-                                            marginLeft: "10px",
-                                            border: "2px solid gray"
-                                        }}
-                                        onClick={(event) => {
-                                            const selected = event.target.value;
-                                            setKitchen(event.target.value);
-                                            if (clicked2 === true) {
-                                                setKitchen(KitchenFeat.NotSpecified);
-                                            }
-                                            setClicked1(false);
-                                            setClicked2(!clicked2);
-                                            setClicked3(false);
-                                        }}
-                                    >
-                                        대면형
-                                    </button>
-                                </div>
-                                <div>
-                                    <Modal
-                                        isOpen={modalIsOpen2}
-                                        style={ModalStyles}
-                                    >
-                                        <h3 style={{ margin: "0px", textAlign: "left" }} >대면형 주방이란?</h3>
-                                        <hr style={{ height: "2px", backgroundColor: "black", width: "100%" }} />
-                                        <div style={{ textAlign: 'left', fontSize: '14px' }} >
-                                            <p>• 부엌과 다이닝룸이 한 공간에 자리하는 형태입니다.</p>
-                                            <p>• 식탁이 따로 놓여 있지만, 음식을 만드는 사람의 얼굴을 보며
-                                                대화를 나눌 수 있는 구조입니다.
-                                            </p>
-                                        </div>
-                                        <button onClick={modalClose2}>닫기</button>
-                                    </Modal>
-                                    <button onClick={() => setModalIsOpen2(true)}
-                                        style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 대면형이 무엇인가요?
-                                    </button>
-                                </div>
-                            </div>
-                            <div style={{ flexDirection: "column" }} >
-                                <div>
-                                    <button className="button"
+
                                         name="kitchen"
                                         value={KitchenFeat.Close}
                                         style={{
@@ -267,6 +202,7 @@ const HostRegistry = () => {
                                         style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 폐쇄형이 무엇인가요?
                                     </button>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -351,6 +287,7 @@ const HostRegistry = () => {
                 <button onClick={() => submit()}>다음</button>
             </Modal>
             <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={"주소는 필수입력사항입니다."} />
+
 
         </div>
     );

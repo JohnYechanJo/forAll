@@ -17,6 +17,7 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
             "JOIN scr.users user2 " +
             "WHERE user1.loginId = :loginId1 AND user2.loginId = :loginId2")
     List<ChatRoom> findByUserLoginIds(@Param("loginId1") String loginId1, @Param("loginId2") String loginId2);
+<<<<<<< HEAD
 
     @Query("SELECT scr FROM ChatRoom scr " +
             "JOIN scr.users user1 " +
@@ -26,4 +27,6 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
             @Param("loginId1") String loginId1,
             @Param("loginId2") String loginId2,
             @Param("category") ChatRoomCategory category);
+=======
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
 }

@@ -117,9 +117,15 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                 <button onClick={() => checkCerifiedNum()} className="buttonForRegister"
                 style={{backgroundColor:"#616161",color:"white"}}
                 >인증번호 확인</button>
+<<<<<<< HEAD
             </div>
             {isPhoneCerified === true ? <p>인증 완료되었습니다</p> :
                     (isPhoneCerified === false ? <p>인증 실패했습니다</p> : null)}
+=======
+                {isPhoneCerified === true ? <p>인증 완료되었습니다</p> :
+                    (isPhoneCerified === false ? <p>인증 실패했습니다</p> : null)}
+            </div>
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
             <div>
             <a className="fontForRegister" >생년월일<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{marginBottom:"2.5rem",display:'flex'}}>

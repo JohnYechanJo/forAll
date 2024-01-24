@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+
 import { ModalStyles } from "./ModalStyles";
 
 const Alert = ({isOpen, setIsOpen, content}) => {
@@ -13,6 +14,7 @@ const Alert = ({isOpen, setIsOpen, content}) => {
                 fontStyle: "normal", fontWeight: "400", lineHeight: "normal"}}>{content}</p>
             <hr/>
             <button onClick={()=>setIsOpen(false)} style={{width:'100%',height:'3.125rem',backgroundColor:'white',border:'none'}} >확인</button>
+
         </Modal>
     )
 };

@@ -99,8 +99,13 @@ const PlaceInfoModifyPage3 = () => {
                 setWorkIn(res.data.ableWorkIn)
                 setMiseen(res.data.ableMiseen)
                 setRentWeek(res.data.ableDate.split(" ")[0])
+<<<<<<< HEAD
                 setMiseenTimeFrom(res.data.ableMiseenStartTime ? res.data.ableMiseenStartTime+"시": "0시")
                 setMiseenTimeTo(res.data.ableMiseenFinTime ? res.data.ableMiseenFinTime+"시":"0시")
+=======
+                setMiseenTimeFrom(res.data.ableStartMiseenHour ? res.data.ableStartMiseenHour+"시": "0시")
+                setMiseenTimeTo(res.data.ableFinMiseenHour ? res.data.ableFinMiseenHour+"시":"0시")
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
                 setRentTimeFrom(res.data.ableStartHour?res.data.ableStartHour+"시":"0시")
                 setRentTimeTo(res.data.ableFinHour?res.data.ableFinHour+"시":"0시")
                 setParkAvaliable(parkAvaliableData.includes(res.data.ableParking) ? res.data.ableParking : "직접 입력")
@@ -198,16 +203,26 @@ const PlaceInfoModifyPage3 = () => {
                             </div>
                             : null)}
                 </div>
+<<<<<<< HEAD
                 <p>입•퇴실 시간*</p>
+=======
+                <p>입 퇴실 시간*</p>
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
                 <div style={{
                     display: "flex",
                     justifyContent: "left",
                     alignItems: "center",
                 }}>
                     <span>전일 </span>
+<<<<<<< HEAD
                     <span><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={rentTimeFrom} val={rentTimeFrom}/></span>
                     <span> 부터, 당일 </span>
                     <span><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={rentTimeTo} val={rentTimeTo}/></span>
+=======
+                    <span><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={dbData.ableStartHour+"시"} val={rentTimeFrom}/></span>
+                    <span> 부터, 당일 </span>
+                    <span><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={dbData.ableFinHour+"시"} val={rentTimeTo}/></span>
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
                     <span> 까지</span>
                 </div>
                 <div>
@@ -377,9 +392,15 @@ const PlaceInfoModifyPage3 = () => {
                 <div hidden={!miseen}>
                     <div  style={{display:"flex"}}>
                         <span>대관전일</span>
+<<<<<<< HEAD
                         <span><DropDown dataArr={rentTimeFromData} onChange={setMiseenTimeFrom} defaultData={miseenTimeFrom} val={miseenTimeFrom} width="5.25rem"/></span>
                         <span> 부터, 당일 </span>
                         <span><DropDown dataArr={rentTimeToData} onChange={setMiseenTimeTo} defaultData={miseenTimeTo} val={miseenTimeTo} width="5.25rem"/></span>
+=======
+                        <span><DropDown dataArr={rentTimeFromData} onChange={setMiseenTimeFrom} defaultData={dbData.ableMiseenStartTime+"시"} val={miseenTimeFrom} width="5.25rem"/></span>
+                        <span> 부터, 당일 </span>
+                        <span><DropDown dataArr={rentTimeToData} onChange={setMiseenTimeTo} defaultData={dbData.ableMiseenFinTime+"시"} val={miseenTimeTo} width="5.25rem"/></span>
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
                         <span> 까지</span>
                     </div>
                 </div>

@@ -6,6 +6,8 @@ import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
 import "../../components/Styles.css";
 import MultipleDatePicker from "react-multiple-datepicker";
+import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
+
 const HostRegistry3 = () => {
     const location = useLocation();
     const data = {...location.state};
@@ -164,6 +166,7 @@ const HostRegistry3 = () => {
                         : null)}
             </div>
             <p>입•퇴실 시간*</p>
+
             <div style={{
                 display: "flex",
                 justifyContent: "left",
@@ -264,13 +267,39 @@ const HostRegistry3 = () => {
                      className={trial === false ? "btn_selected" : ""} onClick={() => setTrial(false)}>불가
                 </div>
             </div>
-            <Modal isOpen={isTrial} style={ModalStyles} >
-                <header>트라이얼이란?</header>
-                <button onClick={()=>setIsTrial(false)} >닫기</button>
+
+            <Modal isOpen={isTrial} style={ExplanationModalStyles}>
+                <div style={{
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "0.625rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal"
+                }}>
+                    <br/>
+                    <a style={{textAlign: "left"}}>트라이얼이란?</a><a style={{textAlign: "right"}} onClick={() => setIsTrial(false)}>x</a>
+                    <hr/>
+                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;트라이얼은 대관 당일 기준
+                        일주일 전 셰프가 업장에 방문하여 직접 요리해볼 수 있게끔 최소 3시간 정도 공간 활용을 허용하는 것을 의미합니다.
+                    </p>
+                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;트라이얼 시 <a
+                        style={{textDecorationLine: "underline"}}>업장 이용 인수인계 및 주의사항</a> 을 안내함으로 더욱 안전한 대관을 보장할 수 있습니다.
+                    </p>
+                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;트라이얼
+                        시간은 <strong>‘셰프와 채팅’</strong>을 통해 정해주세요.</p>
+                    <div style={{textAlign: 'center'}}>
+                        <button onClick={() => setIsTrial(false)}>닫기</button>
+                    </div>
+                </div>
+
             </Modal>
+
             <button onClick={() => setIsTrial(!isTrial)}
                     className="detail"
-            >• 트라이얼이란?</button>
+            >• 트라이얼이란?
+            </button>
+
             <p>재료 새벽 배달*</p>
             <div style={{
                 display: "flex",
@@ -301,13 +330,34 @@ const HostRegistry3 = () => {
                      onClick={() => setMorningDelivery(false)}>불가
                 </div>
             </div>
-            <Modal isOpen={isMorningDelivery} style={ModalStyles} >
-                <header>새벽배달이란?</header>
-                <button onClick={()=>setIsMorningDelivery(false)} >닫기</button>
+
+            <Modal isOpen={isMorningDelivery} style={ExplanationModalStyles}>
+                <div style={{
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "0.625rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal"
+                }}>
+                    <br/>
+                    <a style={{textAlign: "left"}}>새벽배달이란?</a> <a style={{textAlign: "right"}} onClick={() => setIsMorningDelivery(false)}>x</a>
+                    <hr/>
+                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;
+                        식재료 대리 수령은 대관일 전날 또는 셰프와 업주 협의 하에 식재료 사전 보관이 가능한지를 의미합니다.
+                    </p>
+                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;팝업 당일 대관 이용자에게 <a
+                        style={{textDecorationLine: "underline"}}>사용할 수 있는 냉장고</a>를 비워주어 공간 확보를 부탁드립니다.
+                    </p>
+                    <div style={{textAlign: 'center'}}>
+                        <button onClick={() => setIsMorningDelivery(false)}>닫기</button>
+                    </div>
+                </div>
             </Modal>
             <button onClick={() => setIsMorningDelivery(!isMorningDelivery)}
                     className="detail"
-            >• 새벽배달이란?</button>
+            >• 새벽배달이란?
+            </button>
             <p>미장*</p>
             <div style={{
                 display: "flex",
@@ -345,13 +395,33 @@ const HostRegistry3 = () => {
                     <span> 까지</span>
                 </div>
             </div>
-            <Modal isOpen={isMiseen} style={ModalStyles} >
-                <header>미장이란?</header>
-                                <button onClick={()=>setIsMiseen(false)} >닫기</button>
+
+            <Modal isOpen={isMiseen} style={ExplanationModalStyles}>
+                <div style={{
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "0.625rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal"
+                }}>
+                    <br/>
+                    <a style={{textAlign: "left"}}>미장이란?</a><a style={{textAlign: "right"}}
+                                                                 onClick={() => setIsMiseen(false)}>x</a>
+                    <hr/>
+                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;미장 플라세는 영업을 위한 사전 재료 준비를 뜻합니다.
+                    </p>
+                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;팝업 레스토랑에서 고객에게 식사를 제공하기 전에 사전 준비를 완벽하게 해야 하므로 필요한 준비과정입니다.
+                    </p>
+                    <div style={{textAlign: 'center'}}>
+                        <button onClick={() => setIsMiseen(false)}>닫기</button>
+                    </div>
+                </div>
             </Modal>
             <button onClick={() => setIsMiseen(!isMiseen)}
                     className="detail"
-            >• 미장이란?</button>
+            >• 미장이란?
+            </button>
             <p>워크인*</p>
             <div style={{
                 display: "flex",
@@ -380,18 +450,42 @@ const HostRegistry3 = () => {
                      className={workIn === false ? "btn_selected" : ""} onClick={() => setWorkIn(false)}>불가
                 </div>
             </div>
-            <Modal isOpen={isWorkIn} style={ModalStyles} >
-                <header>워크인이란?</header>
-                <button onClick={()=>setIsWorkIn(false)} >닫기</button>
+
+            <Modal isOpen={isWorkIn} style={ExplanationModalStyles}>
+                <div style={{
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "0.625rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal"
+                }}>
+                    <br/>
+                    <a style={{textAlign: "left"}}>워크인이란?</a><a style={{textAlign: "right"}}
+                                                               onClick={() => setIsWorkIn(false)}>x</a>
+                    <hr/>
+                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;워크인은 대관 당일 기준 '팝업 레스토랑' 사전 예약을 하지 않은 손님이 공간을 방문하는 경우를 의미합니다.
+
+                    </p>
+                    <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;<a style={{color: "red"}}>안심하세요! </a><a>팝업 레스토랑은 배너 또는 공지를 통해 공간과 무관한 영업이 진행된다는 점이 명시됩니다.
+                    </a>
+                    </p>
+                    <div style={{textAlign: 'center'}}>
+                        <button onClick={() => setIsWorkIn(false)}>닫기</button>
+                    </div>
+                </div>
             </Modal>
             <button onClick={() => setIsWorkIn(!isWorkIn)}
                     className="detail"
-            >• 워크인이란?</button>
+            >• 워크인이란?
+            </button>
             <div style={{display: "flex"}}>
-                <button onClick={()=>navigate(-1,data)} style={{backgroundColor: "red"}} className="next_button" >이전</button>
+                <button onClick={() => navigate(-1, data)} style={{backgroundColor: "red"}} className="next_button">이전
+                </button>
                 <button style={{backgroundColor: "grey"}} className="next_button"
-                            onClick={handleButton}
-                >다음</button>
+                        onClick={handleButton}
+                >다음
+                </button>
             </div>
             <Modal isOpen={isModalOpen} ariaHideApp={false}>
                 <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>

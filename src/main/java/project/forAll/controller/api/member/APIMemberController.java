@@ -38,7 +38,7 @@ public class APIMemberController extends APIController {
         final Member member = (Member) memberService.findById(id);
 
         return member == null ? new ResponseEntity(errorResponse("No user found for id " + id), HttpStatus.NOT_FOUND)
-            : new ResponseEntity(member, HttpStatus.OK);
+                : new ResponseEntity(member, HttpStatus.OK);
     }
     /**
      * id에 해당하는 member 객체를 반환
@@ -136,10 +136,10 @@ public class APIMemberController extends APIController {
     }
 
     @GetMapping("/members/public/{id}")
-    public ResponseEntity getMemberForPublic(@PathVariable("id") final Long id){
-        final Member member = (Member) memberService.findById(id);
+    public ResponseEntity getMemberForPublic(@PathVariable("id") final String userId){
+        final Member member = memberService.findByLoginId(userId);
 
-        if (member == null) return new ResponseEntity(errorResponse("No user found for id " + id),
+        if (member == null) return new ResponseEntity(errorResponse("No user found for id " + userId),
                 HttpStatus.NOT_FOUND);
 
         // Convert Member to MemberPublicDTO

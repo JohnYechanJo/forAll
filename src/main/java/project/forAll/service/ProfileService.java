@@ -7,10 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.Image;
 import project.forAll.domain.member.Profile;
 import project.forAll.domain.member.Member;
+
 import project.forAll.dto.MemberPublicDTO;
 import project.forAll.dto.ProfilePublicDTO;
 import project.forAll.form.ProfileForm;
 import project.forAll.repository.member.ProfileRepository;
+
 
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class ProfileService extends Service {
         final Member member = memberService.findByLoginId(pf.getUserId());
         profile.setMember(member);
         profile.setIntroduction(pf.getIntroduction());
+
         final Image image = imageService.findByImageName(pf.getProfilePhoto());
         profile.setProfilePhoto(image);
         profile.setMbti(pf.getMbti());
@@ -48,6 +51,7 @@ public class ProfileService extends Service {
         return profiles.get(0);
     }
 
+
     public ProfilePublicDTO convertToProfilePublicDTO(Profile profile) {
         ProfilePublicDTO profilePublicDTO = new ProfilePublicDTO();
         profilePublicDTO.setId(profile.getId());
@@ -61,3 +65,4 @@ public class ProfileService extends Service {
         return profilePublicDTO;
     }
 }
+

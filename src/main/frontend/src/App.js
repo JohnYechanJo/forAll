@@ -5,8 +5,10 @@ import SearchIdPage from "./pages/SearchIdPage";
 import SearchPwPage from "./pages/SearchPwPage";
 import SignUpPage from "./pages/signup/SignUpPage";
 import SignUpCompletePage from "./pages/signup/SignUpCompletePage";
+
 import PlaceInfoModifyStart from './pages/modify/PlaceInfoModifyStart';
 import PersonalInfoModifyPage from './pages/modify/PersonalInfoModifyPage';
+
 import PlaceInfoModifyPage2 from './pages/modify/PlaceInfoModifyPage2';
 import PlaceInfoModifyPage3 from './pages/modify/PlaceInfoModifyPage3';
 import PlaceInfoModifyPage4 from './pages/modify/PlaceInfoModifyPage4';
@@ -20,7 +22,9 @@ import HostRegistry6 from "./pages/hostregistry/HostRegistry6";
 import HostRegistry4 from "./pages/hostregistry/HostRegistry4";
 import HostRegistryComplete from "./pages/hostregistry/HostRegistryComplete";
 import HostRegistryCheckingPage from './pages/hostregistry/HostRegistryChecking';
+
 import GuestRegistry from "./pages/signup/GuestRegistry";
+
 import LoginHandeler from "./pages/LoginHandeler";
 import ChefRegistry from './pages/chefregistry/ChefRegistry';
 import ChefRegistryCheckingPage from './pages/chefregistry/ChefRegistryChecking';
@@ -45,6 +49,7 @@ import HostRegistry5 from "./pages/hostregistry/HostRegistry5";
 import PlaceInfoModifyPage5 from "./pages/modify/PlaceInfoModifyPage5";
 import FAQ from "./pages/FAQ";
 import EntryPartnership from "./pages/EntryPartnership";
+
 import ProfileModifyPage from "./pages/modify/ProfileModifyPage";
 import ProfileViewPage from "./pages/ProfileViewPage";
 
@@ -56,6 +61,7 @@ import ReservationListPage from "./pages/Reservation/ReservationListPage";
 import AssuranceReady from "./pages/Reservation/AssuranceReady";
 import AssuranceReadyView from "./pages/Reservation/AssuranceReadyView";
 import AssuranceFinish from "./pages/Reservation/AssuranceFinish";
+
 function App() {
   return (
       <Routes>
@@ -67,12 +73,14 @@ function App() {
         <Route path="/signUp" element={<SignUpPage />}/>
         <Route path="/signUpComplete" element={<SignUpCompletePage />} />
         <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
+
         <Route path="/placeInfoModifyStart" element={<PlaceInfoModifyStart />} />
         <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
         <Route path="/placeInfoModify3" element={<PlaceInfoModifyPage3 />} />
         <Route path="/placeInfoModify4" element={<PlaceInfoModifyPage4 />} />
         <Route path="/placeInfoModify5" element={<PlaceInfoModifyPage5 />} />
         <Route path="/placeInfoModify6" element={<PlaceInfoModifyPage6 />} />
+
             <Route path="/hostRegistryStart" element={<HostRegistryStartPage />}/>
         <Route path="/hostRegistry" element={<HostRegistry />} />
         <Route path="/hostRegistry2" element={<HostRegistry2 />} />
@@ -83,13 +91,16 @@ function App() {
         <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
         <Route path="/hostRegistryChecking" element={<HostRegistryCheckingPage />} />
         <Route path="/guestRegistry" element={<GuestRegistry />}/>
+
         <Route path="/profileModify" element={<ProfileModifyPage />}/>
+
         <Route path="/chefInfoModify" element={<ChefInfoModifyPage />} />
         <Route path="/spaceList" element={<SpaceListViewPage />} />
         <Route path="/rentSpace/:id" element={<RentSpacePage />} />
         <Route path="/rentSpaceInfo1/:id" element={<RentSpaceInfo1 />} />
         <Route path="/rentSpaceInfo2/:id" element={<RentSpaceInfo2 />} />
         <Route path="/rentSpaceInfo3/:id" element={<RentSpaceInfo3 />} />
+
         <Route path="/rentSpace2" element={<RentSpacePage2 />} />
         <Route path="/rentSpace3" element={<RentSpacePage3 />} />
         <Route path="/rentSpaceComplete" element={<RentSpaceComplete />} />
@@ -98,6 +109,7 @@ function App() {
             <Route path="/profile/:id" element={<ProfileViewPage />} />
             <Route path="/mypost" element={<MyPostPage />} />
         <Route path="/mypost" element={<MyPostPage />} />
+
         <Route path="/post/:id" element={<PostViewPage />} />
         <Route path="/post/edit" element={<PostEditPage />} />
         <Route path="/popup" element={<PopupBoardPage />} />
@@ -111,10 +123,12 @@ function App() {
             <Route path="/FAQ" element={<FAQ />} />
             <Route path="/EntryPartnership" element={<EntryPartnership />} />
 
+
         <Route path="/reservationList" element={<ReservationListPage />} />
         <Route path="/assuranceReady" element={<AssuranceReady />} />
             <Route path="/assuranceReadyView" element={<AssuranceReadyView />} />
             <Route path="/assuranceFinish" element={<AssuranceFinish />} />
+
       </Routes>
   );
 }

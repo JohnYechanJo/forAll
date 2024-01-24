@@ -1,12 +1,26 @@
+<<<<<<< HEAD
 import {useLocation, useNavigate} from "react-router-dom";
+=======
+import Header from "../../components/Header";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import {user_role} from "../../utils/enums";
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
 import checkIcon from "../../components/icons/check.png";
 import "../../components/Styles.css";
 const SignUpCompletePage = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
+<<<<<<< HEAD
     sessionStorage.setItem("profileImg", data.profileImg);
     
+=======
+
+    sessionStorage.setItem("user_id", data.id);
+    sessionStorage.setItem("role", data.role);
+    sessionStorage.setItem("name", data.name);
+    sessionStorage.setItem("email", data.email);
+>>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
     return (
         <div style={{
             display: "flex",

@@ -8,13 +8,17 @@ import login from "../../components/icons/login.png";
 import logout from "../../components/icons/logout.png";
 import xmark from "../../components/icons/xmark.png";
 import alarm from "../../components/icons/alarm.png";
+
 import ImageViewer from "../ImageViewer";
+
 const Sidebar = ({ width = 18.75, children }) => {
     const [isOpen, setOpen] = useState(false);
     const [xPosition, setX] = useState(-width);
     const side = useRef();
     const navigate = useNavigate();
+
     const [profileImage, setProfileImage] = useState("");
+
     // button 클릭 시 토글
     const toggleMenu = () => {
         if (xPosition < 0) {
@@ -35,6 +39,7 @@ const Sidebar = ({ width = 18.75, children }) => {
             console.error(res);
         });
     };
+
     useEffect(() => {
         const userId = sessionStorage.getItem("user_id");
         axios.get("/api/v1/profile/"+userId)
@@ -44,7 +49,7 @@ const Sidebar = ({ width = 18.75, children }) => {
             })
             .catch((err) => console.error(err));
     }, []);
-    // 대표이미지 불러와서 띄우기
+
 
     return (
         <div className={styles.container}>
@@ -78,10 +83,12 @@ const Sidebar = ({ width = 18.75, children }) => {
                         </div>
                     </div>
                     <div>
+
                         <div style={{height:'5.25rem'}}>
                         <ImageViewer val={profileImage} style={{width:'5.25rem',height:'5.25rem',borderRadius:'50%',flexShrink:'0',fill:'#FFF',strokeWidth:'1px',stroke:"#C4C4C4",
                     filter:'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',alignItems:"center",justifyContent:"center", display: "flex", margin: "auto"
                     }}/>
+
                         </div>
                         <p style={{textAlign: "center"}}>{sessionStorage.getItem("name")}</p>
                         <p style={{textAlign:"center"}}>{sessionStorage.getItem("email")}</p>
@@ -140,8 +147,10 @@ const Sidebar = ({ width = 18.75, children }) => {
                         <img src={logout} alt="logout" style={{height:"1.125rem", width:"0.875rem", margin: "auto",border:'none',backgroundColor:'white',fontSize:'0.875rem',fontWeight:'700',marginLeft:'2rem'}} />
                         <a style={{marginLeft:'0.5rem'}}>로그아웃</a>
                         </div>) : (<div onClick={logIn}>
+
                         <img src={login}alt="login" style={{height:"1.125rem", width:"0.875rem", margin: "auto",border:'none',backgroundColor:'white',fontSize:'0.875rem',fontWeight:'700',marginLeft:'2rem'}} />
                         <a style={{marginLeft:'0.5rem'}}>로그인 ㅣ 회원가입</a>
+
                         </div>)}
                 </div>
                 </div>
