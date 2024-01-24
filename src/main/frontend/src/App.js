@@ -12,7 +12,6 @@ import PlaceInfoModifyPage2 from './pages/modify/PlaceInfoModifyPage2';
 import PlaceInfoModifyPage3 from './pages/modify/PlaceInfoModifyPage3';
 import PlaceInfoModifyPage4 from './pages/modify/PlaceInfoModifyPage4';
 import PlaceInfoModifyPage6 from './pages/modify/PlaceInfoModifyPage6';
-import ModifyCompletePage from "./pages/modify/ModifyCompletePage";
 import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
 import HostRegistry from "./pages/hostregistry/HostRegistry";
