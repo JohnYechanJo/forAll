@@ -162,7 +162,7 @@ const HostRegistry = () => {
                                         <br/>
                                         <a style={{textAlign: "left"}}>오픈형 주방이란?</a><a
                                         style={{textAlign: "right"}} onClick={() => setModalIsOpen1(false)}>x</a>
-                                        <hr/>
+                                        <hr style={{ height: "1px", backgroundColor: "black" }}/>
                                         <p style={{
                                             textAlign: 'left',
                                             paddingLeft: "1.5rem",
@@ -230,7 +230,7 @@ const HostRegistry = () => {
                                         <br/>
                                         <a style={{textAlign: "left"}}>대면형 주방이란?</a><a
                                         style={{textAlign: "right"}} onClick={() => setModalIsOpen2(false)}>x</a>
-                                        <hr/>
+                                        <hr style={{ height: "1px", backgroundColor: "black" }}/>
                                         <p style={{
                                             textAlign: 'left',
                                             paddingLeft: "1.5rem",
@@ -297,7 +297,7 @@ const HostRegistry = () => {
                                         <br/>
                                         <a style={{textAlign: "left"}}>폐쇄형 주방이란?</a><a
                                         style={{textAlign: "right"}} onClick={() => setModalIsOpen3(false)}>x</a>
-                                        <hr/>
+                                        <hr style={{ height: "1px", backgroundColor: "black" }}/>
                                         <p style={{
                                             textAlign: 'left',
                                             paddingLeft: "1.5rem",

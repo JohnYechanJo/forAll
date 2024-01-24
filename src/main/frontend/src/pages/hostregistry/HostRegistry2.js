@@ -130,7 +130,7 @@ const HostRegistry2 = () => {
                     }}>
                         <br/>
                         <a style={{textAlign: "left"}}>메뉴 사진이 왜 필요한가요?</a><a style={{textAlign: "right"}} onClick={() => setIsModalOpen2(false)}>x</a>
-                        <hr/>
+                        <hr style={{ height: "2px", backgroundColor: "black" }}/>
                         <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;매장에서 사용중인
                             메뉴를 통해 플레이트 종류를 확인할 수 있습니다.</p>
                         <p style={{textAlign: 'left', paddingLeft: "1.5rem", paddingRight: "1.5rem"}}>•&ensp;셰프님들이 예약
