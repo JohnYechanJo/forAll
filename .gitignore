@@ -43,5 +43,5 @@ out/
 
 *.yml
 .env
-.pem
+*.pem
 .DS_Store
