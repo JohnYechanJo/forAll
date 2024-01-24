@@ -8,11 +8,13 @@ import login from "../../components/icons/login.png";
 import logout from "../../components/icons/logout.png";
 import xmark from "../../components/icons/xmark.png";
 import alarm from "../../components/icons/alarm.png";
+import ImageViewer from "../ImageViewer";
 const Sidebar = ({ width = 18.75, children }) => {
     const [isOpen, setOpen] = useState(false);
     const [xPosition, setX] = useState(-width);
     const side = useRef();
     const navigate = useNavigate();
+    const [profileImage, setProfileImage] = useState("");
     // button 클릭 시 토글
     const toggleMenu = () => {
         if (xPosition < 0) {
@@ -33,6 +35,15 @@ const Sidebar = ({ width = 18.75, children }) => {
             console.error(res);
         });
     };
+    useEffect(() => {
+        const userId = sessionStorage.getItem("user_id");
+        axios.get("/api/v1/profile/"+userId)
+            .then((res) => {
+                console.log(res.data);
+                setProfileImage(res.data.profilePhoto);
+            })
+            .catch((err) => console.error(err));
+    }, []);
     // 대표이미지 불러와서 띄우기
 
     return (
@@ -67,10 +78,10 @@ const Sidebar = ({ width = 18.75, children }) => {
                         </div>
                     </div>
                     <div>
-                        <div style={{width:'5.25rem',height:'5.25rem',borderRadius:'50%',flexShrink:'0',fill:'#FFF',strokeWidth:'1px',stroke:"#C4C4C4",
+                        <div style={{height:'5.25rem'}}>
+                        <ImageViewer val={profileImage} style={{width:'5.25rem',height:'5.25rem',borderRadius:'50%',flexShrink:'0',fill:'#FFF',strokeWidth:'1px',stroke:"#C4C4C4",
                     filter:'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',alignItems:"center",justifyContent:"center", display: "flex", margin: "auto"
-                    }}>
-                        {/* 이 자리에 불러온 대표이미지를 넣으면 됨 */}
+                    }}/>
                         </div>
                         <p style={{textAlign: "center"}}>{sessionStorage.getItem("name")}</p>
                         <p style={{textAlign:"center"}}>{sessionStorage.getItem("email")}</p>
