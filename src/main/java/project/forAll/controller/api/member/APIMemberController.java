@@ -136,10 +136,10 @@ public class APIMemberController extends APIController {
     }
 
     @GetMapping("/members/public/{id}")
-    public ResponseEntity getMemberForPublic(@PathVariable("id") final Long id){
-        final Member member = (Member) memberService.findById(id);
+    public ResponseEntity getMemberForPublic(@PathVariable("id") final String userId){
+        final Member member = memberService.findByLoginId(userId);
 
-        if (member == null) return new ResponseEntity(errorResponse("No user found for id " + id),
+        if (member == null) return new ResponseEntity(errorResponse("No user found for id " + userId),
                 HttpStatus.NOT_FOUND);
 
         // Convert Member to MemberPublicDTO
