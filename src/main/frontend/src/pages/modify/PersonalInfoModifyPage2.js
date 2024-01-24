@@ -10,21 +10,18 @@ import UseTermsTemplate from "../../components/signup/UseTermsTemplate";
 import * as regularExpressions from "../../utils/regularExpressions";
 import Alert from "../../components/Alert";
 const PersonalModify2 = () => {
-    const location = useLocation();
-    const data = { ...location.state };
-    const birdDayList = data.birthday != null ? data.birthday.split('/') : "//".split("/");
     const navigate = useNavigate();
     const [pw, setPw] = useState('');
     const [pwCheck, setPwCheck] = useState('');
-    const [name, setName] = useState(data.name);
-    const [email, setEmail] = useState(data.email);
-    const [phone, setPhone] = useState(data.phoneNum);
+    const [name, setName] = useState(sessionStorage.getItem("name"));
+    const [email, setEmail] = useState(sessionStorage.getItem("email"));
+    const [phone, setPhone] = useState("");
     const [cerifiedNum, setCerifiedNum] = useState('');
-    const [birthDay, setBirthDay] = useState(data.birthDay);
-    const [year, setYear] = useState(birdDayList[0]);
-    const [month, setMonth] = useState(birdDayList[1]);
-    const [day, setDay] = useState(birdDayList[2]);
-    const [gender, setGender] = useState(data.gender);
+    const [birthDay, setBirthDay] = useState("");
+    const [year, setYear] = useState('');
+    const [month, setMonth] = useState('');
+    const [day, setDay] = useState('');
+    const [gender, setGender] = useState('');
     const [isCheckDuplicatedEmail, setIsCheckDuplicatedEmail] = useState();
     const [isCheckPw, setIsCheckPw] = useState();
     const [isUseTermsChecked, setIsUseTermsChecked] = useState(false);
@@ -45,26 +42,41 @@ const PersonalModify2 = () => {
     }, [year, month, day]);
     const sendCerifiedNum = () => {
         const phoneRule = regularExpressions.phoneNum;
-        if (! phoneRule.test(phone)){
+        if (!phoneRule.test(phone)) {
             openAlert("전화번호 형식을 확인해주세요");
         }
-        else{
-            axios.post("/api/v1/send-one/"+phone)
+        else {
+            axios.post("/api/v1/send-one/" + phone)
                 .then((response) => {
                     openAlert("인증번호를 발송했습니다");
                 }).catch((response) => {
-                openAlert("인증번호를 발송하지 못했습니다");
-            });
+                    openAlert("인증번호를 발송하지 못했습니다");
+                });
         }
     };
     const checkCerifiedNum = () => {
-        axios.get("/api/v1/checkSms/"+phone+"/"+cerifiedNum)
+        axios.get("/api/v1/checkSms/" + phone + "/" + cerifiedNum)
             .then((response) => {
                 setIsPhoneCerified(true);
             }).catch((response) => {
-            setIsPhoneCerified(false);
-        });
+                setIsPhoneCerified(false);
+            });
     };
+    // useEffect(() => {   이 부분이 api 가져오는 부분
+    //     const id = sessionStorage.getItem("user_id");
+    //     axios.get("/api/v1/members/" + id)
+    //         .then((res) => {
+    //             setPhone(res.data.phoneNum);
+    //             setYear(res.data.birthday.split('/')[0]);
+    //             setMonth(res.data.birthday.split('/')[1]);
+    //             setDay(res.data.birthday.split('/')[2]);
+    //             setGender(res.data.gender);
+    //             console.log(res.data);
+    //         }).catch((res) => {
+    //             openAlert("회원 정보를 불러오는데 실패했습니다");
+    //         })
+    // }, []);
+
     const handleButton = () => {
         if (pw === "") {
             openAlert("비밀번호는 필수 입력 사항입니다");
@@ -80,15 +92,15 @@ const PersonalModify2 = () => {
             openAlert("비밀번호가 일치하지 않습니다");
         } else if (isCheckDuplicatedEmail !== true) {
             openAlert("이메일 중복확인이 필요합니다");
-        } else if (isPhoneCerified !== true){
+        } else if (isPhoneCerified !== true) {
             openAlert("휴대폰 인증이 필요합니다");
-        } else if (isUseTermsChecked !== true){
+        } else if (isUseTermsChecked !== true) {
             openAlert("약관 동의가 필요합니다")
         }
         else {
             axios.put("/api/v1/members",
                 {
-                    loginId: data.loginId,
+                    loginId: sessionStorage.getItem("user_id"),
                     loginPw: pw,
                     name: name,
                     birthday: birthDay,
@@ -111,40 +123,63 @@ const PersonalModify2 = () => {
     };
     return (
         <div>
-            <Header PageName={"개인정보수정"} />
-            <PersonalInfoModifyInputTemplate
-                name={name}
-                phone={phone}
-                email={email}
-                year={year}
-                month={month}
-                day={day}
-                gender={gender}
-                cerifiedNum={cerifiedNum}
-                setPw={setPw}
-                setPwCheck={setPwCheck}
-                setName={setName}
-                setEmail={setEmail}
-                setPhone={setPhone}
-                setCerifiedNum={setCerifiedNum}
-                setYear={setYear}
-                setMonth={setMonth}
-                setDay={setDay}
-                setGender={setGender}
-                sendCerifiedNum={sendCerifiedNum}
-                isCheckedDuplicatedEmail={isCheckDuplicatedEmail}
-                setIsCheckedDuplicatedEmail={setIsCheckDuplicatedEmail}
-                isCheckPw={isCheckPw}
-                isPhoneCerified={isPhoneCerified}
-                setIsPhoneCerified={setIsPhoneCerified}
-            />
-            <UseTermsTemplate
-                setIsUseTermsChecked={setIsUseTermsChecked}
-            />
-            <button>탈퇴하기</button>
-            <footer className="footer">
-                <button onClick={() => handleButton()} className="button" style={{ backgroundColor: "black"}}>수정하기</button>
-            </footer>
+            <div style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "2.5rem",
+                marginLeft: "1rem",
+                marginRight: "1rem",
+            }}>
+                <div style={{
+                    textAlign: "center",
+                    fontSize: "0.9375rem",
+                    lineHeight: "1.375rem",
+                    fontWeight: "400",
+                    letterSpacing: "-0.0255rem",
+                }}>
+                    <div style={{ marginTop: '2.75rem', fontSize: '0.9375rem' }} >1.개인 정보</div>
+                </div>
+                <PersonalInfoModifyInputTemplate
+                    name={name}
+                    phone={phone}
+                    email={email}
+                    year={year}
+                    month={month}
+                    day={day}
+                    gender={gender}
+                    cerifiedNum={cerifiedNum}
+                    setPw={setPw}
+                    setPwCheck={setPwCheck}
+                    setName={setName}
+                    setEmail={setEmail}
+                    setPhone={setPhone}
+                    setCerifiedNum={setCerifiedNum}
+                    setYear={setYear}
+                    setMonth={setMonth}
+                    setDay={setDay}
+                    setGender={setGender}
+                    sendCerifiedNum={sendCerifiedNum}
+                    isCheckedDuplicatedEmail={isCheckDuplicatedEmail}
+                    setIsCheckedDuplicatedEmail={setIsCheckDuplicatedEmail}
+                    isCheckPw={isCheckPw}
+                    isPhoneCerified={isPhoneCerified}
+                    setIsPhoneCerified={setIsPhoneCerified}
+                />
+                <UseTermsTemplate
+                    setIsUseTermsChecked={setIsUseTermsChecked}
+                />
+            </div>
+            <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem' }}>
+                <button style={{ marginLeft: 'auto', backgroundColor: "#FF4F4F", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+                    onClick={() => navigate('/login')}
+                >
+                    이전</button>
+                <button style={{ marginLeft: 'auto', backgroundColor: "#525252", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+                    onClick={() => handleButton()}
+                >다음</button>
+            </div>
+
             <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={alertContent} />
         </div>
     )

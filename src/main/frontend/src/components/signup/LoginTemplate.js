@@ -59,15 +59,18 @@ const LoginTemplate = () => {
                 <input
                     placeholder="비밀번호 입력"
                     className="input"
+                    type="password"
                     value={passwd}
                     onChange={onChangePw}
                 />
             </div>
             <div>
+                <div style={{display:'flex',flexDirection:'column'}}>
                 <button onClick={() => logIn()} style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',backgroundColor:'#616161',marginBottom:'0.5rem'}} >로그인</button>
                 <Link to="/signUp">
                     <button style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',border:'1px solid #000',backgroundColor:'white'}}>회원가입</button>
                 </Link>
+                </div>
                 <div  style={{
                 color: "#B0B0B0",
                 textAlign: "center",

@@ -186,11 +186,6 @@ const SignUpPage = () => {
             <UseTermsTemplate
                 setIsUseTermsChecked={setIsUseTermsChecked}
             />
-            
-            {isAllChecked ? <SignUpInformationTemplate
-                setIsAllChecked={setIsAllChecked}
-                submit={submit}
-            /> : null}
             <Alert isOpen={isModalOpen} setIsOpen={setIsModalOpen} content={alertContent} />
 
         </div>

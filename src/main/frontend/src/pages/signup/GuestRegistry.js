@@ -69,12 +69,11 @@ const GuestRegistry = () => {
             const picture = await ImageUploader(profileImage, data.loginId);
             axios.post("/api/v1/profile", {
                 userId: data.loginId,
-                introduction: introduce,
-                picture: picture,
+                introduction: introduce, 
+                profilePhoto: picture, 
                 mbti: selectedMBTI,
                 cook: selectedFoodTypes,
-                interest: selectedIngredient,
-
+                cookItem: selectedIngredient, 
             }).then((res) => {
                 navigate("/notification",{state:{
                         id: data.loginId,

@@ -111,7 +111,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
-                        <Link to="/personalInfoModify">
+                        <Link to="/personalInfoModify2">
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>개인 정보수정</button>
                         </Link>
                         <Link to="/chefInfoModify">

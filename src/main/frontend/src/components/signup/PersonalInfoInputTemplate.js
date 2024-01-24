@@ -117,9 +117,9 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                 <button onClick={() => checkCerifiedNum()} className="buttonForRegister"
                 style={{backgroundColor:"#616161",color:"white"}}
                 >인증번호 확인</button>
-                {isPhoneCerified === true ? <p>인증 완료되었습니다</p> :
-                    (isPhoneCerified === false ? <p>인증 실패했습니다</p> : null)}
             </div>
+            {isPhoneCerified === true ? <p>인증 완료되었습니다</p> :
+                    (isPhoneCerified === false ? <p>인증 실패했습니다</p> : null)}
             <div>
             <a className="fontForRegister" >생년월일<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{marginBottom:"2.5rem",display:'flex'}}>

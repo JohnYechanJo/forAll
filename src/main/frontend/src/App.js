@@ -5,7 +5,6 @@ import SearchIdPage from "./pages/SearchIdPage";
 import SearchPwPage from "./pages/SearchPwPage";
 import SignUpPage from "./pages/signup/SignUpPage";
 import SignUpCompletePage from "./pages/signup/SignUpCompletePage";
-import PersonalInfoModifyPage from './pages/modify/PersonalInfoModifyPage';
 import PlaceInfoModifyStart from './pages/modify/PlaceInfoModifyStart';
 import PersonalInfoModifyPage2 from './pages/modify/PersonalInfoModifyPage2';
 import PlaceInfoModifyPage2 from './pages/modify/PlaceInfoModifyPage2';
@@ -61,7 +60,6 @@ function App() {
         <Route path="/searchPw" element={<SearchPwPage />}/>
         <Route path="/signUp" element={<SignUpPage />}/>
         <Route path="/signUpComplete" element={<SignUpCompletePage />} />
-        <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
         <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />
         <Route path="/placeInfoModifyStart" element={<PlaceInfoModifyStart />} />
         <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />

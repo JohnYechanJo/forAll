@@ -71,6 +71,7 @@ const ProfileModifyPage = () => {
         const userId = sessionStorage.getItem("user_id");
         axios.get("/api/v1/profile/"+userId)
             .then((res) => {
+                console.log(res.data);
                 setIntroduce(res.data.introduction);
                 setProfileImage(res.data.profilePhoto);
                 setSelectedMBTI(res.data.mbti ? res.data.mbti : "");
