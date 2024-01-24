@@ -47,6 +47,10 @@ import RentSpacePage2 from "./pages/RentSpace/RentSpacePage2";
 import React from "react";
 import RentSpacePage3 from "./pages/RentSpace/RentSpacePage3";
 import RentSpaceComplete from "./pages/RentSpace/RentSpaceComplete";
+import ReservationListPage from "./pages/Reservation/ReservationListPage";
+import AssuranceReady from "./pages/Reservation/AssuranceReady";
+import AssuranceReadyView from "./pages/Reservation/AssuranceReadyView";
+import AssuranceFinish from "./pages/Reservation/AssuranceFinish";
 function App() {
   return (
       <Routes>
@@ -85,7 +89,7 @@ function App() {
         <Route path="/rentSpaceComplete" element={<RentSpaceComplete />} />
         <Route path="/chatList" element={<ChatRoomListPage />} />
         <Route path="/chatRoom" element={<ChatRoomPage />} />
-            <Route path="/mypost" element={<MyPostPage />} />
+        <Route path="/mypost" element={<MyPostPage />} />
         <Route path="/post/:id" element={<PostViewPage />} />
         <Route path="/post/edit" element={<PostEditPage />} />
         <Route path="/popup" element={<PopupBoardPage />} />
@@ -96,6 +100,10 @@ function App() {
         <Route path="/chefRegistry" element={<ChefRegistry />} />
         <Route path="/chefRegistryChecking" element={<ChefRegistryCheckingPage />} />
         <Route path="/chefRegistryComplete" element={<ChefRegistryComplete />} />
+        <Route path="/reservationList" element={<ReservationListPage />} />
+        <Route path="/assuranceReady" element={<AssuranceReady />} />
+            <Route path="/assuranceReadyView" element={<AssuranceReadyView />} />
+            <Route path="/assuranceFinish" element={<AssuranceFinish />} />
       </Routes>
   );
 }

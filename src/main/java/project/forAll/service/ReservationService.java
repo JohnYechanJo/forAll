@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import project.forAll.domain.Reservation;
+import project.forAll.domain.reservation.Reservation;
+import project.forAll.domain.space.ReservationState;
 import project.forAll.domain.space.Space;
 import project.forAll.form.ReservationForm;
 import project.forAll.repository.ReservationRepository;
@@ -31,15 +32,17 @@ public class ReservationService extends Service{
     }
     public ReservationForm of(final Reservation reservation){
         final ReservationForm form = new ReservationForm();
+        form.setId(reservation.getId());
         form.setMember(reservation.getMember().getLoginId());
         form.setSpace(reservation.getSpace().getId()); // spaceform으로 바꿔야할 수도 있음
         form.setRentDay(reservation.getRentDay());
         form.setTrialDay(reservation.getTrialDay());
 
+        form.setAddress(reservation.getSpace().getPlace().getAddress());
+        form.setName(reservation.getSpace().getPlace().getName());
+        form.setState(reservation.getState().toString());
+        form.setRentStartHour(reservation.getSpace().getRent().getAbleStartTime());
+        form.setRentEndHour(reservation.getSpace().getRent().getAbleFinTime());
         return form;
-    }
-    public void approveReservation(Reservation reservation){
-        reservation.setPending(true);
-        save(reservation);
     }
 }

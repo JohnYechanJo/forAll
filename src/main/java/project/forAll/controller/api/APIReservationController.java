@@ -1,13 +1,13 @@
 package project.forAll.controller.api;
 
 import lombok.RequiredArgsConstructor;
-import okhttp3.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
-import project.forAll.domain.Reservation;
+import project.forAll.domain.reservation.Reservation;
 import project.forAll.domain.member.Member;
+import project.forAll.domain.space.ReservationState;
 import project.forAll.form.ReservationForm;
 import project.forAll.repository.ReservationRepository;
 import project.forAll.service.MemberService;
@@ -40,7 +40,7 @@ public class APIReservationController extends APIController{
         try{
             if (reservationService.findById(form.getId()) == null) throw new Exception("No reservation with id " + form.getId());
             final Reservation reservation = reservationService.build(form);
-            memberService.save(reservation);
+            reservationService.save(reservation);
 
             return new ResponseEntity(Long.toString(reservation.getId()), HttpStatus.OK);
         }catch (final Exception e){
@@ -73,14 +73,16 @@ public class APIReservationController extends APIController{
         }
     }
 
-    @GetMapping("/reservation/approve/{id}")
-    public ResponseEntity approveReservation(@PathVariable Long id){
+    @GetMapping("/reservation/state/{id}/{state}")
+    public ResponseEntity approveReservation(@PathVariable Long id, @PathVariable String state){
         try{
-            //어드민 권한 확인
+            // todo 어드민 권한 확인
             final Reservation reservation = (Reservation) reservationService.findById(id);
             if (reservation == null) throw new Exception("No reservation with id " + id);
-            reservationService.approveReservation(reservation);
-            return new ResponseEntity(reservation, HttpStatus.OK);
+            reservation.setState(ReservationState.parse(state));
+            reservationService.save(reservation);
+
+            return new ResponseEntity(Long.toString(reservation.getId()), HttpStatus.OK);
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Could not approve Reservation" + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
@@ -89,7 +91,7 @@ public class APIReservationController extends APIController{
     @GetMapping("/reservation/pendingList")
     public ResponseEntity getPendingReservation(){
         try{
-            List<Reservation> reservations = reservationRepository.findByPending(false);
+            List<Reservation> reservations = reservationRepository.findByState(ReservationState.PENDING);
             List<ReservationForm> forms = reservations.stream().map(reservation -> reservationService.of(reservation)).toList();
             return new ResponseEntity(forms, HttpStatus.OK);
         }catch (final Exception e){
@@ -97,7 +99,7 @@ public class APIReservationController extends APIController{
         }
     }
     @GetMapping("/reservation/user/{id}")
-    public ResponseEntity getPendingReservation(@PathVariable(value = "id") String userId){
+    public ResponseEntity getUserReservation(@PathVariable(value = "id") String userId){
         try{
             final Member member = memberService.findByLoginId(userId);
             List<Reservation> reservations = reservationRepository.findByMember(member);
