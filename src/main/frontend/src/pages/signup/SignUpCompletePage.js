@@ -1,38 +1,21 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import {useLocation, useNavigate} from "react-router-dom";
-=======
-import Header from "../../components/Header";
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import {user_role} from "../../utils/enums";
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
-=======
-import Header from "../../components/Header";
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import {user_role} from "../../utils/enums";
->>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
+
 import checkIcon from "../../components/icons/check.png";
 import "../../components/Styles.css";
 const SignUpCompletePage = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     sessionStorage.setItem("profileImg", data.profileImg);
-    
-=======
-=======
->>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
+
 
     sessionStorage.setItem("user_id", data.id);
     sessionStorage.setItem("role", data.role);
     sessionStorage.setItem("name", data.name);
     sessionStorage.setItem("email", data.email);
-<<<<<<< HEAD
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
-=======
->>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
+
     return (
         <div style={{
             display: "flex",
