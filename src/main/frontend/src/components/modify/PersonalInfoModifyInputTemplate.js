@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import eyeImg from "../../components/icons/eye.png"
 
-import UseTermsTemplate from "../signup/UseTermsTemplate";
 const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day, cerifiedNum, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear, setMonth, setDay, setGender, isCheckPw, setIsCheckedDuplicatedEmail, isCheckedDuplicatedEmail, sendCerifiedNum, gender, isPhoneCerified, setIsPhoneCerified }) => {
     console.log(year, month, day);
 
@@ -121,7 +119,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                     placeholder={"이름을 입력해 주세요"}
                     onChange={onChangeName}
                     defaultValue={sessionStorage.getItem("name")}
-                    style={{heighit: '2.5rem', paddingLeft:'1rem', fontSize:'0.625rem',fontWeight:'300', width: "22.375rem"}}
+                    style={{height: '2.5rem', paddingLeft:'1rem', fontSize:'0.625rem',fontWeight:'300', width: "22.375rem"}}
 
                 />
             </div>

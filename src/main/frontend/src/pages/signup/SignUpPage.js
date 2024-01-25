@@ -1,7 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
 import PersonalInfoInputTemplate from "../../components/signup/PersonalInfoInputTemplate";
 import UseTermsTemplate from "../../components/signup/UseTermsTemplate";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Gender} from "../../utils/enums";
 import axios from "axios";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
@@ -9,6 +9,7 @@ import * as regularExpressions from "../../utils/regularExpressions";
 import SignUpInformationTemplate from "../../components/signup/SignUpInformationTemplate";
 import "../../components/Styles.css";
 import Modal from "react-modal";
+import PersonalInfoModifyInputTemplate from "../../components/modify/PersonalInfoModifyInputTemplate";
 import Alert from "../../components/Alert";
 const SignUpPage = () => {
     const navigate = useNavigate();
@@ -164,70 +165,95 @@ const SignUpPage = () => {
     return (
         <div>
             <div style={{
-            display:"flex",
-            flexDirection:"column",
-            alignItems:"center",
-            gap:"2.5rem",
-            marginLeft:"1rem",
-            marginRight:"1rem",
-        }} >
-            <div style={{
-                textAlign:"center",
-                fontSize:"0.9375rem",
-                lineHeight:"1.375rem",
-                fontWeight:"400",
-                letterSpacing:"-0.0255rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "2.5rem",
+                width: "100%",
             }}>
-                <div style={{marginTop:'2.75rem',fontSize:'0.9375rem'}} >1.정보 입력</div>
+                <div style={{
+                    textAlign: "center",
+                    fontSize: "0.9375rem",
+                    lineHeight: "1.375rem",
+                    fontWeight: "400",
+                    letterSpacing: "-0.0255rem",
+                }}>
+                    <div style={{ marginTop: '2.75rem', fontSize: '0.9375rem' }} >1.개인 정보</div>
+                </div>
+                <PersonalInfoInputTemplate
+
+                    pw = {pw}
+                    setId={setId}
+                    setPw={setPw}
+                    setPwCheck={setPwCheck}
+                    setName={setName}
+                    setEmail={setEmail}
+                    setPhone={setPhone}
+                    setCerifiedNum={setCerifiedNum}
+                    setYear={setYear}
+                    setMonth={setMonth}
+                    setDay={setDay}
+                    setGender={setGender}
+                    checkDuplicatedId={checkDuplicatedId}
+                    checkDuplicatedEmail={checkDuplicatedEmail}
+                    isCheckedDuplicatedId={isCheckDuplicatedId}
+                    isCheckedDuplicatedEmail={isCheckDuplicatedEmail}
+                    isCheckPw={isCheckPw}
+                    sendCerifiedNum={sendCerifiedNum}
+                    checkCerifiedNum={checkCerifiedNum}
+                    isPhoneCerified={isPhoneCerified}
+                    gender = {gender}
+                />
+                <UseTermsTemplate
+                    setIsUseTermsChecked={setIsUseTermsChecked}
+                />
+                {isAllChecked ? <SignUpInformationTemplate
+                    setIsAllChecked={setIsAllChecked}
+                    submit={submit}
+                /> : null}
+
+                <Alert isOpen={isModalOpen} setIsOpen={setIsModalOpen} content={alertContent} />
+
             </div>
-            <PersonalInfoInputTemplate
-                pw = {pw}
-                setId={setId}
-                setPw={setPw}
-                setPwCheck={setPwCheck}
-                setName={setName}
-                setEmail={setEmail}
-                setPhone={setPhone}
-                setCerifiedNum={setCerifiedNum}
-                setYear={setYear}
-                setMonth={setMonth}
-                setDay={setDay}
-                setGender={setGender}
-                checkDuplicatedId={checkDuplicatedId}
-                checkDuplicatedEmail={checkDuplicatedEmail}
-                isCheckedDuplicatedId={isCheckDuplicatedId}
-                isCheckedDuplicatedEmail={isCheckDuplicatedEmail}
-                isCheckPw={isCheckPw}
-                sendCerifiedNum={sendCerifiedNum}
-                checkCerifiedNum={checkCerifiedNum}
-                isPhoneCerified={isPhoneCerified}
-                gender = {gender}
-            />
-            <UseTermsTemplate
-                setIsUseTermsChecked={setIsUseTermsChecked}
-            />
+            <div style={{
+                display: 'flex',
+                width: '100%',
+                margin: '0px',
+                marginTop: '4rem',
 
-            
-            {isAllChecked ? <SignUpInformationTemplate
-                setIsAllChecked={setIsAllChecked}
-                submit={submit}
-            /> : null}
-
-            <Alert isOpen={isModalOpen} setIsOpen={setIsModalOpen} content={alertContent} />
+                fontSize: "0.9375rem",
+                fontWeight: "400"
+            }}>
+                <button style={{
+                    marginLeft: 'auto',
+                    backgroundColor: "#FF4F4F",
+                    width: '50%',
+                    bottom: '0',
+                    height: '3.125rem',
+                    color: 'white',
+                    border: 'none',
+                    lineHeight: '1.875rem',
+                    textAlign: 'center' }}
+                        onClick={() => navigate('/')}
+                >
+                    이전</button>
+                <button style={{
+                    marginLeft: 'auto',
+                    backgroundColor: "#525252",
+                    width: '50%',
+                    bottom: '0',
+                    height: '3.125rem',
+                    color: 'white',
+                    border: 'none',
+                    lineHeight: '1.875rem',
+                    textAlign: 'center' }}
+                        onClick={() => handleButton()}
+                >다음</button>
+            </div>
 
         </div>
-        <div style={{display:'flex',width:'100%',margin:'0px',marginTop:'4rem'}}>
-        <button style={{marginLeft:'auto',backgroundColor:"#FF4F4F",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}
-        onClick={() => navigate('/login')}
-        >
-            이전</button>
-        <button style={{marginLeft:'auto',backgroundColor:"#525252",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}
-            onClick={()=>handleButton()}
-        >다음</button>
-        </div>
-        </div>
-        
     )
 };
 
 export default SignUpPage;
+
