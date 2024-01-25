@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import {BoardCategory, ChatRoomCategory} from "../../utils/enums";
 import Sidebar from "../../components/home/Sidebar";
@@ -9,12 +9,14 @@ import clockImg from "../../components/icons/clock.jpg";
 import likeImg from "../../components/icons/like.jpg";
 import commentImg from "../../components/icons/comment.jpg";
 import pencilImg from "../../components/icons/pencil.jpg";
+import ImageViewer from "../../components/ImageViewer";
 
 const PostViewPage = ({postList}) => {
     const navigate = useNavigate();
 
     const params = useParams();
     const [data, setData] = useState([]);
+    const [writerProfileImg, setWriterProfileImg] = useState("");
     const [writeComment, setWriteComment] = useState(false);
     const [writeRecomment, setWriteRecomment] = useState(-1); //idx에 해당하는 댓글에 작성중
     const [comment, setComment] = useState("");
@@ -83,7 +85,12 @@ const PostViewPage = ({postList}) => {
     }
     const updateData = async () => {
         await axios.get("/api/v1/articles/" + params.id)
-            .then((res) => setData(res.data))
+            .then((res) => {
+                setData(res.data);
+                axios.get("/api/v1/profile/image/"+res.data.userId)
+                    .then((res) => setWriterProfileImg(res.data))
+                    .catch((err)=>console.error(err));
+            })
             .catch((err) => console.error(err));
     };
     useEffect(() => {
@@ -106,10 +113,12 @@ const PostViewPage = ({postList}) => {
                     lineHeight: 'normal', letterSpacing: '-0.01031rem', margin: 0
                 }}>{data.title}</h1>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    {/*프로필 사진*/}
+                    <div style={{width:"1.5rem", height:"1.5rem", borderRadius:"1.5rem", overflow:"hidden"}}>
+                        <ImageViewer val={writerProfileImg}/>
+                    </div>
                     <p style={{
                         fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '400', lineHeight: 'normal',
-                        letterSpacing: '-0.01031rem', margin: 0
+                        letterSpacing: '-0.01031rem', margin: 0, color:"#0788FF"
                     }}>{data.userId}</p>
                 </div>
                 <div style={{
@@ -121,9 +130,12 @@ const PostViewPage = ({postList}) => {
                         <img src={clockImg} alt="clockImg"
                              style={{width: '0.45006rem', height: '0.4375rem', flexShrink: 0}}/>
                         <p style={{margin: '0 0.51rem 0 0'}}>{TimeUtil.getDiffStr(data.writtenAt)}</p>
-                        <img src={likeImg} alt="likeImg"
-                             style={{width: '0.45006rem', height: '0.4375rem', flexShrink: 0, padding: 0}}/>
-                        <p style={{margin: '0 0.51rem 0 0'}}>{data.recommend}</p>
+                        <div style={{display: 'flex', alignItems: 'center'}} onClick={() => handleRecommendArticle()}>
+                            <img src={likeImg} alt="likeImg"
+                                 style={{width: '0.45006rem', height: '0.4375rem', flexShrink: 0, padding: 0}}/>
+                            <p style={{margin: '0 0.51rem 0 0'}}>{data.recommend}</p>
+                        </div>
+
                         <img src={commentImg} alt="commentImg"
                              style={{width: '0.45006rem', height: '0.4375rem', flexShrink: 0}}/>
                         <p style={{margin: '0 0.51rem 0 0'}}>{data.comments ? data.comments.length : 0}</p>
