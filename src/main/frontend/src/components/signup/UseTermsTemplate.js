@@ -37,15 +37,16 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
         }
     }, [userAgree,infoCollect,infoThird,ageOver14]);
     return (
-        <div className="fontForRegister" style={{fontWeight:'350',display:'inline-flex',flexDirection:'column',justifyContent:"flex-start",width:"100%" }} >
-                <p className="fontForRegister">이용약관동의<span style={{color:'#FF2929'}}>*</span></p>
+        <div className="fontForRegister" style={{paddingLeft: "0.5rem", fontWeight:'350',display:'inline-flex',flexDirection:'column',justifyContent:"flex-start",width:"100%" }} >
+                <p className="fontForRegister" >이용약관동의<span style={{color:'#FF2929'}}>*</span></p>
                 <p style={{marginBottom:'2rem'}} >
                 <div style={{display:'flex',alignItems:"end"}} >
                 <input type="checkbox" checked={everyBox} id="checkbox" onChange={handleCheckBox}/>
-                <label for="checkbox" style={{fontWeight:'500'}}><em  style={{height: '1rem'}}></em><span style={{height: '1rem',marginTop:'-50px'}}>전체 동의합니다.</span>
+                <label for="checkbox" style={{display: 'flex', alignItems: 'center', fontWeight:'500'}}>
+                    <em  style={{marginBottom: "0rem", marginTop: "0rem"}}></em>
+                    <span style={{height: '1rem'}}>전체 동의합니다.</span>
                 </label>
                 </div>
-                
                 </p>
                 <div>
                     <p>
@@ -55,13 +56,13 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
                             onChange={() => {
                                 setUserAgree(!userAgree);
                             }} />
-                            <label for="checkbox1" style={{fontWeight:'500'}}><em  style={{height: '1rem'}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
+                            <label for="checkbox1" style={{display: 'flex', alignItems: 'center', fontWeight:'500'}}><em  style={{marginBottom: "-1rem", marginTop: "-4rem"}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
                             <a>이용약관 동의<span style={{color:'#7B7B7B'}}>(필수)</span></a>
                             </span>
                             </label>
                             
                             </div>
-                            <img src={arrowIcon} style={{width:'0.4375rem',height:'0.875rem'}} onClick={()=>setModalIsOpen1(true)} />
+                            <img src={arrowIcon} style={{paddingRight: "1rem", marginBottom: "-1rem", marginTop: "-4rem", width:'0.4375rem',height:'0.875rem'}} onClick={()=>setModalIsOpen1(true)} />
                         </div>
                         <Modal 
                             isOpen={modalIsOpen1}
@@ -271,12 +272,12 @@ ID를 삭제 및 사용 중지 등의 모든 서비스 제한 조치를 회원�
                             onChange={() => {
                                 setInfoCollect(!infoCollect);
                             }} />
-                            <label for="infoCollect" style={{fontWeight:'500'}}><em  style={{height: '1rem'}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
+                            <label for="infoCollect" style={{display: 'flex', alignItems: 'center', fontWeight:'500'}}><em  style={{marginBottom: "-1rem", marginTop: "-4rem"}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
                             <a>개인정보 수집,이용 동의<span style={{color:'#7B7B7B'}}>(필수)</span></a>
                             </span>
                             </label>
                             </div>
-                            <img src={arrowIcon} style={{width:'0.4375rem',height:'0.875rem'}} onClick={()=>setModalIsOpen2(true)} />
+                            <img src={arrowIcon} style={{paddingRight: "1rem", marginBottom: "-1rem", marginTop: "-4rem", width:'0.4375rem',height:'0.875rem'}} onClick={()=>setModalIsOpen2(true)} />
                         </div>
                         <Modal 
                         isOpen={modalIsOpen2}
@@ -315,12 +316,12 @@ ID를 삭제 및 사용 중지 등의 모든 서비스 제한 조치를 회원�
                             onChange={() => {
                                 setInfoThird(!infoThird);
                             }} />
-                            <label for="infoThird" style={{fontWeight:'500'}}><em  style={{height: '1rem'}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
+                            <label for="infoThird" style={{display: 'flex', alignItems: 'center', fontWeight:'500'}}><em  style={{marginBottom: "-1rem", marginTop: "-4rem"}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
                             <a>개인정보 제 3자 제공 동의<span style={{color:'#7B7B7B'}}>(필수)</span></a>
                             </span>
                             </label>
                             </div>
-                            <img src={arrowIcon} style={{width:'0.4375rem',height:'0.875rem'}} onClick={()=>setModalIsOpen3(true)} />
+                            <img src={arrowIcon} style={{paddingRight: "1rem", marginBottom: "-1rem", marginTop: "-4rem", width:'0.4375rem',height:'0.875rem'}} onClick={()=>setModalIsOpen3(true)} />
                         </div>
                         <Modal 
                         isOpen={modalIsOpen3}
@@ -347,10 +348,11 @@ ID를 삭제 및 사용 중지 등의 모든 서비스 제한 조치를 회원�
                         </Modal>
                     </p>
                 </div>
+
                 <div>
                         <p>
                         <input type="checkbox" checked={ageOver14} onChange={() => setAgeOver14(!ageOver14)} id="ageOver14" />
-                        <label for="ageOver14" style={{fontWeight:'500'}}><em  style={{height: '1rem'}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
+                        <label for="ageOver14" style={{display: 'flex', alignItems: 'center', fontWeight:'500'}}><em  style={{marginBottom: "-1rem", marginTop: "-4rem"}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
                             <a>본인은 만 14세 이상입니다.<span style={{color:'#7B7B7B'}}>(필수)</span></a>
                             </span>
                             </label>
