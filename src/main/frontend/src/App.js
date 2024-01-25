@@ -66,6 +66,10 @@ import ReservationListPage from "./pages/Reservation/ReservationListPage";
 import AssuranceReady from "./pages/Reservation/AssuranceReady";
 import AssuranceReadyView from "./pages/Reservation/AssuranceReadyView";
 import AssuranceFinish from "./pages/Reservation/AssuranceFinish";
+import PersonalInfoModifyPage2 from "./pages/modify/PersonalInfoModifyPage2";
+import ChefInfoModifyCompletePage from "./pages/modify/ChefInfoModifyCompletePage";
+import PersonalModifyCompletePage from "./pages/modify/PersonalModifyCompletePage";
+import PlaceInfoModifyCompletePage from "./pages/modify/PlaceInfoModifyCompletePage";
 
 
 function App() {

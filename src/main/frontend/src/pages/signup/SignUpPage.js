@@ -7,7 +7,6 @@ import axios from "axios";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import * as regularExpressions from "../../utils/regularExpressions";
 import SignUpInformationTemplate from "../../components/signup/SignUpInformationTemplate";
-import SignUpInformationTemplate from "../../components/signup/SignUpInformationTemplate";
 import "../../components/Styles.css";
 import Modal from "react-modal";
 import Alert from "../../components/Alert";

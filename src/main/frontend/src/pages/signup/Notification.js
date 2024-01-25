@@ -6,8 +6,6 @@ const Notification = () => {
     const location = useLocation();
     const data = {...location.state};
 
-import { useNavigate } from "react-router-dom";
-
 
 
     const navigate = useNavigate();
