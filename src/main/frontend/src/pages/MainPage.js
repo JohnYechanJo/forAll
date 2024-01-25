@@ -117,8 +117,8 @@ const MainPage = () => {
                     fontWeight: '700', lineHeight: 'normal', letterSpacing: '-0.01031rem',
                     marginLeft: '1.5rem', marginTop: '4.5rem'
                 }}>
-                    <a onClick={() => navigate("/")}>• 자주 묻는 질문</a>
-                    <a onClick={() => navigate("/")}>• 입점 및 제휴 문의</a>
+                    <a onClick={() => navigate("/FAQ")}>• 자주 묻는 질문</a>
+                    <a onClick={() => navigate("/EntryPartnership")}>• 입점 및 제휴 문의</a>
                 </div>
                 <div style={{
                     display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
