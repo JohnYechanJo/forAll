@@ -129,8 +129,8 @@ const SignUpPage = () => {
     };
     const submit = () => {
         if (isAllChecked) {
-            axios.post("/api/v1/members",
-                {
+            navigate('/guestRegistry',{
+                state: {
                     loginId: id,
                     loginPw: pw,
                     name: name,
@@ -138,26 +138,8 @@ const SignUpPage = () => {
                     gender: gender,
                     email: email,
                     phoneNum: phone
-                },
-                {
-                    headers: {
-                        'Content-type': 'application/json',
-                        'Accept': 'application/json'
-                    }
                 }
-
-            ).then((response) => {
-                navigate('/guestRegistry', {
-                    state: {
-                        id: id,
-                        name: name,
-                        email: email,
-                    }
-                });
-
-            }).catch((response) => {
-                navigate('/error')
-            })
+            });
         }
 
     }

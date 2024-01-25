@@ -2,12 +2,13 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import {BoardCategory, ChatRoomCategory} from "../../utils/enums";
-
+import Sidebar from "../../components/home/Sidebar";
 import {TimeUtil} from "../../utils/TimeUtil";
 import ImageSlider from "../../components/ImageSlider";
 import clockImg from "../../components/icons/clock.jpg";
 import likeImg from "../../components/icons/like.jpg";
 import commentImg from "../../components/icons/comment.jpg";
+import pencilImg from "../../components/icons/pencil.jpg";
 
 const PostViewPage = ({postList}) => {
     const navigate = useNavigate();
@@ -95,6 +96,7 @@ const PostViewPage = ({postList}) => {
                 <button className="button" onClick={() => navigate("/", {state: {focus: "space"}})}>대관하기</button>
                 <button className="button">커뮤니티</button>
             </div>
+            <Sidebar />
             <div style={{
                 display: 'flex', width: '22.375rem', flexDirection: 'column', gap: '0.5rem', marginLeft: '1rem',
                 marginTop: '4.3rem'
@@ -147,7 +149,10 @@ const PostViewPage = ({postList}) => {
                 width: '24.375rem', height: '3.125rem', flexShrink: 0, border: '1px solid #C4C4C4',
                 background: '#FFF', display: 'flex', justifyContent: 'center', alignItems: 'center'
             }}>
-                <div onClick={() => setWriteComment(true)}
+                <div onClick={() => {
+                    if(!sessionStorage.getItem("user_id")) return;
+                    setWriteComment(true);
+                }}
                      style={{width: '22.375rem', height: '1.875rem', flexShrink: 0, border: '1px solid #C4C4C4',
                          background: '#FFF', display: 'flex', alignItems: 'center'}}>
                     <p style={{
@@ -155,11 +160,18 @@ const PostViewPage = ({postList}) => {
                          lineHeight: 'normal', letterSpacing: '-0.01031rem', marginLeft: '0.64rem'
                     }}>댓글을 남겨주세요.</p>
                 </div>
-                {/*<button onClick={() => setWriteComment(true)}*/}
-                {/*        disabled={!sessionStorage.getItem("user_id")}*/}
-                {/*        style={{}}>댓글을 남겨주세요*/}
-                {/*</button>*/}
             </div>
+            {writeComment ? (
+                <div style={{width:"24.375rem"}}>
+                    <textarea style={{width:"20.875rem",height:"7.5rem", margin:"1.25rem", marginBottom:"0", padding:"0.5rem", paddingBottom:"0",border: "1px solid #C4C4C4"}} value={comment} onChange={onChangeComment}/>
+                    <div style={{display:"flex", flexDirection:"row-reverse", alignItems:"center",width:"20.875rem",height:"2rem", marginLeft:"1.25rem", padding:"0.5rem",paddingTop:"0", border: "1px solid #C4C4C4"}}>
+                        <div onClick={submitComment} style={{textAlign:"right"}}>
+                            <img src={pencilImg} alt="pencilImg"
+                                 style={{width: '0.8rem', height: '0.8rem', flexShrink: 0}}/>
+                        </div>
+                    </div>
+                </div>
+            ): null}
             <div>
                 {data.comments ? (
                     <div>
@@ -167,18 +179,16 @@ const PostViewPage = ({postList}) => {
                             if (a.writtenAt > b.writtenAt) return -1;
                             else return 1;
                         })).map((comment, idx) => (
-                            <div key={idx} style={{display: 'flex', justifyContent: 'space-between',
-                                alignItems: 'center', border: '1px solid rgba(196, 196, 196, 0.20)',
-                                background: '#FFF', width: '100%', flexShrink: 0}}>>
+                            <div key={idx}>
                                 <div style={{
                                     display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                                    alignItems: 'flex-start', margin: '1.19rem 0 1.19rem 1.5rem'
+                                    alignItems: 'flex-start', margin: '1.19rem 0 1.19rem 0.5rem'
                                 }}>
                                     <p style={{
                                         fontSize: '0.5rem', fontStyle: 'normal', fontWeight: '400',
                                         lineHeight: 'normal', letterSpacing: '-0.01031rem',
                                         margin: 0, color: '#0788FF'
-                                    }}>{comment.userId}</p>
+                                    }}>{comment.userId}{comment.userId === data.userId ? (<span style={{color: "#FF2929"}}> 작성자</span>) : null}</p>
                                     <p style={{
                                         fontSize: '0.5rem', fontStyle: 'normal',
                                         fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
@@ -195,7 +205,7 @@ const PostViewPage = ({postList}) => {
                                                      padding: 0}}/>
                                             <p style={{margin: '0 0.51rem 0 0'}}>{TimeUtil.getDiffStr(comment.writtenAt)}</p>
                                         </div>
-                                        <div style={{display: 'flex', alignItems: 'center'}}>
+                                        <div style={{display: 'flex', alignItems: 'center'}} onClick={() => handleRecommendComment(comment.id)}>
                                             <img src={likeImg} alt="likeImg"
                                                  style={{width: '0.4375rem', height: '0.4375rem', flexShrink: 0,
                                                      padding: 0}}/>
@@ -213,26 +223,55 @@ const PostViewPage = ({postList}) => {
                                         </div>
                                     </div>
                                 </div>
-                                    <p>{TimeUtil.getDiffStr(comment.writtenAt)}</p>
-                                    <p onClick={() => handleRecommendComment(comment.id)}>{comment.recommend}</p>
-                                    <p onClick={() => {
-                                        if (!sessionStorage.getItem("user_id")) return;
-                                        setWriteRecomment(idx);
-                                    }}>대댓글: {comment.recomments ? comment.recomments.length : 0}</p>
-                                    {writeRecomment === idx ? (<div>
-                                        <input value={recomment} onChange={onChangeRecomment}/>
-                                        <button onClick={() => submitRecomment(idx)}>제출</button>
-                                    </div>) : null}
+                                    {writeRecomment === idx ? (
+                                            <div style={{width:"24.375rem"}}>
+                                                <textarea style={{width:"20.875rem",height:"7.5rem", margin:"1.25rem", marginBottom:"0", padding:"0.5rem", paddingBottom:"0",border: "1px solid #C4C4C4"}} value={recomment} onChange={onChangeRecomment}/>
+                                                <div style={{display:"flex", flexDirection:"row-reverse", alignItems:"center",width:"20.875rem",height:"2rem", marginLeft:"1.25rem", padding:"0.5rem",paddingTop:"0", border: "1px solid #C4C4C4"}}>
+                                                    <div onClick={()=>submitRecomment(idx)} style={{textAlign:"right"}}>
+                                                        <img src={pencilImg} alt="pencilImg"
+                                                             style={{width: '0.8rem', height: '0.8rem', flexShrink: 0}}/>
+                                                    </div>
+                                                </div>
+                                            </div>) : null}
                                     {comment.recomments ? (<div>
                                         {comment.recomments.sort(((a, b) => {
                                             if (a.writtenAt > b.writtenAt) return -1;
                                             else return 1;
                                         })).map((recomment, idx) => (
-                                            <div key={idx}>
-                                                <p>{recomment.userId}</p>
-                                                <p>{recomment.text}</p>\
-                                                <p onClick={() => handleRecommendRecomment(recomment.id)}>{recomment.recommend}</p>
-                                                <p>{TimeUtil.getDiffStr(recomment.writtenAt)}</p>
+                                            <div key={idx} style={{background:"rgba(196, 196, 196, 0.30)"}}>
+                                            <div style={{
+                                                display: 'flex', flexDirection: 'column', justifyContent: 'center',
+                                                alignItems: 'flex-start', marginLeft: '2rem', padding:'0.5rem'
+                                            }}>
+                                            <p style={{
+                                                fontSize: '0.5rem', fontStyle: 'normal', fontWeight: '400',
+                                                lineHeight: 'normal', letterSpacing: '-0.01031rem',
+                                                margin: 0, color: '#0788FF'
+                                            }}>{recomment.userId}{recomment.userId === data.userId ? (<span style={{color: "#FF2929"}}> 작성자</span>) : null}</p>
+                                            <p style={{
+                                                fontSize: '0.5rem', fontStyle: 'normal',
+                                                fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
+                                                margin: 0
+                                            }}>{recomment.text}</p>
+                                            <div style={{
+                                                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                                                fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '400',
+                                                lineHeight: 'normal', letterSpacing: '-0.01031rem', marginTop: '0.1rem'
+                                            }}>
+                                                <div style={{display: 'flex', alignItems: 'center', padding: 0}}>
+                                                    <img src={clockImg} alt="clockImg"
+                                                         style={{width: '0.4375rem', height: '0.4375rem', flexShrink: 0,
+                                                             padding: 0}}/>
+                                                    <p style={{margin: '0 0.51rem 0 0'}}>{TimeUtil.getDiffStr(recomment.writtenAt)}</p>
+                                                </div>
+                                                <div style={{display: 'flex', alignItems: 'center'}} onClick={() => handleRecommendRecomment(recomment.id)}>
+                                                    <img src={likeImg} alt="likeImg"
+                                                         style={{width: '0.4375rem', height: '0.4375rem', flexShrink: 0,
+                                                             padding: 0}}/>
+                                                    <p style={{margin: '0 0.51rem 0 0'}}>{recomment.recommend}</p>
+                                                </div>
+                                            </div>
+                                            </div>
                                             </div>
                                         ))}
                                     </div>) : null}

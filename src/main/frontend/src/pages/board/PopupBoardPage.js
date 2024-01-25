@@ -76,7 +76,10 @@ const PopupBoardPage = () => {
                     display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%',
                     height: '3.125rem', flexShrink: 0, border: '1px solid #C4C4C4', background: '#FFF'
                 }}>
-                    <div onClick={() => setNewPost(true)}
+                    <div onClick={() => {
+                        if (!sessionStorage.getItem("user_id")) return;
+                        setNewPost(true);
+                    }}
                          style={{
                              display: 'flex', alignItems: 'center', width: '21.875rem', height: '1.875rem',
                              flexShrink: 0, border: '1px solid #C4C4C4', background: '#FFF'
