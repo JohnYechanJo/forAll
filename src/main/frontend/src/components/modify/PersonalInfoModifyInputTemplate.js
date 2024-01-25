@@ -73,9 +73,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
     setIsCheckedDuplicatedEmail(true);
     setIsPhoneCerified(true);
     return (
-        <div>
-
-
+        <div style={{width:'100%'}} >
             <a className="fontForRegister" >아이디<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
             <div style={{ display: "flex", marginBottom: "2.5rem", justifyContent: "space-between" }} >
                 <input

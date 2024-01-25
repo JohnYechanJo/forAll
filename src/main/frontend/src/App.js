@@ -57,7 +57,7 @@ import EntryPartnership from "./pages/EntryPartnership";
 
 import ProfileModifyPage from "./pages/modify/ProfileModifyPage";
 import ProfileViewPage from "./pages/ProfileViewPage";
-
+import AlreadyChef from './components/AlreadyChef';
 import RentSpacePage2 from "./pages/RentSpace/RentSpacePage2";
 import React from "react";
 import RentSpacePage3 from "./pages/RentSpace/RentSpacePage3";
@@ -146,9 +146,7 @@ function App() {
         <Route path="/chefRegistryComplete" element={<ChefRegistryComplete />} />
             <Route path="/FAQ" element={<FAQ />} />
             <Route path="/EntryPartnership" element={<EntryPartnership />} />
-
-
-
+        <Route path="/alreadyChef" element={<AlreadyChef />} />
         <Route path="/reservationList" element={<ReservationListPage />} />
         <Route path="/assuranceReady" element={<AssuranceReady />} />
             <Route path="/assuranceReadyView" element={<AssuranceReadyView />} />
