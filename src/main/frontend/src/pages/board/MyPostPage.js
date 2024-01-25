@@ -7,11 +7,16 @@ import {TimeUtil} from "../../utils/TimeUtil";
 import {useNavigate} from "react-router-dom";
 import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
 import Modal from "react-modal";
+
 import {ModalStyles} from "../../components/ModalStyles";
 import {SmallModalStyles} from "../../components/SmallModalStyles";
 const MyPostPage = () => {
     const [postList, setPostList] = useState([]);
     const navigate = useNavigate();
+    const [isEraseAll, setIsEraseAll] = useState(false)
+    const [isEraseFew, setIsEraseFew] = useState(false)
+
+
     useEffect(() => {
         axios.get("/api/v1/articles/user/" + sessionStorage.getItem("user_id"))
             .then((res) => setPostList(res.data))
@@ -26,16 +31,141 @@ const MyPostPage = () => {
             <Sidebar/>
             <HomeTemplate />
             <h1>내가 쓴 글</h1>
+            <Modal
+                isOpen={isEraseAll}
+                style={ModalStyles}
+            >
+                <div style={{
+                    justifyContent: "center", alignItems: "center"+"10px",
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
 
-            <p>전체 삭제</p>
-            <p>선택 삭제</p>
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+
+                }}>
+                    <a style={{marginTop:"-30px"}}>전체 삭제 하시겠습니까?</a>
+                </div>
+                <div style={{
+                    display: 'flex',
+                    width: '100%',
+                    margin: '0px',
+                    marginTop: '4rem',
+                    bottom: '0',
+                    position: 'fixed',
+                    fontSize: "0.9375rem",
+                    fontWeight: "400"
+                }}>
+                    <button style={{
+
+                        backgroundColor: "#000",
+                        width: '10.9375rem',
+                        bottom: '0',
+                        height: '3.125rem',
+                        color: 'white',
+                        border: 'none',
+                        lineHeight: '1.875rem',
+                        textAlign: 'center'
+                    }}
+                            onClick={() => setIsEraseAll(false)}
+                    >
+                        취소
+                    </button>
+                    <button style={{
+
+                        backgroundColor: "#FF4F4F",
+                        width: '10.9375rem',
+                        bottom: '0',
+                        height: '3.125rem',
+                        color: 'white',
+                        border: 'none',
+                        lineHeight: '1.875rem',
+                        textAlign: 'center'
+                    }}
+                            onClick={() => setIsEraseAll(false)}
+                    >
+                        확인
+                    </button>
+                </div>
+            </Modal>
+
+            <p onClick={() => setIsEraseAll(true)}>전체 삭제</p>
+            <Modal
+                isOpen={isEraseFew}
+                style={ModalStyles}
+            >
+                <div style={{
+                    justifyContent: "center", alignItems: "center"+"10px",
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+
+                }}>
+                    <a style={{marginTop:"-30px"}}>선택 삭제 하시겠습니까?</a>
+                </div>
+                <div style={{
+                    display: 'flex',
+                    width: '100%',
+                    margin: '0px',
+                    marginTop: '4rem',
+                    bottom: '0',
+                    position: 'fixed',
+                    fontSize: "0.9375rem",
+                    fontWeight: "400"
+                }}>
+                    <button style={{
+
+                        backgroundColor: "#000",
+                        width: '10.9375rem',
+                        bottom: '0',
+                        height: '3.125rem',
+                        color: 'white',
+                        border: 'none',
+                        lineHeight: '1.875rem',
+                        textAlign: 'center'
+                    }}
+                            onClick={() => setIsEraseFew(false)}
+                    >
+                        취소
+                    </button>
+                    <button style={{
+
+                        backgroundColor: "#FF4F4F",
+                        width: '10.9375rem',
+                        bottom: '0',
+                        height: '3.125rem',
+                        color: 'white',
+                        border: 'none',
+                        lineHeight: '1.875rem',
+                        textAlign: 'center'
+                    }}
+                            onClick={() => setIsEraseFew(false)}
+                    >
+                        확인
+                    </button>
+                </div>
+            </Modal>
+
+            <p onClick={() => setIsEraseFew(true)}>선택 삭제</p>
 
             <div>
                 {postList ? (
                     <div>
-                    {postList.map((post, idx) => (
+                        {postList.map((post, idx) => (
                             <div>
-                                <div key={idx} onClick={() => navigate("/post/"+post.id)}>
+                                <div key={idx} onClick={() => navigate("/post/" + post.id)}>
                                     <p>{post.title}</p>
                                     <p>{post.content}</p>
                                     <p>{TimeUtil.getDiffStr(post.writtenAt)}</p>
@@ -45,8 +175,9 @@ const MyPostPage = () => {
                                 <p onClick={()=>navigate("/post/edit",{state:post})}>수정하기</p>
                             </div>
 
-                            )
-                        )}
+                        ),
+                        )
+                        }
                     </div>
                 ) : null}
             </div>
