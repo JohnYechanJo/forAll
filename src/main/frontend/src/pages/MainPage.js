@@ -53,7 +53,7 @@ const MainPage = () => {
     return (
         <div ref={mainPageRef}>
             <div className="header" style={{ backgroundColor: "white" }}>
-                <div style={{ position: 'absolute', left: '1rem', top: '1rem', width: '5rem', height: '1.25rem', backgroundColor: 'white' }}>
+                <div style={{ position: 'absolute', left: '1rem', top: '0.8rem', width: '5rem', height: '1.25rem', backgroundColor: 'white' }}>
                     <a style={{ fontFamily: 'Mukta', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '-0.01031rem', border: '2px solid black' }}
                         onClick={() => navigate('/')}
                     >For ALL.</a>
