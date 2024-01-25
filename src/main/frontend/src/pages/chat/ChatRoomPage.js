@@ -7,6 +7,8 @@ import SockJs from "sockjs-client";
 import {ChatRoomCategory} from "../../utils/enums";
 import ImageUploader from "../../utils/imageUploader";
 import ImageViewer from "../../components/ImageViewer";
+import Sidebar from "../../components/home/Sidebar";
+import "../../style/ChatRoom.css"
 
 const ChatRoomPage = () => {
     const location = useLocation();
@@ -87,18 +89,32 @@ const ChatRoomPage = () => {
     };
     return(
         <div>
-            <h1>{data.category === ChatRoomCategory.Reservation ? "채팅창 > 예약사항" : "채팅창 > 게시판"}</h1>
-            <div>
-                <button onClick={()=>navigate(-1)}>{"<"}</button>
-                {/*Todo 찾기, 파일함 기능구현*/}
-                {partnerData ? (<div onClick={()=>navigate("/profile/"+partner)}>
-                    <ImageViewer val={partnerData.profilePhoto}/>
-                </div>) : null}
-                <p>{partner}</p>
-                <p>찾기</p>
-                <p>파일함</p>
+            <div style={{position:"fixed", width:"100%"}}>
+                <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
+                    <button className="button">대관하기</button>
+                    <button className="button">커뮤니티</button>
+                </div>
+                <Sidebar/>
+                <div style={{paddingTop:"3.125rem"}}></div>
+                <div className={"chat_category"}>{data.category === ChatRoomCategory.Reservation ? "채팅창 > 예약사항" : "채팅창 > 게시판"}</div>
+                <div style={{height:"3.125rem", display:"flex",background:"white",justifyContent:"space-between"}}>
+                    <div style={{textAlign:"left", display:"flex"}}>
+                        <div onClick={()=>navigate(-1)}>{"<"}</div>
+                        {partnerData ? (<div className={"chat_profile_image"} onClick={()=>navigate("/profile/"+partner)}>
+                            <ImageViewer val={partnerData.profilePhoto}/>
+                        </div>) : null}
+                        <p>{partner}</p>
+                    </div>
+                    <div style={{textAlign:"right", display:"flex"}}>
+                        {/*Todo 찾기, 파일함 기능구현*/}
+                        <p>찾기</p>
+                        <p>파일함</p>
+                    </div>
+                </div>
             </div>
-            <div>
+            <div style={{paddingTop:"11rem"}}></div>
+            <div className={"chat_container"}>
+                <div style={{paddingTop:"11rem"}}></div>
                 {messageSet ?messageSet.map((message, idx) => (
                     <div key={idx}>
                         {message.senderId === partner ? (
@@ -118,23 +134,30 @@ const ChatRoomPage = () => {
                         )}
                     </div>
                 )) :null}
-            </div>
-            <div>
-                <input value={inputMessage} onChange={onChangeMessage}/>
-                <label>
-                    <input type={"file"}
-                           accept="image/*"
-                           onChange={(e) => {
-                               setInputImage(e.target.files[0]);
-                               setInputIsImage(true);
-                           }}
-                           style={{display: "none"}}
-                    />
-                    <div>첨부파일</div>
-                </label>
-                <button onClick={sendMessage}>전송</button>
+                <div style={{paddingBottom:"5rem"}}></div>
             </div>
 
+            <div className={"chat_submit_area"}>
+                <textarea className={"chat_input"} value={inputMessage} onChange={onChangeMessage}/>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                    <label>
+                        <input type={"file"}
+                               accept="image/*"
+                               onChange={(e) => {
+                                   setInputImage(e.target.files[0]);
+                                   setInputIsImage(true);
+                               }}
+                               style={{display: "none"}}
+                        />
+                        <div>첨부파일</div>
+                    </label>
+                    <div style={{textAlign:"right"}}>
+                        <div className={"chat_submit_button"} onClick={sendMessage}>전송</div>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
     )
 };
