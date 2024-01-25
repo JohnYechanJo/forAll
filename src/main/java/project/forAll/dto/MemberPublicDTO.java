@@ -2,6 +2,7 @@ package project.forAll.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import project.forAll.domain.member.ChefPending;
 import project.forAll.domain.member.Gender;
 
 @Getter @Setter
@@ -22,4 +23,6 @@ public class MemberPublicDTO {
     private String birthday;
     // 성별
     private Gender gender;
+    // 셰프 펜딩 여부
+    private String chefPending;
 }

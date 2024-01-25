@@ -56,7 +56,8 @@ const PopupBoardPage = () => {
             <Sidebar/>
             <HomeTemplate />
             <div>
-                <h1>팝업</h1>
+                <h1 style={{fontSize: '0.875rem', fontStyle: 'normal', fontWeight: '700', lineHeight: 'normal',
+                    letterSpacing: '-0.01031rem'}}>• 팝업</h1>
                 <div>
                     <button onClick={()=>setNewPost(true)} disabled={!sessionStorage.getItem("user_id")}>새 글을 작성해주세요!</button>
                     {newPost ? (

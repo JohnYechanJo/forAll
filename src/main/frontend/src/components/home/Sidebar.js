@@ -9,7 +9,9 @@ import logout from "../../components/icons/logout.png";
 import xmark from "../../components/icons/xmark.png";
 import alarm from "../../components/icons/alarm.png";
 import ImageViewer from "../ImageViewer";
+import {ChefPending} from "../../utils/enums";
 const Sidebar = ({ width = 18.75, children }) => {
+    const [userData, setUserData] = useState({});
     const [isOpen, setOpen] = useState(false);
     const [xPosition, setX] = useState(-width);
     const side = useRef();
@@ -35,16 +37,28 @@ const Sidebar = ({ width = 18.75, children }) => {
             console.error(res);
         });
     };
+    const handleChefRegistry = () => {
+        if (userData.chefPending === ChefPending.NOTCREATED) navigate("/chefRegistry");
+    }
+    const handleChefModify = () => {
+        if ([ChefPending.PENDING, ChefPending.APPROVE].includes(userData.chefPending)) navigate("/chefInfoModify");
+    }
     useEffect(() => {
         const userId = sessionStorage.getItem("user_id");
-        axios.get("/api/v1/profile/"+userId)
-            .then((res) => {
-                console.log(res.data);
-                setProfileImage(res.data.profilePhoto);
-            })
-            .catch((err) => console.error(err));
+        if (userId){
+            axios.get("/api/v1/members/public/"+userId)
+                .then((res)=> {
+                    console.log(res.data);
+                    setUserData(res.data);
+                })
+                .catch((err) => console.error(err));
+            axios.get("/api/v1/profile/"+userId)
+                .then((res) => {
+                    setProfileImage(res.data.profilePhoto);
+                })
+                .catch((err) => console.error(err));
+        }
     }, []);
-    // 대표이미지 불러와서 띄우기
 
     return (
         <div className={styles.container}>
@@ -92,16 +106,16 @@ const Sidebar = ({ width = 18.75, children }) => {
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
-                        <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>예약 정보</button>
+                        <Link to={"/reservationList"}>
+                            <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>예약 정보</button>
+                        </Link>
                         <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>찜한내역</button>
                     </div>
                     <div style={{height:"5.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
                     boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"rem"
                 }} >
-                        <Link to="/chefRegistry">
-                            <button className="button"  style={{textAlign:"left",marginLeft:"2rem"}}>셰프 등록하기</button>
-                        </Link>
+                        <button className="button" onClick={handleChefRegistry} style={{textAlign:"left",marginLeft:"2rem"}}>셰프 등록하기</button>
                         <Link to="/hostRegistry">
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>공간 등록하기</button>
                         </Link>
@@ -125,9 +139,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                         <Link to="/personalInfoModify">
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>개인 정보수정</button>
                         </Link>
-                        <Link to="/chefInfoModify">
-                            <button className="button"style={{textAlign:"left",marginLeft:"2rem"}} >셰프 정보수정</button>
-                        </Link>
+                        <button className="button" onClick={handleChefModify} style={{textAlign:"left",marginLeft:"2rem"}} >셰프 정보수정</button>
                         <Link to="/placeInfoModifyStart">
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>공간 정보수정</button>
                         </Link>
