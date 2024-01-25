@@ -8,9 +8,11 @@ export const ModalStyles = {
         transform: 'translate(-50%, -50%)',
         backgroundColor: 'white', 
         color: 'black', 
-        width: '21.625rem',
+        width: '21.875rem',
         height: '12.5rem',
+        border: '1px solid'+ '#C4C4C4',
 
+        background: '#FFF',
 
         textAlign: 'center',
 
