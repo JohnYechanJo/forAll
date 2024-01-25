@@ -33,7 +33,7 @@ public class APIArticleController extends APIController {
     public ResponseEntity getArticle(@PathVariable("id") final Long id, HttpServletRequest request){
         try{
             final Article article = (Article) articleService.findById(id);
-
+            if (article.isDeleted()) throw new Exception("deleted article");
             String loginId = (String) sessionManager.getSession(request);
             final ArticleForm form = articleService.of(article, loginId);
             if (loginId != null) {
@@ -118,6 +118,25 @@ public class APIArticleController extends APIController {
         }catch(final Exception e){
             return new ResponseEntity(errorResponse("Could not recommend article : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
+    }
 
+    @GetMapping("/articles/delete/{id}")
+    public ResponseEntity deleteArticle(@PathVariable Long id, HttpServletRequest request ){
+        try{
+            final Article article = (Article) articleService.findById(id);
+            String loginId = (String) sessionManager.getSession(request);
+            if (!article.getWrittenBy().getLoginId().equals(loginId)) throw new Exception("access deny");
+            articleService.deleteArticle(article);
+
+            return new ResponseEntity(Long.toString(article.getId()), HttpStatus.OK);
+        }catch(final Exception e){
+            return new ResponseEntity(errorResponse("Could not delete article : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("/articles/deleteAll")
+    public void deleteAllArticle(HttpServletRequest request ){
+        String loginId = (String) sessionManager.getSession(request);
+        final List<Article> articles = articleService.findByUserId(loginId);
+        articles.forEach(article -> articleService.deleteArticle(article));
     }
 }

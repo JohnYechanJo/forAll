@@ -89,16 +89,6 @@ public class ArticleService extends Service {
         return form;
     }
 
-
-    /**
-     * Article 삭제
-     * @param id
-     */
-    @Transactional
-    public void deleteArticle(Long id) {
-        articleRepository.deleteById(id);
-    }
-
     /**
      * 유저의 로그인 아이디가 주어졌을 때, 해당 유저의 모든 글을 불러옴
      * @param userId 로그인 아이디
@@ -106,10 +96,16 @@ public class ArticleService extends Service {
     @Transactional
     public List<Article> findByUserId(String userId){
         final Member member = memberService.findByLoginId(userId);
-        return articleRepository.findByWrittenBy(member);
+        return articleRepository.findByWrittenByAndDeleted(member, false);
     }
     @Transactional
     public List<Article> findByCategory(String category){
-        return articleRepository.findByCategory(Category.parse(category));
+        return articleRepository.findByCategoryAndDeleted(Category.parse(category), false);
+    }
+
+    @Transactional
+    public void deleteArticle(Article article){
+        article.setDeleted(true);
+        save(article);
     }
 }
