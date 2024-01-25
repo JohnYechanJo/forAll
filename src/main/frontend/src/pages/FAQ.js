@@ -24,7 +24,7 @@ const FAQ = () => {
             </div>
             <Sidebar/>
             <HomeTemplate />
-            <div style={{paddingLeft: "1rem", paddingRight: "1rem", width: "22.375rem", height: "62.5rem", flexShrink: "0"}}>
+            <div style={{paddingLeft: "1rem", paddingRight: "1rem", width: "21rem", height: "62.5rem", flexShrink: "0"}}>
             <div style={{color: "#000", fontStyle: "normal", fontFamily: "Noto Sans KR", lineHeight: "normal", letterSpacing: "-0.0255rem"}}>
                 <h1 style={{fontWeight: "700", fontSize: "0.9375rem"}}> • 자주 묻는 질문</h1>
 
@@ -85,9 +85,7 @@ const FAQ = () => {
                         <a>•</a>&ensp;<a style={{fontWeight: "700", textDecorationLine: "underline"}}> Q8. 팝업을 진행하고 싶은데 크루가 없어요. For ALL에서 크루 모집이 가능하나요?</a>
                         <br/>
                         <a>•</a>&ensp;<a style={{fontWeight: "400", textDecorationLine: "none"}}> A. 커뮤니티 게시판을 이용하여 팝업 크루 모집이 가능합니다. 게시물을 업로드 하여 개인 채팅을 통해 원하는 팝업 크루를 모집하세요.</a></p>
-
                 </div>
-                <ArticleListTemplate postList={postList}/>
             </div>
         </div>
         </div>
