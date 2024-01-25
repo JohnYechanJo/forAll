@@ -11,12 +11,12 @@ const PlaceInfoModify2 = () => {
     const [img2, setImg2] = useState("");
     const [img3, setImg3] = useState("");
     const [imgAdditional, setImgAdditional] = useState([]);
-    
+
     const [kitchen1, setKitchen1] = useState("");
     const [kitchen2, setKitchen2] = useState("");
     const [kitchen3, setKitchen3] = useState("");
     const [kitchenAdditional, setKitchenAdditional] = useState([]);
-    
+
     const [menu1, setMenu1] = useState("");
     const [menuAdditional, setMenuAdditional] = useState([]);
 
@@ -87,12 +87,12 @@ const PlaceInfoModify2 = () => {
     };
     return (
         <div className="margin"
-            style={{
-                display: "flex",
-                justifyContent: "space-around",
-                flexDirection: "column",
-                gap: "1.5rem"
-            }}>
+             style={{
+                 display: "flex",
+                 justifyContent: "space-around",
+                 flexDirection: "column",
+                 gap: "1.5rem"
+             }}>
             <div >
                 <header style={{ textAlign: "center" }}><h3>1. 공간 정보</h3></header>
                 <a className="fontForRegister" >홀 사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
@@ -163,7 +163,7 @@ const PlaceInfoModify2 = () => {
             <div style={{ display: "flex" }}>
                 <button onClick={() => navigate(-1, data)} style={{ backgroundColor: "red" }} className="next_button" >이전</button>
                 <button style={{ backgroundColor: "#525252" }} className="next_button"
-                    onClick={handleButton}
+                        onClick={handleButton}
                 >다음</button>
             </div>
             <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>

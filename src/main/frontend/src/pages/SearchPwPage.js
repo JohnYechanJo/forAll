@@ -23,15 +23,21 @@ const SearchPwPage = () => {
     const sendCerifiedNum = () => {
         const phoneRule = regularExpressions.phoneNum;
         if (!phoneRule.test(phone)){
+
             openAlert("전화번호 형식을 확인해주세요.");
+
+
         }
         else{
             axios.post("/api/v1/send-one/"+phone)
                 .then((response) => {
+
                     openAlert("인증번호를 발송했습니다.");
                     setIsSendCerifiedNum(true);
                 }).catch((response) => {
                 openAlert("인증번호를 발송하지 못했습니다.");
+
+
             });
         }
     };
@@ -48,6 +54,7 @@ const SearchPwPage = () => {
 
     return (
         <div>
+
             <SearchPwTemplate
                 pw={pw}
                 setId={setId}

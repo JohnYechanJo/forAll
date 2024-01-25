@@ -49,8 +49,8 @@ const PersonalModify = () => {
                 .then((response) => {
                     openAlert("인증번호를 발송했습니다");
                 }).catch((response) => {
-                    openAlert("인증번호를 발송하지 못했습니다");
-                });
+                openAlert("인증번호를 발송하지 못했습니다");
+            });
         }
     };
     const checkCerifiedNum = () => {
@@ -58,8 +58,8 @@ const PersonalModify = () => {
             .then((response) => {
                 setIsPhoneCerified(true);
             }).catch((response) => {
-                setIsPhoneCerified(false);
-            });
+            setIsPhoneCerified(false);
+        });
     };
     useEffect(() => {
         const id = sessionStorage.getItem("user_id");
@@ -72,8 +72,8 @@ const PersonalModify = () => {
                 setGender(res.data.gender);
                 console.log(res.data);
             }).catch((res) => {
-                openAlert("회원 정보를 불러오는데 실패했습니다");
-            })
+            openAlert("회원 정보를 불러오는데 실패했습니다");
+        })
     }, []);
 
     const handleButton = () => {
@@ -170,11 +170,11 @@ const PersonalModify = () => {
             </div>
             <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem' }}>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#FF4F4F", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                    onClick={() => navigate('/')}
+                        onClick={() => navigate('/')}
                 >
                     이전</button>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#525252", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                    onClick={() => handleButton()}
+                        onClick={() => handleButton()}
                 >다음</button>
             </div>
 

@@ -26,4 +26,5 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
             @Param("loginId1") String loginId1,
             @Param("loginId2") String loginId2,
             @Param("category") ChatRoomCategory category);
+
 }

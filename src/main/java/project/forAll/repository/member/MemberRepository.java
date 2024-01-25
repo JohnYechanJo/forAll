@@ -2,7 +2,9 @@ package project.forAll.repository.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 import project.forAll.domain.member.ChefPending;
+
 import project.forAll.domain.member.Member;
 
 import java.util.List;
@@ -15,5 +17,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findByLoginIdAndPhoneNum(String loginId, String phoneNum);
     List<Member> findByNameAndPhoneNum(String name, String phoneNum);
     List<Member> findByLoginIdAndLoginPw(String loginId, String loginPw);
+
     List<Member> findByChefPending(ChefPending chefPending);
+
 }

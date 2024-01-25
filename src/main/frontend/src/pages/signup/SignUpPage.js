@@ -6,6 +6,7 @@ import {Gender} from "../../utils/enums";
 import axios from "axios";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import * as regularExpressions from "../../utils/regularExpressions";
+import SignUpInformationTemplate from "../../components/signup/SignUpInformationTemplate";
 import "../../components/Styles.css";
 import Modal from "react-modal";
 import Alert from "../../components/Alert";
@@ -23,6 +24,7 @@ const SignUpPage = () => {
     const [month, setMonth] = useState("");
     const [day, setDay] = useState("");
     const [gender, setGender] = useState(Gender.NotSpecified);
+
     const [isCheckDuplicatedId, setIsCheckDuplicatedId] = useState();
     const [isCheckDuplicatedEmail, setIsCheckDuplicatedEmail] = useState();
     const [isCheckPw, setIsCheckPw] = useState();
@@ -126,8 +128,9 @@ const SignUpPage = () => {
         }
     };
     const submit = () => {
-            navigate('/guestRegistry',{
-                state: {
+        if (isAllChecked){
+            axios.post("/api/v1/members",
+                {
                     loginId: id,
                     loginPw: pw,
                     name: name,
@@ -135,8 +138,27 @@ const SignUpPage = () => {
                     gender: gender,
                     email: email,
                     phoneNum: phone
+                },
+                {
+                    headers:{
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    }
                 }
-            });
+
+            ).then((response) => {
+                navigate('/guestRegistry',{
+                    state: {
+                        id: id,
+                        name: name,
+                        email: email,
+                    }
+                });
+
+            }).catch((response) => {
+                navigate('/error')
+            })
+        }
 
     }
     return (
@@ -184,6 +206,13 @@ const SignUpPage = () => {
             <UseTermsTemplate
                 setIsUseTermsChecked={setIsUseTermsChecked}
             />
+
+            
+            {isAllChecked ? <SignUpInformationTemplate
+                setIsAllChecked={setIsAllChecked}
+                submit={submit}
+            /> : null}
+
             <Alert isOpen={isModalOpen} setIsOpen={setIsModalOpen} content={alertContent} />
 
         </div>

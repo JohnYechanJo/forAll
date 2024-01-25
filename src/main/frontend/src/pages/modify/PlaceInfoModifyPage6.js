@@ -290,6 +290,7 @@ const PlaceInfoModifyPage6 = () => {
                     <label for='agree' style={{ display: 'block', marginBottom: '1rem', marginTop: '1rem' }}>
                         <em></em><span className="fontForRegister" >동의합니다</span>
                     </label>
+
             <div style={{ display: "flex" }}>
                 <button onClick={()=>navigate(-1,data)} style={{backgroundColor: "red"}} className="next_button" >이전</button>
                 <button className="next_button" style={{ backgroundColor: "grey" }}
@@ -311,7 +312,9 @@ const PlaceInfoModifyPage6 = () => {
                 <p style={{
                     color: "#000", fontFamily: "Noto Sans KR", fontSize: "0.9375rem",
                     fontStyle: "normal", fontWeight: "400", lineHeight: "normal"
+
                 }}>공간정보가 수정되었습니다!</p>
+
                 <hr/>
                 <button onClick={() => navigate("/")}>확인</button>
             </Modal>

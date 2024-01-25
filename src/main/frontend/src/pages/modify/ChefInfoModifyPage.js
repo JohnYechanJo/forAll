@@ -44,7 +44,7 @@ const ChefInfoModifyPage = () => {
             navigate("/");
         }).catch((err) => console.error(err));
     };
-    useEffect(() => { 
+    useEffect(() => {
         const userId = sessionStorage.getItem("user_id");
         axios.get("/api/v1/chefProfile/user/" + userId)
             .then((res) => {
@@ -77,9 +77,9 @@ const ChefInfoModifyPage = () => {
             <input type="text" placeholder="안심하세요! 언제든지 프로필을 수정할 수 있어요."
                    style={{width: "94vw", height: "3vh"}}
                    onKeyDown={(e) => {activeEnter(e)}}
-                    onChange={(e)=>{
-                    setInputText(e.target.value);
-            }}/>
+                   onChange={(e)=>{
+                       setInputText(e.target.value);
+                   }}/>
             {career.map((item, index) => (
                 <div style={{ position: 'relative', display: 'inline-block' }}>
                     <div key={index}
@@ -124,8 +124,8 @@ const ChefInfoModifyPage = () => {
             </div>
             <div style={{ display: "flex", flexDirection: "column", padding: "1rem", alignItems: "flex-start", gap: "1.5rem" }} className="fontForRegister">
                 <div style={{width:"100%"}} >
-                <a className="fontForRegister" >계좌 정보를 입력해 주세요.<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                <hr style={{ height: "2px", backgroundColor: "black",width:"100%" }} />
+                    <a className="fontForRegister" >계좌 정보를 입력해 주세요.<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
+                    <hr style={{ height: "2px", backgroundColor: "black",width:"100%" }} />
                 </div>
                 <a>• 법인 사업자는 법인 통장계좌를, 개인 사업자는 사업자 명의의 통장 계좌를 입력해주세요. 포 올을 통해 결제된 금액이 해당 계좌로 정산됩니다.</a>
                 <div style={{ display: "flex" }} >
@@ -136,32 +136,32 @@ const ChefInfoModifyPage = () => {
                     <div style={{ margin: "0.62rem" }}>
                         <p>계좌번호*</p>
                         <input onChange={onChangeAccount} placeholder={"454102-01-376503"} value={account}
-                            style={{ width: "9.375rem", height: "1.875rem", flexShrink: "0" }}
+                               style={{ width: "9.375rem", height: "1.875rem", flexShrink: "0" }}
                         />
                     </div>
                     <div style={{ margin: "0.62rem" }}>
                         <p>예금주*</p>
                         <input onChange={onChangeAccountHolder} value={accountHolder} placeholder={"홍길동"}
-                            style={{ width: "4.375rem", height: "1.875rem", flexShrink: "0" }}
+                               style={{ width: "4.375rem", height: "1.875rem", flexShrink: "0" }}
                         />
                     </div>
                 </div>
                 <div style={{gap:"0px"}}>
                     <p>• 정확한 정보를 입력했는지 다시 한 번 확인해주세요.</p>
                 </div>
-            <div style={{display: "flex"}}>
-                <Link to="/">
-                    <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
-                </Link>
-                <button style={{backgroundColor: "grey"}} className="next_button"
+                <div style={{display: "flex"}}>
+                    <Link to="/">
+                        <button style={{backgroundColor: "red"}} className="next_button" >이전</button>
+                    </Link>
+                    <button style={{backgroundColor: "grey"}} className="next_button"
                             onClick={handleButton}
-                >다음</button>
-                <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                    <p style={{fontSize: "16px"}}>필수 입력사항이 모두 기입되지 않았습니다.</p>
-                    <button onClick={() => setIsModalOpen(false)}>뒤로</button>
-                </Modal>
+                    >다음</button>
+                    <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
+                        <p style={{fontSize: "16px"}}>필수 입력사항이 모두 기입되지 않았습니다.</p>
+                        <button onClick={() => setIsModalOpen(false)}>뒤로</button>
+                    </Modal>
 
-            </div>
+                </div>
             </div>
         </div>
     );

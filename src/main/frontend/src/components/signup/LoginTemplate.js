@@ -39,7 +39,7 @@ const LoginTemplate = () => {
                         'Accept': 'application/json'
                     }
                 }
-                ).then((res) => {
+            ).then((res) => {
                 sessionStorage.setItem("user_id", id);
                 sessionStorage.setItem("name", res.data.name);
                 sessionStorage.setItem("email", res.data.email);
@@ -68,40 +68,40 @@ const LoginTemplate = () => {
             </div>
             <div>
                 <div style={{display:'flex',flexDirection:'column'}}>
-                <button onClick={() => logIn()} style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',backgroundColor:'#616161',marginBottom:'0.5rem'}} >로그인</button>
-                <Link to="/signUp">
-                    <button style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',border:'1px solid #000',backgroundColor:'white'}}>회원가입</button>
-                </Link>
+                    <button onClick={() => logIn()} style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',backgroundColor:'#616161',marginBottom:'0.5rem'}} >로그인</button>
+                    <Link to="/signUp">
+                        <button style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',border:'1px solid #000',backgroundColor:'white'}}>회원가입</button>
+                    </Link>
                 </div>
                 <div  style={{
-                color: "#B0B0B0",
-                textAlign: "center",
-                fontFeatureSettings: "'case' on", 
-                fontSize: "0.9375rem",
-                fontWeight:"500",
-                lineHeight:"1.375rem",
-                textDecorationLine:"underline",
-            }}>
-                <Link to="/searchId"><span style={{
-                color: "#B0B0B0",
-                textAlign: "center",
-                fontFeatureSettings: "'case' on", 
-                fontSize: "0.9375rem",
-                fontWeight:"500",
-                lineHeight:"1.375rem",
-                textDecorationLine:"underline",
-            }}>아이디 찾기</span></Link>
-                <span style={{marginLeft:"0.69rem",marginRight:"0.69rem"}} >|</span>
-                <Link to="/searchPw"><span style={{
-                color: "#B0B0B0",
-                textAlign: "center",
-                fontFeatureSettings: "'case' on", 
-                fontSize: "0.9375rem",
-                fontWeight:"500",
-                lineHeight:"1.375rem",
-                textDecorationLine:"underline",
-            }}>비밀번호 찾기</span></Link>
-            </div>
+                    color: "#B0B0B0",
+                    textAlign: "center",
+                    fontFeatureSettings: "'case' on",
+                    fontSize: "0.9375rem",
+                    fontWeight:"500",
+                    lineHeight:"1.375rem",
+                    textDecorationLine:"underline",
+                }}>
+                    <Link to="/searchId"><span style={{
+                        color: "#B0B0B0",
+                        textAlign: "center",
+                        fontFeatureSettings: "'case' on",
+                        fontSize: "0.9375rem",
+                        fontWeight:"500",
+                        lineHeight:"1.375rem",
+                        textDecorationLine:"underline",
+                    }}>아이디 찾기</span></Link>
+                    <span style={{marginLeft:"0.69rem",marginRight:"0.69rem"}} >|</span>
+                    <Link to="/searchPw"><span style={{
+                        color: "#B0B0B0",
+                        textAlign: "center",
+                        fontFeatureSettings: "'case' on",
+                        fontSize: "0.9375rem",
+                        fontWeight:"500",
+                        lineHeight:"1.375rem",
+                        textDecorationLine:"underline",
+                    }}>비밀번호 찾기</span></Link>
+                </div>
             </div>
             <Modal isOpen={isOpen} style={ModalStyles}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
@@ -110,7 +110,7 @@ const LoginTemplate = () => {
                         fill="black"/>
                 </svg>
                 <p style={{color: "#000", fontFamily:"Noto Sans KR", fontSize:"0.9375rem",
-                fontStyle: "normal", fontWeight: "400", lineHeight: "normal"}}>아이디, 비밀번호를 확인해 주세요!</p>
+                    fontStyle: "normal", fontWeight: "400", lineHeight: "normal"}}>아이디, 비밀번호를 확인해 주세요!</p>
                 <hr/>
                 <button onClick={()=>setIsOpen(false)} style={{width:'100%',height:'3.125rem',backgroundColor:'white',border:'none'}} >확인</button>
             </Modal>

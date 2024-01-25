@@ -21,7 +21,8 @@ const EntryPartnership = () => {
             </div>
             <Sidebar/>
             <HomeTemplate />
-            <div style={{color: "#000", fontStyle: "normal",lineHeight: "normal", fontFamily: "Noto Sans KR", letterSpacing: "-0.0255rem"}}>
+            <div style={{paddingLeft: "1rem", paddingRight: "1rem", width: "22.375rem", height: "62.5rem", flexShrink: "0"}}>
+                <div style={{color: "#000", fontStyle: "normal",lineHeight: "normal", fontFamily: "Noto Sans KR", letterSpacing: "-0.0255rem"}}>
                 <h1 style={{fontWeight: "700", fontSize: "0.9375rem"}}>• 입점 및 제휴 문의</h1>
                 <div>
                     <p style={{fontWeight: "400", fontSize: "0.625rem"}}>• 사업자등록증/영업신고증을 보유한 오너라면 For ALL 공간 등록이 가능합니다.</p>
@@ -42,6 +43,7 @@ const EntryPartnership = () => {
                     <p style={{fontSize: "0.4375rem"}}>본인 확인 및 예약 사항 전달, 파트너 상담 목적으로 이름과 연락처를 수집 · 이용합니다. 톡을 보낸 시점으로부터 최대 1년 보관 후 지체 없이 파기합니다.</p>
                 </div>
             </div>
+        </div>
         </div>
     )
 };

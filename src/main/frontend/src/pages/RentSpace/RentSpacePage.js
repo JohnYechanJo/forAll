@@ -2,7 +2,11 @@ import {useState, useCallback, useEffect} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
 import axios from "axios";
 import ImageSlider from "../../components/ImageSlider";
+
+
 import {ChatRoomCategory, KitchenFeat} from "../../utils/enums";
+
+
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import {AddressUtil} from "../../utils/AddressUtil";
 const RentSpacePage = () => {
@@ -16,7 +20,10 @@ const RentSpacePage = () => {
         axios.get("/api/v1/space/"+params.id)
             .then((res) => {
                 setData(res.data);
+
+
                 // console.log(res.data);
+
             })
             .catch((err) => console.error(err));
     }, []);
@@ -24,6 +31,8 @@ const RentSpacePage = () => {
         setImages1([data.mainImage, ...data.hallImage]);
         setEquipments(data.equip ? data.equip.split(",") : []);
     }, [data]);
+
+
 
     const submit = () => {
         // Todo 셰프 등록이 되었는지 확인
@@ -39,6 +48,8 @@ const RentSpacePage = () => {
                 capacity: data.capacity,
             }});
     }
+
+
     return(
         <div>
             <div>
@@ -49,6 +60,8 @@ const RentSpacePage = () => {
                 <p>{data.priceSet}원 | {data.ableDate}</p>
                 {/*Todo : 관리자 채팅 연결*/}
                 <p>*영업일 대관 시 800,000원 | 별도 문의 바람</p>
+
+
                 <p onClick={()=>navigate("/profile/"+data.userId)}>프로필 보기</p>
                 <p onClick={()=> {
                     if (!sessionStorage.getItem("user_id")) return;
@@ -59,6 +72,7 @@ const RentSpacePage = () => {
                         }
                     })
                 }}>채팅 보내기</p>
+
             </div>
             <div>
                 <h1>공간 소개</h1>
@@ -158,7 +172,11 @@ const RentSpacePage = () => {
                 <div>
                     <div>고객센터</div>
                     <button>찜하기</button>
+
+
                     <button onClick={submit}>예약하기</button>
+
+
                 </div>
 
             </div>

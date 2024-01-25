@@ -1,12 +1,21 @@
+
 import {useLocation, useNavigate} from "react-router-dom";
+
 import checkIcon from "../../components/icons/check.png";
 import "../../components/Styles.css";
 const SignUpCompletePage = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
+
     sessionStorage.setItem("profileImg", data.profileImg);
-    
+
+
+    sessionStorage.setItem("user_id", data.id);
+    sessionStorage.setItem("role", data.role);
+    sessionStorage.setItem("name", data.name);
+    sessionStorage.setItem("email", data.email);
+
     return (
         <div style={{
             display: "flex",

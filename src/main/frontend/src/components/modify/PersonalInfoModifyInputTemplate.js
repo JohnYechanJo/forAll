@@ -3,6 +3,8 @@ import axios from "axios";
 import UseTermsTemplate from "../signup/UseTermsTemplate";
 const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day, cerifiedNum, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear, setMonth, setDay, setGender, isCheckPw, setIsCheckedDuplicatedEmail, isCheckedDuplicatedEmail, sendCerifiedNum, gender, isPhoneCerified, setIsPhoneCerified }) => {
     console.log(year, month, day);
+
+
     const onChangePw = useCallback((e) => {
         setPw(e.target.value);
     }, []);
@@ -34,6 +36,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
         setDay(e.target.value);
     };
     const checkDuplicatedEmail = () => {
+
         if (email === prevEmail) {
             setIsCheckedDuplicatedEmail(true);
         }
@@ -57,6 +60,8 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                 }).catch((response) => {
                     setIsPhoneCerified(false);
                 });
+
+
         }
     };
     const [prevEmail, setPrevEmail] = useState(email);
@@ -74,23 +79,31 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                 <input
                     className="inputForRegister"
                     style={{ width: "14.0625rem" }}
+
+
                     placeholder={id}
                     disabled={true}
                 />
             </div>
+
             <a className="fontForRegister"  >새 비밀번호<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
             <div style={{ marginBottom: "2.5rem", display: "flex" }}>
                 <input
                     className="inputForRegister"
+
+
                     type="password"
                     placeholder={"대,소문자,특수기호,숫자 포함 12-14자리"}
                     onChange={onChangePw}
                 />
             </div>
+
             <a className="fontForRegister"  >새 비밀번호 확인<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
             <div style={{ marginBottom: "2.5rem" }}>
                 <input
                     className="inputForRegister"
+
+
                     type="password"
                     placeholder={"비밀번호를 한번 더 입력해주세요"}
                     onChange={onChangePwCheck}
@@ -152,22 +165,29 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                 <div style={{ marginBottom: "2.5rem", display: 'flex' }}>
                     <select onChange={onChangeYear} style={{ height: '2.5rem', border: '1px solid #D9D9D9', width: '30%', margin: '0.5rem' }} value={year}>
                         <option value="">년(YYYY)</option>
+
+
                         {years.map(year => (
                             <option key={year} value={year}>
                                 {year}
                             </option>
                         ))}
                     </select>
+
                     <select onChange={onChangeMonth} style={{ height: '2.5rem', border: '1px solid #D9D9D9', width: '30%', margin: '0.5rem' }} value={month}>
                         <option value="">월(MM)</option>
+
                         {months.map(month => (
                             <option key={month} value={month}>
                                 {month}
                             </option>
                         ))}
                     </select>
+
                     <select onChange={onChangeDay} style={{ height: '2.5rem', border: '1px solid #D9D9D9', width: '30%', margin: '0.5rem' }} value={day}>
                         <option value="">일(DD)</option>
+
+
                         {days.map(day => (
                             <option key={day} value={day}>
                                 {day}
@@ -200,6 +220,8 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                     />
                     <label for='female' style={{ display: 'block' }}>
                         <em></em><span className="fontForRegister" >여자</span>
+
+
                     </label>
                 </div>
             </div>

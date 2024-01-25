@@ -5,6 +5,10 @@ import axios from "axios";
 import ArticleListTemplate from "../../components/board/ArticleListTemplate";
 import {TimeUtil} from "../../utils/TimeUtil";
 import {useNavigate} from "react-router-dom";
+import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
+import Modal from "react-modal";
+import {ModalStyles} from "../../components/ModalStyles";
+import {SmallModalStyles} from "../../components/SmallModalStyles";
 const MyPostPage = () => {
     const [postList, setPostList] = useState([]);
     const navigate = useNavigate();
@@ -22,12 +26,14 @@ const MyPostPage = () => {
             <Sidebar/>
             <HomeTemplate />
             <h1>내가 쓴 글</h1>
+
             <p>전체 삭제</p>
             <p>선택 삭제</p>
+
             <div>
                 {postList ? (
                     <div>
-                        {postList.map((post, idx) => (
+                    {postList.map((post, idx) => (
                             <div>
                                 <div key={idx} onClick={() => navigate("/post/"+post.id)}>
                                     <p>{post.title}</p>
