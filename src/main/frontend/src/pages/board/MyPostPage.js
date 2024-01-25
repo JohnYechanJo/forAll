@@ -28,39 +28,6 @@ const MyPostPage = () => {
             <h1>내가 쓴 글</h1>
 
             <p>전체 삭제</p>
-            <Modal isOpen={isModalOpen2} style={ModalStyles} ariaHideApp={false}>
-                <div style={{
-                    fontFamily: "Noto Sans KR",
-                    fontStyle: "normal",
-                    fontWeight: "400",
-                    lineHeight: "normal"
-                }}>
-                    <a style={{ color: " #000",fontSize: "1.25rem", textAlign: "left"}}>전체 삭제 하시겠습니까?</a>
-                    <SmallModalStyles style={{background: "#000"}}>
-                    <a style={{
-                        color: " #FFF",
-                        fontSize: "0.9375rem",
-                        textAlign: 'left',
-                        paddingLeft: "1rem",
-                        paddingRight: "1rem"
-                    }}>취소</a>
-                    </SmallModalStyles>
-                    <SmallModalStyles style={{background: "#000"}}>
-                    <a style={{
-                        color: " #FFF",
-                        fontSize: "0.9375rem",
-                        textAlign: 'left',
-                        paddingLeft: "1rem",
-                        paddingRight: "1rem"
-                    }}>확인</a>
-                    </SmallModalStyles>
-
-                    <div className="bottom_button_fixed">
-                        <a style={{fontSize: "0.8rem"}} onClick={() => setIsModalOpen2(false)}>닫기</a>
-                    </div>
-
-                </div>
-            </Modal>
             <p>선택 삭제</p>
 
             <div>
