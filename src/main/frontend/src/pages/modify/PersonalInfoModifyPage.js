@@ -127,8 +127,7 @@ const PersonalModify = () => {
                 flexDirection: "column",
                 alignItems: "center",
                 gap: "2.5rem",
-                marginLeft: "1rem",
-                marginRight: "1rem",
+                width: "100%",
             }}>
                 <div style={{
                     textAlign: "center",

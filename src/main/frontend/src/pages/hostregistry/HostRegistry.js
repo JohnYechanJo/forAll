@@ -99,30 +99,36 @@ const HostRegistry = () => {
                 <header style={{ textAlign: "center" }}><h3>(1/4) 공간 정보</h3></header>
                 <ForAllLogo/>
             <div style={{ padding: '1rem', width: '100%' }}>
-                <div>
+                <div >
                     <h4>공간명을 입력해주세요.</h4>
                     <hr style={{ height: "2px", backgroundColor: "black" }} />
+                    <div style={{display:'flex',justifyContent:'space-between'}} >
                     <h4>공간명</h4>
                     <p>
                         <span>{inputCount}</span>
                         <span>/18자</span>
                     </p>
+                    </div>
                     <input type="text" placeholder="오스테리아 로에로" className="input"
                         onChange={onInputHandler} maxLength="17" />
                     <h5>❕사용 가능한 특수문자: (,),(-),(.),(@),(/)</h5>
+                    <div style={{display:'flex',justifyContent:'space-between'}} >
                     <h4>공간 한 줄 소개</h4>
                     <p>
                         <span>{inputCount2}</span>
                         <span>/18자</span>
                     </p>
+                    </div>
                     <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" className="input"
                         onChange={onInputHandler2} maxLength="17" />
+                    <div style={{display:'flex',justifyContent:'space-between'}} >
                     <h4>공간 소개</h4>
                     <p>
                         <span>{inputCount3}</span>
                         <span>/300자</span>
                         <span style={{ color: "red" }}>(최소 20자)</span>
                     </p>
+                    </div>
                     <textarea type="text" placeholder="공간에 대한 설명을 기재해주세요." style={{ width: "94vw", height: "17vh" }}
                         onChange={onInputHandler3} maxLength="299" minLength="19" />
                     <div>
