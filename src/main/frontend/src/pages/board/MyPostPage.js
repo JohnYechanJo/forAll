@@ -13,10 +13,25 @@ import {SmallModalStyles} from "../../components/SmallModalStyles";
 const MyPostPage = () => {
     const [postList, setPostList] = useState([]);
     const navigate = useNavigate();
-    const [isEraseAll, setIsEraseAll] = useState(false)
-    const [isEraseFew, setIsEraseFew] = useState(false)
-
-
+    const [isEraseAll, setIsEraseAll] = useState(false);
+    const [isEraseFew, setIsEraseFew] = useState(false);
+    const [selectErase, setSelectErase] = useState(false);
+    const [selectPost, setSelectPost] = useState();
+    useEffect(() => {
+        console.log(selectPost);
+    }, [selectPost]);
+    const deletePost = (post) => {
+        console.log(post);
+        setSelectPost(post);
+        setIsEraseFew(true);
+    }
+    const deleteAll = useCallback(()=>{
+        axios.get("/api/v1/articles/deleteAll").then(()=>window.location.reload());
+    },[]);
+    const deleteSelect = ()=>{
+        console.log(selectPost);
+        axios.get("/api/v1/articles/delete/"+selectPost.id).then(()=>window.location.reload());
+    };
     useEffect(() => {
         axios.get("/api/v1/articles/user/" + sessionStorage.getItem("user_id"))
             .then((res) => setPostList(res.data))
@@ -34,6 +49,7 @@ const MyPostPage = () => {
             <Modal
                 isOpen={isEraseAll}
                 style={ModalStyles}
+                ariaHideApp={false}
             >
                 <div style={{
                     justifyContent: "center", alignItems: "center"+"10px",
@@ -87,7 +103,10 @@ const MyPostPage = () => {
                         lineHeight: '1.875rem',
                         textAlign: 'center'
                     }}
-                            onClick={() => setIsEraseAll(false)}
+                            onClick={() => {
+                                deleteAll();
+                                setIsEraseAll(false);
+                            }}
                     >
                         확인
                     </button>
@@ -98,6 +117,7 @@ const MyPostPage = () => {
             <Modal
                 isOpen={isEraseFew}
                 style={ModalStyles}
+                ariaHideApp={false}
             >
                 <div style={{
                     justifyContent: "center", alignItems: "center"+"10px",
@@ -151,28 +171,32 @@ const MyPostPage = () => {
                         lineHeight: '1.875rem',
                         textAlign: 'center'
                     }}
-                            onClick={() => setIsEraseFew(false)}
+                            onClick={() => {
+                                deleteSelect();
+                                setIsEraseFew(false);
+                            }}
                     >
                         확인
                     </button>
                 </div>
             </Modal>
 
-            <p onClick={() => setIsEraseFew(true)}>선택 삭제</p>
+            <p onClick={() => setSelectErase(!selectErase)}>선택 삭제</p>
 
             <div>
                 {postList ? (
                     <div>
                         {postList.map((post, idx) => (
-                            <div>
-                                <div key={idx} onClick={() => navigate("/post/" + post.id)}>
+                            <div key={idx}>
+                                <div onClick={() => navigate("/post/" + post.id)}>
                                     <p>{post.title}</p>
                                     <p>{post.content}</p>
                                     <p>{TimeUtil.getDiffStr(post.writtenAt)}</p>
                                     <p>{post.recommend}</p>
                                     <p>댓글:{post.comments ? post.comments.length : 0}</p>
                                 </div>
-                                <p onClick={()=>navigate("/post/edit",{state:post})}>수정하기</p>
+                                {selectErase ? (<p onClick={()=>deletePost(post)}>삭제하기</p>) :
+                                    (<p onClick={()=>navigate("/post/edit",{state:post})}>수정하기</p>)}
                             </div>
 
                         ),

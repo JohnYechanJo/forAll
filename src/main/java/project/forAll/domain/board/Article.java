@@ -8,6 +8,7 @@ import project.forAll.domain.Image;
 import project.forAll.domain.member.Member;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -41,5 +42,8 @@ public class Article extends BassDomain {
 
     @ElementCollection
     private List<Long> recommend;
+    @NotNull
+    //삭제 여부
+    private boolean deleted = false;
 
 }
