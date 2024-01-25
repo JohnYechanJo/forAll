@@ -11,9 +11,7 @@ export const ModalStyles = {
         width: '21.875rem',
         height: '12.5rem',
         border: '1px solid'+ '#C4C4C4',
-
         background: '#FFF',
-
         textAlign: 'center',
 
     },

@@ -300,7 +300,6 @@ const HostRegistry3 = () => {
                     </div>
 
             </Modal>
-
             <button onClick={() => setIsTrial(!isTrial)}
                     className="detail"
             >• 트라이얼이란?
