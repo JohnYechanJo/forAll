@@ -29,7 +29,7 @@ const ImageInput = ({setImg, val}) => {
     }
 
     return (
-        <div style={{height:"20vh"}}>
+        <div style={{display:'flex',width:'8rem'}}>
             <label
             >
                 <img

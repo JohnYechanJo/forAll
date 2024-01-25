@@ -4,6 +4,7 @@ import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
 import { ModalStyles } from "../../components/ModalStyles";
+import { ModalForAddress } from "../../components/ModalForAddress";
 import DaumPost from "../../components/DaumPost";
 import { KitchenFeat } from "../../utils/enums";
 import ForAllLogo from "../../components/ForAllLogo";
@@ -33,6 +34,7 @@ const HostRegistry = () => {
     const [modalIsOpen3, setModalIsOpen3] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [modalOpen1, setModalOpen1] = useState(false);
     const navigate = useNavigate();
     let isPublic = false;
     const modalClose1 = () => {
@@ -105,57 +107,61 @@ const HostRegistry = () => {
             }}>
             <header style={{ textAlign: "center" }}><h3>(1/4) 공간 정보</h3></header>
             <ForAllLogo />
-            <div style={{ width: '100%',padding:'1rem',boxSizing:'border-box' }} >
+            <div style={{ width: '100%', padding: '1rem', boxSizing: 'border-box', gap: '1rem', display: 'flex', flexDirection: 'column' }} >
                 <div >
-                    <div >
-                        <h4>공간명을 입력해주세요.</h4>
-                        <hr style={{ height: "2px", backgroundColor: "black" }} />
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }} >
-                            <h4>공간명</h4>
-                            <p>
-                                <span>{inputCount}</span>
-                                <span>/18자</span>
-                            </p>
-                        </div>
-                        <input type="text" placeholder="오스테리아 로에로" className="input"
-                            onChange={onInputHandler} maxLength="17" />
-                        <h5>❕사용 가능한 특수문자: (,),(-),(.),(@),(/)</h5>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }} >
-                            <h4>공간 한 줄 소개</h4>
-                            <p>
-                                <span>{inputCount2}</span>
-                                <span>/18자</span>
-                            </p>
-                        </div>
-                        <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" className="input"
-                            onChange={onInputHandler2} maxLength="17" />
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }} >
-                            <h4>공간 소개</h4>
-                            <p>
-                                <span>{inputCount3}</span>
-                                <span>/300자</span>
-                                <span style={{ color: "red" }}>(최소 20자)</span>
-                            </p>
-                        </div>
-                        <textarea type="text" placeholder="공간에 대한 설명을 기재해주세요." style={{ width: "94vw", height: "17vh" }}
-                            onChange={onInputHandler3} maxLength="299" minLength="19" />
+                    <div style={{ gap: '1rem', display: 'flex', flexDirection: 'column' }}>
                         <div>
-                            <h4>주방 특성</h4>
+                            <a>공간명을 입력해주세요.<span style={{ color: '#FF2929' }} >*</span></a>
+                            <hr style={{ height: "1px", backgroundColor: "black" }} />
+                        </div>
+                        <div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
+                                <a>공간명<span style={{ color: '#FF2929' }} >*</span></a>
+                                <p>
+                                    <span>{inputCount}</span>
+                                    <span>/18자</span>
+                                </p>
+                            </div>
+                            <input type="text" placeholder="오스테리아 로에로" className="input"
+                                onChange={onInputHandler} maxLength="17" />
+                            <a>❕사용 가능한 특수문자: (,),(-),(.),(@),(/)</a>
+                        </div>
+                        <div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
+                                <a>공간 한 줄 소개<span style={{ color: '#FF2929' }} >*</span></a>
+                                <p>
+                                    <span>{inputCount2}</span>
+                                    <span>/18자</span>
+                                </p>
+                            </div>
+                            <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" className="input"
+                                onChange={onInputHandler2} maxLength="17" />
+                        </div>
+                        <div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
+                                <a>공간 소개<span style={{ color: '#FF2929' }} >*</span></a>
+                                <p>
+                                    <span>{inputCount3}</span>
+                                    <span>/300자</span>
+                                    <span style={{ color: "red" }}>(최소 20자)</span>
+                                </p>
+                            </div>
+                            <textarea type="text" placeholder="공간에 대한 설명을 기재해주세요." style={{ height: "6.25rem" }}
+                                onChange={onInputHandler3} maxLength="299" minLength="19"
+                                className="input"
+                            />
+                        </div>
+                        <div>
+                            <a>주방 특성<span style={{ color: '#FF2929' }} >*</span></a>
                             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
                                 <div style={{ flexDirection: "column", display: "flex" }}>
                                     <div>
-                                        <button className="button"
-
-
+                                        <button className="square_button"
                                             name="kitchen"
                                             value={KitchenFeat.Open}
                                             style={{
                                                 backgroundColor: clicked1 ? "black" : "white",
                                                 color: clicked1 ? "white" : "black",
-                                                width: "100px",
-                                                flex: "1",
-                                                marginLeft: "10px",
-                                                border: "2px solid gray"
                                             }}
                                             onClick={(event) => {
                                                 const selected = event.target.value;
@@ -215,16 +221,13 @@ const HostRegistry = () => {
                                 </div>
                                 <div style={{ flexDirection: "column" }}>
                                     <div>
-                                        <button className="button"
+                                        <button className="square_button"
                                             name="kitchen"
                                             value={KitchenFeat.Face}
                                             style={{
                                                 backgroundColor: clicked2 ? "black" : "white",
                                                 color: clicked2 ? "white" : "black",
-                                                width: "100px",
-                                                flex: "1",
-                                                marginLeft: "10px",
-                                                border: "2px solid gray"
+
                                             }}
                                             onClick={(event) => {
                                                 const selected = event.target.value;
@@ -284,17 +287,13 @@ const HostRegistry = () => {
                                 </div>
                                 <div style={{ flexDirection: "column" }}>
                                     <div>
-                                        <button className="button"
+                                        <button className="square_button"
                                             name="kitchen"
                                             value={KitchenFeat.Close}
                                             style={{
                                                 backgroundColor: clicked3 ? "black" : "white",
                                                 color: clicked3 ? "white" : "black",
-                                                width: "100px",
-                                                flex: "1",
-                                                marginLeft: "10px",
-                                                marginRight: "10px",
-                                                border: "2px solid gray",
+
                                             }}
                                             onClick={(event) => {
                                                 const selected = event.target.value;
@@ -361,12 +360,22 @@ const HostRegistry = () => {
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <h4>위치 정보</h4>
-                            <hr style={{ height: "2px", backgroundColor: "black" }} />
-                            <h4>주소(위치)</h4>
-                            <DaumPost setAddress={setAddress} />
-                            <h5>
+                        <div style={{ marginTop: '1.5rem' }} >
+                            <a>위치 정보<span style={{ color: '#FF2929' }} >*</span></a>
+                            <hr style={{ height: "1px", backgroundColor: "black",marginBottom:'1rem' }} />
+                            <a>주소(위치)<span style={{ color: '#FF2929' }} >*</span></a>
+                            <div style={{display:'flex'}} >
+                            <input value={address} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '80%' }} className="inputForRegister" />
+                            <Modal isOpen={modalOpen1} >
+                                <DaumPost setAddress={(e) => {
+                                    setAddress(e);
+                                    setModalOpen1(false);
+                                }} />
+                                <button onClick={() => setModalOpen1(false)}>닫기</button>
+                            </Modal>
+                            <button onClick={() => setModalOpen1(true)} style={{ width: "3.4375rem", height: "1.875rem", fontSize: "0.625rem", backgroundColor: "black", color: "white", borderRadius: '0.375rem', marginLeft: '0.31rem' }} >주소등록</button>
+                            </div>
+                            <div>
                                 <span>{(address !== null) ? address : null} </span>
                                 <span>
                                     <input type="text"
@@ -376,47 +385,58 @@ const HostRegistry = () => {
                                             setAddressDetail(e.target.value);
                                             setFullAddress(address + " " + e.target.value);
                                         }}
+                                        style={{ marginTop: '1.5rem' }}
                                         className="input"
                                     />
                                 </span>
-                            </h5>
-                            <h6>
-                                • 공간 주소는 최초 등록 이후 직접 변경할 수 없습니다.
-                            </h6>
-                            <h6>
-                                • 고객센터를 통해 주소 변경을 요청해주세요.
-                            </h6>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column' }} >
+                                <a>
+                                    • 공간 주소는 최초 등록 이후 직접 변경할 수 없습니다.
+                                </a>
+                                <a>
+                                    • 고객센터를 통해 주소 변경을 요청해주세요.
+                                </a>
+                            </div>
                         </div>
                         <div>
-                            <h4>상세 위치 정보</h4>
-                            <p>
-                                <span>{inputCount4}</span>
-                                <span>/18자</span>
-                            </p>
-                            <input type="text" placeholder="ex.성수역 4번출구 도보 1분 거리" style={{ width: "80vw", height: "3vh" }}
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
+                                <a>상세 위치 정보<span style={{ color: '#FF2929' }} >*</span></a>
+                                <p>
+                                    <span>{inputCount4}</span>
+                                    <span>/18자</span>
+                                </p>
+                            </div>
+                            <input type="text" placeholder="ex.성수역 4번출구 도보 1분 거리" 
+                                className="input"
                                 onChange={onInputHandler4} maxLength="17" />
-                            <h6>
-                                • 작성하신 위치정보는 검색에 영향을 미치지 않습니다.
-                            </h6>
-                            <h6 style={{ marginTop: "0px" }}>
-                                • 공간 주소를 입력하시면 반려 처리됩니다.(ex.강남구 대치동, 삼성로 141 등)
-                            </h6>
+                            <div style={{ display: 'flex', flexDirection: 'column' }} >
+                                <a>
+                                    • 작성하신 위치정보는 검색에 영향을 미치지 않습니다.
+                                </a>
+                            </div>
                         </div>
                         <div>
-                            <h4>웹사이트</h4>
-                            <input type="text" placeholder="웹사이트 URL을 입력해주세요." style={{ width: "80vw", height: "3vh" }}
+                            <a>웹사이트<span style={{ color: '#FF2929' }} >*</span></a>
+                            <input type="text" placeholder="웹사이트 URL을 입력해주세요." 
+                                className="input"
                                 onChange={(e) => setWebSite(e.target.value)} />
-                            <h6>
-                                • 인스타그램, 페이스북, 네이버지도, 카카오지도, 구글지도 등
-                            </h6>
-                            <h6 style={{ marginTop: "0px" }}>
-                                공간을 PR할 수 있는 웹사이트면 무엇이든지 좋습니다.
-                            </h6>
+                            <div style={{ display: 'flex', flexDirection: 'column' }} >
+                                <a>
+                                    • 인스타그램, 페이스북, 네이버지도, 카카오지도, 구글지도 등
+                                </a>
+                                <a style={{ marginLeft: "0.3rem" }}>
+                                    공간을 PR할 수 있는 웹사이트면 무엇이든지 좋습니다.
+                                </a>
+                            </div>
                         </div>
-                        <div>
-                            <h4>
-                                <span>대표 이미지 </span>
-                            </h4>
+                        <div style={{ display: 'flex', flexDirection: 'column' }} >
+                            <a>
+                                <span>대표 이미지<span style={{ color: '#FF2929' }} >*</span></span>
+                            </a>
+                            <a style={{ color: '#C4C4C4' }} >
+                                매장의 간판이 보이는 이미지를 첨부해 주세요.
+                            </a>
                             <div>
                                 <ImageInput setImg={setImgRepresent} val={imgRepresent} />
                             </div>
