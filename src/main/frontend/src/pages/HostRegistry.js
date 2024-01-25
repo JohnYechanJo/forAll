@@ -7,6 +7,7 @@ import {ModalStyles} from "../../components/ModalStyles";
 import DaumPost from "../../components/DaumPost";
 import {KitchenFeat} from "../../utils/enums";
 import ImageInput from "../../components/ImageInput";
+import Header from "../components/Header";
 const HostRegistry = () => {
     const [inputCount, setInputCount] = useState(0);
     const [inputCount2, setInputCount2] = useState(0);
@@ -82,6 +83,7 @@ const HostRegistry = () => {
                      justifyContent:"space-around",
                      flexDirection:"column",}}>
             <div>
+                <Header/>
                 <header style={{textAlign: "center"}}><h3>1. 공간 정보</h3></header>
                 <h4>공간명을 입력해주세요.</h4>
                 <hr style={{height: "2px", backgroundColor: "black"}}/>
