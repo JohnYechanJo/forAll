@@ -3,7 +3,7 @@ import "../components/Styles.css";
 import Modal from "react-modal";
 import {ModalStyles} from "./ModalStyles";
 const ImageInputs = ({setImg, vals}) => {
-    const spring_app_url = "http://localhost:8080";
+    const spring_app_url = "http://15.165.222.15:80";
     // 기본 이미지 추후 설정 필요
     const BaseImgSrc = "/logo512.png";
 
