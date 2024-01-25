@@ -1,21 +1,15 @@
 import "../../components/Styles.css";
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import {useLocation, useNavigate} from "react-router-dom";
 
 const Notification = () => {
     const location = useLocation();
     const data = {...location.state};
-=======
+
 import { useNavigate } from "react-router-dom";
 
-const Notification = () => {
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
-=======
-import { useNavigate } from "react-router-dom";
 
-const Notification = () => {
->>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
+
     const navigate = useNavigate();
     return (
         <div style={{ display: "inline-flex", flexDirection: "column", justifyContent: "center", textAlign: "left", gap: '2rem', width: '100%', fontSize: '0.9375rem',padding:'1rem' }} >
@@ -60,20 +54,14 @@ const Notification = () => {
                     <p>대관 시작 전 매장 확인 시 촬영한 사진이 저장됩니다.</p>
                 </div>
             </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <button className="bottom_button" style={{ backgroundColor: "#FF2929", position: "fixed" }} onClick={() => { navigate("/signUpComplete",{state:{
+
+            <button className="bottom_button_relative" style={{ backgroundColor: "#FF2929", position: "fixed" }} onClick={() => { navigate("/signUpComplete",{state:{
                     id: data.loginId,
                     name: data.name,
                     email: data.email,
                     profileImg: data.profileImg,
                 }}) }} >가입하기</button>
-=======
-            <button className="bottom_button" style={{ backgroundColor: "#FF2929", position: "fixed" }} onClick={() => { navigate("/signUpComplete") }} >가입하기</button>
->>>>>>> 087f6a3 ([01.24 예찬] 메뉴사진, 트라이얼, 새벽배달, 워크인, 미장 모달 구현 중+ModalStyles 세가지로 구분)
-=======
-            <button className="bottom_button" style={{ backgroundColor: "#FF2929", position: "fixed" }} onClick={() => { navigate("/signUpComplete") }} >가입하기</button>
->>>>>>> e9549e8 ([01.25 예찬] 모달 정보 수정 구현 완료)
+
         </div>
     )
 };
