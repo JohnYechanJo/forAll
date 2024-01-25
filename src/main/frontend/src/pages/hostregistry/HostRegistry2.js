@@ -9,6 +9,7 @@ import ImageInputs from "../../components/ImageInputs";
 import ImageInput from "../../components/ImageInput";
 import { ModalStyles } from "../../components/ModalStyles";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
+import ForAllLogo from "../../components/ForAllLogo";
 
 
 const HostRegistry2 = () => {
@@ -75,53 +76,76 @@ const HostRegistry2 = () => {
                 flexDirection: "column",
                 gap: "1.5rem"
             }}>
-            <div style={{ padding: '1rem', boxSizing: 'border-box' }}>
+            <header style={{ textAlign: "center" }}><p>(1/4) 공간 정보</p></header>
+            <div style={{ padding: '1rem', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <div >
-                    <header style={{ textAlign: "center" }}><h3>(1/4) 공간 정보</h3></header>
+                    <ForAllLogo />
                     <a className="fontForRegister" >홀 사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "2px", backgroundColor: "black" }} />
+                    <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '0' }} />
                     <a className="fontForRegister" style={{ color: '#7B7B7B' }}>홈페이지에 노출될 사진입니다. 오너님의 공간이 돋보일 수 있도록 예쁘게 찍어주세요!</a>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
-                        <div style={{ display: "flex", flexDirection: "column", }} >
-                            <ImageInput setImg={setImg1} val={img1} />
+                        <div style={{ display: 'flex', justifyContent: 'right' }} >
+                            <div style={{ display: "flex", flexDirection: "column", }} >
+                                <a>사진1<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
+                                <div style={{ justifyContent: 'center', alignItems: 'flex-end' }} >
+                                    <ImageInput setImg={setImg1} val={img1} />
+                                </div>
+                            </div>
                         </div>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'flex-start' }}>
+                            <a>사진2<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                             <ImageInput setImg={setImg2} val={img2} />
                         </div>
-                        <div style={{ display: "flex", flexDirection: "column", }}>
-                            <ImageInput setImg={setImg3} val={img3} />
+                        <div style={{ display: 'flex', justifyContent: 'right' }}>
+
+                            <div style={{ display: "flex", flexDirection: "column" }}>
+                                <a>사진3<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
+                                <div style={{ justifyContent: 'center', alignItems: 'flex-end' }} >
+                                    <ImageInput setImg={setImg3} val={img3} />
+                                </div>
+                            </div>
                         </div>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                            <a>추가사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                             <ImageInputs setImg={setImgAdditional} vals={imgAdditional} />
-
-
                         </div>
                     </div>
                 </div>
                 <div>
-
                     <a className="fontForRegister" >주방 사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "2px", backgroundColor: "black" }} />
+                    <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '0' }} />
+                    <a className="fontForRegister" style={{ color: '#7B7B7B' }}>홈페이지에 노출될 사진입니다. 오너님의 공간이 돋보일 수 있도록 예쁘게 찍어주세요!</a>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
-                        <div style={{ display: "flex", flexDirection: "column" }} >
-                            <ImageInput setImg={setKitchen1} val={kitchen1} />
+                        <div style={{ display: 'flex', justifyContent: 'right' }} >
+                            <div style={{ display: "flex", flexDirection: "column", }} >
+                                <a>사진1<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
+                                <div style={{ justifyContent: 'center', alignItems: 'flex-end' }} >
+                                    <ImageInput setImg={setKitchen1} val={kitchen1} />
+                                </div>
+                            </div>
                         </div>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
-
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'flex-start' }}>
+                            <a>사진2<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                             <ImageInput setImg={setKitchen2} val={kitchen2} />
                         </div>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div style={{ display: 'flex', justifyContent: 'right' }}>
 
-                            <ImageInput setImg={setKitchen3} val={kitchen3} />
+                            <div style={{ display: "flex", flexDirection: "column" }}>
+                                <a>사진3<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
+                                <div style={{ justifyContent: 'center', alignItems: 'flex-end' }} >
+                                    <ImageInput setImg={setKitchen3} val={kitchen3} />
+                                </div>
+                            </div>
                         </div>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                            <a>추가사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                             <ImageInputs setImg={setKitchenAdditional} vals={kitchenAdditional} />
                         </div>
                     </div>
                 </div>
                 <div>
                     <a className="fontForRegister" >메뉴 사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "2px", backgroundColor: "black" }} />
+                    <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '0' }} />
                     <button style={{
                         border: "none",
                         backgroundColor: "white",
@@ -131,7 +155,7 @@ const HostRegistry2 = () => {
                         textUnderlineOffset: "auto",
                         textDecoration: "underline gray",
                     }} onClick={() => { setIsModalOpen2(true) }}
-                    ><h5>메뉴 사진이 왜 필요한가요?</h5></button>
+                    ><a style={{ color: '#7B7B7B' }} >메뉴 사진이 왜 필요한가요?</a></button>
                     <Modal isOpen={isModalOpen2} style={ExplanationModalStyles} ariaHideApp={false}>
                         <div style={{
                             fontFamily: "Noto Sans KR",
@@ -164,20 +188,29 @@ const HostRegistry2 = () => {
                         </div>
                     </Modal>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
-                        <div >
-                            <ImageInput setImg={setMenu1} val={menu1} />
+                        <div style={{ display: 'flex', justifyContent: 'right' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }} >
+                                <a>사진1<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
+                                <ImageInput setImg={setMenu1} val={menu1} />
+                            </div>
                         </div>
                         <div >
+                            <a>추가사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                             <ImageInputs setImg={setMenuAdditional} vals={menuAdditional} />
                         </div>
                     </div>
                 </div>
 
-                <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                    <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
-                    <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
-                    <button onClick={() => setIsModalOpen(false)}>뒤로</button>
-                    <button onClick={() => submit()}>다음</button>
+                <Modal isOpen={isModalOpen} style={{ ...ModalStyles, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} ariaHideApp={false}>
+                    <div style={{ textAlign: "left" }} >
+                        <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
+                        <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                    </div>
+                    <hr style={{ height: "1px", backgroundColor: "lightgrey" }} />
+                    <div style={{ display: 'flex', width: '100%'}} >
+                        <button style={{ flex: 1,border:'none',background:'white',}}  onClick={() => setIsModalOpen(false)}>뒤로</button>
+                        <button style={{ flex: 1,border:'none',background:'white',}}  onClick={() => submit()}>다음</button>
+                    </div>
                 </Modal>
             </div>
             <div style={{ display: 'flex', width: '100vw', margin: '0px', marginTop: '4rem' }}>

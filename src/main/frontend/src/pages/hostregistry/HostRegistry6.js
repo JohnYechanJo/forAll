@@ -10,6 +10,7 @@ import ImageUploader from "../../utils/imageUploader";
 import axios from "axios";
 import ForAllLogo from "../../components/ForAllLogo";
 import { ModalStyles } from "../../components/ModalStyles";
+import { ModalForAddress } from "../../components/ModalForAddress";
 const HostRegistry6 = () => {
     const location = useLocation();
     const data = { ...location.state };
