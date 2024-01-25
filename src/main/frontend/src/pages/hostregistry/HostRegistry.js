@@ -10,6 +10,7 @@ import { KitchenFeat } from "../../utils/enums";
 import ImageInput from "../../components/ImageInput";
 import Alert from "../../components/Alert";
 import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
+import ForAllLogo from "../../components/ForAllLogo";
 
 const HostRegistry = () => {
     const [inputCount, setInputCount] = useState(0);
