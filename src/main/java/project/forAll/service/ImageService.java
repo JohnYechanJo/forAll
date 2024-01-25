@@ -32,9 +32,9 @@ public class ImageService extends Service{
 //         경로 자동 설정
 
         ClassPathResource resource = new ClassPathResource("/static/upload/");
-        String storedImagePath = "src/main/resources/static/upload/"+random+ ".png";
+        String storedImagePath = "forAll/src/main/resources/static/upload/"+random+ ".png";
         try{
-            Path path = Paths.get("src/main/resources/static/upload/"+random+ ".png").toAbsolutePath();
+            Path path = Paths.get("forAll/src/main/resources/static/upload/"+random+ ".png").toAbsolutePath();
             imageFile.transferTo(path.toFile());
 
             final Image image = new Image();
