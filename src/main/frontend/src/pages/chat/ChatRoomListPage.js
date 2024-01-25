@@ -30,7 +30,7 @@ const ChatRoomListPage = () => {
             <Sidebar/>
             <div>
                 <div style={{paddingTop:"3.125rem"}}></div>
-                <div className={"chat_category"}>예약사항</div>
+                <div className={"chat_category"}><p>예약사항</p></div>
                 {reservation ?(
                     <div>
                         {reservation.map((chat, idx) => {
@@ -49,11 +49,14 @@ const ChatRoomListPage = () => {
                                         <div style={{textAlign:"left"}}>
                                             <div className={"chat_room_last_message"}>{chat.lastMessage}</div>
                                         </div>
-                                        <div style={{textAlign:"right"}}>
-                                            <div className={"chat_room_not_read"}>
-                                                <div className={"chat_room_not_read_count"}>{chat.notReadCount}</div>
+                                        {chat.notReadCount > 0 ? (
+                                            <div style={{textAlign:"right"}}>
+                                                <div className={"chat_room_not_read"}>
+                                                    <div className={"chat_room_not_read_count"}>{chat.notReadCount}</div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        ) :null}
+
                                     </div>
                                 </div>
                             )
@@ -62,7 +65,7 @@ const ChatRoomListPage = () => {
                 ) :null}
             </div>
             <div>
-                <div className={"chat_category"}>게시판</div>
+                <div className={"chat_category"}><p>게시판</p></div>
                 {board ?(
                     <div>
                         {board.map((chat, idx) => {
@@ -81,11 +84,13 @@ const ChatRoomListPage = () => {
                                         <div style={{textAlign:"left"}}>
                                             <div className={"chat_room_last_message"}>{chat.lastMessage}</div>
                                         </div>
-                                        <div style={{textAlign:"right"}}>
-                                            <div className={"chat_room_not_read"}>
-                                                <div className={"chat_room_not_read_count"}>{chat.notReadCount}</div>
+                                        {chat.notReadCount > 0 ? (
+                                            <div style={{textAlign:"right"}}>
+                                                <div className={"chat_room_not_read"}>
+                                                    <div className={"chat_room_not_read_count"}>{chat.notReadCount}</div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        ) :null}
                                     </div>
 
 

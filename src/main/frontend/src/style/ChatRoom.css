@@ -6,13 +6,13 @@
     background: #FFF;
     color: #000;
     font-family: "Noto Sans KR";
-    font-size: 1.375rem;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.01031rem;
     padding-left: 1rem;
-    padding-top: 0.88rem;
+    margin:0;
 }
 .chat_room{
     width: 100%;
@@ -75,9 +75,51 @@
     align-items: center;
     overflow: hidden;
 }
+.chat_partner_id{
+    color: #000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Noto Sans KR";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.01031rem;
+}
+.chat_message_container{
+    display: flex;
+    padding: 1rem;
+}
+.chat_partner_message{
+    margin:0;
+    color: #000;
+    font-family: "Noto Sans KR";
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.01031rem;
+    border-radius: 0.3125rem;
+    border: 1px solid rgba(196, 196, 196, 0.20);
+    background: #FFF;
+}
+.chat_my_message{
+    margin:0;
+    color: #000;
+    font-family: "Noto Sans KR";
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.01031rem;
+    border-radius: 0.3125rem;
+    background: #FFE147;
+}
 .chat_container{
     overflow:auto;
     width:100%;
+    height: 100rem;
     border: 1px solid rgba(196, 196, 196, 0.20);
     background: rgba(196, 196, 196, 0.50);
 
@@ -116,4 +158,9 @@
     line-height: 1.875rem;
     letter-spacing: -0.01031rem;
     margin-right: 1rem;
+}
+.height_align_container{
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
