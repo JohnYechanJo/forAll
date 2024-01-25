@@ -17,11 +17,7 @@ const MyPostPage = () => {
     const [isEraseFew, setIsEraseFew] = useState(false);
     const [selectErase, setSelectErase] = useState(false);
     const [selectPost, setSelectPost] = useState();
-    useEffect(() => {
-        console.log(selectPost);
-    }, [selectPost]);
     const deletePost = (post) => {
-        console.log(post);
         setSelectPost(post);
         setIsEraseFew(true);
     }
