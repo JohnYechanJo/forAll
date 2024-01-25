@@ -63,9 +63,6 @@ const GuestRegistry = () => {
             birthday: data.birthday,
             gender: data.gender
         }).then(async ()=>{
-            sessionStorage.setItem("user_id", data.loginId);
-            sessionStorage.setItem("name", data.name);
-            sessionStorage.setItem("email", data.email);
             const picture = await ImageUploader(profileImage, data.loginId);
             axios.post("/api/v1/profile", {
                 userId: data.loginId,
@@ -79,7 +76,7 @@ const GuestRegistry = () => {
                         id: data.loginId,
                         name: data.name,
                         email: data.email,
-                        profileImg: data.picture,
+                        profileImg: picture,
                     }});
             }).catch((err) => console.error(err));
         }).catch((err) => console.error(err));
