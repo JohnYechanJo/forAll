@@ -10,7 +10,6 @@ import xmark from "../../components/icons/xmark.png";
 import alarm from "../../components/icons/alarm.png";
 import ImageViewer from "../ImageViewer";
 import {ChefPending} from "../../utils/enums";
-import Alert from "../Alert";
 const Sidebar = ({ width = 18.75, children }) => {
     const [userData, setUserData] = useState({});
     const [isOpen, setOpen] = useState(false);
@@ -40,10 +39,6 @@ const Sidebar = ({ width = 18.75, children }) => {
     };
     const handleChefRegistry = () => {
         if (userData.chefPending === ChefPending.NOTCREATED) navigate("/chefRegistry");
-        else{
-            navigate("/alreadyChef");
-        
-        }
     }
     const handleChefModify = () => {
         if ([ChefPending.PENDING, ChefPending.APPROVE].includes(userData.chefPending)) navigate("/chefInfoModify");
@@ -108,7 +103,8 @@ const Sidebar = ({ width = 18.75, children }) => {
                 </div>
                 <div style={{display:"flex",flexDirection:"column", justifyContent:"left"}}>
                     <div style={{height:"5.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
-                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",justifyContent:"space-around",gap:"1rem"
+                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
                         <Link to={"/reservationList"}>
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>예약 정보</button>
@@ -116,7 +112,8 @@ const Sidebar = ({ width = 18.75, children }) => {
                         <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>찜한내역</button>
                     </div>
                     <div style={{height:"5.25rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
-                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",justifyContent:"space-around",gap:"rem"
+                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"rem"
                 }} >
                         <button className="button" onClick={handleChefRegistry} style={{textAlign:"left",marginLeft:"2rem"}}>셰프 등록하기</button>
                         <Link to="/hostRegistry">
@@ -124,7 +121,8 @@ const Sidebar = ({ width = 18.75, children }) => {
                         </Link>
                     </div>
                     <div style={{height:"7.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
-                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",justifyContent:"space-around",gap:"1rem"
+                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
                         <Link to="/chatList">
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>채팅함</button>
@@ -135,7 +133,8 @@ const Sidebar = ({ width = 18.75, children }) => {
                         </Link>
                     </div>
                     <div style={{height:"7.375rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
-                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",justifyContent:"space-around",gap:"1rem"
+                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1rem"
                 }}>
                         <Link to="/personalInfoModify">
                             <button className="button" style={{textAlign:"left",marginLeft:"2rem"}}>개인 정보수정</button>
@@ -146,7 +145,8 @@ const Sidebar = ({ width = 18.75, children }) => {
                         </Link>
                     </div>
                     <div style={{height:"2rem",display:"flex",flexDirection:"row",border:"1px solid rgba(196,196,196,0.2)",
-                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",justifyContent:"space-around",gap:"1.37rem"
+                    boxShadow:"4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset:"-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                    display:"flex",flexDirection:"column",justifyContent:"space-around",gap:"1.37rem"
                 }}>
                     {sessionStorage.getItem("user_id") ? (<div onClick={logOut}>
                         <img src={logout} alt="logout" style={{height:"1.125rem", width:"0.875rem", margin: "auto",border:'none',backgroundColor:'white',fontSize:'0.875rem',fontWeight:'700',marginLeft:'2rem'}} />
@@ -157,6 +157,8 @@ const Sidebar = ({ width = 18.75, children }) => {
                         </div>)}
                 </div>
                 </div>
+                
+
             </div>
         </div>
     );
