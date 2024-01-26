@@ -24,6 +24,7 @@ const MainPage = () => {
     const boardFocus = () => { boardRef.current?.scrollIntoView({ behavior: 'smooth' }) };
 
     useEffect(() => {
+        console.log(location.pathname);
         axios.get("/api/v1/space/isPublic")
             .then((res) => setSpaceData(res.data))
             .catch((err) => console.error(err));
@@ -46,6 +47,8 @@ const MainPage = () => {
             }).slice(0, 3)))
             .catch((err) => console.error(err));
     }, []);
+
+
     useEffect(() => {
         if (data.focus === "space") spaceFocus();
         else if (data.focus === "board") boardFocus();

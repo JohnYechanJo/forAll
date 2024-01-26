@@ -11,6 +11,7 @@ import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
 import {SmallModalStyles} from "../../components/SmallModalStyles";
 import updownImg from "../../components/icons/updown.jpg";
+import Header from "../../components/Header";
 const MyPostPage = () => {
     const [postList, setPostList] = useState([]);
     const navigate = useNavigate();
@@ -36,10 +37,7 @@ const MyPostPage = () => {
     }, []);
     return (
         <div>
-            <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
-                <button className="button" onClick={() => navigate("/",{state: {focus: "space"}})}>대관하기</button>
-                <button className="button">커뮤니티</button>
-            </div>
+            <Header />
             <Sidebar/>
             <HomeTemplate />
                 <div style={{

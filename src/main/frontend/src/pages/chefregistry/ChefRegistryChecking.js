@@ -32,7 +32,7 @@ const ChefRegistryCheckingPage = () => {
                 <span style={{fontSize:"0.938rem", fontWeight:"400",marginLeft:'1rem'}} >{email}</span>
             </div>
             </div>
-            <button onClick={()=>{navigate("/chefRegistryComplete");}} className="bottom_button" style={{backgroundColor:"black",position:"fixed"}} >시작하기</button>
+            <button onClick={()=>{navigate("/");}} className="bottom_button" style={{backgroundColor:"black",position:"fixed"}} >시작하기</button>
 
         </div>
     )
