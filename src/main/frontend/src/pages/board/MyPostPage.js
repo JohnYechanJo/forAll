@@ -24,19 +24,37 @@ const MyPostPage = () => {
     }, []);
     return (
         <div>
-            <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
-                <button className="button" onClick={() => navigate("/",{state: {focus: "space"}})}>대관하기</button>
-                <button className="button">커뮤니티</button>
+            <div className="header" style={{backgroundColor: "white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
+                <div style={{
+                    position: 'absolute',
+                    left: '1rem',
+                    top: '0.8rem',
+                    width: '5rem',
+                    height: '1.25rem',
+                    backgroundColor: 'white'
+                }}>
+                    <a style={{
+                        fontFamily: 'Mukta',
+                        fontSize: '0.75rem',
+                        fontWeight: '700',
+                        letterSpacing: '-0.01031rem',
+                        border: '2px solid black'
+                    }}
+                       onClick={() => navigate('/')}
+                    >For ALL.</a>
+                </div>
+                <button className="button" onClick={() => navigate("/", {state: {focus: "space"}})}>대관하기</button>
+                <button className="button" onClick={() => navigate("/", {state: {focus: "board"}})}>커뮤니티</button>
             </div>
             <Sidebar/>
-            <HomeTemplate />
+            <HomeTemplate/>
             <h1>내가 쓴 글</h1>
             <Modal
                 isOpen={isEraseAll}
                 style={ModalStyles}
             >
                 <div style={{
-                    justifyContent: "center", alignItems: "center"+"10px",
+                    justifyContent: "center", alignItems: "center" + "10px",
                     fontFamily: "Noto Sans KR",
                     color: " #000",
                     fontSize: "1.25rem",
