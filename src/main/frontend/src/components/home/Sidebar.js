@@ -10,7 +10,6 @@ import xmark from "../../components/icons/xmark.png";
 import alarm from "../../components/icons/alarm.png";
 import ImageViewer from "../ImageViewer";
 import {ChefPending} from "../../utils/enums";
-import Alert from "../Alert";
 const Sidebar = ({ width = 18.75, children }) => {
     const [userData, setUserData] = useState({});
     const [isOpen, setOpen] = useState(false);
@@ -40,10 +39,6 @@ const Sidebar = ({ width = 18.75, children }) => {
     };
     const handleChefRegistry = () => {
         if (userData.chefPending === ChefPending.NOTCREATED) navigate("/chefRegistry");
-        else{
-            navigate("/alreadyChef");
-        
-        }
     }
     const handleChefModify = () => {
         if ([ChefPending.PENDING, ChefPending.APPROVE].includes(userData.chefPending)) navigate("/chefInfoModify");
@@ -162,6 +157,8 @@ const Sidebar = ({ width = 18.75, children }) => {
                         </div>)}
                 </div>
                 </div>
+                
+
             </div>
         </div>
     );
