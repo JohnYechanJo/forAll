@@ -122,9 +122,9 @@ const HostRegistry4 = () => {
                     <a>화구<span style={{ color: "#FF2929" }} >*</span></a>
                     <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} width='90vw' />
                     {firePit === "직접 입력" ? (
-                        <div>
-                            <span><input onChange={onChangeFirePit} style={{ width: "10vw" }} />개 </span>
-
+                        <div style={{display:'flex',width:'100%',alignItems:'center',marginTop:'0.5rem'}} >
+                            <input onChange={onChangeFirePit} className="input" style={{ width: "10vw" }} />
+                            <a>개 </a>
                             {exactFirePit < 7 ? <p>7 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
                         </div>
                     ) : null}

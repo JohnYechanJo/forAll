@@ -192,9 +192,9 @@ const HostRegistry3 = () => {
                     <a>주차 여부<span style={{ color: '#FF2929' }} >*</span></a>
                     <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} width='90vw' />
                     {parkAvaliable === "직접 입력" ? (
-                        <div style={{marginTop:'1rem'}} >
+                        <div style={{display:'flex',width:'100%',alignItems:'center',marginTop:'0.5rem'}}  >
                             <div style={{display:'flex',alignItems:'center'}} >
-                            <input  className="input" style={{width:'5.25rem'}} onChange={onChangePark} />
+                            <input  className="input" style={{width:'10vw'}} onChange={onChangePark} />
                             <a>대</a>
                             </div>
                             {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요.</p> : null}

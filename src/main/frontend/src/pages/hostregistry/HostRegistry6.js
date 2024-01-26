@@ -192,7 +192,7 @@ const HostRegistry6 = () => {
                 </div>
                 <div>
                     <p>사업자 등록번호<span style={{ color: "#FF2929" }} >*</span></p>
-                    <div style={{ display: "flex",alignItems:'center' }} >
+                    <div style={{ display: "flex",alignItems:'center',justifyContent:'space-between' }} >
                         <input value={registNum1} onChange={onChangeRegistNum1} className="input" style={{ width: "30%" }} />-
                         <input value={registNum2} onChange={onChangeRegistNum2} className="input" style={{ width: "30%" }} />-
                         <input value={registNum3} onChange={onChangeRegistNum3} className="input" style={{ width: "30%" }} />
@@ -215,7 +215,8 @@ const HostRegistry6 = () => {
                             <em></em>공간 정보와 동일
                         </label>
                     </div>
-                    <input value={address} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '18.125rem' }} className="inputForRegister" />
+                    <div style={{display:'flex',justifyContent:'space-between'}} >
+                    <input value={address} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '18.5rem' }} className="input" />
                     <Modal isOpen={modalOpen1}>
                         <DaumPost setAddress={(e) => {
                             setAddress(e);
@@ -223,14 +224,15 @@ const HostRegistry6 = () => {
                         }} />
                         <button onClick={() => setModalOpen1(false)}>닫기</button>
                     </Modal>
-                    <button onClick={() => setModalOpen1(true)} style={{ width: "3.4375rem", height: "1.875rem", fontSize: "0.625rem", backgroundColor: "black", color: "white", borderRadius: '0.375rem', marginLeft: '0.31rem' }} >주소등록</button>
+                    <button onClick={() => setModalOpen1(true)} style={{ width: "3.4375rem", height: "1.875rem", fontSize: "0.625rem", backgroundColor: "black", color: "white", borderRadius: '0.375rem', }} >주소등록</button>
+                    </div>
                     <div>
-                        <input onChange={onChangeExactAddress} placeholder={"상세 주소"} style={{ marginTop: '0.62rem' }} value={exactAddress} className="inputForRegister" />
+                        <input onChange={onChangeExactAddress} placeholder={"상세 주소"} style={{ marginTop: '0.62rem' }} value={exactAddress} className="input" />
                     </div>
                 </div>
                 <div>
                     <p>정산용 연락처<span style={{ color: "#FF2929" }} >*</span></p>
-                    <div style={{ display: "flex",alignItems:'center' }} >
+                    <div style={{ display: "flex",alignItems:'center',justifyContent:'space-between' }} >
                         <input value={phone1} onChange={onChangePhone1} className="input" style={{ width: "30%" }} />-
                         <input value={phone2} onChange={onChangePhone2} className="input" style={{ width: "30%" }} />-
                         <input value={phone3} onChange={onChangePhone3} className="input" style={{ width: "30%" }} />
@@ -245,16 +247,16 @@ const HostRegistry6 = () => {
                 </div>
                 <div style={{ display: 'flex',marginTop:'1.5rem' }} >
                     <div>
-                        <p>은행명<span style={{ color: "#FF2929" }} >*</span></p>
-                        <DropDown dataArr={bankDatas} onChange={setBank} width='6.875rem' />
+                        <a>은행명<span style={{ color: "#FF2929" }} >*</span></a>
+                        <DropDown dataArr={bankDatas} onChange={setBank} width='100%' />
                     </div>
-                    <div>
-                        <p>계좌번호<span style={{ color: "#FF2929" }} >*</span></p>
-                        <input onChange={onChangeAccount} className="input" style={{width:'9.375rem',marginLeft:'0.63rem'}} placeholder={"454102-01-376503"} />
+                    <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}} >
+                        <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
+                        <input onChange={onChangeAccount} className="input" style={{width:'100%'}} placeholder={"454102-01-376503"} />
                     </div>
-                    <div>
-                        <p>예금주<span style={{ color: "#FF2929" }} >*</span></p>
-                        <input onChange={onChangeAccountHolder} className="input" style={{width:'4.375rem',marginLeft:'0.63rem'}} />
+                    <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}}>
+                        <a>예금주<span style={{ color: "#FF2929" }} >*</span></a>
+                        <input onChange={onChangeAccountHolder} className="input" style={{width:'100%'}} />
                     </div>
                 </div>
                 <div style={{fontSize:'0.4375rem'}}>

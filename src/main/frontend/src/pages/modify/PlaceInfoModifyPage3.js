@@ -216,11 +216,10 @@ const PlaceInfoModifyPage3 = () => {
                         justifyContent: "left",
                         alignItems: "center",
                     }}>
-                        <span>전일 </span>
-
-                        <span><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={rentTimeFrom} val={rentTimeFrom} /></span>
+                        <span>대관 당일 </span>
+                        <span style={{ marginLeft: '1rem' }}><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={rentTimeFrom} val={rentTimeFrom} width='6.31444rem' /></span>
                         <span> 부터, 당일 </span>
-                        <span><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={rentTimeTo} val={rentTimeTo} /></span>
+                        <span style={{ marginLeft: '1rem' }}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={rentTimeTo} val={rentTimeTo} width='6.31444rem' /></span>
 
                         <span> 까지</span>
                     </div>
@@ -228,11 +227,11 @@ const PlaceInfoModifyPage3 = () => {
 
                 <div>
                     <a>주차 여부<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택해 주세요"} defaultData={parkAvaliable} val={parkAvaliable} />
+                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택해 주세요"} defaultData={parkAvaliable} val={parkAvaliable} width='90vw' />
                     {parkAvaliable === "직접 입력" ? (
-                        <div style={{ marginTop: '1rem' }}>
+                        <div style={{ marginTop: '0.5rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center' }} >
-                                <input className="input" style={{ width: '5.25rem' }} onChange={onChangePark} value={exactPark} />
+                                <input className="input" style={{ width: '10vw' }} onChange={onChangePark} value={exactPark} />
                                 <a>대</a>
                             </div>
                             {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요.</p> : null}
@@ -272,18 +271,18 @@ const PlaceInfoModifyPage3 = () => {
                 </div>
                 <div>
                     <a>테이블<span style={{ color: '#FF2929' }} >*</span></a>
-                    <input className="input" style={{ width: "90vw", height: "3vh", float: "left" }} onChange={onChangeTable}
+                    <input className="input fontForRegister" style={{ width: "90vw", height: "3vh", float: "left" }} onChange={onChangeTable}
                         placeholder={"최대 테이블 수를 기준으로 입력해주세요"} defaultValue={dbData.tableNum} />
                 </div>
                 <div>
                     <a>좌석 수<span style={{ color: '#FF2929' }} >*</span></a>
-                    <input className="input" style={{ width: "90vw", height: "3vh", float: "left" }} onChange={onChangeSeat}
+                    <input className="input fontForRegister" style={{ width: "90vw", height: "3vh", float: "left" }} onChange={onChangeSeat}
                         placeholder={"최대 좌석수를 기준으로 입력해주세요"} defaultValue={dbData.seatNum} />
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }} >
                     <a>가격 설정<span style={{ color: '#FF2929' }} >*</span></a>
                     <div>
-                        <input className="input" style={{ width: "90vw", height: "3vh", float: "left", marginRight: "2vw" }}
+                        <input className="input fontForRegister" style={{ width: "90vw", height: "3vh", float: "left", marginRight: "2vw" }}
                             onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} defaultValue={dbData.priceSet} />
                     </div>
                     <div>

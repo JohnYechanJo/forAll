@@ -219,7 +219,7 @@ const PlaceInfoModifyPage6 = () => {
                     </div>
                     <div>
                         <p>정산용 연락처<span style={{ color: "#FF2929" }} >*</span></p>
-                        <div style={{ display: "flex", alignItems: 'center' }} >
+                        <div style={{ display: "flex", alignItems: 'center',justifyContent:'space-between' }} >
                             <input value={phone1} defaultValue={phone1} onChange={onChangePhone1} className="input" style={{ width: "30%" }} />-
                             <input value={phone2} defaultValue={phone2} onChange={onChangePhone2} className="input" style={{ width: "30%" }} />-
                             <input value={phone3} defaultValue={phone3} onChange={onChangePhone3} className="input" style={{ width: "30%" }} />
@@ -234,20 +234,20 @@ const PlaceInfoModifyPage6 = () => {
                     </div>
                     <div>
                         <div style={{ display: "flex" }} >
-                            <div>
-                                <p>은행명<span style={{ color: "#FF2929" }} >*</span></p>
-                                <DropDown dataArr={bankDatas} onChange={setBank} defaultData={dbdata.bankName} val={bank} width='6.875rem' />
+                            <div style={{display:'flex',flexDirection:'column'}} >
+                                <a>은행명<span style={{ color: "#FF2929" }} >*</span></a>
+                                <DropDown dataArr={bankDatas} onChange={setBank} defaultData={dbdata.bankName} val={bank} width='100%' />
                             </div>
-                            <div>
-                                <p>계좌번호<span style={{ color: "#FF2929" }} >*</span></p>
+                            <div style={{display:'flex',flexDirection:'column', marginLeft: '0.63rem'}}>
+                                <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
                                 <input onChange={onChangeAccount} placeholder={"454102-01-376503"} defaultValue={dbdata.accountNum} className="input"
-                                    style={{ width: "9.375rem", height: "1.875rem", flexShrink: "0", marginLeft: '0.63rem' }}
+                                    style={{ width: '100%', height: "1.875rem", flexShrink: "0" }}
                                 />
                             </div>
-                            <div>
-                                <p>예금주<span style={{ color: "#FF2929" }} >*</span></p>
+                            <div style={{display:'flex',flexDirection:'column', marginLeft: '0.63rem'}}>
+                                <a>예금주<span style={{ color: "#FF2929" }} >*</span></a>
                                 <input onChange={onChangeAccountHolder} defaultValue={dbdata.accountHolder} className="input"
-                                    style={{ width: "4.375rem", height: "1.875rem", flexShrink: "0", marginLeft: '0.63rem' }}
+                                    style={{ width: '100%', }}
                                 />
                             </div>
                         </div>
