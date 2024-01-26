@@ -25,12 +25,13 @@ const SignUpCompletePage = () => {
         }} >
             <header style={{top:'2.75rem',position: 'absolute',fontSize:'0.9375rem'}} >4. 가입완료
             </header>
-            <div style={{fontSize:"0.938rem", fontWeight:"400",gap:"7.5rem", alignItems:"center", textAlign:"center"}} >
+            <img src={checkIcon} alt="check" style={{width:"3.33rem", height:"3.33rem",flexShrink:"0",marginTop:'7.5rem'}} />
+            <p style={{fontSize:"1.25rem", fontWeight:"700",}} >{data.name}님 환영합니다!</p>
+            <div style={{fontSize:"0.938rem", fontWeight:"400",gap:"7.5rem", alignItems:"center", textAlign:"center",marginBottom:"7.5rem"}} >
                 <p>축하드립니다!</p>
                 <p>포올의 모든 서비스를 이용하실 수 있습니다.</p>
             </div>
-            <img src={checkIcon} alt="check" style={{width:"3.33rem", height:"3.33rem",flexShrink:"0"}} />
-            <p style={{fontSize:"1.25rem", fontWeight:"700",marginBottom:"7.5rem"}} >{data.name}님 환영합니다!</p>
+            
             <div>
                 <span style={{fontSize:"0.938rem", fontWeight:"700"}} >아이디</span>
                 <span style={{fontSize:"0.938rem", fontWeight:"400"}} >{data.id}</span>

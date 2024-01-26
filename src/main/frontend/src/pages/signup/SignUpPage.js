@@ -129,19 +129,19 @@ const SignUpPage = () => {
     };
     const submit = () => {
         if (isAllChecked) {
-            navigate('/guestRegistry',{
+            navigate('/guestRegistry', {
                 state: {
                     loginId: id,
                     loginPw: pw,
                     name: name,
-                    birthday: birthDay,
-                    gender: gender,
                     email: email,
-                    phoneNum: phone
+                    phoneNum: phone,
+                    birthDay: birthDay,
+                    gender:gender
                 }
             });
-        }
-
+                    
+    }
     }
     return (
         <div>
@@ -187,13 +187,6 @@ const SignUpPage = () => {
                 <UseTermsTemplate
                     setIsUseTermsChecked={setIsUseTermsChecked}
                 />
-
-
-                {isAllChecked ? <SignUpInformationTemplate
-                    setIsAllChecked={setIsAllChecked}
-                    submit={submit}
-                /> : null}
-
                 <Alert isOpen={isModalOpen} setIsOpen={setIsModalOpen} content={alertContent} />
 
             </div>

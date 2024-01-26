@@ -52,18 +52,34 @@ const GuestRegistry = () => {
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
     const submit = async () => {
-        const userId = sessionStorage.getItem("user_id");
-        const picture = await ImageUploader(profileImage, userId);
-        axios.post("/api/v1/profile", {
-            userId: userId,
-            introduction: introduce,
-            picture: picture,
-            mbti: selectedMBTI,
-            cook: selectedFoodTypes,
-            interest: selectedIngredient,
-
-        }).then((res) => {
-            navigate("/notification");
+        axios.post("/api/v1/members",{
+            loginId: data.loginId,
+            loginPw: data.loginPw,
+            name: data.name,
+            email: data.email,
+            phoneNum: data.phoneNum,
+            birthday: data.birthday,
+            gender: data.gender
+        }).then(async ()=>{
+            sessionStorage.setItem("user_id", data.loginId);
+            sessionStorage.setItem("name", data.name);
+            sessionStorage.setItem("email", data.email);
+            const picture = await ImageUploader(profileImage, data.loginId);
+            axios.post("/api/v1/profile", {
+                userId: data.loginId,
+                introduction: introduce, 
+                profilePhoto: picture, 
+                mbti: selectedMBTI,
+                cook: selectedFoodTypes,
+                cookItem: selectedIngredient, 
+            }).then((res) => {
+                navigate("/notification",{state:{
+                        id: data.loginId,
+                        name: data.name,
+                        email: data.email,
+                        profileImg: data.picture,
+                    }});
+            }).catch((err) => console.error(err));
         }).catch((err) => console.error(err));
     };
 

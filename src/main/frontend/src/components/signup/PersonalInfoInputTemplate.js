@@ -43,13 +43,13 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
 
 
     return (
-        <div>
+        <div style={{width:'100%',padding:'1rem',boxSizing:'border-box'}} >
             <a className="fontForRegister" >아이디<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{display:"flex",marginBottom:"2.5rem",justifyContent:"space-between"}} >
                 <input
-                    className="inputForRegister"
+                    className="inputForRegister fontForRegister "
                     style={{width:"14.0625rem"}}
-                    placeholder={"아이디를 입력해주세요"}
+                    placeholder={" 아이디를 입력해주세요"}
                     onChange={onChangeId}
                 />
                 <button onClick={() => checkDuplicatedId()} className="buttonForRegister" >중복확인</button>
@@ -59,18 +59,18 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
             <a className="fontForRegister"  >비밀번호<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{marginBottom:"2.5rem", display:"flex" }}>
                 <input
-                    className="inputForRegister"
+                    className="inputForRegister fontForRegister"
                     type="password"
-                    placeholder={"대,소문자,특수기호,숫자 포함 12-14자리"}
+                    placeholder={" 대,소문자,특수기호,숫자 포함 12-14자리"}
                     onChange={onChangePw}
                 />
             </div>
             <a className="fontForRegister"  >비밀번호 확인<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{marginBottom:"2.5rem"}}>
                 <input
-                    className="inputForRegister"
+                    className="inputForRegister fontForRegister"
                     type="password"
-                    placeholder={"비밀번호를 한번 더 입력해주세요"}
+                    placeholder={" 비밀번호를 한번 더 입력해주세요"}
                     onChange={onChangePwCheck}
                 />
                 {isCheckPw === true ? <p>비밀번호가 일치합니다</p> :
@@ -79,8 +79,8 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
             <a className="fontForRegister" >이름<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{marginBottom:"2.5rem"}}>
                 <input
-                    className="inputForRegister"
-                    placeholder={"이름을 입력해 주세요"}
+                    className="inputForRegister fontForRegister"
+                    placeholder={" 이름을 입력해 주세요"}
                     onChange={onChangeName}
                 />
             </div>
@@ -88,8 +88,8 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
             <div style={{marginBottom:"2.5rem",justifyContent:"space-between",display:"flex"}}>
                 <input
                     style={{width:"14.0625rem"}}
-                    className="inputForRegister"
-                    placeholder={"예:forall@forall.com"}
+                    className="inputForRegister fontForRegister"
+                    placeholder={" 예:forall@forall.com"}
                     onChange={onChangeEmail}
                 />
                 <button onClick={() => checkDuplicatedEmail()} className="buttonForRegister">중복확인</button>
@@ -100,8 +100,8 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
             <div style={{justifyContent:"space-between",display:"flex"}}>
                 <input
                     style={{width:"14.0625rem",marginBottom:"0.625rem"}}
-                    className="inputForRegister"
-                    placeholder={"숫자만 입력해주세요"}
+                    className="inputForRegister fontForRegister"
+                    placeholder={" 숫자만 입력해주세요"}
                     onChange={onChangePhone}
                 />
                 <button onClick={() => sendCerifiedNum()} className="buttonForRegister"
@@ -109,9 +109,9 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                 >인증번호 받기</button>
             </div>
             <div style={{marginBottom:"2.5rem",justifyContent:"space-between",display:"flex"}}>
-                <input  className="inputForRegister"
+                <input  className="inputForRegister fontForRegister"
                         style={{width:"14.0625rem"}}
-                        placeholder={"인증번호 입력"}
+                        placeholder={" 인증번호 입력"}
                         onChange={onChangeCerifiedNum}
                 />
                 <button onClick={() => checkCerifiedNum()} className="buttonForRegister"
@@ -160,7 +160,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         onChange={onChangeGender}
                         id="male"
                     />
-                    <label for='male' style={{display:'block',marginBottom:'1rem',marginTop:'1rem'}}>
+                    <label for='male' style={{display: 'flex', alignItems: 'center', marginBottom: '0.5rem', marginTop: '0.5rem'}}>
                         <em></em><span className="fontForRegister" >남자</span>
                     </label>
                     <input
@@ -170,7 +170,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         onChange={onChangeGender}
                         id="female"
                     />
-                    <label for='female' style={{display:'block'}}>
+                    <label for='female' style={{display: 'flex', alignItems: 'center', marginBottom: '0.5rem', marginTop: '0.5rem'}}>
                         <em></em><span className="fontForRegister" >여자</span>
                     </label>
                 </div>

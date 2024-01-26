@@ -26,8 +26,6 @@ const HostRegistry6 = () => {
     const [license, setLicense] = useState();
     const [address, setAddress] = useState("");
     const [exactAddress, setExactAddress] = useState("");
-    const [email1, setEmail1] = useState("");
-    const [email2, setEmail2] = useState(emailDatas[0]);
     const [phone1, setPhone1] = useState("");
     const [phone2, setPhone2] = useState("");
     const [phone3, setPhone3] = useState("");
@@ -58,12 +56,7 @@ const HostRegistry6 = () => {
     const onChangeExactAddress = useCallback((e) => {
         setExactAddress(e.target.value);
     }, []);
-    const onChangeEmail1 = useCallback((e) => {
-        setEmail1(e.target.value);
-    }, []);
-    const onChangeEmail2 = useCallback((e) => {
-        setEmail2(e.target.value);
-    }, []);
+
     const onChangePhone1 = useCallback((e) => {
         if (e.target.value.length <= 3) setPhone1(e.target.value);
     }, []);
@@ -84,7 +77,7 @@ const HostRegistry6 = () => {
         if ((tradeName === "") || (representative === "") || (registNum1 === "") || (registNum2 === "") || (registNum3 === "") || (license === "") || (address === "") || (exactAddress === "") || (isAgree === false)) {
             setIsAlertOpen(true);
         } else if ((tradeName !== "") && (representative !== "") && (registNum1 !== "") && (registNum2 !== "") && (registNum3 !== "")
-            && (license !== undefined) && (address !== undefined) && (exactAddress !== "") && (email1 !== "")
+            && (license !== undefined) && (address !== undefined) && (exactAddress !== "") 
             && (phone1 !== "") && (phone2 !== "") && (phone3 !== "") && (account !== "") && (accountHolder !== undefined)) {
             isPublic = true;
             submit();
@@ -106,7 +99,7 @@ const HostRegistry6 = () => {
         const businessNum = registNum1 + registNum2 + registNum3;
         const businessImage = await ImageUploader(license, userId);
         const businessAddress = address + exactAddress;
-        const payEmail = email1 + "@" + email2;
+
         const payPhoneNum = phone1 + phone2 + phone3;
 
         await axios.post("/api/v1/space", {
@@ -151,7 +144,6 @@ const HostRegistry6 = () => {
             businessNum: businessNum,
             businessImage: businessImage,
             businessAddress: businessAddress,
-            payEmail: payEmail,
             payPhoneNum: payPhoneNum,
             bankName: bank,
             accountNum: account,
@@ -164,9 +156,7 @@ const HostRegistry6 = () => {
             .catch((err) => console.error(err));
 
     };
-    useEffect(() => {
-        if (email2 === "직접입력") setEmail2("");
-    }, [email2]);
+
     const handleCheckBox = () => {
         if (address === "") {
             setAddress(data.address);
@@ -184,7 +174,7 @@ const HostRegistry6 = () => {
             <div style={{ display: "flex", flexDirection: "column", padding: "1rem", alignItems: "flex-start", gap: "1.5rem" }} className="fontForRegister">
                 <div style={{ width: "100%" }} >
                     <a>정산 정보를 입력해 주세요<span style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "2px", backgroundColor: "black", width: "100%" }} />
+                    <hr style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
                 </div>
                 <div>
                     <div style={{ display: "flex", justifyContent: "space-between" }} >
@@ -198,11 +188,11 @@ const HostRegistry6 = () => {
                         <p>대표자명<span style={{ color: "#FF2929" }} >*</span></p>
                         <p>{representative.length}자/10자</p>
                     </div>
-                    <input value={representative} onChange={onChangeRepresentative} placeholder={"대표자명을 입력해 주세요"} className="inputForRegister" />
+                    <input value={representative} onChange={onChangeRepresentative} placeholder={"대표자명을 입력해 주세요"} className="input" />
                 </div>
                 <div>
                     <p>사업자 등록번호<span style={{ color: "#FF2929" }} >*</span></p>
-                    <div style={{ display: "flex" }} >
+                    <div style={{ display: "flex",alignItems:'center',justifyContent:'space-between' }} >
                         <input value={registNum1} onChange={onChangeRegistNum1} className="input" style={{ width: "30%" }} />-
                         <input value={registNum2} onChange={onChangeRegistNum2} className="input" style={{ width: "30%" }} />-
                         <input value={registNum3} onChange={onChangeRegistNum3} className="input" style={{ width: "30%" }} />
@@ -225,7 +215,8 @@ const HostRegistry6 = () => {
                             <em></em>공간 정보와 동일
                         </label>
                     </div>
-                    <input value={address} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '18.125rem' }} className="inputForRegister" />
+                    <div style={{display:'flex',justifyContent:'space-between'}} >
+                    <input value={address} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '18.5rem' }} className="input" />
                     <Modal isOpen={modalOpen1}>
                         <DaumPost setAddress={(e) => {
                             setAddress(e);
@@ -233,20 +224,15 @@ const HostRegistry6 = () => {
                         }} />
                         <button onClick={() => setModalOpen1(false)}>닫기</button>
                     </Modal>
-                    <button onClick={() => setModalOpen1(true)} style={{ width: "3.4375rem", height: "1.875rem", fontSize: "0.625rem", backgroundColor: "black", color: "white", borderRadius: '0.375rem', marginLeft: '0.31rem' }} >주소등록</button>
+                    <button onClick={() => setModalOpen1(true)} style={{ width: "3.4375rem", height: "1.875rem", fontSize: "0.625rem", backgroundColor: "black", color: "white", borderRadius: '0.375rem', }} >주소등록</button>
+                    </div>
                     <div>
-                        <input onChange={onChangeExactAddress} placeholder={"상세 주소"} style={{ marginTop: '0.62rem' }} value={exactAddress} className="inputForRegister" />
+                        <input onChange={onChangeExactAddress} placeholder={"상세 주소"} style={{ marginTop: '0.62rem' }} value={exactAddress} className="input" />
                     </div>
                 </div>
                 <div>
-                    <p>정산용 이메일*</p>
-                    <input onChange={onChangeEmail1} />
-                    @ <input value={email2} onChange={onChangeEmail2} />
-                    <DropDown dataArr={emailDatas} onChange={setEmail2} />
-                </div>
-                <div>
                     <p>정산용 연락처<span style={{ color: "#FF2929" }} >*</span></p>
-                    <div style={{ display: "flex" }} >
+                    <div style={{ display: "flex",alignItems:'center',justifyContent:'space-between' }} >
                         <input value={phone1} onChange={onChangePhone1} className="input" style={{ width: "30%" }} />-
                         <input value={phone2} onChange={onChangePhone2} className="input" style={{ width: "30%" }} />-
                         <input value={phone3} onChange={onChangePhone3} className="input" style={{ width: "30%" }} />
@@ -256,21 +242,21 @@ const HostRegistry6 = () => {
             <div style={{ display: "flex", flexDirection: "column", padding: "1rem", alignItems: "flex-start"}} className="fontForRegister">
                 <div style={{ width: "100%" }} >
                     <a>계좌 정보를 입력해 주세요<span style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "2px", backgroundColor: "black", width: "100%" }} />
+                    <hr style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
                     <a style={{fontSize:'0.4375rem'}} >• 법인 사업자는 법인 통장계좌를, 개인 사업자는 사업자 명의의 통장 계좌를 입력해주세요. 포 올을 통해 결제된 금액이 해당 계좌로 정산됩니다.</a>
                 </div>
                 <div style={{ display: 'flex',marginTop:'1.5rem' }} >
                     <div>
-                        <p>은행명<span style={{ color: "#FF2929" }} >*</span></p>
-                        <DropDown dataArr={bankDatas} onChange={setBank} width='6.875rem' />
+                        <a>은행명<span style={{ color: "#FF2929" }} >*</span></a>
+                        <DropDown dataArr={bankDatas} onChange={setBank} width='100%' />
                     </div>
-                    <div>
-                        <p>계좌번호<span style={{ color: "#FF2929" }} >*</span></p>
-                        <input onChange={onChangeAccount} className="input" style={{width:'9.375rem',marginLeft:'0.63rem'}} placeholder={"454102-01-376503"} />
+                    <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}} >
+                        <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
+                        <input onChange={onChangeAccount} className="input" style={{width:'100%'}} placeholder={"454102-01-376503"} />
                     </div>
-                    <div>
-                        <p>예금주<span style={{ color: "#FF2929" }} >*</span></p>
-                        <input onChange={onChangeAccountHolder} className="input" style={{width:'4.375rem',marginLeft:'0.63rem'}} />
+                    <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}}>
+                        <a>예금주<span style={{ color: "#FF2929" }} >*</span></a>
+                        <input onChange={onChangeAccountHolder} className="input" style={{width:'100%'}} />
                     </div>
                 </div>
                 <div style={{fontSize:'0.4375rem'}}>
@@ -280,16 +266,18 @@ const HostRegistry6 = () => {
             </div>
             <div style={{ display: "flex", flexDirection: "column", padding: "1rem", alignItems: "flex-start"}} className="fontForRegister">
                 <p>환불 기준을 동의해 주세요<span style={{ color: "#FF2929" }} >*</span></p>
-                <hr style={{ height: "2px", backgroundColor: "black", width: "100%" }} />
-                <p>• 셰프 환불 기준은 아래와 같이 구분됩니다.</p>
-                <p>• 1) 대관 14일 전:100% 환불</p>
-                <p>• 2) 대관 13일 전~9일 전:80% 환불</p>
-                <p>• 3) 대관 8일 전~5일 전:50% 환불</p>
-                <p>• 4) 대관 4일 전~당일:환불 불가</p>
-                <hr style={{ height: "2px", backgroundColor: "black", width: "100%" }} />
+                <hr style={{ height: "1px", backgroundColor: "black", width: "100%",marginTop:'0' }} />
+                <div style={{display:'flex',flexDirection:'column'}} >
+                <a>• 셰프 환불 기준은 아래와 같이 구분됩니다.</a>
+                <a>• 1) 대관 14일 전:100% 환불</a>
+                <a>• 2) 대관 13일 전~9일 전:80% 환불</a>
+                <a>• 3) 대관 8일 전~5일 전:50% 환불</a>
+                <a>• 4) 대관 4일 전~당일:환불 불가</a>
+                </div>
+                <hr style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
             </div>
             <input type="checkbox" id="agree" checked={isAgree} onChange={() => setIsAgree(!isAgree)} />
-            <label for='agree' style={{marginLeft:'1rem',display:'flex'}}>
+            <label for='agree' style={{marginLeft:'1rem',display:'flex',alignItems:'center'}}>
                 <em></em><a>동의합니다</a>
             </label>
             <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem', bottom: '0'}}>

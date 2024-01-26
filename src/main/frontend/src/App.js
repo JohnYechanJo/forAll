@@ -22,7 +22,7 @@ import HostRegistry2 from "./pages/hostregistry/HostRegistry2";
 import HostRegistry3 from "./pages/hostregistry/HostRegistry3";
 import HostRegistry6 from "./pages/hostregistry/HostRegistry6";
 import HostRegistry4 from "./pages/hostregistry/HostRegistry4";
-import HostRegistryComplete from "./pages/hostregistry/HostRegistryComplete";
+
 import HostRegistryCheckingPage from './pages/hostregistry/HostRegistryChecking';
 
 
@@ -32,7 +32,6 @@ import GuestRegistry from "./pages/signup/GuestRegistry";
 import LoginHandeler from "./pages/LoginHandeler";
 import ChefRegistry from './pages/chefregistry/ChefRegistry';
 import ChefRegistryCheckingPage from './pages/chefregistry/ChefRegistryChecking';
-import ChefRegistryComplete from './pages/chefregistry/ChefRegistryComplete';
 import ChefInfoModifyPage from './pages/modify/ChefInfoModifyPage';
 import RentSpacePage from "./pages/RentSpace/RentSpacePage";
 import RentSpaceInfo1 from "./pages/RentSpace/RentSpaceInfo1";
@@ -104,7 +103,6 @@ function App() {
         <Route path="/hostRegistry4" element={<HostRegistry4 />}/>
         <Route path="/hostRegistry5" element={<HostRegistry5 />}/>
         <Route path="/hostRegistry6" element={<HostRegistry6 />}/>
-        <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
         <Route path="/hostRegistryChecking" element={<HostRegistryCheckingPage />} />
         <Route path="/guestRegistry" element={<GuestRegistry />}/>
 
@@ -143,7 +141,6 @@ function App() {
         <Route path="/notification" element={<Notification />}/>
         <Route path="/chefRegistry" element={<ChefRegistry />} />
         <Route path="/chefRegistryChecking" element={<ChefRegistryCheckingPage />} />
-        <Route path="/chefRegistryComplete" element={<ChefRegistryComplete />} />
             <Route path="/FAQ" element={<FAQ />} />
             <Route path="/EntryPartnership" element={<EntryPartnership />} />
         <Route path="/alreadyChef" element={<AlreadyChef />} />
