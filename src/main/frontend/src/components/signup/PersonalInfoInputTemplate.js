@@ -54,8 +54,8 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                 />
                 <button onClick={() => checkDuplicatedId()} className="buttonForRegister" >중복확인</button>
             </div>
-            {isCheckedDuplicatedId === true ? <p>중복 확인 완료되었습니다</p> :
-                (isCheckedDuplicatedId === false ? <p>중복되는 아이디가 존재합니다</p> : null)}
+            {isCheckedDuplicatedId === true ? <p style={{paddingLeft:'1.5rem', fontSize:'0.625rem',fontWeight:'300'}}>중복 확인 완료되었습니다</p> :
+                (isCheckedDuplicatedId === false ? <p style={{paddingLeft:'1.5rem', fontSize:'0.625rem',fontWeight:'300'}}>중복되는 아이디가 존재합니다</p> : null)}
             <a className="fontForRegister"  >비밀번호<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{marginBottom:"2.5rem", display:"flex" }}>
                 <input
@@ -73,8 +73,8 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                     placeholder={" 비밀번호를 한번 더 입력해주세요"}
                     onChange={onChangePwCheck}
                 />
-                {isCheckPw === true ? <p>비밀번호가 일치합니다</p> :
-                    (isCheckPw === false ? <p>비밀번호가 일치하지 않습니다</p> : null)}
+                {isCheckPw === true ? <p style={{paddingLeft:'1.5rem', fontSize:'0.625rem',fontWeight:'300'}}>비밀번호가 일치합니다</p> :
+                    (isCheckPw === false ? <p style={{paddingLeft:'1.5rem', fontSize:'0.625rem',fontWeight:'300'}}>비밀번호가 일치하지 않습니다</p> : null)}
             </div>
             <a className="fontForRegister" >이름<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{marginBottom:"2.5rem"}}>
@@ -94,8 +94,8 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                 />
                 <button onClick={() => checkDuplicatedEmail()} className="buttonForRegister">중복확인</button>
             </div>
-            {isCheckedDuplicatedEmail === true ? <p>중복 확인 완료되었습니다</p> :
-                (isCheckedDuplicatedEmail === false ? <p>중복되는 이메일이 존재합니다</p> : null)}
+            {isCheckedDuplicatedEmail === true ? <p style={{paddingLeft:'1.5rem', fontSize:'0.625rem',fontWeight:'300'}}>중복 확인 완료되었습니다</p> :
+                (isCheckedDuplicatedEmail === false ? <p style={{paddingLeft:'1.5rem', fontSize:'0.625rem',fontWeight:'300'}}>중복되는 이메일이 존재합니다</p> : null)}
             <a className="fontForRegister" >휴대폰<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{justifyContent:"space-between",display:"flex"}}>
                 <input
@@ -118,8 +118,8 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         style={{backgroundColor:"#616161",color:"white"}}
                 >인증번호 확인</button>
             </div>
-            {isPhoneCerified === true ? <p>인증 완료되었습니다</p> :
-                (isPhoneCerified === false ? <p>인증 실패했습니다</p> : null)}
+            {isPhoneCerified === true ? <p style={{paddingLeft:'1.5rem', fontSize:'0.625rem',fontWeight:'300'}}>인증 완료되었습니다</p> :
+                (isPhoneCerified === false ? <p style={{paddingLeft:'1.5rem', fontSize:'0.625rem',fontWeight:'300'}}>인증 실패했습니다</p> : null)}
             <div>
                 <a className="fontForRegister" >생년월일<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 <div style={{marginBottom:"2.5rem",display:'flex'}}>
