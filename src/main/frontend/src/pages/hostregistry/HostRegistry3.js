@@ -162,14 +162,14 @@ const HostRegistry3 = () => {
                     <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} width='90vw' />
                     {rentWeek === "직접지정" ?
                         <MultipleDatePicker onSubmit={setRentDays} /> : (rentWeek !== "휴무없음" ?
-                            <div>
-                                <div className={monDay ? "btn_selected" : ""} onClick={toggleMonday}>월</div>
-                                <div className={tuesDay ? "btn_selected" : ""} onClick={toggleTuesDay}>화</div>
-                                <div className={wednesDay ? "btn_selected" : ""} onClick={toggleWednesDay}>수</div>
-                                <div className={thursDay ? "btn_selected" : ""} onClick={toggleThursDay}>목</div>
-                                <div className={friDay ? "btn_selected" : ""} onClick={toggleFriDay}>금</div>
-                                <div className={saturDay ? "btn_selected" : ""} onClick={toggleSaturDay}>토</div>
-                                <div className={sunDay ? "btn_selected" : ""} onClick={toggleSunDay}>일</div>
+                            <div style={{display:'flex'}} >
+                                <div className={monDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleMonday}>월</div>
+                                <div className={tuesDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleTuesDay}>화</div>
+                                <div className={wednesDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleWednesDay}>수</div>
+                                <div className={thursDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleThursDay}>목</div>
+                                <div className={friDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleFriDay}>금</div>
+                                <div className={saturDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleSaturDay}>토</div>
+                                <div className={sunDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleSunDay}>일</div>
                             </div>
                             : null)}
                 </div>
@@ -192,9 +192,11 @@ const HostRegistry3 = () => {
                     <a>주차 여부<span style={{ color: '#FF2929' }} >*</span></a>
                     <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} width='90vw' />
                     {parkAvaliable === "직접 입력" ? (
-                        <div>
-                            <input onChange={onChangePark} />
-                            <p>대</p>
+                        <div style={{marginTop:'1rem'}} >
+                            <div style={{display:'flex',alignItems:'center'}} >
+                            <input  className="input" style={{width:'5.25rem'}} onChange={onChangePark} />
+                            <a>대</a>
+                            </div>
                             {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요.</p> : null}
                         </div>
                     ) : null}
@@ -241,7 +243,7 @@ const HostRegistry3 = () => {
                         placeholder={"최대 테이블 수를 기준으로 입력해주세요"} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <a>좌석수<span style={{ color: '#FF2929' }} >*</span></a>
+                    <a>좌석 수<span style={{ color: '#FF2929' }} >*</span></a>
                     <input className="input" onChange={onChangeSeat}
                         placeholder={"최대 좌석수를 기준으로 입력해주세요"} />
                 </div>

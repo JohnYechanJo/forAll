@@ -22,7 +22,7 @@ import HostRegistry2 from "./pages/hostregistry/HostRegistry2";
 import HostRegistry3 from "./pages/hostregistry/HostRegistry3";
 import HostRegistry6 from "./pages/hostregistry/HostRegistry6";
 import HostRegistry4 from "./pages/hostregistry/HostRegistry4";
-import HostRegistryComplete from "./pages/hostregistry/HostRegistryComplete";
+
 import HostRegistryCheckingPage from './pages/hostregistry/HostRegistryChecking';
 
 
@@ -104,7 +104,6 @@ function App() {
         <Route path="/hostRegistry4" element={<HostRegistry4 />}/>
         <Route path="/hostRegistry5" element={<HostRegistry5 />}/>
         <Route path="/hostRegistry6" element={<HostRegistry6 />}/>
-        <Route path="/hostRegistryComplete" element={<HostRegistryComplete />} />
         <Route path="/hostRegistryChecking" element={<HostRegistryCheckingPage />} />
         <Route path="/guestRegistry" element={<GuestRegistry />}/>
 

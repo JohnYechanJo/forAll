@@ -31,8 +31,7 @@ const HostRegistryCheckingPage = () => {
                     <span style={{ fontSize: "0.938rem", fontWeight: "400", marginLeft: '1rem' }} >{email}</span>
                 </div>
             </div>
-            <button onClick={() => { navigate("/hostRegistryComplete"); }} className="bottom_button" style={{ backgroundColor: "black", position: "fixed" }} >확인</button>
-
+            <button onClick={() => { navigate("/"); }} className="bottom_button_fixed" style={{ width:'100%', height:'3.125rem',backgroundColor:'black',color:'white',fontSize:'1rem',fontWeight:'400'}} >확인</button>
 
         </div>
     )
