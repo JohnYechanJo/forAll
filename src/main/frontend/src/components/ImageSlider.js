@@ -4,7 +4,7 @@ import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 import 'swiper/components/navigation/navigation.min.css';
 import 'swiper/components/pagination/pagination.min.css';
-const ImageSlider = ({images}) => {
+const ImageSlider = ({images, style}) => {
     const spring_app_url = "http://localhost:8080";
     SwiperCore.use([Navigation, Pagination]);
     return(
@@ -18,10 +18,13 @@ const ImageSlider = ({images}) => {
                 {images ? images.map((image, idx) => {
                     return(
                         <SwiperSlide key={idx}>
-                            <img
-                                src={spring_app_url + "/api/v1/image/"+image}
-                                alt={"image"}
-                            />
+                            <div style={style ? style : {}}>
+                                <img
+                                    style={{objectFit:"cover", objectPosition:"center", width:"100%", height:"100%", display:"block"}}
+                                    src={spring_app_url + "/api/v1/image/"+image}
+                                    alt={"image"}
+                                />
+                            </div>
 
                         </SwiperSlide>
                     )
