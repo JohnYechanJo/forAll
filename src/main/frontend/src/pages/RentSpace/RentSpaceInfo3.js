@@ -345,7 +345,7 @@ const RentSpaceInfo3 = () => {
           </div>
         </div>
       </div>
-      <button onClick={() => navigate(-1)}>돌아가기</button>
+      <button  className="bottom_button" style={{backgroundColor:'#FF4F4F',marginTop:'4rem'}} onClick={() => navigate(-1)}>돌아가기</button>
     </div>
   );
 };
