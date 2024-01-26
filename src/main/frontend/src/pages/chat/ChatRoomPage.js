@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
@@ -9,6 +9,10 @@ import ImageUploader from "../../utils/imageUploader";
 import ImageViewer from "../../components/ImageViewer";
 import Sidebar from "../../components/home/Sidebar";
 import "../../style/ChatRoom.css"
+import search from "../../components/icons/search.png";
+import folder from "../../components/icons/folder.png";
+import arrowleft from "../../components/icons/arrowleft.png";
+import clip from "../../components/icons/clip.png";
 
 const ChatRoomPage = () => {
     const location = useLocation();
@@ -96,45 +100,52 @@ const ChatRoomPage = () => {
                 </div>
                 <Sidebar/>
                 <div style={{paddingTop:"3.125rem"}}></div>
-                <div className={"chat_category"}>{data.category === ChatRoomCategory.Reservation ? "채팅창 > 예약사항" : "채팅창 > 게시판"}</div>
+                <div className={"chat_category"}><p>{data.category === ChatRoomCategory.Reservation ? "채팅창 > 예약사항" : "채팅창 > 게시판"}</p></div>
                 <div style={{height:"3.125rem", display:"flex",background:"white",justifyContent:"space-between"}}>
                     <div style={{textAlign:"left", display:"flex"}}>
-                        <div onClick={()=>navigate(-1)}>{"<"}</div>
+                        <div onClick={()=>navigate(-1)} className={"height_align_container"}>
+                            <img src={arrowleft} alt="sidebar" style={{width:"0.5rem", height:"0.9rem", paddingLeft:"0.5rem", paddingRight:"1.5rem", margin: "auto"}} />
+                        </div>
                         {partnerData ? (<div className={"chat_profile_image"} onClick={()=>navigate("/profile/"+partner)}>
                             <ImageViewer val={partnerData.profilePhoto}/>
                         </div>) : null}
-                        <p>{partner}</p>
+                        <div style={{alignItems:"center", display:"flex"}}>
+                            <div className={"chat_partner_id"}>{partner}</div>
+                        </div>
+
                     </div>
                     <div style={{textAlign:"right", display:"flex"}}>
                         {/*Todo 찾기, 파일함 기능구현*/}
-                        <p>찾기</p>
-                        <p>파일함</p>
+                        <img src={search} alt="sidebar" style={{width:"1.125rem", height:"1.125rem", paddingRight:"0.6rem", margin: "auto"}} />
+                        <img src={folder} alt="sidebar" style={{width:"1.26rem", height:"1rem", paddingRight:"0.6rem",margin: "auto"}} />
                     </div>
                 </div>
             </div>
-            <div style={{paddingTop:"11rem"}}></div>
+            <div style={{paddingTop:"9.375rem"}}></div>
             <div className={"chat_container"}>
-                <div style={{paddingTop:"11rem"}}></div>
                 {messageSet ?messageSet.map((message, idx) => (
                     <div key={idx}>
                         {message.senderId === partner ? (
-                            <div>
-                                {partnerData ? (<ImageViewer val={partnerData.profilePhoto}/>) : null}
-                                <p>{partner}</p>
-                                {message.isImage ? (
-                                    <ImageViewer val={message.messageContent}/>
-                                ) : (<p>{message.messageContent}</p>)}
+                            <div className={"chat_message_container"}>
+                                {partnerData ? (<div className={"chat_profile_image"}>
+                                    <ImageViewer val={partnerData.profilePhoto}/>
+                                </div>) : null}
+                                <div>
+                                    <div className={"chat_partner_id"}>{partner}</div>
+                                    {message.isImage ? (
+                                        <ImageViewer val={message.messageContent}/>
+                                    ) : (<div className={"chat_partner_message"}>{message.messageContent}</div>)}
+                                </div>
                             </div>
                         ):(
                             <div>
                                 {message.isImage ? (
                                     <ImageViewer val={message.messageContent}/>
-                                ) : (<p>{message.messageContent}</p>)}
+                                ) : (<div className={"chat_my_message"}>{message.messageContent}</div>)}
                             </div>
                         )}
                     </div>
                 )) :null}
-                <div style={{paddingBottom:"5rem"}}></div>
             </div>
 
             <div className={"chat_submit_area"}>
@@ -149,7 +160,7 @@ const ChatRoomPage = () => {
                                }}
                                style={{display: "none"}}
                         />
-                        <div>첨부파일</div>
+                        <img src={clip} alt="sidebar" style={{width:"1.5rem", height:"1.5rem", paddingLeft:"0.5rem", margin: "auto"}} />
                     </label>
                     <div style={{textAlign:"right"}}>
                         <div className={"chat_submit_button"} onClick={sendMessage}>전송</div>

@@ -9,8 +9,6 @@ const SignUpCompletePage = () => {
     const navigate = useNavigate();
 
     sessionStorage.setItem("profileImg", data.profileImg);
-
-
     sessionStorage.setItem("user_id", data.id);
     sessionStorage.setItem("role", data.role);
     sessionStorage.setItem("name", data.name);

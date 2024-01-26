@@ -53,12 +53,7 @@ const Notification = () => {
                 </div>
             </div>
 
-            <button className="bottom_button_relative" style={{ backgroundColor: "#FF2929", position: "fixed" }} onClick={() => { navigate("/signUpComplete",{state:{
-                    id: data.loginId,
-                    name: data.name,
-                    email: data.email,
-                    profileImg: data.profileImg,
-                }}) }} >가입하기</button>
+            <button className="bottom_button_relative" style={{ backgroundColor: "#FF2929", position: "fixed" }} onClick={() => { navigate("/signUpComplete",{state:data}) }} >가입하기</button>
 
         </div>
     )

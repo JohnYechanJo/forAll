@@ -10,6 +10,8 @@ import {useNavigate} from "react-router-dom";
 import ImagePreView from "../../components/ImagePreView";
 import updownImg from "../../components/icons/updown.jpg";
 import pencilImg from "../../components/icons/pencil.jpg";
+import ImageViewer from "../../components/ImageViewer";
+import clip from "../../components/icons/clip.png";
 
 const RecipeBoardPage = () => {
     const navigate = useNavigate();
@@ -74,7 +76,10 @@ const RecipeBoardPage = () => {
                     display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%',
                     height: '3.125rem', flexShrink: 0, border: '1px solid #C4C4C4', background: '#FFF'
                 }}>
-                    <div onClick={() => setNewPost(true)}
+                    <div onClick={() => {
+                        if (!sessionStorage.getItem("user_id")) return;
+                        setNewPost(true);
+                    }}
                          style={{
                              display: 'flex', alignItems: 'center', width: '21.875rem', height: '1.875rem',
                              flexShrink: 0, border: '1px solid #C4C4C4', background: '#FFF'
@@ -94,24 +99,59 @@ const RecipeBoardPage = () => {
                 <div>
                     {newPost ? (
                         <div>
-                            <input value={postTitle} onChange={onChangePostTitle} placeholder={"글 제목"}/>
-                            <input value={postContent} onChange={onChangePostContent}
-                                   placeholder={postContentPlaceholder}/>
-                            <label>
-                                <input type={"file"}
-                                       accept="image/*"
-                                       onChange={(e) => setPostImage(Array.from(e.target.files))}
-                                       style={{display: "none"}}
-                                       multiple={true}
-                                />
-                                <div>첨부파일</div>
-                            </label>
-                            <button onClick={UploadPost}>글 올리기</button>
+                            <div>
+                                <input value={postTitle} onChange={onChangePostTitle} placeholder={"제목을 입력해주세요"} style={{
+                                    fontSize: '1.25rem', fontStyle: 'normal', fontWeight: '500',
+                                    lineHeight: 'normal', letterSpacing: '-0.01031rem', margin:"0.5rem",
+                                    border:0
+                                }}/>
+                            </div>
+                            <div style={{display:"flex", margin:"0.5rem"}}>
+                                <div style={{width:"1.5rem", height:"1.5rem", borderRadius:"1.5rem", overflow:"hidden"}}>
+                                    <ImageViewer val={null}/>
+                                </div>
+                                <div style={{color:"#0788FF",fontStyle:"0.875rem"}}>{sessionStorage.getItem("user_id")}</div>
+                            </div>
+                            <div>
+                                <textarea value={postContent} onChange={onChangePostContent}
+                                          placeholder={postContentPlaceholder} style={{
+                                    fontSize: '0.875rem', fontStyle: 'normal', fontWeight: '400',
+                                    lineHeight: 'normal', letterSpacing: '-0.01031rem', margin:"0.5rem",
+                                    border:0, width:"100%", height:"25rem"
+                                }}/>
+                            </div>
+                            <div style={{display:"flex",justifyContent:"space-between"}}>
+                                <label>
+                                    <input type={"file"}
+                                           accept="image/*"
+                                           onChange={(e) => setPostImage(Array.from(e.target.files))}
+                                           style={{display: "none"}}
+                                           multiple={true}
+                                    />
+                                    <div>
+                                        <img src={clip} alt="pencilImg" style={{
+                                            width: '0.625rem', height: '0.625rem',
+                                            flexShrink: 0, marginLeft: '1rem'
+                                        }}/>
+                                    </div>
+                                </label>
+                                <div style={{textAlign:"right", paddingRight:"1rem"}}>
+                                    <div onClick={UploadPost}>
+                                        <img src={pencilImg} alt="pencilImg" style={{
+                                            width: '0.625rem', height: '0.625rem',
+                                            flexShrink: 0
+                                        }}/>
+                                    </div>
+                                </div>
+
+                            </div>
+
                             <div>
                                 {postImage ? postImage.map((img, idx) => (
                                     <ImagePreView img={img}/>
                                 )) : null}
                             </div>
+
                         </div>
                     ) : null}
                 </div>
