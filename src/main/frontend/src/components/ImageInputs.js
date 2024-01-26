@@ -2,6 +2,7 @@ import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
 import Modal from "react-modal";
 import {ModalStyles} from "./ModalStyles";
+import xmark from "./icons/xmark.png";
 const ImageInputs = ({setImg, vals}) => {
     const spring_app_url = "http://localhost:8080";
     // 기본 이미지 추후 설정 필요
@@ -50,7 +51,9 @@ const ImageInputs = ({setImg, vals}) => {
                             src={typeof(imgFile) === 'string' ? spring_app_url + "/api/v1/image/"+imgFile : URL.createObjectURL(imgFile)}
                             alt={`image ${index}`}
                         />
-                        <button onClick={() => deleteImgFile(index)}>X</button>
+                        <a onClick={()=>deleteImgFile(index)}>
+                            <img src={xmark} alt="xmark" style={{width:"1.5rem", height:"1.5rem"}} />
+                        </a>
                     </div>
 
                 )) : null}
@@ -69,8 +72,6 @@ const ImageInputs = ({setImg, vals}) => {
 
                 <button onClick={() => setIsModalOpen(false)}>닫기</button>
             </Modal>
-
-
         </div>
     )
 };
