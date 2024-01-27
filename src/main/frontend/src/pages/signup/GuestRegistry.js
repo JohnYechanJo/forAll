@@ -226,8 +226,9 @@ const GuestRegistry = () => {
                 width: "100%",
             }}>
                 <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                    <p style={{ fontSize: "16px" }}>필수 입력사항이 모두 기입되지 않았습니다.</p>
-                    <button onClick={() => setIsModalOpen(false)}>뒤로</button>
+                    <div style={{fontSize:'0.9375rem',fontWeight:'700',display:'flex',alignItems:'center',justifyContent:'center',height:'80%' }}>현재 필수 입력사항이 모두 기입되지 않았습니다!</div>
+                    
+                    <button className="bottom_button" style={{backgroundColor:'#FF4F4F',position:'fixed',marginBottom:'0'}} onClick={() => setIsModalOpen(false)}>마저 입력하기</button>
                 </Modal>
             </div>
             </div>
