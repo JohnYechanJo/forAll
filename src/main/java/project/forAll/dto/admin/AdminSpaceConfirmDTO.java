@@ -8,5 +8,5 @@ import project.forAll.domain.space.SpacePending;
 @Setter
 public class AdminSpaceConfirmDTO {
     private Long id;
-    private SpacePending state;
+    private String state;
 }

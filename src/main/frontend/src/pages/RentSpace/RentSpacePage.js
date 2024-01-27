@@ -2,7 +2,7 @@ import React, {useState, useCallback, useEffect} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
 import axios from "axios";
 import ImageSlider from "../../components/ImageSlider";
-import {ChatRoomCategory, ChefPending, KitchenFeat} from "../../utils/enums";
+import {ChatRoomCategory, ChefState, KitchenFeat} from "../../utils/enums";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import {AddressUtil} from "../../utils/AddressUtil";
 import "../../style/RentSpace.css";
@@ -32,7 +32,7 @@ const RentSpacePage = () => {
         if (!userId) return; // 로그인 안되었으면, 버튼 실행 x
         axios.get("/api/v1/members/public/"+userId)
             .then((res) => {
-                if (res.data.chefPending === ChefPending.NOTCREATED){
+                if (res.data.chefPending === ChefState.NOTCREATED){
                     setNeedChef(true);
                 }else{
                     // Todo 승인 나기 전 과정이 없음

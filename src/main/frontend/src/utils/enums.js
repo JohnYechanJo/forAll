@@ -4,7 +4,7 @@ export const KitchenFeat = {Open:"Open", Face:"Face", Close:"Close", NotSpecifie
 export const PayWay = {QuickPay: "QuickPay", ConfirmPay:"ConfirmPay", NotSpecified:"Not Specified"};
 export const MainPageType = {BASIC: "Basic", SPACE:"Space", COMMUNITY:"Community"};
 export const BoardCategory = {Popup: "Popup", Chat: "Chat", Recipe: "Recipe", NotSpecified: "Not Specified"};
-
 export const ChatRoomCategory = {Reservation:"Reservation",Board:"Board",ServiceCenter:"Service Center", NotSpecified:"Not Specified"};
-export const ReservationState = {PENDING:"Pending", APPROVE:"Approve", READY:"Ready", FINISH:"Finish", NotSpecified:"Not Specified"};
-export const ChefPending = {PENDING:"Pending", APPROVE:"Approve", NOTCREATED:"Not Created", NotSpecified:"Not Specified"};
+export const ReservationState = {PENDING:"Pending", APPROVE:"Approve",REJECT:"Reject",CANCELPENDING:"Cancel Pending",CANCELAPPROVE:"Cancel Approve",CANCELREJECT:"Cancel Reject", READY:"Ready", FINISH:"Finish", NotSpecified:"Not Specified"};
+export const ChefState = {PENDING:"Pending", APPROVE:"Approve",REJECT:"Reject", NOTCREATED:"Not Created", NotSpecified:"Not Specified"};
+export const SpaceState = {PENDING:"Pending", APPROVE:"Approve",REJECT:"Reject",NOTPUBLIC:"Not Public", NotSpecified:"Not Specified"};

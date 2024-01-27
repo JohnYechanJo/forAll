@@ -70,11 +70,13 @@ import ChefInfoModifyCompletePage from "./pages/modify/ChefInfoModifyCompletePag
 import PersonalModifyCompletePage from "./pages/modify/PersonalModifyCompletePage";
 import PlaceInfoModifyCompletePage from "./pages/modify/PlaceInfoModifyCompletePage";
 import PostListViewPage from "./pages/board/PostListViewPage";
+import AdminMainPage from "./pages/admin/AdminMainPage";
 
 
 function App() {
   return (
       <Routes>
+        <Route path="/admin" element={<AdminMainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<MainPage />}/>
         <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />

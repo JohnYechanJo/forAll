@@ -8,7 +8,7 @@ public enum SpacePending {
     PENDING("Pending"),
     APPROVE("Approve"),
     REJECT("Reject"),
-    NOTCREATED("Not Created"),
+    NOTPUBLIC("Not Public"),
     NotSpecified("Not Specified");
 
     private final String name;

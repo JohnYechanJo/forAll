@@ -9,7 +9,7 @@ import logout from "../../components/icons/logout.png";
 import xmark from "../../components/icons/xmark.png";
 import alarm from "../../components/icons/alarm.png";
 import ImageViewer from "../ImageViewer";
-import {ChefPending} from "../../utils/enums";
+import {ChefState} from "../../utils/enums";
 const Sidebar = ({ width = 18.75, children }) => {
     const [userData, setUserData] = useState({});
     const [isOpen, setOpen] = useState(false);
@@ -38,10 +38,10 @@ const Sidebar = ({ width = 18.75, children }) => {
         });
     };
     const handleChefRegistry = () => {
-        if (userData.chefPending === ChefPending.NOTCREATED) navigate("/chefRegistry");
+        if (userData.chefPending === ChefState.NOTCREATED) navigate("/chefRegistry");
     }
     const handleChefModify = () => {
-        if ([ChefPending.PENDING, ChefPending.APPROVE].includes(userData.chefPending)) navigate("/chefInfoModify");
+        if ([ChefState.PENDING, ChefState.APPROVE].includes(userData.chefPending)) navigate("/chefInfoModify");
     }
     useEffect(() => {
         const userId = sessionStorage.getItem("user_id");

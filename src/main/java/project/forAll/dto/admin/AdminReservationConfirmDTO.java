@@ -7,5 +7,5 @@ import project.forAll.domain.reservation.ReservationState;
 @Getter @Setter
 public class AdminReservationConfirmDTO {
     private Long id;
-    private ReservationState state;
+    private String state;
 }

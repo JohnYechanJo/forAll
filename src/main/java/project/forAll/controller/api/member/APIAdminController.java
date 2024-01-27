@@ -104,19 +104,19 @@ public class APIAdminController extends APIController {
     @PostMapping("/admin/space")
     public void confirmSpace(@RequestBody AdminSpaceConfirmDTO dto){
         final Space space = (Space) spaceService.findById(dto.getId());
-        space.setSpacePending(dto.getState());
+        space.setSpacePending(SpacePending.parse(dto.getState()));
         spaceService.save(space);
     }
     @PostMapping("/admin/chef")
     public void confirmChef(@RequestBody AdminChefConfirmDTO dto){
         final Member member = (Member) memberService.findById(dto.getId());
-        member.setChefPending(dto.getState());
+        member.setChefPending(ChefPending.parse(dto.getState()));
         spaceService.save(member);
     }
     @PostMapping("/admin/reservation")
     public void confirmReservation(@RequestBody AdminReservationConfirmDTO dto){
         final Reservation reservation = (Reservation) reservationService.findById(dto.getId());
-        reservation.setState(dto.getState());
+        reservation.setState(ReservationState.parse(dto.getState()));
         spaceService.save(reservation);
     }
 }

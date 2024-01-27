@@ -48,5 +48,5 @@ public class Space extends BassDomain {
     private boolean isPublic;
 
     // 공간 펜딩 여부
-    private SpacePending spacePending = SpacePending.NOTCREATED;
+    private SpacePending spacePending;
 }
