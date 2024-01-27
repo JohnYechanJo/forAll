@@ -9,7 +9,7 @@ import axios from "axios";
 import MultipleDatePicker from "react-multiple-datepicker";
 import ForAllLogo from "../../components/ForAllLogo";
 import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
-const PlaceInfoModifyPage3 = () => {
+const AdminHostRegistry3 = () => {
     const location = useLocation();
     const data = { ...location.state };
     const navigate = useNavigate();
@@ -181,13 +181,13 @@ const PlaceInfoModifyPage3 = () => {
     }, [seat]);
     return (
         <div className="fontForRegister"
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: '1.5rem'
-            }}>
+             style={{
+                 display: "flex",
+                 flexDirection: "column",
+                 gap: '1.5rem'
+             }}>
             <header style={{ textAlign: "center" }}><h3>(2/4) 이용 안내</h3></header>
-            <div style={{ padding: '1rem', width: '100%', boxSizing: 'border-box', gap: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
+            <div disabled={true} style={{ padding: '1rem', width: '100%', boxSizing: 'border-box', gap: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
                 <div>
                     <a>이용 정보를 입력해주세요.<span style={{ color: '#FF2929' }} >*</span></a>
                     <hr style={{ height: "1px", backgroundColor: "black", width: '100%' }} />
@@ -195,10 +195,11 @@ const PlaceInfoModifyPage3 = () => {
                 <ForAllLogo />
                 <div>
                     <a>대관 가능일<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeeksData.includes(rentWeek) ? rentWeek : "직접지정"} val={rentWeek} width='100%' />
+                    <DropDown style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+                        disabled={true} dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeeksData.includes(rentWeek) ? rentWeek : "직접지정"} val={rentWeek} width='100%' />
                     {rentWeek === "직접지정" ?
                         <MultipleDatePicker onSubmit={setRentDays} /> : (rentWeek !== "휴무없음" ?
-                            <div style={{ display: 'flex' }} >
+                            <div disabled={true} style={{  display: 'flex' }} >
                                 <div className={monDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleMonday}>월</div>
                                 <div className={tuesDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleTuesDay}>화</div>
                                 <div className={wednesDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleWednesDay}>수</div>
@@ -212,15 +213,15 @@ const PlaceInfoModifyPage3 = () => {
 
                 <div>
                     <a>입•퇴실 시간<span style={{ color: '#FF2929' }} >*</span></a>
-                    <div style={{
+                    <div disabled={true} style={{
                         display: "flex",
                         justifyContent: "left",
                         alignItems: "center",
                     }}>
                         <span>대관 당일 </span>
-                        <span style={{ }}><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={rentTimeFrom} val={rentTimeFrom} width='100%' /></span>
+                        <span style={{ }}><DropDown disabled={true} dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={rentTimeFrom} val={rentTimeFrom} width='100%' /></span>
                         <span> 부터, 당일 </span>
-                        <span style={{}}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={rentTimeTo} val={rentTimeTo} width='100%' /></span>
+                        <span style={{}}><DropDown disabled={true} dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={rentTimeTo} val={rentTimeTo} width='100%' /></span>
 
                         <span> 까지</span>
                     </div>
@@ -228,11 +229,12 @@ const PlaceInfoModifyPage3 = () => {
 
                 <div>
                     <a>주차 여부<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택해 주세요"} defaultData={parkAvaliable} val={parkAvaliable} width='100%' />
+                    <DropDown style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+                        dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택해 주세요"} defaultData={parkAvaliable} val={parkAvaliable} width='100%' />
                     {parkAvaliable === "직접 입력" ? (
                         <div style={{ marginTop: '0.5rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center' }} >
-                                <input className="input" style={{ width: '10vw' }} onChange={onChangePark} value={exactPark} />
+                                <input disabled={true} className="input" style={{ width: '10vw' }} onChange={onChangePark} value={exactPark} />
                                 <a>대</a>
                             </div>
                             {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요.</p> : null}
@@ -247,44 +249,43 @@ const PlaceInfoModifyPage3 = () => {
                         alignItems: "center",
 
                     }}>
-                        <div style={{
+                        <button disabled={true}
+                            style={{
                             border: "1px solid lightgray",
-                            borderRadius: "0",
                             width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR"
                         }} className={(elevator) === true ? "btn_selected" : "btn_not_selected"} onClick={() => setElevator(true)}>있음
-                        </div>
+                        </button>
 
-                        <div
+                        <button disabled={true}
                             style={{
                                 border: "1px solid lightgray",
-                                borderRadius: "0",
                                 width: "50%",
                                 height: "1.875rem",
                                 textAlign: "center",
                                 fontFamily: "Noto Sans KR",
                             }}
                             className={(elevator) === false ? "btn_selected" : "btn_not_selected"} onClick={() => setElevator(false)}>없음
-                        </div>
+                        </button>
                     </div>
                 </div>
                 <div>
                     <a>테이블<span style={{ color: '#FF2929' }} >*</span></a>
-                    <input className="input fontForRegister" style={{ width: "99%", float: "left" }} onChange={onChangeTable}
-                        placeholder={"최대 테이블 수를 기준으로 입력해주세요"} defaultValue={dbData.tableNum} />
+                    <input disabled={true} className="input fontForRegister" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "99%", float: "left" }} onChange={onChangeTable}
+                           placeholder={"최대 테이블 수를 기준으로 입력해주세요"} defaultValue={dbData.tableNum} />
                 </div>
                 <div>
                     <a>좌석 수<span style={{ color: '#FF2929' }} >*</span></a>
-                    <input className="input fontForRegister" style={{ width: "99%", float: "left"}} onChange={onChangeSeat}
-                        placeholder={"최대 좌석수를 기준으로 입력해주세요"} defaultValue={dbData.seatNum} />
+                    <input disabled={true} className="input fontForRegister" style={{ width: "99%", float: "left" }} onChange={onChangeSeat}
+                           placeholder={"최대 좌석수를 기준으로 입력해주세요"} defaultValue={dbData.seatNum} />
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }} >
                     <a>가격 설정<span style={{ color: '#FF2929' }} >*</span></a>
                     <div>
-                        <input className="input fontForRegister" style={{  width: "99%", float: "left",  marginRight: "2vw" }}
-                            onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} defaultValue={dbData.priceSet} />
+                        <input disabled={true} className="input fontForRegister" style={{ width: "99%",  float: "left", marginRight: "2vw" }}
+                               onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} defaultValue={dbData.priceSet} />
                     </div>
                     <div>
                         <h3 style={{ fontSize: '0.875rem' }} >{(seat === undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat <= 10) ? "포 올 권장가격 : ₩150,000원" : "포 올 권장가격 :" + formattedPrice + "원"}</h3 >
@@ -296,7 +297,7 @@ const PlaceInfoModifyPage3 = () => {
                     <hr style={{ height: "1px", backgroundColor: "black" }} />
                 </div>
                 <div>
-                    <a>트라이얼<span style={{ color: '#FF2929' }} >*</span></a>
+                    <a >트라이얼<span style={{ color: '#FF2929' }} >*</span></a>
 
                     <div style={{
                         display: "flex",
@@ -304,26 +305,24 @@ const PlaceInfoModifyPage3 = () => {
                         alignItems: "center",
 
                     }}>
-                        <div style={{
+                        <button disabled={true} style={{
                             border: "1px solid lightgray",
-                            borderRadius: "0.5px",
                             width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR"
                         }}
-                            className={(trial) === true ? "btn_selected" : 'btn_not_selected'} onClick={() => setTrial(true)}>가능
-                        </div>
-                        <div style={{
+                             className={(trial) === true ? "btn_selected" : 'btn_not_selected'} onClick={() => setTrial(true)}>가능
+                        </button>
+                        <button disabled={true} style={{
                             border: "1px solid lightgray",
-                            borderRadius: "0.5px",
                             width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR"
                         }}
-                            className={(trial) === false ? "btn_selected" : 'btn_not_selected'} onClick={() => setTrial(false)}>불가
-                        </div>
+                             className={(trial) === false ? "btn_selected" : 'btn_not_selected'} onClick={() => setTrial(false)}>불가
+                        </button>
                     </div>
                     <Modal isOpen={isTrial} style={ExplanationModalStyles}>
                         <div style={{
@@ -364,39 +363,35 @@ const PlaceInfoModifyPage3 = () => {
 
 
                 <div>
-                    <a>재료 새벽 배달<span style={{ color: '#FF2929' }} >*</span></a>
-                    <div style={{
+                    <a style={{}}>재료 새벽 배달<span style={{ color: '#FF2929'}} >*</span></a>
+                    <div  style={{
                         display: "flex",
-                        justifyContent: "left",
+                        justifyContent: "center",
                         alignItems: "center",
 
                     }}>
-                        <div style={{
+                        <button disabled={true} style={{
                             border: "1px solid lightgray",
                             width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
+
                         }}
-                             className={morningDelivery === true ? "btn_selected" : ""}
+                             className={morningDelivery === true ? "btn_selected" : "btn_not_selected"}
                              onClick={() => setMorningDelivery(true)}>가능
-                        </div>
-                        <div style={{
+                        </button>
+                        <button disabled={true} style={{
                             border: "1px solid lightgray",
                             width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
+
                         }}
-                             className={morningDelivery === false ? "btn_selected" : ""}
+                             className={morningDelivery === false ? "btn_selected" : "btn_not_selected"}
                              onClick={() => setMorningDelivery(false)}>불가
-                        </div>
+                        </button>
                     </div>
 
                     <Modal isOpen={isMorningDelivery} style={ExplanationModalStyles}>
@@ -440,30 +435,26 @@ const PlaceInfoModifyPage3 = () => {
                         alignItems: "center",
 
                     }}>
-                        <div style={{
+                        <button disabled={true} style={{
                             border: "1px solid lightgray",
                             width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
+
                         }}
-                             className={miseen === true ? "btn_selected" : ""} onClick={() => setMiseen(true)}>가능
-                        </div>
-                        <div style={{
+                             className={miseen === true ? "btn_selected" : "btn_not_selected"} onClick={() => setMiseen(true)}>가능
+                        </button>
+                        <button disabled={true} style={{
                             border: "1px solid lightgray",
                             width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
+
                         }}
-                             className={miseen === false ? "btn_selected" : ""} onClick={() => setMiseen(false)}>불가
-                        </div>
+                             className={miseen === false ? "btn_selected" : "btn_not_selected"} onClick={() => setMiseen(false)}>불가
+                        </button>
                     </div>
                     <div hidden={!miseen}>
                         <div style={{ display: "flex", justifyContent: 'left', alignItems: 'center' }}>
@@ -515,30 +506,26 @@ const PlaceInfoModifyPage3 = () => {
                         alignItems: "center",
 
                     }}>
-                        <div style={{
+                        <button disabled={true} style={{
                             border: "1px solid lightgray",
                             width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
+
                         }}
-                             className={workIn === true ? "btn_selected" : ""} onClick={() => setWorkIn(true)}>가능
-                        </div>
-                        <div style={{
+                             className={workIn === true ? "btn_selected" : "btn_not_selected"} onClick={() => setWorkIn(true)}>가능
+                        </button>
+                        <button disabled={true} style={{
                             border: "1px solid lightgray",
                             width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
+
                         }}
-                             className={workIn === false ? "btn_selected" : ""} onClick={() => setWorkIn(false)}>불가
-                        </div>
+                             className={workIn === false ? "btn_selected" : "btn_not_selected"} onClick={() => setWorkIn(false)}>불가
+                        </button>
                     </div>
 
                     <Modal isOpen={isWorkIn} style={ExplanationModalStyles}>
@@ -584,19 +571,9 @@ const PlaceInfoModifyPage3 = () => {
                         onClick={() => handleButton()}
                 >다음</button>
             </div>
-            <Modal isOpen={isModalOpen} style={{ ...ModalStyles, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} ariaHideApp={false}>
-                <div style={{ textAlign: "left" }} >
-                    <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
-                    <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
-                </div>
-                <hr style={{ height: "1px", backgroundColor: "lightgrey" }} />
-                <div style={{ display: 'flex', width: '100%' }} >
-                    <button style={{ flex: 1, border: 'none', background: 'white', }} onClick={() => setIsModalOpen(false)}>뒤로</button>
-                    <button style={{ flex: 1, border: 'none', background: 'white', }} onClick={() => submit()}>다음</button>
-                </div>
-            </Modal>
+
         </div>
     )
 };
 
-export default PlaceInfoModifyPage3;
+export default AdminHostRegistry3;

@@ -159,7 +159,7 @@ const HostRegistry3 = () => {
                 <ForAllLogo />
                 <div >
                     <a>대관 가능일<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} width='90vw' />
+                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} width='100%' />
                     {rentWeek === "직접지정" ?
                         <MultipleDatePicker onSubmit={setRentDays} /> : (rentWeek !== "휴무없음" ?
                             <div style={{display:'flex'}} >
@@ -182,15 +182,15 @@ const HostRegistry3 = () => {
                         alignItems: "center",
                     }}>
                         <span>대관 당일 </span>
-                        <span style={{ marginLeft: '1rem' }} ><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} width='6.31444rem' /></span>
+                        <span style={{ }} ><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} width='100%' /></span>
                         <span> 부터, 당일 </span>
-                        <span style={{ marginLeft: '1rem' }}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} width='6.31444rem' /></span>
+                        <span style={{  }}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} width='100%' /></span>
                         <span> 까지</span>
                     </div>
                 </div>
                 <div>
                     <a>주차 여부<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} width='90vw' />
+                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} width='100%' />
                     {parkAvaliable === "직접 입력" ? (
                         <div style={{display:'flex',width:'100%',alignItems:'center',marginTop:'0.5rem'}}  >
                             <div style={{display:'flex',alignItems:'center'}} >
@@ -205,26 +205,26 @@ const HostRegistry3 = () => {
                     <a>엘리베이터 여부<span style={{ color: '#FF2929' }} >*</span></a>
                     <div style={{
                         display: "flex",
-                        justifyContent: "left",
+                        justifyContent: "center",
                         alignItems: "center",
 
                     }}>
                         <div style={{
                             border: "1px solid #D9D9D9",
-                            width: "45vw",
+                            width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                        }} className={elevator === true ? "btn_selected" : ""} onClick={() => setElevator(true)}>있음
+                        }} className={elevator === true ? "btn_selected" : "btn_not_selected"} onClick={() => setElevator(true)}>있음
                         </div>
                         <div
                             style={{
 
                                 border: "1px solid lightgray",
-                                width: "45vw",
+                                width: "50%",
                                 height: "1.875rem",
                                 textAlign: "center",
                                 fontFamily: "Noto Sans KR",
@@ -232,7 +232,7 @@ const HostRegistry3 = () => {
                                 justifyContent: "center",
                                 alignItems: "center",
                             }}
-                            className={elevator === false ? "btn_selected" : ""} onClick={() => setElevator(false)}>없음
+                            className={elevator === false ? "btn_selected" : "btn_not_selected"} onClick={() => setElevator(false)}>없음
                         </div>
                     </div>
 
@@ -240,17 +240,17 @@ const HostRegistry3 = () => {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }} >
                     <a>테이블<span style={{ color: '#FF2929' }} >*</span></a>
-                    <input className="input" onChange={onChangeTable}
+                    <input className="input fontForRegister" onChange={onChangeTable} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "99%", float: "left" }}
                         placeholder={"최대 테이블 수를 기준으로 입력해주세요"} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <a>좌석 수<span style={{ color: '#FF2929' }} >*</span></a>
-                    <input className="input" onChange={onChangeSeat}
+                    <input className="input fontForRegister" onChange={onChangeSeat} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "99%", float: "left" }}
                         placeholder={"최대 좌석수를 기준으로 입력해주세요"} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <a>가격 설정<span style={{ color: '#FF2929' }} >*</span></a>
-                    <input className="input"
+                    <input className="input fontForRegister" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "99%", float: "left" }}
                         onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} />
                     <h3 style={{ fontSize: '0.875rem' }} >{(seat === undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat <= 10) ? "포 올 권장가격 : ₩150,000원" : "포 올 권장가격 :" + formattedPrice + "원"}</h3>
                 </div>
@@ -263,13 +263,13 @@ const HostRegistry3 = () => {
                     <a>트라이얼<span style={{ color: '#FF2929' }} >*</span></a>
                     <div style={{
                         display: "flex",
-                        justifyContent: "left",
+                        justifyContent: "center",
                         alignItems: "center",
 
                     }}>
                         <div style={{
                             border: "1px solid lightgray",
-                            width: "45vw",
+                            width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
@@ -277,11 +277,11 @@ const HostRegistry3 = () => {
                             justifyContent: "center",
                             alignItems: "center",
                         }}
-                            className={trial === true ? "btn_selected" : ""} onClick={() => setTrial(true)}>가능
+                            className={trial === true ? "btn_selected" : "btn_not_selected"} onClick={() => setTrial(true)}>가능
                         </div>
                         <div style={{
                             border: "1px solid lightgray",
-                            width: "45vw",
+                            width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
@@ -289,7 +289,7 @@ const HostRegistry3 = () => {
                             justifyContent: "center",
                             alignItems: "center",
                         }}
-                            className={trial === false ? "btn_selected" : ""} onClick={() => setTrial(false)}>불가
+                            className={trial === false ? "btn_selected" : "btn_not_selected"} onClick={() => setTrial(false)}>불가
                         </div>
                     </div>
                     <Modal isOpen={isTrial} style={ExplanationModalStyles}>
@@ -331,7 +331,7 @@ const HostRegistry3 = () => {
 
 
                 <div>
-                    <p>재료 새벽 배달<span style={{ color: '#FF2929' }} >*</span></p>
+                    <a>재료 새벽 배달<span style={{ color: '#FF2929' }} >*</span></a>
                     <div style={{
                         display: "flex",
                         justifyContent: "left",
@@ -340,7 +340,7 @@ const HostRegistry3 = () => {
                     }}>
                         <div style={{
                             border: "1px solid lightgray",
-                            width: "45vw",
+                            width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
@@ -348,12 +348,12 @@ const HostRegistry3 = () => {
                             justifyContent: "center",
                             alignItems: "center",
                         }}
-                            className={morningDelivery === true ? "btn_selected" : ""}
+                            className={morningDelivery === true ? "btn_selected" : "btn_not_selected"}
                             onClick={() => setMorningDelivery(true)}>가능
                         </div>
                         <div style={{
                             border: "1px solid lightgray",
-                            width: "45vw",
+                            width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
@@ -361,7 +361,7 @@ const HostRegistry3 = () => {
                             justifyContent: "center",
                             alignItems: "center",
                         }}
-                            className={morningDelivery === false ? "btn_selected" : ""}
+                            className={morningDelivery === false ? "btn_selected" : "btn_not_selected"}
                             onClick={() => setMorningDelivery(false)}>불가
                         </div>
                     </div>
@@ -400,7 +400,7 @@ const HostRegistry3 = () => {
                 </div>
 
                 <div>
-                    <p>미장<span style={{ color: '#FF2929' }} >*</span></p>
+                    <a>미장<span style={{ color: '#FF2929' }} >*</span></a>
                     <div style={{
                         display: "flex",
                         justifyContent: "left",
@@ -409,7 +409,7 @@ const HostRegistry3 = () => {
                     }}>
                         <div style={{
                             border: "1px solid lightgray",
-                            width: "45vw",
+                            width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
@@ -417,11 +417,11 @@ const HostRegistry3 = () => {
                             justifyContent: "center",
                             alignItems: "center",
                         }}
-                            className={miseen === true ? "btn_selected" : ""} onClick={() => setMiseen(true)}>가능
+                            className={miseen === true ? "btn_selected" : "btn_not_selected"} onClick={() => setMiseen(true)}>가능
                         </div>
                         <div style={{
                             border: "1px solid lightgray",
-                            width: "45vw",
+                            width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
@@ -429,7 +429,7 @@ const HostRegistry3 = () => {
                             justifyContent: "center",
                             alignItems: "center",
                         }}
-                            className={miseen === false ? "btn_selected" : ""} onClick={() => setMiseen(false)}>불가
+                            className={miseen === false ? "btn_selected" : "btn_not_selected"} onClick={() => setMiseen(false)}>불가
                         </div>
                     </div>
                     <div hidden={!miseen}>
@@ -484,7 +484,7 @@ const HostRegistry3 = () => {
                     }}>
                         <div style={{
                             border: "1px solid lightgray",
-                            width: "45vw",
+                            width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
@@ -492,11 +492,11 @@ const HostRegistry3 = () => {
                             justifyContent: "center",
                             alignItems: "center",
                         }}
-                            className={workIn === true ? "btn_selected" : ""} onClick={() => setWorkIn(true)}>가능
+                            className={workIn === true ? "btn_selected" : "btn_not_selected"} onClick={() => setWorkIn(true)}>가능
                         </div>
                         <div style={{
                             border: "1px solid lightgray",
-                            width: "45vw",
+                            width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR",
@@ -504,7 +504,7 @@ const HostRegistry3 = () => {
                             justifyContent: "center",
                             alignItems: "center",
                         }}
-                            className={workIn === false ? "btn_selected" : ""} onClick={() => setWorkIn(false)}>불가
+                            className={workIn === false ? "btn_selected" : "btn_not_selected"} onClick={() => setWorkIn(false)}>불가
                         </div>
                     </div>
 

@@ -81,7 +81,7 @@ const PlaceInfoModifyPage4 = () => {
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
-                console.log(res.data); 
+                console.log(res.data);
                 setDbData(res.data)
                 setFirePit(res.data.fireholeNum);
                 setExactFirePit(res.data.fireholeNum);
@@ -151,11 +151,11 @@ const PlaceInfoModifyPage4 = () => {
                 className="fontForRegister">
                 <div style={{ width: '100%' }} >
                     <a>주방 정보<span style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "1px", backgroundColor: "black", width: '100%' }} />
+                    <hr style={{ height: "2px", backgroundColor: "black", width: '100%' }} />
                 </div>
-                <div>
+                <div style={{ width: '100%' }} >
                     <a>화구<span style={{ color: "#FF2929" }} >*</span></a>
-                    <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={(firePit > 6) ? "직접 입력" : firePit + "개"} val={firePit} width='90vw' />
+                    <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={(firePit > 6) ? "직접 입력" : firePit + "개"} val={firePit} width='100%' />
                     {(firePit > 6) ? (
                         <div>
                             <span><input onChange={onChangeFirePit} defaultValue={dbData.fireholeNum} style={{ width: "10vw" }} />개 </span>
@@ -163,28 +163,28 @@ const PlaceInfoModifyPage4 = () => {
                         </div>
                     ) : null}
                 </div>
-                <div>
+                <div style={{ width: '95%' }} >
                     <a>주방 수용 인원 수<span style={{ color: "#FF2929" }} >*</span></a>
-                    <span style={{ display: 'flex', alignItems: 'center' }}><input val={capacity} defaultValue={dbData.capacity}  onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{ width: "21.875rem" }} className="input" />명</span>
+                    <span style={{ display: 'flex', alignItems: 'center' }}><input val={capacity} onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{width: '100%' }} className="input" />명</span>
                 </div>
                 <div style={{ width: '100%' }}>
                     <a>주방기계<span style={{ color: "#FF2929" }} >*</span></a>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={fryer === true ? "btn_selected" : "btn_not_selected"} onClick={toggleFryer}>튀김기</button>
-                        <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={oven === true ? "btn_selected" : "btn_not_selected"} onClick={toggleOven}>오븐</button>
-                        <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={dishWasher === true ? "btn_selected" : "btn_not_selected"} onClick={toggleDishWasher}>식기세척기</button>
-                        <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={iceMaker === true ? "btn_selected" : "btn_not_selected"} onClick={toggleIceMaker}>제빙기</button>
-                        <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={someThing === true ? "btn_selected" : "btn_not_selected"} onClick={toggleSomeThing}>냉장고</button>
+                        <button style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }} className={fryer === true ? "btn_selected" : "btn_not_selected"} onClick={toggleFryer}>튀김기</button>
+                        <button style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }} className={oven === true ? "btn_selected" : "btn_not_selected"} onClick={toggleOven}>오븐</button>
+                        <button style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }} className={dishWasher === true ? "btn_selected" : "btn_not_selected"} onClick={toggleDishWasher}>식기세척기</button>
+                        <button style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }} className={iceMaker === true ? "btn_selected" : "btn_not_selected"} onClick={toggleIceMaker}>제빙기</button>
+                        <button style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }} className={someThing === true ? "btn_selected" : "btn_not_selected"} onClick={toggleSomeThing}>냉장고</button>
                     </div>
                 </div>
                 {/* 이미지 보여주는 건 다시 건드려야 함 */}
-                <div>
+                <div style={{ width: '100%' }}>
                     <a>추가 사용 가능 기계<span style={{ color: "#FF2929" }} >*</span></a>
                     <textarea className="input" onChange={onChangeExtraMachine} placeholder={"사용 가능한 기계를 입력해주세요. ex) 수비드 기계"} defaultValue={dbData.equipExtra} style={{ height: '6.25rem' }} />
                 </div>
                 <div style={{ width: '100%' }} >
                     <a>매장 물품<span style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "1px", backgroundColor: "black", width: '100%' }} />
+                    <hr style={{ height: "2px", backgroundColor: "black", width: '100%' }} />
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', justifyContent: 'center', width: '100%' }} >
                     <div style={{display:'flex',justifyContent:"right"}}>

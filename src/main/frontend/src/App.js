@@ -70,10 +70,16 @@ import ChefInfoModifyCompletePage from "./pages/modify/ChefInfoModifyCompletePag
 import PersonalModifyCompletePage from "./pages/modify/PersonalModifyCompletePage";
 import PlaceInfoModifyCompletePage from "./pages/modify/PlaceInfoModifyCompletePage";
 import PostListViewPage from "./pages/board/PostListViewPage";
-import AllNotification from "./pages/AllNotifications";
 import AllNotifications from "./pages/AllNotifications";
 import DeadlineInfo from "./pages/Reservation/DeadlineInfo";
-import AdminMainPage from './pages/admin/AdminMainPage';
+import AdminMainPage from "./pages/admin/AdminMainPage";
+import AdminHostRegistry1 from "./pages/admin/AdminHostRegistry1";
+import AdminHostRegistry2 from "./pages/admin/AdminHostRegistry2";
+import AdminHostRegistry3 from "./pages/admin/AdminHostRegistry3";
+import AdminHostRegistry4 from "./pages/admin/AdminHostRegistry4";
+import AdminHostRegistry5 from "./pages/admin/AdminHostRegistry5";
+import AdminHostRegistry6 from "./pages/admin/AdminHostRegistry6";
+
 
 function App() {
   return (
@@ -149,6 +155,12 @@ function App() {
          <Route path="/assuranceFinish" element={<AssuranceFinish />} />
             <Route path="/deadlineInfo" element={<DeadlineInfo />} />
 
+            <Route path="/adminHostRegistry1" element={<AdminHostRegistry1 />} />
+            <Route path="/adminHostRegistry2" element={<AdminHostRegistry2 />} />
+            <Route path="/adminHostRegistry3" element={<AdminHostRegistry3 />}/>
+            <Route path="/adminHostRegistry4" element={<AdminHostRegistry4 />}/>
+            <Route path="/adminHostRegistry5" element={<AdminHostRegistry5 />}/>
+            <Route path="/adminHostRegistry6" element={<AdminHostRegistry6 />}/>
       </Routes>
   );
 }
