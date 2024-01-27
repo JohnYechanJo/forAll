@@ -2,7 +2,7 @@ import React, {useState, useCallback, useEffect} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
 import axios from "axios";
 import ImageSlider from "../../components/ImageSlider";
-import {ChatRoomCategory, KitchenFeat} from "../../utils/enums";
+import {ChatRoomCategory, ChefPending, KitchenFeat} from "../../utils/enums";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import {AddressUtil} from "../../utils/AddressUtil";
 import "../../style/RentSpace.css";
@@ -13,8 +13,8 @@ const RentSpacePage = () => {
     const navigate = useNavigate();
     const [data, setData] = useState({});
     const [images1, setImages1] = useState([]);
-    const [images2, setImages2] = useState([]);
     const [equipments, setEquipments] = useState([]);
+    const [needChef, setNeedChef] = useState(false);
     useEffect(() => {
         axios.get("/api/v1/space/"+params.id)
             .then((res) => {
@@ -28,18 +28,28 @@ const RentSpacePage = () => {
     }, [data]);
 
     const submit = () => {
-        // Todo 셰프 등록이 되었는지 확인
-        navigate("/rentSpace2", {state:{
-                spaceId: data.id,
-                spaceName: data.name,
-                spaceAddress: data.address,
-                spaceImage: data.mainImage,
-                ableTrial: data.ableTrial,
-                ableStartHour: data.ableStartHour,
-                ableFinHour: data.ableFinHour,
-                priceSet: data.priceSet,
-                capacity: data.capacity,
-            }});
+        const userId = sessionStorage.getItem("user_id");
+        if (!userId) return; // 로그인 안되었으면, 버튼 실행 x
+        axios.get("/api/v1/members/public/"+userId)
+            .then((res) => {
+                if (res.data.chefPending === ChefPending.NOTCREATED){
+                    setNeedChef(true);
+                }else{
+                    // Todo 승인 나기 전 과정이 없음
+                    navigate("/rentSpace2", {state:{
+                            spaceId: data.id,
+                            spaceName: data.name,
+                            spaceAddress: data.address,
+                            spaceImage: data.mainImage,
+                            ableTrial: data.ableTrial,
+                            ableStartHour: data.ableStartHour,
+                            ableFinHour: data.ableFinHour,
+                            priceSet: data.priceSet,
+                            capacity: data.capacity,
+                        }});
+                }
+            })
+
     }
 
 
@@ -199,6 +209,19 @@ const RentSpacePage = () => {
                 </div>
 
             </div>
+
+            {needChef ?(
+                <div className={"overlay_container"}>
+                    <div style={{height:"70%", display:"flex", alignItems:"center", padding:"1rem"}}>
+                        <div style={{margin: "1rem", paddingRight:"2rem"}}>
+                            <p style={{fontSize:"1.25rem", fontWeight:"700"}}>{sessionStorage.getItem("name")+"님, 대관을 위해서 셰프 등록을 먼저 부탁드립니다!"}</p>
+                            <p style={{fontSize:"0.95rem", paddingTop:"1rem"}}>셰프 등록을하신 후, 포 올을 통해 세상에 놀라운 경험을 선사해주세요.</p>
+                        </div>
+
+                    </div>
+                    <div className={"submit_button"} onClick={()=>navigate("/chefRegistry")}>셰프 등록하기</div>
+                </div>
+            ) : null}
 
         </div>
     )

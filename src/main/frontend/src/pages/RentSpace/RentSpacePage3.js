@@ -167,9 +167,9 @@ const RentSpacePage3 = () => {
 
             {isAgree ?(
                 <div className={"overlay_container"}>
-                    <h1>포 올 계약서 안내</h1>
                     <div style={{height:"70%", display:"flex", alignItems:"center", padding:"1rem"}}>
                         <div>
+                            <h1>포 올 계약서 안내</h1>
                             <p style={{fontSize:"1.25rem"}}>포 올은 안전대관을 위해 계약서 제도를 도입하고 있습니다. 대관을 위해 아래 내용을 확인해주세요.</p>
                             <p style={{fontSize:"1rem", paddingTop:"1rem"}} onClick={()=>setContractModal(true)}>자세히</p>
                         </div>
