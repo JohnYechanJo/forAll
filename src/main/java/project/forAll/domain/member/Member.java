@@ -19,8 +19,8 @@ public class Member extends BassDomain {
 //    @JoinColumn(name = "article_id")
 //    private Article article;
 
-    // 호스트 또는 게스트
-    // private MemberRole role;
+    // ADMIN 계정 구분
+    private IsAdmin isAdmin;
     // 로그인 ID
     private String loginId;
     // 로그인 PW
