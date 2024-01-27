@@ -37,158 +37,160 @@ const MyPostPage = () => {
     }, []);
     return (
         <div>
-            <Header />
+            <Header/>
             <Sidebar/>
-            <HomeTemplate />
-                <div style={{
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    width: '100%', height: '3.125rem', flexShrink: 0, border: '1px solid #C4C4C4', background: '#FFF'
-                }}>
-                    <h1 style={{
-                        fontSize: '0.875rem', fontStyle: 'normal', fontWeight: '700', lineHeight: 'normal',
-                        letterSpacing: '-0.01031rem', marginLeft: '0.1rem'
-                    }}>• 내가 쓴 글</h1>
-                    <div style={{display: 'flex', alignItems: 'center'}}>
-                        <Modal
-                            isOpen={isEraseAll}
-                            style={ModalStyles}
-                            ariaHideApp={false}
-                        >
-                            <div style={{
-                                justifyContent: "center", alignItems: "center" + "10px",
-                                fontFamily: "Noto Sans KR",
-                                color: " #000",
-                                fontSize: "1.25rem",
-                                fontStyle: "normal",
-                                fontWeight: "400",
-                                lineHeight: "normal",
+            <HomeTemplate/>
+            <div style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                width: '100%', height: '3.125rem', flexShrink: 0, border: '1px solid #C4C4C4', background: '#FFF'
+            }}>
+                <h1 style={{
+                    fontSize: '0.875rem', fontStyle: 'normal', fontWeight: '700', lineHeight: 'normal',
+                    letterSpacing: '-0.01031rem', marginLeft: '0.1rem'
+                }}>• 내가 쓴 글</h1>
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                    <Modal
+                        isOpen={isEraseAll}
+                        style={SmallModalStyles}
+                        ariaHideApp={false}
+                    >
+                        <div style={{
+                            justifyContent: "center", alignItems: "center" + "10px",
+                            fontFamily: "Noto Sans KR",
+                            color: " #000",
+                            fontSize: "1.25rem",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "normal",
 
-                                height: "100%",
-                                display: "flex",
-                                flexDirection: "column",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
 
-                            }}>
-                                <a style={{marginTop:"-30px"}}>전체 삭제 하시겠습니까?</a>
-                            </div>
-                            <div style={{
-                                display: 'flex',
-                                width: '100%',
-                                margin: '0px',
-                                marginTop: '4rem',
+                        }}>
+                            <a style={{marginTop: "-30px"}}>전체 삭제 하시겠습니까?</a>
+                        </div>
+                        <div style={{
+                            display: 'flex',
+                            width: '100%',
+                            margin: '0px',
+                            marginTop: '4rem',
+                            bottom: '0',
+                            position: 'fixed',
+                            fontSize: "0.9375rem",
+                            fontWeight: "400"
+                        }}>
+                            <button style={{
+
+                                backgroundColor: "#000",
+                                width: '50%',
                                 bottom: '0',
-                                position: 'fixed',
-                                fontSize: "0.9375rem",
-                                fontWeight: "400"
-                            }}>
-                                <button style={{
+                                height: '3.125rem',
+                                color: 'white',
+                                border: 'none',
+                                lineHeight: '1.875rem',
+                                textAlign: 'center'
+                            }}
+                                    onClick={() => setIsEraseAll(false)}
+                            >
+                                취소
+                            </button>
+                            <button style={{
 
-                                    backgroundColor: "#000",
-                                    width: '10.9375rem',
-                                    bottom: '0',
-                                    height: '3.125rem',
-                                    color: 'white',
-                                    border: 'none',
-                                    lineHeight: '1.875rem',
-                                    textAlign: 'center'
-                                }}
-                                        onClick={() => setIsEraseAll(false)}
-                                >
-                                    취소
-                                </button>
-                                <button style={{
-
-                                    backgroundColor: "#FF4F4F",
-                                    width: '10.9375rem',
-                                    bottom: '0',
-                                    height: '3.125rem',
-                                    color: 'white',
-                                    border: 'none',
-                                    lineHeight: '1.875rem',
-                                    textAlign: 'center'
-                                }}
-                                        onClick={() => {
-                                            deleteAll();
-                                            setIsEraseAll(false);
-                                        }}
-                                >
-                                    확인
-                                </button>
-                            </div>
-                        </Modal>
-                        <p onClick={() => setIsEraseAll(true)}
-                           style={{
-                               fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
-                               lineHeight: 'normal', letterSpacing: '-0.01031rem', textDecorationLine: 'underline',
-                               marginRight: '0.5rem'
-                           }}>전체 삭제</p>
-
-                        <Modal isOpen={isEraseFew} style={ModalStyles} ariaHideApp={false}>
-                            <div style={{
-                                justifyContent: "center", alignItems: "center" + "10px",
-                                fontFamily: "Noto Sans KR",
-                                color: " #000",
-                                fontSize: "1.25rem",
-                                fontStyle: "normal",
-                                fontWeight: "400",
-                                lineHeight: "normal",
-                                height: "100%",
-                                display: "flex",
-                                flexDirection: "column",
-                            }}>
-                                <a style={{marginTop: "-30px"}}>선택 삭제 하시겠습니까?</a>
-                            </div>
-                            <div style={{
-                                display: 'flex',
-                                width: '100%',
-                                margin: '0px',
-                                marginTop: '4rem',
+                                backgroundColor: "#FF4F4F",
+                                width: '50%',
                                 bottom: '0',
-                                position: 'fixed',
-                                fontSize: "0.9375rem",
-                                fontWeight: "400"
-                            }}>
-                                <button style={{
-                                    backgroundColor: "#000",
-                                    width: '10.9375rem',
-                                    bottom: '0',
-                                    height: '3.125rem',
-                                    color: 'white',
-                                    border: 'none',
-                                    lineHeight: '1.875rem',
-                                    textAlign: 'center'
-                                }}
-                                        onClick={() => setIsEraseFew(false)}
-                                >
-                                    취소
-                                </button>
-                                <button style={{
-                                    backgroundColor: "#FF4F4F",
-                                    width: '10.9375rem',
-                                    bottom: '0',
-                                    height: '3.125rem',
-                                    color: 'white',
-                                    border: 'none',
-                                    lineHeight: '1.875rem',
-                                    textAlign: 'center'
-                                }}
-                                        onClick={() => {
-                                            deleteSelect();
-                                            setIsEraseFew(false);
-                                        }}
-                                >
-                                    확인
-                                </button>
-                            </div>
-                        </Modal>
-                        <p onClick={() => setSelectErase(!selectErase)}
-                           style={{
-                               fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
-                               lineHeight: 'normal', letterSpacing: '-0.01031rem', textDecorationLine: 'underline',
-                               marginRight: '0.5rem'
-                           }}>선택 삭제</p>
-                    </div>
+                                height: '3.125rem',
+                                color: 'white',
+                                border: 'none',
+                                lineHeight: '1.875rem',
+                                textAlign: 'center'
+                            }}
+                                    onClick={() => {
+                                        deleteAll();
+                                        setIsEraseAll(false);
+                                    }}
+                            >
+                                확인
+                            </button>
+                        </div>
+                    </Modal>
+                    <p onClick={() => setIsEraseAll(true)}
+                       style={{
+                           fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
+                           lineHeight: 'normal', letterSpacing: '-0.01031rem', textDecorationLine: 'underline',
+                           marginRight: '0.5rem'
+                       }}>전체 삭제</p>
+
+                    <Modal isOpen={isEraseFew} style={SmallModalStyles} ariaHideApp={false}>
+                        <div style={{
+                            justifyContent: "center", alignItems: "center" + "10px",
+                            fontFamily: "Noto Sans KR",
+                            color: " #000",
+                            fontSize: "1.25rem",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "normal",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                        }}>
+                            <a style={{marginTop: "-30px"}}>선택 삭제 하시겠습니까?</a>
+                        </div>
+                        <div style={{
+                            display: 'flex',
+                            width: '100%',
+                            margin: '0px',
+                            marginTop: '4rem',
+                            bottom: '0',
+                            position: 'fixed',
+                            fontSize: "0.9375rem",
+                            fontWeight: "400",
+
+                        }}>
+                            <button style={{
+
+                                backgroundColor: "#000",
+                                width: '50%',
+                                bottom: '0',
+                                height: '3.125rem',
+                                color: 'white',
+                                border: 'none',
+                                lineHeight: '1.875rem',
+                                textAlign: 'center'
+                            }}
+                                    onClick={() => setIsEraseFew(false)}
+                            >
+                                취소
+                            </button>
+                            <button style={{
+                                backgroundColor: "#FF4F4F",
+                                width: '50%',
+                                bottom: '0',
+                                height: '3.125rem',
+                                color: 'white',
+                                border: 'none',
+                                lineHeight: '1.875rem',
+                                textAlign: 'center'
+                            }}
+                                    onClick={() => {
+                                        deleteSelect();
+                                        setIsEraseFew(false);
+                                    }}
+                            >
+                                확인
+                            </button>
+                        </div>
+                    </Modal>
+                    <p onClick={() => setIsEraseFew(true)}
+                       style={{
+                           fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
+                           lineHeight: 'normal', letterSpacing: '-0.01031rem', textDecorationLine: 'underline',
+                           marginRight: '0.5rem'
+                       }}>선택 삭제</p>
                 </div>
-            
+            </div>
+
             <ArticleListTemplate postList={postList} userPost={true} isErase={selectErase} deletePost={deletePost}/>
             <div style={{
                 display: 'flex', flexDirection: 'column', justifyContent: 'space-between',

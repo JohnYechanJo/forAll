@@ -1,4 +1,4 @@
-export const ModalStyles = {
+export const CorrectionModalStyles = {
     content: {
         top: '50%',
         left: '50%',
@@ -6,16 +6,14 @@ export const ModalStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        backgroundColor: 'white', 
-        color: 'black', 
+        color: 'black',
         width: '80%',
         height: '12.5rem',
-        border: '1px solid'+ '#C4C4C4',
-        background: '#FFF',
-        textAlign: 'center',
-
+        background: "white",
+        border: '1px solid'+'#000',
+        backgroundColor: 'rgba(217, 217, 217, 1)'
     },
     overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.75)' 
+        backgroundColor: 'rgba(0, 0, 0, 0.75)'
     }
 };

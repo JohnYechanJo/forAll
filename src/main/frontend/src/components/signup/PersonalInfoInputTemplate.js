@@ -95,7 +95,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                 <input
                     className="inputForRegister fontForRegister pr-10"
                     type={hide[1] ? 'password' : 'text'}
-                    placeholder={" 비밀번호를 한번 더 입력해주세요"}
+                    placeholder={" 비밀번호를 한 번 더 입력해주세요"}
                     onChange={onChangePwCheck}
                     style={{height:'2.5rem', paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', width: "92%" }}
 
@@ -150,7 +150,7 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                 <input
                     style={{width:"70%", paddingLeft:"2%", fontSize:'0.625rem',fontWeight:'300'}}
                     className="inputForRegister fontForRegister"
-                    placeholder={" 숫자만 입력해주세요"}
+                    placeholder={" 숫자만 입력해 주세요"}
                     onChange={onChangePhone}
                 />
                 <button onClick={() => sendCerifiedNum()} className="buttonForRegister"

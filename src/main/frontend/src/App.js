@@ -70,7 +70,9 @@ import ChefInfoModifyCompletePage from "./pages/modify/ChefInfoModifyCompletePag
 import PersonalModifyCompletePage from "./pages/modify/PersonalModifyCompletePage";
 import PlaceInfoModifyCompletePage from "./pages/modify/PlaceInfoModifyCompletePage";
 import PostListViewPage from "./pages/board/PostListViewPage";
-import AdminMainPage from "./pages/admin/AdminMainPage";
+import AllNotification from "./pages/AllNotifications";
+import AllNotifications from "./pages/AllNotifications";
+import DeadlineInfo from "./pages/Reservation/DeadlineInfo";
 
 
 function App() {
@@ -79,7 +81,9 @@ function App() {
         <Route path="/admin" element={<AdminMainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<MainPage />}/>
-        <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
+            <Route path="/allNotifications" element={<AllNotifications />}/>
+
+            <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
         <Route path="/searchId" element={<SearchIdPage />} />
         <Route path="/searchPw" element={<SearchPwPage />}/>
         <Route path="/signUp" element={<SignUpPage />}/>
@@ -143,6 +147,7 @@ function App() {
         <Route path="/assuranceReady" element={<AssuranceReady />} />
         <Route path="/assuranceReadyView" element={<AssuranceReadyView />} />
          <Route path="/assuranceFinish" element={<AssuranceFinish />} />
+            <Route path="/deadlineInfo" element={<DeadlineInfo />} />
 
       </Routes>
   );

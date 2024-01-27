@@ -12,6 +12,10 @@ import {AddressUtil} from "../../utils/AddressUtil";
 import creditCard from "../../components/icons/creditCard.png";
 import DropDown from "../../components/DropDown";
 import Contract from "../../components/Contract";
+import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
+import minusButton from "../../components/icons/minusButton.png";
+import plusButton from "../../components/icons/plusButton.png";
+import {CorrectionModalStyles} from "../../components/CorrectionModalStyles";
 
 const RentSpacePage3 = () => {
     const location = useLocation();
@@ -179,27 +183,103 @@ const RentSpacePage3 = () => {
                 </div>
             ) : null}
 
-            <Modal isOpen={chefNumModal} style={ModalStyles} ariaHideApp={false}>
-                <h1>셰프</h1>
-                <p>이 주방의 최대 수용 셰프 수는 {data.capacity}명입니다.</p>
-                <h1>셰프</h1>
-                <button onClick={substractChef} disabled={chefNum <= 1}>{"-"}</button>
-                <p>{chefNum}</p>
-                <button onClick={addChef} disabled={chefNum >= data.capacity}>{"+"}</button>
-                <button onClick={()=>setChefNumModal(false)}>저장</button>
+            <Modal isOpen={chefNumModal} style={CorrectionModalStyles} ariaHideApp={false}>
+                <div style={{
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "0.625rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal"
+                }}>
+                    <br/>
+                    <a style={{textAlign: "left"}}>셰프 수<span
+                        style={{color: "red"}}>*</span></a>
+                    <hr style={{height: "1px", backgroundColor: "black"}}/>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <a style={{textAlign: "left"}}>이 주방의 최대 수용 셰프
+                            수는 {data.capacity}명입니다.</a>
+                        <div style={{display: "flex", justifyContent: "right"}}>
+                            <strong style={{
+                                textAlign: "right",
+                                marginTop: "-0.1rem",
+                                fontSize: "0.8rem"
+                            }}>셰프</strong><strong style={{
+                            textAlign: "right",
+                            marginTop: "-0.2rem",
+                            fontSize: "0.8rem"
+                        }}>: </strong>&ensp;&ensp;
+
+                            <div onClick={() => {
+                                if (chefNum <= 1) return;
+                                substractChef();
+                            }}>
+                                <div style={{display: "flex", justifyContent: "right"}}>
+                                    <img src={minusButton} alt="minusButton"
+                                         style={{
+                                             marginTop: "-0.05rem",
+                                             width: '1.125rem',
+                                             height: '1.125rem',
+                                             flexShrink: 0,
+                                             display: "block"
+                                         }}/>
+                                    &ensp;&ensp;&ensp;
+                                    <a>{chefNum}명</a>
+                                    <div style={{margin: "0 0.5rem 0 0.5rem"}} onClick={() => {
+                                        if (chefNum >= data.capacity) return;
+                                        addChef();
+                                    }}><img src={plusButton} alt="plusButton"
+                                            style={{
+                                                marginTop: "-0.05rem",
+                                                marginBottom: "3.5rem",
+                                                width: '1.125rem',
+                                                height: '1.125rem',
+                                                flexShrink: 0,
+                                                display: "block"
+                                            }}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <button className="bottom_button_relative" onClick={() => setChefNumModal(false)}>저장</button>
+                </div>
             </Modal>
-            <Modal isOpen={refundModal} style={ModalStyles} ariaHideApp={false}>
-                <h1>환불 기준을 확인해 주세요</h1>
-                <p>환불 기준은 아래 구분됩니다.</p>
-                <p>1) 대관 14일 전 : 100% 환불</p>
-                <p>2) 대관 13일 전~9일 전: 80% 환불</p>
-                <p>3) 대관 8일 전~5일 전: 50% 환불</p>
-                <p>4) 대관 4일 전~당일: 환불 불가</p>
-                <button onClick={()=>setRefundModal(false)}>닫기</button>
+            <Modal isOpen={refundModal} style={ExplanationModalStyles} ariaHideApp={false}>
+                <div style={{
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "0.625rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal"
+                }}>
+                    <br/>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <a style={{textAlign: "left"}}>환불 기준을 확인해주세요.<span style={{color: "red"}}>*</span></a><a
+                        style={{textAlign: "right"}}
+                        onClick={() => setRefundModal(false)}>x</a>
+                    </div>
+                    <hr style={{height: "1px", backgroundColor: "black"}}/>
+                    <p style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>•&ensp;환불 기준은 아래 구분됩니다.
+                    </p>
+                    <p style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>•&ensp;1) 대관 14일 전 : 100% 환불
+                    </p>
+                    <p style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>•&ensp;2) 대관 13일 전~9일 전: 80%
+                        환불</p>
+                    <p style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>•&ensp;3) 대관 8일 전~5일 전: 50% 환불</p>
+                    <p style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>•&ensp;4) 대관 4일 전~당일: 환불 불가</p>
+
+                    <div className="bottom_button_relative">
+                        <a style={{fontSize: "0.8rem"}} onClick={() => setRefundModal(false)}>닫기</a>
+                    </div>
+                </div>
             </Modal>
             <Modal isOpen={contractModal} style={ModalStyles} ariaHideApp={false}>
-                <Contract />
-                <div style={{fontSize:"1rem", textAlign:"right"}} onClick={()=>setContractModal(false)}>확인</div>
+                <Contract/>
+                <div style={{fontSize: "1rem", textAlign: "right"}} onClick={() => setContractModal(false)}>확인</div>
             </Modal>
 
         </div>

@@ -197,13 +197,13 @@ const HostRegistry = () => {
                                                 <hr style={{ height: "1px", backgroundColor: "black" }} />
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;주방, 홀이 하나로 결합된 형태입니다.</p>
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;주방과 홀이 결합되면서 음식을 만드는 사람과 가까이할 수 있어
                                                     대면형보다 더 긴밀한 커뮤니케이션이 가능하며, 요리를 하는 동시에 식사가 가능한 형태를 띕니다.
                                                 </p>
@@ -265,13 +265,13 @@ const HostRegistry = () => {
                                                 <hr style={{ height: "1px", backgroundColor: "black" }} />
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;부엌과 다이닝룸이 한 공간에 자리하는 형태입니다.</p>
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;식탁이 따로 놓여 있지만, 음식을 만드는 사람의 얼굴을 보며
                                                     대화를 나눌 수 있는 구조입니다.</p>
                                             </div>
@@ -332,19 +332,19 @@ const HostRegistry = () => {
                                                 <hr style={{ height: "1px", backgroundColor: "black" }} />
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;차분하게 조리와 정리에 전념할 수 있습니다.</p>
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;또한, 조리할 때 발생하는 오염과 냄새, 연기, 소리 등이 거실에 비교적 전달이 되지 않습니다.
                                                 </p>
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;홀에서는 어수선한 모습이 보이지 않아 쾌적한 매장 환경이 만들어집니다.</p>
                                             </div>
                                             <div class="bottom_button_fixed">

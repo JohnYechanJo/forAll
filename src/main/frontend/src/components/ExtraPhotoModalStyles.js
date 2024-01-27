@@ -1,4 +1,4 @@
-export const ExplanationModalStyles = {
+export const ExtraPhotoModalStyles = {
     content: {
         top: '50%',
         left: '50%',
@@ -8,7 +8,7 @@ export const ExplanationModalStyles = {
         transform: 'translate(-50%, -50%)',
         color: 'black',
         width: '80%',
-        height: '12.5rem',
+        height: '50rem',
         background: "white",
         border: '1px solid'+'#000',
         backgroundColor: 'rgba(217, 217, 217, 1)'

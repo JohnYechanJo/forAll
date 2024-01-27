@@ -1,4 +1,4 @@
-export const ModalStyles = {
+export const BigModalStyles = {
     content: {
         top: '50%',
         left: '50%',
@@ -9,7 +9,7 @@ export const ModalStyles = {
         backgroundColor: 'white', 
         color: 'black', 
         width: '80%',
-        height: '12.5rem',
+        height: '20rem',
         border: '1px solid'+ '#C4C4C4',
         background: '#FFF',
         textAlign: 'center',
