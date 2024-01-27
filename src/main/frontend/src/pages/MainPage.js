@@ -9,6 +9,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ImageViewer from "../components/ImageViewer";
 import ArticleListTemplate from "../components/board/ArticleListTemplate";
 import ToolBar from "../components/home/ToolBar";
+import Header from "../components/home/Header";
+import Footer from "../components/home/Footer";
 const MainPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -24,7 +26,6 @@ const MainPage = () => {
     const boardFocus = () => { boardRef.current?.scrollIntoView({ behavior: 'smooth' }) };
 
     useEffect(() => {
-        console.log(location.pathname);
         axios.get("/api/v1/space/isPublic")
             .then((res) => setSpaceData(res.data))
             .catch((err) => console.error(err));
@@ -55,15 +56,7 @@ const MainPage = () => {
     }, [mainPageRef]); // 페이지 전환 후 스크롤 이동에 애먹고 있음
     return (
         <div ref={mainPageRef}>
-            <div className="header" style={{ backgroundColor: "white" }}>
-                <div style={{ position: 'absolute', left: '1rem', top: '0.8rem', width: '5rem', height: '1.25rem', backgroundColor: 'white' }}>
-                    <a style={{ fontFamily: 'Mukta', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '-0.01031rem', border: '2px solid black' }}
-                        onClick={() => navigate('/')}
-                    >For ALL.</a>
-                </div>
-                <button className="button" onClick={spaceFocus}>대관하기</button>
-                <button className="button" onClick={boardFocus}>커뮤니티</button>
-            </div>
+            <Header />
             <Sidebar />
             <ToolBar />
             <HomeTemplate />
@@ -114,28 +107,8 @@ const MainPage = () => {
                         }}>모두보기</a>
                 </div>
                 <ArticleListTemplate postList={recipeData} preview={true} />
-                <div style={{
-                    display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                    width: '8.5625rem', height: '4.3125rem', fontSize: '1rem', fontStyle: 'normal',
-                    fontWeight: '700', lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                    marginLeft: '1.5rem', marginTop: '4.5rem'
-                }}>
-                    <a onClick={() => navigate("/FAQ")}>• 자주 묻는 질문</a>
-                    <a onClick={() => navigate("/EntryPartnerShip")}>• 입점 및 제휴 문의</a>
-                </div>
-                <div style={{
-                    display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
-                    width: '12.4375rem', height: '5rem', fontSize: '0.4375rem', fontStyle: 'normal',
-                    fontWeight: '700', lineHeight: 'normal', letterSpacing: '-0.01031rem', marginLeft: '1.5rem',
-                    marginTop: '2.5rem'
-                }}>
-                    <p style={{ margin: '0.1rem 0' }}>주식회사 포 올</p>
-                    <p style={{ margin: '0.1rem 0' }}>대표 : 김대원 | 개인정보관리 책임자 : 김대원</p>
-                    <p style={{ margin: '0.1rem 0' }}>이메일 : for.official.all@gmail.com | 대표번호 : 010-9019-7733</p>
-                    <p style={{ margin: '0.1rem 0' }}>주소 : 서울시 관악구 관악로 17길</p>
-                    <p style={{ margin: '0.1rem 0' }}>사업자등록번호 :</p>
-                </div>
             </div>
+            <Footer />
         </div>
     )
 };

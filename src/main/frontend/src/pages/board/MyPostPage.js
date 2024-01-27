@@ -11,7 +11,7 @@ import Modal from "react-modal";
 import {ModalStyles} from "../../components/ModalStyles";
 import {SmallModalStyles} from "../../components/SmallModalStyles";
 import updownImg from "../../components/icons/updown.jpg";
-import Header from "../../components/Header";
+import Header from "../../components/home/Header";
 const MyPostPage = () => {
     const [postList, setPostList] = useState([]);
     const navigate = useNavigate();

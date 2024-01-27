@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Header from "../../components/Header";
+import Header from "../../components/home/Header";
 import axios from "axios";
 import ImageInput from "../../components/ImageInput";
 import Modal from "react-modal";
