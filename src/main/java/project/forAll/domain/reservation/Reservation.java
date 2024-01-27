@@ -34,6 +34,4 @@ public class Reservation extends BassDomain {
     private int chefNum;
     // 예약 상태
     private ReservationState state = ReservationState.PENDING;
-    // 예약 취소 상태 (사용자가 취소를 요청했을 때만 발동)
-    private ReservationCancelState cancelState = ReservationCancelState.NotSpecified;
 }

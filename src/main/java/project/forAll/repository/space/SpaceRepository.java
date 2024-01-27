@@ -10,6 +10,5 @@ import java.util.List;
 public interface SpaceRepository extends JpaRepository<Space, Long> {
 
     List<Space> findByMember(Member member);
-    List<Space> findByIsPublic(boolean isPublic);
     List<Space> findBySpacePending(SpacePending pending);
 }

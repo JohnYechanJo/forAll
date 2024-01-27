@@ -45,7 +45,6 @@ public class Space extends BassDomain {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "closeImage_id")
     private List<Image> closeImage = new ArrayList<>();
-    private boolean isPublic;
 
     // 공간 펜딩 여부
     private SpacePending spacePending;

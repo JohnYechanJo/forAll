@@ -13,5 +13,4 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findByMember(Member member);
     List<Reservation> findBySpace(Space space);
     List<Reservation> findByState(ReservationState state);
-    List<Reservation> findByCancelState(ReservationCancelState state);
 }
