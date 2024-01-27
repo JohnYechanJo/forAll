@@ -48,7 +48,7 @@ public class APIImageController extends APIController{
     @GetMapping("/image/{id}")
     public ResponseEntity getImage(@PathVariable(value="id") String imageName){
         try{
-            String path = "forAll/src/main/resources/static/upload/";
+            String path = "src/main/resources/static/upload/";
             Resource resource = new FileSystemResource(path + imageName + ".png");
             return new ResponseEntity(resource, HttpStatus.OK);
         }catch(final Exception e){

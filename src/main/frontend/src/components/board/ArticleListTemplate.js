@@ -53,18 +53,22 @@ const ArticleListTemplate = ({postList, preview=false, userPost=false, isErase, 
                                         </div>
                                     </div>
                                 </div>
-                                <div style={{width:"5rem"}}>
-                                    {isErase ? (
-                                            <p onClick={()=>deletePost(post)}
-                                               style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
-                                                   lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                                   margin: 0, paddingRight:"1rem"}}>삭제하기</p>) :
-                                        (
-                                            <p onClick={()=>navigate("/post/edit",{state:post})}
-                                               style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
-                                                   lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                                   margin: 0, paddingRight:"1rem"}}>수정하기</p>)}
-                                </div>
+                                {userPost ?(
+                                    <div style={{width:"5rem"}}>
+                                        {isErase ? (
+                                                <p onClick={()=>deletePost(post)}
+                                                   style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
+                                                       lineHeight: 'normal', letterSpacing: '-0.01031rem',
+                                                       margin: 0, paddingRight:"1rem"}}>삭제하기</p>) :
+                                            (
+                                                <p onClick={()=>navigate("/post/edit",{state:post})}
+                                                   style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
+                                                       lineHeight: 'normal', letterSpacing: '-0.01031rem',
+                                                       margin: 0, paddingRight:"1rem"}}>수정하기</p>)}
+                                    </div>
+                                ) : null
+                                }
+
                             </div>
                     )
                     )}
