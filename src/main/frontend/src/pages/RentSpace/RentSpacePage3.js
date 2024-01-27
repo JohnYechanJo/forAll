@@ -63,7 +63,7 @@ const RentSpacePage3 = () => {
 
             </div>
             <div>
-                <ImageViewer val={data.spaceImage}/>
+                <ImageViewer val={data.spaceImage} isfixed/>
                 <p style={{fontSize:"1rem", paddingLeft:"1rem"}}>{AddressUtil.extraction(data.spaceAddress)} | {data.spaceName}</p>
             </div>
             <div style={{margin:"1rem"}}>

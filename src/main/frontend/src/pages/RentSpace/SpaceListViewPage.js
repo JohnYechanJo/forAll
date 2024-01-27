@@ -28,7 +28,7 @@ const SpaceListViewPage = () => {
             <div>
                 {data ? data.map((data, idx) =>
                     (<div key={idx} style={{width:"100%"}} onClick={()=>navigate("/rentSpace/"+data.id)}>
-                        <ImageViewer val={data.mainImage} />
+                        <ImageViewer val={data.mainImage} isfixed />
                         <div style={{paddingLeft:"1rem"}}>
                             <p style={{margin:0,fontSize:"1rem",fontWeight:"500"}}>{data.priceSet}원</p>
                             <div style={{display:"flex"}}>
