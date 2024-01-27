@@ -1,4 +1,4 @@
-package project.forAll.dto;
+package project.forAll.dto.admin;
 
 import lombok.Getter;
 import lombok.Setter;

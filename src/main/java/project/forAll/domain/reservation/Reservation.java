@@ -5,7 +5,7 @@ import lombok.Setter;
 import project.forAll.domain.BassDomain;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.space.ReservationCancelState;
-import project.forAll.domain.space.ReservationState;
+import project.forAll.domain.reservation.ReservationState;
 import project.forAll.domain.space.Space;
 
 import javax.persistence.*;
