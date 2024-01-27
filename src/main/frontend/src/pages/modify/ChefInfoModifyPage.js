@@ -70,7 +70,7 @@ const ChefInfoModifyPage = () => {
              style={{display:"flex",
                  justifyContent:"space-around",
                  flexDirection:"column",}}>
-            <header style={{textAlign: "center"}}><h3>1. 자기소개</h3></header>
+            <header style={{textAlign: "center"}}><h3>셰프 정보</h3></header>
             <h4 style={{marginBottom:"0"}} >경력</h4>
             <hr style={{height: "2px", backgroundColor: "black", width:"95vw"}}/>
             <h4>최근 경력을 최소 1개 입력해주세요.</h4>

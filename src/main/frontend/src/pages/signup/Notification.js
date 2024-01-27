@@ -10,9 +10,9 @@ const Notification = () => {
 
     const navigate = useNavigate();
     return (
-        <div style={{ display: "inline-flex", flexDirection: "column", justifyContent: "center", textAlign: "left", gap: '2rem', width: '100%', fontSize: '0.9375rem',padding:'1rem' }} >
+        <div style={{ display: "inline-flex", flexDirection: "column", justifyContent: "center", textAlign: "left", gap: '2rem', width: '100vw', fontSize: '0.8rem',padding:'1rem',boxSizing:'border-box',height:'100vh' }} >
             <div style={{ textAlign: 'center' }} >
-                <p style={{marginTop:'1.75rem'}} >3.안내 사항</p>
+                <p style={{marginTop:'1.75rem',position:'fixed',top:'0',textAlign:'center',width:'100%'}} >3.안내 사항</p>
             </div>
             <div style={{ height: '2.75rem' }} >
                 <p>포 올은 아래의 권한들이 필요합니다.</p>
@@ -53,7 +53,7 @@ const Notification = () => {
                 </div>
             </div>
 
-            <button className="bottom_button_relative" style={{ backgroundColor: "#FF2929", position: "fixed" }} onClick={() => { navigate("/signUpComplete",{state:data}) }} >가입하기</button>
+            <button className="bottom_button" style={{ backgroundColor: "#FF2929", position: "fixed" }} onClick={() => { navigate("/signUpComplete",{state:data}) }} >가입하기</button>
 
         </div>
     )

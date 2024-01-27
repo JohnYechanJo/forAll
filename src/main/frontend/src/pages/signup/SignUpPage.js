@@ -136,7 +136,7 @@ const SignUpPage = () => {
                     name: name,
                     email: email,
                     phoneNum: phone,
-                    birthDay: birthDay,
+                    birthday: birthDay,
                     gender:gender
                 }
             });

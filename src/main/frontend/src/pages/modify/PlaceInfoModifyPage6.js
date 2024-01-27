@@ -9,6 +9,7 @@ import ImageUploader from "../../utils/imageUploader";
 import Alert from "../../components/Alert";
 import { ModalStyles } from "../../components/ModalStyles";
 import ForAllLogo from "../../components/ForAllLogo";
+import ImageViewer from "../../components/ImageViewer";
 const PlaceInfoModifyPage6 = () => {
     const location = useLocation();
     const data = { ...location.state };
@@ -211,7 +212,7 @@ const PlaceInfoModifyPage6 = () => {
                     </div>
                     <div style={{ height: "9rem" }} >
                         <p>사업자 등록증 첨부<span style={{ color: "#FF2929" }} >*</span></p>
-                        <ImageInput setImg={setLicense} val={license} />
+                        <ImageViewer val={license} />
                     </div>
                     <div>
                         <a>사업장 주소<span style={{ color: "#FF2929" }} >*</span></a>

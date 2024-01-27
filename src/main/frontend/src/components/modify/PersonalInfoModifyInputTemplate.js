@@ -81,7 +81,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                     style={{height:'2.5rem', paddingLeft:'1rem', fontSize:'0.625rem',fontWeight:'300', width: "22.375rem" }}
                     placeholder={"아이디를 입력해 주세요"}
                     disabled={true}
-
+                    defaultValue={sessionStorage.getItem("user_id")}
                 />
             </div>
 
@@ -124,7 +124,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                 />
             </div>
             <a className="fontForRegister" style={{paddingLeft:"0.5rem"}}>이메일<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-            <div style={{ paddingLeft: '0.5rem', justifyContent: "space-between", display: "flex", marginBottom: 0}}>
+            <div style={{ paddingLeft: '0.5rem', justifyContent: "space-between", display: "flex", marginBottom: '0',justifyContent:'flex-start'}}>
                 <input
                     className="inputForRegister"
                     defaultValue={email}
@@ -144,7 +144,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
             <br/>
             <p className="fontForRegister" style={{paddingLeft:"0.5rem"}}>휴대폰<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></p>
 
-            <div style={{paddingLeft: '0.5rem', justifyContent: "space-between", display: "flex"}}>
+            <div style={{paddingLeft: '0.5rem', justifyContent: "flex-start", display: "flex"}}>
             <input
                     style={{height: '2.5rem', paddingLeft:'1rem', fontSize:'0.625rem',fontWeight:'300', width: "14.22138rem", marginBottom: "0.625rem" }}
                     className="inputForRegister"
@@ -157,7 +157,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                     style={{ backgroundColor: "#616161", color: "white",fontSize:'0.625rem' }}
                 >인증번호 받기</button>
             </div>
-            <div style={{paddingLeft: '0.5rem', marginBottom: "2.5rem", justifyContent: "space-between", display: "flex" }}>
+            <div style={{paddingLeft: '0.5rem', marginBottom: "2.5rem", justifyContent: "flex-start", display: "flex" }}>
                 <input
                     className="inputForRegister"
                     style={{height: '2.5rem', paddingLeft:'1rem', fontSize:'0.625rem',fontWeight:'300', width: "14.22138rem" }}

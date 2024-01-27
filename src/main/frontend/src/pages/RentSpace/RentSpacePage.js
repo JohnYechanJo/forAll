@@ -1,10 +1,10 @@
-import React, {useState, useCallback, useEffect} from "react";
-import {useNavigate, useParams} from 'react-router-dom';
+import React, { useState, useCallback, useEffect } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
 import ImageSlider from "../../components/ImageSlider";
-import {ChatRoomCategory, KitchenFeat} from "../../utils/enums";
+import { ChatRoomCategory, KitchenFeat } from "../../utils/enums";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
-import {AddressUtil} from "../../utils/AddressUtil";
+import { AddressUtil } from "../../utils/AddressUtil";
 import "../../style/RentSpace.css";
 import arrowright from "../../components/icons/arrowright.png";
 import hearImg from "../../components/icons/heart.png";
@@ -16,7 +16,7 @@ const RentSpacePage = () => {
     const [images2, setImages2] = useState([]);
     const [equipments, setEquipments] = useState([]);
     useEffect(() => {
-        axios.get("/api/v1/space/"+params.id)
+        axios.get("/api/v1/space/" + params.id)
             .then((res) => {
                 setData(res.data);
             })
@@ -29,7 +29,8 @@ const RentSpacePage = () => {
 
     const submit = () => {
         // Todo 셰프 등록이 되었는지 확인
-        navigate("/rentSpace2", {state:{
+        navigate("/rentSpace2", {
+            state: {
                 spaceId: data.id,
                 spaceName: data.name,
                 spaceAddress: data.address,
@@ -39,24 +40,25 @@ const RentSpacePage = () => {
                 ableFinHour: data.ableFinHour,
                 priceSet: data.priceSet,
                 capacity: data.capacity,
-            }});
+            }
+        });
     }
 
 
-    return(
+    return (
         <div className={"rent_space_container"}>
             <div>
-                <ImageSlider images={images1}/>
+                <ImageSlider images={images1} />
             </div>
-            <div style={{marginBottom:"2rem"}}>
-                <div className={"space_title"} style={{paddingLeft:"1rem"}}>{AddressUtil.extraction(data.address)} | {data.name}</div>
-                <p style={{margin:"1rem"}}>{data.priceSet}원 | {data.ableDate}</p>
+            <div style={{ marginBottom: "2rem" }}>
+                <div className={"space_title"} style={{ paddingLeft: "1rem" }}>{AddressUtil.extraction(data.address)} | {data.name}</div>
+                <p style={{ margin: "1rem" }}>{data.priceSet}원 | {data.ableDate}</p>
                 {/*Todo : 관리자 채팅 연결*/}
-                <div style={{display:"flex", justifyContent:"space-between"}}>
-                    <p style={{marginLeft:"1rem"}}>*영업일 대관 시 800,000원 | 별도 문의 바람</p>
-                    <div style={{textAlign:"right", display:"flex"}}>
-                        <p className={"underline"} onClick={()=>navigate("/profile/"+data.userId)}>프로필 보기</p>
-                        <p onClick={()=> {
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <p style={{ marginLeft: "1rem" }}>*영업일 대관 시 800,000원 | 별도 문의 바람</p>
+                    <div style={{ textAlign: "right", display: "flex" }}>
+                        <p className={"underline"} onClick={() => navigate("/profile/" + data.userId)}>프로필 보기</p>
+                        <p onClick={() => {
                             if (!sessionStorage.getItem("user_id")) return;
                             navigate("/chatRoom", {
                                 state: {
@@ -64,39 +66,40 @@ const RentSpacePage = () => {
                                     category: ChatRoomCategory.Reservation
                                 }
                             })
-                        }} style={{padding:"0 0.5rem 0 0.5rem",textDecorationLine: "underline"}}>채팅 보내기</p>
+                        }} style={{ padding: "0 0.5rem 0 0.5rem", textDecorationLine: "underline" }}>채팅 보내기</p>
                     </div>
                 </div>
             </div>
             <div>
-                <p style={{fontSize:"1rem", margin:"1rem 0 1rem 0"}}>• 공간 소개</p>
+                <p style={{ fontSize: "1rem", margin: "1rem 0 1rem 0" }}>• 공간 소개</p>
                 <div>
-                    <p style={{paddingLeft:"1rem"}}>공간명<span style={{color:"red"}}>*</span></p>
-                    <div className={"data_input"}><p style={{paddingLeft:"0.6rem"}}>{data.name}</p></div>
+                    <p style={{ paddingLeft: "1rem" }}>공간명<span style={{ color: "red" }}>*</span></p>
+                    <div className={"data_input"}><p style={{ paddingLeft: "0.6rem" }}>{data.name}</p></div>
                 </div>
-                <div style={{marginTop:"1rem"}}></div>
+                <div style={{ marginTop: "1rem" }}></div>
                 <div>
-                    <p style={{paddingLeft:"1rem"}}>공간 한 줄 소개<span style={{color:"red"}}>*</span></p>
-                    <div className={"data_input"}><p style={{paddingLeft:"0.6rem"}}>{data.spaceBrief}</p></div>
+                    <p style={{ paddingLeft: "1rem" }}>공간 한 줄 소개<span style={{ color: "red" }}>*</span></p>
+                    <div className={"data_input"}><p style={{ paddingLeft: "0.6rem" }}>{data.spaceBrief}</p></div>
                 </div>
-                <div style={{marginTop:"1rem"}}></div>
-                <p className={"more_info"} onClick={() => navigate("/rentSpaceInfo1/"+params.id)} style={{paddingLeft:"1rem"}}>더 보기</p>
+                <div style={{ marginTop: "1rem" }}></div>
+                <p className={"more_info"} onClick={() => navigate("/rentSpaceInfo1/" + params.id)} style={{ paddingLeft: "1rem" }}>더 보기</p>
             </div>
             <div>
-                <p style={{fontSize:"1rem", margin:"1rem 0 1rem 0"}}>• 공간 정보</p>
+                <p style={{ fontSize: "1rem", margin: "1rem 0 1rem 0" }}>• 공간 정보</p>
                 <div>
-                    <p style={{paddingLeft:"1rem"}}>주소(위치)<span style={{color:"red"}}>*</span></p>
-                    <div className={"data_input"}><p style={{paddingLeft:"0.6rem"}}>{data.address}</p></div>
-                    <div style={{marginTop:"0.5rem"}}></div>
-                    <div className={"data_input"}><p style={{paddingLeft:"0.6rem"}}>{data.addressBrief}</p></div>
+                    <p style={{ paddingLeft: "1rem" }}>주소(위치)<span style={{ color: "red" }}>*</span></p>
+                    <div className={"data_input"}><p style={{ paddingLeft: "0.6rem" }}>{data.address}</p></div>
+                    <div style={{ marginTop: "0.5rem" }}></div>
+                    <div className={"data_input"}><p style={{ paddingLeft: "0.6rem" }}>{data.addressBrief}</p></div>
                 </div>
-                <p onClick={() => navigate("/rentSpaceInfo2/"+params.id)} className={"more_info"} style={{paddingLeft:"1rem"}}>더 보기</p>
+                <p onClick={() => navigate("/rentSpaceInfo2/" + params.id)} className={"more_info"} style={{ paddingLeft: "1rem" }}>더 보기</p>
             </div>
             <div>
-                <p style={{fontSize:"1rem", margin:"1rem 0 1rem 0"}}>• 주방 정보</p>
-                <p style={{paddingLeft:"1rem"}}>주방 특성<span style={{color:"red"}}>*</span></p>
-                <div style={{display: "flex"}}>
-                    <button className="button"
+                <p style={{ fontSize: "1rem", margin: "1rem 0 1rem 0" }}>• 주방 정보</p>
+                <p style={{ paddingLeft: "1rem" }}>주방 특성<span style={{ color: "red" }}>*</span></p>
+                <div style={{paddingLeft:'1rem',paddingRight:'1rem'}} >
+                    <div style={{ display: "flex", justifyContent: 'flex-start', width: '100%' }}>
+                        <button className="square_button"
                             name="kitchen"
                             disabled={true}
                             style={{
@@ -104,12 +107,12 @@ const RentSpacePage = () => {
                                 color: data.kitchenFeat === KitchenFeat.Open ? "white" : "black",
                                 width: "100px",
                                 flex: "1",
-                                marginLeft: "10px"
+
                             }}
-                    >
-                        오픈형
-                    </button>
-                    <button className="button"
+                        >
+                            오픈형
+                        </button>
+                        <button className="square_button"
                             name="kitchen"
                             disabled={true}
                             style={{
@@ -117,12 +120,12 @@ const RentSpacePage = () => {
                                 color: data.kitchenFeat === KitchenFeat.Face ? "white" : "black",
                                 width: "100px",
                                 flex: "1",
-                                marginLeft: "10px"
+
                             }}
-                    >
-                        대면형
-                    </button>
-                    <button className="button"
+                        >
+                            대면형
+                        </button>
+                        <button className="square_button"
                             name="kitchen"
                             disabled={true}
                             style={{
@@ -130,38 +133,45 @@ const RentSpacePage = () => {
                                 color: data.kitchenFeat === KitchenFeat.Close ? "white" : "black",
                                 width: "100px",
                                 flex: "1",
-                                marginLeft: "10px"
+
                             }}
-                    >
-                        폐쇄형
-                    </button>
-                </div>
-                <div style={{display: "flex", marginBottom:"1rem"}}>
-                    <p style={{width: "100px",
-                        flex: "1",
-                        marginLeft: "10px"}}>오픈형이 무엇인가요?</p>
-                    <p style={{width: "100px",
-                        flex: "1",
-                        marginLeft: "10px"}}>대면형이 무엇인가요?</p>
-                    <p style={{width: "100px",
-                        flex: "1",
-                        marginLeft: "10px"}}>폐쇠형이 무엇인가요?</p>
-                </div>
-                <div style={{marginBottom:"1rem"}}>
-                    <p style={{paddingLeft:"1rem"}}>화구<span style={{color:"red"}}>*</span></p>
-                    <div className={"data_input"}><p style={{paddingLeft:"0.6rem"}}>{data.fireholeNum + "구"}</p></div>
-                </div>
-                <div>
-                    <p style={{paddingLeft:"1rem"}}>확보된 주방기계<span style={{color:"red"}}>*</span></p>
-                    <div style={{display:"flex", flexDirection:"row",justifyContent:"space-evenly", marginTop:"1rem"}}>
-                        <div className={equipments.includes("튀김기") === true ? "btn_selected" : ""}>튀김기</div>
-                        <div className={equipments.includes("오븐") === true ? "btn_selected" : ""}>오븐</div>
-                        <div className={equipments.includes("식기세척기") === true ? "btn_selected" : ""}>식기세척기</div>
-                        <div className={equipments.includes("제빙기") === true ? "btn_selected" : ""}>제빙기</div>
+                        >
+                            폐쇄형
+                        </button>
                     </div>
                 </div>
-                <div style={{marginTop:"1rem"}}>
-                    <p style={{paddingLeft:"1rem"}}>추가 사용 가능 기계<span style={{color:"red"}}>*</span></p>
+                <div style={{ display: "flex", marginBottom: "1rem" }}>
+                    <p style={{
+                        width: "100px",
+                        flex: "1",
+                        marginLeft: "10px"
+                    }}>오픈형이 무엇인가요?</p>
+                    <p style={{
+                        width: "100px",
+                        flex: "1",
+                        marginLeft: "10px"
+                    }}>대면형이 무엇인가요?</p>
+                    <p style={{
+                        width: "100px",
+                        flex: "1",
+                        marginLeft: "10px"
+                    }}>폐쇄형이 무엇인가요?</p>
+                </div>
+                <div style={{ marginBottom: "1rem" }}>
+                    <p style={{ paddingLeft: "1rem" }}>화구<span style={{ color: "red" }}>*</span></p>
+                    <div className={"data_input"}><p style={{ paddingLeft: "0.6rem" }}>{data.fireholeNum + "구"}</p></div>
+                </div>
+                <div>
+                    <p style={{ paddingLeft: "1rem" }}>확보된 주방기계<span style={{ color: "red" }}>*</span></p>
+                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", marginTop: "1rem" }}>
+                        <div className={equipments.includes("튀김기") === true ? "btn_selected" : "btn_not_selected"}>튀김기</div>
+                        <div className={equipments.includes("오븐") === true ? "btn_selected" : "btn_not_selected"}>오븐</div>
+                        <div className={equipments.includes("식기세척기") === true ? "btn_selected" : "btn_not_selected"}>식기세척기</div>
+                        <div className={equipments.includes("제빙기") === true ? "btn_selected" : "btn_not_selected"}>제빙기</div>
+                    </div>
+                </div>
+                <div style={{ marginTop: "1rem" }}>
+                    <p style={{ paddingLeft: "1rem" }}>추가 사용 가능 기계<span style={{ color: "red" }}>*</span></p>
                     <div
                         style={{
                             border: "2px solid gray",
@@ -169,28 +179,28 @@ const RentSpacePage = () => {
                             width: "21.875rem",
                             height: "10vh",
                             margin: "0 1rem 0 1rem",
-                            fontSize:"0.625rem",
-                            padding:"0.5rem 0 0 0.5rem"
+                            fontSize: "0.625rem",
+                            padding: "0.5rem 0 0 0.5rem"
                         }}
                     >
                         {data.equipExtra}
                     </div>
                 </div>
-                <p onClick={() => navigate("/rentSpaceInfo3/"+params.id)} className={"more_info"} style={{paddingLeft:"1rem"}}>더 보기</p>
+                <p onClick={() => navigate("/rentSpaceInfo3/" + params.id)} className={"more_info"} style={{ paddingLeft: "1rem" }}>더 보기</p>
                 <div>
-                    <div style={{display:"flex", margin:"1rem", justifyContent:"space-between"}}>
-                        <p style={{fontSize:"1rem"}}>고객센터</p>
-                        <div style={{textAlign:'right'}}>
+                    <div style={{ display: "flex", margin: "1rem", justifyContent: "space-between" }}>
+                        <p style={{ fontSize: "1rem" }}>고객센터</p>
+                        <div style={{ textAlign: 'right' }}>
                             <img src={arrowright} alt="arrowright"
-                                 style={{width: '0.7rem', height: '1.1rem', flexShrink: 0}}/>
+                                style={{ width: '0.7rem', height: '1.1rem', flexShrink: 0 }} />
                         </div>
                     </div>
-                    <div style={{display:"flex", margin:"1rem", justifyContent:"space-between"}}>
+                    <div style={{ display: "flex", margin: "1rem", justifyContent: "space-between" }}>
                         <div>
                             <img src={hearImg} alt="heartImg"
-                                 style={{width: '1.9rem', height: '1.9rem', flexShrink: 0}}/>
+                                style={{ width: '1.9rem', height: '1.9rem', flexShrink: 0 }} />
                         </div>
-                        <div className={"submit_button"} style={{textAlign:"right"}} onClick={submit}>
+                        <div className={"submit_button"} style={{ textAlign: "right" }} onClick={submit}>
                             <p>예약하기</p>
                         </div>
                     </div>

@@ -44,6 +44,7 @@ const Sidebar = ({ width = 18.75, children }) => {
             navigate("/alreadyChef");
         
         }
+        else{navigate('/alreadyChef')}
     }
     const handleChefModify = () => {
         if ([ChefPending.PENDING, ChefPending.APPROVE].includes(userData.chefPending)) navigate("/chefInfoModify");

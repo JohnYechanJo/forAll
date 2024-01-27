@@ -81,6 +81,7 @@ const PlaceInfoModifyPage4 = () => {
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
+                console.log(res.data); 
                 setDbData(res.data)
                 setFirePit(res.data.fireholeNum);
                 setExactFirePit(res.data.fireholeNum);
@@ -164,7 +165,7 @@ const PlaceInfoModifyPage4 = () => {
                 </div>
                 <div>
                     <a>주방 수용 인원 수<span style={{ color: "#FF2929" }} >*</span></a>
-                    <span style={{ display: 'flex', alignItems: 'center' }}><input val={capacity} onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{ width: "21.875rem" }} className="input" />명</span>
+                    <span style={{ display: 'flex', alignItems: 'center' }}><input val={capacity} defaultValue={dbData.capacity}  onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{ width: "21.875rem" }} className="input" />명</span>
                 </div>
                 <div style={{ width: '100%' }}>
                     <a>주방기계<span style={{ color: "#FF2929" }} >*</span></a>
