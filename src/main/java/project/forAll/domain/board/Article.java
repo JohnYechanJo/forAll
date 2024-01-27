@@ -25,6 +25,7 @@ public class Article extends BassDomain {
     // 제목
     private String title;
     // 내용
+    @Column(length = 1000)
     private String content;
     // 생성일시 (수정일시)
     private String writtenAt;

@@ -5,30 +5,35 @@ import {TimeUtil} from "../../utils/TimeUtil";
 import clockImg from "../../components/icons/clock.jpg";
 import likeImg from "../../components/icons/like.jpg"
 import commentImg from "../../components/icons/comment.jpg"
+import {StringUtil} from "../../utils/StringUtil";
 
-const ArticleListTemplate = ({postList, preview=false}) => {
+const ArticleListTemplate = ({postList, preview=false, userPost=false, isErase, deletePost}) => {
     const navigate = useNavigate();
     return (
         <div>
             {postList ? (
                 <div>
                     {postList.map((post, idx) => (
-                            <div key={idx} onClick={() => navigate("/post/" + post.id)}
+                            <div key={idx}
                                 style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                                 border: '1px solid rgba(196, 196, 196, 0.20)', background: '#FFF',
                                 width: '100%', flexShrink: 0}}>
-                                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center',
+                                <div onClick={() => navigate("/post/" + post.id)}
+                                    style={{width:"100%",
                                     alignItems: 'flex-start', margin: '1.19rem 0 1.19rem 1.5rem'}}>
-                                    <p style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '700',
-                                        lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                        margin: 0}}>{post.title}</p>
+                                    <div style={{display:"flex", justifyContent:"space-between"}}>
+                                            <p style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '700',
+                                                lineHeight: 'normal', letterSpacing: '-0.01031rem',
+                                                margin: 0}}>{post.title}</p>
+                                    </div>
+                                    
                                     {!preview ? <p style={{fontSize: '0.625rem', fontStyle: 'normal',
                                         fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                        margin: 0}}>{post.content}</p> : null}
+                                        margin: 0}}>{StringUtil.postPreViewContent(post.content)}</p> : null}
                                     {!preview ? <p style={{fontSize: '0.625rem', fontStyle: 'normal',
                                         fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
                                         color: '#0788FF', margin: 0}}>{post.userId}</p> : null}
-                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                                    <div style={{display: 'flex', alignItems: 'center',
                                         fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '400',
                                         lineHeight: 'normal', letterSpacing: '-0.01031rem', marginTop: '0.1rem'}}>
                                         <div style={{display: 'flex', alignItems: 'center', padding: 0}}>
@@ -47,6 +52,18 @@ const ArticleListTemplate = ({postList, preview=false}) => {
                                             <p style={{margin: '0 0.51rem 0 0'}}>{post.comments ? post.comments.length : 0}</p>
                                         </div>
                                     </div>
+                                </div>
+                                <div style={{width:"5rem"}}>
+                                    {isErase ? (
+                                            <p onClick={()=>deletePost(post)}
+                                               style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
+                                                   lineHeight: 'normal', letterSpacing: '-0.01031rem',
+                                                   margin: 0, paddingRight:"1rem"}}>삭제하기</p>) :
+                                        (
+                                            <p onClick={()=>navigate("/post/edit",{state:post})}
+                                               style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
+                                                   lineHeight: 'normal', letterSpacing: '-0.01031rem',
+                                                   margin: 0, paddingRight:"1rem"}}>수정하기</p>)}
                                 </div>
                             </div>
                     )

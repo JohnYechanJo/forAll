@@ -164,7 +164,7 @@ const PostViewPage = ({postList}) => {
             }}>
                 <div onClick={() => {
                     if(!sessionStorage.getItem("user_id")) return;
-                    setWriteComment(true);
+                    setWriteComment(!writeComment);
                 }}
                      style={{width: '22.375rem', height: '1.875rem', flexShrink: 0, border: '1px solid #C4C4C4',
                          background: '#FFF', display: 'flex', alignItems: 'center'}}>
@@ -175,7 +175,7 @@ const PostViewPage = ({postList}) => {
                 </div>
             </div>
             {writeComment ? (
-                <div style={{width:"24.375rem", display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                <div style={{width:"20.875rem", display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                     <textarea style={{width:"20.875rem",height:"7.5rem", margin:'1.25rem 1.25rem 0 1.25rem',
                         padding:"0.5rem", border: "1px solid #C4C4C4"}}
                               value={comment} onChange={onChangeComment}/>
@@ -243,9 +243,20 @@ const PostViewPage = ({postList}) => {
                                     </div>
                                 </div>
                                 {writeRecomment === idx ? (
-                                    <textarea style={{width: '24.375rem', height: '1.875rem', flexShrink: 0,
-                                        border: '1px solid rgba(196, 196, 196, 0.50)', background: '#FFF'}}
-                                              value={recomment} onChange={onChangeRecomment}/>) : null}
+                                    <div style={{width:"20.875rem", display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                                        <textarea style={{width: '20.875rem', height: '1.875rem', flexShrink: 0, margin:'1.25rem 1.25rem 0 1.25rem',
+                                            padding:"0.5rem", border: '1px solid rgba(196, 196, 196, 0.50)', background: '#FFF'}}
+                                                  value={recomment} onChange={onChangeRecomment}/>
+                                        <div style={{display:"flex", flexDirection:"row-reverse", alignItems:"center", width:"20.875rem",
+                                            height:"1.875rem", marginLeft:"1.25rem", padding:"0.5rem", paddingTop:"0",
+                                            border: "1px solid #C4C4C4"}}>
+                                            <div onClick={() => submitRecomment(idx)} style={{textAlign:"right"}}>
+                                                <img src={pencilImg} alt="pencilImg"
+                                                     style={{width: '0.8rem', height: '0.8rem', flexShrink: 0}}/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ) : null}
                                 {comment.recomments ? (<div>
                                     {comment.recomments.sort(((a, b) => {
                                         if (a.writtenAt > b.writtenAt) return -1;

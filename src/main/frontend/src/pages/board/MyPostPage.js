@@ -162,7 +162,6 @@ const MyPostPage = () => {
                                     취소
                                 </button>
                                 <button style={{
-
                                     backgroundColor: "#FF4F4F",
                                     width: '10.9375rem',
                                     bottom: '0',
@@ -190,7 +189,7 @@ const MyPostPage = () => {
                     </div>
                 </div>
             
-            <ArticleListTemplate postList={postList}/>
+            <ArticleListTemplate postList={postList} userPost={true} isErase={selectErase} deletePost={deletePost}/>
             <div style={{
                 display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
                 width: '8.5625rem', height: '4.3125rem', fontSize: '1rem', fontStyle: 'normal',
