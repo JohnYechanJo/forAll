@@ -1,76 +1,93 @@
-import { useRef, useState, useEffect } from "react";
+import {useRef, useState, useEffect} from "react";
 import Modal from "react-modal";
 import "../Styles.css";
-import { ModalStyles } from "../ModalStyles";
+import {ModalStyles} from "../ModalStyles";
 import arrowIcon from "../../components/icons/arrowright.png";
+import {CompleteModalStyles} from "../CompleteModalStyles";
 
 
 const UseTermsTemplate = ({setIsUseTermsChecked}) => {
-        const [modalIsOpen1, setModalIsOpen1] = useState(false);
-        const [modalIsOpen2, setModalIsOpen2] = useState(false);
-        const [modalIsOpen3, setModalIsOpen3] = useState(false);
-        const modalClose1 = () => {
-                setModalIsOpen1(false);
-        };
-        const modalClose2 = () => {
-            setModalIsOpen2(false);
-        };
-        const modalClose3 = () => {
-            setModalIsOpen3(false);
-        };
-        const [everyBox, setEveryBox] = useState(false);
-        const [userAgree, setUserAgree] = useState(false);
-        const [infoCollect, setInfoCollect] = useState(false);
-        const [infoThird, setInfoThird] = useState(false);
-        const [ageOver14, setAgeOver14] = useState(false);
-        const handleCheckBox = () => {
-            setEveryBox(!everyBox);
-            setUserAgree(!everyBox);
-            setInfoCollect(!everyBox);
-            setInfoThird(!everyBox);
-            setAgeOver14(!everyBox);
-        };
-    
+    const [modalIsOpen1, setModalIsOpen1] = useState(false);
+    const [modalIsOpen2, setModalIsOpen2] = useState(false);
+    const [modalIsOpen3, setModalIsOpen3] = useState(false);
+    const modalClose1 = () => {
+        setModalIsOpen1(false);
+    };
+    const modalClose2 = () => {
+        setModalIsOpen2(false);
+    };
+    const modalClose3 = () => {
+        setModalIsOpen3(false);
+    };
+    const [everyBox, setEveryBox] = useState(false);
+    const [userAgree, setUserAgree] = useState(false);
+    const [infoCollect, setInfoCollect] = useState(false);
+    const [infoThird, setInfoThird] = useState(false);
+    const [ageOver14, setAgeOver14] = useState(false);
+    const handleCheckBox = () => {
+        setEveryBox(!everyBox);
+        setUserAgree(!everyBox);
+        setInfoCollect(!everyBox);
+        setInfoThird(!everyBox);
+        setAgeOver14(!everyBox);
+    };
+
     useEffect(() => {
-        if (userAgree && infoCollect && infoThird && ageOver14){
+        if (userAgree && infoCollect && infoThird && ageOver14) {
             setIsUseTermsChecked(true);
         }
-    }, [userAgree,infoCollect,infoThird,ageOver14]);
+    }, [userAgree, infoCollect, infoThird, ageOver14]);
     return (
-        <div className="fontForRegister" style={{fontWeight:'350',display:'inline-flex',flexDirection:'column',justifyContent:"flex-start",width:"100%" }} >
-                <p className="fontForRegister">이용약관동의<span style={{color:'#FF2929'}}>*</span></p>
-                <p style={{marginBottom:'2rem'}} >
-                <div style={{display:'flex',alignItems:"end"}} >
-                <input type="checkbox" checked={everyBox} id="checkbox" onChange={handleCheckBox}/>
-                <label for="checkbox" style={{fontWeight:'500'}}><em  style={{height: '1rem'}}></em><span style={{height: '1rem',marginTop:'-50px'}}>전체 동의합니다.</span>
-                </label>
+        <div className="fontForRegister" style={{
+            fontWeight: '350',
+            display: 'inline-flex',
+            flexDirection: 'column',
+            justifyContent: "flex-start",
+            width: "100%"
+        }}>
+            <p style={{paddingLeft: "2%"}} className="fontForRegister">이용약관동의<span style={{color: '#FF2929'}}>*</span>
+            </p>
+            <p style={{marginBottom: '2rem'}}>
+                <div style={{display: 'flex', alignItems: "end"}}>
+                    <input type="checkbox" checked={everyBox} id="checkbox" onChange={handleCheckBox}/>
+                    <label htmlFor="checkbox" style={{paddingLeft: "2%", fontWeight: '500'}}><em
+                        style={{height: '1rem'}}></em><span
+                        style={{height: '1rem', marginTop: '-50px'}}>전체 동의합니다.</span>
+                    </label>
                 </div>
-                
-                </p>
-                <div>
-                    <p>
-                        <div style={{display:'flex',justifyContent:'space-between',alignItems:"center",textAlign:"center"}} >
-                            <div>
+
+            </p>
+            <div>
+                <p>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: "center",
+                        textAlign: "center"
+                    }}>
+                        <div>
                             <input type="checkbox" checked={userAgree} id="checkbox1"
-                            onChange={() => {
-                                setUserAgree(!userAgree);
-                            }} />
-                            <label for="checkbox1" style={{fontWeight:'500'}}><em  style={{height: '1rem'}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
-                            <a>이용약관 동의<span style={{color:'#7B7B7B'}}>(필수)</span></a>
+                                   onChange={() => {
+                                       setUserAgree(!userAgree);
+                                   }}/>
+                            <label htmlFor="checkbox1" style={{paddingLeft: "2%", fontWeight: '500'}}><em
+                                style={{height: '1rem'}}></em><span style={{height: '1rem', marginTop: '-50px'}}>
+                            <a>이용약관 동의<span style={{color: '#7B7B7B'}}>(필수)</span></a>
                             </span>
                             </label>
-                            
-                            </div>
-                            <img src={arrowIcon} style={{width:'0.4375rem',height:'0.875rem'}} onClick={()=>setModalIsOpen1(true)} />
+
                         </div>
-                        <Modal 
-                            isOpen={modalIsOpen1}
-                            style={ModalStyles}
-                        >
-                            <pre style={{fontSize:'0.9375rem',fontWeight:'700',textAlign:'left'}} >포 올 이용약관</pre>
-                            <div style={{textAlign:'left',wordWrap:'break-word',width:'21.875rem'}} >
-                                <p style={{fontSize:'0.6325rem',fontWeight:'700'}} >• 제 1장 총칙</p>
-                                <pre style={{fontSize:'0.3125rem'}} >
+                        <img src={arrowIcon} style={{width: '0.4375rem', height: '0.875rem'}}
+                             onClick={() => setModalIsOpen1(true)}/>
+                    </div>
+                    <Modal
+                        isOpen={modalIsOpen1}
+                        style={ModalStyles}
+                    >
+                        <pre style={{fontSize: '0.9375rem', fontWeight: '700', textAlign: 'left'}}>포 올 이용약관</pre>
+                        <div style={{textAlign: 'left', wordWrap: 'break-word', width: '100%'}}>
+                            <p style={{fontSize: '0.6325rem', fontWeight: '700'}}>• 제 1장 총칙</p>
+                            <p style={{fontSize: '0.625rem'}}>
                                 {`
 **제1조 목적**
 본 약관은 포 올(이하 “회사” 라 함)이 제공하는 “팝업 레스토랑 공간 플랫폼”(이하 "서비스"라 함)과 관련하여 "회사"와 “오너”, “셰프”(이하 “오너”와 “셰프’를 “회원”라 함) 간의 권리, 의무, 책임사항 및 "서비스" 사용 절차에 관한 사항을 규정함을 목적으로 합니다.
@@ -112,9 +129,9 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
 3. 서비스를 사용하는 모든 회원은 회원으로 등록되어야 하며, 회사는 셰프들의 예약 및 사용 내역에 대한 정보를 오너에게 제출할 수 있습니다.
 4. 회원이 예약 정책에 관한 위 사항들을 지키지 않음으로 발생한 모든 불이익에 대한 책임은 회원에게 있습니다.
                             `}
-                                </pre>
-                                <p>• 제 2장 사용계약 및 정보보호</p>
-                                <pre style={{fontSize:'0.3125rem'}} >
+                                </p>
+                            <p>• 제 2장 사용계약 및 정보보호</p>
+                            <p style={{fontSize: '0.625rem'}}>
                                 {`
 **제8조 회원가입 및 회원정보의 변경**
 1. 회원은 회사가 정한 가입 양식에 따라 회원정보를 기입한 후 본 약관 등에 동의한다는 의사표시를 함으로서 회원가입을 신청합니다.
@@ -153,9 +170,9 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
 1. 회사는 회원이 서비스 사용 중 필요하다고 인정되는 다양한 정보를 서비스 내 공지사항, 서비스 화면, 전자우편 등의 방법으로 회원에게 제공할 수 있습니다. 다만, 회원은 관련법에 따른 거래관련 정보 및 고객문의 등에 대한 답변 등을 제외하고는 언제든지 위 정보제공에 대해서 수신 거절을 할 수 있습니다.
 2. 회사는 서비스의 운영과 관련하여 회사가 제공하는 서비스의 화면 및 홈페이지 등에 광고를 게재할 수 있습니다.
                             `}
-                                </pre>
-                                <p>• 제 3장 서비스의 사용</p>
-                                <pre style={{fontSize:'0.3125rem'}} >
+                                </p>
+                            <p>• 제 3장 서비스의 사용</p>
+                            <p style={{fontSize: '0.625rem'}}>
                                 {`
 **제12조 상품의 구매**
 1. 회원은 본 약관 및 회사가 정한 규정에 따라 아래와 같이 상품의 구매를 신청합니다.
@@ -203,9 +220,9 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
 1. 회사는 컴퓨터 등 정보통신설비의 보수점검, 교체 및 고장, 통신의 두절 등의 사유가 발생한 경우에는 서비스의 제공을 일시적으로 중단할 수 있습니다.
 2. 사업 종목의 전환, 사업의 포기, 업체 간의 통합 등의 이유로 서비스를 제공할 수 없게 되는 경우에는 회사는 회원에게 통지하거나, 회원이 알아볼 수 있도록 공지사항으로 게시합니다.
                             `}
-                                </pre>
-                                <p>• 제 4장 책임</p>
-                                <pre style={{fontSize:'0.3125rem'}} >
+                                </p>
+                            <p>• 제 4장 책임</p>
+                            <p style={{fontSize: '0.625rem'}}>
                                 {`
 **제18조 회사의 의무**
 1. 회사는 법령과 이 약관이 금지하거나 공서양속에 반하는 행위를 하지 않으며 이 약관이 정하는 바에 따라 지속적이고, 안정적으로 회원에게 서비스를 제공하기 위해 최선을 다합니다.
@@ -254,37 +271,54 @@ ID를 삭제 및 사용 중지 등의 모든 서비스 제한 조치를 회원�
 1. 회사와 회원간 제기된 소송은 대한민국법을 준거법으로 합니다.
 2. 회사와 회원간 발생한 분쟁에 관한 소송은 민사소송법 상의 관할법원에 제소합니다.
                             `}
-                                </pre>
-                            </div>
-                            <div onClick={()=>{
-                                modalClose1();
-                                setUserAgree(true);
-                            }} style={{fontSize:'0.9375rem',fontWeight:'700',textDecorationLine:'underline',textAlign:'right'}}>확인</div>
-                        </Modal>
-                    </p>
-                </div>
-                <div>
-                    <p>
-                    <div style={{display:'flex',justifyContent:'space-between',alignItems:"center",textAlign:"center"}} >
-                            <div>
+                                </p>
+                        </div>
+                        <div onClick={() => {
+                            modalClose1();
+                            setUserAgree(true);
+                        }} style={{
+                            fontSize: '0.9375rem',
+                            fontWeight: '700',
+                            textDecorationLine: 'underline',
+                            textAlign: 'right'
+                        }}>확인
+                        </div>
+                    </Modal>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: "center",
+                        textAlign: "center"
+                    }}>
+                        <div>
                             <input type="checkbox" checked={infoCollect} id="infoCollect"
-                            onChange={() => {
-                                setInfoCollect(!infoCollect);
-                            }} />
-                            <label for="infoCollect" style={{fontWeight:'500'}}><em  style={{height: '1rem'}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
-                            <a>개인정보 수집,이용 동의<span style={{color:'#7B7B7B'}}>(필수)</span></a>
+                                   onChange={() => {
+                                       setInfoCollect(!infoCollect);
+                                   }}/>
+                            <label htmlFor="infoCollect" style={{paddingLeft: "2%", fontWeight: '500'}}><em
+                                style={{height: '1rem'}}></em><span style={{height: '1rem', marginTop: '-50px'}}>
+                            <a>개인정보 수집,이용 동의<span style={{color: '#7B7B7B'}}>(필수)</span></a>
                             </span>
                             </label>
-                            </div>
-                            <img src={arrowIcon} style={{width:'0.4375rem',height:'0.875rem'}} onClick={()=>setModalIsOpen2(true)} />
                         </div>
-                        <Modal 
+                        <img src={arrowIcon} style={{width: '0.4375rem', height: '0.875rem'}}
+                             onClick={() => setModalIsOpen2(true)}/>
+                    </div>
+                    <Modal
                         isOpen={modalIsOpen2}
                         style={ModalStyles}
                     >
-                        <pre style={{fontSize:'0.9375rem',fontWeight:'700',textAlign:'left'}} >개인정보 수집,이용 동의(필수)</pre>
-                            <div style={{textAlign:'left',wordWrap:'break-word',width:'21.875rem'}} >
-                                <pre style={{fontSize:'0.3125rem'}} >
+                        <pre style={{
+                            fontSize: '0.9375rem',
+                            fontWeight: '700',
+                            textAlign: 'left'
+                        }}>개인정보 수집,이용 동의(필수)</pre>
+                        <div style={{textAlign: 'left', wordWrap: 'break-word', width: '100%'}}>
+                                <p style={{fontSize: '0.625rem'}}>
                                 {`
 1.수집 목적 : 회원 가입의사 확인, 이용자 식별 및 본인여부, 회원자격 유지·관리, 계약 이행 및 약관변경 고지를 위한 연락, 본인의사 화인 및 민원 처리, 
 부정이용 방지, 비인가 사용방지, 서비스 제공 및 계약의 이행,서비스 이용 및 상담, 문의, 후기를 위한 원활한 의사소통 경로 확보, 맞춤형 서비스 제공, 거점 기반 서비스 제공
@@ -298,37 +332,54 @@ ID를 삭제 및 사용 중지 등의 모든 서비스 제한 조치를 회원�
 
 *단, 회원 탈퇴와 별개로 분쟁 조정, 고객문의 대응 및 법령 준수 이력 증빙을위하여 이메일, 문자 알림톡 발송이력은 발송일로부터 6개월 보관후 파기합니다
                             `}
-                                </pre>
-                            </div>
-                        <div onClick={()=>{
-                                modalClose2();
-                                setInfoCollect(true);
-                            }}  style={{fontSize:'0.9375rem',fontWeight:'700',textDecorationLine:'underline',textAlign:'right'}}>확인</div>
-                        </Modal>
-                    </p>
-                </div>
-                <div>
-                    <p>
-                    <div style={{display:'flex',justifyContent:'space-between',alignItems:"center",textAlign:"center"}} >
-                            <div>
+                                </p>
+                        </div>
+                        <div onClick={() => {
+                            modalClose2();
+                            setInfoCollect(true);
+                        }} style={{
+                            fontSize: '0.9375rem',
+                            fontWeight: '700',
+                            textDecorationLine: 'underline',
+                            textAlign: 'right'
+                        }}>확인
+                        </div>
+                    </Modal>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: "center",
+                        textAlign: "center"
+                    }}>
+                        <div>
                             <input type="checkbox" checked={infoThird} id="infoThird"
-                            onChange={() => {
-                                setInfoThird(!infoThird);
-                            }} />
-                            <label for="infoThird" style={{fontWeight:'500'}}><em  style={{height: '1rem'}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
-                            <a>개인정보 제 3자 제공 동의<span style={{color:'#7B7B7B'}}>(필수)</span></a>
+                                   onChange={() => {
+                                       setInfoThird(!infoThird);
+                                   }}/>
+                            <label htmlFor="infoThird" style={{paddingLeft: "2%", fontWeight: '500'}}><em
+                                style={{height: '1rem'}}></em><span style={{height: '1rem', marginTop: '-50px'}}>
+                            <a>개인정보 제 3자 제공 동의<span style={{color: '#7B7B7B'}}>(필수)</span></a>
                             </span>
                             </label>
-                            </div>
-                            <img src={arrowIcon} style={{width:'0.4375rem',height:'0.875rem'}} onClick={()=>setModalIsOpen3(true)} />
                         </div>
-                        <Modal 
+                        <img src={arrowIcon} style={{width: '0.4375rem', height: '0.875rem'}}
+                             onClick={() => setModalIsOpen3(true)}/>
+                    </div>
+                    <Modal
                         isOpen={modalIsOpen3}
                         style={ModalStyles}
                     >
-                        <pre style={{fontSize:'0.9375rem',fontWeight:'700',textAlign:'left'}} >개인정보의 제 3자 제공 동의 안내</pre>
-                            <div style={{textAlign:'left',wordWrap:'break-word',width:'21.875rem'}} >
-                                <pre style={{fontSize:'0.3125rem'}} >
+                        <pre style={{
+                            fontSize: '0.9375rem',
+                            fontWeight: '700',
+                            textAlign: 'left'
+                        }}>개인정보의 제 3자 제공 동의 안내</pre>
+                        <div style={{textAlign: 'left', wordWrap: 'break-word', width: '100%'}}>
+                                <p style={{fontSize: '0.625rem'}}>
                                 {`
 1.개인정보를 제공받는 자.- 계약관계에 있는 오너와 셰프
 
@@ -338,24 +389,32 @@ ID를 삭제 및 사용 중지 등의 모든 서비스 제한 조치를 회원�
 
 4.개인정보 제공기간- 개인정보 제공 목적 달성 시 - 또는 참여자의 삭제 요청 시까지
                             `}
-                                </pre>
-                            </div>
-                        <div onClick={()=>{
-                                modalClose3();
-                                setInfoThird(true);
-                            }}  style={{fontSize:'0.9375rem',fontWeight:'700',textDecorationLine:'underline',textAlign:'right'}}>확인</div>
-                        </Modal>
-                    </p>
-                </div>
-                <div>
-                        <p>
-                        <input type="checkbox" checked={ageOver14} onChange={() => setAgeOver14(!ageOver14)} id="ageOver14" />
-                        <label for="ageOver14" style={{fontWeight:'500'}}><em  style={{height: '1rem'}}></em><span style={{height: '1rem',marginTop:'-50px'}}>
-                            <a>본인은 만 14세 이상입니다.<span style={{color:'#7B7B7B'}}>(필수)</span></a>
+                                </p>
+                        </div>
+                        <div onClick={() => {
+                            modalClose3();
+                            setInfoThird(true);
+                        }} style={{
+                            fontSize: '0.9375rem',
+                            fontWeight: '700',
+                            textDecorationLine: 'underline',
+                            textAlign: 'right'
+                        }}>확인
+                        </div>
+                    </Modal>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <input type="checkbox" checked={ageOver14} onChange={() => setAgeOver14(!ageOver14)}
+                           id="ageOver14"/>
+                    <label htmlFor="ageOver14" style={{paddingLeft: "2%", fontWeight: '500'}}><em
+                        style={{height: '1rem'}}></em><span style={{height: '1rem', marginTop: '-50px'}}>
+                            <a>본인은 만 14세 이상입니다.<span style={{color: '#7B7B7B'}}>(필수)</span></a>
                             </span>
-                            </label>
-                        </p>
-                </div>
+                    </label>
+                </p>
+            </div>
         </div>
     );
 };
