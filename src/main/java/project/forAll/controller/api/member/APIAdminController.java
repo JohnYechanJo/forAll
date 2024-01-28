@@ -107,30 +107,33 @@ public class APIAdminController extends APIController {
         }
     }
     @PostMapping("/admin/space")
-    public void confirmSpace(@RequestBody AdminSpaceConfirmDTO dto, @RequestBody final AlarmForm af){
+    public ResponseEntity confirmSpace(@RequestBody AdminSpaceConfirmDTO dto, @RequestBody final AlarmForm af){
         final Space space = (Space) spaceService.findById(dto.getId());
         space.setSpacePending(SpacePending.parse(dto.getState()));
         spaceService.save(space);
         // 공간 등록 승인 알림
         final Alarm alarm = alarmService.build(af);
         final Long alarmId = alarmService.saveAlarm(alarm);
+        return new ResponseEntity(Long.toString(alarmId), HttpStatus.OK);
     }
     @PostMapping("/admin/chef")
-    public void confirmChef(@RequestBody AdminChefConfirmDTO dto, @RequestBody final AlarmForm af){
+    public ResponseEntity confirmChef(@RequestBody AdminChefConfirmDTO dto, @RequestBody final AlarmForm af){
         final Member member = (Member) memberService.findById(dto.getId());
         member.setChefPending(ChefPending.parse(dto.getState()));
         spaceService.save(member);
         // 셰프 등록 승인 알림
         final Alarm alarm = alarmService.build(af);
         final Long alarmId = alarmService.saveAlarm(alarm);
+        return new ResponseEntity(Long.toString(alarmId), HttpStatus.OK);
     }
     @PostMapping("/admin/reservation")
-    public void confirmReservation(@RequestBody AdminReservationConfirmDTO dto, @RequestBody final AlarmForm af){
+    public ResponseEntity confirmReservation(@RequestBody AdminReservationConfirmDTO dto, @RequestBody final AlarmForm af){
         final Reservation reservation = (Reservation) reservationService.findById(dto.getId());
         reservation.setState(ReservationState.parse(dto.getState()));
         spaceService.save(reservation);
         // 예약 확정 알림
         final Alarm alarm = alarmService.build(af);
         final Long alarmId = alarmService.saveAlarm(alarm);
+        return new ResponseEntity(Long.toString(alarmId), HttpStatus.OK);
     }
 }
