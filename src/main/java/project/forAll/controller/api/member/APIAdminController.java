@@ -1,12 +1,12 @@
 package project.forAll.controller.api.member;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
 import project.forAll.controller.api.APIController;
+import project.forAll.domain.alarm.Alarm;
 import project.forAll.domain.member.ChefPending;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.reservation.Reservation;
@@ -14,12 +14,15 @@ import project.forAll.domain.reservation.ReservationState;
 import project.forAll.domain.space.Space;
 import project.forAll.domain.space.SpacePending;
 import project.forAll.dto.admin.*;
-import project.forAll.repository.ReservationRepository;
+import project.forAll.form.AlarmForm;
+import project.forAll.form.ArticleForm;
+import project.forAll.repository.reservation.ReservationRepository;
 import project.forAll.repository.member.MemberRepository;
 import project.forAll.repository.space.SpaceRepository;
 import project.forAll.service.MemberService;
 import project.forAll.service.ReservationService;
 import project.forAll.service.SpaceService;
+import project.forAll.service.alarm.AlarmService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +40,8 @@ public class APIAdminController extends APIController {
     private final SpaceService spaceService;
     private final ReservationService reservationService;
     private final ReservationRepository reservationRepository;
+    // 알림 기능 때문에 추가
+    private final AlarmService alarmService;
 
     @PostMapping("/admin/login")
     public ResponseEntity loginAdmin(@RequestBody final AdminMemberDto adminMemberDto, HttpServletRequest request,
@@ -102,21 +107,30 @@ public class APIAdminController extends APIController {
         }
     }
     @PostMapping("/admin/space")
-    public void confirmSpace(@RequestBody AdminSpaceConfirmDTO dto){
+    public void confirmSpace(@RequestBody AdminSpaceConfirmDTO dto, @RequestBody final AlarmForm af){
         final Space space = (Space) spaceService.findById(dto.getId());
         space.setSpacePending(SpacePending.parse(dto.getState()));
         spaceService.save(space);
+        // 공간 등록 승인 알림
+        final Alarm alarm = alarmService.build(af);
+        final Long alarmId = alarmService.saveAlarm(alarm);
     }
     @PostMapping("/admin/chef")
-    public void confirmChef(@RequestBody AdminChefConfirmDTO dto){
+    public void confirmChef(@RequestBody AdminChefConfirmDTO dto, @RequestBody final AlarmForm af){
         final Member member = (Member) memberService.findById(dto.getId());
         member.setChefPending(ChefPending.parse(dto.getState()));
         spaceService.save(member);
+        // 셰프 등록 승인 알림
+        final Alarm alarm = alarmService.build(af);
+        final Long alarmId = alarmService.saveAlarm(alarm);
     }
     @PostMapping("/admin/reservation")
-    public void confirmReservation(@RequestBody AdminReservationConfirmDTO dto){
+    public void confirmReservation(@RequestBody AdminReservationConfirmDTO dto, @RequestBody final AlarmForm af){
         final Reservation reservation = (Reservation) reservationService.findById(dto.getId());
         reservation.setState(ReservationState.parse(dto.getState()));
         spaceService.save(reservation);
+        // 예약 확정 알림
+        final Alarm alarm = alarmService.build(af);
+        final Long alarmId = alarmService.saveAlarm(alarm);
     }
 }

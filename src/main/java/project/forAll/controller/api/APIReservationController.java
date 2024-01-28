@@ -9,7 +9,7 @@ import project.forAll.domain.reservation.Reservation;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.reservation.ReservationState;
 import project.forAll.form.ReservationForm;
-import project.forAll.repository.ReservationRepository;
+import project.forAll.repository.reservation.ReservationRepository;
 import project.forAll.service.MemberService;
 import project.forAll.service.ReservationService;
 

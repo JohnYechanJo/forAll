@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.reservation.Assurance;
 import project.forAll.domain.reservation.Reservation;
 import project.forAll.form.AssuranceForm;
-import project.forAll.repository.AssuranceRepository;
+import project.forAll.repository.reservation.AssuranceRepository;
 
 @Component
 @Transactional

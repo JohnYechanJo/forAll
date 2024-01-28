@@ -4,16 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project.forAll.domain.member.Member;
 import project.forAll.domain.reservation.Assurance;
 import project.forAll.domain.reservation.Reservation;
 import project.forAll.form.AssuranceForm;
-import project.forAll.form.ReservationForm;
-import project.forAll.repository.AssuranceRepository;
+import project.forAll.repository.reservation.AssuranceRepository;
 import project.forAll.service.AssuranceService;
 import project.forAll.service.ReservationService;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
