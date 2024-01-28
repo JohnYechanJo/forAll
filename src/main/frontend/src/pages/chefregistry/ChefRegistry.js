@@ -7,6 +7,7 @@ import ImageInput from "../../components/ImageInput";
 import axios from "axios";
 import ImageUploader from "../../utils/imageUploader";
 import DropDown from "../../components/DropDown";
+import {SmallModalStyles} from "../../components/SmallModalStyles";
 const ChefRegistry = () => {
     const navigate = useNavigate();
     const [career, setCareer] = useState([]);
@@ -141,12 +142,72 @@ const ChefRegistry = () => {
                     <p>• 정확한 정보를 입력했는지 다시 한 번 확인해주세요.</p>
 
 
-                    <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                        <div style={{ fontSize: '0.9375rem', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '80%' }}>현재 필수 입력사항이 모두 기입되지 않았습니다!</div>
-                        <button className="bottom_button" style={{ backgroundColor: '#FF4F4F', position: 'fixed', marginBottom: '0' }} onClick={() => setIsModalOpen(false)}>마저 입력하기</button>
+                    <Modal isOpen={isModalOpen} ariaHideApp={false} style={SmallModalStyles}>
+                        <div style={{
+                            justifyContent: "center", alignItems: "center",
+                            fontFamily: "Noto Sans KR",
+                            color: " #000",
+                            fontSize: "1.25rem",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "normal",
+
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+
+                        }}>
+                            <a style={{fontSize: '0.9375rem'}}>현재 필수 입력사항이 모두 기입되지 않았습니다.</a>
+                            <p style={{fontSize: '0.9375rem'}}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                        </div>
+                        <div style={{
+                            display: 'flex',
+                            width: '100%',
+                            margin: '0px',
+                            marginTop: '4rem',
+                            bottom: '0',
+                            position: 'fixed',
+                            fontSize: "0.9375rem",
+                            fontWeight: "400"
+                        }}>
+                            <button style={{
+                                backgroundColor: "#FF4F4F",
+
+                                width: '50%',
+                                bottom: '0',
+                                height: '3.125rem',
+                                color: 'white',
+                                border: 'none',
+                                lineHeight: '1.875rem',
+                                textAlign: 'center'
+                            }}
+                                    onClick={() => setIsModalOpen(false)}
+                            >
+                                마저 입력하기
+                            </button>
+                            <button style={{
+                                backgroundColor: "#000",
+
+                                width: '50%',
+                                bottom: '0',
+                                height: '3.125rem',
+                                color: 'white',
+                                border: 'none',
+                                lineHeight: '1.875rem',
+                                textAlign: 'center'
+                            }}
+                                    onClick={() => {
+                                        setIsModalOpen(false);
+                                    }}
+                            >
+                                넘어가기
+                            </button>
+                        </div>
+
                     </Modal>
                 </div>
             </div>
+
 
             <button onClick={handleButton} className="bottom_button"
                     style={{backgroundColor: "#FF4F4F", position: "fixed"}}>저장 후 닫기</button>
