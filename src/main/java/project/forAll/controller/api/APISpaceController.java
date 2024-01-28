@@ -65,7 +65,7 @@ public class APISpaceController extends APIController {
     @GetMapping("/space/isPublic")
     public ResponseEntity getPublicSpaces(){
         try{
-            List<Space> spaces = spaceRepository.findBySpacePending(SpacePending.NOTPUBLIC);
+            List<Space> spaces = spaceRepository.findBySpacePending(SpacePending.APPROVE);
             if (spaces == null) return new ResponseEntity(new ArrayList<>(), HttpStatus.OK);
             else{
                 List<SpaceForm> spaceForms = spaces.stream().map(space -> spaceService.of(space)).toList();

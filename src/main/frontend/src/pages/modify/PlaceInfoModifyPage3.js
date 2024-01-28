@@ -8,6 +8,7 @@ import "../../components/Styles.css";
 import axios from "axios";
 import MultipleDatePicker from "react-multiple-datepicker";
 import ForAllLogo from "../../components/ForAllLogo";
+import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
 const PlaceInfoModifyPage3 = () => {
     const location = useLocation();
     const data = { ...location.state };
@@ -199,7 +200,7 @@ const PlaceInfoModifyPage3 = () => {
                 <ForAllLogo />
                 <div>
                     <a>대관 가능일<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeeksData.includes(rentWeek) ? rentWeek : "직접지정"} val={rentWeek} width='90vw' />
+                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeeksData.includes(rentWeek) ? rentWeek : "직접지정"} val={rentWeek} width='100%' />
                     {rentWeek === "직접지정" ?
                         <MultipleDatePicker onSubmit={setRentDays} /> : (rentWeek !== "휴무없음" ?
                             <div style={{ display: 'flex' }} >
@@ -222,9 +223,9 @@ const PlaceInfoModifyPage3 = () => {
                         alignItems: "center",
                     }}>
                         <span>대관 당일 </span>
-                        <span style={{ marginLeft: '1rem' }}><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={rentTimeFrom} val={rentTimeFrom} width='6.31444rem' /></span>
+                        <span style={{ }}><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={rentTimeFrom} val={rentTimeFrom} width='100%' /></span>
                         <span> 부터, 당일 </span>
-                        <span style={{ marginLeft: '1rem' }}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={rentTimeTo} val={rentTimeTo} width='6.31444rem' /></span>
+                        <span style={{}}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={rentTimeTo} val={rentTimeTo} width='100%' /></span>
 
                         <span> 까지</span>
                     </div>
@@ -232,7 +233,7 @@ const PlaceInfoModifyPage3 = () => {
 
                 <div>
                     <a>주차 여부<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택해 주세요"} defaultData={parkAvaliable} val={parkAvaliable} width='90vw' />
+                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택해 주세요"} defaultData={parkAvaliable} val={parkAvaliable} width='100%' />
                     {parkAvaliable === "직접 입력" ? (
                         <div style={{ marginTop: '0.5rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center' }} >
@@ -254,7 +255,7 @@ const PlaceInfoModifyPage3 = () => {
                         <div style={{
                             border: "1px solid lightgray",
                             borderRadius: "0",
-                            width: "45vw",
+                            width: "50%",
                             height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR"
@@ -265,7 +266,7 @@ const PlaceInfoModifyPage3 = () => {
                             style={{
                                 border: "1px solid lightgray",
                                 borderRadius: "0",
-                                width: "45vw",
+                                width: "50%",
                                 height: "1.875rem",
                                 textAlign: "center",
                                 fontFamily: "Noto Sans KR",
@@ -276,18 +277,18 @@ const PlaceInfoModifyPage3 = () => {
                 </div>
                 <div>
                     <a>테이블<span style={{ color: '#FF2929' }} >*</span></a>
-                    <input className="input fontForRegister" style={{ width: "90vw", height: "3vh", float: "left" }} onChange={onChangeTable}
+                    <input className="input fontForRegister" style={{ width: "99%", float: "left" }} onChange={onChangeTable}
                         placeholder={"최대 테이블 수를 기준으로 입력해주세요"} defaultValue={dbData.tableNum} />
                 </div>
                 <div>
                     <a>좌석 수<span style={{ color: '#FF2929' }} >*</span></a>
-                    <input className="input fontForRegister" style={{ width: "90vw", height: "3vh", float: "left" }} onChange={onChangeSeat}
+                    <input className="input fontForRegister" style={{ width: "99%", float: "left"}} onChange={onChangeSeat}
                         placeholder={"최대 좌석수를 기준으로 입력해주세요"} defaultValue={dbData.seatNum} />
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }} >
                     <a>가격 설정<span style={{ color: '#FF2929' }} >*</span></a>
                     <div>
-                        <input className="input fontForRegister" style={{ width: "90vw", height: "3vh", float: "left", marginRight: "2vw" }}
+                        <input className="input fontForRegister" style={{  width: "99%", float: "left",  marginRight: "2vw" }}
                             onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} defaultValue={dbData.priceSet} />
                     </div>
                     <div>
@@ -311,8 +312,8 @@ const PlaceInfoModifyPage3 = () => {
                         <div style={{
                             border: "1px solid lightgray",
                             borderRadius: "0.5px",
-                            width: "47vw",
-                            height: "3vh",
+                            width: "50%",
+                            height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR"
                         }}
@@ -321,113 +322,198 @@ const PlaceInfoModifyPage3 = () => {
                         <div style={{
                             border: "1px solid lightgray",
                             borderRadius: "0.5px",
-                            width: "47vw",
-                            height: "3vh",
+                            width: "50%",
+                            height: "1.875rem",
                             textAlign: "center",
                             fontFamily: "Noto Sans KR"
                         }}
                             className={(trial) === false ? "btn_selected" : 'btn_not_selected'} onClick={() => setTrial(false)}>불가
                         </div>
                     </div>
-                    <Modal isOpen={isTrial} style={ModalStyles} >
-                        <header>트라이얼이란?</header>
-                        <button onClick={() => setIsTrial(false)} >닫기</button>
+                    <Modal isOpen={isTrial} style={ExplanationModalStyles}>
+                        <div style={{
+                            fontFamily: "Noto Sans KR",
+                            color: " #000",
+                            fontSize: "0.625rem",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "normal"
+                        }}>
+                            <br />
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <a style={{ textAlign: "left" }}>트라이얼이란?</a><a style={{ textAlign: "right" }}
+                                                                               onClick={() => setIsTrial(false)}>x</a>
+                            </div>
+                            <hr style={{ height: "1px", backgroundColor: "black" }} />
+                            <p style={{ textAlign: 'left', paddingLeft: "5%", paddingRight: "5%" }}>•&ensp;트라이얼은 대관 당일
+                                기준
+                                일주일 전 셰프가 업장에 방문하여 직접 요리해볼 수 있게끔 최소 3시간 정도 공간 활용을 허용하는 것을 의미합니다.
+                            </p>
+                            <p style={{ textAlign: 'left', paddingLeft: "5%", paddingRight: "5%" }}>•&ensp;트라이얼 시 <a
+                                style={{ textDecorationLine: "underline" }}>업장 이용 인수인계 및 주의사항</a> 을 안내함으로 더욱 안전한 대관을 보장할 수
+                                있습니다.
+                            </p>
+                            <p style={{ textAlign: 'left', paddingLeft: "5%", paddingRight: "5%" }}>•&ensp;트라이얼
+                                시간은 <strong>‘셰프와 채팅’</strong>을 통해 정해주세요.</p>
+                            <div class="bottom_button_relative">
+                                <a style={{ fontSize: "0.8rem" }} onClick={() => setIsTrial(false)}>닫기</a>
+                            </div>
+                        </div>
+
                     </Modal>
                     <button onClick={() => setIsTrial(!isTrial)}
-                        className="detail"
-                    >• 트라이얼이란?</button>
+                            className="detail"
+                    >• 트라이얼이란?
+                    </button>
                 </div>
+
+
                 <div>
                     <a>재료 새벽 배달<span style={{ color: '#FF2929' }} >*</span></a>
-
                     <div style={{
                         display: "flex",
-                        justifyContent: "center",
+                        justifyContent: "left",
                         alignItems: "center",
 
                     }}>
                         <div style={{
                             border: "1px solid lightgray",
-                            borderRadius: "0.5px",
-                            width: "47vw",
-                            height: "3vh",
+                            width: "50%",
+                            height: "1.875rem",
                             textAlign: "center",
-                            fontFamily: "Noto Sans KR"
+                            fontFamily: "Noto Sans KR",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}
-                            className={(morningDelivery) === true ? "btn_selected" : 'btn_not_selected'}
-                            onClick={() => setMorningDelivery(true)}>가능
+                             className={morningDelivery === true ? "btn_selected" : ""}
+                             onClick={() => setMorningDelivery(true)}>가능
                         </div>
                         <div style={{
                             border: "1px solid lightgray",
-                            borderRadius: "0.5px",
-                            width: "47vw",
-                            height: "3vh",
+                            width: "50%",
+                            height: "1.875rem",
                             textAlign: "center",
-                            fontFamily: "Noto Sans KR"
+                            fontFamily: "Noto Sans KR",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}
-                            className={(morningDelivery) === false ? "btn_selected" : 'btn_not_selected'}
-                            onClick={() => setMorningDelivery(false)}>불가
+                             className={morningDelivery === false ? "btn_selected" : ""}
+                             onClick={() => setMorningDelivery(false)}>불가
                         </div>
                     </div>
-                    <Modal isOpen={isMorningDelivery} style={ModalStyles} >
-                        <header>새벽배달이란?</header>
-                        <button onClick={() => setIsMorningDelivery(false)} >닫기</button>
+
+                    <Modal isOpen={isMorningDelivery} style={ExplanationModalStyles}>
+                        <div style={{
+                            fontFamily: "Noto Sans KR",
+                            color: " #000",
+                            fontSize: "0.625rem",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "normal"
+                        }}>
+                            <br />
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <a style={{ textAlign: "left" }}>새벽배달이란?</a> <a style={{ textAlign: "right" }}
+                                                                                onClick={() => setIsMorningDelivery(false)}>x</a>
+                            </div>
+                            <hr style={{ height: "1px", backgroundColor: "black" }} />
+                            <p style={{ textAlign: 'left', paddingLeft: "5%", paddingRight: "5%" }}>•&ensp;
+                                식재료 대리 수령은 대관일 전날 또는 셰프와 업주 협의 하에 식재료 사전 보관이 가능한지를 의미합니다.
+                            </p>
+                            <p style={{ textAlign: 'left', paddingLeft: "5%", paddingRight: "5%" }}>•&ensp;팝업 당일 대관
+                                이용자에게 <a
+                                    style={{ textDecorationLine: "underline" }}>사용할 수 있는 냉장고</a>를 비워주어 공간 확보를 부탁드립니다.
+                            </p>
+                            <div class="bottom_button_fixed">
+                                <a style={{ fontSize: "0.8rem" }} onClick={() => setIsMorningDelivery(false)}>닫기</a>
+                            </div>
+                        </div>
                     </Modal>
                     <button onClick={() => setIsMorningDelivery(!isMorningDelivery)}
-                        className="detail"
-                    >• 새벽배달이란?</button>
+                            className="detail"
+                    >• 새벽배달이란?
+                    </button>
                 </div>
+
                 <div>
                     <a>미장<span style={{ color: '#FF2929' }} >*</span></a>
-
                     <div style={{
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
+
                     }}>
                         <div style={{
                             border: "1px solid lightgray",
-                            borderRadius: "0.5px",
-                            width: "47vw",
-                            height: "3vh",
+                            width: "50%",
+                            height: "1.875rem",
                             textAlign: "center",
-                            fontFamily: "Noto Sans KR"
+                            fontFamily: "Noto Sans KR",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}
-                            className={(miseen) === true ? "btn_selected" : 'btn_not_selected'} onClick={() => setMiseen(true)}>가능
+                             className={miseen === true ? "btn_selected" : ""} onClick={() => setMiseen(true)}>가능
                         </div>
                         <div style={{
                             border: "1px solid lightgray",
-                            borderRadius: "0.5px",
-                            width: "47vw",
-                            height: "3vh",
+                            width: "50%",
+                            height: "1.875rem",
                             textAlign: "center",
-                            fontFamily: "Noto Sans KR"
+                            fontFamily: "Noto Sans KR",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}
-                            className={(miseen) === false ? "btn_selected" : 'btn_not_selected'} onClick={() => setMiseen(false)}>불가
+                             className={miseen === false ? "btn_selected" : ""} onClick={() => setMiseen(false)}>불가
                         </div>
                     </div>
                     <div hidden={!miseen}>
                         <div style={{ display: "flex", justifyContent: 'left', alignItems: 'center' }}>
-                            <span>대관전일</span>
-
-                            <span style={{ marginLeft: '1rem' }}><DropDown dataArr={rentTimeFromData} onChange={setMiseenTimeFrom} defaultData={miseenTimeFrom} val={miseenTimeFrom} width="5.25rem" /></span>
+                            <span>대관 전일</span>
+                            <span style={{ marginLeft: '1rem' }} ><DropDown dataArr={rentTimeFromData} onChange={setMiseenTimeFrom} placeholder={"00시"} width="5.25rem" /></span>
                             <span> 부터, 당일 </span>
-                            <span style={{ marginLeft: '1rem' }}><DropDown dataArr={rentTimeToData} onChange={setMiseenTimeTo} defaultData={miseenTimeTo} val={miseenTimeTo} width="5.25rem" /></span>
-
+                            <span style={{ marginLeft: '1rem' }}><DropDown dataArr={rentTimeToData} onChange={setMiseenTimeTo} placeholder={"24시"} width="5.25rem" /></span>
                             <span> 까지</span>
                         </div>
                     </div>
-                    <Modal isOpen={isMiseen} style={ModalStyles} >
-                        <header>미장이란?</header>
-                        <button onClick={() => setIsMiseen(false)} >닫기</button>
+
+                    <Modal isOpen={isMiseen} style={ExplanationModalStyles}>
+                        <div style={{
+                            fontFamily: "Noto Sans KR",
+                            color: " #000",
+                            fontSize: "0.625rem",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "normal"
+                        }}>
+                            <br />
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <a style={{ textAlign: "left" }}>미장이란?</a><a style={{ textAlign: "right" }}
+                                                                             onClick={() => setIsMiseen(false)}>x</a>
+                            </div>
+                            <hr style={{ height: "1px", backgroundColor: "black" }} />
+                            <p style={{ textAlign: 'left', paddingLeft: "5%", paddingRight: "5%" }}>•&ensp;미장 플라세는 영업을
+                                위한 사전 재료 준비를 뜻합니다.
+                            </p>
+                            <p style={{ textAlign: 'left', paddingLeft: "5%", paddingRight: "5%" }}>•&ensp;팝업 레스토랑에서
+                                고객에게 식사를 제공하기 전에 사전 준비를 완벽하게 해야 하므로 필요한 준비과정입니다.
+                            </p>
+                            <div class="bottom_button_fixed">
+                                <a style={{ fontSize: "0.8rem" }} onClick={() => setIsMiseen(false)}>닫기</a>
+                            </div>
+                        </div>
                     </Modal>
                     <button onClick={() => setIsMiseen(!isMiseen)}
-                        className="detail"
-                    >• 미장이란?</button>
+                            className="detail"
+                    >• 미장이란?
+                    </button>
                 </div>
+
                 <div>
                     <a>워크인<span style={{ color: '#FF2929' }} >*</span></a>
-
                     <div style={{
                         display: "flex",
                         justifyContent: "center",
@@ -436,41 +522,71 @@ const PlaceInfoModifyPage3 = () => {
                     }}>
                         <div style={{
                             border: "1px solid lightgray",
-                            borderRadius: "0.5px",
-                            width: "47vw",
-                            height: "3vh",
+                            width: "50%",
+                            height: "1.875rem",
                             textAlign: "center",
-                            fontFamily: "Noto Sans KR"
+                            fontFamily: "Noto Sans KR",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}
-                            className={(workIn) === true ? "btn_selected" : 'btn_not_selected'} onClick={() => setWorkIn(true)}>가능
+                             className={workIn === true ? "btn_selected" : ""} onClick={() => setWorkIn(true)}>가능
                         </div>
                         <div style={{
                             border: "1px solid lightgray",
-                            borderRadius: "0.5px",
-                            width: "47vw",
-                            height: "3vh",
+                            width: "50%",
+                            height: "1.875rem",
                             textAlign: "center",
-                            fontFamily: "Noto Sans KR"
+                            fontFamily: "Noto Sans KR",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}
-                            className={(workIn) === false ? "btn_selected" : 'btn_not_selected'} onClick={() => setWorkIn(false)}>불가
+                             className={workIn === false ? "btn_selected" : ""} onClick={() => setWorkIn(false)}>불가
                         </div>
                     </div>
-                    <Modal isOpen={isWorkIn} style={ModalStyles} >
-                        <header>워크인이란?</header>
-                        <button onClick={() => setIsWorkIn(false)} >닫기</button>
+
+                    <Modal isOpen={isWorkIn} style={ExplanationModalStyles}>
+                        <div style={{
+                            fontFamily: "Noto Sans KR",
+                            color: " #000",
+                            fontSize: "0.625rem",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "normal"
+                        }}>
+                            <br />
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <a style={{ textAlign: "left" }}>워크인이란?</a><a style={{ textAlign: "right" }}
+                                                                              onClick={() => setIsWorkIn(false)}>x</a>
+                            </div>
+                            <hr style={{ height: "1px", backgroundColor: "black" }} />
+                            <p style={{ textAlign: 'left', paddingLeft: "5%", paddingRight: "5%" }}>•&ensp;워크인은 대관 당일
+                                기준 '팝업 레스토랑' 사전 예약을 하지 않은 손님이 공간을 방문하는 경우를 의미합니다.
+
+                            </p>
+                            <p style={{ textAlign: 'left', paddingLeft: "5%", paddingRight: "5%" }}>•&ensp;<a
+                                style={{ color: "red" }}>안심하세요! </a><a>팝업 레스토랑은 배너 또는 공지를 통해 공간과 무관한 영업이 진행된다는 점이 명시됩니다.
+                            </a>
+                            </p>
+                            <div className="bottom_button_fixed">
+                                <a style={{ fontSize: "0.8rem" }} onClick={() => setIsWorkIn(false)}>닫기</a>
+                            </div>
+                        </div>
                     </Modal>
                     <button onClick={() => setIsWorkIn(!isWorkIn)}
-                        className="detail"
-                    >• 워크인이란?</button>
+                            className="detail"
+                    >• 워크인이란?
+                    </button>
                 </div>
             </div>
             <div style={{ display: 'flex', width: '100vw', margin: '0px', marginTop: '4rem' }}>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#FF4F4F", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                    onClick={() => navigate(-1, data)}
+                        onClick={() => navigate(-1, data)}
                 >
                     이전</button>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#525252", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                    onClick={() => handleButton()}
+                        onClick={() => handleButton()}
                 >다음</button>
             </div>
             <Modal isOpen={isModalOpen} style={{ ...ModalStyles, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} ariaHideApp={false}>

@@ -1,8 +1,7 @@
-import {useCallback, useEffect} from "react";
+import {useCallback, useEffect, useState} from "react";
 import { Gender } from "../../utils/enums";
 import axios from "axios";
 import "../../components/Styles.css";
-import React, { useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear,setMonth,setDay, setGender, checkDuplicatedId, checkDuplicatedEmail, isCheckedDuplicatedId, isCheckedDuplicatedEmail, isCheckPw, sendCerifiedNum, checkCerifiedNum,isPhoneCerified, gender }) => {
 

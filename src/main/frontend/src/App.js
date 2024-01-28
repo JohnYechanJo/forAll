@@ -70,10 +70,16 @@ import ChefInfoModifyCompletePage from "./pages/modify/ChefInfoModifyCompletePag
 import PersonalModifyCompletePage from "./pages/modify/PersonalModifyCompletePage";
 import PlaceInfoModifyCompletePage from "./pages/modify/PlaceInfoModifyCompletePage";
 import PostListViewPage from "./pages/board/PostListViewPage";
-import AllNotification from "./pages/AllNotifications";
 import AllNotifications from "./pages/AllNotifications";
 import DeadlineInfo from "./pages/Reservation/DeadlineInfo";
-import AdminMainPage from './pages/admin/AdminMainPage';
+import AdminMainPage from "./pages/admin/AdminMainPage";
+import AdminSpaceViewPage1 from "./pages/admin/AdminSpaceViewPage1";
+import AdminSpaceViewPage2 from "./pages/admin/AdminSpaceViewPage2";
+import AdminSpaceViewPage3 from "./pages/admin/AdminSpaceViewPage3";
+import AdminSpaceViewPage4 from "./pages/admin/AdminSpaceViewPage4";
+import AdminSpaceViewPage5 from "./pages/admin/AdminSpaceViewPage5";
+import AdminSpaceViewPage6 from "./pages/admin/AdminSpaceViewPage6";
+
 
 function App() {
   return (
@@ -149,6 +155,12 @@ function App() {
          <Route path="/assuranceFinish" element={<AssuranceFinish />} />
             <Route path="/deadlineInfo" element={<DeadlineInfo />} />
 
+            <Route path="/adminspaceViewPage1" element={<AdminSpaceViewPage1 />} />
+            <Route path="/adminspaceViewPage2" element={<AdminSpaceViewPage2 />} />
+            <Route path="/adminspaceViewPage3" element={<AdminSpaceViewPage3 />}/>
+            <Route path="/adminspaceViewPage4" element={<AdminSpaceViewPage4 />}/>
+            <Route path="/adminspaceViewPage5" element={<AdminSpaceViewPage5 />}/>
+            <Route path="/adminspaceViewPage6" element={<AdminSpaceViewPage6 />}/>
       </Routes>
   );
 }

@@ -118,9 +118,9 @@ const HostRegistry4 = () => {
                     <a>주방 정보<span style={{ color: "#FF2929" }} >*</span></a>
                     <hr style={{ height: "2px", backgroundColor: "black", width: '100%' }} />
                 </div>
-                <div>
+                <div style={{ width: '100%' }}>
                     <a>화구<span style={{ color: "#FF2929" }} >*</span></a>
-                    <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} width='90vw' />
+                    <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} width='100%' />
                     {firePit === "직접 입력" ? (
                         <div style={{display:'flex',width:'100%',alignItems:'center',marginTop:'0.5rem'}} >
                             <input onChange={onChangeFirePit} className="input" style={{ width: "10vw" }} />
@@ -129,25 +129,25 @@ const HostRegistry4 = () => {
                         </div>
                     ) : null}
                 </div>
-                <div>
+                <div style={{ width: '95%' }}>
                     <a>주방 수용 인원 수<span style={{ color: "#FF2929" }} >*</span></a>
                     <div>
-                        <span style={{ display: 'flex', alignItems: 'center' }} ><input val={capacity} onChange={onChangeCapacity} className="input" placeholder={"주방이 수용할 수 있는 최대 인원수를 입력해 주세요."} style={{ width: "21.875rem" }} />명</span>
+                        <span style={{ display: 'flex', alignItems: 'center' }} ><input val={capacity} onChange={onChangeCapacity} className="input" placeholder={"주방이 수용할 수 있는 최대 인원수를 입력해 주세요."} style={{ width: '100%' }} />명</span>
                     </div>
                 </div>
                 <div style={{ width: '100%' }}>
                     <a>주방기계<span style={{ color: "#FF2929" }} >*</span></a>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={fryer === true ? "btn_selected" : "btn_not_selected"} onClick={toggleFryer}>튀김기</button>
-                        <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={oven === true ? "btn_selected" : "btn_not_selected"} onClick={toggleOven}>오븐</button>
-                        <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={dishWasher === true ? "btn_selected" : "btn_not_selected"} onClick={toggleDishWasher}>식기세척기</button>
-                        <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={iceMaker === true ? "btn_selected" : "btn_not_selected"} onClick={toggleIceMaker}>제빙기</button>
-                        <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={someThing === true ? "btn_selected" : "btn_not_selected"} onClick={toggleSomeThing}>냉장고</button>
+                        <button style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }} className={fryer === true ? "btn_selected" : "btn_not_selected"} onClick={toggleFryer}>튀김기</button>
+                        <button style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }} className={oven === true ? "btn_selected" : "btn_not_selected"} onClick={toggleOven}>오븐</button>
+                        <button style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }} className={dishWasher === true ? "btn_selected" : "btn_not_selected"} onClick={toggleDishWasher}>식기세척기</button>
+                        <button style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }} className={iceMaker === true ? "btn_selected" : "btn_not_selected"} onClick={toggleIceMaker}>제빙기</button>
+                        <button style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }} className={someThing === true ? "btn_selected" : "btn_not_selected"} onClick={toggleSomeThing}>냉장고</button>
                     </div>
 
                 </div>
 
-                <div>
+                <div style={{ width: '100%' }}>
                     <a>추가 사용 가능 기계<span style={{ color: "#FF2929" }} >*</span></a>
                     <textarea onChange={onChangeExtraMachine} placeholder={"사용할 수 있는 기계를 입력해주세요. ex) 수비드 기계"} className="input" style={{ height: '6.25rem' }} />
                 </div>
