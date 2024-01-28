@@ -63,6 +63,10 @@ const PlaceInfoModifyPage3 = () => {
         setPrice(e.target.value);
     }, []);
 
+    const handleDatePicker=(e)=>{ 
+        setRentDays(e);
+    };
+
     const toggleMonday = useCallback((e) => {
         setMonDay(!monDay);
     }, [monDay]);
@@ -99,8 +103,9 @@ const PlaceInfoModifyPage3 = () => {
                 setMorningDelivery(res.data.ableEarlyDeliver)
                 setWorkIn(res.data.ableWorkIn)
                 setMiseen(res.data.ableMiseen)
-                setRentWeek(res.data.ableDate.split(" ")[0])
-
+                setRentWeek(!isNaN(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1])?  "직접지정"  : res.data.ableDate.split(" ")[0] === '매월'? res.data.ableDate.split(" ")[0] + " " + res.data.ableDate.split(" ")[1] : res.data.ableDate.split(" ")[0]  ) 
+//res.data.ableDate.split(" ")[0] === '매월'? res.data.ableDate.split(" ")[0] + " " + res.data.ableDate.split(" ")[1] : res.data.ableDate.split(" ")[0]
+//이게 직접지정해서 나온 Wed Jan 31 2024의 형태가 아닐 때 써야 하는 코드다
                 setMiseenTimeFrom(res.data.ableMiseenStartTime ? res.data.ableMiseenStartTime + "시" : "0시")
                 setMiseenTimeTo(res.data.ableMiseenFinTime ? res.data.ableMiseenFinTime + "시" : "0시")
 
@@ -112,14 +117,14 @@ const PlaceInfoModifyPage3 = () => {
                 setPrice(res.data.priceSet)
                 setExactPark(res.data.ableParking.split("대")[0])
                 // 아래 부분은 수정 필요함, 대관 날짜를 직접 지정하면 오류 난다
-                setRentDays(res.data.ableDate.split(" ")[1].split(","))
-                setMonDay(res.data.ableDate.split(" ")[1].split(",").includes("월"))
-                setTuesDay(res.data.ableDate.split(" ")[1].split(",").includes("화"))
-                setWednesDay(res.data.ableDate.split(" ")[1].split(",").includes("수"))
-                setThursDay(res.data.ableDate.split(" ")[1].split(",").includes("목"))
-                setFriDay(res.data.ableDate.split(" ")[1].split(",").includes("금"))
-                setSaturDay(res.data.ableDate.split(" ")[1].split(",").includes("토"))
-                setSunDay(res.data.ableDate.split(" ")[1].split(",").includes("일"))
+                setRentDays(!isNaN(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1])  ? res.data.ableDate : res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(","))
+                setMonDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("월"))
+                setTuesDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("화"))
+                setWednesDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("수"))
+                setThursDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("목"))
+                setFriDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("금"))
+                setSaturDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("토"))
+                setSunDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("일"))
             }).catch((err) => console.error(err))
     };
     useEffect(() => {

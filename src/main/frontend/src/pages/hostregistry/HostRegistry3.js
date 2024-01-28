@@ -1,7 +1,7 @@
 import DropDown from "../../components/DropDown";
 import { useCallback, useEffect, useState } from "react";
 import "../../style/btnStyles.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { ModalStyles } from "../../components/ModalStyles";
 import "../../components/Styles.css";
@@ -86,6 +86,9 @@ const HostRegistry3 = () => {
         setSunDay(!sunDay);
     }, [sunDay]);
 
+    const handleDatePicker=(e)=>{
+        setRentDays(e);
+    };
 
     const handleButton = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
@@ -158,10 +161,12 @@ const HostRegistry3 = () => {
                 </div>
                 <ForAllLogo />
                 <div >
+                    {console.log(rentWeek)}
+                    {console.log(rentDays)}
                     <a>대관 가능일<span style={{ color: '#FF2929' }} >*</span></a>
                     <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} width='90vw' />
                     {rentWeek === "직접지정" ?
-                        <MultipleDatePicker onSubmit={setRentDays} /> : (rentWeek !== "휴무없음" ?
+                        <MultipleDatePicker onSubmit={handleDatePicker} /> : (rentWeek !== "휴무없음" ?
                             <div style={{display:'flex'}} >
                                 <div className={monDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleMonday}>월</div>
                                 <div className={tuesDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleTuesDay}>화</div>

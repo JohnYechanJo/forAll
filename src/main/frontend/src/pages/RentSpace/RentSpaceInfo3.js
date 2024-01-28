@@ -49,7 +49,7 @@ const RentSpaceInfo3 = () => {
         <div  >
           <div>
             <a>주방 특성</a>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex",justifyContent:'space-evenly' }}>
               <div style={{ display: 'flex', flexDirection: 'column' }} >
                 <div>
                   <button

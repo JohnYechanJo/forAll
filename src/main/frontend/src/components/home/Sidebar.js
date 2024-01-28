@@ -83,12 +83,12 @@ const Sidebar = ({ width = 18.75, children }) => {
                             <img src={xmark} alt="xmark" style={{ width: "1.5rem", height: "1.5rem", objectFit: "contain" }} onClick={() => toggleMenu()} />
                         </div>
                     </div>
-                    <div>
-                        <div style={{ height: '5.25rem' }}>
-                            <ImageViewer val={profileImage} style={{
+                    <div  >
+                        <div style={{
                                 width: '5.25rem', height: '5.25rem', borderRadius: '50%', flexShrink: '0', fill: '#FFF', strokeWidth: '1px', stroke: "#C4C4C4",
                                 filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))', alignItems: "center", justifyContent: "center", display: "flex", margin: "auto"
-                            }} />
+                             }}>
+                            <ImageViewer val={profileImage} />
                         </div>
                         <p style={{ textAlign: "center" }}>{sessionStorage.getItem("name")}</p>
                         <p style={{ textAlign: "center" }}>{sessionStorage.getItem("email")}</p>

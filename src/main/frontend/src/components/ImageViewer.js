@@ -8,7 +8,7 @@ const ImageViewer = ({val, isfixed}) => {
         e.target.src = BaseImgSrc;
     }
     return (
-        <div style={{height:"20vh"}}>
+        <div >
             <label>
                 <img
                     className="image"
