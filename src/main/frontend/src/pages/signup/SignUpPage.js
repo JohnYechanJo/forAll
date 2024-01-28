@@ -140,7 +140,7 @@ const SignUpPage = () => {
                     gender:gender
                 }
             });
-                    
+
     }
     }
     return (
@@ -150,7 +150,7 @@ const SignUpPage = () => {
                 flexDirection: "column",
                 alignItems: "center",
                 gap: "2.5rem",
-                
+
             }} >
                 <div style={{
                     textAlign: "center",
@@ -200,7 +200,7 @@ const SignUpPage = () => {
                 >다음</button>
             </div>
         </div>
-
+        
     )
 };
 

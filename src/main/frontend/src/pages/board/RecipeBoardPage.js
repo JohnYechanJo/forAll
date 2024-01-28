@@ -92,8 +92,6 @@ const RecipeBoardPage = () => {
                             fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
                             lineHeight: 'normal', letterSpacing: '-0.01031rem'
                         }}>새 글을 작성해주세요!</p>
-                        {/*<a onClick={() => setNewPost(true)}*/}
-                        {/*    disabled={!sessionStorage.getItem("user_id")}>새 글을 작성해주세요!</a>*/}
                     </div>
                 </div>
                 <div>

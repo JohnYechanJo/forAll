@@ -69,22 +69,27 @@ import PersonalInfoModifyPage2 from "./pages/modify/PersonalInfoModifyPage2";
 import ChefInfoModifyCompletePage from "./pages/modify/ChefInfoModifyCompletePage";
 import PersonalModifyCompletePage from "./pages/modify/PersonalModifyCompletePage";
 import PlaceInfoModifyCompletePage from "./pages/modify/PlaceInfoModifyCompletePage";
+import PostListViewPage from "./pages/board/PostListViewPage";
+import AllNotification from "./pages/AllNotifications";
+import AllNotifications from "./pages/AllNotifications";
+import DeadlineInfo from "./pages/Reservation/DeadlineInfo";
 
 
 function App() {
   return (
       <Routes>
+        <Route path="/admin" element={<AdminMainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<MainPage />}/>
-        <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
+            <Route path="/allNotifications" element={<AllNotifications />}/>
+
+            <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} />
         <Route path="/searchId" element={<SearchIdPage />} />
         <Route path="/searchPw" element={<SearchPwPage />}/>
         <Route path="/signUp" element={<SignUpPage />}/>
         <Route path="/signUpComplete" element={<SignUpCompletePage />} />
         <Route path="/personalInfoModify" element={<PersonalInfoModifyPage />} />
-
         <Route path="/personalInfoModify2" element={<PersonalInfoModifyPage2 />} />
-
         <Route path="/placeInfoModifyStart" element={<PlaceInfoModifyStart />} />
         <Route path="/placeInfoModify2" element={<PlaceInfoModifyPage2 />} />
         <Route path="/placeInfoModify3" element={<PlaceInfoModifyPage3 />} />
@@ -93,10 +98,10 @@ function App() {
         <Route path="/placeInfoModify6" element={<PlaceInfoModifyPage6 />} />
 
         <Route path="/chefInfoModifyComplete" element={<ChefInfoModifyCompletePage />}/>
-            <Route path="/personalModifyComplete" element={<PersonalModifyCompletePage />}/>
-            <Route path="/placeInfoModifyComplete" element={<PlaceInfoModifyCompletePage />}/>
+        <Route path="/personalModifyComplete" element={<PersonalModifyCompletePage />}/>
+        <Route path="/placeInfoModifyComplete" element={<PlaceInfoModifyCompletePage />}/>
 
-            <Route path="/hostRegistryStart" element={<HostRegistryStartPage />}/>
+        <Route path="/hostRegistryStart" element={<HostRegistryStartPage />}/>
         <Route path="/hostRegistry" element={<HostRegistry />} />
         <Route path="/hostRegistry2" element={<HostRegistry2 />} />
         <Route path="/hostRegistry3" element={<HostRegistry3 />}/>
@@ -108,30 +113,24 @@ function App() {
 
 
         <Route path="/profileModify" element={<ProfileModifyPage />}/>
-
-
         <Route path="/chefInfoModify" element={<ChefInfoModifyPage />} />
         <Route path="/spaceList" element={<SpaceListViewPage />} />
         <Route path="/rentSpace/:id" element={<RentSpacePage />} />
         <Route path="/rentSpaceInfo1/:id" element={<RentSpaceInfo1 />} />
         <Route path="/rentSpaceInfo2/:id" element={<RentSpaceInfo2 />} />
         <Route path="/rentSpaceInfo3/:id" element={<RentSpaceInfo3 />} />
-
-
         <Route path="/rentSpace2" element={<RentSpacePage2 />} />
         <Route path="/rentSpace3" element={<RentSpacePage3 />} />
         <Route path="/rentSpaceComplete" element={<RentSpaceComplete />} />
         <Route path="/chatList" element={<ChatRoomListPage />} />
         <Route path="/chatRoom" element={<ChatRoomPage />} />
-            <Route path="/profile/:id" element={<ProfileViewPage />} />
-            <Route path="/mypost" element={<MyPostPage />} />
+        <Route path="/profile/:id" element={<ProfileViewPage />} />
         <Route path="/mypost" element={<MyPostPage />} />
 
 
         <Route path="/chatList" element={<ChatRoomListPage />} />
         <Route path="/chatRoom" element={<ChatRoomPage />} />
-            <Route path="/mypost" element={<MyPostPage />} />
-
+        <Route path="/postList" element={<PostListViewPage />} />
         <Route path="/post/:id" element={<PostViewPage />} />
         <Route path="/post/edit" element={<PostEditPage />} />
         <Route path="/popup" element={<PopupBoardPage />} />
@@ -141,13 +140,14 @@ function App() {
         <Route path="/notification" element={<Notification />}/>
         <Route path="/chefRegistry" element={<ChefRegistry />} />
         <Route path="/chefRegistryChecking" element={<ChefRegistryCheckingPage />} />
-            <Route path="/FAQ" element={<FAQ />} />
-            <Route path="/EntryPartnership" element={<EntryPartnership />} />
+        <Route path="/FAQ" element={<FAQ />} />
+        <Route path="/EntryPartnership" element={<EntryPartnership />} />
         <Route path="/alreadyChef" element={<AlreadyChef />} />
         <Route path="/reservationList" element={<ReservationListPage />} />
         <Route path="/assuranceReady" element={<AssuranceReady />} />
-            <Route path="/assuranceReadyView" element={<AssuranceReadyView />} />
-            <Route path="/assuranceFinish" element={<AssuranceFinish />} />
+        <Route path="/assuranceReadyView" element={<AssuranceReadyView />} />
+         <Route path="/assuranceFinish" element={<AssuranceFinish />} />
+            <Route path="/deadlineInfo" element={<DeadlineInfo />} />
 
       </Routes>
   );

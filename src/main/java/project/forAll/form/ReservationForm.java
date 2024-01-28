@@ -26,4 +26,5 @@ public class ReservationForm {
     private String state; // 상태
     private Integer rentStartHour; // 대관 시작 시간
     private Integer rentEndHour; // 대관 종료 시간
+    private Integer priceSet; // 가격
 }

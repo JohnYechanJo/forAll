@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.reservation.Reservation;
-import project.forAll.domain.space.ReservationState;
+import project.forAll.domain.reservation.ReservationState;
 import project.forAll.domain.space.Space;
 import project.forAll.form.ReservationForm;
 import project.forAll.repository.ReservationRepository;
@@ -43,6 +43,7 @@ public class ReservationService extends Service{
         form.setState(reservation.getState().toString());
         form.setRentStartHour(reservation.getSpace().getRent().getAbleStartTime());
         form.setRentEndHour(reservation.getSpace().getRent().getAbleFinTime());
+        form.setPriceSet(reservation.getSpace().getRent().getPriceSet());
         return form;
     }
 }

@@ -7,7 +7,7 @@ export const ExplanationModalStyles = {
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
         color: 'black',
-        width: '16.875rem',
+        width: '80%',
         height: '12.5rem',
         background: "white",
         border: '1px solid'+'#000',

@@ -155,7 +155,8 @@ const PostViewPage = ({postList}) => {
                     </div>
                 </div>
                 <ImageSlider images={data.postImage}/>
-                <p>{data.content}</p>
+                <p style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '400', lineHeight: 'normal',
+                    letterSpacing: '-0.01031rem'}}>{data.content}</p>
             </div>
             <div style={{
                 width: '24.375rem', height: '3.125rem', flexShrink: 0, border: '1px solid #C4C4C4',
@@ -163,7 +164,7 @@ const PostViewPage = ({postList}) => {
             }}>
                 <div onClick={() => {
                     if(!sessionStorage.getItem("user_id")) return;
-                    setWriteComment(true);
+                    setWriteComment(!writeComment);
                 }}
                      style={{width: '22.375rem', height: '1.875rem', flexShrink: 0, border: '1px solid #C4C4C4',
                          background: '#FFF', display: 'flex', alignItems: 'center'}}>
@@ -174,9 +175,13 @@ const PostViewPage = ({postList}) => {
                 </div>
             </div>
             {writeComment ? (
-                <div style={{width:"24.375rem"}}>
-                    <textarea style={{width:"20.875rem",height:"7.5rem", margin:"1.25rem", marginBottom:"0", padding:"0.5rem", paddingBottom:"0",border: "1px solid #C4C4C4"}} value={comment} onChange={onChangeComment}/>
-                    <div style={{display:"flex", flexDirection:"row-reverse", alignItems:"center",width:"20.875rem",height:"2rem", marginLeft:"1.25rem", padding:"0.5rem",paddingTop:"0", border: "1px solid #C4C4C4"}}>
+                <div style={{width:"20.875rem", display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                    <textarea style={{width:"20.875rem",height:"7.5rem", margin:'1.25rem 1.25rem 0 1.25rem',
+                        padding:"0.5rem", border: "1px solid #C4C4C4"}}
+                              value={comment} onChange={onChangeComment}/>
+                    <div style={{display:"flex", flexDirection:"row-reverse", alignItems:"center", width:"20.875rem",
+                        height:"1.875rem", marginLeft:"1.25rem", padding:"0.5rem", paddingTop:"0",
+                        border: "1px solid #C4C4C4"}}>
                         <div onClick={submitComment} style={{textAlign:"right"}}>
                             <img src={pencilImg} alt="pencilImg"
                                  style={{width: '0.8rem', height: '0.8rem', flexShrink: 0}}/>
@@ -194,22 +199,24 @@ const PostViewPage = ({postList}) => {
                             <div key={idx}>
                                 <div style={{
                                     display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                                    alignItems: 'flex-start', margin: '1.19rem 0 1.19rem 0.5rem'
+                                    alignItems: 'flex-start', margin: 0, width: '24.375rem',
+                                    height: '3.125rem', flexShrink: 0, border: '1px solid rgba(196, 196, 196, 0.20)',
+                                    background: '#FFF'
                                 }}>
                                     <p style={{
                                         fontSize: '0.5rem', fontStyle: 'normal', fontWeight: '400',
                                         lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                        margin: 0, color: '#0788FF'
+                                        margin: '0.31rem 0 0 1rem', color: '#0788FF'
                                     }}>{comment.userId}{comment.userId === data.userId ? (<span style={{color: "#FF2929"}}> 작성자</span>) : null}</p>
                                     <p style={{
                                         fontSize: '0.5rem', fontStyle: 'normal',
                                         fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                        margin: 0
+                                        margin: '0 0 0 1rem'
                                     }}>{comment.text}</p>
                                     <div style={{
                                         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                                        fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '400',
-                                        lineHeight: 'normal', letterSpacing: '-0.01031rem', marginTop: '0.1rem'
+                                        fontSize: '0.5rem', fontStyle: 'normal', fontWeight: '400',
+                                        lineHeight: 'normal', letterSpacing: '-0.01031rem', margin: '0 0 0.31rem 1rem'
                                     }}>
                                         <div style={{display: 'flex', alignItems: 'center', padding: 0}}>
                                             <img src={clockImg} alt="clockImg"
@@ -230,68 +237,74 @@ const PostViewPage = ({postList}) => {
                                             <p onClick={() => {
                                                 if (!sessionStorage.getItem("user_id")) return;
                                                 setWriteRecomment(idx);}}
-                                                style={{margin: '0 0.51rem 0 0'}}>{comment.recomments ?
+                                               style={{margin: '0 0.51rem 0 0'}}>{comment.recomments ?
                                                 comment.recomments.length : 0}</p>
                                         </div>
                                     </div>
                                 </div>
-                                    {writeRecomment === idx ? (
-                                            <div style={{width:"24.375rem"}}>
-                                                <textarea style={{width:"20.875rem",height:"7.5rem", margin:"1.25rem", marginBottom:"0", padding:"0.5rem", paddingBottom:"0",border: "1px solid #C4C4C4"}} value={recomment} onChange={onChangeRecomment}/>
-                                                <div style={{display:"flex", flexDirection:"row-reverse", alignItems:"center",width:"20.875rem",height:"2rem", marginLeft:"1.25rem", padding:"0.5rem",paddingTop:"0", border: "1px solid #C4C4C4"}}>
-                                                    <div onClick={()=>submitRecomment(idx)} style={{textAlign:"right"}}>
-                                                        <img src={pencilImg} alt="pencilImg"
-                                                             style={{width: '0.8rem', height: '0.8rem', flexShrink: 0}}/>
-                                                    </div>
-                                                </div>
-                                            </div>) : null}
-                                    {comment.recomments ? (<div>
-                                        {comment.recomments.sort(((a, b) => {
-                                            if (a.writtenAt > b.writtenAt) return -1;
-                                            else return 1;
-                                        })).map((recomment, idx) => (
-                                            <div key={idx} style={{background:"rgba(196, 196, 196, 0.30)"}}>
+                                {writeRecomment === idx ? (
+                                    <div style={{width:"20.875rem", display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                                        <textarea style={{width: '20.875rem', height: '1.875rem', flexShrink: 0, margin:'1.25rem 1.25rem 0 1.25rem',
+                                            padding:"0.5rem", border: '1px solid rgba(196, 196, 196, 0.50)', background: '#FFF'}}
+                                                  value={recomment} onChange={onChangeRecomment}/>
+                                        <div style={{display:"flex", flexDirection:"row-reverse", alignItems:"center", width:"20.875rem",
+                                            height:"1.875rem", marginLeft:"1.25rem", padding:"0.5rem", paddingTop:"0",
+                                            border: "1px solid #C4C4C4"}}>
+                                            <div onClick={() => submitRecomment(idx)} style={{textAlign:"right"}}>
+                                                <img src={pencilImg} alt="pencilImg"
+                                                     style={{width: '0.8rem', height: '0.8rem', flexShrink: 0}}/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ) : null}
+                                {comment.recomments ? (<div>
+                                    {comment.recomments.sort(((a, b) => {
+                                        if (a.writtenAt > b.writtenAt) return -1;
+                                        else return 1;
+                                    })).map((recomment, idx) => (
+                                        <div key={idx} style={{background:"rgba(196, 196, 196, 0.30)",
+                                            border: '1px solid rgba(196, 196, 196, 0.20)'}}>
                                             <div style={{
                                                 display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                                                alignItems: 'flex-start', marginLeft: '2rem', padding:'0.5rem'
+                                                alignItems: 'flex-start', marginLeft: '2rem'
                                             }}>
-                                            <p style={{
-                                                fontSize: '0.5rem', fontStyle: 'normal', fontWeight: '400',
-                                                lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                                margin: 0, color: '#0788FF'
-                                            }}>{recomment.userId}{recomment.userId === data.userId ? (<span style={{color: "#FF2929"}}> 작성자</span>) : null}</p>
-                                            <p style={{
-                                                fontSize: '0.5rem', fontStyle: 'normal',
-                                                fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                                margin: 0
-                                            }}>{recomment.text}</p>
-                                            <div style={{
-                                                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                                                fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '400',
-                                                lineHeight: 'normal', letterSpacing: '-0.01031rem', marginTop: '0.1rem'
-                                            }}>
-                                                <div style={{display: 'flex', alignItems: 'center', padding: 0}}>
-                                                    <img src={clockImg} alt="clockImg"
-                                                         style={{width: '0.4375rem', height: '0.4375rem', flexShrink: 0,
-                                                             padding: 0}}/>
-                                                    <p style={{margin: '0 0.51rem 0 0'}}>{TimeUtil.getDiffStr(recomment.writtenAt)}</p>
+                                                <p style={{
+                                                    fontSize: '0.5rem', fontStyle: 'normal', fontWeight: '400',
+                                                    lineHeight: 'normal', letterSpacing: '-0.01031rem',
+                                                    margin: '0.31rem 0 0 0', color: '#0788FF'
+                                                }}>{recomment.userId}{recomment.userId === data.userId ? (<span style={{color: "#FF2929"}}> 작성자</span>) : null}</p>
+                                                <p style={{
+                                                    fontSize: '0.5rem', fontStyle: 'normal',
+                                                    fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
+                                                    margin: 0
+                                                }}>{recomment.text}</p>
+                                                <div style={{
+                                                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                                                    fontSize: '0.5rem', fontStyle: 'normal', fontWeight: '400',
+                                                    lineHeight: 'normal', letterSpacing: '-0.01031rem', margin: '0 0 0.31rem 0'
+                                                }}>
+                                                    <div style={{display: 'flex', alignItems: 'center', padding: 0}}>
+                                                        <img src={clockImg} alt="clockImg"
+                                                             style={{width: '0.4375rem', height: '0.4375rem', flexShrink: 0,
+                                                                 padding: 0}}/>
+                                                        <p style={{margin: '0 0.51rem 0 0'}}>{TimeUtil.getDiffStr(recomment.writtenAt)}</p>
+                                                    </div>
+                                                    <div style={{display: 'flex', alignItems: 'center'}} onClick={() => handleRecommendRecomment(recomment.id)}>
+                                                        <img src={likeImg} alt="likeImg"
+                                                             style={{width: '0.4375rem', height: '0.4375rem', flexShrink: 0,
+                                                                 padding: 0}}/>
+                                                        <p style={{margin: '0 0.51rem 0 0'}}>{recomment.recommend}</p>
+                                                    </div>
                                                 </div>
-                                                <div style={{display: 'flex', alignItems: 'center'}} onClick={() => handleRecommendRecomment(recomment.id)}>
-                                                    <img src={likeImg} alt="likeImg"
-                                                         style={{width: '0.4375rem', height: '0.4375rem', flexShrink: 0,
-                                                             padding: 0}}/>
-                                                    <p style={{margin: '0 0.51rem 0 0'}}>{recomment.recommend}</p>
-                                                </div>
                                             </div>
-                                            </div>
-                                            </div>
-                                        ))}
-                                    </div>) : null}
-                                </div>
-                                ))}
-                            </div>) : null}
-                    </div>
-                    </div>
-                    )
-                };
-                export default PostViewPage;
+                                        </div>
+                                    ))}
+                                </div>) : null}
+                            </div>
+                        ))}
+                    </div>) : null}
+            </div>
+        </div>
+    )
+};
+export default PostViewPage;

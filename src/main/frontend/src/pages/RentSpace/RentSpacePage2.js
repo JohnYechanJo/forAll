@@ -36,9 +36,6 @@ const RentSpacePage2 = () => {
                     }})
         }
     }
-    useEffect(() => {
-        console.log(rentDay);
-    }, [rentDay]);
     return (
         <div className={"rent_space_container"}>
             <div style={{display:"flex", alignItems:"center"}}>
@@ -51,7 +48,7 @@ const RentSpacePage2 = () => {
 
             </div>
             <div>
-                <ImageViewer val={data.spaceImage}/>
+                <ImageViewer val={data.spaceImage} isfixed={true}/>
                 <p style={{fontSize:"1rem", paddingLeft:"1rem"}}>{AddressUtil.extraction(data.spaceAddress)} | {data.spaceName}</p>
             </div>
             <div style={{margin:"1rem"}}>

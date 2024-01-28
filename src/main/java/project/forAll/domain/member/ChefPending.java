@@ -7,6 +7,7 @@ public enum ChefPending {
 
     PENDING("Pending"),
     APPROVE("Approve"),
+    REJECT("Reject"),
     NOTCREATED("Not Created"),
     NotSpecified("Not Specified");
 

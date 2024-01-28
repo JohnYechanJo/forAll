@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.space.Space;
+import project.forAll.domain.space.SpacePending;
 import project.forAll.form.SpaceForm;
 import project.forAll.repository.space.SpaceRepository;
 import project.forAll.service.MemberService;
@@ -64,7 +65,7 @@ public class APISpaceController extends APIController {
     @GetMapping("/space/isPublic")
     public ResponseEntity getPublicSpaces(){
         try{
-            List<Space> spaces = spaceRepository.findByIsPublic(true);
+            List<Space> spaces = spaceRepository.findBySpacePending(SpacePending.NOTPUBLIC);
             if (spaces == null) return new ResponseEntity(new ArrayList<>(), HttpStatus.OK);
             else{
                 List<SpaceForm> spaceForms = spaces.stream().map(space -> spaceService.of(space)).toList();

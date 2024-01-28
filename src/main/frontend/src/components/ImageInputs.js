@@ -13,7 +13,7 @@ const ImageInputs = ({setImg, vals}) => {
     const addImgFile = (event) => {
         const file = event.target.files[0];
         if (file == null) return;
-        setImg([...vals, file]);
+        setImg([...(vals || []), file]);
     };
     const deleteImgFile = (index) => {
         setImg(vals.filter((_,i) => i !== index));

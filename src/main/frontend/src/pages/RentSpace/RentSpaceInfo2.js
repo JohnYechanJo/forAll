@@ -19,7 +19,6 @@ const [isMiseen, setIsMiseen] = useState(false);
         axios.get("/api/v1/space/" + params.id)
             .then((res) => {
                 setData(res.data);
-                console.log(res.data);
             })
             .catch((err) => console.error(err));
     }, []);

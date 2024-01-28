@@ -36,5 +36,9 @@ export const TimeUtil = {
         const date = new Date(json).toLocaleDateString().replaceAll(".", "/").replaceAll(" ","");
         const time = new Date(json).toLocaleTimeString("en-US",{hour12: false}).split(":").slice(0,2).join(":");
         return date + time;
+    },
+    toReservationDate: (json) => {
+        const date = new Date(json).toLocaleDateString().replaceAll(" ","").split(".");
+        return date[1] + "월 " + date[2] + "일";
     }
 }

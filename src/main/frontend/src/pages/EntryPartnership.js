@@ -15,13 +15,13 @@ const EntryPartnership = () => {
 
     return(
         <div>
-            <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
+            <div className="header" style={{width: '100%', alignItems: "center",backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
                 <button className="button" onClick={() => navigate("/",{state: {focus: "space"}})}>대관하기</button>
                 <button className="button">커뮤니티</button>
             </div>
             <Sidebar/>
             <HomeTemplate />
-            <div style={{paddingLeft: "1rem", paddingRight: "1rem", width: "22.375rem", height: "62.5rem", flexShrink: "0"}}>
+            <div style={{paddingLeft: "2%", paddingRight: "2%", width: "96%", height: "62.5rem", flexShrink: "0"}}>
                 <div style={{color: "#000", fontStyle: "normal",lineHeight: "normal", fontFamily: "Noto Sans KR", letterSpacing: "-0.0255rem"}}>
                 <h1 style={{fontWeight: "700", fontSize: "0.9375rem"}}>• 입점 및 제휴 문의</h1>
                 <div>
@@ -40,7 +40,8 @@ const EntryPartnership = () => {
                         연락처:<br/>
                         이메일:<br/>
                         문의 사항:</p>
-                    <p style={{fontSize: "0.4375rem"}}>본인 확인 및 예약 사항 전달, 파트너 상담 목적으로 이름과 연락처를 수집 · 이용합니다. 톡을 보낸 시점으로부터 최대 1년 보관 후 지체 없이 파기합니다.</p>
+                    <p style={{fontSize: "0.4375rem"}}>본인 확인 및 예약 사항 전달, 파트너 상담 목적으로 이름과 연락처를 수집 · 이용합니다.</p>
+                    <p style={{fontSize: "0.4375rem"}}>톡을 보낸 시점으로부터 최대 1년 보관 후 지체 없이 파기합니다.</p>
                 </div>
             </div>
         </div>

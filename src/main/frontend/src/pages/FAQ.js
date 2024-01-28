@@ -17,14 +17,14 @@ const FAQ = () => {
     const [postList, setPostList] = useState([]);
 
     return(
-        <div >
+        <div style={{width: '100%', alignItems: "center"}}>
             <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
                 <button className="button" onClick={() => navigate("/",{state: {focus: "space"}})}>대관하기</button>
                 <button className="button">커뮤니티</button>
             </div>
             <Sidebar/>
             <HomeTemplate />
-            <div style={{paddingLeft: "1rem", paddingRight: "1rem", width: "21rem", height: "62.5rem", flexShrink: "0"}}>
+            <div style={{alignItems: "center", paddingLeft: "2%", paddingRight: "2%", width: "96%", height: "62.5rem", flexShrink: "0"}}>
             <div style={{color: "#000", fontStyle: "normal", fontFamily: "Noto Sans KR", lineHeight: "normal", letterSpacing: "-0.0255rem"}}>
                 <h1 style={{fontWeight: "700", fontSize: "0.9375rem"}}> • 자주 묻는 질문</h1>
 

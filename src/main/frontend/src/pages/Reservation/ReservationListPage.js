@@ -37,21 +37,33 @@ const ReservationListPage = () => {
             <Sidebar/>
             <HomeTemplate />
             <div>
-                <h1>진행 중인 대관</h1>
+                <div style={{display:"flex", width:"100%", height:"3.125rem", border:"1px solid #C4C4C4"}}><p style={{fontSize:"1rem", fontWeight:"700", paddingLeft:"1rem"}}>
+                    • 진행중인 대관
+                </p></div>
                 {reservationData ? reservationData.filter((data) => TimeUtil.checkToday(data.rentDay)).map((data) => (
-                    <div onClick={handleAssurance(data)}>
-                        <h1>{AddressUtil.extraction(data.address)}</h1>
-                        <p>{data.name}</p>
+                    <div style={{border:"1px solid #C4C4C4", height:"6rem"}} onClick={handleAssurance(data)}>
+                        <div style={{display:"flex", justifyContent:"space-between"}}>
+                            <p style={{fontSize:"1rem", fontWeight:"700", paddingLeft:"1rem"}}>{AddressUtil.extraction(data.address)}</p>
+                        </div>
+
+                        <p style={{margin:0, paddingLeft:"1rem", color:"#0788FF"}}>{data.name}</p>
+
                     </div>
                 )) : null}
             </div>
             <div>
-                <h1>예약 정보</h1>
+                <div style={{display:"flex", width:"100%", height:"3.125rem", border:"1px solid #C4C4C4"}}><p style={{fontSize:"1rem", fontWeight:"700", paddingLeft:"1rem"}}>
+                    • 예약 정보
+                </p></div>
                 {reservationData ? reservationData.filter((data) => !TimeUtil.checkToday(data.rentDay)).map((data) => (
-                    <div>
-                        <h1>{AddressUtil.extraction(data.address)}</h1>
-                        <p>{data.name}</p>
-                        <p>취소하기</p>
+                    <div style={{border:"1px solid #C4C4C4", height:"6rem"}}>
+                        <div style={{display:"flex", justifyContent:"space-between"}}>
+                            <p style={{fontSize:"1rem", fontWeight:"700", paddingLeft:"1rem"}}>{AddressUtil.extraction(data.address)}</p>
+                            <p style={{fontSize:"0.8rem", fontWeight:"500", paddingRight:"1rem"}}>취소하기</p>
+                        </div>
+
+                        <p style={{margin:0, paddingLeft:"1rem", color:"#0788FF"}}>{data.name}</p>
+
                     </div>
                 )) : null}
             </div>

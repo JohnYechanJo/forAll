@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
 import project.forAll.domain.reservation.Reservation;
 import project.forAll.domain.member.Member;
-import project.forAll.domain.space.ReservationState;
+import project.forAll.domain.reservation.ReservationState;
 import project.forAll.form.ReservationForm;
 import project.forAll.repository.ReservationRepository;
 import project.forAll.service.MemberService;

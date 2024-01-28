@@ -5,6 +5,7 @@ import ImageViewer from "../../components/ImageViewer";
 import Sidebar from "../../components/home/Sidebar";
 import HomeTemplate from "../../components/home/HomeTemplate";
 import {AddressUtil} from "../../utils/AddressUtil";
+import pointer from "../../components/icons/pointer.png";
 
 const SpaceListViewPage = () => {
     const navigate = useNavigate();
@@ -26,10 +27,19 @@ const SpaceListViewPage = () => {
             <HomeTemplate />
             <div>
                 {data ? data.map((data, idx) =>
-                    (<div key={idx}>
-                        <ImageViewer val={data.mainImage} />
-                        <p>{data.priceSet}원</p>
-                        <p>{AddressUtil.extraction(data.address)} | {data.name}</p>
+                    (<div key={idx} style={{width:"100%"}} onClick={()=>navigate("/rentSpace/"+data.id)}>
+                        <ImageViewer val={data.mainImage} isfixed />
+                        <div style={{paddingLeft:"1rem"}}>
+                            <p style={{margin:0,fontSize:"1rem",fontWeight:"500"}}>{data.priceSet}원</p>
+                            <div style={{display:"flex"}}>
+                                <div style={{display:"flex", alignItems:"center"}}>
+                                    <img src={pointer} alt="pointer" style={{ width: "0.7rem", height: "1rem", flexShrink: "0", marginRight:"0.3rem" }} />
+                                </div>
+
+                                <p style={{margin:0,fontSize:"1rem",fontWeight:"500"}}>{AddressUtil.extraction(data.address)} | {data.name}</p>
+                            </div>
+                        </div>
+
                     </div>)
                 ) : null}
             </div>
