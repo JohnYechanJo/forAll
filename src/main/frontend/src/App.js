@@ -73,12 +73,12 @@ import PostListViewPage from "./pages/board/PostListViewPage";
 import AllNotifications from "./pages/AllNotifications";
 import DeadlineInfo from "./pages/Reservation/DeadlineInfo";
 import AdminMainPage from "./pages/admin/AdminMainPage";
-import AdminHostRegistry1 from "./pages/admin/AdminHostRegistry1";
-import AdminHostRegistry2 from "./pages/admin/AdminHostRegistry2";
-import AdminHostRegistry3 from "./pages/admin/AdminHostRegistry3";
-import AdminHostRegistry4 from "./pages/admin/AdminHostRegistry4";
-import AdminHostRegistry5 from "./pages/admin/AdminHostRegistry5";
-import AdminHostRegistry6 from "./pages/admin/AdminHostRegistry6";
+import AdminSpaceViewPage1 from "./pages/admin/AdminSpaceViewPage1";
+import AdminSpaceViewPage2 from "./pages/admin/AdminSpaceViewPage2";
+import AdminSpaceViewPage3 from "./pages/admin/AdminSpaceViewPage3";
+import AdminSpaceViewPage4 from "./pages/admin/AdminSpaceViewPage4";
+import AdminSpaceViewPage5 from "./pages/admin/AdminSpaceViewPage5";
+import AdminSpaceViewPage6 from "./pages/admin/AdminSpaceViewPage6";
 import AdminSignedUp from "./pages/admin/AdminSignedUp";
 import AdminProfile from "./pages/admin/AdminProfile";
 import AdminChefInfo from "./pages/admin/AdminChefInfo";
@@ -159,12 +159,12 @@ function App() {
          <Route path="/assuranceFinish" element={<AssuranceFinish />} />
             <Route path="/deadlineInfo" element={<DeadlineInfo />} />
 
-            <Route path="/adminHostRegistry1" element={<AdminHostRegistry1 />} />
-            <Route path="/adminHostRegistry2" element={<AdminHostRegistry2 />} />
-            <Route path="/adminHostRegistry3" element={<AdminHostRegistry3 />}/>
-            <Route path="/adminHostRegistry4" element={<AdminHostRegistry4 />}/>
-            <Route path="/adminHostRegistry5" element={<AdminHostRegistry5 />}/>
-            <Route path="/adminHostRegistry6" element={<AdminHostRegistry6 />}/>
+          <Route path="/adminspaceViewPage1" element={<AdminSpaceViewPage1 />} />
+          <Route path="/adminspaceViewPage2" element={<AdminSpaceViewPage2 />} />
+          <Route path="/adminspaceViewPage3" element={<AdminSpaceViewPage3 />}/>
+          <Route path="/adminspaceViewPage4" element={<AdminSpaceViewPage4 />}/>
+          <Route path="/adminspaceViewPage5" element={<AdminSpaceViewPage5 />}/>
+          <Route path="/adminspaceViewPage6" element={<AdminSpaceViewPage6 />}/>
 
             <Route path="/adminSignedUp" element={<AdminSignedUp />} />
             <Route path="/adminProfile" element={<AdminProfile />} />
