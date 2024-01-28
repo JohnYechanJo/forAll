@@ -45,12 +45,11 @@ public class AlarmService extends Service {
     }
 
     @Transactional
-    public Alarm build(final AlarmForm af) {
-        final Alarm alarm = new Alarm();
-        if (af.getId() != null) alarm.setId(af.getId());
-        alarm.setMember(memberService.findByLoginId(af.getMemberId()));
-        alarm.setAlarmInfo(af.getAlarmInfo());
-        alarm.setAlarmAt(af.getAlarmAt());
+    public Alarm build(final Alarm alarm) {
+        if (alarm.getId() != null) alarm.setId(alarm.getId());
+        alarm.setMember(alarm.getMember());
+        alarm.setAlarmInfo(alarm.getAlarmInfo());
+        alarm.setAlarmAt(alarm.getAlarmAt());
 
         return alarm;
     }

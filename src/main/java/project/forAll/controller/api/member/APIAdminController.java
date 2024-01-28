@@ -1,6 +1,7 @@
 package project.forAll.controller.api.member;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import project.forAll.service.MemberService;
 import project.forAll.service.ReservationService;
 import project.forAll.service.SpaceService;
 import project.forAll.service.alarm.AlarmService;
+import project.forAll.util.ZoneTime;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +44,7 @@ public class APIAdminController extends APIController {
     private final ReservationRepository reservationRepository;
     // 알림 기능 때문에 추가
     private final AlarmService alarmService;
+    private final ZoneTime zoneTime;
 
     @PostMapping("/admin/login")
     public ResponseEntity loginAdmin(@RequestBody final AdminMemberDto adminMemberDto, HttpServletRequest request,
@@ -107,33 +110,39 @@ public class APIAdminController extends APIController {
         }
     }
     @PostMapping("/admin/space")
-    public ResponseEntity confirmSpace(@RequestBody AdminSpaceConfirmDTO dto, @RequestBody final AlarmForm af){
+    public void confirmSpace(@RequestBody AdminSpaceConfirmDTO dto){
         final Space space = (Space) spaceService.findById(dto.getId());
         space.setSpacePending(SpacePending.parse(dto.getState()));
         spaceService.save(space);
         // 공간 등록 승인 알림
-        final Alarm alarm = alarmService.build(af);
-        final Long alarmId = alarmService.saveAlarm(alarm);
-        return new ResponseEntity(Long.toString(alarmId), HttpStatus.OK);
+        final Alarm alarm = new Alarm();
+        alarm.setMember(space.getMember());
+        alarm.setAlarmInfo("공간 등록 승인");
+        alarm.setAlarmAt(zoneTime.now());
+        alarmService.saveAlarm(alarm);
     }
     @PostMapping("/admin/chef")
-    public ResponseEntity confirmChef(@RequestBody AdminChefConfirmDTO dto, @RequestBody final AlarmForm af){
+    public void confirmChef(@RequestBody AdminChefConfirmDTO dto){
         final Member member = (Member) memberService.findById(dto.getId());
         member.setChefPending(ChefPending.parse(dto.getState()));
         spaceService.save(member);
         // 셰프 등록 승인 알림
-        final Alarm alarm = alarmService.build(af);
-        final Long alarmId = alarmService.saveAlarm(alarm);
-        return new ResponseEntity(Long.toString(alarmId), HttpStatus.OK);
+        final Alarm alarm = new Alarm();
+        alarm.setMember(member);
+        alarm.setAlarmInfo("셰프 등록 승인");
+        alarm.setAlarmAt(zoneTime.now());
+        alarmService.saveAlarm(alarm);
     }
     @PostMapping("/admin/reservation")
-    public ResponseEntity confirmReservation(@RequestBody AdminReservationConfirmDTO dto, @RequestBody final AlarmForm af){
+    public void confirmReservation(@RequestBody AdminReservationConfirmDTO dto){
         final Reservation reservation = (Reservation) reservationService.findById(dto.getId());
         reservation.setState(ReservationState.parse(dto.getState()));
         spaceService.save(reservation);
         // 예약 확정 알림
-        final Alarm alarm = alarmService.build(af);
-        final Long alarmId = alarmService.saveAlarm(alarm);
-        return new ResponseEntity(Long.toString(alarmId), HttpStatus.OK);
+        final Alarm alarm = new Alarm();
+        alarm.setMember(reservation.getMember());
+        alarm.setAlarmInfo("예약 확정 승인");
+        alarm.setAlarmAt(zoneTime.now());
+        alarmService.saveAlarm(alarm);
     }
 }

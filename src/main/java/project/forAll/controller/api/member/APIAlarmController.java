@@ -27,6 +27,10 @@ public class APIAlarmController extends APIController {
     public ResponseEntity getAlarmList(@PathVariable(value = "id") final String userId) {
         try {
             List<Alarm> alarmList = alarmService.findAlarmByUserId(userId);
+            // 사용자가 알림 목록을 체크하면 그 알림들을 확인했음을 변수로 표현
+            for (Alarm alarm: alarmList) {
+                alarm.setUserChecked(Boolean.TRUE);
+            }
 
             return new ResponseEntity(alarmList, HttpStatus.OK);
         } catch (final Exception e) {

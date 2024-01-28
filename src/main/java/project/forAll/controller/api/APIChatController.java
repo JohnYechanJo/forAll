@@ -10,6 +10,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
+import project.forAll.domain.alarm.Alarm;
 import project.forAll.domain.chat.ChatRoom;
 import project.forAll.domain.chat.Message;
 import project.forAll.dto.ChatDto;
@@ -17,6 +18,9 @@ import project.forAll.form.ChatRoomForm;
 import project.forAll.form.MessageForm;
 import project.forAll.service.Chat.ChatRoomService;
 import project.forAll.service.Chat.MessageService;
+import project.forAll.service.MemberService;
+import project.forAll.service.alarm.AlarmService;
+import project.forAll.util.ZoneTime;
 import retrofit2.http.Path;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +34,10 @@ public class APIChatController extends APIController{
     private final MessageService messageService;
     private final SimpMessagingTemplate messagingTemplate;
     private final SessionManager sessionManager;
+    // 알림
+    private final AlarmService alarmService;
+    private final ZoneTime zoneTime;
+    private final MemberService memberService;
 
     /**
      * 사용자 아이디와 카테고리에 해당하는 채팅방 list 반환
@@ -91,7 +99,13 @@ public class APIChatController extends APIController{
         final Message message = messageService.build(form);
         messageService.save(message);
         messagingTemplate.convertAndSend("/sub/chat/room/"+form.getChatRoomId(),messageService.of(message));
-        return;
+        // 채팅 도착 알림
+        final Alarm alarm = new Alarm();
+        alarm.setMember(memberService.findByLoginId(message.getTargetId()));
+        alarm.setAlarmInfo("채팅 도착");
+        alarm.setAlarmAt(zoneTime.now());
+        alarmService.saveAlarm(alarm);
+        // return;
     }
 
     @GetMapping("/chat/check/{id}")
