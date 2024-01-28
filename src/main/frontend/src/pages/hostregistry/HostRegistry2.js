@@ -10,6 +10,7 @@ import ImageInput from "../../components/ImageInput";
 import { ModalStyles } from "../../components/ModalStyles";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 import ForAllLogo from "../../components/ForAllLogo";
+import {SmallModalStyles} from "../../components/SmallModalStyles";
 
 
 const HostRegistry2 = () => {
@@ -201,15 +202,66 @@ const HostRegistry2 = () => {
                     </div>
                 </div>
 
-                <Modal isOpen={isModalOpen} style={{ ...ModalStyles, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} ariaHideApp={false}>
-                    <div style={{ textAlign: "left" }} >
-                        <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
-                        <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                <Modal isOpen={isModalOpen} ariaHideApp={false} style={SmallModalStyles}>
+                    <div style={{
+                        justifyContent: "center", alignItems: "center",
+                        fontFamily: "Noto Sans KR",
+                        color: " #000",
+                        fontSize: "1.25rem",
+                        fontStyle: "normal",
+                        fontWeight: "400",
+                        lineHeight: "normal",
+
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+
+                    }}>
+                        <a style={{fontSize: '0.9375rem'}}>현재 필수 입력사항이 모두 기입되지 않았습니다.</a>
+                        <p style={{fontSize: '0.9375rem'}}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
                     </div>
-                    <hr style={{ height: "1px", backgroundColor: "lightgrey" }} />
-                    <div style={{ display: 'flex', width: '100%'}} >
-                        <button style={{ flex: 1,border:'none',background:'white',}}  onClick={() => setIsModalOpen(false)}>뒤로</button>
-                        <button style={{ flex: 1,border:'none',background:'white',}}  onClick={() => submit()}>다음</button>
+                    <div style={{
+                        display: 'flex',
+                        width: '100%',
+                        margin: '0px',
+                        marginTop: '4rem',
+                        bottom: '0',
+                        position: 'fixed',
+                        fontSize: "0.9375rem",
+                        fontWeight: "400"
+                    }}>
+                        <button style={{
+                            backgroundColor: "#FF4F4F",
+
+                            width: '50%',
+                            bottom: '0',
+                            height: '3.125rem',
+                            color: 'white',
+                            border: 'none',
+                            lineHeight: '1.875rem',
+                            textAlign: 'center'
+                        }}
+                                onClick={() => setIsModalOpen(false)}
+                        >
+                            마저 입력하기
+                        </button>
+                        <button style={{
+                            backgroundColor: "#000",
+
+                            width: '50%',
+                            bottom: '0',
+                            height: '3.125rem',
+                            color: 'white',
+                            border: 'none',
+                            lineHeight: '1.875rem',
+                            textAlign: 'center'
+                        }}
+                                onClick={() => {
+                                    setIsModalOpen(false);
+                                }}
+                        >
+                            넘어가기
+                        </button>
                     </div>
                 </Modal>
             </div>
