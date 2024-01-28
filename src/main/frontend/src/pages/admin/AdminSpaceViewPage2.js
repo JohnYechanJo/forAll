@@ -1,94 +1,25 @@
 import { useState, useEffect } from "react";
 import "../../components/Styles.css";
-import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
+import {useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
-import ImageInputs from "../../components/ImageInputs";
-import ImageInput from "../../components/ImageInput";
-import { ModalStyles } from "../../components/ModalStyles";
 import axios from "axios";
 import ForAllLogo from "../../components/ForAllLogo";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 import ImageViewer from "../../components/ImageViewer";
 import ImagesViewer from "../../components/ImagesViewer";
-const AdminHostRegistry2 = () => {
-    const [img1, setImg1] = useState("");
-    const [img2, setImg2] = useState("");
-    const [img3, setImg3] = useState("");
-    const [imgAdditional, setImgAdditional] = useState([]);
-
-    const [kitchen1, setKitchen1] = useState("");
-    const [kitchen2, setKitchen2] = useState("");
-    const [kitchen3, setKitchen3] = useState("");
-    const [kitchenAdditional, setKitchenAdditional] = useState([]);
-
-    const [menu1, setMenu1] = useState("");
-    const [menuAdditional, setMenuAdditional] = useState([]);
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isModalOpen2, setIsModalOpen2] = useState(false);
+const AdminSpaceViewPage2 = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const data = { ...location.state };
-    const [dbData, setDbData] = useState({});
-    let isPublic = false;
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen2, setIsModalOpen2] = useState(false);
     const getIdx = (arr, idx) => {
         if (!arr) return null;
         else if (arr.length <= idx) return null
         else return arr[idx]
     }
-    const handleButton = () => {
-        if ((img1 !== "") && (img2 !== "") && (img3 !== "") && (kitchen1 !== "") && (kitchen2 !== "") && (kitchen3 !== "") && (menu1 !== "") && (menuAdditional !== "")) {
-            isPublic = true;
-            submit();
-        }
-        else {
-            setIsModalOpen(true);
-        }
-    };
-    //dbdata에 db에 저장되어 있는 정보들을 담아서 사용한다.
-    const downloadData = async () => {
-        let spaceid;
-        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data[0])
-            .catch((err) => console.error(err));
-        axios
-            .get("/api/v1/space/" + spaceid)
-            .then((res) => {
-                setDbData(res.data)
-                setImg1(getIdx(res.data.hallImage, 0));
-                setImg2(getIdx(res.data.hallImage, 1));
-                setImg3(getIdx(res.data.hallImage, 2));
-                setImgAdditional(res.data.hallImage.slice(3));
-                setKitchen1(getIdx(res.data.kitImage, 0));
-                setKitchen2(getIdx(res.data.kitImage, 1));
-                setKitchen3(getIdx(res.data.kitImage, 2));
-                setKitchenAdditional(res.data.kitImage.slice(3));
-                setMenu1(getIdx(res.data.menu, 0));
-                setMenuAdditional(res.data.menu.slice(1));
-            })
-            .catch((err) => console.error(err));
-    };
-    useEffect(() => {
-        downloadData();
-    }, []);
-    const submit = () => {
-        data.isPublic = data.isPublic && isPublic;
-        navigate("/placeInfoModify3", {
-            state: {
-                ...data,
-                img1: img1,
-                img2: img2,
-                img3: img3,
-                imgAdditional: imgAdditional,
-                kitchen1: kitchen1,
-                kitchen2: kitchen2,
-                kitchen3: kitchen3,
-                kitchenAdditional: kitchenAdditional,
-                menu1: menu1,
-                menuAdditional: menuAdditional,
-            }
-        });
-    };
+
     return (
         <div className="fontForRegister"
              style={{
@@ -109,26 +40,26 @@ const AdminHostRegistry2 = () => {
                             <div style={{ display: "flex", flexDirection: "column", }} >
                                 <a>사진1<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                                 <div style={{ justifyContent: 'center', alignItems: 'flex-end' }} >
-                                    <ImageViewer setImg={setImg1} val={img1} />
+                                    <ImageViewer val={getIdx(data.hallImage, 0)} />
                                 </div>
                             </div>
                         </div>
                         <div style={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'flex-start' }}>
                             <a>사진2<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                            <ImageViewer setImg={setImg2} val={img2} />
+                            <ImageViewer val={getIdx(data.hallImage, 1)} />
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'right' }}>
 
                             <div style={{ display: "flex", flexDirection: "column" }}>
                                 <a>사진3<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                                 <div style={{justifyContent: 'center', alignItems: 'flex-end'}} >
-                                    <ImageViewer setImg={setImg3} val={img3} />
+                                    <ImageViewer val={getIdx(data.hallImage, 2)} />
                                 </div>
                             </div>
                         </div>
                         <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                             <a>추가사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                            <ImagesViewer setImg={setImgAdditional} vals={imgAdditional} />
+                            <ImagesViewer vals={data.hallImage.slice(3)} />
                         </div>
                     </div>
                 </div>
@@ -141,26 +72,26 @@ const AdminHostRegistry2 = () => {
                             <div style={{ display: "flex", flexDirection: "column", }} >
                                 <a>사진1<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                                 <div style={{ justifyContent: 'center', alignItems: 'flex-end' }} >
-                                    <ImageViewer setImg={setKitchen1} val={kitchen1} />
+                                    <ImageViewer  val={getIdx(data.kitImage, 0)} />
                                 </div>
                             </div>
                         </div>
                         <div style={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'flex-start' }}>
                             <a>사진2<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                            <ImageViewer setImg={setKitchen2} val={kitchen2} />
+                            <ImageViewer val={getIdx(data.kitImage, 1)} />
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'right' }}>
 
                             <div style={{ display: "flex", flexDirection: "column" }}>
                                 <a>사진3<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                                 <div style={{justifyContent: 'center', alignItems: 'flex-end'}} >
-                                    <ImageViewer setImg={setKitchen3} val={kitchen3} />
+                                    <ImageViewer val={getIdx(data.kitImage, 2)} />
                                 </div>
                             </div>
                         </div>
                         <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                             <a>추가사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                            <ImagesViewer setImg={setKitchenAdditional} vals={kitchenAdditional} />
+                            <ImagesViewer vals={data.kitImage.slice(3)} />
                         </div>
                     </div>
                 </div>
@@ -212,12 +143,12 @@ const AdminHostRegistry2 = () => {
                         <div style={{display:'flex',justifyContent:'right'}}>
                             <div style={{display:'flex',flexDirection:'column'}} >
                                 <a>사진1<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                                <ImageViewer setImg={setMenu1} val={menu1} />
+                                <ImageViewer val={getIdx(data.menu, 0)} />
                             </div>
                         </div>
                         <div >
                             <a>추가사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                            <ImagesViewer setImg={setMenuAdditional} vals={menuAdditional} />
+                            <ImagesViewer vals={data.menu.slice(1)} />
                         </div>
                     </div>
                 </div>
@@ -228,11 +159,11 @@ const AdminHostRegistry2 = () => {
                 >
                     이전</button>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#525252", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                        onClick={() => handleButton()}
+                        onClick={() => navigate("/adminspaceViewPage3", {state:data})}
                 >다음</button>
             </div>
 
         </div>
     );
 }
-export default AdminHostRegistry2;
+export default AdminSpaceViewPage2;

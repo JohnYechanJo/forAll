@@ -12,7 +12,7 @@ import ForAllLogo from "../../components/ForAllLogo";
 import { ModalStyles } from "../../components/ModalStyles";
 import { ModalForAddress } from "../../components/ModalForAddress";
 import ImageViewer from "../../components/ImageViewer";
-const AdminHostRegistry6 = () => {
+const AdminSpaceViewPage6 = () => {
     const location = useLocation();
     const data = { ...location.state };
     const navigate = useNavigate();
@@ -180,23 +180,23 @@ const AdminHostRegistry6 = () => {
                 <div>
                     <div style={{ display: "flex", justifyContent: "space-between" }} >
                         <p>상호(개인/법인)<span style={{ color: "#FF2929" }} >*</span></p>
-                        <p>{tradeName.length}자/28자</p>
+                        <p>{data.companyName.length}자/28자</p>
                     </div>
-                    <input disabled={true}  value={tradeName} onChange={onChangeTradeName} placeholder={"상호를 입력해주세요"} className="input" />
+                    <input disabled={true}  value={data.companyName} className="input" />
                 </div>
                 <div>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <p>대표자명<span style={{ color: "#FF2929" }} >*</span></p>
-                        <p>{representative.length}자/10자</p>
+                        <p>{data.ceoName.length}자/10자</p>
                     </div>
-                    <input disabled={true} value={representative} onChange={onChangeRepresentative} placeholder={"대표자명을 입력해 주세요"} className="input" />
+                    <input disabled={true} value={data.ceoName} className="input" />
                 </div>
                 <div>
                     <p>사업자 등록번호<span style={{ color: "#FF2929" }} >*</span></p>
                     <div style={{ display: "flex",alignItems:'center',justifyContent:'space-between' }} >
-                        <input disabled={true} value={registNum1} onChange={onChangeRegistNum1} className="input" style={{ width: "30%" }} />-
-                        <input disabled={true} value={registNum2} onChange={onChangeRegistNum2} className="input" style={{ width: "30%" }} />-
-                        <input disabled={true} value={registNum3} onChange={onChangeRegistNum3} className="input" style={{ width: "30%" }} />
+                        <input disabled={true} value={data.businessNum ? data.businessNum.slice(0,3) : ""} className="input" style={{ width: "30%" }} />-
+                        <input disabled={true} value={data.businessNum ? data.businessNum.slice(3,5) : ""}  className="input" style={{ width: "30%" }} />-
+                        <input disabled={true} value={data.businessNum ? data.businessNum.slice(5) : ""}  className="input" style={{ width: "30%" }} />
                     </div>
                     <div style={{ padding: "0px 0px", display: "flex", flexDirection: 'column' }} >
                         <a style={{ color: "red" }} >• 사업자 등록번호는 필수 입력입니다.</a>
@@ -206,31 +206,31 @@ const AdminHostRegistry6 = () => {
                 </div>
                 <div style={{ height: "9rem" }}>
                     <p>사업자 등록증<span style={{ color: "#FF2929" }} >*</span></p>
-                    <ImageViewer setImg={setLicense} val={license} />
+                    <ImageViewer val={data.businessImage} />
                 </div>
                 <div>
                     <div style={{ display: "flex" }} >
                         <a>사업장 주소<span style={{ color: "#FF2929" }} >*</span></a>
-                        <input disabled={true} type={"checkbox"} onClick={handleCheckBox} id="chkbox" />
+                        <input disabled={true} type={"checkbox"} id="chkbox" />
                         <label for='chkbox' style={{ display: "flex", marginLeft: "5vw" }} >
                             <em></em>공간 정보와 동일
                         </label>
                     </div>
                     <div style={{display:'flex',justifyContent:'space-between'}} >
-                        <input value={address} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '18.5rem' }} className="input" />
+                        <input value={data.businessAddress} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '18.5rem' }} className="input" />
 
-                        <button onClick={() => setModalOpen1(true)} style={{ width: "3.4375rem", height: "1.875rem", fontSize: "0.625rem", backgroundColor: "black", color: "white", borderRadius: '0.375rem', }} >주소등록</button>
+                        <button style={{ width: "3.4375rem", height: "1.875rem", fontSize: "0.625rem", backgroundColor: "black", color: "white", borderRadius: '0.375rem' }} >주소등록</button>
                     </div>
                     <div>
-                        <input disabled={true} onChange={onChangeExactAddress} placeholder={"상세 주소"} style={{ marginTop: '0.62rem' }} value={exactAddress} className="input" />
+                        <input disabled={true} placeholder={"상세 주소"} style={{ marginTop: '0.62rem' }} value={"위의 주소에 포함됨"} className="input" />
                     </div>
                 </div>
                 <div>
                     <p>정산용 연락처<span style={{ color: "#FF2929" }} >*</span></p>
                     <div style={{ display: "flex",alignItems:'center',justifyContent:'space-between' }} >
-                        <input disabled={true} value={phone1} onChange={onChangePhone1} className="input" style={{ width: "30%" }} />-
-                        <input disabled={true} value={phone2} onChange={onChangePhone2} className="input" style={{ width: "30%" }} />-
-                        <input disabled={true} value={phone3} onChange={onChangePhone3} className="input" style={{ width: "30%" }} />
+                        <input disabled={true} value={data.payPhoneNum ? data.payPhoneNum.slice(0,3) : ""} className="input" style={{ width: "30%" }} />-
+                        <input disabled={true} value={data.payPhoneNum ? data.payPhoneNum.slice(3,7) : ""}  className="input" style={{ width: "30%" }} />-
+                        <input disabled={true} value={data.payPhoneNum ? data.payPhoneNum.slice(7) : ""} className="input" style={{ width: "30%" }} />
                     </div>
                 </div>
             </div>
@@ -243,15 +243,15 @@ const AdminHostRegistry6 = () => {
                 <div style={{ display: 'flex',marginTop:'1.5rem' }} >
                     <div>
                         <a>은행명<span style={{ color: "#FF2929" }} >*</span></a>
-                        <DropDown disabled={true} dataArr={bankDatas} onChange={setBank} width='100%' />
+                        <div>{data.bankName}</div>
                     </div>
                     <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}} >
                         <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
-                        <input disabled={true} onChange={onChangeAccount} className="input" style={{width:'100%'}} placeholder={"454102-01-376503"} />
+                        <input disabled={true} value={data.accountNum} className="input" style={{width:'100%'}} placeholder={"454102-01-376503"} />
                     </div>
                     <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}}>
                         <a>예금주<span style={{ color: "#FF2929" }} >*</span></a>
-                        <input disabled={true} onChange={onChangeAccountHolder} className="input" style={{width:'100%'}} />
+                        <input disabled={true} value={data.accountHolder} className="input" style={{width:'100%'}} />
                     </div>
                 </div>
                 <div style={{fontSize:'0.4375rem'}}>
@@ -259,30 +259,14 @@ const AdminHostRegistry6 = () => {
                     <p>- 정산 금액 입금 시, 입금자명은 "포 올"로 확인할 수 있습니다.</p>
                 </div>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", padding: "1rem", alignItems: "flex-start"}} className="fontForRegister">
-                <p>환불 기준을 동의해 주세요<span style={{ color: "#FF2929" }} >*</span></p>
-                <hr style={{ height: "1px", backgroundColor: "black", width: "100%",marginTop:'0' }} />
-                <div style={{display:'flex',flexDirection:'column'}} >
-                    <a>• 셰프 환불 기준은 아래와 같이 구분됩니다.</a>
-                    <a>• 1) 대관 14일 전:100% 환불</a>
-                    <a>• 2) 대관 13일 전~9일 전:80% 환불</a>
-                    <a>• 3) 대관 8일 전~5일 전:50% 환불</a>
-                    <a>• 4) 대관 4일 전~당일:환불 불가</a>
-                </div>
-                <hr style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
-            </div>
-            <input disabled={true} type="checkbox" id="agree" checked={isAgree} onChange={() => setIsAgree(!isAgree)} />
-            <label for='agree' style={{marginLeft:'1rem',display:'flex',alignItems:'center'}}>
-                <em></em><a>동의합니다</a>
-            </label>
             <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem', bottom: '0'}}>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#FF4F4F", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
                         onClick={() => navigate(-1, data)}
                 >
                     이전</button>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#525252", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                        onClick={() => handleButton()}
-                >다음</button>
+                        onClick={() => navigate("/admin")}
+                >돌아가기</button>
             </div>
 
         </div>
@@ -290,4 +274,4 @@ const AdminHostRegistry6 = () => {
 
     )
 };
-export default AdminHostRegistry6;
+export default AdminSpaceViewPage6;

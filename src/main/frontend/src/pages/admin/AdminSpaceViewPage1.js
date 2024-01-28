@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "../../components/home/Header";
 import axios from "axios";
@@ -9,108 +9,14 @@ import { KitchenFeat } from "../../utils/enums";
 import ForAllLogo from "../../components/ForAllLogo";
 import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
 import ImageViewer from "../../components/ImageViewer";
-const AdminHostRegistry1 = () => {
+const AdminSpaceViewPage1 = () => {
     const navigate = useNavigate();
-    const [data, setData] = useState({});
-    const [inputCount, setInputCount] = useState(0);
-    const [inputCount2, setInputCount2] = useState(0);
-    const [inputCount3, setInputCount3] = useState(0);
-    const [inputCount4, setInputCount4] = useState(0);
-    const [placeName, setPlaceName] = useState("");
-    const [placeIntro, setPlaceIntro] = useState("");
-    const [placeIntroDetail, setPlaceIntroDetail] = useState("");
-    const [kitchen, setKitchen] = useState(KitchenFeat.NotSpecified);
-    const [fullAddress, setFullAddress] = useState("");
-    const [placeInfo, setPlaceInfo] = useState("");
-    const [webSite, setWebSite] = useState("");
-    const [imgRepresent, setImgRepresent] = useState("");
-    const [clicked1, setClicked1] = useState(false);
-    const [clicked2, setClicked2] = useState(false);
-    const [clicked3, setClicked3] = useState(false);
+    const location = useLocation();
+    const data = { ...location.state };
     const [modalIsOpen1, setModalIsOpen1] = useState(false);
     const [modalIsOpen2, setModalIsOpen2] = useState(false);
     const [modalIsOpen3, setModalIsOpen3] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const downloadData = async () => {
-        let spaceid;
-        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data[0])
-            .catch((err) => console.error(err));
-        axios
-            .get("/api/v1/space/" + spaceid)
-            .then((res) => {
-                setData(res.data);
-                setPlaceName(res.data.name);
-                setFullAddress(res.data.address);
-                setPlaceIntro(res.data.spaceBrief);
-                setPlaceIntroDetail(res.data.spaceIntro);
-                setKitchen(res.data.kitchenFeat);
-                setPlaceInfo(res.data.addressBrief);
-                setWebSite(res.data.website);
-                setImgRepresent(res.data.mainImage);
-            })
-            .catch((err) => console.error(err));
-    };
-    useEffect(() => {
-        downloadData();
-    }, []);
-    let isPublic = false;
-    const modalClose1 = () => {
-        setModalIsOpen1(false);
-    };
-    const modalClose2 = () => {
-        setModalIsOpen2(false);
-    };
-    const modalClose3 = () => {
-        setModalIsOpen3(false);
-    };
-    const onInputHandler = (e) => {
-        setInputCount(e.target.value.length);
-        setPlaceName(e.target.value);
-    };
-    const onInputHandler2 = (e) => {
-        setInputCount2(e.target.value.length);
-        setPlaceIntro(e.target.value);
-    };
-    const onInputHandler3 = (e) => {
-        setInputCount3(e.target.value.length);
-        setPlaceIntroDetail(e.target.value);
-    };
-    const onInputHandler4 = (e) => {
-        setInputCount4(e.target.value.length);
-        setPlaceInfo(e.target.value);
-    };
-    const handleButton = () => {
-        if (
-            placeName !== "" &&
-            placeIntro !== "" &&
-            placeIntroDetail !== "" &&
-            kitchen !== "" &&
-            placeInfo !== "" &&
-            imgRepresent !== "" &&
-            webSite !== ""
-        ) {
-            isPublic = true;
-            submit();
-        } else {
-            setIsModalOpen(true);
-        }
-    };
-    const submit = () => {
-        navigate("/placeInfoModify2", {
-            state: {
-                placeName: placeName,
-                placeIntro: placeIntro,
-                placeIntroDetail: placeIntroDetail,
-                kitchen: kitchen,
-                address: fullAddress,
-                webSite: webSite,
-                placeInfo: placeInfo,
-                imgRepresent: imgRepresent,
-                isPublic: isPublic,
-            },
-        });
-    };
+
     return (
         <div
             className="fontForRegister"
@@ -133,7 +39,7 @@ const AdminHostRegistry1 = () => {
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <a>공간명<span style={{ color: '#FF2929' }} >*</span></a>
                                 <p>
-                                    <span>{placeName.length}</span>
+                                    <span>{data.name.length}</span>
                                     <span>/18자</span>
                                 </p>
                             </div>
@@ -141,7 +47,6 @@ const AdminHostRegistry1 = () => {
                                 disabled={true}
                                 type="text"
                                 defaultValue={data.name}
-                                onChange={onInputHandler}
                                 className="input"
                                 maxLength="17"
                             />
@@ -152,7 +57,7 @@ const AdminHostRegistry1 = () => {
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
                                 <a>공간 한 줄 소개<span style={{ color: '#FF2929' }} >*</span></a>
                                 <p>
-                                    <span>{placeIntro.length}</span>
+                                    <span>{data.spaceBrief.length}</span>
                                     <span>/18자</span>
                                 </p>
                             </div>
@@ -160,7 +65,6 @@ const AdminHostRegistry1 = () => {
                                 disabled={true}
                                 type="text"
                                 defaultValue={data.spaceBrief}
-                                onChange={onInputHandler2}
                                 className="input"
                                 maxLength="17"
                             />
@@ -170,7 +74,7 @@ const AdminHostRegistry1 = () => {
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
                                 <a>공간 소개<span style={{ color: '#FF2929' }} >*</span></a>
                                 <p>
-                                    <span>{placeIntroDetail.length}</span>
+                                    <span>{data.spaceIntro.length}</span>
                                     <span>/300자</span>
                                     <span style={{ color: "red" }}>(최소 20자)</span>
                                 </p>
@@ -181,7 +85,6 @@ const AdminHostRegistry1 = () => {
                                 defaultValue={data.spaceIntro}
                                 className="input"
                                 style={{ height: "6.25rem" }}
-                                onChange={onInputHandler3}
                                 maxLength="299"
                                 minLength="19"
                             />
@@ -196,20 +99,9 @@ const AdminHostRegistry1 = () => {
                                                 name="kitchen"
                                                 value={KitchenFeat.Open}
                                                 style={{
-                                                    backgroundColor: clicked1 ? "black" : "white",
-                                                    color: clicked1 ? "white" : "black",
+                                                    backgroundColor: data.kitchenFeat === KitchenFeat.Open ? "black" : "white",
+                                                    color: data.kitchenFeat === KitchenFeat.Open ? "white" : "black",
                                                 }}
-                                                onClick={(event) => {
-                                                    const selected = event.target.value;
-                                                    setKitchen(event.target.value);
-                                                    if (clicked1 === true) {
-                                                        setKitchen(KitchenFeat.NotSpecified);
-                                                    }
-                                                    setClicked1(!clicked1);
-                                                    setClicked2(false);
-                                                    setClicked3(false);
-                                                }}
-
                                         >
                                             오픈형
                                         </button>
@@ -262,19 +154,9 @@ const AdminHostRegistry1 = () => {
                                                 name="kitchen"
                                                 value={KitchenFeat.Face}
                                                 style={{
-                                                    backgroundColor: clicked2 ? "black" : "white",
-                                                    color: clicked2 ? "white" : "black",
+                                                    backgroundColor: data.kitchenFeat === KitchenFeat.Face ? "black" : "white",
+                                                    color: data.kitchenFeat === KitchenFeat.Face ? "white" : "black",
 
-                                                }}
-                                                onClick={(event) => {
-                                                    const selected = event.target.value;
-                                                    setKitchen(event.target.value);
-                                                    if (clicked2 === true) {
-                                                        setKitchen(KitchenFeat.NotSpecified);
-                                                    }
-                                                    setClicked1(false);
-                                                    setClicked2(!clicked2);
-                                                    setClicked3(false);
                                                 }}
                                         >
                                             대면형
@@ -329,21 +211,9 @@ const AdminHostRegistry1 = () => {
                                                 name="kitchen"
                                                 value={KitchenFeat.Close}
                                                 style={{
-                                                    backgroundColor: clicked3 ? "black" : "white",
-                                                    color: clicked3 ? "white" : "black",
-
+                                                    backgroundColor: data.kitchenFeat === KitchenFeat.Close ? "black" : "white",
+                                                    color: data.kitchenFeat === KitchenFeat.Close ? "white" : "black",
                                                 }}
-                                                onClick={(event) => {
-                                                    const selected = event.target.value;
-                                                    setKitchen(event.target.value);
-                                                    if (clicked3 === true) {
-                                                        setKitchen(KitchenFeat.NotSpecified);
-                                                    }
-                                                    setClicked1(false);
-                                                    setClicked2(false);
-                                                    setClicked3(!clicked3);
-                                                }}
-
                                         >
                                             폐쇄형
                                         </button>
@@ -404,7 +274,7 @@ const AdminHostRegistry1 = () => {
                         <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '1rem' }} />
                         <a>주소(위치)<span style={{ color: '#FF2929' }} >*</span></a>
                         <div>
-                            <span className="input">{fullAddress}</span>
+                            <span className="input">{data.address}</span>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column' }} >
                             <a>
@@ -419,7 +289,7 @@ const AdminHostRegistry1 = () => {
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
                             <a>상세 위치 정보<span style={{ color: '#FF2929' }} >*</span></a>
                             <p>
-                                <span>{placeInfo.length}</span>
+                                <span>{data.addressBrief.length}</span>
                                 <span>/18자</span>
                             </p>
                         </div>
@@ -427,7 +297,6 @@ const AdminHostRegistry1 = () => {
                             disabled={true}
                             type="text"
                             defaultValue={data.addressBrief}
-                            onChange={onInputHandler4}
                             maxLength="17"
                             className="input"
                         />
@@ -440,7 +309,6 @@ const AdminHostRegistry1 = () => {
                             disabled={true}
                             type="text"
                             defaultValue={data.website}
-                            onChange={(e) => setWebSite(e.target.value)}
                             className="input"
                         />
                         <div style={{ display: 'flex', flexDirection: 'column' }} >
@@ -462,7 +330,7 @@ const AdminHostRegistry1 = () => {
                             </a>
                         </div>
                         <div>
-                            <ImageViewer setImg={setImgRepresent} val={imgRepresent} />
+                            <ImageViewer val={data.mainImage} />
                         </div>
                     </div>
                 </div>
@@ -473,11 +341,11 @@ const AdminHostRegistry1 = () => {
                 >
                     이전</button>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#525252", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                        onClick={() => handleButton()}
+                        onClick={()=>navigate("/adminspaceViewPage2", {state:data})}
                 >다음</button>
             </div>
         </div>
     );
 };
 
-export default AdminHostRegistry1;
+export default AdminSpaceViewPage1;

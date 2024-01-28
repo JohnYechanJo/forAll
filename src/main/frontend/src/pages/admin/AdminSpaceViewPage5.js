@@ -8,36 +8,10 @@ import "../../components/Styles.css";
 import { ModalStyles } from "../../components/ModalStyles";
 import ImageViewer from "../../components/ImageViewer";
 import ImagesViewer from "../../components/ImagesViewer";
-const AdminHostRegistry5 = () => {
+const AdminSpaceViewPage5 = () => {
     const location = useLocation();
     const data = { ...location.state };
     const navigate = useNavigate();
-    let isPublic = false;
-    const [closeGuide, setCloseGuide] = useState("");
-    const [closeImage, setCloseImage] = useState("");
-    const [additionalImage, setAdditionalImage] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const onChangeGuide = useCallback((e) => {
-        setCloseGuide(e.target.value);
-    }, []);
-
-    const handleButton = () => {
-        if (closeGuide && closeImage) {
-            isPublic = true;
-            submit();
-        }
-        else setIsModalOpen(true);
-    };
-    const submit = () => {
-        data.isPublic = data.isPublic && isPublic;
-        navigate("/hostRegistry6", {
-            state: {
-                ...data,
-                closeGuide: closeGuide,
-                closeImage: additionalImage ? [closeImage, additionalImage] : [closeImage]
-            }
-        });
-    };
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
@@ -64,7 +38,7 @@ const AdminHostRegistry5 = () => {
                         <a>숙지 사항<span style={{ color: "#FF2929" }} >*</span></a>
                         <p style={{color:'#FF2929'}} >(최소 20자)</p>
                     </div>
-                    <textarea disabled={true}  className="input" style={{ height: '6.25rem', letterSpacing: '-0.0255rem' }} value={closeGuide} onChange={onChangeGuide} placeholder={
+                    <textarea disabled={true}  className="input" style={{ height: '6.25rem', letterSpacing: '-0.0255rem' }} defaultValue={data.closeGuide} value={data.closeGuide} placeholder={
                         `대관을 진행하는 셰프님들이 마감할 때 꼭 숙지해야 할 점을 기록해 주세요! 
 • 홀 마감은 이렇게 해주세요. 
 • 주방 마감은 이렇게 해주세요. 
@@ -77,11 +51,11 @@ ex.이 물건은 꼭 손대지 말아주세요.
                 <div style={{ display: 'flex', justifyContent: 'center', width: '100%', gap: '1rem' }} >
                     <div>
                         <p>사진<span style={{ color: "#FF2929" }} >*</span></p>
-                        <ImageViewer val={closeImage} setImg={setCloseImage} />
+                        <ImageViewer val={data.closeImage ? data.closeImage[0] : ""} />
                     </div>
                     <div>
                         <p>추가 사진</p>
-                        <ImagesViewer vals={additionalImage} setImg={setAdditionalImage} />
+                        <ImagesViewer vals={data.closeImage ? data.closeImage.slice(1) : []} />
                     </div>
                 </div>
             </div>
@@ -91,7 +65,7 @@ ex.이 물건은 꼭 손대지 말아주세요.
                 >
                     이전</button>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#525252", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                        onClick={() => handleButton()}
+                        onClick={() => navigate("/adminspaceViewPage6",{state:data})}
                 >다음</button>
             </div>
 
@@ -99,4 +73,4 @@ ex.이 물건은 꼭 손대지 말아주세요.
 
     )
 };
-export default AdminHostRegistry5;
+export default AdminSpaceViewPage5;
