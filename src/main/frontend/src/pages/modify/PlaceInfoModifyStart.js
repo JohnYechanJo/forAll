@@ -191,8 +191,8 @@ const PlaceInfoModifyStart = () => {
                             name="kitchen"
                             value={KitchenFeat.Open}
                             style={{
-                              backgroundColor: clicked1 ? "black" : "white",
-                              color: clicked1 ? "white" : "black",
+                              backgroundColor: data.kitchenFeat === KitchenFeat.Open||clicked1 ? "black" : "white",
+                              color: data.kitchenFeat === KitchenFeat.Open||clicked1 ? "white" : "black",
                             }}
                             onClick={(event) => {
                               const selected = event.target.value;
@@ -256,8 +256,8 @@ const PlaceInfoModifyStart = () => {
                             name="kitchen"
                             value={KitchenFeat.Face}
                             style={{
-                              backgroundColor: clicked2 ? "black" : "white",
-                              color: clicked2 ? "white" : "black",
+                              backgroundColor: data.kitchenFeat === KitchenFeat.Face||clicked2 ? "black" : "white",
+                              color: data.kitchenFeat === KitchenFeat.Face||clicked2 ? "white" : "black",
 
                             }}
                             onClick={(event) => {
@@ -322,8 +322,8 @@ const PlaceInfoModifyStart = () => {
                             name="kitchen"
                             value={KitchenFeat.Close}
                             style={{
-                              backgroundColor: clicked3 ? "black" : "white",
-                              color: clicked3 ? "white" : "black",
+                              backgroundColor: data.kitchenFeat === KitchenFeat.Close||clicked3 ? "black" : "white",
+                              color: data.kitchenFeat === KitchenFeat.Close||clicked3 ? "white" : "black",
 
                             }}
                             onClick={(event) => {

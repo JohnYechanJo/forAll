@@ -6,6 +6,7 @@ import Sidebar from "../../components/home/Sidebar";
 import HomeTemplate from "../../components/home/HomeTemplate";
 import {AddressUtil} from "../../utils/AddressUtil";
 import pointer from "../../components/icons/pointer.png";
+import Header from "../../components/home/Header";
 
 const SpaceListViewPage = () => {
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ const SpaceListViewPage = () => {
                 <button className="button">대관하기</button>
                 <button className="button" onClick={()=>navigate("/",{state:{focus:"board"}})}>커뮤니티</button>
             </div>
+            <Header/>
             <Sidebar/>
             <HomeTemplate />
             <div>

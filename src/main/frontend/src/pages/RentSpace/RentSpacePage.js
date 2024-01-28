@@ -2,12 +2,14 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
 import ImageSlider from "../../components/ImageSlider";
-import {ChatRoomCategory, ChefState, KitchenFeat} from "../../utils/enums";
+import { ChatRoomCategory, ChefState, KitchenFeat } from "../../utils/enums";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 import { AddressUtil } from "../../utils/AddressUtil";
 import "../../style/RentSpace.css";
 import arrowright from "../../components/icons/arrowright.png";
 import hearImg from "../../components/icons/heart.png";
+import Modal from "react-modal";
+import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 const RentSpacePage = () => {
     const params = useParams();
     const navigate = useNavigate();
@@ -15,6 +17,10 @@ const RentSpacePage = () => {
     const [images1, setImages1] = useState([]);
     const [equipments, setEquipments] = useState([]);
     const [needChef, setNeedChef] = useState(false);
+    const [modalIsOpen1, setModalIsOpen1] = useState(false);
+    const [modalIsOpen2, setModalIsOpen2] = useState(false);
+    const [modalIsOpen3, setModalIsOpen3] = useState(false);
+
     useEffect(() => {
         axios.get("/api/v1/space/" + params.id)
             .then((res) => {
@@ -30,13 +36,14 @@ const RentSpacePage = () => {
     const submit = () => {
         const userId = sessionStorage.getItem("user_id");
         if (!userId) return; // 로그인 안되었으면, 버튼 실행 x
-        axios.get("/api/v1/members/public/"+userId)
+        axios.get("/api/v1/members/public/" + userId)
             .then((res) => {
-                if (res.data.chefPending === ChefState.NOTCREATED){
+                if (res.data.chefPending === ChefState.NOTCREATED) {
                     setNeedChef(true);
-                }else{
+                } else {
                     // Todo 승인 나기 전 과정이 없음
-                    navigate("/rentSpace2", {state:{
+                    navigate("/rentSpace2", {
+                        state: {
                             spaceId: data.id,
                             spaceName: data.name,
                             spaceAddress: data.address,
@@ -46,7 +53,8 @@ const RentSpacePage = () => {
                             ableFinHour: data.ableFinHour,
                             priceSet: data.priceSet,
                             capacity: data.capacity,
-                        }});
+                        }
+                    });
                 }
             })
 
@@ -54,7 +62,7 @@ const RentSpacePage = () => {
 
 
     return (
-        <div className={"rent_space_container"}>
+        <div className={"rent_space_container"}  >
             <div>
                 <ImageSlider images={images1} />
             </div>
@@ -105,86 +113,205 @@ const RentSpacePage = () => {
             <div>
                 <p style={{ fontSize: "1rem", margin: "1rem 0 1rem 0" }}>• 주방 정보</p>
                 <p style={{ paddingLeft: "1rem" }}>주방 특성<span style={{ color: "red" }}>*</span></p>
-                <div style={{paddingLeft:'1rem',paddingRight:'1rem'}} >
-                    <div style={{ display: "flex", justifyContent: 'flex-start', width: '100%' }}>
-                        <button className="square_button"
-                            name="kitchen"
-                            disabled={true}
-                            style={{
-                                backgroundColor: data.kitchenFeat === KitchenFeat.Open ? "black" : "white",
-                                color: data.kitchenFeat === KitchenFeat.Open ? "white" : "black",
-                                width: "100px",
-                                flex: "1",
+                
+                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between",width:'90vw',paddingLeft:'1rem' }}>
+                        <div style={{ flexDirection: "column", display: "flex" }}>
+                            <div>
+                                <button className="square_button"
+                                    name="kitchen"
+                                    value={KitchenFeat.Open}
+                                    style={{
+                                        backgroundColor: data.kitchenFeat === KitchenFeat.Open  ? "black" : "white",
+                                        color: data.kitchenFeat === KitchenFeat.Open ? "white" : "black",
+                                    }}
+                                
+                                >
+                                    오픈형
+                                </button>
+                            </div>
+                            <div>
+                                <Modal isOpen={modalIsOpen1} style={ExplanationModalStyles}>
+                                    <div style={{
+                                        fontFamily: "Noto Sans KR",
+                                        color: " #000",
+                                        fontSize: "0.625rem",
+                                        fontStyle: "normal",
+                                        fontWeight: "400",
+                                        lineHeight: "normal"
+                                    }}>
+                                        <br />
+                                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                            <a style={{ textAlign: "left" }}>오픈형 주방이란?</a><a
+                                                style={{ textAlign: "right" }}
+                                                onClick={() => setModalIsOpen1(false)}>x</a>
+                                        </div>
+                                        <hr style={{ height: "1px", backgroundColor: "black" }} />
+                                        <p style={{
+                                            textAlign: 'left',
+                                            paddingLeft: "5%",
+                                            paddingRight: "5%"
+                                        }}>•&ensp;주방, 홀이 하나로 결합된 형태입니다.</p>
+                                        <p style={{
+                                            textAlign: 'left',
+                                            paddingLeft: "5%",
+                                            paddingRight: "5%"
+                                        }}>•&ensp;주방과 홀이 결합되면서 음식을 만드는 사람과 가까이할 수 있어
+                                            대면형보다 더 긴밀한 커뮤니케이션이 가능하며, 요리를 하는 동시에 식사가 가능한 형태를 띕니다.
+                                        </p>
+                                    </div>
+                                    <div class="bottom_button_fixed">
+                                        <a onClick={() => setModalIsOpen1(false)}>닫기</a>
+                                    </div>
 
-                            }}
-                        >
-                            오픈형
-                        </button>
-                        <button className="square_button"
-                            name="kitchen"
-                            disabled={true}
-                            style={{
-                                backgroundColor: data.kitchenFeat === KitchenFeat.Face ? "black" : "white",
-                                color: data.kitchenFeat === KitchenFeat.Face ? "white" : "black",
-                                width: "100px",
-                                flex: "1",
+                                </Modal>
+                                <button onClick={() => setModalIsOpen1(true)}
+                                    style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 오픈형이
+                                    무엇인가요?
+                                </button>
+                            </div>
+                        </div>
+                        <div style={{ flexDirection: "column" }}>
+                            <div>
+                                <button className="square_button"
+                                    name="kitchen"
+                                    value={KitchenFeat.Face}
+                                    style={{
+                                        backgroundColor: data.kitchenFeat === KitchenFeat.Face  ? "black" : "white",
+                                        color: data.kitchenFeat === KitchenFeat.Face  ? "white" : "black",
 
-                            }}
-                        >
-                            대면형
-                        </button>
-                        <button className="square_button"
-                            name="kitchen"
-                            disabled={true}
-                            style={{
-                                backgroundColor: data.kitchenFeat === KitchenFeat.Close ? "black" : "white",
-                                color: data.kitchenFeat === KitchenFeat.Close ? "white" : "black",
-                                width: "100px",
-                                flex: "1",
+                                    }}
+                                    
+                                >
+                                    대면형
+                                </button>
+                            </div>
+                            <div>
+                                <Modal
+                                    isOpen={modalIsOpen2}
+                                    style={ExplanationModalStyles}>
 
-                            }}
-                        >
-                            폐쇄형
-                        </button>
+                                    <div style={{
+                                        fontFamily: "Noto Sans KR",
+                                        color: " #000",
+                                        fontSize: "0.625rem",
+                                        fontStyle: "normal",
+                                        fontWeight: "400",
+                                        lineHeight: "normal"
+                                    }}>
+                                        <br />
+                                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                            <a style={{ textAlign: "left" }}>대면형 주방이란?</a><a
+                                                style={{ textAlign: "right" }}
+                                                onClick={() => setModalIsOpen2(false)}>x</a>
+                                        </div>
+                                        <hr style={{ height: "1px", backgroundColor: "black" }} />
+                                        <p style={{
+                                            textAlign: 'left',
+                                            paddingLeft: "5%",
+                                            paddingRight: "5%"
+                                        }}>•&ensp;부엌과 다이닝룸이 한 공간에 자리하는 형태입니다.</p>
+                                        <p style={{
+                                            textAlign: 'left',
+                                            paddingLeft: "5%",
+                                            paddingRight: "5%"
+                                        }}>•&ensp;식탁이 따로 놓여 있지만, 음식을 만드는 사람의 얼굴을 보며
+                                            대화를 나눌 수 있는 구조입니다.</p>
+                                    </div>
+                                    <div class="bottom_button_fixed">
+                                        <a onClick={() => setModalIsOpen2(false)}>닫기</a>
+                                    </div>
+                                </Modal>
+                                <button onClick={() => setModalIsOpen2(true)}
+                                    style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 대면형이
+                                    무엇인가요?
+                                </button>
+                            </div>
+                        </div>
+                        <div style={{ flexDirection: "column" }}>
+                            <div>
+                                <button className="square_button"
+                                    name="kitchen"
+                                    value={KitchenFeat.Close}
+                                    style={{
+                                        backgroundColor: data.kitchenFeat === KitchenFeat.Close ? "black" : "white",
+                                        color: data.kitchenFeat === KitchenFeat.Close ? "white" : "black",
+
+                                    }}
+
+                                >
+                                    폐쇄형
+                                </button>
+                            </div>
+                            <div>
+                                <Modal
+                                    isOpen={modalIsOpen3}
+                                    style={ExplanationModalStyles}
+                                >
+                                    <div style={{
+                                        fontFamily: "Noto Sans KR",
+                                        color: " #000",
+                                        fontSize: "0.625rem",
+                                        fontStyle: "normal",
+                                        fontWeight: "400",
+                                        lineHeight: "normal"
+                                    }}>
+                                        <br />
+                                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                            <a style={{ textAlign: "left" }}>폐쇄형 주방이란?</a><a
+                                                style={{ textAlign: "right" }}
+                                                onClick={() => setModalIsOpen3(false)}>x</a>
+                                        </div>
+                                        <hr style={{ height: "1px", backgroundColor: "black" }} />
+                                        <p style={{
+                                            textAlign: 'left',
+                                            paddingLeft: "5%",
+                                            paddingRight: "5%"
+                                        }}>•&ensp;차분하게 조리와 정리에 전념할 수 있습니다.</p>
+                                        <p style={{
+                                            textAlign: 'left',
+                                            paddingLeft: "5%",
+                                            paddingRight: "5%"
+                                        }}>•&ensp;또한, 조리할 때 발생하는 오염과 냄새, 연기, 소리 등이 거실에 비교적 전달이 되지 않습니다.
+                                        </p>
+                                        <p style={{
+                                            textAlign: 'left',
+                                            paddingLeft: "5%",
+                                            paddingRight: "5%"
+                                        }}>•&ensp;홀에서는 어수선한 모습이 보이지 않아 쾌적한 매장 환경이 만들어집니다.</p>
+                                    </div>
+                                    <div class="bottom_button_fixed">
+                                        <a onClick={() => setModalIsOpen3(false)}>닫기</a>
+                                    </div>
+
+                                </Modal>
+                                <button onClick={() => setModalIsOpen3(true)}
+                                    style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 폐쇄형이
+                                    무엇인가요?
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div style={{ display: "flex", marginBottom: "1rem" }}>
-                    <p style={{
-                        width: "100px",
-                        flex: "1",
-                        marginLeft: "10px"
-                    }}>오픈형이 무엇인가요?</p>
-                    <p style={{
-                        width: "100px",
-                        flex: "1",
-                        marginLeft: "10px"
-                    }}>대면형이 무엇인가요?</p>
-                    <p style={{
-                        width: "100px",
-                        flex: "1",
-                        marginLeft: "10px"
-                    }}>폐쇄형이 무엇인가요?</p>
-                </div>
+                
                 <div style={{ marginBottom: "1rem" }}>
                     <p style={{ paddingLeft: "1rem" }}>화구<span style={{ color: "red" }}>*</span></p>
                     <div className={"data_input"}><p style={{ paddingLeft: "0.6rem" }}>{data.fireholeNum + "구"}</p></div>
                 </div>
                 <div>
                     <p style={{ paddingLeft: "1rem" }}>확보된 주방기계<span style={{ color: "red" }}>*</span></p>
-                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", marginTop: "1rem" }}>
-                        <div className={equipments.includes("튀김기") === true ? "btn_selected" : "btn_not_selected"}>튀김기</div>
-                        <div className={equipments.includes("오븐") === true ? "btn_selected" : "btn_not_selected"}>오븐</div>
-                        <div className={equipments.includes("식기세척기") === true ? "btn_selected" : "btn_not_selected"}>식기세척기</div>
-                        <div className={equipments.includes("제빙기") === true ? "btn_selected" : "btn_not_selected"}>제빙기</div>
+                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: "1rem",width:'90vw',paddingLeft: "1rem"  }}>
+                        <div style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }}  className={equipments.includes("튀김기") === true ? "btn_selected" : "btn_not_selected"}>튀김기</div>
+                        <div style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }}  className={equipments.includes("오븐") === true ? "btn_selected" : "btn_not_selected"}>오븐</div>
+                        <div style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }}  className={equipments.includes("식기세척기") === true ? "btn_selected" : "btn_not_selected"}>식기세척기</div>
+                        <div style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }}  className={equipments.includes("제빙기") === true ? "btn_selected" : "btn_not_selected"}>제빙기</div>
+                        <div style={{ borderRadius: '0.3125rem', width: '18%', height: '1.25rem' }}  className={equipments.includes("냉장고") === true ? "btn_selected" : "btn_not_selected"}>냉장고</div>
                     </div>
                 </div>
                 <div style={{ marginTop: "1rem" }}>
                     <p style={{ paddingLeft: "1rem" }}>추가 사용 가능 기계<span style={{ color: "red" }}>*</span></p>
                     <div
                         style={{
-                            border: "2px solid gray",
-                            borderRadius: "2px",
-                            width: "21.875rem",
+                            border: "1px solid lightgray",
+                            width: "90vw",
                             height: "10vh",
                             margin: "0 1rem 0 1rem",
                             fontSize: "0.625rem",
@@ -218,16 +345,16 @@ const RentSpacePage = () => {
 
             </div>
 
-            {needChef ?(
+            {needChef ? (
                 <div className={"overlay_container"}>
-                    <div style={{height:"70%", display:"flex", alignItems:"center", padding:"1rem"}}>
-                        <div style={{margin: "1rem", paddingRight:"2rem"}}>
-                            <p style={{fontSize:"1.25rem", fontWeight:"700"}}>{sessionStorage.getItem("name")+"님, 대관을 위해서 셰프 등록을 먼저 부탁드립니다!"}</p>
-                            <p style={{fontSize:"0.95rem", paddingTop:"1rem"}}>셰프 등록을하신 후, 포 올을 통해 세상에 놀라운 경험을 선사해주세요.</p>
+                    <div style={{ height: "70%", display: "flex", alignItems: "center", padding: "1rem" }}>
+                        <div style={{ margin: "1rem", paddingRight: "2rem" }}>
+                            <p style={{ fontSize: "1.25rem", fontWeight: "700" }}>{sessionStorage.getItem("name") + "님, 대관을 위해서 셰프 등록을 먼저 부탁드립니다!"}</p>
+                            <p style={{ fontSize: "0.95rem", paddingTop: "1rem" }}>셰프 등록을하신 후, 포 올을 통해 세상에 놀라운 경험을 선사해주세요.</p>
                         </div>
 
                     </div>
-                    <div className={"submit_button"} onClick={()=>navigate("/chefRegistry")}>셰프 등록하기</div>
+                    <div className={"submit_button"} onClick={() => navigate("/chefRegistry")}>셰프 등록하기</div>
                 </div>
             ) : null}
 

@@ -105,8 +105,7 @@ const PlaceInfoModifyPage3 = () => {
                 setWorkIn(res.data.ableWorkIn)
                 setMiseen(res.data.ableMiseen)
                 setRentWeek(!isNaN(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1])?  "직접지정"  : res.data.ableDate.split(" ")[0] === '매월'? res.data.ableDate.split(" ")[0] + " " + res.data.ableDate.split(" ")[1] : res.data.ableDate.split(" ")[0]  ) 
-//res.data.ableDate.split(" ")[0] === '매월'? res.data.ableDate.split(" ")[0] + " " + res.data.ableDate.split(" ")[1] : res.data.ableDate.split(" ")[0]
-//이게 직접지정해서 나온 Wed Jan 31 2024의 형태가 아닐 때 써야 하는 코드다
+
                 setMiseenTimeFrom(res.data.ableMiseenStartTime ? res.data.ableMiseenStartTime + "시" : "0시")
                 setMiseenTimeTo(res.data.ableMiseenFinTime ? res.data.ableMiseenFinTime + "시" : "0시")
 
@@ -117,7 +116,6 @@ const PlaceInfoModifyPage3 = () => {
                 setSeat(res.data.seatNum)
                 setPrice(res.data.priceSet)
                 setExactPark(res.data.ableParking.split("대")[0])
-                // 아래 부분은 수정 필요함, 대관 날짜를 직접 지정하면 오류 난다
                 setRentDays(!isNaN(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1])  ? res.data.ableDate : res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(","))
                 setMonDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("월"))
                 setTuesDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("화"))
@@ -202,7 +200,7 @@ const PlaceInfoModifyPage3 = () => {
                     <a>대관 가능일<span style={{ color: '#FF2929' }} >*</span></a>
                     <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeeksData.includes(rentWeek) ? rentWeek : "직접지정"} val={rentWeek} width='100%' />
                     {rentWeek === "직접지정" ?
-                        <MultipleDatePicker onSubmit={setRentDays} /> : (rentWeek !== "휴무없음" ?
+                        <MultipleDatePicker onSubmit={setRentDays}  /> : (rentWeek !== "휴무없음" ?
                             <div style={{ display: 'flex' }} >
                                 <div className={monDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleMonday}>월</div>
                                 <div className={tuesDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleTuesDay}>화</div>

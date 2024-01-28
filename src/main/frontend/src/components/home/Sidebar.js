@@ -83,8 +83,9 @@ const Sidebar = ({ width = 18.75, children }) => {
                             <img src={xmark} alt="xmark" style={{ width: "1.5rem", height: "1.5rem", objectFit: "contain" }} onClick={() => toggleMenu()} />
                         </div>
                     </div>
-                    <div  >
-                        <div style={{
+                    <div>
+                        <div style={{ height: '5.25rem' }}>
+                            <ImageViewer val={profileImage} style={{
                                 width: '5.25rem', height: '5.25rem', borderRadius: '50%', flexShrink: '0', fill: '#FFF', strokeWidth: '1px', stroke: "#C4C4C4",
                                 filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))', alignItems: "center", justifyContent: "center", display: "flex", margin: "auto"
                             }} /></div>
@@ -99,7 +100,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                         display: "flex", flexDirection: "column", justifyContent: "space-around", gap: "1rem"
                     }}>
                         <Link to={"/reservationList"}>
-                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }}>예약 정보</button>
+                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem",textDecorationLine:'underline' }}>예약 정보</button>
                         </Link>
                         <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }}>찜한내역</button>
                     </div>
@@ -110,7 +111,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     }} >
                         <button className="button" onClick={handleChefRegistry} style={{ textAlign: "left", marginLeft: "2rem" }}>셰프 등록하기</button>
                         <Link to="/hostRegistry">
-                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }}>공간 등록하기</button>
+                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem",textDecorationLine:'underline' }}>공간 등록하기</button>
                         </Link>
                     </div>
                     <div style={{
@@ -119,11 +120,11 @@ const Sidebar = ({ width = 18.75, children }) => {
                         display: "flex", flexDirection: "column", justifyContent: "space-around", gap: "1rem"
                     }}>
                         <Link to="/chatList">
-                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }}>채팅함</button>
+                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem",textDecorationLine:'underline' }}>채팅함</button>
                         </Link>
                         <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }} >고객센터</button>
                         <Link to="/mypost">
-                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }} >내가 쓴 글</button>
+                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem",textDecorationLine:'underline' }} >내가 쓴 글</button>
                         </Link>
                     </div>
                     <div style={{
@@ -132,11 +133,11 @@ const Sidebar = ({ width = 18.75, children }) => {
                         display: "flex", flexDirection: "column", justifyContent: "space-around", gap: "1rem"
                     }}>
                         <Link to="/personalInfoModify">
-                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }}>개인 정보수정</button>
+                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem",textDecorationLine:'underline' }}>개인 정보수정</button>
                         </Link>
                         <button className="button" onClick={handleChefModify} style={{ textAlign: "left", marginLeft: "2rem" }} >셰프 정보수정</button>
                         <Link to="/placeInfoModifyStart">
-                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }}>공간 정보수정</button>
+                            <button className="button" style={{ textAlign: "left", marginLeft: "2rem",textDecorationLine:'underline' }}>공간 정보수정</button>
                         </Link>
                     </div>
                     <div style={{
@@ -153,11 +154,10 @@ const Sidebar = ({ width = 18.75, children }) => {
                         </div>)}
                     </div>
                 </div>
-
             </div>
             <button onClick={() => toggleMenu()}
                 className={styles.button + styles.sidebar}
-                style={{ alignItems: "center", backgroundColor: "transparent", border: "none", right:'0.5rem',top:'1rem',position:'absolute',transition: '0.8s ease' }}
+                style={{ alignItems: "center", backgroundColor: "transparent", border: "none", right:'1rem',top:'1rem',position:'fixed',transition: '0.8s ease',zIndex:'999' }}
             >
                 {isOpen ?
                     <span></span> : <div className={styles.openBtn} style={{ alignContent: "center", justifyContent: "center", display: "flex", alignItems: "center" }} >

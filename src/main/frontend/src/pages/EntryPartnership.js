@@ -6,7 +6,7 @@ import {useEffect, useRef, useState} from "react";
 
 import {BoardCategory} from "../utils/enums";
 import axios from "axios";
-
+import Header from "../../src/components/home/Header";
 
 import "../style/mainpage.css";
 
@@ -19,6 +19,7 @@ const EntryPartnership = () => {
                 <button className="button" onClick={() => navigate("/",{state: {focus: "space"}})}>대관하기</button>
                 <button className="button">커뮤니티</button>
             </div>
+            <Header/>
             <Sidebar/>
             <HomeTemplate />
             <div style={{paddingLeft: "2%", paddingRight: "2%", width: "96%", height: "62.5rem", flexShrink: "0"}}>
