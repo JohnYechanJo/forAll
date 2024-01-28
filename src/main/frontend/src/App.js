@@ -80,6 +80,9 @@ import AdminHostRegistry4 from "./pages/admin/AdminHostRegistry4";
 import AdminHostRegistry5 from "./pages/admin/AdminHostRegistry5";
 import AdminHostRegistry6 from "./pages/admin/AdminHostRegistry6";
 import AdminSignedUp from "./pages/admin/AdminSignedUp";
+import AdminProfile from "./pages/admin/AdminProfile";
+import AdminChefInfo from "./pages/admin/AdminChefInfo";
+import AdminPlaceReservationCheck from "./pages/admin/AdminPlaceReservationCheck";
 
 
 function App() {
@@ -164,6 +167,9 @@ function App() {
             <Route path="/adminHostRegistry6" element={<AdminHostRegistry6 />}/>
 
             <Route path="/adminSignedUp" element={<AdminSignedUp />} />
+            <Route path="/adminProfile" element={<AdminProfile />} />
+          <Route path="/adminChefInfo" element={<AdminChefInfo />} />
+          <Route path="/adminPlaceReservationCheck" element={<AdminPlaceReservationCheck />} />
 
       </Routes>
   );
