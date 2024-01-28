@@ -242,10 +242,11 @@ const RentSpaceInfo3 = () => {
         <div>
           <a>확보된 주방기계</a>
           <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
-            <div className={equipments.includes("튀김기") === true ? "btn_selected" : "btn_not_selected"}>튀김기</div>
-            <div className={equipments.includes("오븐") === true ? "btn_selected" : "btn_not_selected"}>오븐</div>
-            <div className={equipments.includes("식기세척기") === true ? "btn_selected" : "btn_not_selected"}>식기세척기</div>
-            <div className={equipments.includes("제빙기") === true ? "btn_selected" : "btn_not_selected"}>제빙기</div>
+            <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={equipments.includes("튀김기") === true ? "btn_selected" : "btn_not_selected"}>튀김기</button>
+            <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={equipments.includes("오븐") === true ? "btn_selected" : "btn_not_selected"}>오븐</button>
+            <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }}className={equipments.includes("식기세척기") === true ? "btn_selected" : "btn_not_selected"}>식기세척기</button>
+            <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }}className={equipments.includes("제빙기") === true ? "btn_selected" : "btn_not_selected"}>제빙기</button>
+            <button style={{ borderRadius: '0.3125rem', width: '4.375rem', height: '1.25rem' }} className={equipments.includes('냉장고') === true ? "btn_selected" : "btn_not_selected"}>냉장고</button>
           </div>
         </div>
         <div>
