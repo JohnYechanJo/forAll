@@ -86,6 +86,7 @@ const PlaceInfoModifyPage6 = () => {
         const cupImage = data.cup ? await Promise.all(data.cup.map(async (img) => await ImageUploader(img, userId))) : null;
         const cutleryImage = data.cuttrary ? await Promise.all(data.cuttrary.map(async (img) => await ImageUploader(img, userId))) : null;
 
+        const closeImage = data.closeImage ? await Promise.all(data.closeImage.map(async(img) => await ImageUploader(img, userId))) : null;
         const businessNum = registNum1 + registNum2 + registNum3;
         const businessImage = await ImageUploader(license, userId);
         const businessAddress = address + exactAddress;
@@ -139,7 +140,9 @@ const PlaceInfoModifyPage6 = () => {
             bankName: bank,
             accountNum: account,
             accountHolder: accountHolder,
-            isPublic: data.isPublic && isPublic
+            isPublic: data.isPublic && isPublic,
+            closeGuide: data.closeGuide,
+            closeImage: closeImage
         })
             .then((res) => setModalOpen1(true))
             .catch((err) => console.error(err));

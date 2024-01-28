@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.forAll.domain.reservation.Assurance;
 import project.forAll.domain.reservation.Reservation;
+import project.forAll.domain.reservation.ReservationState;
 import project.forAll.form.AssuranceForm;
 import project.forAll.repository.reservation.AssuranceRepository;
 import project.forAll.service.AssuranceService;
@@ -23,9 +24,12 @@ public class APIAssuranceController extends APIController {
         try{
             final Assurance assurance = assuranceService.build(form);
             assuranceService.save(assurance);
+            final Reservation reservation = assurance.getReservation();
+            reservation.setState(ReservationState.READY);
+            reservationService.save(reservation);
             return new ResponseEntity(Long.toString(assurance.getId()), HttpStatus.OK);
         }catch (final Exception e){
-            return new ResponseEntity(errorResponse("Could not create assurance"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(errorResponse("Could not create assurance : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -35,7 +39,9 @@ public class APIAssuranceController extends APIController {
             if (assuranceService.findById(form.getId()) == null) throw new Exception("No assurance with id " + form.getId());
             final Assurance assurance = assuranceService.build(form);
             assuranceService.save(assurance);
-
+            final Reservation reservation = assurance.getReservation();
+            reservation.setState(ReservationState.FINISH);
+            reservationService.save(reservation);
             return new ResponseEntity(Long.toString(assurance.getId()), HttpStatus.OK);
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Could not update Assurance" + e.getMessage()), HttpStatus.BAD_REQUEST);
@@ -43,7 +49,7 @@ public class APIAssuranceController extends APIController {
     }
 
     @GetMapping("/assurance/reservation/{id}")
-    public ResponseEntity getReservationAssurance(@PathVariable Reservation id){
+    public ResponseEntity getReservationAssurance(@PathVariable Long id){
         try{
             final Reservation reservation = (Reservation) reservationService.findById(id);
             Assurance assurance = assuranceRepository.findByReservation(reservation);

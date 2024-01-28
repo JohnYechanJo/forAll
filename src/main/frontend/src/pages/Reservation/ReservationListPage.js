@@ -12,7 +12,9 @@ const ReservationListPage = () => {
     const [reservationData, setReservationData] = useState([]);
 
     const handleAssurance = (data) => {
+        console.log(data);
         if (data.state === ReservationState.FINISH) return;
+        if (data.state === ReservationState.PENDING) return;
         if (data.state === ReservationState.APPROVE) navigate("/assuranceReady", {state:data});
         else{
             const rentEndTime = TimeUtil.setHour(data.rentDay, data.rentEndHour);
@@ -41,7 +43,7 @@ const ReservationListPage = () => {
                     • 진행중인 대관
                 </p></div>
                 {reservationData ? reservationData.filter((data) => TimeUtil.checkToday(data.rentDay)).map((data) => (
-                    <div style={{border:"1px solid #C4C4C4", height:"6rem"}} onClick={handleAssurance(data)}>
+                    <div style={{border:"1px solid #C4C4C4", height:"6rem"}} onClick={()=>handleAssurance(data)}>
                         <div style={{display:"flex", justifyContent:"space-between"}}>
                             <p style={{fontSize:"1rem", fontWeight:"700", paddingLeft:"1rem"}}>{AddressUtil.extraction(data.address)}</p>
                         </div>

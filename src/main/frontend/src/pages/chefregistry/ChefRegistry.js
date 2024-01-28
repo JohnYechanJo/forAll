@@ -122,21 +122,19 @@ const ChefRegistry = () => {
                 </div>
                 <a>• 법인 사업자는 법인 통장계좌를, 개인 사업자는 사업자 명의의 통장 계좌를 입력해주세요. 포 올을 통해 결제된 금액이 해당 계좌로 정산됩니다.</a>
                 <div style={{display: "flex", justifyContent: "left"}} >
-                    <div style={{marginTop:"0.5rem", marginRight: "3%"}}>
-                        <p>은행명*</p>
-                        <DropDown style={{width: "5%"}} dataArr={bankDatas} onChange={setBank} val={bank} defaultData={bank} />
-                    </div>
-                    <div style={{ marginTop: "0.5rem", height: '1.5rem' , marginRight: "0.5rem" }}>
-                        <p>계좌번호*</p>
-                        <input onChange={onChangeAccount} placeholder={"454102-01-376503"}
-                            style={{fontSize: '0.9375rem', width: "10rem",height: "1.5rem"}}
-                        />
-                    </div>
-                    <div style={{ marginTop: "0.5rem", height: '1.5rem' }}>
-                        <p>예금주*</p>
-                        <input onChange={onChangeAccountHolder}
-                            style={{ fontSize: '0.9375rem', width: "5rem", height: "1.5rem", flexShrink: "0", marginRight:  '10%'}}
-                        />
+                    <div style={{ display: 'flex',marginTop:'1.5rem' }} >
+                        <div>
+                            <a>은행명<span style={{ color: "#FF2929" }} >*</span></a>
+                            <DropDown dataArr={bankDatas} onChange={setBank} width='100%' />
+                        </div>
+                        <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}} >
+                            <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
+                            <input onChange={onChangeAccount} className="input" style={{width:'100%'}} placeholder={"454102-01-376503"} />
+                        </div>
+                        <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}}>
+                            <a>예금주<span style={{ color: "#FF2929" }} >*</span></a>
+                            <input onChange={onChangeAccountHolder} className="input" style={{width:'100%'}} />
+                        </div>
                     </div>
                 </div>
                 <div style={{gap:"0px"}}>

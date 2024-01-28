@@ -79,6 +79,10 @@ import AdminSpaceViewPage3 from "./pages/admin/AdminSpaceViewPage3";
 import AdminSpaceViewPage4 from "./pages/admin/AdminSpaceViewPage4";
 import AdminSpaceViewPage5 from "./pages/admin/AdminSpaceViewPage5";
 import AdminSpaceViewPage6 from "./pages/admin/AdminSpaceViewPage6";
+import AdminSignedUp from "./pages/admin/AdminSignedUp";
+import AdminProfile from "./pages/admin/AdminProfile";
+import AdminChefInfo from "./pages/admin/AdminChefInfo";
+import AdminPlaceReservationCheck from "./pages/admin/AdminPlaceReservationCheck";
 
 
 function App() {
@@ -155,12 +159,18 @@ function App() {
          <Route path="/assuranceFinish" element={<AssuranceFinish />} />
             <Route path="/deadlineInfo" element={<DeadlineInfo />} />
 
-            <Route path="/adminspaceViewPage1" element={<AdminSpaceViewPage1 />} />
-            <Route path="/adminspaceViewPage2" element={<AdminSpaceViewPage2 />} />
-            <Route path="/adminspaceViewPage3" element={<AdminSpaceViewPage3 />}/>
-            <Route path="/adminspaceViewPage4" element={<AdminSpaceViewPage4 />}/>
-            <Route path="/adminspaceViewPage5" element={<AdminSpaceViewPage5 />}/>
-            <Route path="/adminspaceViewPage6" element={<AdminSpaceViewPage6 />}/>
+          <Route path="/adminspaceViewPage1" element={<AdminSpaceViewPage1 />} />
+          <Route path="/adminspaceViewPage2" element={<AdminSpaceViewPage2 />} />
+          <Route path="/adminspaceViewPage3" element={<AdminSpaceViewPage3 />}/>
+          <Route path="/adminspaceViewPage4" element={<AdminSpaceViewPage4 />}/>
+          <Route path="/adminspaceViewPage5" element={<AdminSpaceViewPage5 />}/>
+          <Route path="/adminspaceViewPage6" element={<AdminSpaceViewPage6 />}/>
+
+            <Route path="/adminSignedUp" element={<AdminSignedUp />} />
+            <Route path="/adminProfile" element={<AdminProfile />} />
+          <Route path="/adminChefInfo" element={<AdminChefInfo />} />
+          <Route path="/adminPlaceReservationCheck" element={<AdminPlaceReservationCheck />} />
+
       </Routes>
   );
 }

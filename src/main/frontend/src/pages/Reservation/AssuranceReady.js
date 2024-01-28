@@ -25,7 +25,6 @@ const AssuranceReady = () => {
 
     const [record, setRecord] = useState("");
     const [agree, setAgree] = useState(false);
-    const [agreed, setAgreed] = useState(false);
 
     const [spaceData, setSpaceData] = useState({});
     const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -33,14 +32,10 @@ const AssuranceReady = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [completeModal, setCompleteModal] = useState(false);
 
-    const [closeGuide, setCloseGuide] = useState("");
-    const onChangeGuide = useCallback((e) => {
-        setCloseGuide(e.target.value);
-    }, []);
     const onChangeRecord = useCallback((e) => setRecord(e.target.value), []);
     const toggleAgree = () => setAgree(!agree);
     const handleButton = () => {
-        if(kitImage && hallImage && record && agree && closeGuide && setAgreed){
+        if(kitImage && hallImage && record && agree){
             submit();
         }
         else setIsAlertOpen(true);
@@ -55,7 +50,7 @@ const AssuranceReady = () => {
         const readyAdditionalImages = await ImageUploader(additionImages, userId);
 
         axios.post("/api/v1/assurance", {
-            reservation: data.space,
+            reservation: data.id,
             readyKitImage: readyKitImage,
             readyHallImage: readyHallImage,
             readyAdditionalImage: readyAdditionalImage,
@@ -135,28 +130,20 @@ const AssuranceReady = () => {
                     <a>홀 사진 추가</a>
                     <ImageInputs setImg={setHallImages} vals={hallImages}/>
                 </div>
-                <div style={{display: 'flex', justifyContent: 'right'}}>
-
-                    <div style={{display: "flex", flexDirection: "column"}}>
-                        <a>사고/손상</a>
-                        <div style={{justifyContent: 'center', alignItems: 'flex-end'}}>
-                            <ImageInput setImg={setAdditionImage} val={additionImage}/>
-                        </div>
-                    </div>
-                </div>
-                <div style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: 'center',
-                    alignItems: 'flex-start'
-                }}>
+            </div>
+            <div style={{
+                display: "flex",
+                justifyContent: 'center',
+                alignItems: 'flex-start'
+            }}>
+                <div style={{justifyContent:'right'}}>
                     <a>기타 사진</a>
-                    <div style={{justifyContent: 'center', alignItems: 'flex-start'}}>
+                    <div style={{justifyContent: 'right', alignItems: 'flex-start'}}>
                         <ImageInputs setImg={setAdditionImage} vals={additionImage}/>
                     </div>
                 </div>
-            </div>
 
+            </div>
             <div>
                 <div style={{paddingLeft: '2%', paddingRight: '2%'}}>
                     <div style={{
@@ -169,7 +156,7 @@ const AssuranceReady = () => {
                         <p style={{color: '#FF2929', paddingRight: '2%'}}>(최소 20자)</p>
                     </div>
                     <textarea className="input" style={{height: '6.25rem', letterSpacing: '-0.0255rem'}}
-                              value={closeGuide} onChange={onChangeGuide} placeholder={
+                              value={record} onChange={onChangeRecord} placeholder={
                         "대관을 진행하는 중 셰프님께서 발견한 특이사항을 기록해 주세요.\n" +
                         "ex. ‘오너 마감 가이드’ 숙지를 충분히 완료했다.\n" +
                         "ex. 셰프님이 찍은 사진에 대한 설명을 적어주세요."
@@ -230,7 +217,7 @@ const AssuranceReady = () => {
                     <h1>마감 안내</h1>
                     <p>오너 마감 가이드</p>
                     <p>숙지 사항</p>
-                    <textarea content={spaceData.closeGuide}/>
+                    <textarea value={spaceData.closeGuide}/>
                     <p>사진</p>
                     <ImageViewer val={spaceData.closeImage ? spaceData.closeImage[0] : null}/>
                     <p>추가 사진</p>
@@ -260,7 +247,7 @@ const AssuranceReady = () => {
                     </a>
                     <a style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "1rem"}}>•&ensp;포 올의 얼굴입니다.</a>
                     <div className="bottom_button_relative">
-                        <a style={{fontSize: "0.8rem"}} onClick={() => setCompleteModal(false)}>닫기</a>
+                        <a style={{fontSize: "0.8rem"}} onClick={() => navigate("/")}>닫기</a>
                     </div>
                 </div>
             </Modal>

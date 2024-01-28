@@ -43,8 +43,8 @@ const SignUpPage = () => {
             .then((response) => {
                 setIsCheckDuplicatedId(true);
             }).catch((response) => {
-                setIsCheckDuplicatedId(false);
-            });
+            setIsCheckDuplicatedId(false);
+        });
 
     };
     const checkDuplicatedEmail = () => {
@@ -56,8 +56,8 @@ const SignUpPage = () => {
                 .then((response) => {
                     setIsCheckDuplicatedEmail(true);
                 }).catch((response) => {
-                    setIsCheckDuplicatedEmail(false);
-                });
+                setIsCheckDuplicatedEmail(false);
+            });
         }
 
 
@@ -73,8 +73,8 @@ const SignUpPage = () => {
                 .then((response) => {
                     openModal("인증번호를 발송했습니다.");
                 }).catch((response) => {
-                    openModal("인증번호를 발송하지 못했습니다.");
-                });
+                openModal("인증번호를 발송하지 못했습니다.");
+            });
         }
     };
     const checkCerifiedNum = () => {
@@ -82,8 +82,8 @@ const SignUpPage = () => {
             .then((response) => {
                 setIsPhoneCerified(true);
             }).catch((response) => {
-                setIsPhoneCerified(false);
-            });
+            setIsPhoneCerified(false);
+        });
     };
 
     useDidMountEffect(() => {
@@ -141,7 +141,7 @@ const SignUpPage = () => {
                 }
             });
 
-    }
+        }
     }
     return (
         <div>
@@ -192,15 +192,15 @@ const SignUpPage = () => {
             </div>
             <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem' }}>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#FF4F4F", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                    onClick={() => navigate('/login')}
+                        onClick={() => navigate('/login')}
                 >
                     이전</button>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#525252", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                    onClick={() => handleButton()}
+                        onClick={() => handleButton()}
                 >다음</button>
             </div>
         </div>
-        
+
     )
 };
 
