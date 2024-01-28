@@ -1,4 +1,4 @@
-package project.forAll.repository;
+package project.forAll.repository.reservation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import project.forAll.domain.reservation.Assurance;
