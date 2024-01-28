@@ -73,7 +73,7 @@ import PostListViewPage from "./pages/board/PostListViewPage";
 import AllNotification from "./pages/AllNotifications";
 import AllNotifications from "./pages/AllNotifications";
 import DeadlineInfo from "./pages/Reservation/DeadlineInfo";
-
+import AdminMainPage from './pages/admin/AdminMainPage';
 
 function App() {
   return (
