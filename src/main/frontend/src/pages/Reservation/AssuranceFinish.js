@@ -12,8 +12,8 @@ import ImagesViewer from "../../components/ImagesViewer";
 import {ReservationModalStyles} from "../../components/ReservationModalStyles";
 import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
 
-const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = useState({});
-
+const AssuranceFinish = () => {
+    const [assuranceData, setAssuranceData] = useState({});
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
@@ -21,17 +21,10 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
     const [kitImages, setKitImages] = useState([]);
     const [hallImage, setHallImage] = useState();
     const [hallImages, setHallImages] = useState([]);
-    const [additionImage, setAdditionImage] = useState();
-
-    const [newKitImage, setNewKitImage] = useState();
-    const [newKitImages, setNewKitImages] = useState([]);
-    const [newHallImage, setNewHallImage] = useState();
-    const [newHallImages, setNewHallImages] = useState([]);
-    const [newAdditionImage, setNewAdditionImage] = useState();
+    const [additionImage, setAdditionImage] = useState([]);
 
     const [record, setRecord] = useState("");
     const [agree, setAgree] = useState(false);
-    const [agreed, setAgreed] = useState(false);
 
     const [spaceData, setSpaceData] = useState({});
     const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -39,14 +32,10 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [completeModal, setCompleteModal] = useState(false);
 
-    const [closeGuide, setCloseGuide] = useState("");
-    const onChangeGuide = useCallback((e) => {
-        setCloseGuide(e.target.value);
-    }, []);
     const onChangeRecord = useCallback((e) => setRecord(e.target.value), []);
     const toggleAgree = () => setAgree(!agree);
     const handleButton = () => {
-        if(kitImage && hallImage && record && agree && closeGuide && setAgreed){
+        if(kitImage && hallImage && record && agree){
             submit();
         }
         else setIsAlertOpen(true);
@@ -56,9 +45,6 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
         const finKitImage = kitImages ? await Promise.all([kitImage, ...kitImages].map(async (img) => await ImageUploader(img, userId))) : null;
         const finHallImage = hallImages ? await Promise.all([hallImage, ...hallImages].map(async (img) => await ImageUploader(img, userId))) : null;
         const finAdditionalImage = await ImageUploader(additionImage, userId);
-        const readyNewKitImage = kitImages ? await Promise.all([newKitImage, ...newKitImages].map(async (img) => await ImageUploader(img, userId))) : null;
-        const readyNewHallImage = hallImages ? await Promise.all([newHallImage, ...newHallImages].map(async (img) => await ImageUploader(img, userId))) : null;
-        const readyNewAdditionalImage = await ImageUploader(newAdditionImage, userId);
 
         axios.put("/api/v1/assurance", {
             id: assuranceData.id,
@@ -70,11 +56,7 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
             finKitImage: finKitImage,
             finHallImage: finHallImage,
             finAdditionalImage: finAdditionalImage,
-            finRecord: record,
-            readyNewKitImage: readyNewKitImage,
-            readyNewHallImage: readyNewHallImage,
-            readyNewAdditionalImage: readyNewAdditionalImage
-
+            finRecord: record
         }).then(() => setCompleteModal(true))
             .catch((err) => console.error(err));
     };
@@ -84,7 +66,10 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
             .then((res) => setSpaceData(res.data))
             .catch((err) => console.error(err));
         axios.get("/api/v1/assurance/reservation/" + data.id)
-            .then((res) => setAssuranceData(res.data))
+            .then((res) => {
+                console.log(res.data);
+                setAssuranceData(res.data);
+            })
             .catch((err) => console.error(err));
     }, []);
     return (
@@ -117,7 +102,7 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
                     <div style={{display: "flex", flexDirection: "column"}}>
                         <a>주방 사진<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></a>
                         <div style={{justifyContent: 'center', alignItems: 'flex-end'}}>
-                            <ImageViewer setImg={setKitImage} val={kitImage}/>
+                            <ImageViewer val={assuranceData.readyKitImage ? assuranceData.readyKitImage[0]:""}/>
                         </div>
                     </div>
                 </div>
@@ -128,14 +113,13 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
                     alignItems: 'flex-start'
                 }}>
                     <a>주방 사진 추가</a>
-                    <ImagesViewer setImg={setKitImages} vals={kitImages}/>
+                    <ImagesViewer vals={assuranceData.readyKitImage ? assuranceData.readyKitImage.slice(1) : []}/>
                 </div>
                 <div style={{display: 'flex', justifyContent: 'right'}}>
-
                     <div style={{display: "flex", flexDirection: "column"}}>
                         <a>홀 사진<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></a>
                         <div style={{justifyContent: 'center', alignItems: 'flex-end'}}>
-                            <ImageViewer setImg={setHallImage} val={hallImage}/>
+                            <ImageViewer val={assuranceData.readyHallImage ? assuranceData.readyHallImage[0]:""}/>
                         </div>
                     </div>
                 </div>
@@ -146,14 +130,14 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
                     alignItems: 'flex-start'
                 }}>
                     <a>홀 사진 추가</a>
-                    <ImagesViewer setImg={setHallImages} vals={hallImages}/>
+                    <ImagesViewer vals={assuranceData.readyHallImage ? assuranceData.readyHallImage.slice(1) : []}/>
                 </div>
                 <div style={{display: 'flex', justifyContent: 'right'}}>
 
                     <div style={{display: "flex", flexDirection: "column"}}>
                         <a>사고/손상/기타</a>
                         <div style={{justifyContent: 'center', alignItems: 'flex-end'}}>
-                            <ImagesViewer setImg={setAdditionImage} vals={additionImage}/>
+                            <ImagesViewer  vals={assuranceData.readyAdditionalImage ? assuranceData.readyAdditionalImage : []}/>
                         </div>
                     </div>
                 </div>
@@ -191,7 +175,7 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
                                 <div style={{display: "flex", flexDirection: "column"}}>
                                     <a>주방 사진<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></a>
                                     <div style={{justifyContent: 'center', alignItems: 'flex-end'}}>
-                                        <ImageInput setImg={setNewKitImage} val={newKitImage}/>
+                                        <ImageInput setImg={setKitImage} val={kitImage}/>
                                     </div>
                                 </div>
                             </div>
@@ -202,14 +186,14 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
                                 alignItems: 'flex-start'
                             }}>
                                 <a>주방 사진 추가</a>
-                                <ImageInputs setImg={setNewKitImages} vals={newKitImages}/>
+                                <ImageInputs setImg={setKitImages} vals={kitImages}/>
                             </div>
                             <div style={{display: 'flex', justifyContent: 'right'}}>
 
                                 <div style={{display: "flex", flexDirection: "column"}}>
                                     <a>홀 사진<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></a>
                                     <div style={{justifyContent: 'center', alignItems: 'flex-end'}}>
-                                        <ImageInput setImg={setNewHallImage} val={newHallImage}/>
+                                        <ImageInput setImg={setHallImage} val={hallImage}/>
                                     </div>
                                 </div>
                             </div>
@@ -220,28 +204,23 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
                                 alignItems: 'flex-start'
                             }}>
                                 <a>홀 사진 추가</a>
-                                <ImageInputs setImg={setNewHallImages} vals={newHallImages}/>
+                                <ImageInputs setImg={setHallImages} vals={hallImages}/>
                             </div>
-                            <div style={{display: 'flex', justifyContent: 'right'}}>
 
-                                <div style={{display: "flex", flexDirection: "column"}}>
-                                    <a>사고/손상</a>
-                                    <div style={{justifyContent: 'center', alignItems: 'flex-end'}}>
-                                        <ImageInput setImg={setNewAdditionImage} val={newAdditionImage}/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: 'center',
-                                alignItems: 'flex-start'
-                            }}>
+
+                        </div>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: 'center',
+                            alignItems: 'flex-start'
+                        }}>
+                            <div style={{justifyContent:'right'}}>
                                 <a>기타 사진</a>
                                 <div style={{justifyContent: 'center', alignItems: 'flex-start'}}>
-                                    <ImageInputs setImg={setNewAdditionImage} vals={newAdditionImage}/>
+                                    <ImageInputs setImg={setAdditionImage} vals={additionImage}/>
                                 </div>
                             </div>
+
                         </div>
 
                         <div>
@@ -256,7 +235,7 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
                                     <p style={{color: '#FF2929', paddingRight: '2%'}}>(최소 20자)</p>
                                 </div>
                                 <textarea className="input" style={{height: '6.25rem', letterSpacing: '-0.0255rem'}}
-                                          value={closeGuide} onChange={onChangeGuide} placeholder={
+                                          value={record} onChange={onChangeRecord} placeholder={
                                     "대관을 진행하는 중 셰프님께서 발견한 특이사항을 기록해 주세요.\n" +
                                     "ex. ‘오너 마감 가이드’ 숙지를 충분히 완료했다.\n" +
                                     "ex. 셰프님이 찍은 사진에 대한 설명을 적어주세요."
@@ -317,7 +296,7 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
                             <h1>마감 안내</h1>
                             <p>오너 마감 가이드</p>
                             <p>숙지 사항</p>
-                            <textarea content={spaceData.closeGuide}/>
+                            <textarea value={spaceData.closeGuide}/>
                             <p>사진</p>
                             <ImageViewer val={spaceData.closeImage ? spaceData.closeImage[0] : null}/>
                             <p>추가 사진</p>
@@ -349,7 +328,7 @@ const AssuranceFinish = () => {    const [assuranceData, setAssuranceData] = use
                             <a style={{textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem"}}>•&ensp;포 올의
                                 얼굴입니다.</a>
                             <div className="bottom_button_relative">
-                                <a style={{fontSize: "0.8rem"}} onClick={() => setCompleteModal(false)}>닫기</a>
+                                <a style={{fontSize: "0.8rem"}} onClick={() => navigate("/")}>닫기</a>
                             </div>
                         </div>
                     </Modal>
