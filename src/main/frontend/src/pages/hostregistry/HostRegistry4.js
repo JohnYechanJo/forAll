@@ -105,6 +105,7 @@ const HostRegistry4 = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ForAllLogo />
+            {console.log(data)}
             <p style={{ textAlign: 'center', fontSize: '0.9375rem' }}>(2/4) 이용 안내</p>
             <div style={{
                 display: "flex",

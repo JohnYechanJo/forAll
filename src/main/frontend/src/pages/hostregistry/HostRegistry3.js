@@ -31,7 +31,7 @@ const HostRegistry3 = () => {
     const [sunDay, setSunDay] = useState(false);
     const [rentTimeFrom, setRentTimeFrom] = useState("");
     const [rentTimeTo, setRentTimeTo] = useState("");
-    const [parkAvaliable, setParkAvaliable] = useState();
+    const [parkAvaliable, setParkAvaliable] = useState('주차불가');
     const [exactPark, setExactPark] = useState();
     const [elevator, setElevator] = useState();
     const [table, setTable] = useState();
@@ -165,7 +165,7 @@ const HostRegistry3 = () => {
                     {console.log(rentWeek)}
                     {console.log(rentDays)}
                     <a>대관 가능일<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} width='100%' />
+                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={'휴무없음'}  width='100%' />
                     {rentWeek === "직접지정" ?
                         <MultipleDatePicker onSubmit={handleDatePicker} /> : (rentWeek !== "휴무없음" ?
                             <div style={{display:'flex'}} >
@@ -196,14 +196,16 @@ const HostRegistry3 = () => {
                 </div>
                 <div>
                     <a>주차 여부<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} width='100%' />
+                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} defaultData={'주차불가'} width='100%' />
                     {parkAvaliable === "직접 입력" ? (
-                        <div style={{display:'flex',width:'100%',alignItems:'center',marginTop:'0.5rem'}}  >
+                        <div>
+                            <div style={{display:'flex',width:'100%',alignItems:'center',marginTop:'0.5rem'}}  >
                             <div style={{display:'flex',alignItems:'center'}} >
                             <input  className="input" style={{width:'10vw'}} onChange={onChangePark} />
                             <a>대</a>
-                            </div>
-                            {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요.</p> : null}
+                            </div> 
+                        </div>
+                        {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요.</p> : null}
                         </div>
                     ) : null}
                 </div>
