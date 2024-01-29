@@ -30,7 +30,7 @@ const RentSpacePage = () => {
             .catch((err) => console.error(err));
     }, []);
     useDidMountEffect(() => {
-        setImages1([data.mainImage]);
+        setImages1(data.hallImage? [data.mainImage, ...data.hallImage] : [data.mainImage]);
         setEquipments(data.equip ? data.equip.split(",") : []);
     }, [data]);
 
