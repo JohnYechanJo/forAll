@@ -7,16 +7,12 @@ import { ModalStyles } from "../../components/ModalStyles";
 import ImageInput from "../../components/ImageInput";
 import axios from "axios";
 import ImageUploader from "../../utils/imageUploader";
+import ImageViewer from "../../components/ImageViewer";
 
 const GuestRegistry = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
-    const [introduce, setIntroduce] = useState("");
-    const [profileImage, setProfileImage] = useState("");
-    const [selectedMBTI, setSelectedMBTI] = useState("");
-    const [selectedFoodTypes, setSelectedFoodTypes] = useState([]);
-    const [selectedIngredient, setSelectedIngredient] = useState([]);
 
     const MBTI_TYPES = [
         'ISTJ', 'ISFJ', 'INFJ', 'INTJ',
@@ -32,60 +28,7 @@ const GuestRegistry = () => {
     const INGREDIENT_TYPES = [
         '육류', '가공육류', '어류', '해조류', '갑각류', '어패류', '곡류', '채소류', '버섯류', '과실류', '견과류', '콩류', '계란', '유제품류', '약재', '조미료',
     ];
-    const toggleFoodType = (foodType) => {
-        if (selectedFoodTypes.includes(foodType)) {
-            setSelectedFoodTypes(selectedFoodTypes.filter(type => type !== foodType));
-        } else {
-            setSelectedFoodTypes([...selectedFoodTypes, foodType]);
-        }
-    };
-    const toggleIngredient = (ingredient) => {
-        if (selectedIngredient.includes(ingredient)) {
-            setSelectedIngredient(selectedIngredient.filter(type => type !== ingredient));
-        } else {
-            setSelectedIngredient([...selectedIngredient, ingredient]);
-        }
-    };
-    const handleButton = () => {
-        if (introduce && profileImage) {
-            submit();
-        }
-        else setIsModalOpen(true);
-    }
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const submit = async () => {
-        axios.post("/api/v1/members",{
-            loginId: data.loginId,
-            loginPw: data.loginPw,
-            name: data.name,
-            email: data.email,
-            phoneNum: data.phoneNum,
-            birthday: data.birthday,
-            gender: data.gender
-        }).then(async ()=>{
-            const picture = await ImageUploader(profileImage, data.loginId);
-            axios.post("/api/v1/profile", {
-                userId: data.loginId,
-                introduction: introduce,
-                profilePhoto: picture,
-                mbti: selectedMBTI,
-                cook: selectedFoodTypes,
-                cookItem: selectedIngredient,
-            }).then((res) => {
-                navigate("/notification",{state:{
-                        id: data.loginId,
-                        name: data.name,
-                        email: data.email,
-                        profileImg: picture,
-                    }});
-            }).catch((err) => console.error(err));
-        }).catch((err) => console.error(err));
 
-    };
-
-    const onInputHandler = (e) => {
-        setIntroduce(e.target.value);
-    };
 
     return (
         <div>
@@ -123,11 +66,11 @@ const GuestRegistry = () => {
                     <a className="fontForRegister" >본인 한 줄 소개<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 </div>
                 <input disabled={true}  type="text" placeholder="ex.한식 퓨전 요리를 선보이는 매장 '브와르'를 운영하고 있습니다." style={{width:"98%", height: "1.875rem" }}
-                       onChange={onInputHandler} />
+                       defaultValue={data.detailIntroduction}/>
 
                 <a className="fontForRegister" >프로필 등록 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 <p>
-                    <ImageInput setImg={setProfileImage} val={profileImage} />
+                    <ImageViewer val={data.profilePhoto} />
                 </p>
                 <div style={{width:"100%"}} >
                     <a className="fontForRegister" >관심사<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
@@ -153,12 +96,11 @@ const GuestRegistry = () => {
                                 height: '1.25rem',
                                 border: '1px solid #C4C4C4',
                                 borderRadius: '0.3125rem',
-                                cursor: selectedMBTI === mbti ? 'default' : 'pointer',
-                                backgroundColor: selectedMBTI === mbti ? 'lightgray' : 'white',
+                                cursor: data.mbti === mbti ? 'default' : 'pointer',
+                                backgroundColor: data.mbti === mbti ? 'lightgray' : 'white',
                                 textAlign: 'center',
                                 fontSize: '0.625rem',
                             }}
-                            onClick={() => setSelectedMBTI(mbti)}
                         >
                             {mbti}
                         </button>
@@ -182,12 +124,11 @@ const GuestRegistry = () => {
                                 height: '1.25rem',
                                 border: '1px solid #C4C4C4',
                                 borderRadius: '0.3125rem',
-                                cursor: selectedFoodTypes.includes(foodType) ? 'default' : 'pointer',
-                                backgroundColor: selectedFoodTypes.includes(foodType) ? 'lightgray' : 'white',
+                                cursor: data.cook ? (data.cook.includes(foodType) ? 'default' : 'pointer') : 'default',
+                                backgroundColor: data.cook ? (data.cook.includes(foodType) ? 'lightgray' : 'white') : 'white',
                                 textAlign: 'center',
                                 fontSize: '0.625rem',
                             }}
-                            onClick={() => toggleFoodType(foodType)}
                         >
                             {foodType}
                         </button>
@@ -211,38 +152,25 @@ const GuestRegistry = () => {
                                 height: '1.25rem',
                                 border: '1px solid #C4C4C4',
                                 borderRadius: '0.3125rem',
-                                cursor: selectedIngredient.includes(ingredient) ? 'default' : 'pointer',
-                                backgroundColor: selectedIngredient.includes(ingredient) ? 'lightgray' : 'white',
+                                cursor: data.cookItem ? (data.cookItem.includes(ingredient) ? 'default' : 'pointer') : 'default',
+                                backgroundColor:  data.cookItem ? (data.cookItem.includes(ingredient) ? 'lightgray' : 'white') : 'white',
                                 textAlign: 'center',
                                 fontSize: '0.625rem',
                             }}
-                            onClick={() => toggleIngredient(ingredient)}
                         >
                             {ingredient}
                         </button>
                     ))}
                 </div>
-                <div style={{
-                    alignItems: "center",
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "100%",
-                }}>
-                    <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                        <div style={{fontSize:'0.9375rem',fontWeight:'700',display:'flex',alignItems:'center',justifyContent:'center',height:'80%' }}>현재 필수 입력사항이 모두 기입되지 않았습니다!</div>
-
-                        <button className="bottom_button" style={{backgroundColor:'#FF4F4F',position:'fixed',marginBottom:'0'}} onClick={() => setIsModalOpen(false)}>마저 입력하기</button>
-                    </Modal>
-                </div>
             </div>
 
             <div style={{display:'flex',width:'100%',margin:'0px',marginTop:'4rem'}}>
                 <button style={{marginLeft:'auto',backgroundColor:"#FF4F4F",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}
-                        onClick={() => navigate('/signUp')}
+                        onClick={() => navigate(-1)}
                 >
                     이전</button>
                 <button style={{marginLeft:'auto',backgroundColor:"#525252",width:'50%',bottom:'0',height:'3.125rem',color:'white',border:'none',lineHeight:'1.875rem',textAlign:'center'}}
-                        onClick={()=>handleButton()}
+                        onClick={()=>navigate("/adminchefViewPage3", {state:data})}
                 >다음</button>
             </div>
         </div>

@@ -47,35 +47,6 @@ public class APIAdminController extends APIController {
     private final AlarmService alarmService;
     private final ZoneTime zoneTime;
 
-    @PostMapping("/admin/login")
-    public ResponseEntity loginAdmin(@RequestBody final AdminMemberDto adminMemberDto, HttpServletRequest request,
-                                     HttpServletResponse response) {
-
-        Member adminLoginMember = memberService.findByLoginIdAndLoginPw(adminMemberDto.getLoginId(),
-                adminMemberDto.getLoginPw());
-
-        try {
-            if ((adminLoginMember == null) | !(adminLoginMember.getIsAdmin().toString().equals("ADMIN")))
-                throw new Exception(adminLoginMember.getLoginId());
-
-            sessionManager.createSession(adminLoginMember.getLoginId(), response);
-
-            return new ResponseEntity(adminLoginMember, HttpStatus.OK);
-        } catch (final Exception e) {
-            return new ResponseEntity(errorResponse("Could not find admin member : " + e.getMessage()),
-                    HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @PostMapping("/admin/logout")
-    public void logoutAdmin(HttpServletRequest request) {
-        sessionManager.expire(request);
-
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-    }
     @GetMapping("/admin/reservation/{id}")
     public ResponseEntity getReservation(@PathVariable Long id){
         final Reservation reservation = (Reservation) reservationService.findById(id);
@@ -95,7 +66,7 @@ public class APIAdminController extends APIController {
     public ResponseEntity getChefList(@PathVariable String state){
         try{
             List<Member> members = memberRepository.findByChefPending(ChefPending.parse(state));
-            return new ResponseEntity(members.stream().map(member -> memberService.convertToMemberPublicDTO(member)).toList(), HttpStatus.OK);
+            return new ResponseEntity(members.stream().map(member -> memberService.convertToAdminDTO(member)).toList(), HttpStatus.OK);
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Could not get chef list : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
@@ -105,7 +76,7 @@ public class APIAdminController extends APIController {
     public ResponseEntity getReservationList(@PathVariable String state){
         try{
             List<Reservation> reservations = reservationRepository.findByState(ReservationState.parse(state));
-            return new ResponseEntity(reservations.stream().map(reservation -> reservationService.of(reservation)).toList(), HttpStatus.OK);
+            return new ResponseEntity(reservations.stream().map(reservation -> AdminReservationDTO.build(reservation)).toList(), HttpStatus.OK);
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Could not get reservation list : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }

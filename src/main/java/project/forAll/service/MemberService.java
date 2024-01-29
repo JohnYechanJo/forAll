@@ -4,15 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import project.forAll.domain.member.ChefProfile;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.member.Gender;
 
 
+import project.forAll.domain.member.Profile;
 import project.forAll.dto.MemberPublicDTO;
 
 
+import project.forAll.dto.admin.AdminMemberDto;
 import project.forAll.form.MemberForm;
+import project.forAll.repository.member.ChefProfileRepository;
 import project.forAll.repository.member.MemberRepository;
+import project.forAll.repository.member.ProfileRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +28,10 @@ public class MemberService extends Service {
 
     @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private ProfileRepository profileRepository;
+    @Autowired
+    private ChefProfileRepository chefProfileRepository;
 
     @Override
     protected JpaRepository getRepository() {
@@ -157,6 +166,42 @@ public class MemberService extends Service {
         memberPublicDTO.setChefPending(member.getChefPending().toString());
 
         return memberPublicDTO;
+    }
+
+    public AdminMemberDto convertToAdminDTO(Member member){
+        AdminMemberDto dto = new AdminMemberDto();
+        dto.setId(member.getId());
+        dto.setLoginId(member.getLoginId());
+        dto.setLoginPw(member.getLoginPw());
+        dto.setName(member.getName());
+        dto.setEmail(member.getEmail());
+        dto.setPhoneNum(member.getPhoneNum());
+        dto.setBirthday(member.getBirthday());
+        dto.setGender(member.getGender().toString());
+
+        List<Profile> profiles = profileRepository.findByMember(member);
+        if(!profiles.isEmpty()){
+            final Profile profile = profiles.get(0);
+            dto.setIntroduction(profile.getIntroduction());
+            dto.setProfilePhoto(profile.getProfilePhoto().getImageName());
+            dto.setDetailIntroduction(profile.getDetailIntroduction());
+            dto.setMbti(profile.getMbti());
+            dto.setCook(profile.getCook());
+            dto.setCookItem(profile.getCookItem());
+        }
+
+        List<ChefProfile> chefProfiles = chefProfileRepository.findByMember(member);
+        if(!chefProfiles.isEmpty()){
+            final ChefProfile chefProfile = chefProfiles.get(0);
+            dto.setCareer(chefProfile.getCareer());
+            dto.setCertificatePhoto(chefProfile.getCertificatePhoto().getImageName());
+            dto.setAccountBank(chefProfile.getAccountBank());
+            dto.setAccountNum(chefProfile.getAccountNum());
+            dto.setAccountHolder(chefProfile.getAccountHolder());
+        }
+
+
+        return dto;
     }
 
 

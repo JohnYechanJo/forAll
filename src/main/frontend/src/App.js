@@ -166,10 +166,10 @@ function App() {
           <Route path="/adminspaceViewPage5" element={<AdminSpaceViewPage5 />}/>
           <Route path="/adminspaceViewPage6" element={<AdminSpaceViewPage6 />}/>
 
-            <Route path="/adminSignedUp" element={<AdminSignedUp />} />
-            <Route path="/adminProfile" element={<AdminProfile />} />
-          <Route path="/adminChefInfo" element={<AdminChefInfo />} />
-          <Route path="/adminPlaceReservationCheck" element={<AdminPlaceReservationCheck />} />
+            <Route path="/adminchefViewPage1" element={<AdminSignedUp />} />
+            <Route path="/adminchefViewPage2" element={<AdminProfile />} />
+          <Route path="/adminchefViewPage3" element={<AdminChefInfo />} />
+          <Route path="/adminreservationViewPage1" element={<AdminPlaceReservationCheck />} />
 
       </Routes>
   );
