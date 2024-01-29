@@ -148,9 +148,7 @@ ex.이 물건은 꼭 손대지 말아주세요.
                             lineHeight: '1.875rem',
                             textAlign: 'center'
                         }}
-                                onClick={() => {
-                                    setIsModalOpen(false);
-                                }}
+                                onClick={() => submit()}
                         >
                             넘어가기
                         </button>

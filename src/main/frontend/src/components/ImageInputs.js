@@ -23,23 +23,19 @@ const ImageInputs = ({setImg, vals}) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [representImage, setRepresentImage] = useState("");
-    const addImgFile = (event) => {
-        const file = event.target.files[0];
-        if (file == null) return;
-        setImg([...(vals || []), file]);
-    };
+
     const deleteImgFile = (index) => {
         setImg(vals.filter((_,i) => i !== index));
     };
     useEffect(() => {
-        if ((!vals) || (!vals[0])) {
-            setRepresentImage("");
+        const imageList=[img1, img2, img3, img4, img5, img6, img7, img8].filter((img)=>img);
+        if (imageList.length>0){
+            setRepresentImage(imageList[0]);
         }
-        else{
-            if (vals[0] !== undefined) setRepresentImage(vals[0]);
-        }
+        else {setRepresentImage('');}
+        setImg(imageList);
 
-    }, [vals]);
+    }, [img1, img2, img3, img4, img5, img6, img7, img8]);
     const onErrorImg = (e) => {
         e.target.src = BaseImgSrc;
     }
