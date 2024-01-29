@@ -1,32 +1,88 @@
-.sidebar{
-    border: 1px solid black;
+.sidebar {
+    border: 1px solid #C4C4C4;
+    background: #FFF;
+    box-shadow: 10px 4px 20px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    width: 15.625rem;
+    height: 64rem;
+    padding: 2rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+    flex-shrink: 0;
 }
-.container{
+
+.font-weight-bold {
+    color: var(--Accent-blue, #109CF1);
+    font-family: "Open Sans";
+    font-size: 1.5625rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.font-normal {
+    color: var(--Accent-blue, #109CF1);
+    font-family: Poppins;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.00938rem;
+}
+
+.container {
     margin: 3rem;
-    width:80%;
-    .table_header{
-        width: 100%;
+    width: 80%;
+
+    .table_header {
         display: flex;
         justify-content: space-between;
         border: 1px solid black;
+        fill: #FFF;
+        width: 43.75rem;
+        height: 3.125rem;
+        flex-shrink: 0;
+        stroke-width: 1px;
+        stroke: #C4C4C4;
     }
-    .row{
-        width: 100%;
+
+    .row {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         border: 1px solid black;
+        fill: #FFF;
+        width: 43.75rem;
+        height: 4.0625rem;
+        flex-shrink: 0;
+        stroke-width: 1px;
+        stroke: #C4C4C4;
     }
-    .button-set{
+
+    .button-set {
         display: flex;
+        justify-content: center;
+        align-items: center;
     }
-    .button-approve{
-        height: 100%;
+
+    .button-approve {
+        height: 1.875rem;
         display: flex;
-        background: #2a87d0;
+        width: 4.375rem;
+        background: #0788FF;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
     }
-    .button-reject{
-        height: 100%;
+
+    .button-reject {
+        height: 1.875rem;
         display: flex;
-        background: orangered;
+        width: 4.375rem;
+        text-align: center;
+        background: #FF4F4F;
+        justify-content: center;
+        align-items: center;
     }
 }
