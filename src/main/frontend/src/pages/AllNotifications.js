@@ -153,7 +153,7 @@ const AllNotifications = () => {
                             </div>
 
                             <p style={{margin: 0, paddingLeft: "1rem", color: "#0788FF"}}>{alarm.alarmInfo}</p>
-
+                            <p onClick={()=>deleteAlarm(alarm)}>확인</p>
                         </div>
                     </div>
                 )

@@ -90,8 +90,10 @@ const RentSpacePage2 = () => {
                         onClick={submit}
                 >다음</button>
             </div>
+            <div style={{zIndex:2}}>
+                <Alert content={alertContent} isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} />
+            </div>
 
-            <Alert content={alertContent} isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} />
         </div>
     )
 };

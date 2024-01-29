@@ -36,6 +36,7 @@ public class ReservationService extends Service{
         form.setSpace(reservation.getSpace().getId()); // spaceform으로 바꿔야할 수도 있음
         form.setRentDay(reservation.getRentDay());
         form.setTrialDay(reservation.getTrialDay());
+        form.setChefNum(reservation.getChefNum());
 
         form.setAddress(reservation.getSpace().getPlace().getAddress());
         form.setName(reservation.getSpace().getPlace().getName());

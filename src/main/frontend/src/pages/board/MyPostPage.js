@@ -27,7 +27,6 @@ const MyPostPage = () => {
         axios.get("/api/v1/articles/deleteAll").then(()=>window.location.reload());
     },[]);
     const deleteSelect = ()=>{
-        console.log(selectPost);
         axios.get("/api/v1/articles/delete/"+selectPost.id).then(()=>window.location.reload());
     };
     useEffect(() => {
@@ -182,7 +181,7 @@ const MyPostPage = () => {
                             </button>
                         </div>
                     </Modal>
-                    <p onClick={() => setIsEraseFew(true)}
+                    <p onClick={() => setSelectErase(true)}
                        style={{
                            fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
                            lineHeight: 'normal', letterSpacing: '-0.01031rem', textDecorationLine: 'underline',

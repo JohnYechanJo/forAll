@@ -133,7 +133,7 @@ const PostViewPage = ({postList}) => {
                         <div style={{display: 'flex', alignItems: 'center'}} onClick={() => handleRecommendArticle()}>
                             <img src={likeImg} alt="likeImg"
                                  style={{width: '0.45006rem', height: '0.4375rem', flexShrink: 0, padding: 0}}/>
-                            <p style={{margin: '0 0.51rem 0 0'}}>{data.recommend}</p>
+                            <p style={{margin: '0 0.51rem 0 0'}}>{data.recommend != 0 ? data.recommend : "좋아요"}</p>
                         </div>
 
                         <img src={commentImg} alt="commentImg"
@@ -228,7 +228,7 @@ const PostViewPage = ({postList}) => {
                                             <img src={likeImg} alt="likeImg"
                                                  style={{width: '0.4375rem', height: '0.4375rem', flexShrink: 0,
                                                      padding: 0}}/>
-                                            <p style={{margin: '0 0.51rem 0 0'}}>{comment.recommend}</p>
+                                            <p style={{margin: '0 0.51rem 0 0'}}>{comment.recommend != 0 ? comment.recommend : "좋아요"}</p>
                                         </div>
                                         <div style={{display: 'flex', alignItems: 'center'}}>
                                             <img src={commentImg} alt="commentImg"
@@ -293,7 +293,7 @@ const PostViewPage = ({postList}) => {
                                                         <img src={likeImg} alt="likeImg"
                                                              style={{width: '0.4375rem', height: '0.4375rem', flexShrink: 0,
                                                                  padding: 0}}/>
-                                                        <p style={{margin: '0 0.51rem 0 0'}}>{recomment.recommend}</p>
+                                                        <p style={{margin: '0 0.51rem 0 0'}}>{recomment.recommend != 0 ? recomment.recommend : "좋아요"}</p>
                                                     </div>
                                                 </div>
                                             </div>

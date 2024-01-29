@@ -15,7 +15,7 @@ const ImageViewer = ({val, style, isfixed=false}) => {
                     src={spring_app_url + "/api/v1/image/"+val}
                     alt={"image"}
                     onError={onErrorImg}
-                    style ={isfixed ? { width: "100%"}: style}
+                    style ={isfixed ? { width: "100%", height:"250px"}: style}
                 />
             </label>
         </div>

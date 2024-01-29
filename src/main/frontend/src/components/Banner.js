@@ -18,7 +18,7 @@ const Banner = ({dataSet, navigate}) => {
             <Swiper
                 className={"swiper"}
                 spaceBetween={50}
-                slidesPerView={3}
+                slidesPerView={2}
                 autoplay={{delay: 0, disableOnInteraction: false}}
                 speed={2000} // 넘어가는 속도
                 loop={true}

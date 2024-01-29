@@ -2,12 +2,14 @@ import {useEffect, useState} from "react";
 import {ChefState, ReservationState, SpaceState} from "../../utils/enums";
 import axios from "axios";
 import "./AdminMainPage.css";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const AdminMainPage = () => {
     const navigate = useNavigate();
-    const [tableName, setTableName] = useState("대기중");
-    const [category, setCategory] = useState("space");
+    const location = useLocation();
+    const data = { ...location.state };
+    const [tableName, setTableName] = useState(data.tableName ? data.tableName : "대기중");
+    const [category, setCategory] = useState(data.category ? data.category : "space");
     const [state, setState] = useState(SpaceState.PENDING);
     const [dataList, setDataList] = useState([]);
     const [confirm, setConfirm] = useState(false);
@@ -72,7 +74,11 @@ const AdminMainPage = () => {
                     dataList.map((data, idx) => (
                         <div key={idx} className={"row"}>
                             <p>{data.name}</p>
-                            <p onClick={()=>navigate("/admin"+category+"ViewPage1", {state:data})}>더보기</p>
+                            <p onClick={()=>navigate("/admin"+category+"ViewPage1", {state: {
+                                    ...data,
+                                    category: category,
+                                    tableName: tableName
+                                }})}>더보기</p>
                             {state === "Pending" ? (
                                 <div className={"button-set"}>
                                     <div className={"button-approve"} onClick={()=>confirmObject(data.id, "Approve")}>

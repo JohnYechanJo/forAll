@@ -89,7 +89,7 @@ const AdminChefInfo = () => {
                 </div>
             </div>
 
-            <button onClick={()=>navigate("/admin")} className="bottom_button"
+            <button onClick={()=>navigate("/admin",{state:data})} className="bottom_button"
                     style={{backgroundColor: "#FF4F4F", position: "fixed"}}>돌아가기
             </button>
         </div>

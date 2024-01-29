@@ -42,7 +42,6 @@ const RentSpacePage = () => {
                 if (res.data.chefPending === ChefState.NOTCREATED) {
                     setNeedChef(true);
                 } else {
-                    // Todo 승인 나기 전 과정이 없음
                     navigate("/rentSpace2", {
                         state: {
                             spaceId: data.id,

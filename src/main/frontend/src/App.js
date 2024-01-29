@@ -62,6 +62,7 @@ import React from "react";
 import RentSpacePage3 from "./pages/RentSpace/RentSpacePage3";
 import RentSpaceComplete from "./pages/RentSpace/RentSpaceComplete";
 import ReservationListPage from "./pages/Reservation/ReservationListPage";
+import ReservationViewPage from "./pages/Reservation/ReservationViewPage";
 import AssuranceReady from "./pages/Reservation/AssuranceReady";
 import AssuranceReadyView from "./pages/Reservation/AssuranceReadyView";
 import AssuranceFinish from "./pages/Reservation/AssuranceFinish";
@@ -154,7 +155,8 @@ function App() {
         <Route path="/EntryPartnership" element={<EntryPartnership />} />
         <Route path="/alreadyChef" element={<AlreadyChef />} />
         <Route path="/reservationList" element={<ReservationListPage />} />
-        <Route path="/assuranceReady" element={<AssuranceReady />} />
+          <Route path="/reservationViewPage" element={<ReservationViewPage />} />
+          <Route path="/assuranceReady" element={<AssuranceReady />} />
         <Route path="/assuranceReadyView" element={<AssuranceReadyView />} />
          <Route path="/assuranceFinish" element={<AssuranceFinish />} />
             <Route path="/deadlineInfo" element={<DeadlineInfo />} />

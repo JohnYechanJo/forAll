@@ -265,7 +265,7 @@ const AdminSpaceViewPage6 = () => {
                 >
                     이전</button>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#525252", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                        onClick={() => navigate("/admin")}
+                        onClick={() => navigate("/admin", {state:data})}
                 >돌아가기</button>
             </div>
 

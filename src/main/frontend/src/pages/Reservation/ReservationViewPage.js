@@ -1,15 +1,10 @@
-import Sidebar from "../../components/home/Sidebar";
-import HomeTemplate from "../../components/home/HomeTemplate";
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-import {TimeUtil} from "../../utils/TimeUtil";
-import {AddressUtil} from "../../utils/AddressUtil";
 import {useLocation, useNavigate} from "react-router-dom";
-import {ReservationState} from "../../utils/enums";
-import ImageInput from "../../components/ImageInput";
 import ImageViewer from "../../components/ImageViewer";
+import {AddressUtil} from "../../utils/AddressUtil";
+import {TimeUtil} from "../../utils/TimeUtil";
+import React from "react";
 
-const AdminPlaceReservationCheck = () => {
+const ReservationViewPage = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
@@ -113,10 +108,10 @@ const AdminPlaceReservationCheck = () => {
                     </strong>
                 </p>
             </div>
-            <button onClick={()=>navigate("/admin",{state:data})} className="bottom_button"
+            <button onClick={()=>navigate("/admin")} className="bottom_button"
                     style={{backgroundColor: "#FF4F4F", position: "fixed"}}>돌아가기
             </button>
         </div>
     )
 };
-export default AdminPlaceReservationCheck;
+export default ReservationViewPage;

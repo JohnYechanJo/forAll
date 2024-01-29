@@ -58,7 +58,7 @@ const ReservationListPage = () => {
                     • 예약 정보
                 </p></div>
                 {reservationData ? reservationData.filter((data) => !TimeUtil.checkToday(data.rentDay)).map((data) => (
-                    <div style={{border:"1px solid #C4C4C4", height:"6rem"}}>
+                    <div style={{border:"1px solid #C4C4C4", height:"6rem"}} onClick={()=>navigate("/reservationViewPage",{state:data})}>
                         <div style={{display:"flex", justifyContent:"space-between"}}>
                             <p style={{fontSize:"1rem", fontWeight:"700", paddingLeft:"1rem"}}>{AddressUtil.extraction(data.address)}</p>
                             <p style={{fontSize:"0.8rem", fontWeight:"500", paddingRight:"1rem"}}>취소하기</p>

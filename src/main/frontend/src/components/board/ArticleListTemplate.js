@@ -44,7 +44,7 @@ const ArticleListTemplate = ({postList, preview=false, userPost=false, isErase, 
                                         <div style={{display: 'flex', alignItems: 'center'}}>
                                             <img src={likeImg} alt="likeImg"
                                                  style={{width: '0.45006rem', height: '0.4375rem', flexShrink: 0, padding: 0}}/>
-                                            <p style={{margin: '0 0.51rem 0 0'}}>{post.recommend}</p>
+                                            <p style={{margin: '0 0.51rem 0 0'}}>{post.recommend != 0 ? post.recommend : "좋아요"}</p>
                                         </div>
                                         <div style={{display: 'flex', alignItems: 'center'}}>
                                             <img src={commentImg} alt="commentImg"

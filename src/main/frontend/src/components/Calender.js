@@ -17,10 +17,6 @@ const Calendar  = ({setDate}) => {
                 locale={ko}
                 popperPlacement="bottom"
                 popperModifiers={{
-                    offset: {
-                        enabled: true,
-                        offset: '5px, 10px'
-                    },
                     preventOverflow: {
                         enabled: true,
                         escapeWithReference: false,
