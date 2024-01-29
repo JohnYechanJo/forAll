@@ -13,19 +13,21 @@ const PersonalModify = () => {
     const navigate = useNavigate();
     const [pw, setPw] = useState('');
     const [pwCheck, setPwCheck] = useState('');
-    const [name, setName] = useState(sessionStorage.getItem("name"));
-    const [email, setEmail] = useState(sessionStorage.getItem("email"));
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [defaultEmail, setDefaultEmail] = useState("");
     const [phone, setPhone] = useState("");
+    const [defaultPhone, setDefaultPhone] = useState("");
     const [cerifiedNum, setCerifiedNum] = useState('');
     const [birthDay, setBirthDay] = useState("");
     const [year, setYear] = useState('');
     const [month, setMonth] = useState('');
     const [day, setDay] = useState('');
     const [gender, setGender] = useState('');
-    const [isCheckDuplicatedEmail, setIsCheckDuplicatedEmail] = useState();
+    const [isCheckDuplicatedEmail, setIsCheckDuplicatedEmail] = useState(true);
     const [isCheckPw, setIsCheckPw] = useState();
     const [isUseTermsChecked, setIsUseTermsChecked] = useState(false);
-    const [isPhoneCerified, setIsPhoneCerified] = useState(false);
+    const [isPhoneCerified, setIsPhoneCerified] = useState(true);
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [alertContent, setAlertContent] = useState("");
@@ -67,6 +69,10 @@ const PersonalModify = () => {
         axios.get("/api/v1/members/user/" + id)
             .then((res) => {
                 setPhone(res.data.phoneNum);
+                setDefaultPhone(res.data.phoneNum);
+                setName(res.data.name);
+                setEmail(res.data.email);
+                setDefaultEmail(res.data.email);
                 setYear(res.data.birthday.split('/')[0]);
                 setMonth(res.data.birthday.split('/')[1]);
                 setDay(res.data.birthday.split('/')[2]);
@@ -164,6 +170,8 @@ const PersonalModify = () => {
                     isCheckPw={isCheckPw}
                     isPhoneCerified={isPhoneCerified}
                     setIsPhoneCerified={setIsPhoneCerified}
+                    defaultEmail={defaultEmail}
+                    defaultPhone={defaultPhone}
                 />
                 <UseTermsTemplate
                     setIsUseTermsChecked={setIsUseTermsChecked}
