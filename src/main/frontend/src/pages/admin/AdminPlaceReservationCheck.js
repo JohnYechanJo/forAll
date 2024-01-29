@@ -13,7 +13,6 @@ const AdminPlaceReservationCheck = () => {
     const location = useLocation();
     const data = {...location.state};
     const navigate = useNavigate();
-
     return (
         <div>
             <header style={{textAlign: "center", marginTop: "1rem", marginBottom: "-2rem"}}><h3>• 확인 및 결제</h3></header>
@@ -27,7 +26,7 @@ const AdminPlaceReservationCheck = () => {
                 flexDirection: "column"
             }}>
                 <p>
-                    <ImageViewer style={{marginTop: '-2rem', height: "15rem", width: "100%"}}  val={data.image} />
+                    <ImageViewer style={{marginTop: '-2rem', height: "15rem", width: "100%"}} val={data.image}/>
                     <p style={{marginTop: "1rem", fontSize: "1.25rem", marginLeft: "1rem", marginBottom: "-1rem"}}>
                         {AddressUtil.extraction(data.address) + " | " + data.name}
                     </p>
@@ -49,7 +48,7 @@ const AdminPlaceReservationCheck = () => {
                     paddingRight: "5%",
                     color: '#A0A0A0',
                     fontSize: '0.875rem'
-                }}>{TimeUtil.toReservationDate(data.rentDay) +" " + data.rentStartHour + "시 부터 ~ " + data.rentEndHour + "시 까지"}</a>
+                }}>{TimeUtil.toReservationDate(data.rentDay) + " " + data.rentStartHour + "시 부터 ~ " + data.rentEndHour + "시 까지"}</a>
             </p>
             <p style={{fontSize: '0.875rem', justifyContent: "space-between", display: "flex"}}><strong
                 style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>
@@ -101,7 +100,7 @@ const AdminPlaceReservationCheck = () => {
                         보증금
                     </strong>
                     <strong style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>
-                        {Math.floor(data.priceSet * 0.1) + "원"}
+                        {Math.floor(data.priceSet * 0.1) > 50000 ? Math.floor(data.priceSet * 0.1) : 50000}원
                     </strong>
                 </p>
                 <p style={{fontSize: '0.875rem', justifyContent: "space-between", display: "flex"}}>
@@ -109,11 +108,33 @@ const AdminPlaceReservationCheck = () => {
                         총 합계
                     </strong>
                     <strong style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>
-                        {Math.floor(data.priceSet * 1.28) + "원"}
+                        {Math.floor(data.priceSet * 1.18 + (Math.floor(data.priceSet * 0.1) > 50000 ? Math.floor(data.priceSet * 0.1) : 50000)) + "원"}
                     </strong>
                 </p>
             </div>
-            <button onClick={()=>navigate("/admin",{state:data})} className="bottom_button"
+            <div style={{paddingBottom:"3rem"}}>
+                <div style={{display: "flex", width: "100%", height: "3.125rem", border: "1px solid #C4C4C4"}}><p
+                    style={{fontSize: "1rem", fontWeight: "700", paddingLeft: "1rem"}}>
+                    • 취소 정보<span className="fontForRegister" style={{color: "#FF2929"}}>*</span>
+                </p></div>
+                <p style={{fontSize: '0.875rem', justifyContent: "space-between", display: "flex"}}>
+                    <strong style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>
+                        취소 사유
+                    </strong>
+                    <strong style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>
+                        {data.cancelReason}
+                    </strong>
+                </p>
+                <p style={{fontSize: '0.875rem', justifyContent: "space-between", display: "flex"}}>
+                    <strong style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>
+                        취소 시간
+                    </strong>
+                    <strong style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>
+                        {TimeUtil.toReservationDate(data.cancelTime)}
+                    </strong>
+                </p>
+            </div>
+            <button onClick={() => navigate("/admin", {state: data})} className="bottom_button"
                     style={{backgroundColor: "#FF4F4F", position: "fixed"}}>돌아가기
             </button>
         </div>

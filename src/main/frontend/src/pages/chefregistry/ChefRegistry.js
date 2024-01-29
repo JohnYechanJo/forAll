@@ -66,7 +66,7 @@ const ChefRegistry = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '1rem' }} >
                 <div>
                     <a style={{ marginBottom: "0" }} >경력</a>
-                    <hr style={{ height: "1px", backgroundColor: "black", width: "90vw" }} />
+                    <hr style={{ height: "1px", backgroundColor: "black", width: "100%"}}/>
                 </div>
                 <div>
                     <a>최근 경력을 최소 1개 입력해주세요.</a>
@@ -137,18 +137,18 @@ const ChefRegistry = () => {
                     <div style={{ display: "flex" }} >
                         <div style={{ margin: "0.62rem" }}>
                             <p>은행명*</p>
-                            <DropDown dataArr={bankDatas} onChange={setBank}   />
+                            <DropDown  dataArr={bankDatas} onChange={setBank}   />
                         </div>
                         <div style={{ margin: "0.62rem" }}>
                             <p>계좌번호*</p>
                             <input onChange={onChangeAccount} placeholder={"454102-01-376503"}
-                                style={{ width: "9.375rem", height: "1.875rem", flexShrink: "0" }}
+                                style={{ width: "32vw", height: "1.5rem", flexShrink: "0" }}
                             />
                         </div>
                         <div style={{ margin: "0.62rem" }}>
                             <p>예금주*</p>
                             <input onChange={onChangeAccountHolder}
-                                style={{ width: "4.375rem", height: "1.875rem", flexShrink: "0" }}
+                                style={{ width: "15vw", height: "1.5rem", flexShrink: "0" }}
                             />
                         </div>
                     </div>

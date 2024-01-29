@@ -191,20 +191,20 @@ const PlaceInfoModifyPage4 = () => {
                         <div>
                         <p>앞접시*</p>
                         <ImageInputs setImg={setSidePlate} vals={sidePlate} />
-                        <input onChange={onChangeCountSidePlate} className="input" placeholder={"최대 개수"} style={{ width: '6.25rem' }} defaultValue={dbData.plateNum} />
+                        <input onChange={onChangeCountSidePlate} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} defaultValue={dbData.plateNum} />
                         </div>
                     </div>
                     <div>
                         <p>물컵*</p>
                         <ImageInputs setImg={setCup} vals={cup} />
-                        <input onChange={onChangeCountCup} className="input" placeholder={"최대 개수"} style={{ width: '6.25rem' }} defaultValue={dbData.cupNum} />
+                        <input onChange={onChangeCountCup} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} defaultValue={dbData.cupNum} />
                     </div>
 
                     <div style={{display:'flex',justifyContent:"right"}}>
                         <div>
                         <p>커트러리*</p>
                         <ImageInputs setImg={setCuttrary} vals={cuttrary} />
-                        <input onChange={onChangeCountCuttrary} className="input" placeholder={"최대 개수"} style={{ width: '6.25rem' }} defaultValue={dbData.cutleryNum} />
+                        <input onChange={onChangeCountCuttrary} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} defaultValue={dbData.cutleryNum} />
                         </div>
                     </div>
                 </div>

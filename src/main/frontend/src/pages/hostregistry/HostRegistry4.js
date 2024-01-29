@@ -164,20 +164,20 @@ const HostRegistry4 = () => {
                         <div>
                             <p>앞접시*</p>
                             <ImageInputs setImg={setSidePlate} vals={sidePlate} />
-                            <input onChange={onChangeCountSidePlate} className="input" placeholder={"최대 개수"} style={{ width: '6.25rem' }} />
+                            <input onChange={onChangeCountSidePlate} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} />
                         </div>
                     </div>
                     <div>
                         <p>물컵*</p>
                         <ImageInputs setImg={setCup} vals={cup} />
-                        <input onChange={onChangeCountCup} className="input" placeholder={"최대 개수"} style={{ width: '6.25rem' }} />
+                        <input onChange={onChangeCountCup} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} />
                     </div>
 
                     <div style={{ display: 'flex', justifyContent: "right" }}>
                         <div>
                             <p>커트러리*</p>
                             <ImageInputs setImg={setCuttrary} vals={cuttrary} />
-                            <input onChange={onChangeCountCuttrary} className="input" placeholder={"최대 개수"} style={{ width: '6.25rem' }} />
+                            <input onChange={onChangeCountCuttrary} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} />
                         </div>
                     </div>
                 </div>

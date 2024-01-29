@@ -104,7 +104,7 @@ public class APIReservationController extends APIController{
         try{
             final Member member = memberService.findByLoginId(userId);
             List<Reservation> reservations = reservationRepository.findByMember(member);
-            List<ReservationForm> forms = reservations.stream().map(reservation -> reservationService.of(reservation)).toList();
+            List<ReservationForm> forms = reservations.stream().filter(reservation -> reservation.getState() != ReservationState.CANCEL).map(reservation -> reservationService.of(reservation)).toList();
             return new ResponseEntity(forms, HttpStatus.OK);
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Could not get user Reservation" + e.getMessage()), HttpStatus.BAD_REQUEST);

@@ -108,7 +108,7 @@ const ReservationViewPage = () => {
                     </strong>
                 </p>
             </div>
-            <button onClick={()=>navigate("/admin")} className="bottom_button"
+            <button onClick={()=>navigate(-1)} className="bottom_button"
                     style={{backgroundColor: "#FF4F4F", position: "fixed"}}>돌아가기
             </button>
         </div>
