@@ -5,7 +5,7 @@ import {ModalStyles} from "./ModalStyles";
 import xmark from "./icons/xmark.png";
 import {ExplanationModalStyles} from "./ExplanationModalStyles";
 import ImageInput from "./ImageInput";
-import {AddedImagesModalStyles} from "./AddedImagesModalStyles";
+import { AddedImagesModalStyles } from "./AddedImagesModalStyles";
 const ImageInputs = ({setImg, vals}) => {
     const spring_app_url = "http://localhost:8080";
     // 기본 이미지 추후 설정 필요
