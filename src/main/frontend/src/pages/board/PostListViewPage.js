@@ -6,7 +6,7 @@ import ToolBar from "../../components/home/ToolBar";
 import HomeTemplate from "../../components/home/HomeTemplate";
 import ArticleListTemplate from "../../components/board/ArticleListTemplate";
 import {useNavigate} from "react-router-dom";
-
+import Headers from "../../components/home/Header";
 const PostListViewPage = () => {
     const navigate = useNavigate();
     const [popupData, setPopupData] = useState([]);
@@ -36,15 +36,7 @@ const PostListViewPage = () => {
 
     return(
         <div>
-            <div className="header" style={{ backgroundColor: "white" }}>
-                <div style={{ position: 'absolute', left: '1rem', top: '0.8rem', width: '5rem', height: '1.25rem', backgroundColor: 'white' }}>
-                    <a style={{ fontFamily: 'Mukta', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '-0.01031rem', border: '2px solid black' }}
-                       onClick={() => navigate('/')}
-                    >For ALL.</a>
-                </div>
-                <button className="button" onClick={()=>navigate("/spaceList")}>대관하기</button>
-                <button className="button" >커뮤니티</button>
-            </div>
+            <Headers />
             <Sidebar />
             <ToolBar />
             <HomeTemplate />

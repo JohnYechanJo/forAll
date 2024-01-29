@@ -6,6 +6,7 @@ import axios from "axios";
 import {ChatRoomCategory} from "../../utils/enums";
 import "../../style/ChatRoom.css";
 import {TimeUtil} from "../../utils/TimeUtil";
+import Header from "../../components/home/Header";
 const ChatRoomListPage = () => {
     const navigate = useNavigate();
     const [reservation, setReservation] = useState([]);
@@ -23,10 +24,7 @@ const ChatRoomListPage = () => {
 
     return (
         <div>
-            <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
-                <button className="button">대관하기</button>
-                <button className="button">커뮤니티</button>
-            </div>
+            <Header/>
             <Sidebar/>
             <div>
                 <div style={{paddingTop:"3.125rem"}}></div>

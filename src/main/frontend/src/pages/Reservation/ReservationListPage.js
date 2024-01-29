@@ -6,6 +6,7 @@ import {TimeUtil} from "../../utils/TimeUtil";
 import {AddressUtil} from "../../utils/AddressUtil";
 import {useNavigate} from "react-router-dom";
 import {ReservationState} from "../../utils/enums";
+import Header from "../../components/home/Header";
 
 const ReservationListPage = () => {
     const navigate = useNavigate();
@@ -29,13 +30,7 @@ const ReservationListPage = () => {
     }, []);
     return (
         <div>
-            <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
-                {/* <button className="button" onClick={() => navigate("/")}>
-                    <img src={forAllLogo} alt="forAllLogo" style={{width:"1.875rem", height:"1.875rem"}} />
-                </button> */}
-                <button className="button">대관하기</button>
-                <button className="button">커뮤니티</button>
-            </div>
+            <Header/>
             <Sidebar/>
             <HomeTemplate />
             <div>
