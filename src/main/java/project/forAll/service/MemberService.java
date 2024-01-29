@@ -184,7 +184,6 @@ public class MemberService extends Service {
             final Profile profile = profiles.get(0);
             dto.setIntroduction(profile.getIntroduction());
             dto.setProfilePhoto(profile.getProfilePhoto().getImageName());
-            dto.setDetailIntroduction(profile.getDetailIntroduction());
             dto.setMbti(profile.getMbti());
             dto.setCook(profile.getCook());
             dto.setCookItem(profile.getCookItem());

@@ -35,9 +35,6 @@ public class Profile extends BassDomain {
     @OneToOne(fetch = FetchType.LAZY)
     private Image profilePhoto;
 
-    // 세부 소개
-    private String detailIntroduction;
-
     // MBTI
     private String mbti;
     // 요리

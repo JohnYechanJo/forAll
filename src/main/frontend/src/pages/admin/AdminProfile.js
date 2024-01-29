@@ -66,7 +66,7 @@ const GuestRegistry = () => {
                     <a className="fontForRegister" >본인 한 줄 소개<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 </div>
                 <input disabled={true}  type="text" placeholder="ex.한식 퓨전 요리를 선보이는 매장 '브와르'를 운영하고 있습니다." style={{width:"98%", height: "1.875rem" }}
-                       defaultValue={data.detailIntroduction}/>
+                       defaultValue={data.introduction}/>
 
                 <a className="fontForRegister" >프로필 등록 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
                 <p>

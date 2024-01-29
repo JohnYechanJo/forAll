@@ -76,7 +76,9 @@ public class APIChefProfileController extends APIController {
 
             final ChefProfile chefProfile = chefProfileService.build(form);
             chefProfile.setId(savedChefProfile.getId());
-            memberService.save(chefProfile);
+            chefProfileService.save(chefProfile);
+            savedMember.setChefPending(ChefPending.PENDING);
+            memberService.save(savedMember);
 
             return new ResponseEntity(ChefProfileForm.cf(chefProfile), HttpStatus.OK);
         } catch(final Exception e) {
