@@ -84,7 +84,7 @@ import AdminSignedUp from "./pages/admin/AdminSignedUp";
 import AdminProfile from "./pages/admin/AdminProfile";
 import AdminChefInfo from "./pages/admin/AdminChefInfo";
 import AdminPlaceReservationCheck from "./pages/admin/AdminPlaceReservationCheck";
-
+import ReservationCancelPage from './pages/Reservation/ReservationCancel';
 
 function App() {
   return (
@@ -172,7 +172,7 @@ function App() {
             <Route path="/adminchefViewPage2" element={<AdminProfile />} />
           <Route path="/adminchefViewPage3" element={<AdminChefInfo />} />
           <Route path="/adminreservationViewPage1" element={<AdminPlaceReservationCheck />} />
-
+          <Route path="/reservationCancel" element={<ReservationCancelPage />} />
       </Routes>
   );
 }
