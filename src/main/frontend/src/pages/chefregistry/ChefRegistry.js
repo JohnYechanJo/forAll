@@ -116,7 +116,7 @@ const ChefRegistry = () => {
                 </div>
             </div>
             <br/>
-            <div style={{ display: "flex", flexDirection: "column", paddingLeft: '2%', paddingRight: '2%', alignItems: "flex-start", gap: "1%" }} className="fontForRegister">
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "1%" }} className="fontForRegister">
                 <div style={{width:"100%"}} >
                 <a className="fontForRegister" >계좌 정보를 입력해 주세요.<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
                     <hr style={{width: '100%', backgroundColor: 'black'}}/>
@@ -132,7 +132,7 @@ const ChefRegistry = () => {
                             <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
                             <input onChange={onChangeAccount} className="input" style={{width:'100%'}} placeholder={"454102-01-376503"} />
                         </div>
-                        <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}}>
+                        <div style={{paddingLeft: '2%', paddingRight: '2%',display:'flex',flexDirection:'column',marginLeft:'1rem'}}>
                             <a>예금주<span style={{ color: "#FF2929" }} >*</span></a>
                             <input onChange={onChangeAccountHolder} className="input" style={{width:'100%'}} />
                         </div>
@@ -196,9 +196,7 @@ const ChefRegistry = () => {
                                 lineHeight: '1.875rem',
                                 textAlign: 'center'
                             }}
-                                    onClick={() => {
-                                        setIsModalOpen(false);
-                                    }}
+                                    onClick={() => submit()}
                             >
                                 넘어가기
                             </button>

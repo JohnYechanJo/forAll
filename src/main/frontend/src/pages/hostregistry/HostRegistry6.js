@@ -344,9 +344,7 @@ const HostRegistry6 = () => {
                         lineHeight: '1.875rem',
                         textAlign: 'center'
                     }}
-                            onClick={() => {
-                                setIsModalOpen(false);
-                            }}
+                            onClick={() => submit()}
                     >
                         넘어가기
                     </button>
