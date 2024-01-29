@@ -95,7 +95,7 @@ const HostRegistry3 = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
             && (parkAvaliable) && (elevator !== undefined) && (table !== undefined)
             && (seat !== undefined) && (price !== undefined) && (trial !== undefined) && (morningDelivery !== undefined)
-            && (workIn !== undefined) && (miseen !== undefined) && (miseenTimeFrom !== "") && (miseenTimeTo !== "")) {
+            && (workIn !== undefined) && (miseen !== undefined)) {
             isPublic = true;
             submit();
         }
