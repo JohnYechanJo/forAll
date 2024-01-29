@@ -75,11 +75,11 @@ const ChefInfoModifyPage = () => {
             <header style={{ textAlign: "center" }}><h3>셰프 정보</h3></header>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '1rem' }} >
                 <div>
-                    <h4 style={{ marginBottom: "0" }} >경력</h4>
-                    <hr style={{ height: "1px", backgroundColor: "black", width: "90vw" }} />
+                    <a style={{ marginBottom: "0" }} >경력</a>
+                    <hr style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
                 </div>
                 <div>
-                    <h4>최근 경력을 최소 1개 입력해주세요.</h4>
+                    <a>최근 경력을 최소 1개 입력해주세요.</a>
                     <input type="text" placeholder="안심하세요! 언제든지 프로필을 수정할 수 있어요."
                         style={{ width: "90vw" }}
                         className="input"
@@ -87,7 +87,6 @@ const ChefInfoModifyPage = () => {
                         onChange={(e) => {
                             setInputText(e.target.value);
                         }} />
-                </div>
                 <div>
                     {career.map((item, index) => (
                         <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -127,6 +126,7 @@ const ChefInfoModifyPage = () => {
                         </div>
                     ))}
                 </div>
+                </div>
                 <div>
                     <a style={{ marginBottom: "0" }} >보건증 사진</a>
                     <p>
@@ -151,13 +151,13 @@ const ChefInfoModifyPage = () => {
                         <div style={{ margin: "0.62rem" }}>
                             <p>계좌번호*</p>
                             <input onChange={onChangeAccount} placeholder={"454102-01-376503"} value={account} defaultData={account}
-                                style={{ width: "9.375rem", height: "1.875rem", flexShrink: "0" }}
+                                style={{ width: "32vw", height: "1.5rem", flexShrink: "0" }}
                             />
                         </div>
                         <div style={{ margin: "0.62rem" }}>
                             <p>예금주*</p>
                             <input onChange={onChangeAccountHolder} value={accountHolder} placeholder={"홍길동"} defaultData={accountHolder}
-                                style={{ width: "4.375rem", height: "1.875rem", flexShrink: "0" }}
+                                style={{ width: "15vw", height: "1.5rem", flexShrink: "0" }}
                             />
                         </div>
                     </div>

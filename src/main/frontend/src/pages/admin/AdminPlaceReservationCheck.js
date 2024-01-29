@@ -101,7 +101,7 @@ const AdminPlaceReservationCheck = () => {
                         보증금
                     </strong>
                     <strong style={{textAlign: 'left', paddingLeft: "5%", paddingRight: "5%"}}>
-                        {Math.floor(data.priceSet * 0.1) + "원"}
+                        {Math.floor(data.priceSet * 0.1) > 50000 ? Math.floor(data.priceSet * 0.1) : 50000}원
                     </strong>
                 </p>
                 <p style={{fontSize: '0.875rem', justifyContent: "space-between", display: "flex"}}>

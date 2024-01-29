@@ -60,8 +60,10 @@ const MainPage = () => {
             <Sidebar />
             <ToolBar />
             <HomeTemplate />
-            <div ref={spaceRef}>
-                <p onClick={() => navigate("/spaceList")}>모두보기</p>
+            <div ref={spaceRef} >
+                <p style={{justifyContent: 'right', display: 'flex', fontSize: "0.9375rem", textDecorationLine: "underline", fontStyle: 'normal',
+                    fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
+                    marginRight: '0.5rem'}} onClick={() => navigate("/spaceList")}>모두보기</p>
                 <Banner dataSet={spaceData} navigate={navigate} />
             </div>
             <div ref={boardRef}>

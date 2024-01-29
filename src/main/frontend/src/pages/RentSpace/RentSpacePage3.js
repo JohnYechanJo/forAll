@@ -114,7 +114,7 @@ const RentSpacePage3 = () => {
                         <p style={{fontSize:"1rem"}}>통장입금</p>
                     </div>
                     <div style={{textAlign:"right", marginRight:"1rem"}}>
-                        <p style={{fontSize:"1rem"}} onClick={()=>setAccountData(!accountData)}>계좌정보</p>
+                        <p style={{fontSize:"1rem", color: '#C4C4C4', textDecorationLine: 'underline'}} onClick={()=>setAccountData(!accountData)}>계좌정보</p>
                     </div>
                 </div>
                 {accountData ? (
@@ -143,21 +143,33 @@ const RentSpacePage3 = () => {
                 ) : null
                 }
             </div>
-            <div className={"price_container"} style={{margin:"1rem"}}>
-                <p style={{fontSize:"1rem"}}>• 요금 세부 정보<span style={{ color: '#FF2929' }} >*</span></p>
-                <hr style={{ height: "2px", backgroundColor: "black" }} />
-                <p>{data.priceSet}원 | 매장대관금액</p>
-                <p>{Math.floor(data.priceSet*0.18)}원 | 포 올 수수료</p>
-                <p>{Math.floor(data.priceSet*0.1) > 50000 ? Math.floor(data.priceSet*0.1) : 50000}원 | 보증금</p>
-                <div style={{display:"flex", justifyContent:"space-between"}}>
+            <div className={"price_container"} style={{margin: "1rem"}}>
+                <p style={{fontSize: "1rem"}}>• 요금 세부 정보<span style={{color: '#FF2929'}}>*</span></p>
+                <hr style={{height: "2px", backgroundColor: "black"}}/>
+                <div style={{display: "flex", justifyContent: "space-between", marginBottom: '-1.2rem', marginTop: '-1rem'}}>
+                    <p>매장 대관 금액</p>
+                    <p>{data.priceSet}원</p>
+                </div>
+
+                <div style={{display: "flex", justifyContent: "space-between", marginBottom: '-1.2rem'}}>
+                    <p>포 올 수수료</p>
+                    <p>{Math.floor(data.priceSet * 0.18)}원</p>
+                </div>
+                <div style={{display: "flex", justifyContent: "space-between", marginBottom: '-1.2rem'}}>
+                    <p>보증금</p>
+                    <p>{Math.floor(data.priceSet * 0.1) > 50000 ? Math.floor(data.priceSet * 0.1) : 50000}원</p>
+                </div>
+
+                <div style={{display: "flex", justifyContent: "space-between"}}>
                     <p>총 합계</p>
-                    <p>{data.priceSet + Math.floor(data.priceSet*0.18) + (Math.floor(data.priceSet*0.1) > 50000 ? Math.floor(data.priceSet*0.1) : 50000)}원</p>
+                    <p>{data.priceSet + Math.floor(data.priceSet * 0.18) + (Math.floor(data.priceSet * 0.1) > 50000 ? Math.floor(data.priceSet * 0.1) : 50000)}원</p>
                 </div>
             </div>
-            <div style={{margin:"1rem"}}>
-                <p style={{fontSize:"1rem", paddingBottom:"1rem"}}>• 환불 정책<span style={{ color: '#FF2929' }} >*</span></p>
+            <div style={{margin: "1rem"}}>
+                <p style={{fontSize: "1rem", paddingBottom: "1rem"}}>• 환불 정책<span style={{color: '#FF2929'}}>*</span>
+                </p>
                 <p>포 올 예약 후 취소 시점에 따라 수수료가 부과될 수 있습니다. 건전한 대관 문화 조성을 위해 패널티 제도를 운영하고 있습니다. 예약 전 취소수수료 및 패널티 제도를 반드시 확인해주세요.</p>
-                <p onClick={()=>setRefundModal(true)} style={{fontSize:"1rem", paddingTop:"1rem"}}>자세히 알아보기</p>
+                <p onClick={()=>setRefundModal(true)} style={{fontSize:"1rem", paddingTop:"1rem", textDecorationLine: 'underline'}}>자세히 알아보기</p>
             </div>
             <div style={{margin:"1rem"}}>
                 <p style={{fontSize:"1rem", paddingBottom:"1rem"}}>• 기본 규칙<span style={{ color: '#FF2929' }} >*</span></p>
