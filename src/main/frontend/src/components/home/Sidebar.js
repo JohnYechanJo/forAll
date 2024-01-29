@@ -39,7 +39,11 @@ const Sidebar = ({ width = 18.75, children }) => {
     };
     const handleChefRegistry = () => {
         if (userData.chefPending === ChefState.NOTCREATED) navigate("/chefRegistry");
+        else{
+            navigate("/alreadyChef");
+        }
     }
+
     const handleChefModify = () => {
         if ([ChefState.PENDING, ChefState.APPROVE].includes(userData.chefPending)) navigate("/chefInfoModify");
     }

@@ -314,7 +314,7 @@ const PlaceInfoModifyPage6 = () => {
                 }}>공간정보가 수정되었습니다!</p>
 
                 <hr />
-                <button onClick={() => navigate("/")}>확인</button>
+                <button  style={{width:'100%',height:'3.125rem',backgroundColor:'white',border:'none'}} onClick={() => navigate("/")}>확인</button>
             </Modal>
             <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={"환불 기준에 동의해 주세요"} />
         </div>
