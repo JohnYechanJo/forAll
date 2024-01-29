@@ -91,7 +91,7 @@ const RentSpacePage3 = () => {
                 </div>
                 {data.ableTrial ? (
                     <div>
-                        {trialDayModal ? (<div style={{display:"flex", justifyContent:"space-between"}}>
+                        {trialDayModal ? (<div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
                             <Calendar setDate={setTrialDay}/>
                         </div>) : (<p>{trialDay ? TimeUtil.toReservationDate(trialDay.toString()) : null}</p>)}
                     </div>
