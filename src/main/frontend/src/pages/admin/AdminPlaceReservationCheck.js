@@ -1,12 +1,7 @@
-import Sidebar from "../../components/home/Sidebar";
-import HomeTemplate from "../../components/home/HomeTemplate";
-import React, {useEffect, useState} from "react";
-import axios from "axios";
+import React from "react";
 import {TimeUtil} from "../../utils/TimeUtil";
 import {AddressUtil} from "../../utils/AddressUtil";
 import {useLocation, useNavigate} from "react-router-dom";
-import {ReservationState} from "../../utils/enums";
-import ImageInput from "../../components/ImageInput";
 import ImageViewer from "../../components/ImageViewer";
 
 const AdminPlaceReservationCheck = () => {

@@ -5,7 +5,6 @@ import axios from "axios";
 import ImageInput from "../../components/ImageInput";
 import ImageInputs from "../../components/ImageInputs";
 import Modal from "react-modal";
-import {ModalStyles} from "../../components/ModalStyles";
 import Alert from "../../components/Alert";
 import ImageViewer from "../../components/ImageViewer";
 import ImagesViewer from "../../components/ImagesViewer";
@@ -23,7 +22,6 @@ const AssuranceFinish = () => {
     const [hallImage, setHallImage] = useState();
     const [hallImages, setHallImages] = useState([]);
     const [additionImage, setAdditionImage] = useState();
-    const [additionImages, setAdditionImages] = useState();
     const [closeImage, setCloseImage] = useState("");
     const [additionalImage, setAdditionalImage] = useState([]);
 

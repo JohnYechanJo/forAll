@@ -1,10 +1,9 @@
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import React, {useCallback, useEffect, useState} from "react";
 import ImageInput from "../../components/ImageInput";
 import ImageInputs from "../../components/ImageInputs";
 import Alert from "../../components/Alert";
 import Modal from "react-modal";
-import {ModalStyles} from "../../components/ModalStyles";
 import axios from "axios";
 import ImageViewer from "../../components/ImageViewer";
 import ImagesViewer from "../../components/ImagesViewer";

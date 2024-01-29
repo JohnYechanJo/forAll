@@ -13,7 +13,6 @@ const AdminMainPage = () => {
     const [category, setCategory] = useState(data.category ? data.category : "space");
     const [state, setState] = useState(data.state ? data.state : SpaceState.PENDING);
     const [dataList, setDataList] = useState([]);
-    const [confirm, setConfirm] = useState(false);
     useEffect(() => {
         axios.get("/api/v1/admin/" + category+"List/"+state).then((res) => setDataList(res.data))
             .catch((err) => console.error(err));
