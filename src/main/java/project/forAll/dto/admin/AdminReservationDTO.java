@@ -16,6 +16,8 @@ public class AdminReservationDTO {
     private Integer rentStartHour; // 대관 시작 시간
     private Integer rentEndHour; // 대관 종료 시간
     private Integer priceSet; // 가격
+    private String cancelReason; // 취소 사유
+    private String cancelTime; // 취소 시간
 
     public static AdminReservationDTO build(Reservation reservation){
         final AdminReservationDTO dto = new AdminReservationDTO();
@@ -28,6 +30,9 @@ public class AdminReservationDTO {
         dto.setRentStartHour(reservation.getSpace().getRent().getAbleStartTime());
         dto.setRentEndHour(reservation.getSpace().getRent().getAbleFinTime());
         dto.setPriceSet(reservation.getSpace().getRent().getPriceSet());
+
+        dto.setCancelReason(reservation.getCancelReason());
+        dto.setCancelTime(reservation.getCancelTime());
         return dto;
     }
 }

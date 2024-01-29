@@ -34,4 +34,6 @@ public class Reservation extends BassDomain {
     private int chefNum;
     // 예약 상태
     private ReservationState state = ReservationState.PENDING;
+    private String cancelReason;
+    private String cancelTime;
 }

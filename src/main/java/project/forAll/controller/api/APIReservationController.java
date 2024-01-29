@@ -12,6 +12,7 @@ import project.forAll.form.ReservationForm;
 import project.forAll.repository.reservation.ReservationRepository;
 import project.forAll.service.MemberService;
 import project.forAll.service.ReservationService;
+import project.forAll.dto.ReservationCancelDTO;
 
 import java.util.List;
 
@@ -108,5 +109,15 @@ public class APIReservationController extends APIController{
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Could not get user Reservation" + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PostMapping("/reservation/cancel")
+    public void cancelReservation(@RequestBody ReservationCancelDTO dto){
+        final Reservation reservation = (Reservation) reservationService.findById(dto.getId());
+        reservation.setState(ReservationState.CANCEL);
+        reservation.setCancelReason(dto.getReason());
+        reservation.setCancelTime(dto.getCancelTime());
+        reservationService.save(reservation);
+
     }
 }
