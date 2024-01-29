@@ -47,7 +47,6 @@ const SearchIdPage = () => {
 
     return (
         <div>
-            <Header PageName={"아이디 찾기"}/>
             <SearchIdTemplate
                 id={id}
                 setName={setName}
@@ -58,9 +57,6 @@ const SearchIdPage = () => {
                 checkCerifiedNum={checkCerifiedNum}
                 sendCerifiedNum={sendCerifiedNum}
             />
-            <Link to={"/login"}>
-                <button>홈화면</button>
-            </Link>
             <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={alertContent} />
         </div>
     )

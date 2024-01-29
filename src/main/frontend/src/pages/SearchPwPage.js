@@ -65,9 +65,6 @@ const SearchPwPage = () => {
                 checkCerifiedNum={checkCerifiedNum}
                 sendCerifiedNum={sendCerifiedNum}
             />
-            <Link to={"/login"}>
-                <button>홈화면</button>
-            </Link>
 
             <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={alertContent} />
         </div>
