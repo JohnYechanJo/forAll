@@ -7,7 +7,7 @@ import { ModalStyles } from "../../components/ModalStyles";
 import "../../components/Styles.css";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 import ForAllLogo from "../../components/ForAllLogo";
-import {SmallModalStyles} from "../../components/SmallModalStyles";
+import { SmallModalStyles } from "../../components/SmallModalStyles";
 const HostRegistry3 = () => {
     const location = useLocation();
     const data = { ...location.state };
@@ -165,10 +165,10 @@ const HostRegistry3 = () => {
                     {console.log(rentWeek)}
                     {console.log(rentDays)}
                     <a>대관 가능일<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"}  width='100%' />
+                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} width='100%' />
                     {rentWeek === "직접지정" ?
-                        <input onChange={onChangeDate} placeholder="대관 가능일을 입력해주세요"  className="input" style={{width:'99%',fontSize:'0.625rem',marginTop:'0.5rem'}}  /> : (rentWeek !== "휴무없음" ?
-                            <div style={{display:'flex'}} >
+                        <input onChange={onChangeDate} placeholder="대관 가능일을 입력해주세요" className="input" style={{ width: '99%', fontSize: '0.625rem', marginTop: '0.5rem' }} /> : (rentWeek !== "휴무없음" ?
+                            <div style={{ display: 'flex' }} >
                                 <div className={monDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleMonday}>월</div>
                                 <div className={tuesDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleTuesDay}>화</div>
                                 <div className={wednesDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleWednesDay}>수</div>
@@ -187,10 +187,10 @@ const HostRegistry3 = () => {
                         justifyContent: "left",
                         alignItems: "center",
                     }}>
-                        <span>대관 당일 </span>
-                        <span style={{ }} ><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} width='100%' /></span>
+                        <span>대관 당일</span>
+                        <span style={{ marginLeft: '1rem' }} ><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} width="5.25rem" /></span>
                         <span> 부터, 당일 </span>
-                        <span style={{  }}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} width='100%' /></span>
+                        <span style={{ marginLeft: '1rem' }}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} width="5.25rem" /></span>
                         <span> 까지</span>
                     </div>
                 </div>
@@ -199,13 +199,13 @@ const HostRegistry3 = () => {
                     <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"} defaultData={'주차불가'} width='100%' />
                     {parkAvaliable === "직접 입력" ? (
                         <div>
-                            <div style={{display:'flex',width:'100%',alignItems:'center',marginTop:'0.5rem'}}  >
-                            <div style={{display:'flex',alignItems:'center'}} >
-                            <input  className="input" style={{width:'10vw'}} onChange={onChangePark} />
-                            <a>대</a>
-                            </div> 
-                        </div>
-                        {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요.</p> : null}
+                            <div style={{ display: 'flex', width: '100%', alignItems: 'center', marginTop: '0.5rem' }}  >
+                                <div style={{ display: 'flex', alignItems: 'center' }} >
+                                    <input className="input" style={{ width: '10vw' }} onChange={onChangePark} />
+                                    <a>대</a>
+                                </div>
+                            </div>
+                            {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요.</p> : null}
                         </div>
                     ) : null}
                 </div>
@@ -574,8 +574,8 @@ const HostRegistry3 = () => {
                     flexDirection: "column",
 
                 }}>
-                    <a style={{fontSize: '0.9375rem'}}>현재 필수 입력사항이 모두 기입되지 않았습니다.</a>
-                    <p style={{fontSize: '0.9375rem'}}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                    <a style={{ fontSize: '0.9375rem' }}>현재 필수 입력사항이 모두 기입되지 않았습니다.</a>
+                    <p style={{ fontSize: '0.9375rem' }}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
                 </div>
                 <div style={{
                     display: 'flex',
@@ -598,7 +598,7 @@ const HostRegistry3 = () => {
                         lineHeight: '1.875rem',
                         textAlign: 'center'
                     }}
-                            onClick={() => setIsModalOpen(false)}
+                        onClick={() => setIsModalOpen(false)}
                     >
                         마저 입력하기
                     </button>
@@ -613,7 +613,7 @@ const HostRegistry3 = () => {
                         lineHeight: '1.875rem',
                         textAlign: 'center'
                     }}
-                            onClick={() => submit()}
+                        onClick={() => submit()}
                     >
                         넘어가기
                     </button>
