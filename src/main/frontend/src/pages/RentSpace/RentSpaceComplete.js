@@ -12,13 +12,13 @@ const RentSpaceComplete = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            height: "100vh"
+            height: "110vh"
         }} >
             <img src={checkIcon} alt="check" style={{ width: "3.33rem", height: "3.33rem", flexShrink: "0" }} />
-            <p style={{ fontSize: "1.25rem", fontWeight: "700", marginBottom: "7.5rem" }} >{name}님 감사합니다!</p>
+            <p style={{ fontSize: "1.25rem", fontWeight: "700",}} >{name}님 감사합니다!</p>
             <div style={{ fontSize: "0.938rem", fontWeight: "400", gap: "7.5rem", alignItems: "center", textAlign: "center" }} >
                 <p>포올에서 꼼꼼히 검수 후</p>
-                <p>예약 확정 결과를 알려드릴게요.</p>
+                <p style={{paddingBottom:'1rem'}} >예약 확정 결과를 알려드릴게요.</p>
                 <p>12시간 이내 입금이 미완료시 예약자동 취소됩니다.</p>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start',flexDirection:'column',marginTop:'7.5rem' }}>
