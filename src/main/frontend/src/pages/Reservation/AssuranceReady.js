@@ -11,6 +11,7 @@ import ImagesViewer from "../../components/ImagesViewer";
 import ImageUploader from "../../utils/imageUploader";
 import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
 import {ReservationModalStyles} from "../../components/ReservationModalStyles";
+import {BigModalStyles} from "../../components/BigModalStyles";
 
 const AssuranceReady = () => {
     const location = useLocation();
@@ -22,6 +23,11 @@ const AssuranceReady = () => {
     const [hallImages, setHallImages] = useState([]);
     const [additionImage, setAdditionImage] = useState();
     const [additionImages, setAdditionImages] = useState();
+    const [closeImage, setCloseImage] = useState("");
+    const [additionalImage, setAdditionalImage] = useState([]);
+
+    const [closeGuide, setCloseGuide] = useState("");
+
 
     const [record, setRecord] = useState("");
     const [agree, setAgree] = useState(false);
@@ -30,7 +36,9 @@ const AssuranceReady = () => {
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [isGuidOpen, setIsGuidOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
     const [completeModal, setCompleteModal] = useState(false);
+
 
     const onChangeRecord = useCallback((e) => setRecord(e.target.value), []);
     const toggleAgree = () => setAgree(!agree);
@@ -40,7 +48,9 @@ const AssuranceReady = () => {
         }
         else setIsAlertOpen(true);
     };
-
+    const onChangeGuide = useCallback((e) => {
+        setCloseGuide(e.target.value);
+    }, []);
 
     const submit = async () => {
         const userId = sessionStorage.getItem("user_id");
@@ -136,7 +146,7 @@ const AssuranceReady = () => {
                 justifyContent: 'center',
                 alignItems: 'flex-start'
             }}>
-                <div style={{justifyContent:'right'}}>
+                <div style={{justifyContent: 'right'}}>
                     <a>기타 사진</a>
                     <div style={{justifyContent: 'right', alignItems: 'flex-start'}}>
                         <ImageInputs setImg={setAdditionImage} vals={additionImage}/>
@@ -164,13 +174,15 @@ const AssuranceReady = () => {
                 </div>
             </div>
             <div>
-                <a><strong style={{paddingLeft: '2%', fontSize: "0.75rem"}}>퇴장 2시간전 알림창 으로 ‘마감 마무리’ 창을 보내드릴 예정입니다.</strong></a>
+                <a><strong style={{paddingLeft: '2%', fontSize: "0.75rem"}}>퇴장 2시간전 알림창 으로 ‘마감 마무리’ 창을 보내드릴
+                    예정입니다.</strong></a>
                 <p style={{marginTop: '-0.5rem'}}>
-                <strong style={{paddingLeft: '2%', fontSize: "0.75rem"}}>확인 후 마감 마무리를 진행해 주세요.<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></strong>
+                    <strong style={{paddingLeft: '2%', fontSize: "0.75rem"}}>확인 후 마감 마무리를 진행해 주세요.<span
+                        className="fontForRegister" style={{color: "#FF2929"}}>*</span></strong>
                 </p>
-                    <p>
+                <p>
                     <input type="checkbox" checked={agree} id='agreed' onChange={toggleAgree}/>
-                    <label htmlFor="agreed" style={{marginTop:"0.5rem", paddingLeft: "2%", fontWeight: '500'}}><em
+                    <label htmlFor="agreed" style={{marginTop: "0.5rem", paddingLeft: "2%", fontWeight: '500'}}><em
                         style={{height: '1rem'}}></em><span style={{height: '1rem', marginTop: '-50px'}}>
                             <a>알겠습니다.<span style={{color: '#7B7B7B'}}>(필수)</span></a>
                     </span></label>
@@ -212,19 +224,69 @@ const AssuranceReady = () => {
                 </div>
             </Modal>
             <Alert content={"필수 요소들이 입력되어야 합니다."} isOpen={isAlertOpen} setIsOpen={setIsAlertOpen}/>
-            {isGuidOpen ? (
-                <div>
-                    <h1>마감 안내</h1>
-                    <p>오너 마감 가이드</p>
-                    <p>숙지 사항</p>
-                    <textarea value={spaceData.closeGuide}/>
-                    <p>사진</p>
-                    <ImageViewer val={spaceData.closeImage ? spaceData.closeImage[0] : null}/>
-                    <p>추가 사진</p>
-                    <ImagesViewer vals={spaceData.closeImage ? spaceData.closeImage.slice(1) : []}/>
-                    <button onClick={() => setIsGuidOpen(false)}>닫기</button>
+
+
+            <Modal isOpen={isGuidOpen} style={BigModalStyles} ariaHideApp={false}>
+
+                <div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    padding: '1rem',
+                    gap: "1rem",
+                    alignItems: "flex-start",
+                }}
+                     className="fontForRegister">
+                    <div style={{width: '100%', textAlign: 'left'}}>
+                        <a style={{}}>오너 마감 가이드<span style={{color: "#FF2929"}}>*</span></a>
+                        <hr style={{width: '100%', backgroundColor: 'black'}}/>
+                    </div>
+                    <div>
+                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                            <a>숙지 사항<span style={{color: "#FF2929"}}>*</span></a>
+                            <p style={{color: '#FF2929'}}>(최소 20자)</p>
+                        </div>
+                        <textarea disabled={true} className="input"
+                                  style={{height: '6.25rem', letterSpacing: '-0.0255rem', width: '70vw'}}
+                                  value={closeGuide} onChange={onChangeGuide} placeholder={
+                            `대관을 진행하는 셰프님들이 마감할 때 꼭 숙지해야 할 점을 기록해 주세요! 
+• 홀 마감은 이렇게 해주세요. 
+• 주방 마감은 이렇게 해주세요. 
+ex. 음식물 쓰레기 처리방법 
+ex.분리수거 처리방법
+ex.이 물건은 꼭 손대지 말아주세요.
+`
+                        }/>
+                    </div>
+                    <div style={{display: 'flex', justifyContent: 'center', width: '100%', gap: '1rem'}}>
+                        <div>
+                            <p>사진<span style={{color: "#FF2929"}}>*</span></p>
+                            <ImageViewer val={closeImage} setImg={setCloseImage}/>
+                        </div>
+                        <div>
+                            <p>추가 사진</p>
+                            <ImagesViewer vals={additionalImage} setImg={setAdditionalImage}/>
+                        </div>
+                    </div>
                 </div>
-            ) : null}
+
+                <div style={{
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "0.625rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal"
+                }}>
+
+                    <div className="bottom_button_relative">
+                        <a style={{fontSize: "0.8rem"}} onClick={() => {
+                            setIsGuidOpen(false)
+                        }}>닫기</a>
+                    </div>
+                </div>
+            </Modal>
+
+
             <Modal isOpen={completeModal} style={ExplanationModalStyles} ariaHideApp={false}>
                 <div style={{
                     fontFamily: "Noto Sans KR",
