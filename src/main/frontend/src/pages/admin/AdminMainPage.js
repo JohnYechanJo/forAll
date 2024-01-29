@@ -18,7 +18,7 @@ const AdminMainPage = () => {
     const confirmObject = (id, state) => {
         axios.post("/api/v1/admin/"+category, {
             id: id,
-            state: "APPROVE",
+            state: state,
         }).then(()=>window.location.reload())
             .catch((err) => console.error(err));
     };

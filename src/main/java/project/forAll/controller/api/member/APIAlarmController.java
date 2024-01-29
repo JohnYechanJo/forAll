@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import project.forAll.controller.api.APIController;
 import project.forAll.domain.alarm.Alarm;
+import project.forAll.domain.alarm.AlarmCategory;
 import project.forAll.domain.chat.ChatRoom;
 import project.forAll.domain.member.Member;
+import project.forAll.form.AlarmForm;
 import project.forAll.form.ChatRoomForm;
+import project.forAll.repository.chat.MessageRepository;
 import project.forAll.service.MemberService;
 import project.forAll.service.alarm.AlarmService;
 
@@ -22,20 +25,33 @@ import java.util.List;
 public class APIAlarmController extends APIController {
 
     private final AlarmService alarmService;
+    private final MessageRepository messageRepository;
 
     @GetMapping("/alarm/list/{id}")
     public ResponseEntity getAlarmList(@PathVariable(value = "id") final String userId) {
         try {
             List<Alarm> alarmList = alarmService.findAlarmByUserId(userId);
-            // 사용자가 알림 목록을 체크하면 그 알림들을 확인했음을 변수로 표현
-            for (Alarm alarm: alarmList) {
-                alarm.setUserChecked(Boolean.TRUE);
+            List<AlarmForm> forms = alarmList.stream().map(alarm -> alarmService.of(alarm)).toList();
+
+            if(!messageRepository.findByTargetIdAndReadFlag(userId, false).isEmpty()){
+                AlarmForm form = new AlarmForm();
+                form.setMemberId(userId);
+                form.setCategory(AlarmCategory.CHAT.toString());
+                form.setAlarmInfo("새로운 채팅이 도착했어요!");
+                forms.add(form);
             }
 
-            return new ResponseEntity(alarmList, HttpStatus.OK);
+            return new ResponseEntity(forms, HttpStatus.OK);
         } catch (final Exception e) {
             return new ResponseEntity(errorResponse("Could not get Alarm list : " + e.getMessage()),
                     HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/alarm/check/{id}")
+    public void checkAlaram(@PathVariable Long id){
+        Alarm alarm = (Alarm) alarmService.findById(id);
+        alarm.setUserChecked(true);
+        alarmService.save(alarm);
     }
 }

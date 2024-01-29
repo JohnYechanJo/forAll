@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface AlarmRepository extends JpaRepository<Alarm, Long> {
 
-    List<Alarm> findByMember(Member member);
+    List<Alarm> findByMemberAndUserChecked(Member member, Boolean userChecked);
 }

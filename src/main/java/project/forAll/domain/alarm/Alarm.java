@@ -20,13 +20,14 @@ public class Alarm extends BassDomain {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
     // "셰프 등록", "공간 등록", "예약 확정", "대관", "채팅", "고객센터" 중 하나
+    private AlarmCategory category;
+    // 공간명 등 안내문구
     private String alarmInfo;
 
     // 알림 시간
     private ZonedDateTime alarmAt;
 
     // 알림 확인 여부
-    private Boolean userChecked;
+    private Boolean userChecked = false;
 }

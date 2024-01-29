@@ -19,6 +19,8 @@ public class AlarmForm {
     // 유저
     private String memberId;
     // "셰프 등록", "공간 등록", "예약 확정", "대관", "채팅", "고객센터" 중 하나
+    private String category;
+    // 안내 문구
     private String alarmInfo;
     // 알림 날짜 + 시간
     private String alarmAt;

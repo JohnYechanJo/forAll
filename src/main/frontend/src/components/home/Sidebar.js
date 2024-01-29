@@ -79,7 +79,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                         justifyContent: "flex-end",
                     }}>
                         <div style={{ backgroundColor: "transparent", marginRight: '1rem' }}>
-                            <img src={alarm} alt="alarm" style={{ width: "0.99931rem", height: "1.5rem", marginRight: '1rem', objectFit: "contain" }} />
+                            <img src={alarm} alt="alarm" style={{ width: "0.99931rem", height: "1.5rem", marginRight: '1rem', objectFit: "contain" }} onClick={()=>navigate("/allNotifications")}/>
                             <img src={xmark} alt="xmark" style={{ width: "1.5rem", height: "1.5rem", objectFit: "contain" }} onClick={() => toggleMenu()} />
                         </div>
                     </div>

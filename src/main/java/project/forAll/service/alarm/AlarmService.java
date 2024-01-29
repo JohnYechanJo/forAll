@@ -35,7 +35,7 @@ public class AlarmService extends Service {
     public List<Alarm> findAlarmByUserId(String userId){
         Member member = memberService.findByLoginId(userId);
 
-        return alarmRepository.findByMember(member);
+        return alarmRepository.findByMemberAndUserChecked(member, false);
     }
 
     @Transactional
@@ -45,12 +45,14 @@ public class AlarmService extends Service {
     }
 
     @Transactional
-    public Alarm build(final Alarm alarm) {
-        if (alarm.getId() != null) alarm.setId(alarm.getId());
-        alarm.setMember(alarm.getMember());
-        alarm.setAlarmInfo(alarm.getAlarmInfo());
-        alarm.setAlarmAt(alarm.getAlarmAt());
+    public AlarmForm of(final Alarm alarm){
+        final AlarmForm form = new AlarmForm();
+        form.setId(alarm.getId());
+        form.setMemberId(alarm.getMember().getLoginId());
+        form.setCategory(alarm.getCategory().toString());
+        form.setAlarmInfo(alarm.getAlarmInfo());
+        form.setAlarmAt(alarm.getAlarmAt().toString());
 
-        return alarm;
+        return form;
     }
 }

@@ -14,24 +14,30 @@ import {SmallModalStyles} from "../components/SmallModalStyles";
 
 const AllNotifications = () => {
     const navigate = useNavigate();
-    const [reservationData, setReservationData] = useState([]);
+    const [alarmList, setAlarmList] = useState([]);
     const [isEraseAll, setIsEraseAll] = useState(false);
 
     const deleteAll = useCallback(()=>{
-        axios.get("/api/v1/articles/deleteAll").then(()=>window.location.reload());
+        alarmList.forEach((alarm) => {
+            if(alarm.id) axios.get("/api/v1/alarm/check/"+alarm.id);
+        });
+        window.location.reload();
     },[]);
-    const handleAssurance = (data) => {
-        if (data.state === ReservationState.FINISH) return;
-        if (data.state === ReservationState.APPROVE) navigate("/assuranceReady", {state:data});
-        else{
-            const rentEndTime = TimeUtil.setHour(data.rentDay, data.rentEndHour);
-            if (TimeUtil.getDiffSecond(rentEndTime) < 2 * 60 * 60) navigate("/assuranceFinish", {state:data});
-            else navigate("/assuranceReadyView", {state:data});
-        }
+    const deleteAlarm = (alarm) => {
+        if(alarm.id) axios.get("/api/v1/alarm/check/"+alarm.id).then(()=>window.location.reload());
     }
+    // const handleAssurance = (data) => {
+    //     if (data.state === ReservationState.FINISH) return;
+    //     if (data.state === ReservationState.APPROVE) navigate("/assuranceReady", {state:data});
+    //     else{
+    //         const rentEndTime = TimeUtil.setHour(data.rentDay, data.rentEndHour);
+    //         if (TimeUtil.getDiffSecond(rentEndTime) < 2 * 60 * 60) navigate("/assuranceFinish", {state:data});
+    //         else navigate("/assuranceReadyView", {state:data});
+    //     }
+    // }
     useEffect(() => {
-        axios.get("/api/v1/reservation/user/"+sessionStorage.getItem("user_id"))
-            .then((res) => setReservationData(res.data))
+        axios.get("/api/v1/alarm/list/"+sessionStorage.getItem("user_id"))
+            .then((res) => setAlarmList(res.data))
             .catch((err) => console.error(err));
     }, []);
     return (
@@ -54,20 +60,6 @@ const AllNotifications = () => {
                     style={{fontSize: "1rem", fontWeight: "700", paddingLeft: "1rem"}}>
                     • 알림
                 </p></div>
-                {reservationData ? reservationData.filter((data) => TimeUtil.checkToday(data.rentDay)).map((data) => (
-                    <div style={{border: "1px solid #C4C4C4", height: "6rem"}} onClick={handleAssurance(data)}>
-                        <div style={{display: "flex", justifyContent: "space-between"}}>
-                            <p style={{
-                                fontSize: "1rem",
-                                fontWeight: "700",
-                                paddingLeft: "1rem"
-                            }}>{AddressUtil.extraction(data.address)}</p>
-                        </div>
-
-                        <p style={{margin: 0, paddingLeft: "1rem", color: "#0788FF"}}>{data.name}</p>
-
-                    </div>
-                )) : null}
             </div>
             <Modal
                 isOpen={isEraseAll}
@@ -142,133 +134,32 @@ const AllNotifications = () => {
                    marginRight: '0.5rem'
                }}>전체 삭제</p>
             </div>
+            {alarmList ? (alarmList.map((alarm, idx) => {
+                let category;
+                if (alarm.category === "Chef") category = "셰프 등록";
+                else if(alarm.category === "Space") category = "공간 등록";
+                else if(alarm.category === "Reservation") category = "예약 확정";
+                else if(alarm.category === "Chat") category = "채팅";
 
-            <div>
-                <div style={{display: "flex", width: "100%", height: "3.125rem", border: "1px solid #C4C4C4"}}><p
-                    style={{fontSize: "1rem", fontWeight: "700", paddingLeft: "1rem"}}>
-                    대관
-                </p></div>
-                {reservationData ? reservationData.filter((data) => !TimeUtil.checkToday(data.rentDay)).map((data) => (
-                    <div style={{border: "1px solid #C4C4C4", height: "6rem"}}>
-                        <div style={{display: "flex", justifyContent: "space-between"}}>
-                            <p style={{
-                                fontSize: "1rem",
-                                fontWeight: "700",
-                                paddingLeft: "1rem"
-                            }}>{AddressUtil.extraction(data.address)}</p>
-                            <p style={{fontSize: "0.8rem", fontWeight: "500", paddingRight: "1rem"}}>취소하기</p>
+                return(
+                    <div key={idx}>
+                        <div style={{border: "1px solid #C4C4C4", height: "6rem"}}>
+                            <div style={{display: "flex", justifyContent: "space-between"}}>
+                                <p style={{
+                                    fontSize: "1rem",
+                                    fontWeight: "700",
+                                    paddingLeft: "1rem"
+                                }}>{category}</p>
+                            </div>
+
+                            <p style={{margin: 0, paddingLeft: "1rem", color: "#0788FF"}}>{alarm.alarmInfo}</p>
+
                         </div>
-
-                        <p style={{margin: 0, paddingLeft: "1rem", color: "#0788FF"}}>{data.name}</p>
-
                     </div>
-                )) : null}
-            </div>
-            <div>
-                <div style={{display: "flex", width: "100%", height: "3.125rem", border: "1px solid #C4C4C4"}}><p
-                    style={{fontSize: "1rem", fontWeight: "700", paddingLeft: "1rem"}}>
-                    공간 등록
-                </p></div>
-                {reservationData ? reservationData.filter((data) => !TimeUtil.checkToday(data.rentDay)).map((data) => (
-                    <div style={{border: "1px solid #C4C4C4", height: "6rem"}}>
-                        <div style={{display: "flex", justifyContent: "space-between"}}>
-                            <p style={{
-                                fontSize: "1rem",
-                                fontWeight: "700",
-                                paddingLeft: "1rem"
-                            }}>{AddressUtil.extraction(data.address)}</p>
-                            <p style={{fontSize: "0.8rem", fontWeight: "500", paddingRight: "1rem"}}>취소하기</p>
-                        </div>
+                )
+                }
+            )) :null}
 
-                        <p style={{margin: 0, paddingLeft: "1rem", color: "#0788FF"}}>{data.name}</p>
-
-                    </div>
-                )) : null}
-            </div>
-            <div>
-                <div style={{display: "flex", width: "100%", height: "3.125rem", border: "1px solid #C4C4C4"}}><p
-                    style={{fontSize: "1rem", fontWeight: "700", paddingLeft: "1rem"}}>
-                    셰프 등록
-                </p></div>
-                {reservationData ? reservationData.filter((data) => !TimeUtil.checkToday(data.rentDay)).map((data) => (
-                    <div style={{border: "1px solid #C4C4C4", height: "6rem"}}>
-                        <div style={{display: "flex", justifyContent: "space-between"}}>
-                            <p style={{
-                                fontSize: "1rem",
-                                fontWeight: "700",
-                                paddingLeft: "1rem"
-                            }}>{AddressUtil.extraction(data.address)}</p>
-                            <p style={{fontSize: "0.8rem", fontWeight: "500", paddingRight: "1rem"}}>취소하기</p>
-                        </div>
-
-                        <p style={{margin: 0, paddingLeft: "1rem", color: "#0788FF"}}>{data.name}</p>
-
-                    </div>
-                )) : null}
-            </div>
-            <div>
-                <div style={{display: "flex", width: "100%", height: "3.125rem", border: "1px solid #C4C4C4"}}><p
-                    style={{fontSize: "1rem", fontWeight: "700", paddingLeft: "1rem"}}>
-                    예약 확정
-                </p></div>
-                {reservationData ? reservationData.filter((data) => !TimeUtil.checkToday(data.rentDay)).map((data) => (
-                    <div style={{border: "1px solid #C4C4C4", height: "6rem"}}>
-                        <div style={{display: "flex", justifyContent: "space-between"}}>
-                            <p style={{
-                                fontSize: "1rem",
-                                fontWeight: "700",
-                                paddingLeft: "1rem"
-                            }}>{AddressUtil.extraction(data.address)}</p>
-                            <p style={{fontSize: "0.8rem", fontWeight: "500", paddingRight: "1rem"}}>취소하기</p>
-                        </div>
-
-                        <p style={{margin: 0, paddingLeft: "1rem", color: "#0788FF"}}>{data.name}</p>
-
-                    </div>
-                )) : null}
-            </div>
-            <div>
-                <div style={{display: "flex", width: "100%", height: "3.125rem", border: "1px solid #C4C4C4"}}><p
-                    style={{fontSize: "1rem", fontWeight: "700", paddingLeft: "1rem"}}>
-                    채팅
-                </p></div>
-                {reservationData ? reservationData.filter((data) => !TimeUtil.checkToday(data.rentDay)).map((data) => (
-                    <div style={{border: "1px solid #C4C4C4", height: "6rem"}}>
-                        <div style={{display: "flex", justifyContent: "space-between"}}>
-                            <p style={{
-                                fontSize: "1rem",
-                                fontWeight: "700",
-                                paddingLeft: "1rem"
-                            }}>{AddressUtil.extraction(data.address)}</p>
-                            <p style={{fontSize: "0.8rem", fontWeight: "500", paddingRight: "1rem"}}>취소하기</p>
-                        </div>
-
-                        <p style={{margin: 0, paddingLeft: "1rem", color: "#0788FF"}}>{data.name}</p>
-
-                    </div>
-                )) : null}
-            </div>
-            <div>
-                <div style={{display: "flex", width: "100%", height: "3.125rem", border: "1px solid #C4C4C4", borderBottom:"2px solid #C4C4C4"}}><p
-                    style={{fontSize: "1rem", fontWeight: "700", paddingLeft: "1rem"}}>
-                    고객센터
-                </p></div>
-                {reservationData ? reservationData.filter((data) => !TimeUtil.checkToday(data.rentDay)).map((data) => (
-                    <div style={{border: "1px solid #C4C4C4", height: "6rem"}}>
-                        <div style={{display: "flex", justifyContent: "space-between"}}>
-                            <p style={{
-                                fontSize: "1rem",
-                                fontWeight: "700",
-                                paddingLeft: "1rem"
-                            }}>{AddressUtil.extraction(data.address)}</p>
-                            <p style={{fontSize: "0.8rem", fontWeight: "500", paddingRight: "1rem"}}>취소하기</p>
-                        </div>
-
-                        <p style={{margin: 0, paddingLeft: "1rem", color: "#0788FF"}}>{data.name}</p>
-
-                    </div>
-                )) : null}
-            </div>
 
             <div style={{
                 display: 'flex', flexDirection: 'column', justifyContent: 'space-between',

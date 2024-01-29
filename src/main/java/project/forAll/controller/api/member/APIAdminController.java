@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
 import project.forAll.controller.api.APIController;
 import project.forAll.domain.alarm.Alarm;
+import project.forAll.domain.alarm.AlarmCategory;
 import project.forAll.domain.member.ChefPending;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.reservation.Reservation;
@@ -117,7 +118,8 @@ public class APIAdminController extends APIController {
         // 공간 등록 승인 알림
         final Alarm alarm = new Alarm();
         alarm.setMember(space.getMember());
-        alarm.setAlarmInfo("공간 등록 승인");
+        alarm.setCategory(AlarmCategory.SPACE);
+        alarm.setAlarmInfo(space.getSpacePending() == SpacePending.APPROVE ? "공간이 정상적으로 등록되었습니다." : "공간 등록 거부");
         alarm.setAlarmAt(zoneTime.now());
         alarmService.saveAlarm(alarm);
     }
@@ -129,7 +131,8 @@ public class APIAdminController extends APIController {
         // 셰프 등록 승인 알림
         final Alarm alarm = new Alarm();
         alarm.setMember(member);
-        alarm.setAlarmInfo("셰프 등록 승인");
+        alarm.setCategory(AlarmCategory.CHEF);
+        alarm.setAlarmInfo(member.getChefPending() == ChefPending.APPROVE ? "셰프님이 정상적으로 등록되었습니다" : "셰프 등록 거부");
         alarm.setAlarmAt(zoneTime.now());
         alarmService.saveAlarm(alarm);
     }
@@ -141,7 +144,8 @@ public class APIAdminController extends APIController {
         // 예약 확정 알림
         final Alarm alarm = new Alarm();
         alarm.setMember(reservation.getMember());
-        alarm.setAlarmInfo("예약 확정 승인");
+        alarm.setCategory(AlarmCategory.RESERVATION);
+        alarm.setAlarmInfo(reservation.getState() == ReservationState.APPROVE ? "예약 확정 승인" : "예약 확정 거부");
         alarm.setAlarmAt(zoneTime.now());
         alarmService.saveAlarm(alarm);
     }

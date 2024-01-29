@@ -99,12 +99,6 @@ public class APIChatController extends APIController{
         final Message message = messageService.build(form);
         messageService.save(message);
         messagingTemplate.convertAndSend("/sub/chat/room/"+form.getChatRoomId(),messageService.of(message));
-        // 채팅 도착 알림
-        final Alarm alarm = new Alarm();
-        alarm.setMember(memberService.findByLoginId(message.getTargetId()));
-        alarm.setAlarmInfo("채팅 도착");
-        alarm.setAlarmAt(zoneTime.now());
-        alarmService.saveAlarm(alarm);
         // return;
     }
 
