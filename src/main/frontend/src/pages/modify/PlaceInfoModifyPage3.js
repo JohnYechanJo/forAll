@@ -217,28 +217,32 @@ const PlaceInfoModifyPage3 = () => {
                 </div>
 
                 <div>
-                    <a>입•퇴실 시간<span style={{ color: '#FF2929' }} >*</span></a>
+                    <a>입•퇴실 시간<span style={{color: '#FF2929'}}>*</span></a>
                     <div style={{
                         display: "flex",
                         justifyContent: "left",
                         alignItems: "center",
                     }}>
                         <span>대관 당일 </span>
-                        <span style={{ }}><DropDown dataArr={rentTimeFromData} onChange={setRentTimeFrom} placeholder={"00시"} defaultData={rentTimeFrom} val={rentTimeFrom} width='100%' /></span>
+                        <span style={{marginLeft: '1rem'}}><DropDown dataArr={rentTimeFromData}
+                                                                     onChange={setRentTimeFrom} placeholder={"00시"}
+                                                                     width='6.31444rem'/></span>
                         <span> 부터, 당일 </span>
-                        <span style={{}}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} placeholder={"24시"} defaultData={rentTimeTo} val={rentTimeTo} width='100%' /></span>
-
+                        <span style={{marginLeft: '1rem'}}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo}
+                                                                     placeholder={"24시"} width='6.31444rem'/></span>
                         <span> 까지</span>
                     </div>
                 </div>
 
                 <div>
-                    <a>주차 여부<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택해 주세요"} defaultData={parkAvaliable} val={parkAvaliable} width='100%' />
+                    <a>주차 여부<span style={{color: '#FF2929'}}>*</span></a>
+                    <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택해 주세요"}
+                              defaultData={parkAvaliable} val={parkAvaliable} width='100%'/>
                     {parkAvaliable === "직접 입력" ? (
-                        <div style={{ marginTop: '0.5rem' }}>
-                            <div style={{ display: 'flex', alignItems: 'center' }} >
-                                <input className="input" style={{ width: '10vw' }} onChange={onChangePark} value={exactPark} />
+                        <div style={{marginTop: '0.5rem'}}>
+                            <div style={{display: 'flex', alignItems: 'center'}}>
+                                <input className="input" style={{width: '10vw'}} onChange={onChangePark}
+                                       value={exactPark}/>
                                 <a>대</a>
                             </div>
                             {exactPark < 5 ? <p>5 이상의 숫자만 입력하여 주세요.</p> : null}
