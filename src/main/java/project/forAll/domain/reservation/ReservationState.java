@@ -13,12 +13,8 @@ public enum ReservationState {
     APPROVE("Approve"),
     // 거절
     REJECT("Reject"),
-    // 취소 대기중
-    CANCELPENDING("Cancel Pending"),
-    // 취소 승인
-    CANCELAPPROVE("Cancel Approve"),
-    // 취소 거절
-    CANCELREJECT("Cancel Reject"),
+    // 취소
+    CANCEL("Cancel"),
     READY("Ready"),
     FINISH("Finish"),
     NotSpecified("Not Specified");
