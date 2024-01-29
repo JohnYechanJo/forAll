@@ -7,7 +7,7 @@ import Modal from "react-modal";
 import { ModalStyles } from "../../components/ModalStyles";
 import { KitchenFeat } from "../../utils/enums";
 import ForAllLogo from "../../components/ForAllLogo";
-import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
+import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 const PlaceInfoModifyStart = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({});
@@ -188,22 +188,22 @@ const PlaceInfoModifyStart = () => {
                 <div style={{ flexDirection: "column", display: "flex" }}>
                   <div>
                     <button className="square_button"
-                            name="kitchen"
-                            value={KitchenFeat.Open}
-                            style={{
-                              backgroundColor: data.kitchenFeat === KitchenFeat.Open||clicked1 ? "black" : "white",
-                              color: data.kitchenFeat === KitchenFeat.Open||clicked1 ? "white" : "black",
-                            }}
-                            onClick={(event) => {
-                              const selected = event.target.value;
-                              setKitchen(event.target.value);
-                              if (clicked1 === true) {
-                                setKitchen(KitchenFeat.NotSpecified);
-                              }
-                              setClicked1(!clicked1);
-                              setClicked2(false);
-                              setClicked3(false);
-                            }}
+                      name="kitchen"
+                      value={KitchenFeat.Open}
+                      style={{
+                        backgroundColor: data.kitchenFeat === KitchenFeat.Open || clicked1 ? "black" : "white",
+                        color: data.kitchenFeat === KitchenFeat.Open || clicked1 ? "white" : "black",
+                      }}
+                      onClick={(event) => {
+                        const selected = event.target.value;
+                        setKitchen(event.target.value);
+                        if (clicked1 === true) {
+                          setKitchen(KitchenFeat.NotSpecified);
+                        }
+                        setClicked1(!clicked1);
+                        setClicked2(false);
+                        setClicked3(false);
+                      }}
 
                     >
                       오픈형
@@ -245,7 +245,7 @@ const PlaceInfoModifyStart = () => {
 
                     </Modal>
                     <button onClick={() => setModalIsOpen1(true)}
-                            style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 오픈형이
+                      style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 오픈형이
                       무엇인가요?
                     </button>
                   </div>
@@ -253,31 +253,31 @@ const PlaceInfoModifyStart = () => {
                 <div style={{ flexDirection: "column" }}>
                   <div>
                     <button className="square_button"
-                            name="kitchen"
-                            value={KitchenFeat.Face}
-                            style={{
-                              backgroundColor: data.kitchenFeat === KitchenFeat.Face||clicked2 ? "black" : "white",
-                              color: data.kitchenFeat === KitchenFeat.Face||clicked2 ? "white" : "black",
+                      name="kitchen"
+                      value={KitchenFeat.Face}
+                      style={{
+                        backgroundColor: data.kitchenFeat === KitchenFeat.Face || clicked2 ? "black" : "white",
+                        color: data.kitchenFeat === KitchenFeat.Face || clicked2 ? "white" : "black",
 
-                            }}
-                            onClick={(event) => {
-                              const selected = event.target.value;
-                              setKitchen(event.target.value);
-                              if (clicked2 === true) {
-                                setKitchen(KitchenFeat.NotSpecified);
-                              }
-                              setClicked1(false);
-                              setClicked2(!clicked2);
-                              setClicked3(false);
-                            }}
+                      }}
+                      onClick={(event) => {
+                        const selected = event.target.value;
+                        setKitchen(event.target.value);
+                        if (clicked2 === true) {
+                          setKitchen(KitchenFeat.NotSpecified);
+                        }
+                        setClicked1(false);
+                        setClicked2(!clicked2);
+                        setClicked3(false);
+                      }}
                     >
                       대면형
                     </button>
                   </div>
                   <div>
                     <Modal
-                        isOpen={modalIsOpen2}
-                        style={ExplanationModalStyles}>
+                      isOpen={modalIsOpen2}
+                      style={ExplanationModalStyles}>
 
                       <div style={{
                         fontFamily: "Noto Sans KR",
@@ -311,7 +311,7 @@ const PlaceInfoModifyStart = () => {
                       </div>
                     </Modal>
                     <button onClick={() => setModalIsOpen2(true)}
-                            style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 대면형이
+                      style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 대면형이
                       무엇인가요?
                     </button>
                   </div>
@@ -319,23 +319,23 @@ const PlaceInfoModifyStart = () => {
                 <div style={{ flexDirection: "column" }}>
                   <div>
                     <button className="square_button"
-                            name="kitchen"
-                            value={KitchenFeat.Close}
-                            style={{
-                              backgroundColor: data.kitchenFeat === KitchenFeat.Close||clicked3 ? "black" : "white",
-                              color: data.kitchenFeat === KitchenFeat.Close||clicked3 ? "white" : "black",
+                      name="kitchen"
+                      value={KitchenFeat.Close}
+                      style={{
+                        backgroundColor: data.kitchenFeat === KitchenFeat.Close || clicked3 ? "black" : "white",
+                        color: data.kitchenFeat === KitchenFeat.Close || clicked3 ? "white" : "black",
 
-                            }}
-                            onClick={(event) => {
-                              const selected = event.target.value;
-                              setKitchen(event.target.value);
-                              if (clicked3 === true) {
-                                setKitchen(KitchenFeat.NotSpecified);
-                              }
-                              setClicked1(false);
-                              setClicked2(false);
-                              setClicked3(!clicked3);
-                            }}
+                      }}
+                      onClick={(event) => {
+                        const selected = event.target.value;
+                        setKitchen(event.target.value);
+                        if (clicked3 === true) {
+                          setKitchen(KitchenFeat.NotSpecified);
+                        }
+                        setClicked1(false);
+                        setClicked2(false);
+                        setClicked3(!clicked3);
+                      }}
 
                     >
                       폐쇄형
@@ -343,8 +343,8 @@ const PlaceInfoModifyStart = () => {
                   </div>
                   <div>
                     <Modal
-                        isOpen={modalIsOpen3}
-                        style={ExplanationModalStyles}
+                      isOpen={modalIsOpen3}
+                      style={ExplanationModalStyles}
                     >
                       <div style={{
                         fontFamily: "Noto Sans KR",
@@ -384,7 +384,7 @@ const PlaceInfoModifyStart = () => {
 
                     </Modal>
                     <button onClick={() => setModalIsOpen3(true)}
-                            style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 폐쇄형이
+                      style={{ border: "none", backgroundColor: "white", fontSize: "10px" }}>• 폐쇄형이
                       무엇인가요?
                     </button>
                   </div>
@@ -444,13 +444,13 @@ const PlaceInfoModifyStart = () => {
             </div>
           </div>
           <div style={{ marginTop: '1.5rem' }}>
-            <div style={{display:'flex',flexDirection:'column'}} >
-            <a>
-              <span>대표 이미지<span style={{ color: '#FF2929' }} >*</span></span>
-            </a>
-            <a style={{ color: '#C4C4C4' }} >
-                                매장의 간판이 보이는 이미지를 첨부해 주세요.
-                            </a>
+            <div style={{ display: 'flex', flexDirection: 'column' }} >
+              <a>
+                <span>대표 이미지<span style={{ color: '#FF2929' }} >*</span></span>
+              </a>
+              <a style={{ color: '#C4C4C4' }} >
+                매장의 간판이 보이는 이미지를 첨부해 주세요.
+              </a>
             </div>
             <div>
               <ImageInput setImg={setImgRepresent} val={imgRepresent} />
@@ -467,14 +467,18 @@ const PlaceInfoModifyStart = () => {
           onClick={() => handleButton()}
         >다음</button>
 
-        <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-          <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
-          <p>
-            이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지
-            않습니다.
-          </p>
-          <button onClick={() => setIsModalOpen(false)}>뒤로</button>
-          <button onClick={() => submit()}>다음</button>
+        <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalStyles} >
+          <p style={{ fontSize: '0.9375rem' }}>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
+          <p style={{ fontSize: '0.9375rem' }}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+          <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem', borderTop: '1px solid #C4C4C4' }}>
+            <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+              onClick={() => setIsModalOpen(false)}
+            >
+              뒤로</button>
+            <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+              onClick={() => submit()}
+            >다음</button>
+          </div>
         </Modal>
       </div>
     </div>

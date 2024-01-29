@@ -6,9 +6,9 @@ import Modal from "react-modal";
 import { ModalStyles } from "../../components/ModalStyles";
 import "../../components/Styles.css";
 import axios from "axios";
-import MultipleDatePicker from "react-multiple-datepicker";
 import ForAllLogo from "../../components/ForAllLogo";
 import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
+import { set } from "date-fns";
 const PlaceInfoModifyPage3 = () => {
     const location = useLocation();
     const data = { ...location.state };
@@ -64,9 +64,9 @@ const PlaceInfoModifyPage3 = () => {
         setPrice(e.target.value);
     }, []);
 
-    const handleDatePicker=(e)=>{ 
-        setRentDays(e);
-    };
+    const onChangeDate = useCallback((e) => {
+        setRentDays(e.target.value);
+    }, []);
 
     const toggleMonday = useCallback((e) => {
         setMonDay(!monDay);
@@ -99,24 +99,24 @@ const PlaceInfoModifyPage3 = () => {
             .then((res) => {
                 console.log(res.data);
                 setDbData(res.data);
-                setElevator(res.data.haveElevator)
-                setTrial(res.data.ableTrial)
-                setMorningDelivery(res.data.ableEarlyDeliver)
-                setWorkIn(res.data.ableWorkIn)
-                setMiseen(res.data.ableMiseen)
-                setRentWeek(!isNaN(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1])?  "직접지정"  : res.data.ableDate.split(" ")[0] === '매월'? res.data.ableDate.split(" ")[0] + " " + res.data.ableDate.split(" ")[1] : res.data.ableDate.split(" ")[0]  ) 
+                setElevator(res.data.haveElevator);
+                setTrial(res.data.ableTrial);
+                setMorningDelivery(res.data.ableEarlyDeliver);
+                setWorkIn(res.data.ableWorkIn);
+                setMiseen(res.data.ableMiseen);
+                setRentWeek(res.data.ableDate.split(" ")[0] === '매월' ? res.data.ableDate.split(" ")[0] + " " + res.data.ableDate.split(" ")[1] : res.data.ableDate.includes('%') ? "직접지정" : res.data.ableDate.split(" ")[0]);
+                setMiseenTimeFrom(res.data.ableMiseenStartTime ? res.data.ableMiseenStartTime + "시" : "0시");
+                setMiseenTimeTo(res.data.ableMiseenFinTime ? res.data.ableMiseenFinTime + "시" : "0시");
 
-                setMiseenTimeFrom(res.data.ableMiseenStartTime ? res.data.ableMiseenStartTime + "시" : "0시")
-                setMiseenTimeTo(res.data.ableMiseenFinTime ? res.data.ableMiseenFinTime + "시" : "0시")
-
-                setRentTimeFrom(res.data.ableStartHour ? res.data.ableStartHour + "시" : "0시")
-                setRentTimeTo(res.data.ableFinHour ? res.data.ableFinHour + "시" : "0시")
-                setParkAvaliable(parkAvaliableData.includes(res.data.ableParking) ? res.data.ableParking : "직접 입력")
-                setTable(res.data.tableNum)
+                setRentTimeFrom(res.data.ableStartHour ? res.data.ableStartHour + "시" : "0시");
+                setRentTimeTo(res.data.ableFinHour ? res.data.ableFinHour + "시" : "0시");
+                setParkAvaliable(parkAvaliableData.includes(res.data.ableParking) ? res.data.ableParking : "직접 입력");
+                setTable(res.data.tableNum);
                 setSeat(res.data.seatNum)
                 setPrice(res.data.priceSet)
                 setExactPark(res.data.ableParking.split("대")[0])
-                setRentDays(!isNaN(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1])  ? res.data.ableDate : res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(","))
+                setRentDays(res.data.ableDate.includes('%') ? res.data.ableDate.split("%")[1] : [])
+                // setRentDays(!isNaN(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1])  ? res.data.ableDate : res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(","))
                 setMonDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("월"))
                 setTuesDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("화"))
                 setWednesDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("수"))
@@ -130,10 +130,10 @@ const PlaceInfoModifyPage3 = () => {
         DownloadData();
     }, []);
     const handleButton = () => {
-        if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
-            && (parkAvaliable !== "") && (elevator !== undefined) && (table !== undefined)
-            && (seat !== undefined) && (price !== undefined) && (trial !== undefined) && (morningDelivery !== undefined)
-            && (workIn !== undefined) && (miseen !== undefined)) {
+        if ((!rentWeek) && (!rentTimeFrom) && (!rentTimeTo)
+            && (!parkAvaliable) && (!elevator) && (!table)
+            && (!seat) && (!price) && (!trial) && (!morningDelivery)
+            && (!workIn) && (!miseen)) {
             isPublic = true;
             submit();
         }
@@ -141,6 +141,7 @@ const PlaceInfoModifyPage3 = () => {
     }
     const submit = () => {
         const rentDayString = [];
+        
         if (monDay) rentDayString.push("월");
         if (tuesDay) rentDayString.push("화");
         if (wednesDay) rentDayString.push("수");
@@ -149,8 +150,8 @@ const PlaceInfoModifyPage3 = () => {
         if (saturDay) rentDayString.push("토");
         if (sunDay) rentDayString.push("일");
 
-        const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0, 4).join(" ")).join(",");
-        const rentData = rentWeek !== "직접지정" ? rentWeek + " " + rentDayString.join(",") : rentDaysdata;
+        const rentDaysdata = rentDayString.length !== 0 ? rentDayString.map((day) => day.toString().split(" ").slice(0, 4).join(" ")).join(",") : rentDays;
+        const rentData = rentWeek !== "직접지정" ? rentWeek + " " + rentDayString.join(",") : '직접지정' + '%' + rentDays;
         const park = parkAvaliable === "직접 입력" ? exactPark + "대" : parkAvaliable;
         data.isPublic = data.isPublic && isPublic;
         navigate("/placeInfoModify4", {
@@ -197,10 +198,12 @@ const PlaceInfoModifyPage3 = () => {
                 </div>
                 <ForAllLogo />
                 <div>
+                    {console.log(rentWeek)}
+                    {console.log(rentDays)}
                     <a>대관 가능일<span style={{ color: '#FF2929' }} >*</span></a>
                     <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeeksData.includes(rentWeek) ? rentWeek : "직접지정"} val={rentWeek} width='100%' />
                     {rentWeek === "직접지정" ?
-                        <MultipleDatePicker onSubmit={setRentDays}  /> : (rentWeek !== "휴무없음" ?
+                        <input onChange={onChangeDate} placeholder="대관 가능일을 입력해주세요"  className="input" style={{width:'99%',fontSize:'0.625rem',marginTop:'0.5rem'}} defaultValue={rentDays} /> : (rentWeek !== "휴무없음" ?
                             <div style={{ display: 'flex' }} >
                                 <div className={monDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleMonday}>월</div>
                                 <div className={tuesDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleTuesDay}>화</div>

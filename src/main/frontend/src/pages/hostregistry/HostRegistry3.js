@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { ModalStyles } from "../../components/ModalStyles";
 import "../../components/Styles.css";
-import MultipleDatePicker from "react-multiple-datepicker";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 import ForAllLogo from "../../components/ForAllLogo";
 import {SmallModalStyles} from "../../components/SmallModalStyles";
@@ -64,6 +63,9 @@ const HostRegistry3 = () => {
     const onChangePrice = useCallback((e) => {
         setPrice(e.target.value);
     }, []);
+    const onChangeDate = useCallback((e) => {
+        setRentDays(e.target.value);
+    }, []);
 
     const toggleMonday = useCallback((e) => {
         setMonDay(!monDay);
@@ -87,9 +89,7 @@ const HostRegistry3 = () => {
         setSunDay(!sunDay);
     }, [sunDay]);
 
-    const handleDatePicker=(e)=>{
-        setRentDays(e);
-    };
+
 
     const handleButton = () => {
         if ((rentWeek !== "") && (rentTimeFrom !== "") && (rentTimeTo !== "")
@@ -112,8 +112,8 @@ const HostRegistry3 = () => {
         if (saturDay) rentDayString.push("토");
         if (sunDay) rentDayString.push("일");
 
-        const rentDaysdata = rentDays.map((day) => day.toString().split(" ").slice(0, 4).join(" ")).join(",");
-        const rentData = rentWeek !== "직접지정" ? rentWeek + " " + rentDayString.join(",") : rentDaysdata;
+        const rentDaysdata = rentDayString.length !== 0 ? rentDayString.map((day) => day.toString().split(" ").slice(0, 4).join(" ")).join(",") : rentDays;
+        const rentData = rentWeek !== "직접지정" ? rentWeek + " " + rentDayString.join(",") : '직접지정' + '%' + rentDaysdata;
         const park = parkAvaliableData.includes(parkAvaliable) ? parkAvaliable : exactPark + "대";
         data.isPublic = data.isPublic && isPublic;
         navigate("/hostRegistry4", {
@@ -165,9 +165,9 @@ const HostRegistry3 = () => {
                     {console.log(rentWeek)}
                     {console.log(rentDays)}
                     <a>대관 가능일<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={'휴무없음'}  width='100%' />
+                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"}  width='100%' />
                     {rentWeek === "직접지정" ?
-                        <MultipleDatePicker onSubmit={handleDatePicker} /> : (rentWeek !== "휴무없음" ?
+                        <input onChange={onChangeDate} placeholder="대관 가능일을 입력해주세요"  className="input" style={{width:'99%',fontSize:'0.625rem',marginTop:'0.5rem'}}  /> : (rentWeek !== "휴무없음" ?
                             <div style={{display:'flex'}} >
                                 <div className={monDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleMonday}>월</div>
                                 <div className={tuesDay ? "btn_selected_square" : "btn_not_selected_square"} onClick={toggleTuesDay}>화</div>

@@ -81,7 +81,6 @@ const PlaceInfoModifyPage4 = () => {
         axios
             .get("/api/v1/space/" + spaceid)
             .then((res) => {
-                console.log(res.data);
                 setDbData(res.data)
                 setFirePit(res.data.fireholeNum);
                 setExactFirePit(res.data.fireholeNum);
@@ -103,11 +102,12 @@ const PlaceInfoModifyPage4 = () => {
             .catch((err) => console.error(err));
     };
     useEffect(() => {
+        console.log(data);
         downloadData();
     }, []);
     const handleButton = () => {
-        if ((firePit !== undefined) && (sidePlate !== undefined) && (countSidePlate !== undefined) && (cup !== undefined) && (countCup !== undefined)
-            && (cuttrary !== undefined) && (countCuttrary !== undefined)) {
+        if ((!firePit) && (!sidePlate) && (!countSidePlate) && (!cup) && (!countCup)
+            && (!cuttrary) && (!countCuttrary)) {
             isPublic = true;
             submit();
         }

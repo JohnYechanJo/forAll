@@ -35,7 +35,7 @@ const PlaceInfoModify2 = () => {
         else return arr[idx]
     }
     const handleButton = () => {
-        if ((img1 !== "") && (img2 !== "") && (img3 !== "") && (kitchen1 !== "") && (kitchen2 !== "") && (kitchen3 !== "") && (menu1 !== "") && (menuAdditional !== "")) {
+        if ((!img1) && (!img2) && (!img3) && (!kitchen1) && (!kitchen2) && (!kitchen3) && (!menu1) && (!menuAdditional) && (!imgAdditional) && (!kitchenAdditional)) {
             isPublic = true;
             submit();
         }

@@ -47,7 +47,7 @@ const GuestRegistry = () => {
         }
     };
     const handleButton = () => {
-        if (introduce && profileImage && selectedMBTI && selectedFoodTypes && selectedIngredient) {
+        if (introduce && profileImage && selectedMBTI && selectedFoodTypes.length!==0 && selectedIngredient!==0) {
             submit();
         }
         else setIsModalOpen(true);
