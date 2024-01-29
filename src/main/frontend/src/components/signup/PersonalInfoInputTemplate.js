@@ -53,18 +53,27 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
 
     return (
         <div style={{width:'100%'}} >
-            <a style={{paddingLeft: '2%'}} className="fontForRegister" >아이디<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-            <div style={{marginLeft: '2%', marginRight: '2%', flexDirection:"row", alignItems: "center",marginBottom:"2.5rem", display:"flex"}} >
+            <a style={{paddingLeft:'2%'}} className="fontForRegister" >아이디<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
+            <div style={{paddingLeft: '2%',
+                flexDirection: "row",
+                alignItems: "center",
+                marginBottom: "2.5rem",
+                display: "flex"
+            }}>
                 <input
-                    className="inputForRegister fontForRegister "
-                    style={{width:"61%", paddingLeft:"2%"}}
+                    style={{width:"61%", paddingLeft:"2%", fontSize:'0.625rem',fontWeight:'300'}}
+                    className="inputForRegister fontForRegister"
                     placeholder={"아이디를 입력해주세요"}
                     onChange={onChangeId}
                 />
-                <button onClick={() => checkDuplicatedId()} className="buttonForRegister" style={{ textAlign:'center', height: '2.7rem', width: '32%', fontSize: '0.625rem'}}>중복 확인</button>
+                <button onClick={() => checkDuplicatedId()} style={{textAlign:'center',height: '2.7rem', width: '32%',fontSize: '0.625rem'}} className="buttonForRegister">중복 확인</button>
             </div>
             {isCheckedDuplicatedId === true ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>중복 확인 완료되었습니다</p> :
                 (isCheckedDuplicatedId === false ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>중복되는 아이디가 존재합니다</p> : null)}
+
+
+
+
             <a style={{paddingLeft: '2%'}} className="fontForRegister"  >비밀번호<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div className="relative w-full" style={{marginLeft: '2%', marginRight: '2%', width: '96%', display: "flex",
                 alignItems: "center", marginBottom: "2.5rem", border: '1px solid #D9D9D9'}}>
@@ -105,22 +114,22 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
 
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                {hide[1] ? (
+                    {hide[1] ? (
                         <AiFillEyeInvisible
                             className="text-xl text-gray-700 cursor-pointer"
                             onClick={() => onToggleHide(1)}
                         />
 
-                ) : (
+                    ) : (
                         <AiFillEye
                             className="text-xl text-gray-700 cursor-pointer"
                             onClick={() => onToggleHide(1)}
                         />
-                )}
+                    )}
                 </div>
             </div>
-                {isCheckPw === true ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>비밀번호가 일치합니다</p> :
-                    (isCheckPw === false ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>비밀번호가 일치하지 않습니다</p> : null)}
+            {isCheckPw === true ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>비밀번호가 일치합니다</p> :
+                (isCheckPw === false ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>비밀번호가 일치하지 않습니다</p> : null)}
 
             <a style={{paddingLeft: '2%'}} className="fontForRegister" >이름<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
             <div style={{paddingLeft: '2%', flexDirection: "column", marginBottom:"2.5rem", display:"flex" }}>
@@ -169,9 +178,9 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                 display: "flex"
             }}>
                 <input className="inputForRegister fontForRegister"
-                        style={{width:"61%", paddingLeft:"2%", fontSize:'0.625rem',fontWeight:'300'}}
-                        placeholder={" 인증번호 입력"}
-                        onChange={onChangeCerifiedNum}
+                       style={{width:"61%", paddingLeft:"2%", fontSize:'0.625rem',fontWeight:'300'}}
+                       placeholder={" 인증번호 입력"}
+                       onChange={onChangeCerifiedNum}
                 />
                 <button onClick={() => checkCerifiedNum()} className="buttonForRegister"
                         style={{ textAlign:'center', height: '2.7rem', width: '32%', fontSize: '0.625rem', backgroundColor:"#616161",color:"white"}}

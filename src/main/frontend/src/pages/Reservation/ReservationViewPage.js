@@ -22,7 +22,7 @@ const ReservationViewPage = () => {
                 flexDirection: "column"
             }}>
                 <p>
-                    <ImageViewer style={{marginTop: '-2rem', height: "15rem", width: "100%"}}  val={data.image} />
+                    <ImageViewer style={{marginTop: '-2rem', height: "15rem", width: "100%"}}  val={data.mainImage} />
                     <p style={{marginTop: "1rem", fontSize: "1.25rem", marginLeft: "1rem", marginBottom: "-1rem"}}>
                         {AddressUtil.extraction(data.address) + " | " + data.name}
                     </p>

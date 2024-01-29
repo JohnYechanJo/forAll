@@ -73,9 +73,7 @@ const RentSpacePage = () => {
                 display: "flex",
                 flexDirection: "column"
             }}>
-                <p>
-                    <ImageViewer style={{ height: "15rem", width: "100%"}} val={data.mainImage}/>
-                </p>
+
             </div>
             <div>
                 <ImageSlider images={images1}/>

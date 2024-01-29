@@ -8,14 +8,18 @@ const AdminMainPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const data = { ...location.state };
-    const [tableName, setTableName] = useState(data.tableName ? data.tableName : "대기중");
+    console.log(data);
+    const [tableName, setTableName] = useState("대기중");
     const [category, setCategory] = useState(data.category ? data.category : "space");
-    const [state, setState] = useState(SpaceState.PENDING);
+    const [state, setState] = useState(data.state ? data.state : SpaceState.PENDING);
     const [dataList, setDataList] = useState([]);
     const [confirm, setConfirm] = useState(false);
     useEffect(() => {
         axios.get("/api/v1/admin/" + category+"List/"+state).then((res) => setDataList(res.data))
             .catch((err) => console.error(err));
+        if (state === "Pending") setTableName("대기중");
+        else if(state === "Approve") setTableName("승인");
+        else if(state === "Reject") setTableName("거절");
     }, [category, state]);
     const confirmObject = (id, state) => {
         axios.post("/api/v1/admin/"+category, {
@@ -77,7 +81,7 @@ const AdminMainPage = () => {
                             <p onClick={()=>navigate("/admin"+category+"ViewPage1", {state: {
                                     ...data,
                                     category: category,
-                                    tableName: tableName
+                                    state: state
                                 }})}>더보기</p>
                             {state === "Pending" ? (
                                 <div className={"button-set"}>
