@@ -46,7 +46,7 @@ const ProfileModifyPage = () => {
         }
     };
     const handleButton = () => {
-        if (introduce && profileImage) {
+        if (introduce && profileImage && selectedMBTI && selectedFoodTypes && selectedIngredient) {
             submit();
         }
         else setIsModalOpen(true);

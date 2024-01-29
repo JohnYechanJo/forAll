@@ -366,7 +366,7 @@ const HostRegistry = () => {
                             <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '1rem' }} />
                             <a>주소(위치)<span style={{ color: '#FF2929' }} >*</span></a>
                             <div style={{ display: 'flex' }} >
-                                <input value={address} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '80%' }} className="inputForRegister" />
+                                <input value={address} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '80%',height:'1.875rem' }} className="inputForRegister" />
                                 <Modal isOpen={modalOpen1} >
                                     <DaumPost setAddress={(e) => {
                                         setAddress(e);
@@ -377,7 +377,7 @@ const HostRegistry = () => {
                                 <button onClick={() => setModalOpen1(true)} style={{ width: "3.4375rem", height: "1.875rem", fontSize: "0.625rem", backgroundColor: "black", color: "white", borderRadius: '0.375rem', marginLeft: '0.31rem' }} >주소등록</button>
                             </div>
                             <div>
-                                <span>{(address !== null) ? address : null} </span>
+                                {/* <span>{(address !== null) ? address : null} </span> */}
                                 <span>
                                     <input type="text"
                                         placeholder="상세 주소"
