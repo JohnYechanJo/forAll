@@ -35,7 +35,8 @@ const RentSpacePage3 = () => {
 
 
     const substractChef = () => { setChefNum(chefNum-1); }
-    const addChef = () => { setChefNum(chefNum+1); }
+    const addChef = () => {
+        setChefNum(chefNum+1); }
 
     const submit = () => {
         axios.post("/api/v1/reservation", {
@@ -222,10 +223,7 @@ const RentSpacePage3 = () => {
                             fontSize: "0.8rem"
                         }}>: </strong>&ensp;&ensp;
 
-                            <div onClick={() => {
-                                if (chefNum <= 1) return;
-                                substractChef();
-                            }}>
+                            <div >
                                 <div style={{display: "flex", justifyContent: "right"}}>
                                     <img src={minusButton} alt="minusButton"
                                          style={{
@@ -234,7 +232,12 @@ const RentSpacePage3 = () => {
                                              height: '1.125rem',
                                              flexShrink: 0,
                                              display: "block"
-                                         }}/>
+                                         }}
+                                         onClick={() => {
+                                             if (chefNum <= 1) return;
+                                             substractChef();
+                                         }}
+                                    />
                                     &ensp;&ensp;&ensp;
                                     <a>{chefNum}명</a>
                                     <div style={{margin: "0 0.5rem 0 0.5rem"}} onClick={() => {

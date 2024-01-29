@@ -56,10 +56,7 @@ const AdminMainPage = () => {
                     <p onClick={()=>setStates("reservation", ReservationState.REJECT)}>거절한 예약</p>
                 </div>
                 <div>
-                    <h1>예약 취소</h1>
-                    <p onClick={()=>setStates("reservation", ReservationState.CANCELPENDING)}>대기중</p>
-                    <p onClick={()=>setStates("reservation", ReservationState.CANCELAPPROVE)}>승인한 예약취소</p>
-                    <p onClick={()=>setStates("reservation", ReservationState.CANCELREJECT)}>거절한 예약취소</p>
+                    <h1 onClick={()=>setStates("reservation", ReservationState.CANCEL)}>예약 취소</h1>
                 </div>
                 <div>
                     <h1>고객 센터</h1>

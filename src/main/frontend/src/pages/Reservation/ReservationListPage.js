@@ -19,10 +19,7 @@ const ReservationListPage = () => {
     const [isErase, setIsErase] = useState(false);
 
     const [selectErase, setSelectErase] = useState(false);
-    const [selectPost, setSelectPost] = useState();
-    const deletePost = (post) => {
-        setSelectPost(post);
-    }
+    const [selectReservation, setSelectReservation] = useState();
 
     ///글 작성
     const [postContent, setPostContent] = useState("");
@@ -30,7 +27,11 @@ const ReservationListPage = () => {
 
 ///예약 정보 삭제
     const deleteSelect = (id)=>{
-        axios.get("/api/v1/articles/delete/"+selectPost.id).then(()=>window.location.reload());
+        axios.post("/api/v1/reservation/cancel",{
+            id: id,
+            reason: postContent,
+            cancelTime: TimeUtil.now()
+        }).then(()=>window.location.reload());
     };
     const handleAssurance = (data) => {
         console.log(data);
@@ -117,7 +118,10 @@ const ReservationListPage = () => {
 
                             </div>
                             <div>
-                                <p onClick={() => setIsErase(true)}
+                                <p onClick={() => {
+                                    setSelectReservation(data);
+                                    setIsErase(true);
+                                }}
                                    style={{
                                        fontSize: '0.8rem',
                                        fontStyle: 'normal',
@@ -181,7 +185,7 @@ const ReservationListPage = () => {
 
                     <div className="bottom_button_fixed">
                         <a style={{fontSize: "0.8rem"}} onClick={() => {
-                            deleteSelect();
+                            deleteSelect(selectReservation.id);
                             setIsErase(false)
                         }}>저장 후 닫기</a>
                     </div>
