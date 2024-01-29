@@ -1,9 +1,24 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
+import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 
-const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day, cerifiedNum, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear, setMonth, setDay, setGender, isCheckPw, setIsCheckedDuplicatedEmail, isCheckedDuplicatedEmail, sendCerifiedNum, gender, isPhoneCerified, setIsPhoneCerified }) => {
-    console.log(year, month, day);
+const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day, cerifiedNum, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear, setMonth, setDay, setGender, isCheckPw, setIsCheckedDuplicatedEmail, isCheckedDuplicatedEmail, sendCerifiedNum, gender, isPhoneCerified, setIsPhoneCerified, defaultEmail, defaultPhone }) => {
+    const [phoneChanged, setPhoneChanged] = useState(false);
+    const [emailChanged, setEmailChanged] = useState(false);
+    console.log(year,month,day);
+    useDidMountEffect(() => {
+        if (phone != defaultPhone){
+            setIsPhoneCerified(false);
+            setPhoneChanged(true);
+        }
+    }, [phone]);
+    useDidMountEffect(() => {
+        if(email != defaultEmail){
+            setIsCheckedDuplicatedEmail(false);
+            setEmailChanged(true);
+        }
+    }, [email]);
 
 
     const onChangePw = useCallback((e) => {
@@ -42,42 +57,25 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
         setHide(hide.map((ishide, i)=> idx === i ? !ishide : ishide));
     };
     const checkDuplicatedEmail = () => {
-
-        if (email === prevEmail) {
-            setIsCheckedDuplicatedEmail(true);
-        }
-        else {
-            axios.get("/api/v1/members/checkEmail/" + email)
-                .then((response) => {
-                    setIsCheckedDuplicatedEmail(true);
-                }).catch((response) => {
-                setIsCheckedDuplicatedEmail(false);
-            });
-        }
+        axios.get("/api/v1/members/checkEmail/" + email)
+            .then((response) => {
+                setIsCheckedDuplicatedEmail(true);
+            }).catch((response) => {
+            setIsCheckedDuplicatedEmail(false);
+        });
     };
     const checkCerifiedNum = () => {
-        if (phone === prevPhone) {
-            setIsPhoneCerified(true);
-        }
-        else {
-            axios.get("/api/v1/checkSms/" + phone + "/" + cerifiedNum)
-                .then((response) => {
-                    setIsPhoneCerified(true);
-                }).catch((response) => {
-                setIsPhoneCerified(false);
-            });
-
-
-        }
+        axios.get("/api/v1/checkSms/" + phone + "/" + cerifiedNum)
+            .then((response) => {
+                setIsPhoneCerified(true);
+            }).catch((response) => {
+            setIsPhoneCerified(false);
+        });
     };
-    const [prevEmail, setPrevEmail] = useState(email);
-    const [prevPhone, setPrevPhone] = useState(phone);
     const years = [...Array(121).keys()].map(i => i + 1900).reverse();
     const months = [...Array(12).keys()].map(i => i + 1);
     const days = [...Array(31).keys()].map(i => i + 1);
     const id = sessionStorage.getItem("user_id");
-    setIsCheckedDuplicatedEmail(true);
-    setIsPhoneCerified(true);
     return (
         <div style={{width: '100%'}}>
             <a className="fontForRegister" style={{paddingLeft: "0.5rem"}}>아이디<span className="fontForRegister"
@@ -200,7 +198,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                     placeholder={"예: forall@forall.com"}
                     style={{width: "61%", paddingLeft: "2%", fontSize: '0.625rem', fontWeight: '300'}}
                 />
-                <button onClick={() => checkDuplicatedEmail()} disabled={email === prevEmail}
+                <button onClick={() => checkDuplicatedEmail()} disabled={email === defaultEmail}
                         style={{
                             textAlign: 'center',
                             height: '2.7rem',
@@ -214,21 +212,13 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
 
 
             </div>
-
-            {isCheckedDuplicatedEmail === true ? <p style={{
-                    paddingLeft: '2%',
-                    fontSize: '0.625rem',
-                    fontWeight: '300',
-                    marginTop: "-2.5rem",
-                    marginBottom: "2.5rem"
-                }}>중복 확인 완료되었습니다</p> :
-                (isCheckedDuplicatedEmail === false ? <p style={{
-                    paddingLeft: '2%',
-                    fontSize: '0.625rem',
-                    fontWeight: '300',
-                    marginTop: "-2.5rem",
-                    marginBottom: "2.5rem"
-                }}>중복되는 이메일이 존재합니다</p> : null)}
+            {!emailChanged ? null : (<p style={{
+                paddingLeft: '2%',
+                fontSize: '0.625rem',
+                fontWeight: '300',
+                marginTop: "-2.5rem",
+                marginBottom: "2.5rem"
+            }}>{isCheckedDuplicatedEmail ? "중복 확인 완료되었습니다" : "중복 확인 실패했습니다."}</p>)}
 
 
             <a style={{paddingLeft: '2%'}} className="fontForRegister">휴대폰<span className="fontForRegister"
@@ -284,20 +274,13 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                 >인증번호 확인
                 </button>
             </div>
-            {isPhoneCerified === true ? <p style={{
-                    paddingLeft: '2%',
-                    fontSize: '0.625rem',
-                    fontWeight: '300',
-                    marginTop: "-2.5rem",
-                    marginBottom: "2.5rem"
-                }}>인증 완료되었습니다</p> :
-                (isPhoneCerified === false ? <p style={{
-                    paddingLeft: '2%',
-                    fontSize: '0.625rem',
-                    fontWeight: '300',
-                    marginTop: "-2.5rem",
-                    marginBottom: "2.5rem"
-                }}>인증 실패했습니다</p> : null)}
+            {!phoneChanged ? null : (<p style={{
+                paddingLeft: '2%',
+                fontSize: '0.625rem',
+                fontWeight: '300',
+                marginTop: "-2.5rem",
+                marginBottom: "2.5rem"
+            }}>{isPhoneCerified ? "인증 완료되었습니다." : "인증 실패했습니다."}</p>)}
             <div>
                 <a style={{paddingLeft: "2%"}} className="fontForRegister">생년월일<span className="fontForRegister"
                                                                                      style={{color: "#FF2929"}}>*</span></a>
@@ -310,7 +293,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                         height: '2.5rem',
                         border: '1px solid #D9D9D9',
                         width: '30%'
-                    }}>
+                    }} value={year}>
                         <option value="">년(YYYY)</option>
                         {years.map(year => (
                             <option key={year} value={year}>
@@ -324,7 +307,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                         height: '2.5rem',
                         border: '1px solid #D9D9D9',
                         width: '30%'
-                    }}>
+                    }} value={month}>
                         <option value="">월(MM)</option>
                         {months.map(month => (
                             <option key={month} value={month}>
@@ -338,7 +321,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                         height: '2.5rem',
                         border: '1px solid #D9D9D9',
                         width: '30%'
-                    }}>
+                    }} value={day}>
                         <option value="">일(DD)</option>
                         {days.map(day => (
                             <option key={day} value={day}>
