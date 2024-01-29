@@ -8,7 +8,7 @@ import {AddressUtil} from "../utils/AddressUtil"; // 나중에 Styles.css로 합
 const Banner = ({dataSet, navigate}) => {
     // 왜인지는 모르겠는데 얘만 process 접근이 안됨
     // const SpringAppUrl = process.env.SPRING_APP_URL;
-    const spring_app_url = "http://localhost:8080";
+    const spring_app_url = "http://15.165.222.15:80";
     SwiperCore.use([Autoplay]);
 
     const handleClick = (data) => {
