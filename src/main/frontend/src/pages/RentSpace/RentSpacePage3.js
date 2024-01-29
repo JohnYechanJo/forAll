@@ -10,7 +10,6 @@ import "../../style/RentSpace.css";
 import arrowleft from "../../components/icons/arrowleft.png";
 import {AddressUtil} from "../../utils/AddressUtil";
 import creditCard from "../../components/icons/creditCard.png";
-import DropDown from "../../components/DropDown";
 import Contract from "../../components/Contract";
 import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
 import minusButton from "../../components/icons/minusButton.png";

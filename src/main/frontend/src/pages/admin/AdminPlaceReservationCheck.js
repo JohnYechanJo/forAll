@@ -1,12 +1,7 @@
-import Sidebar from "../../components/home/Sidebar";
-import HomeTemplate from "../../components/home/HomeTemplate";
-import React, {useEffect, useState} from "react";
-import axios from "axios";
+import React from "react";
 import {TimeUtil} from "../../utils/TimeUtil";
 import {AddressUtil} from "../../utils/AddressUtil";
 import {useLocation, useNavigate} from "react-router-dom";
-import {ReservationState} from "../../utils/enums";
-import ImageInput from "../../components/ImageInput";
 import ImageViewer from "../../components/ImageViewer";
 
 const AdminPlaceReservationCheck = () => {
@@ -112,7 +107,7 @@ const AdminPlaceReservationCheck = () => {
                     </strong>
                 </p>
             </div>
-            <div style={{paddingBottom:"3rem"}}>
+            {data.cancelReason ? (<div style={{paddingBottom: "3rem"}}>
                 <div style={{display: "flex", width: "100%", height: "3.125rem", border: "1px solid #C4C4C4"}}><p
                     style={{fontSize: "1rem", fontWeight: "700", paddingLeft: "1rem"}}>
                     • 취소 정보<span className="fontForRegister" style={{color: "#FF2929"}}>*</span>
@@ -133,7 +128,7 @@ const AdminPlaceReservationCheck = () => {
                         {TimeUtil.toReservationDate(data.cancelTime)}
                     </strong>
                 </p>
-            </div>
+            </div>) : null}
             <button onClick={() => navigate("/admin", {state: data})} className="bottom_button"
                     style={{backgroundColor: "#FF4F4F", position: "fixed"}}>돌아가기
             </button>

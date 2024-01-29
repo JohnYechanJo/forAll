@@ -7,9 +7,6 @@ import {AddressUtil} from "../../utils/AddressUtil";
 import {useNavigate} from "react-router-dom";
 import {ReservationState} from "../../utils/enums";
 import Modal from "react-modal";
-import {SmallModalStyles} from "../../components/SmallModalStyles";
-import ArticleListTemplate from "../../components/board/ArticleListTemplate";
-import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
 import {CancelReasonModalStyles} from "../../components/CancelReasonModalStyles";
 import Header from "../../components/home/Header";
 
@@ -18,7 +15,6 @@ const ReservationListPage = () => {
     const [reservationData, setReservationData] = useState([]);
     const [isErase, setIsErase] = useState(false);
 
-    const [selectErase, setSelectErase] = useState(false);
     const [selectReservation, setSelectReservation] = useState();
 
     ///글 작성
