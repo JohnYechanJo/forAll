@@ -3,7 +3,7 @@ import axios from "axios";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 import useDidMountEffect from "../../utils/hooks/useDidMountEffect";
 
-const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day, cerifiedNum, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear, setMonth, setDay, setGender, isCheckPw, setIsCheckedDuplicatedEmail, isCheckedDuplicatedEmail, sendCerifiedNum, gender, isPhoneCerified, setIsPhoneCerified, defaultEmail, defaultPhone }) => {
+const PersonalInfoModifyInputTemplate = ({ name, pw, phone, email, year, month, day, cerifiedNum, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear, setMonth, setDay, setGender, isCheckPw, setIsCheckedDuplicatedEmail, isCheckedDuplicatedEmail, sendCerifiedNum, gender, isPhoneCerified, setIsPhoneCerified, defaultEmail, defaultPhone }) => {
     const [phoneChanged, setPhoneChanged] = useState(false);
     const [emailChanged, setEmailChanged] = useState(false);
     console.log(year,month,day);
@@ -76,6 +76,16 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
     const months = [...Array(12).keys()].map(i => i + 1);
     const days = [...Array(31).keys()].map(i => i + 1);
     const id = sessionStorage.getItem("user_id");
+
+    const arrPW = pw.split('');
+    console.log(arrPW);
+    const isPasswordValid =
+        arrPW.length > 11 && arrPW.length < 15 &&
+        arrPW.some(element => /[a-zA-Z]/.test(element)) && // 영문자 포함 여부 확인
+        arrPW.some(element => /[0-9]/.test(element)) && // 숫자 포함 여부 확인
+        arrPW.some(element => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(element)); // 특수 문자 포함 여부 확인
+
+
     return (
         <div style={{width: '100%'}}>
             <a className="fontForRegister" style={{paddingLeft: "0.5rem"}}>아이디<span className="fontForRegister"
@@ -123,6 +133,11 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                     )}
                 </div>
             </div>
+            {isPasswordValid || pw.length===0 ? null : <p style={{paddingLeft: '2%',
+                fontSize: '0.625rem',
+                fontWeight: '300',
+                marginTop: "-2.5rem",
+                marginBottom: "2.5rem"}}>대,소문자,특수기호,숫자 포함 12-14자리를 입력해주세요.</p>}
             <a style={{paddingLeft: '2%'}} className="fontForRegister">비밀번호 확인<span className="fontForRegister"
                                                                                     style={{color: "#FF2929"}}>*</span></a>
             <div className="relative w-full" style={{
@@ -202,7 +217,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                         style={{
                             textAlign: 'center',
                             height: '2.7rem',
-                            width: '32%',
+                            width: '30%',
                             fontSize: '0.625rem',
                             backgroundColor: "#616161",
                             color: "white"
@@ -242,7 +257,7 @@ const PersonalInfoModifyInputTemplate = ({ name, phone, email, year, month, day,
                         style={{
                             textAlign: 'center',
                             height: '2.7rem',
-                            width: '32%',
+                            width: '30%',
                             fontSize: '0.625rem',
                             backgroundColor: "#616161",
                             color: "white"

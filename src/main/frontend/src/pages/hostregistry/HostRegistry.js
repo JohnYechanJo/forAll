@@ -1,8 +1,9 @@
 
-import { useState } from "react";
+import React, { useState } from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
+import iImg from "../../components/icons/i.png";
 import { ModalStyles } from "../../components/ModalStyles";
 import { ModalForAddress } from "../../components/ModalForAddress";
 import DaumPost from "../../components/DaumPost";
@@ -115,19 +116,25 @@ const HostRegistry = () => {
                             <hr style={{ height: "1px", backgroundColor: "black" }} />
                         </div>
                         <div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
-                                <a>공간명<span style={{ color: '#FF2929' }} >*</span></a>
+                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                <a>공간명<span style={{color: '#FF2929'}}>*</span></a>
                                 <p>
                                     <span>{inputCount}</span>
                                     <span>/18자</span>
                                 </p>
                             </div>
+
                             <input type="text" placeholder="오스테리아 로에로" className="input"
-                                onChange={onInputHandler} maxLength="17" />
-                            <a>❕사용 가능한 특수문자: (,),(-),(.),(@),(/)</a>
+                                   onChange={onInputHandler} maxLength="17"/>
+                            <div style={{marginTop: '0.5rem', justifyContent: 'left', display: 'flex'}}>
+                                <img src={iImg} alt="iImg"
+                                     style={{width: '1rem', height: '1rem', flexShrink: 0}}/>
+                                &ensp;
+                                <a style={{paddingTop: "0.05rem"}}>사용 가능한 특수문자: (,),(-),(.),(@),(/)</a>
+                            </div>
                         </div>
                         <div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
+                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                                 <a>공간 한 줄 소개<span style={{ color: '#FF2929' }} >*</span></a>
                                 <p>
                                     <span>{inputCount2}</span>

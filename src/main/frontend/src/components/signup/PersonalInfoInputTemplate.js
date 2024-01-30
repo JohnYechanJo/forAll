@@ -4,7 +4,7 @@ import axios from "axios";
 import "../../components/Styles.css";
 import React from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear,setMonth,setDay, setGender, checkDuplicatedId, checkDuplicatedEmail, isCheckedDuplicatedId, isCheckedDuplicatedEmail, isCheckPw, sendCerifiedNum, checkCerifiedNum,isPhoneCerified, gender }) => {
+const PersonalInfoInputTemplate = ({ role, pw, pwCheck, setId, setPw, setPwCheck, setName, setEmail, setPhone, setCerifiedNum, setYear,setMonth,setDay, setGender, checkDuplicatedId, checkDuplicatedEmail, isCheckedDuplicatedId, isCheckedDuplicatedEmail, isCheckPw, sendCerifiedNum, checkCerifiedNum,isPhoneCerified, gender }) => {
 
 
     const onChangeId = useCallback((e) => {
@@ -44,46 +44,74 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
     const months = [...Array(12).keys()].map(i => i + 1);
     const days = [...Array(31).keys()].map(i => i + 1);
 
-
     const [hide, setHide] = useState([true, true]);
+
+    const arrPW = pw.split('');
+    console.log(arrPW);
+    const isPasswordValid =
+        arrPW.length > 11 && arrPW.length < 15 &&
+        arrPW.some(element => /[a-zA-Z]/.test(element)) && // 영문자 포함 여부 확인
+        arrPW.some(element => /[0-9]/.test(element)) && // 숫자 포함 여부 확인
+        arrPW.some(element => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(element)); // 특수 문자 포함 여부 확인
 
     const onToggleHide = (idx) => {
         setHide(hide.map((ishide, i)=> idx === i ? !ishide : ishide));
     };
 
     return (
-        <div style={{width:'100%'}} >
-            <a style={{paddingLeft:'2%'}} className="fontForRegister" >아이디<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-            <div style={{paddingLeft: '2%',
+        <div style={{width: '100%'}}>
+            <a style={{paddingLeft: '2%'}} className="fontForRegister">아이디<span className="fontForRegister"
+                                                                                style={{color: "#FF2929"}}>*</span></a>
+            <div style={{
+                paddingLeft: '2%',
                 flexDirection: "row",
                 alignItems: "center",
                 marginBottom: "2.5rem",
                 display: "flex"
             }}>
                 <input
-                    style={{width:"61%", paddingLeft:"2%", fontSize:'0.625rem',fontWeight:'300'}}
+                    style={{width: "61%", paddingLeft: "2%", fontSize: '0.625rem', fontWeight: '300'}}
                     className="inputForRegister fontForRegister"
                     placeholder={"아이디를 입력해주세요"}
                     onChange={onChangeId}
+                    maxLength={12}
                 />
-                <button onClick={() => checkDuplicatedId()} style={{textAlign:'center',height: '2.7rem', width: '32%',fontSize: '0.625rem'}} className="buttonForRegister">중복 확인</button>
+                <button onClick={() => checkDuplicatedId()}
+                        style={{textAlign: 'center', height: '2.7rem', width: '30%', fontSize: '0.625rem'}}
+                        className="buttonForRegister">중복 확인
+                </button>
             </div>
-            {isCheckedDuplicatedId === true ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>중복 확인 완료되었습니다</p> :
-                (isCheckedDuplicatedId === false ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>중복되는 아이디가 존재합니다</p> : null)}
+            {isCheckedDuplicatedId === true ? <p style={{
+                    paddingLeft: '2%',
+                    fontSize: '0.625rem',
+                    fontWeight: '300',
+                    marginTop: "-2.5rem",
+                    marginBottom: "2.5rem"
+                }}>중복 확인 완료되었습니다</p> :
+                (isCheckedDuplicatedId === false ? <p style={{
+                    paddingLeft: '2%',
+                    fontSize: '0.625rem',
+                    fontWeight: '300',
+                    marginTop: "-2.5rem",
+                    marginBottom: "2.5rem"
+                }}>중복되는 아이디가 존재합니다</p> : null)}
 
 
-
-
-            <a style={{paddingLeft: '2%'}} className="fontForRegister"  >비밀번호<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-            <div className="relative w-full" style={{marginLeft: '2%', marginRight: '2%', width: '96%', display: "flex",
-                alignItems: "center", marginBottom: "2.5rem", border: '1px solid #D9D9D9'}}>
+            <a style={{paddingLeft: '2%'}} className="fontForRegister">비밀번호<span className="fontForRegister"
+                                                                                 style={{color: "#FF2929"}}>*</span></a>
+            <div className="relative w-full" style={{
+                marginLeft: '2%', marginRight: '2%', width: '96%', display: "flex",
+                alignItems: "center", marginBottom: "2.5rem", border: '1px solid #D9D9D9'
+            }}>
                 <input
                     className="inputForRegister fontForRegister pr-10"
                     type={hide[0] ? 'password' : 'text'}
                     placeholder={" 대,소문자,특수기호,숫자 포함 12-14자리"}
                     onChange={onChangePw}
-                    style={{paddingLeft: '2%', height: '2.5rem', fontSize: '0.625rem',fontWeight: '300', width: "92%",
-                        border: '#FFFFFF'}}
+                    style={{
+                        paddingLeft: '2%', height: '2.5rem', fontSize: '0.625rem', fontWeight: '300', width: "92%",
+                        border: '#FFFFFF'
+                    }}
 
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -100,17 +128,28 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         />
                     )}
                 </div>
+
             </div>
-            <a style={{paddingLeft: '2%'}} className="fontForRegister"  >비밀번호 확인<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-            <div className="relative w-full" style={{marginLeft: '2%', marginRight: '2%', width: '96%', display: "flex",
-                alignItems: "center", marginBottom: "2.5rem", border: '1px solid #D9D9D9'}}>
+            {isPasswordValid || pw.length===0 ? null : <p style={{paddingLeft: '2%',
+                fontSize: '0.625rem',
+                fontWeight: '300',
+                marginTop: "-2.5rem",
+                marginBottom: "2.5rem"}}>대,소문자,특수기호,숫자 포함 12-14자리를 입력해주세요.</p>}
+            <a style={{paddingLeft: '2%'}} className="fontForRegister">비밀번호 확인<span className="fontForRegister"
+                                                                                    style={{color: "#FF2929"}}>*</span></a>
+            <div className="relative w-full" style={{
+                marginLeft: '2%', marginRight: '2%', width: '96%', display: "flex",
+                alignItems: "center", marginBottom: "2.5rem", border: '1px solid #D9D9D9'
+            }}>
                 <input
                     className="inputForRegister fontForRegister pr-10"
                     type={hide[1] ? 'password' : 'text'}
                     placeholder={" 비밀번호를 한 번 더 입력해주세요"}
                     onChange={onChangePwCheck}
-                    style={{paddingLeft: '2%', height: '2.5rem', fontSize: '0.625rem',fontWeight: '300', width: "92%",
-                        border: '#FFFFFF'}}
+                    style={{
+                        paddingLeft: '2%', height: '2.5rem', fontSize: '0.625rem', fontWeight: '300', width: "92%",
+                        border: '#FFFFFF'
+                    }}
 
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -128,47 +167,93 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                     )}
                 </div>
             </div>
-            {isCheckPw === true ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>비밀번호가 일치합니다</p> :
-                (isCheckPw === false ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>비밀번호가 일치하지 않습니다</p> : null)}
 
-            <a style={{paddingLeft: '2%'}} className="fontForRegister" >이름<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-            <div style={{paddingLeft: '2%', flexDirection: "column", marginBottom:"2.5rem", display:"flex" }}>
+            {isCheckPw === true ? <p style={{
+                    paddingLeft: '2%',
+                    fontSize: '0.625rem',
+                    fontWeight: '300',
+                    marginTop: "-2.5rem",
+                    marginBottom: "2.5rem"
+                }}>비밀번호가 일치합니다</p> :
+                (isCheckPw === false ? <p style={{
+                    paddingLeft: '2%',
+                    fontSize: '0.625rem',
+                    fontWeight: '300',
+                    marginTop: "-2.5rem",
+                    marginBottom: "2.5rem"
+                }}>비밀번호가 일치하지 않습니다</p> : null)}
+
+            <a style={{paddingLeft: '2%'}} className="fontForRegister">이름<span className="fontForRegister"
+                                                                               style={{color: "#FF2929"}}>*</span></a>
+            <div style={{paddingLeft: '2%', flexDirection: "column", marginBottom: "2.5rem", display: "flex"}}>
                 <input
                     className="inputForRegister fontForRegister"
                     placeholder={" 이름을 입력해 주세요"}
                     onChange={onChangeName}
-                    style={{height: '2.5rem', paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', width: "95%"}}
+                    style={{height: '2.5rem', paddingLeft: '2%', fontSize: '0.625rem', fontWeight: '300', width: "95%"}}
 
                 />
             </div>
-            <a style={{paddingLeft:'2%'}} className="fontForRegister" >이메일<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-            <div style={{paddingLeft: '2%',
+            <a style={{paddingLeft: '2%'}} className="fontForRegister">이메일<span className="fontForRegister"
+                                                                                style={{color: "#FF2929"}}>*</span></a>
+            <div style={{
+                paddingLeft: '2%',
                 flexDirection: "row",
                 alignItems: "center",
                 marginBottom: "2.5rem",
                 display: "flex"
             }}>
                 <input
-                    style={{width:"61%", paddingLeft:"2%", fontSize:'0.625rem',fontWeight:'300'}}
+                    style={{width: "61%", paddingLeft: "2%", fontSize: '0.625rem', fontWeight: '300'}}
                     className="inputForRegister fontForRegister"
                     placeholder={" 예:forall@forall.com"}
                     onChange={onChangeEmail}
                 />
-                <button onClick={() => checkDuplicatedEmail()} style={{textAlign:'center',height: '2.7rem', width: '32%',fontSize: '0.625rem'}} className="buttonForRegister">중복 확인</button>
+                <button onClick={() => checkDuplicatedEmail()}
+                        style={{textAlign: 'center', height: '2.7rem', width: '30%', fontSize: '0.625rem'}}
+                        className="buttonForRegister">중복 확인
+                </button>
             </div>
-            {isCheckedDuplicatedEmail === true ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>중복 확인 완료되었습니다</p> :
-                (isCheckedDuplicatedEmail === false ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>중복되는 이메일이 존재합니다</p> : null)}
-            <a style={{paddingLeft:'2%'}} className="fontForRegister" >휴대폰<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-            <div style={{paddingLeft: '2%', flexDirection:"row", alignItems: "center",marginBottom:"2.5rem", display:"flex"}} >
+            {isCheckedDuplicatedEmail === true ? <p style={{
+                    paddingLeft: '2%',
+                    fontSize: '0.625rem',
+                    fontWeight: '300',
+                    marginTop: "-2.5rem",
+                    marginBottom: "2.5rem"
+                }}>중복 확인 완료되었습니다</p> :
+                (isCheckedDuplicatedEmail === false ? <p style={{
+                    paddingLeft: '2%',
+                    fontSize: '0.625rem',
+                    fontWeight: '300',
+                    marginTop: "-2.5rem",
+                    marginBottom: "2.5rem"
+                }}>중복되는 이메일이 존재합니다</p> : null)}
+            <a style={{paddingLeft: '2%'}} className="fontForRegister">휴대폰<span className="fontForRegister"
+                                                                                style={{color: "#FF2929"}}>*</span></a>
+            <div style={{
+                paddingLeft: '2%',
+                flexDirection: "row",
+                alignItems: "center",
+                marginBottom: "2.5rem",
+                display: "flex"
+            }}>
                 <input
-                    style={{width:"61%", paddingLeft:"2%", fontSize:'0.625rem',fontWeight:'300'}}
+                    style={{width: "61%", paddingLeft: "2%", fontSize: '0.625rem', fontWeight: '300'}}
                     className="inputForRegister fontForRegister"
                     placeholder={" 숫자만 입력해 주세요"}
                     onChange={onChangePhone}
                 />
                 <button onClick={() => sendCerifiedNum()} className="buttonForRegister"
-                        style={{textAlign:'center', height: '2.7rem', width: '32%', fontSize: '0.625rem',  backgroundColor:"#616161",color:"white"}}
-                >인증번호 받기</button>
+                        style={{
+                            textAlign: 'center',
+                            height: '2.7rem',
+                            width: '30%',
+                            fontSize: '0.625rem',
+                            backgroundColor: "#616161",
+                            color: "white"
+                        }}
+                >인증번호 받기
+                </button>
             </div>
             <div style={{
                 paddingLeft: '2%',
@@ -178,22 +263,49 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                 display: "flex"
             }}>
                 <input className="inputForRegister fontForRegister"
-                       style={{width:"61%", paddingLeft:"2%", fontSize:'0.625rem',fontWeight:'300'}}
+                       style={{width: "61%", paddingLeft: "2%", fontSize: '0.625rem', fontWeight: '300'}}
                        placeholder={" 인증번호 입력"}
                        onChange={onChangeCerifiedNum}
                 />
                 <button onClick={() => checkCerifiedNum()} className="buttonForRegister"
-                        style={{ textAlign:'center', height: '2.7rem', width: '32%', fontSize: '0.625rem', backgroundColor:"#616161",color:"white"}}
-                >인증번호 확인</button>
+                        style={{
+                            textAlign: 'center',
+                            height: '2.7rem',
+                            width: '30%',
+                            fontSize: '0.625rem',
+                            backgroundColor: "#616161",
+                            color: "white"
+                        }}
+                >인증번호 확인
+                </button>
             </div>
-            {isPhoneCerified === true ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>인증 완료되었습니다</p> :
-                (isPhoneCerified === false ? <p style={{paddingLeft:'2%', fontSize:'0.625rem',fontWeight:'300', marginTop:"-2.5rem", marginBottom:"2.5rem"}}>인증 실패했습니다</p> : null)}
+            {isPhoneCerified === true ? <p style={{
+                    paddingLeft: '2%',
+                    fontSize: '0.625rem',
+                    fontWeight: '300',
+                    marginTop: "-2.5rem",
+                    marginBottom: "2.5rem"
+                }}>인증 완료되었습니다</p> :
+                (isPhoneCerified === false ? <p style={{
+                    paddingLeft: '2%',
+                    fontSize: '0.625rem',
+                    fontWeight: '300',
+                    marginTop: "-2.5rem",
+                    marginBottom: "2.5rem"
+                }}>인증 실패했습니다</p> : null)}
             <div>
-                <a style={{paddingLeft: "2%"}} className="fontForRegister" >생년월일<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
+                <a style={{paddingLeft: "2%"}} className="fontForRegister">생년월일<span className="fontForRegister"
+                                                                                     style={{color: "#FF2929"}}>*</span></a>
 
-                <div style={{paddingLeft: "2%", marginBottom:"2.5rem",display:'flex'}}>
+                <div style={{paddingLeft: "2%", marginBottom: "2.5rem", display: 'flex'}}>
 
-                    <select onChange={onChangeYear} style={{paddingLeft: "2%", marginRight: "3%", height:'2.5rem',border:'1px solid #D9D9D9', width:'30%'}} >
+                    <select onChange={onChangeYear} style={{
+                        paddingLeft: "2%",
+                        marginRight: "3%",
+                        height: '2.5rem',
+                        border: '1px solid #D9D9D9',
+                        width: '30%'
+                    }}>
                         <option value="">년(YYYY)</option>
                         {years.map(year => (
                             <option key={year} value={year}>
@@ -201,7 +313,13 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                             </option>
                         ))}
                     </select>
-                    <select onChange={onChangeMonth} style={{paddingLeft: "2%", marginRight: "3%",height:'2.5rem',border:'1px solid #D9D9D9', width:'30%'}}>
+                    <select onChange={onChangeMonth} style={{
+                        paddingLeft: "2%",
+                        marginRight: "3%",
+                        height: '2.5rem',
+                        border: '1px solid #D9D9D9',
+                        width: '30%'
+                    }}>
                         <option value="">월(MM)</option>
                         {months.map(month => (
                             <option key={month} value={month}>
@@ -209,7 +327,13 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                             </option>
                         ))}
                     </select>
-                    <select onChange={onChangeDay} style={{paddingLeft: "2%", marginRight: "3%",height:'2.5rem',border:'1px solid #D9D9D9', width:'30%'}}>
+                    <select onChange={onChangeDay} style={{
+                        paddingLeft: "2%",
+                        marginRight: "3%",
+                        height: '2.5rem',
+                        border: '1px solid #D9D9D9',
+                        width: '30%'
+                    }}>
                         <option value="">일(DD)</option>
                         {days.map(day => (
                             <option key={day} value={day}>
@@ -219,9 +343,10 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                     </select>
                 </div>
             </div>
-            <a style={{paddingLeft: "2%"}} className="fontForRegister" >성별<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-            <div style={{height:'3rem'}}>
-                <div >
+            <a style={{paddingLeft: "2%"}} className="fontForRegister">성별<span className="fontForRegister"
+                                                                               style={{color: "#FF2929"}}>*</span></a>
+            <div style={{height: '3rem'}}>
+                <div>
                     <input
                         type="radio"
                         name="gender"
@@ -230,8 +355,14 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         id="male"
                         style={{paddingLeft: "2%"}}
                     />
-                    <label for='male' style={{paddingLeft:'2%', display: 'flex', alignItems: 'center', marginBottom: '0.5rem', marginTop: '0.5rem'}}>
-                        <em></em><span className="fontForRegister" >남자</span>
+                    <label for='male' style={{
+                        paddingLeft: '2%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginBottom: '0.5rem',
+                        marginTop: '0.5rem'
+                    }}>
+                        <em></em><span className="fontForRegister">남자</span>
                     </label>
                     <input
                         type="radio"
@@ -241,8 +372,14 @@ const PersonalInfoInputTemplate = ({ role, setId, setPw, setPwCheck, setName, se
                         id="female"
                         style={{paddingLeft: "2%"}}
                     />
-                    <label for='female' style={{paddingLeft: '2%', display: 'flex', alignItems: 'center', marginBottom: '0.5rem', marginTop: '0.5rem'}}>
-                        <em></em><span className="fontForRegister" >여자</span>
+                    <label for='female' style={{
+                        paddingLeft: '2%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginBottom: '0.5rem',
+                        marginTop: '0.5rem'
+                    }}>
+                        <em></em><span className="fontForRegister">여자</span>
                     </label>
                 </div>
             </div>
