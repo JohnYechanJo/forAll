@@ -8,7 +8,7 @@ export const AddedImagesModalStyles = {
         transform: 'translate(-50%, -50%)',
         color: 'black',
         width: '80%',
-        height: '60%',
+        height: '25rem',
         background: "white",
         border: '1px solid'+'#000',
         backgroundColor: 'rgba(217, 217, 217, 1)'
