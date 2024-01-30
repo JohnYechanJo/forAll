@@ -73,7 +73,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     overflowY:'auto'
                 }}>
                 <div style={{
-                    height: "13.625rem",
+                    height: "15.625rem",
                     width: "100%",
                     border: "1px solid rgba(196,196,196,0.2)",
                     boxShadow: "4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset: "-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
@@ -97,11 +97,11 @@ const Sidebar = ({ width = 18.75, children }) => {
                         <p style={{ textAlign: "center" }}>{sessionStorage.getItem("email")}</p>
                     </div>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "left" }}>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "left", }}>
                     <div style={{
-                        height: "5.25rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",
+                        height: "6.25rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",
                         boxShadow: "4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset: "-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                        display: "flex", flexDirection: "column", justifyContent: "space-around", gap: "1rem"
+                        display: "flex", flexDirection: "column", justifyContent: "space-evenly", gap: "1rem"
                     }}>
                         <Link to={"/reservationList"}>
                             <button className="button" style={{ textAlign: "left", marginLeft: "2rem",textDecorationLine:'underline' }}>예약 정보</button>
@@ -109,9 +109,9 @@ const Sidebar = ({ width = 18.75, children }) => {
                         <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }}>찜한내역</button>
                     </div>
                     <div style={{
-                        height: "5.25rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",
+                        height: "6.25rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",
                         boxShadow: "4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset: "-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                        display: "flex", flexDirection: "column", justifyContent: "space-around", gap: "rem"
+                        display: "flex", flexDirection: "column", justifyContent: "space-evenly", gap: "rem"
                     }} >
                         <button className="button" onClick={handleChefRegistry} style={{ textAlign: "left", marginLeft: "2rem" }}>셰프 등록하기</button>
                         <Link to="/hostRegistry">
@@ -119,9 +119,9 @@ const Sidebar = ({ width = 18.75, children }) => {
                         </Link>
                     </div>
                     <div style={{
-                        height: "7.375rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",
+                        height: "9.375rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",
                         boxShadow: "4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset: "-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                        display: "flex", flexDirection: "column", justifyContent: "space-around", gap: "1rem"
+                        display: "flex", flexDirection: "column", justifyContent: "space-evenly", gap: "1rem"
                     }}>
                         <Link to="/chatList">
                             <button className="button" style={{ textAlign: "left", marginLeft: "2rem",textDecorationLine:'underline' }}>채팅함</button>
@@ -132,9 +132,9 @@ const Sidebar = ({ width = 18.75, children }) => {
                         </Link>
                     </div>
                     <div style={{
-                        height: "7.375rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",
+                        height: "9.375rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",
                         boxShadow: "4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset: "-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                        display: "flex", flexDirection: "column", justifyContent: "space-around", gap: "1rem"
+                        display: "flex", flexDirection: "column", justifyContent: "space-evenly", gap: "1rem"
                     }}>
                         <Link to="/personalInfoModify">
                             <button className="button" style={{ textAlign: "left", marginLeft: "2rem",textDecorationLine:'underline' }}>개인 정보수정</button>
