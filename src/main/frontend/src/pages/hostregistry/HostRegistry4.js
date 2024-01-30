@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import { ModalStyles } from "../../components/ModalStyles";
 import ForAllLogo from "../../components/ForAllLogo";
 import { SmallModalStyles } from "../../components/SmallModalStyles";
+import ImageUploader from "../../utils/imageUploader";
 const HostRegistry4 = () => {
     const location = useLocation();
     const data = { ...location.state };
@@ -30,7 +31,7 @@ const HostRegistry4 = () => {
     const [countCuttrary, setCountCuttrary] = useState();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [pending, setPending] = useState(false);
     const onChangeFirePit = useCallback((e) => {
         setExactFirePit(e.target.value);
     }, []);
@@ -78,13 +79,19 @@ const HostRegistry4 = () => {
         }
         else setIsModalOpen(true);
     };
-    const submit = () => {
+    const submit = async () => {
+        if (pending) return;
+        setPending(true);
+        const userId = sessionStorage.getItem("user_id");
         const equip = [];
         if (fryer) equip.push("튀김기");
         if (oven) equip.push("오븐");
         if (dishWasher) equip.push("식기세척기");
         if (iceMaker) equip.push("제빙기");
         data.isPublic = data.isPublic && isPublic;
+        const plateImage = await Promise.all(sidePlate.map(async (img) => await ImageUploader(img, userId)));
+        const cupImage = await Promise.all(cup.map(async (img) => await ImageUploader(img, userId)));
+        const cutleryImage = await Promise.all(cuttrary.map(async (img) => await ImageUploader(img, userId)));
         navigate("/hostRegistry5", {
             state: {
                 ...data,
@@ -92,11 +99,11 @@ const HostRegistry4 = () => {
                 capacity: capacity,
                 equip: equip.join(","),
                 extraMachine: extraMachine,
-                sidePlate: sidePlate,
+                plateImage: plateImage,
                 countSidePlate: countSidePlate,
-                cup: cup,
+                cupImage: cupImage,
                 countCup: countCup,
-                cuttrary: cuttrary,
+                cutleryImage: cutleryImage,
                 countCuttrary: countCuttrary,
             }
         })

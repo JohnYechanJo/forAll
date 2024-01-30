@@ -20,6 +20,7 @@ const HostRegistry5 = () => {
     const onChangeGuide = useCallback((e) => {
         setCloseGuide(e.target.value);
     }, []);
+    const [pending, setPending] = useState(false);
 
     const handleButton = () => {
         if (closeGuide && closeImage) {
@@ -29,12 +30,14 @@ const HostRegistry5 = () => {
         else setIsModalOpen(true);
     };
     const submit = () => {
+        if (pending) return;
+        setPending(true);
         data.isPublic = data.isPublic && isPublic;
         navigate("/hostRegistry6", {
             state: {
                 ...data,
                 closeGuide: closeGuide,
-                closeImage: additionalImage ? [closeImage, additionalImage] : [closeImage]
+                closeImage: additionalImage ? [closeImage, ...additionalImage] : [closeImage]
             }
         });
     };

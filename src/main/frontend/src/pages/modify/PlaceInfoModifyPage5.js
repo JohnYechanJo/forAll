@@ -12,33 +12,15 @@ const PlaceInfoModifyPage5 = () => {
     const data = { ...location.state };
     const navigate = useNavigate();
     let isPublic = false;
-    const [dbData, setDbData] = useState({});
-    const [closeGuide, setCloseGuide] = useState("");
-    const [closeImage, setCloseImage] = useState("");
-    const [additionalImage, setAdditionalImage] = useState([]);
+    const [closeGuide, setCloseGuide] = useState(data.closeGuide);
+    const [closeImage, setCloseImage] = useState(data.closeImage ? data.closeImage[0] : "");
+    const [additionalImage, setAdditionalImage] = useState(data.closeImage ? data.closeImage.slice(1) :[]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [pending, setPending] = useState(false);
     const onChangeGuide = useCallback((e) => {
         setCloseGuide(e.target.value);
     }, []);
 
-    const downloadData = async () => {
-        let spaceid;
-        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data[0])
-            .catch((err) => console.error(err));
-        axios
-            .get("/api/v1/space/" + spaceid)
-            .then((res) => {
-                setDbData(res.data)
-                setCloseGuide(res.data.closeGuide);
-                setCloseImage(res.data.closeImage ? res.data.closeImage[0] : "");
-                setAdditionalImage(res.data.closeImage ? res.data.closeImage.slice(1) : []);
-            })
-            .catch((err) => console.error(err));
-    };
-    useEffect(() => {
-        downloadData();
-    }, []);
 
     const handleButton = () => {
         if (closeGuide && closeImage) {
@@ -48,12 +30,14 @@ const PlaceInfoModifyPage5 = () => {
         else setIsModalOpen(true);
     };
     const submit = () => {
+        if (pending) return;
+        setPending(true);
         data.isPublic = data.isPublic && isPublic;
         navigate("/placeInfoModify6", {
             state: {
                 ...data,
                 closeGuide: closeGuide,
-                closeImage: additionalImage ? [closeImage, additionalImage] : [closeImage]
+                closeImage: additionalImage ? [closeImage, ...additionalImage] : [closeImage]
             }
         });
     };

@@ -12,6 +12,7 @@ import ImageInput from "../../components/ImageInput";
 import Alert from "../../components/Alert";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 import {SmallModalStyles} from "../../components/SmallModalStyles";
+import ImageUploader from "../../utils/imageUploader";
 const HostRegistry = () => {
     const [inputCount, setInputCount] = useState(0);
     const [inputCount2, setInputCount2] = useState(0);
@@ -75,12 +76,10 @@ const HostRegistry = () => {
             setIsModalOpen(true);
         }
     };
-    const submit = () => {
-
-
+    const submit = async () => {
+        const userId = sessionStorage.getItem("user_id");
+        const img = await ImageUploader(imgRepresent, userId);
         navigate("/hostRegistry2", {
-
-
             state: {
                 placeName: placeName,
                 placeIntro: placeIntro,
@@ -89,7 +88,7 @@ const HostRegistry = () => {
                 fullAddress: fullAddress,
                 webSite: webSite,
                 placeInfo: placeInfo,
-                imgRepresent: imgRepresent,
+                imgRepresent: img,
                 isPublic: isPublic,
                 addressDetail: addressDetail,
                 address: address,

@@ -7,32 +7,34 @@ import axios from "axios";
 import "../../components/Styles.css";
 import ForAllLogo from "../../components/ForAllLogo";
 import { ModalStyles } from "../../components/ModalStyles";
+import ImageUploader from "../../utils/imageUploader";
 const PlaceInfoModifyPage4 = () => {
     const location = useLocation();
     const data = { ...location.state };
     const navigate = useNavigate();
-    const [dbData, setDbData] = useState({});
+    console.log(data);
 
     let isPublic = false;
     const firePitData = ["1개", "2개", "3개", "4개", "5개", "6개", "직접 입력"];
 
-    const [firePit, setFirePit] = useState(firePitData[0]);
-    const [capacity, setCapacity] = useState();
-    const [exactFirePit, setExactFirePit] = useState();
-    const [fryer, setFryer] = useState(false);
-    const [oven, setOven] = useState(false);
-    const [dishWasher, setDishWasher] = useState(false);
-    const [iceMaker, setIceMaker] = useState(false);
-    const [someThing, setSomeThing] = useState(false);
-    const [extraMachine, setExtraMachine] = useState("");
-    const [sidePlate, setSidePlate] = useState([]);
-    const [countSidePlate, setCountSidePlate] = useState();
-    const [cup, setCup] = useState([]);
-    const [countCup, setCountCup] = useState();
-    const [cuttrary, setCuttrary] = useState([]);
-    const [countCuttrary, setCountCuttrary] = useState();
+    const [firePit, setFirePit] = useState(data.fireholeNum ? data.fireholeNum + "개" : firePitData[0]);
+    const [capacity, setCapacity] = useState(data.capacity);
+    const [exactFirePit, setExactFirePit] = useState(data.fireholeNum ? data.fireholeNum : "");
+    const [fryer, setFryer] = useState(data.equip ? data.equip.includes("튀김기"): false);
+    const [oven, setOven] = useState(data.equip ? data.equip.includes("오븐"): false);
+    const [dishWasher, setDishWasher] = useState(data.equip ? data.equip.includes("식기세척기"): false);
+    const [iceMaker, setIceMaker] = useState(data.equip ? data.equip.includes("제빙기"): false);
+    const [someThing, setSomeThing] = useState(data.equip ? data.equip.includes("냉장고"): false);
+    const [extraMachine, setExtraMachine] = useState(data.equipExtra);
+    const [sidePlate, setSidePlate] = useState(data.plateImage ? data.plateImage : []);
+    const [countSidePlate, setCountSidePlate] = useState(data.plateNum);
+    const [cup, setCup] = useState(data.cupImage ? data.cupImage : []);
+    const [countCup, setCountCup] = useState(data.cupNum);
+    const [cuttrary, setCuttrary] = useState(data.cutleryImage ? data.cutleryImage : []);
+    const [countCuttrary, setCountCuttrary] = useState(data.cutleryNum);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [pending, setPending] = useState(false);
 
     const onChangeFirePit = useCallback((e) => {
         setExactFirePit(e.target.value);
@@ -72,66 +74,45 @@ const PlaceInfoModifyPage4 = () => {
     const onChangeCountCuttrary = useCallback((e) => {
         setCountCuttrary(e.target.value);
     }, []);
-
-    const downloadData = async () => {
-        let spaceid;
-        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data[0])
-            .catch((err) => console.error(err));
-        axios
-            .get("/api/v1/space/" + spaceid)
-            .then((res) => {
-                setDbData(res.data)
-                setFirePit(res.data.fireholeNum);
-                setExactFirePit(res.data.fireholeNum);
-                setCapacity(res.data.capacity);
-                setExtraMachine(res.data.equipExtra);
-                setCountSidePlate(res.data.plateNum);
-                setCountCup(res.data.cupNum);
-                setCountCuttrary(res.data.cutleryNum);
-                setSidePlate(res.data.plateImage);
-                setCup(res.data.cupImage);
-                setCuttrary(res.data.cutleryImage);
-                setDishWasher(res.data.equip.includes("식기세척기"));
-                setFryer(res.data.equip.includes("튀김기"));
-                setOven(res.data.equip.includes("오븐"));
-                setIceMaker(res.data.equip.includes("제빙기"));
-                setExactFirePit(res.data.fireholeNum);
-                setExtraMachine(res.data.equipExtra);
-            })
-            .catch((err) => console.error(err));
-    };
     useEffect(() => {
-        console.log(data);
-        downloadData();
-    }, []);
+        console.log(firePit);
+    }, [firePit]);
     const handleButton = () => {
-        if ((!firePit) && (!sidePlate) && (!countSidePlate) && (!cup) && (!countCup)
-            && (!cuttrary) && (!countCuttrary)) {
+        if ((firePit) && (sidePlate) && (countSidePlate) && (cup) && (countCup)
+            && (cuttrary) && (countCuttrary)) {
             isPublic = true;
             submit();
         }
         else setIsModalOpen(true);
     };
-    const submit = () => {
+    const submit = async() => {
+        if (pending) return;
+        setPending(true);
         const equip = [];
         if (fryer) equip.push("튀김기");
         if (oven) equip.push("오븐");
         if (dishWasher) equip.push("식기세척기");
         if (iceMaker) equip.push("제빙기");
+        if (someThing) equip.push("냉장고");
         data.isPublic = data.isPublic && isPublic;
+        const userId = sessionStorage.getItem("user_id");
+
+        const plateImage = sidePlate ? await Promise.all(sidePlate.map(async (img) => await ImageUploader(img, userId))) : null;
+        const cupImage = cup ? await Promise.all(cup.map(async (img) => await ImageUploader(img, userId))) : null;
+        const cutleryImage = cuttrary ? await Promise.all(cuttrary.map(async (img) => await ImageUploader(img, userId))) : null;
+        console.log(cupImage);
         navigate("/placeInfoModify5", {
             state: {
                 ...data,
-                firePit: firePit > 6 ? exactFirePit : firePit,
+                firePit: firePit.split("개")[0] > 6 ? exactFirePit : firePit.split("개")[0],
                 capacity: capacity,
                 equip: equip.join(","),
                 extraMachine: extraMachine,
-                sidePlate: sidePlate,
+                plateImage: plateImage,
                 countSidePlate: countSidePlate,
-                cup: cup,
+                cupImage: cupImage,
                 countCup: countCup,
-                cuttrary: cuttrary,
+                cutleryImage: cutleryImage,
                 countCuttrary: countCuttrary,
             }
         })
@@ -155,17 +136,17 @@ const PlaceInfoModifyPage4 = () => {
                 </div>
                 <div style={{ width: '100%' }} >
                     <a>화구<span style={{ color: "#FF2929" }} >*</span></a>
-                    <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={(firePit > 6) ? "직접 입력" : firePit + "개"} val={firePit} width='100%' />
+                    <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={(firePit > 6) ? "직접 입력" : firePit + "개"} width='100%' />
                     {(firePit > 6) ? (
                         <div>
-                            <span><input onChange={onChangeFirePit} defaultValue={dbData.fireholeNum} style={{ width: "10vw" }} />개 </span>
+                            <span><input onChange={onChangeFirePit} defaultValue={data.fireholeNum} style={{ width: "10vw" }} />개 </span>
                             {exactFirePit < 7 ? <p>7 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
                         </div>
                     ) : null}
                 </div>
                 <div style={{ width: '95%' }} >
                     <a>주방 수용 인원 수<span style={{ color: "#FF2929" }} >*</span></a>
-                    <span style={{ display: 'flex', alignItems: 'center' }}><input val={capacity} onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{width: '100%' }} className="input" />명</span>
+                    <span style={{ display: 'flex', alignItems: 'center' }}><input defaultValue={capacity} onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{width: '100%' }} className="input" />명</span>
                 </div>
                 <div style={{ width: '100%' }}>
                     <a>주방기계<span style={{ color: "#FF2929" }} >*</span></a>
@@ -180,7 +161,7 @@ const PlaceInfoModifyPage4 = () => {
                 {/* 이미지 보여주는 건 다시 건드려야 함 */}
                 <div style={{ width: '100%' }}>
                     <a>추가 사용 가능 기계<span style={{ color: "#FF2929" }} >*</span></a>
-                    <textarea className="input" onChange={onChangeExtraMachine} placeholder={"사용 가능한 기계를 입력해주세요. ex) 수비드 기계"} defaultValue={dbData.equipExtra} style={{ height: '6.25rem' }} />
+                    <textarea className="input" onChange={onChangeExtraMachine} placeholder={"사용 가능한 기계를 입력해주세요. ex) 수비드 기계"} defaultValue={data.equipExtra} style={{ height: '6.25rem' }} />
                 </div>
                 <div style={{ width: '100%' }} >
                     <a>매장 물품<span style={{ color: "#FF2929" }} >*</span></a>
@@ -191,20 +172,20 @@ const PlaceInfoModifyPage4 = () => {
                         <div>
                         <p>앞접시*</p>
                         <ImageInputs setImg={setSidePlate} vals={sidePlate} />
-                        <input onChange={onChangeCountSidePlate} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} defaultValue={dbData.plateNum} />
+                        <input onChange={onChangeCountSidePlate} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} defaultValue={data.plateNum} />
                         </div>
                     </div>
                     <div>
                         <p>물컵*</p>
                         <ImageInputs setImg={setCup} vals={cup} />
-                        <input onChange={onChangeCountCup} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} defaultValue={dbData.cupNum} />
+                        <input onChange={onChangeCountCup} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} defaultValue={data.cupNum} />
                     </div>
 
                     <div style={{display:'flex',justifyContent:"right"}}>
                         <div>
                         <p>커트러리*</p>
                         <ImageInputs setImg={setCuttrary} vals={cuttrary} />
-                        <input onChange={onChangeCountCuttrary} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} defaultValue={dbData.cutleryNum} />
+                        <input onChange={onChangeCountCuttrary} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} defaultValue={data.cutleryNum} />
                         </div>
                     </div>
                 </div>

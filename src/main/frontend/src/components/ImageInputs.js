@@ -11,10 +11,16 @@ const ImageInputs = ({setImg, vals}) => {
     // 기본 이미지 추후 설정 필요
     const BaseImgSrc = "/logo512.png";
 
-    const [img1, setImg1] = useState("");
-    const [img2, setImg2] = useState("");
-    const [img3, setImg3] = useState("");
-    const [img4, setImg4] = useState("");
+    const getIdx = (arr, idx) => {
+        if (!arr) return null;
+        else if (arr.length <= idx) return null
+        else return arr[idx]
+    }
+
+    const [img1, setImg1] = useState(getIdx(vals,0));
+    const [img2, setImg2] = useState(getIdx(vals,1));
+    const [img3, setImg3] = useState(getIdx(vals,2));
+    const [img4, setImg4] = useState(getIdx(vals,3));
 
 
 

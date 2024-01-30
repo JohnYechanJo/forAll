@@ -11,6 +11,7 @@ import { ModalStyles } from "../../components/ModalStyles";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 import ForAllLogo from "../../components/ForAllLogo";
 import {SmallModalStyles} from "../../components/SmallModalStyles";
+import ImageUploader from "../../utils/imageUploader";
 
 
 const HostRegistry2 = () => {
@@ -32,13 +33,12 @@ const HostRegistry2 = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const [pending, setPending] = useState(false);
 
     const data = { ...location.state };
     let isPublic = false;
     const handleButton = () => {
-        if ((img1 !== "") && (img2 !== "") && (img3 !== "") && (kitchen1 !== "") && (kitchen2 !== "") && (kitchen3 !== "") && (menu1 !== "") && (menuAdditional !== "")) {
-
-
+        if ((img1 !== "") && (img2 !== "") && (img3 !== "") && (kitchen1 !== "") && (kitchen2 !== "") && (kitchen3 !== "") && (menu1 !== "")) {
             isPublic = true;
             submit();
         }
@@ -47,24 +47,20 @@ const HostRegistry2 = () => {
         }
     };
 
-    const submit = () => {
+    const submit = async () => {
+        if(pending) return;
+        setPending(true);
+        const userId = sessionStorage.getItem("user_id");
         data.isPublic = data.isPublic && isPublic;
-
-
+        const hallImage = await Promise.all([img1, img2, img3, ...imgAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const kitImage = await Promise.all([kitchen1, kitchen2, kitchen3, ...kitchenAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const menu = await Promise.all([menu1, ...menuAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
         navigate("/hostRegistry3", {
-
             state: {
                 ...data,
-                img1: img1,
-                img2: img2,
-                img3: img3,
-                imgAdditional: imgAdditional,
-                kitchen1: kitchen1,
-                kitchen2: kitchen2,
-                kitchen3: kitchen3,
-                kitchenAdditional: kitchenAdditional,
-                menu1: menu1,
-                menuAdditional: menuAdditional,
+                hallImage: hallImage,
+                kitImage: kitImage,
+                menu: menu
             }
         });
     };
