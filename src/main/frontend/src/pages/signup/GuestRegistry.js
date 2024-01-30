@@ -67,7 +67,7 @@ const GuestRegistry = () => {
             axios.post("/api/v1/profile", {
                 userId: data.loginId,
                 introduction: introduce, 
-                profilePhoto: picture, 
+                profilePhoto: picture,
                 mbti: selectedMBTI,
                 cook: selectedFoodTypes,
                 cookItem: selectedIngredient, 
