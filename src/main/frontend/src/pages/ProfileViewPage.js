@@ -1,16 +1,16 @@
-import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import ImageInput from "../components/ImageInput";
 import Modal from "react-modal";
-import {ModalStyles} from "../components/ModalStyles";
+import { ModalStyles } from "../components/ModalStyles";
 import ImageViewer from "../components/ImageViewer";
-
+import "../components/Styles.css";
 const ProfileViewPage = () => {
     const navigate = useNavigate();
     const params = useParams();
     const [profile, setProfile] = useState({});
-
+    const [career, setCareer] = useState([]);
     const MBTI_TYPES = [
         'ISTJ', 'ISFJ', 'INFJ', 'INTJ',
         'ISTP', 'ISFP', 'INFP', 'INTP',
@@ -27,13 +27,20 @@ const ProfileViewPage = () => {
     ];
 
     useEffect(() => {
-        axios.get("/api/v1/profile/public/"+params.id)
+        axios.get("/api/v1/profile/public/" + params.id)
             .then((res) => setProfile(res.data))
             .catch((err) => console.error(err));
+        const userId = sessionStorage.getItem("user_id");
+        axios.get("/api/v1/chefProfile/user/" + userId)
+            .then((res) => {
+                setCareer(res.data.career ? res.data.career : []);
+            })
+            .catch(() => {
+                navigate("/error");
+            })
     }, []);
     return (
         <div>
-            <button onClick={()=>navigate(-1)}>{"<"}</button>
             <div style={{
                 textAlign: "center",
                 fontSize: "0.9375rem",
@@ -59,131 +66,155 @@ const ProfileViewPage = () => {
                     fontSize: "0.625rem",
                 }}>
                 </div>
-
-                <div style={{width:"100%"}}>
-                    <a className="fontForRegister" >소개<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-                    <hr style={{ height: "2px", backgroundColor: "black"}} />
+                <div style={{ display: 'flex',alignItems:'center',marginLeft:'0.6rem' }} >
+                    <div style={{ display: "flex", justifyContent: "center", flexDirection: 'column', alignItems: 'center' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                            <path d="M19.6198 23.2576C19.4274 23.2584 19.2377 23.213 19.0665 23.1253L12.9325 19.9139L6.79846 23.1253C6.59928 23.23 6.37471 23.2768 6.15027 23.2602C5.92584 23.2437 5.71055 23.1645 5.52887 23.0317C5.3472 22.8989 5.20643 22.7178 5.12257 22.509C5.03871 22.3001 5.01511 22.0719 5.05448 21.8504L6.25723 15.0789L1.30189 10.2679C1.14729 10.1136 1.03762 9.92014 0.984642 9.70824C0.931668 9.49635 0.937394 9.27402 1.00121 9.06514C1.07092 8.85138 1.19915 8.66144 1.37135 8.51687C1.54356 8.37231 1.75283 8.27891 1.97543 8.24727L8.83111 7.24898L11.85 1.07887C11.9485 0.875524 12.1023 0.704028 12.2937 0.584031C12.4852 0.464034 12.7065 0.400391 12.9325 0.400391C13.1584 0.400391 13.3798 0.464034 13.5713 0.584031C13.7627 0.704028 13.9165 0.875524 14.015 1.07887L17.07 7.23696L23.9256 8.23524C24.1482 8.26688 24.3575 8.36028 24.5297 8.50485C24.7019 8.64941 24.8301 8.83935 24.8999 9.05311C24.9637 9.262 24.9694 9.48432 24.9164 9.69621C24.8634 9.90811 24.7538 10.1016 24.5992 10.2559L19.6438 15.0669L20.8466 21.8383C20.8895 22.0638 20.867 22.2969 20.7818 22.51C20.6965 22.7231 20.5521 22.9074 20.3655 23.0411C20.1477 23.1937 19.8855 23.2699 19.6198 23.2576ZM12.9325 17.3641C13.1253 17.3592 13.316 17.4049 13.4858 17.4964L18.0201 19.9019L17.1541 14.8383C17.1205 14.645 17.1348 14.4464 17.1956 14.2598C17.2564 14.0732 17.3619 13.9043 17.5029 13.7679L21.1112 10.2438L16.0596 9.49813C15.8744 9.46083 15.7006 9.38041 15.5522 9.2634C15.4038 9.14637 15.2851 8.99604 15.2057 8.82459L12.9325 4.31427L10.6593 8.82459C10.5723 8.99743 10.4448 9.14672 10.2878 9.25979C10.1308 9.37286 9.94875 9.44637 9.75723 9.47407L4.70568 10.2198L8.31393 13.7438C8.45498 13.8803 8.56051 14.0491 8.62131 14.2357C8.68211 14.4223 8.69633 14.6209 8.66273 14.8143L7.79675 19.8177L12.3311 17.4122C12.5232 17.3408 12.7314 17.3241 12.9325 17.3641Z" fill="#231F20" />
+                        </svg>
+                        <a className="fontForRegister" >본인 소개</a>
+                    </div>
+                    <a style={{ textAlign: 'left', alignItems: 'center', display: 'flex', marginLeft: '2rem' }} >{profile.introduction}</a>
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <a className="fontForRegister" >본인 한 줄 소개<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
+                <div style={{ display: 'flex', alignItems: 'center',marginLeft:'0.9rem' }} >
+                    <div style={{ display: "flex", justifyContent: "center", flexDirection: 'column', alignItems: 'center' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="30" viewBox="0 0 29 30" fill="none">
+                            <path d="M14.5 14.0966C15.4515 14.0966 16.3817 13.8145 17.1728 13.2858C17.964 12.7572 18.5806 12.0058 18.9448 11.1267C19.3089 10.2476 19.4042 9.28028 19.2185 8.34703C19.0329 7.41379 18.5747 6.55655 17.9019 5.88372C17.229 5.21089 16.3718 4.75269 15.4385 4.56705C14.5053 4.38142 13.538 4.47669 12.6589 4.84083C11.7798 5.20496 11.0284 5.8216 10.4998 6.61276C9.97113 7.40393 9.68896 8.33409 9.68896 9.28561C9.68896 10.5616 10.1958 11.7853 11.0981 12.6875C12.0003 13.5897 13.224 14.0966 14.5 14.0966ZM14.5 6.88011C14.9757 6.88011 15.4408 7.02119 15.8364 7.28551C16.232 7.54983 16.5403 7.92552 16.7224 8.36507C16.9044 8.80462 16.9521 9.28828 16.8592 9.7549C16.7664 10.2215 16.5373 10.6501 16.2009 10.9866C15.8645 11.323 15.4359 11.5521 14.9693 11.6449C14.5026 11.7377 14.019 11.6901 13.5794 11.508C13.1399 11.3259 12.7642 11.0176 12.4999 10.622C12.2355 10.2265 12.0945 9.76138 12.0945 9.28561C12.0945 8.64763 12.3479 8.03579 12.799 7.58467C13.2501 7.13355 13.862 6.88011 14.5 6.88011Z" fill="#231F20" />
+                            <path d="M14.4998 16.502C12.2669 16.502 10.1254 17.389 8.54651 18.9679C6.96759 20.5468 6.08057 22.6883 6.08057 24.9212C6.08057 25.2402 6.20728 25.5461 6.43284 25.7717C6.6584 25.9972 6.96433 26.124 7.28332 26.124C7.60231 26.124 7.90823 25.9972 8.13379 25.7717C8.35935 25.5461 8.48607 25.2402 8.48607 24.9212C8.48607 23.3263 9.11966 21.7966 10.2475 20.6688C11.3753 19.541 12.9049 18.9075 14.4998 18.9075C16.0948 18.9075 17.6244 19.541 18.7522 20.6688C19.88 21.7966 20.5136 23.3263 20.5136 24.9212C20.5136 25.2402 20.6403 25.5461 20.8658 25.7717C21.0914 25.9972 21.3973 26.124 21.7163 26.124C22.0353 26.124 22.3412 25.9972 22.5668 25.7717C22.7924 25.5461 22.9191 25.2402 22.9191 24.9212C22.9191 22.6883 22.032 20.5468 20.4531 18.9679C18.8742 17.389 16.7327 16.502 14.4998 16.502Z" fill="#231F20" />
+                        </svg>
+                        <a className="fontForRegister" >MBTI</a>
+                    </div>
+                    <div
+                        style={{
+                            display: 'inline-block',
+                            flexShrink: '0',
+                            margin: '1vw',
+                            width: '3.125rem',
+                            height: '1.25rem',
+                            border: '1px solid #C4C4C4',
+                            borderRadius: '0.3125rem',
+                            backgroundColor: 'white',
+                            textAlign: 'center',
+                            fontSize: '0.625rem',
+                            marginLeft: '2.5rem'
+                        }}
+                    >
+                        {profile.mbti}
+                    </div>
                 </div>
-                <input type="text"style={{width:"21.875rem", height: "1.875rem" }}
-                       value={profile.introduction}  disabled={true}/>
-
-                <a className="fontForRegister" >프로필 등록 사진<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-                <p>
-                    <ImageViewer val={profile.profilePhoto} />
-                </p>
-                <div style={{width:"100%"}} >
-                    <a className="fontForRegister" >관심사<span className="fontForRegister" style={{color:"#FF2929"}} >*</span></a>
-                    <hr style={{ height: "2px", backgroundColor: "black"}} />
-                    <a style={{ marginBottom: "0", fontSize: "0.625rem" }}>• 내 관심사를 프로필에 추가하면 사람들이 유저님을 잘 알아볼 수 있어요.</a>
-                </div>
-
-                <a style={{ fontSize: "0.625rem" }} >• MBTI 선택으로 오너님의 성격을 대략적으로 알 수 있게 해주세요:)</a>
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(4, 1fr)',
-                    gap: '0.31rem'
-                }}>
-                    {MBTI_TYPES.map((mbti, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                display: 'inline-block',
-                                flexShrink: '0',
-                                margin: '1vw',
-                                width: '3.125rem',
-                                height: '1.25rem',
-                                border: '1px solid #C4C4C4',
-                                borderRadius: '0.3125rem',
-                                backgroundColor: profile.mbti === mbti ? 'lightgray' : 'white',
-                                textAlign: 'center',
-                                fontSize: '0.625rem',
-                            }}
-                        >
-                            {mbti}
+                <div style={{ display: 'flex', alignItems: 'center' }} >
+                    <div style={{ display: "flex", justifyContent: "center", flexDirection: 'column', alignItems: 'center' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="37" height="35" viewBox="0 0 37 35" fill="none">
+                            <path d="M15.1859 27.1625L10.7567 31.588C9.79469 32.5499 8.48997 33.0904 7.12953 33.0904C5.76909 33.0904 4.46437 32.5499 3.50237 31.588C2.54042 30.626 2 29.3213 2 27.9608C2 26.6004 2.54042 25.2957 3.50237 24.3337L24.6068 3.23479C25.5688 2.27284 26.8736 1.73242 28.234 1.73242C29.5944 1.73242 30.8992 2.27284 31.8612 3.23479C32.8231 4.19679 33.3635 5.50151 33.3635 6.86195C33.3635 8.22239 32.8231 9.52711 31.8612 10.4891L24.383 17.9673" stroke="black" stroke-width="2.1462" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M21.292 6.5459L27.4747 6.68487" stroke="black" stroke-width="2.1462" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M14.7642 13.0771L20.9468 13.2161" stroke="black" stroke-width="2.1462" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8.23535 19.6055L13.4854 19.6745" stroke="black" stroke-width="2.1462" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M3.22949 25.2139L8.82179 25.3398" stroke="black" stroke-width="2.1462" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M15.3511 22.5404L20.9471 16.9443L34.9372 22.5404V32.7997H15.3511V22.5404Z" stroke="black" stroke-width="2.1462" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M15.3511 22.54H23.7451V27.6697C23.7451 28.0408 23.8925 28.3966 24.1549 28.659C24.4172 28.9213 24.7731 29.0687 25.1441 29.0687C25.5152 29.0687 25.871 28.9213 26.1334 28.659C26.3957 28.3966 26.5431 28.0408 26.5431 27.6697V24.8717C26.5431 25.2428 26.6905 25.5986 26.9529 25.861C27.2152 26.1233 27.5711 26.2707 27.9421 26.2707C28.3132 26.2707 28.669 26.1233 28.9314 25.861C29.1937 25.5986 29.3411 25.2428 29.3411 24.8717V22.54H34.9372" stroke="black" stroke-width="2.1462" stroke-linejoin="round" />
+                        </svg>
+                        <a style={{ fontSize: "0.625rem" }} >자신 있는 분야</a>
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(4, 1fr)',
+                            gap: '0.31rem'
+                        }}>
+                            {console.log(profile)}
                         </div>
-                    ))}
+                    </div>
+                    <div style={{ marginLeft: '1.1rem' }} >
+                        {profile?.cook?.map((foodType, index) => (
+                            <div
+                                key={index}
+                                style={{
+                                    display: 'inline-block',
+                                    flexShrink: '0',
+                                    margin: '1vw',
+                                    width: '3.125rem',
+                                    height: '1.25rem',
+                                    border: '1px solid #C4C4C4',
+                                    borderRadius: '0.3125rem',
+                                    backgroundColor: "white",
+                                    textAlign: 'center',
+                                    fontSize: '0.625rem',
+                                }}
+                            >
+                                {foodType}
+                            </div>
+                        ))}
+                    </div>
                 </div>
-                <a style={{ fontSize: "0.625rem" }} >• 자신 있는 분야를 선택해주세요!</a>
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(4, 1fr)',
-                    gap: '0.31rem'
-                }}>
-                    {FOOD_TYPES.map((foodType, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                display: 'inline-block',
-                                flexShrink: '0',
-                                margin: '1vw',
-                                width: '3.125rem',
-                                height: '1.25rem',
-                                border: '1px solid #C4C4C4',
-                                borderRadius: '0.3125rem',
-                                backgroundColor: profile.cook ? (profile.cook.includes(foodType) ? 'lightgray' : 'white'):"white",
-                                textAlign: 'center',
-                                fontSize: '0.625rem',
-                            }}
-                        >
-                            {foodType}
+                <div style={{ display: 'flex', alignItems: 'center' }} >
+                    <div style={{ display: "flex", justifyContent: "center", flexDirection: 'column', alignItems: 'center' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+                            <path d="M14.4329 25.3476C14.2746 25.3485 14.1177 25.3181 13.9712 25.2583C13.8246 25.1984 13.6914 25.1102 13.579 24.9988L4.2336 15.6414C3.06135 14.4569 2.40381 12.8577 2.40381 11.1912C2.40381 9.52469 3.06135 7.9255 4.2336 6.74101C5.41501 5.56293 7.01536 4.90137 8.68377 4.90137C10.3522 4.90137 11.9525 5.56293 13.134 6.74101L14.4329 8.03998L15.7319 6.74101C16.9133 5.56293 18.5137 4.90137 20.1821 4.90137C21.8505 4.90137 23.4508 5.56293 24.6322 6.74101C25.8045 7.9255 26.462 9.52469 26.462 11.1912C26.462 12.8577 25.8045 14.4569 24.6322 15.6414L15.2869 24.9988C15.1745 25.1102 15.0412 25.1984 14.8947 25.2583C14.7481 25.3181 14.5912 25.3485 14.4329 25.3476ZM8.68377 7.3063C8.17462 7.304 7.67007 7.40274 7.19935 7.59681C6.72863 7.79088 6.30109 8.07642 5.9415 8.43689C5.21511 9.1671 4.80735 10.1552 4.80735 11.1852C4.80735 12.2151 5.21511 13.2032 5.9415 13.9335L14.4329 22.4369L22.9243 13.9335C23.6507 13.2032 24.0585 12.2151 24.0585 11.1852C24.0585 10.1552 23.6507 9.1671 22.9243 8.43689C22.183 7.73653 21.2019 7.34635 20.1821 7.34635C19.1623 7.34635 18.1811 7.73653 17.4398 8.43689L15.2869 10.6018C15.1751 10.7146 15.042 10.804 14.8955 10.8651C14.7489 10.9262 14.5917 10.9576 14.4329 10.9576C14.2741 10.9576 14.1169 10.9262 13.9704 10.8651C13.8238 10.804 13.6908 10.7146 13.579 10.6018L11.426 8.43689C11.0665 8.07642 10.6389 7.79088 10.1682 7.59681C9.69748 7.40274 9.19293 7.304 8.68377 7.3063Z" fill="#231F20" />
+                        </svg>
+                        <a style={{ fontSize: "0.625rem" }} >좋아하는 재료</a>
+
+                    </div>
+                    <div style={{marginLeft:'1.2rem'}} >
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(4, 1fr)',
+                            
+                        }}>
+                            {profile?.cookItem?.map((ingredient, index) => (
+                                <div
+                                    key={index}
+                                    style={{
+                                        display: 'inline-block',
+                                        flexShrink: '0',
+                                        margin: '1vw',
+                                        width: '3.125rem',
+                                        height: '1.25rem',
+                                        border: '1px solid #C4C4C4',
+                                        borderRadius: '0.3125rem',
+                                        backgroundColor: 'white',
+                                        textAlign: 'center',
+                                        fontSize: '0.625rem',
+                                    }}
+                                >
+                                    {ingredient}
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </div>
-                <a style={{ fontSize: "0.625rem" }}>• 좋아하는 요리재료를 선택해주세요! </a>
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(4, 1fr)',
-                    gap: '0.31rem'
-                }}>
-                    {INGREDIENT_TYPES.map((ingredient, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                display: 'inline-block',
-                                flexShrink: '0',
-                                margin: '1vw',
-                                width: '3.125rem',
-                                height: '1.25rem',
-                                border: '1px solid #C4C4C4',
-                                borderRadius: '0.3125rem',
-                                backgroundColor: profile.cookItem ? (profile.cookItem.includes(ingredient) ? 'lightgray' : 'white') : 'white',
-                                textAlign: 'center',
-                                fontSize: '0.625rem',
-                            }}
-                        >
-                            {ingredient}
-                        </div>
-                    ))}
-                </div>
-                {profile.career ? (<div>
-                    <h4 style={{marginBottom:"0"}} >경력</h4>
-                    <hr style={{height: "2px", backgroundColor: "black", width:"95vw"}}/>
-                    {profile.career.map((item, index) => (
+                {console.log(career)}
+                <div style={{display:'flex',marginLeft:'0.9rem'}} >
+                <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',marginRight:'1rem'}} >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+                        <path d="M10.8916 13.2538C11.8431 13.2538 12.7733 12.9717 13.5644 12.443C14.3556 11.9144 14.9722 11.163 15.3364 10.2839C15.7005 9.40484 15.7958 8.4375 15.6101 7.50426C15.4245 6.57102 14.9663 5.71378 14.2935 5.04095C13.6206 4.36812 12.7634 3.90991 11.8301 3.72428C10.8969 3.53865 9.92957 3.63392 9.05048 3.99805C8.17138 4.36219 7.42001 4.97883 6.89137 5.76999C6.36273 6.56116 6.08057 7.49131 6.08057 8.44284C6.08057 9.7188 6.58744 10.9425 7.48968 11.8447C8.39191 12.747 9.61561 13.2538 10.8916 13.2538ZM10.8916 6.03734C11.3673 6.03734 11.8324 6.17842 12.228 6.44274C12.6236 6.70706 12.9319 7.08275 13.114 7.52229C13.296 7.96184 13.3437 8.44551 13.2508 8.91213C13.158 9.37875 12.9289 9.80737 12.5925 10.1438C12.2561 10.4802 11.8275 10.7093 11.3609 10.8021C10.8942 10.8949 10.4106 10.8473 9.97102 10.6652C9.53148 10.4832 9.15579 10.1748 8.89147 9.77926C8.62715 9.38368 8.48607 8.9186 8.48607 8.44284C8.48607 7.80486 8.7395 7.19301 9.19062 6.74189C9.64174 6.29077 10.2536 6.03734 10.8916 6.03734Z" fill="#231F20" />
+                        <path d="M20.5135 15.6589C21.2272 15.6589 21.9248 15.4473 22.5182 15.0508C23.1115 14.6543 23.574 14.0908 23.8471 13.4315C24.1202 12.7721 24.1917 12.0466 24.0524 11.3467C23.9132 10.6468 23.5696 10.0038 23.0649 9.49922C22.5603 8.99459 21.9174 8.65094 21.2175 8.51172C20.5175 8.37249 19.792 8.44395 19.1327 8.71705C18.4734 8.99015 17.9099 9.45262 17.5134 10.046C17.1169 10.6394 16.9053 11.337 16.9053 12.0506C16.9053 13.0076 17.2854 13.9254 17.9621 14.6021C18.6388 15.2787 19.5566 15.6589 20.5135 15.6589ZM20.5135 10.8479C20.7514 10.8479 20.9839 10.9184 21.1817 11.0506C21.3795 11.1827 21.5337 11.3706 21.6247 11.5904C21.7158 11.8101 21.7396 12.052 21.6932 12.2853C21.6468 12.5186 21.5322 12.7329 21.364 12.9011C21.1958 13.0693 20.9815 13.1839 20.7482 13.2303C20.5149 13.2767 20.273 13.2529 20.0533 13.1618C19.8335 13.0708 19.6456 12.9166 19.5135 12.7188C19.3813 12.5211 19.3108 12.2885 19.3108 12.0506C19.3108 11.7316 19.4375 11.4257 19.6631 11.2002C19.8886 10.9746 20.1945 10.8479 20.5135 10.8479Z" fill="#231F20" />
+                        <path d="M20.5134 16.8623C19.1806 16.8637 17.886 17.308 16.833 18.1252C15.6549 16.9517 14.1558 16.1534 12.5245 15.8308C10.8933 15.5083 9.20314 15.676 7.66712 16.3128C6.1311 16.9496 4.81803 18.0269 3.89351 19.409C2.96899 20.7911 2.47442 22.416 2.47217 24.0788C2.47217 24.3978 2.59889 24.7037 2.82445 24.9292C3.05 25.1548 3.35593 25.2815 3.67492 25.2815C3.99391 25.2815 4.29983 25.1548 4.52539 24.9292C4.75095 24.7037 4.87767 24.3978 4.87767 24.0788C4.87767 22.4838 5.51126 20.9542 6.63906 19.8264C7.76685 18.6986 9.29647 18.065 10.8914 18.065C12.4864 18.065 14.016 18.6986 15.1438 19.8264C16.2716 20.9542 16.9052 22.4838 16.9052 24.0788C16.9052 24.3978 17.0319 24.7037 17.2575 24.9292C17.483 25.1548 17.7889 25.2815 18.1079 25.2815C18.4269 25.2815 18.7328 25.1548 18.9584 24.9292C19.184 24.7037 19.3107 24.3978 19.3107 24.0788C19.3135 22.6697 18.9576 21.283 18.2763 20.0496C18.8078 19.6295 19.4469 19.3676 20.1203 19.2938C20.7937 19.22 21.4743 19.3373 22.0842 19.6322C22.6941 19.9271 23.2086 20.3877 23.5689 20.9614C23.9293 21.5351 24.1208 22.1986 24.1217 22.876C24.1217 23.195 24.2484 23.5009 24.474 23.7265C24.6995 23.952 25.0054 24.0788 25.3244 24.0788C25.6434 24.0788 25.9493 23.952 26.1749 23.7265C26.4005 23.5009 26.5272 23.195 26.5272 22.876C26.5272 21.2811 25.8936 19.7514 24.7658 18.6237C23.638 17.4959 22.1084 16.8623 20.5134 16.8623Z" fill="#231F20" />
+                    </svg>
+                    <a style={{ marginBottom: "0" }} >경력</a>
+                    </div>
+                {career ? (<div>
+                    {career.map((item, index) => (
                         <div style={{ position: 'relative', display: 'inline-block' }}>
                             <div key={index}
-                                 style={{
-                                     display: 'flex',
-                                     justifyContent: 'center',
-                                     alignItems: 'center',
-                                     height: "3vh",
-                                     width: '45vw',
-                                     border: '2px solid lightgray',
-                                     backgroundColor: 'white',
-                                     borderRadius: '7px',
-                                     marginTop: '5px',
-                                 }}
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    height: "3vh",
+                                    width: '45vw',
+                                    border: '2px solid lightgray',
+                                    backgroundColor: 'white',
+                                    borderRadius: '7px',
+                                    marginTop: '5px',
+                                }}
                             >
                                 {item}
                             </div>
                         </div>
                     ))}
-                </div>):null}
+                </div>) : null}
+                </div>
 
 
             </div>
+            <button className="bottom_button" style={{ backgroundColor: 'black', position: 'fixed' }} onClick={() => navigate(-1)}>돌아가기</button>
         </div>
     );
 };

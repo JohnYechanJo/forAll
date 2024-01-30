@@ -24,7 +24,7 @@ const [isMiseen, setIsMiseen] = useState(false);
     }, []);
     //data에서 받아온 정보를 출력, 뭘로 호출해야 하는지 확인하고 바꿔야 함
     return (<div className="fontForRegister" >
-        <h2 style={{ marginLeft: '1rem' }} >• 공간정보</h2>
+        <h2 style={{ textAlign:'center' ,fontSize:'0.9375rem',fontWeight:'500'}} >공간정보</h2>
         <hr style={{ width: "90vw", color: "black", border: "1px solid black", backgroundColor: "black", height: "0.5px" }} />
         <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", gap: '1rem', padding: '1rem' }}>
             <div>
@@ -358,7 +358,7 @@ const [isMiseen, setIsMiseen] = useState(false);
             </div>
 
         </div>
-        <button className="bottom_button" style={{backgroundColor:'#FF4F4F',marginTop:'4rem'}}  onClick={() => navigate(-1)}>돌아가기</button>
+        <button className="bottom_button" style={{backgroundColor:'black',marginTop:'4rem'}}  onClick={() => navigate(-1)}>돌아가기</button>
     </div>)
 };
 

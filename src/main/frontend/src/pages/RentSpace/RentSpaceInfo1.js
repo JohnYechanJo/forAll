@@ -17,13 +17,49 @@ const RentSpaceInfo1 = () => {
     }, []);
 
     return (
-        <div style={{display:'flex',justifyContent:'center',flexDirection:'column',alignItems:'center',height:'100vh'}} >  
-            <h2 style={{textAlign:'center'}} > "{data.name}"에 대한 공간 소개</h2>
-            <hr style={{width: "90vw", color: "black", border:"1px solid black",backgroundColor:"black" ,height:"0.5px",marginBottom:'0'}}/>
-            <div style={{padding:'1rem',display:'flex',textAlign:'left', whiteSpace:'pre-wrap'} }>
-                <a className="input fontForRegister" style={{height:'30rem',textAlign:'left',display:'flex',alignItems:'flex-start'}} >{data.spaceIntro}</a>
+        <div style={{display:'flex',justifyContent:'center',flexDirection:'column',alignItems:'center',gap:'1.5rem',padding:'1rem',boxSizing:'border-box'  }} 
+        className="fontForRegister"
+        >  
+            <a style={{ textAlign:'center' ,fontSize:'0.9375rem',fontWeight:'500'}} >공간 소개</a>
+            <hr style={{width: "100%", color: "black", border:"1px solid black",backgroundColor:"black" ,height:"0.5px",marginBottom:'0'}}/>
+            <div >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <a>공간명<span style={{ color: '#FF2929' }} >*</span></a>
+              </div>
+              <input
+                type="text"
+                defaultValue={data.name}
+                className="input"
+                maxLength="17"
+              />
             </div>
-            <button className="bottom_button" style={{backgroundColor:'#FF4F4F',position:'fixed'}} onClick={() => navigate(-1)}>돌아가기</button>
+
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
+                <a>공간 한 줄 소개<span style={{ color: '#FF2929' }} >*</span></a>
+              </div>
+              <input
+                type="text"
+                defaultValue={data.spaceBrief}
+                className="input"
+                maxLength="17"
+              />
+            </div>
+
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
+                <a>공간 소개<span style={{ color: '#FF2929' }} >*</span></a>
+              </div>
+              <textarea
+                type="text"
+                defaultValue={data.spaceIntro}
+                className="input"
+                style={{ height: "6.25rem" }}
+                maxLength="299"
+                minLength="19"
+              />
+            </div>
+            <button className="bottom_button" style={{backgroundColor:'black',position:'fixed'}} onClick={() => navigate(-1)}>돌아가기</button>
         </div>
     )
 };

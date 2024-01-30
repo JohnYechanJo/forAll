@@ -43,7 +43,7 @@ const RentSpaceInfo3 = () => {
   }
   return (
     <div className="fontForRegister">
-      <h2 style={{ marginLeft: '1rem' }} >• 공간정보</h2>
+      <h2 style={{ textAlign:'center' ,fontSize:'0.9375rem',fontWeight:'500'}} >주방정보 및 마감 안내</h2>
       <hr style={{ width: "90vw", color: "black", border: "1px solid black", backgroundColor: "black", height: "0.5px" }} />
       <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", gap: '1rem', padding: '1rem' }}>
         <div  >
@@ -346,7 +346,7 @@ const RentSpaceInfo3 = () => {
           </div>
         </div>
       </div>
-      <button  className="bottom_button" style={{backgroundColor:'#FF4F4F',marginTop:'4rem'}} onClick={() => navigate(-1)}>돌아가기</button>
+      <button  className="bottom_button" style={{backgroundColor:'black',marginTop:'4rem'}} onClick={() => navigate(-1)}>돌아가기</button>
     </div>
   );
 };

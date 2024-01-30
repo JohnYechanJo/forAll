@@ -87,45 +87,45 @@ const ChefInfoModifyPage = () => {
                         onChange={(e) => {
                             setInputText(e.target.value);
                         }} />
-                <div>
-                    {career.map((item, index) => (
-                        <div style={{ position: 'relative', display: 'inline-block' }}>
-                            <div key={index}
-                                style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    height: "3vh",
-                                    width: '45vw',
-                                    border: '1px solid lightgray',
-                                    backgroundColor: 'white',
-                                    borderRadius: '7px',
-                                    marginTop: '5px',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                {item}
+                    <div>
+                        {career.map((item, index) => (
+                            <div style={{ position: 'relative', display: 'inline-block' }}>
+                                <div key={index}
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        height: "3vh",
+                                        width: '45vw',
+                                        border: '1px solid lightgray',
+                                        backgroundColor: 'white',
+                                        borderRadius: '7px',
+                                        marginTop: '5px',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    {item}
+                                </div>
+                                <button
+                                    style={{
+                                        position: 'absolute',
+                                        right: '0%',
+                                        bottom: "15%",
+                                        border: 'none',
+                                        backgroundColor: 'white',
+                                    }}
+                                    onClick={() => {
+                                        const newCareer = [...career];
+                                        newCareer.splice(index, 1);
+                                        setCareer(newCareer);
+                                    }}
+                                >
+                                    x
+                                </button>
                             </div>
-                            <button
-                                style={{
-                                    position: 'absolute',
-                                    right: '0%',
-                                    bottom: "15%",
-                                    border: 'none',
-                                    backgroundColor: 'white',
-                                }}
-                                onClick={() => {
-                                    const newCareer = [...career];
-                                    newCareer.splice(index, 1);
-                                    setCareer(newCareer);
-                                }}
-                            >
-                                x
-                            </button>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
                 </div>
                 <div>
                     <a style={{ marginBottom: "0" }} >보건증 사진</a>
@@ -182,7 +182,7 @@ const ChefInfoModifyPage = () => {
 
                 }}>셰프정보가 수정되었습니다!</p>
                 <hr />
-                <button  style={{width:'100%',height:'3.125rem',backgroundColor:'white',border:'none'}}  onClick={() => navigate("/")}>확인</button>
+                <button style={{ width: '100%', height: '3.125rem', backgroundColor: 'white', border: 'none' }} onClick={() => navigate("/")}>확인</button>
             </Modal>
             <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem', position: 'fixed', bottom: '0' }}>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#FF4F4F", width: '100%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
