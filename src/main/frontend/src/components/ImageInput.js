@@ -20,7 +20,6 @@ const ImageInput = ({setImg, val}) => {
         else setImgFile(typeof(val) === "string" ? spring_app_url + "/api/v1/image/"+val : URL.createObjectURL(val));
     }, [val]);
     const handleButton = () => {
-        setImgFile(undefined);
         setImgFile("");
     }
     const onErrorImg = (e) => {

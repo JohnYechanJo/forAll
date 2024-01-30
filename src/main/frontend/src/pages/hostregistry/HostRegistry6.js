@@ -16,6 +16,7 @@ const HostRegistry6 = () => {
     const location = useLocation();
     const data = { ...location.state };
     const navigate = useNavigate();
+    console.log(data);
     let isPublic = false;
     const emailDatas = ["직접입력", "naver.com", "choi.com", "dreamwiz.com", "empal.com", "gmail.com", "hanafos.com", "hanmail.net", "hanmir.com", "hitel.net", "hotmail.com", "korea.com", "lycos.co.kr", "nate.com"];
 
@@ -38,6 +39,8 @@ const HostRegistry6 = () => {
     const [modalOpen1, setModalOpen1] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
+
+    const [pending, setPending] = useState(false);
 
     const onChangeTradeName = useCallback((e) => {
         if (e.target.value.length <= 28) setTradeName(e.target.value);
@@ -86,16 +89,10 @@ const HostRegistry6 = () => {
         else setIsModalOpen(true);
     };
     const submit = async () => {
+        if(pending) return;
+        setPending(true);
         const userId = sessionStorage.getItem("user_id");
-        // 대표 이미지
-        const imgRepresent = await ImageUploader(data.imgRepresent, userId);
-        const hallImage = await Promise.all([data.img1, data.img2, data.img3, ...data.imgAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const kitImage = await Promise.all([data.kitchen1, data.kitchen2, data.kitchen3, ...data.kitchenAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const menu = await Promise.all([data.menu1, ...data.menuAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
 
-        const plateImage = await Promise.all(data.sidePlate.map(async (img) => await ImageUploader(img, userId)));
-        const cupImage = await Promise.all(data.cup.map(async (img) => await ImageUploader(img, userId)));
-        const cutleryImage = await Promise.all(data.cuttrary.map(async (img) => await ImageUploader(img, userId)));
         const closeImage = await Promise.all(data.closeImage.map(async (img) => await ImageUploader(img, userId)));
         const businessNum = registNum1 + registNum2 + registNum3;
         const businessImage = await ImageUploader(license, userId);
@@ -112,10 +109,10 @@ const HostRegistry6 = () => {
             address: data.fullAddress,
             addressBrief: data.placeInfo,
             website: data.webSite,
-            mainImage: imgRepresent,
-            hallImage: hallImage,
-            kitImage: kitImage,
-            menu: menu,
+            mainImage: data.imgRepresent,
+            hallImage: data.hallImage,
+            kitImage: data.kitImage,
+            menu: data.menu,
             ableDate: data.rentWeek,
             ableStartHour: data.rentTimeFrom,
             ableFinHour: data.rentTimeTo,
@@ -134,11 +131,11 @@ const HostRegistry6 = () => {
             capacity: data.capacity,
             equip: data.equip,
             equipExtra: data.extraMachine,
-            plateImage: plateImage,
+            plateImage: data.plateImage,
             plateNum: data.countSidePlate,
-            cupImage: cupImage,
+            cupImage: data.cupImage,
             cupNum: data.countCup,
-            cutleryImage: cutleryImage,
+            cutleryImage: data.cutleryImage,
             cutleryNum: data.countCuttrary,
             companyName: tradeName,
             ceoName: representative,

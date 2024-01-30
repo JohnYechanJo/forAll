@@ -13,33 +13,31 @@ import ImageViewer from "../../components/ImageViewer";
 const PlaceInfoModifyPage6 = () => {
     const location = useLocation();
     const data = { ...location.state };
+    console.log(data);
     const navigate = useNavigate();
-    const [dbdata, setDbData] = useState({});
 
     let isPublic = false;
     const emailDatas = ["직접입력", "naver.com", "choi.com", "dreamwiz.com", "empal.com", "gmail.com", "hanafos.com", "hanmail.net", "hanmir.com", "hitel.net", "hotmail.com", "korea.com", "lycos.co.kr", "nate.com"];
 
-    const [tradeName, setTradeName] = useState("");
-    const [representative, setRepresentative] = useState("");
-    const [registNum1, setRegistNum1] = useState("");
-    const [registNum2, setRegistNum2] = useState("");
-    const [registNum3, setRegistNum3] = useState("");
-    const [license, setLicense] = useState("");
-    const [address, setAddress] = useState("");
+    const [tradeName, setTradeName] = useState(data.companyName);
+    const [representative, setRepresentative] = useState(data.ceoName);
+    const [registNum, setRegistNum] = useState(data.businessNum);
+    const [license, setLicense] = useState(data.businessImage);
+    const [address, setAddress] = useState(data.businessAddress);
     const [exactAddress, setExactAddress] = useState("");
-    const [phone1, setPhone1] = useState("");
-    const [phone2, setPhone2] = useState("");
-    const [phone3, setPhone3] = useState("");
+    const [phone1, setPhone1] = useState(data.payPhoneNum.slice(0, 3));
+    const [phone2, setPhone2] = useState(data.payPhoneNum.slice(3, 7));
+    const [phone3, setPhone3] = useState(data.payPhoneNum.slice(7, 11));
     const bankDatas = ["한국은행", "KB국민은행", "신한은행", "우리은행", "하나은행", "SC제일은행", "한국씨티은행", "케이뱅크", "카카오뱅크", "토스뱅크", "한국산업은행", "중소기업은행", "한국수출은행", "NH농협은행", "수협은행", "대구은행", "부산은행", "경남은행", "광주은행", "전북은행", "제주은행"];
-    const [bank, setBank] = useState(bankDatas[0]);
-    const [account, setAccount] = useState("");
-    const [accountHolder, setAccountHolder] = useState();
+    const [bank, setBank] = useState(data.bankName ? data.bankName : bankDatas[0]);
+    const [account, setAccount] = useState(data.accountNum);
+    const [accountHolder, setAccountHolder] = useState(data.accountHolder);
     const [isAgree, setIsAgree] = useState(false);
     const [modalOpen1, setModalOpen1] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
-
-    const businessNum = dbdata.businessNum;
+    const [pending, setPending] = useState(false);
+    const businessNum = data.businessNum;
     const onChangeTradeName = useCallback((e) => {
         if (e.target.value.length <= 28) setTradeName(e.target.value);
     }, []);
@@ -67,52 +65,43 @@ const PlaceInfoModifyPage6 = () => {
     }, []);
     const handleButton = () => {
         if (isAgree === false) setIsAlertOpen(true);
-        else if ((phone1 !== "") && (phone2 !== "") && (phone3 !== "") && (account !== "") && (accountHolder !== undefined)) {
+        else if ((phone1 !== "") && (phone2 !== "") && (phone3 !== "") && (account !== "") && (accountHolder)) {
             isPublic = true;
             submit();
         }
         else setIsModalOpen(true);
     };
     const submit = async () => {
+        if(pending) return;
+        setPending(true);
         const userId = sessionStorage.getItem("user_id");
-        // 대표 이미지
-        const imgRepresent = await ImageUploader(data.imgRepresent, userId);
-        const hallImage = await Promise.all([data.img1, data.img2, data.img3, ...data.imgAdditional].map(async (img) => await ImageUploader(img, userId)));
-        const kitImage = await Promise.all([data.kitchen1, data.kitchen2, data.kitchen3, ...data.kitchenAdditional].map(async (img) => await ImageUploader(img, userId)));
-
-        const menu = data.menuAdditional ? await Promise.all([data.menu1, ...data.menuAdditional].map(async (img) => await ImageUploader(img, userId))) : null;
-
-        const plateImage = data.sidePlate ? await Promise.all(data.sidePlate.map(async (img) => await ImageUploader(img, userId))) : null;
-        const cupImage = data.cup ? await Promise.all(data.cup.map(async (img) => await ImageUploader(img, userId))) : null;
-        const cutleryImage = data.cuttrary ? await Promise.all(data.cuttrary.map(async (img) => await ImageUploader(img, userId))) : null;
 
         const closeImage = data.closeImage ? await Promise.all(data.closeImage.map(async(img) => await ImageUploader(img, userId))) : null;
-        const businessNum = registNum1 + registNum2 + registNum3;
         const businessImage = await ImageUploader(license, userId);
         const businessAddress = address + exactAddress;
         const payPhoneNum = phone1 + phone2 + phone3;
 
         await axios.put("/api/v1/space", {
-            id: dbdata.id,
+            id: data.id,
             userId: userId,
             name: data.placeName,
             spaceBrief: data.placeIntro,
             spaceIntro: data.placeIntroDetail,
             kitchenFeat: data.kitchen,
-            address: data.fullAddress,
+            address: data.address,
             addressBrief: data.placeInfo,
-            website: data.webSite,
-            mainImage: imgRepresent,
-            hallImage: hallImage,
-            kitImage: kitImage,
-            menu: menu,
+            website: data.website,
+            mainImage: data.imgRepresent,
+            hallImage: data.hallImage,
+            kitImage: data.kitImage,
+            menu: data.menu,
             ableDate: data.rentWeek,
             ableStartHour: data.rentTimeFrom,
             ableFinHour: data.rentTimeTo,
-            ableMiseenStartTime: data.miseenTimeFrom,
-            ableMiseenFinTime: data.miseenTimeTo,
+            ableMiseenStartTime: data.ableMiseenStartTime,
+            ableMiseenFinTime: data.ableMiseenFinTime,
             floorNum: data.floor,
-            ableParking: data.parkAvaliable,
+            ableParking: data.ableParking,
             haveElevator: data.elevator,
             tableNum: data.table,
             seatNum: data.seat,
@@ -125,15 +114,15 @@ const PlaceInfoModifyPage6 = () => {
             capacity: data.capacity,
             equip: data.equip,
             equipExtra: data.extraMachine,
-            plateImage: plateImage,
+            plateImage: data.plateImage,
             plateNum: data.countSidePlate,
-            cupImage: cupImage,
+            cupImage: data.cupImage,
             cupNum: data.countCup,
-            cutleryImage: cutleryImage,
+            cutleryImage: data.cutleryImage,
             cutleryNum: data.countCuttrary,
             companyName: tradeName,
             ceoName: representative,
-            businessNum: businessNum,
+            businessNum: registNum,
             businessImage: businessImage,
             businessAddress: businessAddress,
             payPhoneNum: payPhoneNum,
@@ -148,35 +137,6 @@ const PlaceInfoModifyPage6 = () => {
             .catch((err) => console.error(err));
 
     };
-    const downloadData = async () => {
-        let spaceid;
-        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data[0])
-            .catch((err) => console.error(err));
-        axios
-            .get("/api/v1/space/" + spaceid)
-            .then((res) => {
-                setDbData(res.data)
-                console.log(res.data);
-                setTradeName(res.data.companyName);
-                setRepresentative(res.data.ceoName);
-                setRegistNum1(res.data.businessNum.slice(0, 3));
-                setRegistNum2(res.data.businessNum.slice(3, 5));
-                setRegistNum3(res.data.businessNum.slice(5, 10));
-                setLicense(res.data.businessImage);
-                setAddress(res.data.businessAddress);
-                setPhone1(res.data.payPhoneNum.slice(0, 3));
-                setPhone2(res.data.payPhoneNum.slice(3, 7));
-                setPhone3(res.data.payPhoneNum.slice(7, 11));
-                setBank(res.data.bankName);
-                setAccount(res.data.accountNum);
-                setAccountHolder(res.data.accountHolder);
-            })
-            .catch((err) => console.error(err));
-    };
-    useEffect(() => {
-        downloadData();
-    }, []);
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ForAllLogo />
@@ -192,14 +152,14 @@ const PlaceInfoModifyPage6 = () => {
                             <p>상호(개인/법인)<span style={{ color: "#FF2929" }} >*</span></p>
                             <p>{tradeName.length}자/28자</p>
                         </div>
-                        <input value={tradeName} defaultValue={dbdata.companyName} disabled={true} className="input" />
+                        <input value={tradeName} defaultValue={data.companyName} disabled={true} className="input" />
                     </div>
                     <div>
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <p>대표자명<span style={{ color: "#FF2929" }} >*</span></p>
                             <p>{representative.length}자/10자</p>
                         </div>
-                        <input value={representative} defaultValue={dbdata.ceoName} disabled={true} className="input" />
+                        <input value={representative} defaultValue={data.ceoName} disabled={true} className="input" />
                     </div>
                     <div>
                         <p>사업자 등록번호<span style={{ color: "#FF2929" }} >*</span></p>
@@ -219,7 +179,7 @@ const PlaceInfoModifyPage6 = () => {
                     </div>
                     <div>
                         <a>사업장 주소<span style={{ color: "#FF2929" }} >*</span></a>
-                        <input defaultValue={dbdata.businessAddress} disabled={true} className="input" />
+                        <input defaultValue={address} disabled={true} className="input" />
                     </div>
                     <div>
                         <p>정산용 연락처<span style={{ color: "#FF2929" }} >*</span></p>
@@ -240,17 +200,17 @@ const PlaceInfoModifyPage6 = () => {
                         <div style={{ display: "flex" }} >
                             <div style={{display:'flex',flexDirection:'column'}} >
                                 <a>은행명<span style={{ color: "#FF2929" }} >*</span></a>
-                                <DropDown dataArr={bankDatas} onChange={setBank} defaultData={dbdata.bankName} val={bank} width='100%' />
+                                <DropDown dataArr={bankDatas} onChange={setBank} defaultData={bank} val={bank} width='100%' />
                             </div>
                             <div style={{display:'flex',flexDirection:'column', marginLeft: '0.63rem'}}>
                                 <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
-                                <input onChange={onChangeAccount} placeholder={"454102-01-376503"} defaultValue={dbdata.accountNum} className="input"
+                                <input onChange={onChangeAccount} placeholder={"454102-01-376503"} defaultValue={account} className="input"
                                     style={{ width: '100%', height: "1.875rem", flexShrink: "0" }}
                                 />
                             </div>
                             <div style={{display:'flex',flexDirection:'column', marginLeft: '0.63rem'}}>
                                 <a>예금주<span style={{ color: "#FF2929" }} >*</span></a>
-                                <input onChange={onChangeAccountHolder} defaultValue={dbdata.accountHolder} className="input"
+                                <input onChange={onChangeAccountHolder} defaultValue={accountHolder} className="input"
                                     style={{ width: '100%', }}
                                 />
                             </div>
