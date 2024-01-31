@@ -1,7 +1,7 @@
 import DropDown from "../../components/DropDown";
 import ImageInputs from "../../components/ImageInputs";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Modal from "react-modal";
 import axios from "axios";
 import "../../components/Styles.css";
@@ -258,6 +258,25 @@ const PlaceInfoModifyPage4 = () => {
                     >
                         넘어가기
                     </button>
+                </div>
+            </Modal>
+            <Modal isOpen={pending} ariaHideApp={false} style={SmallModalStyles}>
+                <div style={{
+                    justifyContent: "center", alignItems: "center",
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+
+                }}>
+                    <a style={{fontSize: '0.9375rem'}}>현재 입력사항을 업로드 중입니다.</a>
+                    <p style={{fontSize: '0.9375rem'}}>잠시만 기다려주세요.</p>
                 </div>
             </Modal>
         </div>

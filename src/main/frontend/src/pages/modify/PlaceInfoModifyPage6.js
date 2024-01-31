@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import DropDown from "../../components/DropDown";
 import Modal from "react-modal";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -323,6 +323,25 @@ const PlaceInfoModifyPage6 = () => {
 
                 <hr />
                 <button  style={{width:'100%',height:'3.125rem',backgroundColor:'white',border:'none'}} onClick={() => navigate("/")}>확인</button>
+            </Modal>
+            <Modal isOpen={pending} ariaHideApp={false} style={SmallModalStyles}>
+                <div style={{
+                    justifyContent: "center", alignItems: "center",
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+
+                }}>
+                    <a style={{fontSize: '0.9375rem'}}>현재 입력사항을 업로드 중입니다.</a>
+                    <p style={{fontSize: '0.9375rem'}}>잠시만 기다려주세요.</p>
+                </div>
             </Modal>
             <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={"환불 기준에 동의해 주세요"} />
         </div>

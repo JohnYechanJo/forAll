@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import ImageInput from "../../components/ImageInput";
 import ImageInputs from "../../components/ImageInputs";
 import Modal from "react-modal";
@@ -158,6 +158,25 @@ ex.이 물건은 꼭 손대지 말아주세요.
                             넘어가기
                         </button>
                     </div>
+            </Modal>
+            <Modal isOpen={pending} ariaHideApp={false} style={SmallModalStyles}>
+                <div style={{
+                    justifyContent: "center", alignItems: "center",
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+
+                }}>
+                    <a style={{fontSize: '0.9375rem'}}>현재 입력사항을 업로드 중입니다.</a>
+                    <p style={{fontSize: '0.9375rem'}}>잠시만 기다려주세요.</p>
+                </div>
             </Modal>
         </div>
 

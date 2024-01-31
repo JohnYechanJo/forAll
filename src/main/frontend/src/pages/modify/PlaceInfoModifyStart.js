@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/home/Header";
 import axios from "axios";
 import ImageInput from "../../components/ImageInput";
@@ -10,6 +10,7 @@ import ForAllLogo from "../../components/ForAllLogo";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 import ImageUploader from "../../utils/imageUploader";
 import iImg from "../../components/icons/i.png";
+import {SmallModalStyles} from "../../components/SmallModalStyles";
 
 const PlaceInfoModifyStart = () => {
   const navigate = useNavigate();
@@ -501,6 +502,25 @@ const PlaceInfoModifyStart = () => {
             <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
               onClick={() => submit()}
             >다음</button>
+          </div>
+        </Modal>
+        <Modal isOpen={pending} ariaHideApp={false} style={SmallModalStyles}>
+          <div style={{
+            justifyContent: "center", alignItems: "center",
+            fontFamily: "Noto Sans KR",
+            color: " #000",
+            fontSize: "1.25rem",
+            fontStyle: "normal",
+            fontWeight: "400",
+            lineHeight: "normal",
+
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+
+          }}>
+            <a style={{fontSize: '0.9375rem'}}>현재 입력사항을 업로드 중입니다.</a>
+            <p style={{fontSize: '0.9375rem'}}>잠시만 기다려주세요.</p>
           </div>
         </Modal>
       </div>
