@@ -88,7 +88,7 @@ const PersonalInfoModifyInputTemplate = ({ name, pw, phone, email, year, month, 
 
     return (
         <div style={{width: '100%'}}>
-            <a className="fontForRegister" style={{paddingLeft: "0.5rem"}}>아이디<span className="fontForRegister"
+            <a className="fontForRegister" style={{paddingLeft: "2%"}}>아이디<span className="fontForRegister"
                                                                                     style={{color: "#FF2929"}}>*</span></a>
             <div style={{paddingLeft: '2%', flexDirection: "column", marginBottom: "2.5rem", display: "flex"}}>
                 <input
@@ -281,7 +281,7 @@ const PersonalInfoModifyInputTemplate = ({ name, pw, phone, email, year, month, 
                         style={{
                             textAlign: 'center',
                             height: '2.7rem',
-                            width: '32%',
+                            width: '30%',
                             fontSize: '0.625rem',
                             backgroundColor: "#616161",
                             color: "white"
