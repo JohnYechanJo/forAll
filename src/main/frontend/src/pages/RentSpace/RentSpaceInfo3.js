@@ -94,7 +94,7 @@ const RentSpaceInfo3 = () => {
                         대면형보다 더 긴밀한 커뮤니케이션이 가능하며, 요리를 하는 동시에 식사가 가능한 형태를 띕니다.
                       </p>
                     </div>
-                    <div class="bottom_button_fixed">
+                    <div class="bottom_button_relative">
                       <a onClick={() => setModalIsOpen1(false)}>닫기</a>
                     </div>
 
@@ -151,7 +151,7 @@ const RentSpaceInfo3 = () => {
                       }}>•&ensp;식탁이 따로 놓여 있지만, 음식을 만드는 사람의 얼굴을 보며
                         대화를 나눌 수 있는 구조입니다.</p>
                     </div>
-                    <div class="bottom_button_fixed">
+                    <div class="bottom_button_relative">
                       <a onClick={() => setModalIsOpen2(false)}>닫기</a>
                     </div>
                   </Modal>
@@ -213,7 +213,7 @@ const RentSpaceInfo3 = () => {
                         paddingRight: "1rem"
                       }}>•&ensp;홀에서는 어수선한 모습이 보이지 않아 쾌적한 매장 환경이 만들어집니다.</p>
                     </div>
-                    <div class="bottom_button_fixed">
+                    <div class="bottom_button_relative">
                       <a onClick={() => setModalIsOpen3(false)}>닫기</a>
                     </div>
 
@@ -228,16 +228,17 @@ const RentSpaceInfo3 = () => {
           </div>
         </div>
         <div>
-          <a>화구</a>
+          <a >화구</a>
           <div
             className="input"
+            style={{width:"90vw"}}
           >
             {data.fireholeNum}
           </div>
         </div>
         <div>
           <p>수용 가능 주방 인원 수</p>
-          <p className="input" >{data.capacity}</p>
+          <p className="input" style={{width:"90vw"}}>{data.capacity}</p>
         </div>
         <div>
           <a>확보된 주방기계</a>

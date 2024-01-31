@@ -29,26 +29,27 @@ const [isMiseen, setIsMiseen] = useState(false);
         <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", gap: '1rem', padding: '1rem' }}>
             <div>
                 <a>주소(위치)</a>
-                <div className="input" >{data.address}</div>
+                <div className="input" style={{width:"90vw"}}>{data.address}</div>
             </div>
             <div>
                 <a>위치정보</a>
-                <div className="input" >{data.addressBrief}</div>
+                <div className="input" style={{width:"90vw"}}>{data.addressBrief}</div>
             </div>
             <div>
                 <a>웹사이트</a>
-                <div className="input" >{data.website}</div>
+                <div className="input" style={{width:"90vw"}}>{data.website}</div>
             </div>
             <div style={{ height: '8rem' }} >
                 <a>대표 이미지</a>
                 <ImageViewer val={data.mainImage} />
             </div>
-            <a>이용시간</a>
+            <a style={{marginBottom:'-1rem'}}>이용시간</a>
             <div style={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
                 alignItems: "center",
+                width:"90vw"
             }}
                 className="input"
             >
@@ -64,7 +65,7 @@ const [isMiseen, setIsMiseen] = useState(false);
             </div>
             <div>
                 <a>주차 여부</a>
-                <div className="input">{data.ableParking}</div>
+                <div className="input" style={{width:"90vw"}}>{data.ableParking}</div>
             </div>
             <a>엘리베이터 여부</a>
             <div style={{
@@ -95,11 +96,11 @@ const [isMiseen, setIsMiseen] = useState(false);
             </div>
             <div>
                 <a>테이블</a>
-                <div className="input" >{data.tableNum}</div>
+                <div className="input" style={{width:"90vw"}}>{data.tableNum}</div>
             </div>
             <div>
                 <a>좌석수</a>
-                <div className="input" >{data.seatNum}</div>
+                <div className="input" style={{width:"90vw"}}>{data.seatNum}</div>
             </div>
             <div>
             <a style={{ padding: "0px 0px", marginBottom: "0px" }}>가능 여부</a>
@@ -219,7 +220,7 @@ const [isMiseen, setIsMiseen] = useState(false);
                             이용자에게 <a
                                 style={{ textDecorationLine: "underline" }}>사용할 수 있는 냉장고</a>를 비워주어 공간 확보를 부탁드립니다.
                         </p>
-                        <div class="bottom_button_fixed">
+                        <div class="bottom_button_relative">
                             <a style={{ fontSize: "0.8rem" }} onClick={() => setIsMorningDelivery(false)}>닫기</a>
                         </div>
                     </div>
@@ -278,7 +279,7 @@ const [isMiseen, setIsMiseen] = useState(false);
                                 style={{ color: "red" }}>안심하세요! </a><a>팝업 레스토랑은 배너 또는 공지를 통해 공간과 무관한 영업이 진행된다는 점이 명시됩니다.
                                 </a>
                             </p>
-                            <div className="bottom_button_fixed">
+                            <div className="bottom_button_relative">
                                 <a style={{ fontSize: "0.8rem" }} onClick={() => setIsWorkIn(false)}>닫기</a>
                             </div>
                         </div>
@@ -346,7 +347,7 @@ const [isMiseen, setIsMiseen] = useState(false);
                             <p style={{ textAlign: 'left', paddingLeft: "1rem", paddingRight: "1rem" }}>•&ensp;팝업 레스토랑에서
                                 고객에게 식사를 제공하기 전에 사전 준비를 완벽하게 해야 하므로 필요한 준비과정입니다.
                             </p>
-                            <div class="bottom_button_fixed">
+                            <div class="bottom_button_relative">
                                 <a style={{ fontSize: "0.8rem" }} onClick={() => setIsMiseen(false)}>닫기</a>
                             </div>
                         </div>
