@@ -3,9 +3,9 @@ import "../components/Styles.css";
 
 
 import xmark from "./icons/xmark.png";
+import {GetImageUri} from "../utils/GetImage";
 
 const ImageInput = ({setImg, val}) => {
-    const spring_app_url = "http://15.165.222.15:80";
     // 기본 이미지 추후 설정 필요
     const BaseImgSrc = "logo512.png";
     const [imgFile, setImgFile] = useState("");
@@ -17,7 +17,7 @@ const ImageInput = ({setImg, val}) => {
     };
     useEffect(() => {
         if (!val) setImgFile("");
-        else setImgFile(typeof(val) === "string" ? spring_app_url + "/api/v1/image/"+val : URL.createObjectURL(val));
+        else setImgFile(typeof(val) === "string" ? GetImageUri(val) : URL.createObjectURL(val));
     }, [val]);
     const handleButton = () => {
         setImgFile("");

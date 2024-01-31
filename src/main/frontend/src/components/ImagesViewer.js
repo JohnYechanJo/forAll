@@ -2,8 +2,8 @@ import {useRef, useState, useCallback, useEffect} from "react";
 import "../components/Styles.css";
 import Modal from "react-modal";
 import {ModalStyles} from "./ModalStyles";
+import {GetImageUri} from "../utils/GetImage";
 const ImagesViewer = ({vals}) => {
-    const spring_app_url = "http://15.165.222.15:80";
     // 기본 이미지 추후 설정 필요
     const BaseImgSrc = "/logo512.png";
 
@@ -27,7 +27,7 @@ const ImagesViewer = ({vals}) => {
                 <img
                     className={"image"}
                     key={0}
-                    src={spring_app_url + "/api/v1/image/"+representImage}
+                    src={GetImageUri(representImage)}
                     alt={"image"}
                     onError={onErrorImg}
                 />
@@ -38,7 +38,7 @@ const ImagesViewer = ({vals}) => {
                         <img
                             key={index+1}
                             className="image"
-                            src={spring_app_url + "/api/v1/image/"+imgFile}
+                            src={GetImageUri(imgFile)}
                             alt={`image ${index}`}
                         />
                     </div>

@@ -50,7 +50,7 @@ public class ImageService extends Service {
         // image.setId((long)300);
         image.setOriginName(originalName);
         // image.setImageName(UUID.randomUUID() + ".jpg");
-        image.setImageName(UUID.randomUUID() + "." + originalName.substring(originalName.lastIndexOf('.'),
+        image.setImageName(UUID.randomUUID() + originalName.substring(originalName.lastIndexOf('.'),
                 originalName.length()));
         // image.setAccessUrl("");
         // image.setOriginName(originalName);
