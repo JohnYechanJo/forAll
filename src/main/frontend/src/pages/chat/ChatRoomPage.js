@@ -13,6 +13,7 @@ import search from "../../components/icons/search.png";
 import folder from "../../components/icons/folder.png";
 import arrowleft from "../../components/icons/arrowleft.png";
 import clip from "../../components/icons/clip.png";
+import Header from "../../components/home/Header";
 
 const ChatRoomPage = () => {
     const location = useLocation();
@@ -103,10 +104,7 @@ const ChatRoomPage = () => {
     return(
         <div>
             <div style={{position:"fixed", width:"100%"}}>
-                <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
-                    <button className="button">대관하기</button>
-                    <button className="button">커뮤니티</button>
-                </div>
+                <Header/>
                 <Sidebar/>
                 <div style={{paddingTop:"3.125rem"}}></div>
                 <div className={"chat_category"}><p>{data.category === ChatRoomCategory.Reservation ? "채팅창 > 예약사항" : "채팅창 > 게시판"}</p></div>

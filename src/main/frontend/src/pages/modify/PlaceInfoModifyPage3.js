@@ -594,15 +594,17 @@ const PlaceInfoModifyPage3 = () => {
                         onClick={() => handleButton()}
                 >다음</button>
             </div>
-            <Modal isOpen={isModalOpen} style={{ ...ModalStyles, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} ariaHideApp={false}>
-                <div style={{ textAlign: "left" }} >
-                    <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
-                    <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
-                </div>
-                <hr style={{ height: "1px", backgroundColor: "lightgrey" }} />
-                <div style={{ display: 'flex', width: '100%' }} >
-                    <button style={{ flex: 1, border: 'none', background: 'white', }} onClick={() => setIsModalOpen(false)}>뒤로</button>
-                    <button style={{ flex: 1, border: 'none', background: 'white', }} onClick={() => submit()}>다음</button>
+            <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalStyles} >
+                <p style={{ fontSize: '0.9375rem' }}>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
+                <p style={{ fontSize: '0.9375rem' }}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem', borderTop: '1px solid #C4C4C4' }}>
+                    <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+                        onClick={() => setIsModalOpen(false)}
+                    >
+                        뒤로</button>
+                    <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+                        onClick={() => submit()}
+                    >다음</button>
                 </div>
             </Modal>
         </div>
