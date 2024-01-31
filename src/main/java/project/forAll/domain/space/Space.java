@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import project.forAll.domain.BassDomain;
 import project.forAll.domain.Image;
-import project.forAll.domain.member.ChefPending;
 import project.forAll.domain.member.Member;
 
 import javax.persistence.*;
