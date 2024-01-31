@@ -1,4 +1,5 @@
 const ImagePreView = ({img}) => {
+    const spring_app_url = "http://localhost:8080";
     // 기본 이미지 추후 설정 필요
     const BaseImgSrc = "/logo512.png";
     const onErrorImg = (e) => {
@@ -8,7 +9,7 @@ const ImagePreView = ({img}) => {
     return(
         <img
             style={{width:'90%'}}
-            src={URL.createObjectURL(img)}
+            src={typeof(img) === "string" ? spring_app_url + "/api/v1/image/"+img : URL.createObjectURL(img)}
             alt={"image"}
             onError={onErrorImg}
         />
