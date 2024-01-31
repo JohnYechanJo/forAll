@@ -7,7 +7,7 @@ const ImagePreView = ({img}) => {
     }
     return(
         <img
-            style={{width:'100%'}}
+            style={{width:'90%'}}
             src={URL.createObjectURL(img)}
             alt={"image"}
             onError={onErrorImg}

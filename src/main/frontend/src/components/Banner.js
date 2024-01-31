@@ -20,7 +20,7 @@ const Banner = ({dataSet, navigate}) => {
                 spaceBetween={50}
                 slidesPerView={2}
                 autoplay={{delay: 0, disableOnInteraction: false}}
-                speed={2000} // 넘어가는 속도
+                speed={1000} // 넘어가는 속도
                 loop={true}
             >
                 {dataSet ? dataSet.map((data, idx) => {

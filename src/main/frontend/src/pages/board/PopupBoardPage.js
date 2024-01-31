@@ -13,6 +13,7 @@ import updownImg from "../../components/icons/updown.jpg";
 import pencilImg from "../../components/icons/pencil.jpg";
 import clip from "../../components/icons/clip.png";
 import Header from "../../components/home/Header";
+import xmark from "../../components/icons/xmark.png";
 
 const PopupBoardPage = () => {
     const navigate = useNavigate();
@@ -124,7 +125,7 @@ const PopupBoardPage = () => {
                                 <label>
                                     <input type={"file"}
                                            accept="image/*"
-                                           onChange={(e) => setPostImage(Array.from(e.target.files))}
+                                           onChange={(e) => setPostImage([...postImage, ...Array.from(e.target.files)] )}
                                            style={{display: "none"}}
                                            multiple={true}
                                     />
@@ -148,7 +149,14 @@ const PopupBoardPage = () => {
 
                             <div>
                                 {postImage ? postImage.map((img, idx) => (
-                                    <ImagePreView img={img}/>
+                                    <div style={{display:"flex"}}>
+                                        <ImagePreView img={img}/>
+                                        <div onClick={()=>setPostImage(postImage.filter((i) => i !== img))}>
+                                            <a>
+                                                <img src={xmark} alt="xmark" style={{width:"1.5rem", height:"1.5rem"}} />
+                                            </a>
+                                        </div>
+                                    </div>
                                 )) : null}
                             </div>
 

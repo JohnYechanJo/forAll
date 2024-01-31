@@ -29,7 +29,7 @@ public class APILoginController extends APIController {
         Member loginMember = memberService.findByLoginIdAndLoginPw(loginForm.getLoginId(), loginForm.getLoginPw());
 
         try {
-            if (loginMember == null) throw new Exception(loginMember.getLoginId());
+            if (loginMember == null) throw new Exception(loginForm.getLoginId());
 
             // 문제 없다면 삭제할 코드
 //            HttpSession session = request.getSession();

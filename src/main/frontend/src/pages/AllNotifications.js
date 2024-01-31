@@ -25,6 +25,7 @@ const AllNotifications = () => {
     },[]);
     const deleteAlarm = (alarm) => {
         if(alarm.id) axios.get("/api/v1/alarm/check/"+alarm.id).then(()=>window.location.reload());
+        else setAlarmList(alarmList.filter((a) => a.id !== alarm.id)) //채팅의 경우
     }
     // const handleAssurance = (data) => {
     //     if (data.state === ReservationState.FINISH) return;
@@ -137,8 +138,8 @@ const AllNotifications = () => {
                 else if(alarm.category === "Chat") category = "채팅";
 
                 return(
-                    <div key={idx}>
-                        <div style={{border: "1px solid #C4C4C4", height: "6rem"}}>
+                    <div key={idx} style={{display:"flex", justifyContent:"space-between", border: "1px solid #C4C4C4"}}>
+                        <div style={{ height: "6rem"}}>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
                                 <p style={{
                                     fontSize: "1rem",
@@ -148,6 +149,8 @@ const AllNotifications = () => {
                             </div>
 
                             <p style={{margin: 0, paddingLeft: "1rem", color: "#0788FF"}}>{alarm.alarmInfo}</p>
+                        </div>
+                        <div style={{textAlign:"right", paddingRight:"1rem"}}>
                             <p onClick={()=>deleteAlarm(alarm)}>확인</p>
                         </div>
                     </div>

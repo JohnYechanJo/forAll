@@ -17,6 +17,7 @@ import project.forAll.repository.chat.MessageRepository;
 import project.forAll.service.MemberService;
 import project.forAll.service.alarm.AlarmService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // 홈페이지 또는 알림 페이지 안에서 작동
@@ -31,7 +32,7 @@ public class APIAlarmController extends APIController {
     public ResponseEntity getAlarmList(@PathVariable(value = "id") final String userId) {
         try {
             List<Alarm> alarmList = alarmService.findAlarmByUserId(userId);
-            List<AlarmForm> forms = alarmList.stream().map(alarm -> alarmService.of(alarm)).toList();
+            List<AlarmForm> forms = new ArrayList<>(alarmList.stream().map(alarm -> alarmService.of(alarm)).toList());
 
             if(!messageRepository.findByTargetIdAndReadFlag(userId, false).isEmpty()){
                 AlarmForm form = new AlarmForm();
