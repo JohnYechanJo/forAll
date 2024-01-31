@@ -179,14 +179,14 @@ const HostRegistry6 = () => {
                         <p>상호(개인/법인)<span style={{ color: "#FF2929" }} >*</span></p>
                         <p>{tradeName.length}자/28자</p>
                     </div>
-                    <input value={tradeName} onChange={onChangeTradeName} placeholder={"상호를 입력해주세요"} className="input" style={{width:"92vw"}}/>
+                    <input maxLength="28" value={tradeName} onChange={onChangeTradeName} placeholder={"상호를 입력해주세요"} className="input" style={{width:"92vw"}}/>
                 </div>
                 <div style={{ marginBottom:"-1rem" }}>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <p>대표자명<span style={{ color: "#FF2929" }} >*</span></p>
                         <p>{representative.length}자/10자</p>
                     </div>
-                    <input value={representative} onChange={onChangeRepresentative} placeholder={"대표자명을 입력해 주세요"} className="input" style={{width:"92vw"}}/>
+                    <input maxLength="10" value={representative} onChange={onChangeRepresentative} placeholder={"대표자명을 입력해 주세요"} className="input" style={{width:"92vw"}}/>
                 </div>
                 <div style={{ marginBottom:"-1rem" }}>
                     <p>사업자 등록번호<span style={{ color: "#FF2929" }} >*</span></p>

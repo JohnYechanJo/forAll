@@ -67,7 +67,9 @@ const HostRegistry5 = () => {
                     <a>숙지 사항<span style={{ color: "#FF2929" }} >*</span></a>
                     <p style={{color:'#FF2929'}} >(최소 20자)</p>
                     </div>
-                    <textarea className="input" style={{ height: '6.25rem', letterSpacing: '-0.0255rem', width: "92vw"}} value={closeGuide} onChange={onChangeGuide} placeholder={
+                    <textarea className="input"
+                              minLength="20"
+                              style={{ height: '6.25rem', letterSpacing: '-0.0255rem', width: "92vw"}} value={closeGuide} onChange={onChangeGuide} placeholder={
                         `대관을 진행하는 셰프님들이 마감할 때 꼭 숙지해야 할 점을 기록해 주세요! 
 • 홀 마감은 이렇게 해주세요. 
 • 주방 마감은 이렇게 해주세요. 

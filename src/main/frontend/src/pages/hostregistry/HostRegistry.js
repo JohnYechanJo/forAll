@@ -124,7 +124,7 @@ const HostRegistry = () => {
                             </div>
 
                             <input type="text" placeholder="오스테리아 로에로" className="input" style={{width: '98%'}}
-                                   onChange={onInputHandler} maxLength="17"/>
+                                   onChange={onInputHandler} maxLength="18"/>
                             <div style={{marginTop: '0.5rem', justifyContent: 'left', display: 'flex'}}>
                                 <img src={iImg} alt="iImg"
                                      style={{width: '1rem', height: '1rem', flexShrink: 0}}/>
@@ -141,7 +141,7 @@ const HostRegistry = () => {
                                 </p>
                             </div>
                             <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" className="input" style={{width: '98%'}}
-                                onChange={onInputHandler2} maxLength="17" />
+                                onChange={onInputHandler2} maxLength="18" />
                         </div>
                         <div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
@@ -153,7 +153,7 @@ const HostRegistry = () => {
                                 </p>
                             </div>
                             <textarea type="text" placeholder="공간에 대한 설명을 기재해주세요." style={{ height: "6.25rem", width:" 98%" }}
-                                onChange={onInputHandler3} maxLength="299" minLength="19"
+                                onChange={onInputHandler3} maxLength="300" minLength="20"
                                 className="input"
                             />
                         </div>
@@ -415,7 +415,7 @@ const HostRegistry = () => {
                             </div>
                             <input type="text" placeholder="ex.성수역 4번출구 도보 1분 거리"
                                 className="input" style={{width: '98%'}}
-                                onChange={onInputHandler4} maxLength="17" />
+                                onChange={onInputHandler4} maxLength="18" />
                             <div style={{ display: 'flex', flexDirection: 'column' }} >
                                 <a>
                                     • 작성하신 위치정보는 검색에 영향을 미치지 않습니다.
