@@ -11,7 +11,7 @@ import commentImg from "../../components/icons/comment.jpg";
 import pencilImg from "../../components/icons/pencil.jpg";
 import ImageViewer from "../../components/ImageViewer";
 import Header from "../../components/home/Header";
-
+import Alert from "../../components/Alert";
 const PostViewPage = ({postList}) => {
     const navigate = useNavigate();
 
@@ -24,6 +24,16 @@ const PostViewPage = ({postList}) => {
     const [recomment, setRecomment] = useState("");
     const onChangeComment = useCallback((e) => {setComment(e.target.value);}, []);
     const onChangeRecomment = useCallback((e) => {setRecomment(e.target.value);}, []);
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [alertContent, setAlertContent] = useState("");
+
+    const openAlert = (string) => {
+        setAlertContent(string);
+        setIsAlertOpen(true);
+    };
+
+
+
     const submitComment = () => {
         axios.post("/api/v1/comments",{
             articleId: data.id,
@@ -84,6 +94,30 @@ const PostViewPage = ({postList}) => {
             updateData();
         });
     }
+    const handleProfile = () => {
+        if (!sessionStorage.getItem("user_id")) {
+            navigate("/login");
+        }
+        else {
+            navigate("/profile/"+data.userId);
+        }
+    };
+    const handleChat = () => {
+        if (!sessionStorage.getItem("user_id")) {
+            navigate("/login");
+        }
+        else if (sessionStorage.getItem("user_id") === data.userId) {
+            openAlert("본인과는 채팅할 수 없습니다!");
+        }
+        else {
+            navigate("/chatRoom", {
+                state: {
+                    partner: data.userId,
+                    category: ChatRoomCategory.Board
+                }
+            })
+        }
+    };
     const updateData = async () => {
         await axios.get("/api/v1/articles/" + params.id)
             .then((res) => {
@@ -139,18 +173,11 @@ const PostViewPage = ({postList}) => {
                         <p style={{margin: '0 0.51rem 0 0'}}>{data.comments ? data.comments.length : 0}</p>
                     </div>
                     <div style={{display: 'flex', alignItems: 'center', margin: 0, padding: 0}}>
-                        <p onClick={() => navigate("/profile/" + data.userId)}
+                        <p onClick={handleProfile}
                            style={{margin: '0 0.51rem 0 0', marginTop: 0}}>프로필 보기</p>
-                        <p onClick={() => {
-                            if (!sessionStorage.getItem("user_id")) return;
-                            navigate("/chatRoom", {
-                                state: {
-                                    partner: data.userId,
-                                    category: ChatRoomCategory.Board
-                                }
-                            })
-                        }} style={{margin: '0 0.51rem 0 0'}}>채팅 보내기</p>
+                        <p onClick={handleChat} style={{margin: '0 0.51rem 0 0'}}>채팅 보내기</p>
                     </div>
+                    <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={alertContent} />
                 </div>
                 <ImageSlider images={data.postImage}/>
                 <p style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '400', lineHeight: 'normal',
