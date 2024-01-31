@@ -14,12 +14,14 @@ import project.forAll.domain.member.AuthenticationData;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.space.Space;
 import project.forAll.domain.space.image.KitImage;
+import project.forAll.dto.ImageSaveDto;
 import project.forAll.service.AuthenticationDataService;
 import project.forAll.service.ImageService;
 import project.forAll.service.MemberService;
 import project.forAll.service.SpaceService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,16 +32,17 @@ public class APIImageController extends APIController{
     private final MemberService memberService;
 
     @PostMapping("/image/upload")
-    public ResponseEntity upload(@RequestPart(value="file") MultipartFile file,@RequestPart(value ="loginId") String userId, HttpServletRequest request){
+    public ResponseEntity upload(@ModelAttribute ImageSaveDto imageSaveDto, @RequestPart(value ="loginId") String userId, HttpServletRequest request){
         try{
             String loginId = (String) sessionManager.getSession(request);
             if (!loginId.equals(userId)) return new ResponseEntity(errorResponse("Session Disabled"), HttpStatus.SERVICE_UNAVAILABLE);
             final Member savedMember = memberService.findByLoginId(userId);
             if (savedMember == null) throw new Exception("No member with loginId " + userId);
-            if (file == null) return new ResponseEntity("file is null", HttpStatus.BAD_GATEWAY);
+            //if (file == null) return new ResponseEntity("file is null", HttpStatus.BAD_GATEWAY);
 
-            String imageName = imageService.saveImage(file);
-            return new ResponseEntity(imageName, HttpStatus.OK);
+            //String imageName = imageService.saveImage(file);
+            List<String> imageNames = imageService.saveImages(imageSaveDto);
+            return new ResponseEntity(imageNames, HttpStatus.OK);
         }catch(final Exception e){
             return new ResponseEntity(errorResponse("Could not upload Image : "+ e.getMessage()), HttpStatus.BAD_REQUEST);
         }
