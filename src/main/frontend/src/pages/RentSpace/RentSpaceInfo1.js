@@ -31,6 +31,7 @@ const RentSpaceInfo1 = () => {
                 defaultValue={data.name}
                 className="input"
                 maxLength="17"
+                disabled
               />
             </div>
 
@@ -43,6 +44,7 @@ const RentSpaceInfo1 = () => {
                 defaultValue={data.spaceBrief}
                 className="input"
                 maxLength="17"
+                disabled
               />
             </div>
 
@@ -57,6 +59,7 @@ const RentSpaceInfo1 = () => {
                 style={{ height: "6.25rem" }}
                 maxLength="299"
                 minLength="19"
+                disabled
               />
             </div>
             <button className="bottom_button" style={{backgroundColor:'black',position:'fixed'}} onClick={() => navigate(-1)}>돌아가기</button>

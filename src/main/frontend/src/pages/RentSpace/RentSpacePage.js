@@ -11,6 +11,7 @@ import hearImg from "../../components/icons/heart.png";
 import Modal from "react-modal";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 import ImageViewer from "../../components/ImageViewer";
+import { sub } from "date-fns";
 const RentSpacePage = () => {
     const params = useParams();
     const navigate = useNavigate();
@@ -33,10 +34,13 @@ const RentSpacePage = () => {
         setImages1(data.hallImage? [data.mainImage, ...data.hallImage] : [data.mainImage]);
         setEquipments(data.equip ? data.equip.split(",") : []);
     }, [data]);
-
+    const handleBooking=()=>{
+        const userId = sessionStorage.getItem("user_id");
+        if ( userId ===null  ) navigate('/login'); // 로그인 안되었으면, 버튼 실행 x
+        else submit();
+    }
     const submit = () => {
         const userId = sessionStorage.getItem("user_id");
-        if (!userId) return; // 로그인 안되었으면, 버튼 실행 x
         axios.get("/api/v1/members/public/" + userId)
             .then((res) => {
                 if (res.data.chefPending === ChefState.NOTCREATED) {
@@ -375,7 +379,7 @@ const RentSpacePage = () => {
                             <img src={hearImg} alt="heartImg"
                                  style={{width: '1.9rem', height: '1.9rem', flexShrink: 0}}/>
                         </div>
-                        <div className={"submit_button"} style={{textAlign: "right"}} onClick={submit}>
+                        <div className={"submit_button"} style={{textAlign: "right"}} onClick={handleBooking}>
                             <p>예약하기</p>
                         </div>
                     </div>
@@ -393,7 +397,7 @@ const RentSpacePage = () => {
                                 fontSize: "1.25rem",
                                 fontWeight: "700"
                             }}>{sessionStorage.getItem("name") + "님, 대관을 위해서 셰프 등록을 먼저 부탁드립니다!"}</p>
-                            <p style={{fontSize: "0.95rem", paddingTop: "1rem"}}>셰프 등록을하신 후, 포 올을 통해 세상에 놀라운 경험을
+                            <p style={{fontSize: "0.95rem", paddingTop: "1rem"}}>셰프 등록을 하신 후, 포 올을 통해 세상에 놀라운 경험을
                                 선사해주세요.</p>
                         </div>
 

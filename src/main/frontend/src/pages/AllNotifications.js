@@ -10,7 +10,7 @@ import ToolBar from "../components/home/ToolBar";
 import ArticleListTemplate from "../components/board/ArticleListTemplate";
 import Modal from "react-modal";
 import {SmallModalStyles} from "../components/SmallModalStyles";
-
+import Header from "../components/home/Header";
 
 const AllNotifications = () => {
     const navigate = useNavigate();
@@ -42,14 +42,9 @@ const AllNotifications = () => {
     }, []);
     return (
         <div>
-            <div className="header" style={{backgroundColor: "white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
-                {/* <button className="button" onClick={() => navigate("/")}>
-                    <img src={forAllLogo} alt="forAllLogo" style={{width:"1.875rem", height:"1.875rem"}} />
-                </button> */}
-                <button className="button">대관하기</button>
-                <button className="button">커뮤니티</button>
-            </div>
+            <Header/>
             <Sidebar/>
+            <ToolBar/>
             <HomeTemplate/>
             <div style={{
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
