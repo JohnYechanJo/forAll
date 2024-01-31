@@ -31,6 +31,16 @@ const PersonalModify = () => {
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [alertContent, setAlertContent] = useState("");
+
+    const arrPW = pw.split('');
+    console.log(arrPW);
+    const isPasswordValid =
+        arrPW.length > 11 && arrPW.length < 15 &&
+        arrPW.some(element => /[a-zA-Z]/.test(element)) && // 영문자 포함 여부 확인
+        arrPW.some(element => /[0-9]/.test(element)) && // 숫자 포함 여부 확인
+        arrPW.some(element => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(element)); // 특수 문자 포함 여부 확인
+
+
     const openAlert = (string) => {
         setAlertContent(string);
         setIsAlertOpen(true);
@@ -84,7 +94,9 @@ const PersonalModify = () => {
     }, []);
 
     const handleButton = () => {
-        if (pw === "") {
+        if (!(isPasswordValid || pw.length===0)) {
+            openAlert("비밀번호 형식을 맞춰주세요.");
+        } else if(pw === "") {
             openAlert("비밀번호는 필수 입력 사항입니다");
         } else if (name === "") {
             openAlert("이름은 필수 입력 사항입니다");
@@ -154,6 +166,7 @@ const PersonalModify = () => {
                     day={day}
                     gender={gender}
                     cerifiedNum={cerifiedNum}
+                    pw={pw}
                     setPw={setPw}
                     setPwCheck={setPwCheck}
                     setName={setName}

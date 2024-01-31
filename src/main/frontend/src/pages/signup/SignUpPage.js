@@ -59,9 +59,16 @@ const SignUpPage = () => {
                 setIsCheckDuplicatedEmail(false);
             });
         }
-
-
     };
+
+    const arrPW = pw.split('');
+    console.log(arrPW);
+    const isPasswordValid =
+        arrPW.length > 11 && arrPW.length < 15 &&
+        arrPW.some(element => /[a-zA-Z]/.test(element)) && // 영문자 포함 여부 확인
+        arrPW.some(element => /[0-9]/.test(element)) && // 숫자 포함 여부 확인
+        arrPW.some(element => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(element)); // 특수 문자 포함 여부 확인
+
 
     const sendCerifiedNum = () => {
         const phoneRule = regularExpressions.phoneNum;
@@ -97,7 +104,9 @@ const SignUpPage = () => {
     const handleButton = () => {
         if (id === "") {
             openModal("아이디는 필수 입력 사항입니다.");
-        } else if (pw === "") {
+        } else if (!(isPasswordValid || pw.length===0)) {
+            openModal("비밀번호 형식을 맞춰주세요.");
+        }else if (pw === "") {
             openModal("비밀번호는 필수 입력 사항입니다.");
         } else if (name === "") {
             openModal("이름은 필수 입력 사항입니다.");

@@ -9,6 +9,8 @@ import { KitchenFeat } from "../../utils/enums";
 import ForAllLogo from "../../components/ForAllLogo";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 import ImageUploader from "../../utils/imageUploader";
+import iImg from "../../components/icons/i.png";
+
 const PlaceInfoModifyStart = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({});
@@ -154,12 +156,17 @@ const PlaceInfoModifyStart = () => {
                 className="input"
                 maxLength="17"
               />
-              <a>❕사용 가능한 특수문자: (,),(-),(.),(@),(/)</a>
+              <div style={{marginTop: '0.5rem', justifyContent: 'left', display: 'flex'}}>
+                <img src={iImg} alt="iImg"
+                     style={{width: '1rem', height: '1rem', flexShrink: 0}}/>
+                &ensp;
+                <a style={{paddingTop: "0.05rem"}}>사용 가능한 특수문자: (,),(-),(.),(@),(/)</a>
+              </div>
             </div>
 
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
-                <a>공간 한 줄 소개<span style={{ color: '#FF2929' }} >*</span></a>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <a>공간 한 줄 소개<span style={{color: '#FF2929'}}>*</span></a>
                 <p>
                   <span>{placeIntro.length}</span>
                   <span>/18자</span>
@@ -267,8 +274,8 @@ const PlaceInfoModifyStart = () => {
                       name="kitchen"
                       value={KitchenFeat.Face}
                       style={{
-                        backgroundColor: kitchen === KitchenFeat.Face || clicked2 ? "black" : "white",
-                        color: kitchen === KitchenFeat.Face || clicked2 ? "white" : "black",
+                        backgroundColor: data.kitchenFeat === KitchenFeat.Face || clicked2 ? "black" : "white",
+                        color: data.kitchenFeat === KitchenFeat.Face || clicked2 ? "white" : "black",
 
                       }}
                       onClick={(event) => {
