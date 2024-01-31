@@ -75,6 +75,10 @@ const Sidebar = ({ width = 18.75, children }) => {
         else if ([SpaceState.PENDING, SpaceState.APPROVE].includes(userData.spacePending)) navigate("/placeInfoModify");
         //공간 등록을 먼저 하라는 내용 띄우기
     }
+    const handleServiceCenter = () => {
+        if (id === null) navigate("/login");
+        else navigate("/serviceChatRoom");
+    }
     useEffect(() => {
         const userId = sessionStorage.getItem("user_id");
         if (userId) {
@@ -150,7 +154,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                         display: "flex", flexDirection: "column", justifyContent: "space-evenly", gap: "1rem"
                     }}>
                         <button className="button" onClick={handleChatList} style={{ textAlign: "left", marginLeft: "2rem" }}>채팅함</button>
-                        <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }} >고객센터</button>
+                        <button className="button" onClick={handleServiceCenter} style={{ textAlign: "left", marginLeft: "2rem" }} >고객센터</button>
                         <button className="button" onClick={handleMyPost} style={{ textAlign: "left", marginLeft: "2rem" }}>내가 쓴 글</button>
                     </div>
                     <div style={{
