@@ -5,14 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import project.forAll.domain.Image;
-import project.forAll.domain.member.Member;
 import project.forAll.domain.member.Profile;
-
-import javax.persistence.ElementCollection;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 
 import java.util.List;

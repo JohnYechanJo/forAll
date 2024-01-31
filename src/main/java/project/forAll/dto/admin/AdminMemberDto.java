@@ -2,8 +2,6 @@ package project.forAll.dto.admin;
 
 import lombok.Getter;
 import lombok.Setter;
-import project.forAll.domain.Image;
-import project.forAll.domain.member.Gender;
 
 import java.util.List;
 

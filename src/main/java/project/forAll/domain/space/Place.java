@@ -4,9 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import project.forAll.domain.BassDomain;
 import project.forAll.domain.Image;
-import project.forAll.domain.space.image.HallImage;
-import project.forAll.domain.space.image.KitImage;
-import project.forAll.domain.space.image.MenuImage;
 
 import javax.persistence.*;
 import java.util.ArrayList;

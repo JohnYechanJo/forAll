@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import project.forAll.domain.BassDomain;
 import project.forAll.domain.Image;
-import project.forAll.domain.member.Member;
-import project.forAll.util.StringListConverter;
 
 import javax.persistence.*;
 import java.util.List;

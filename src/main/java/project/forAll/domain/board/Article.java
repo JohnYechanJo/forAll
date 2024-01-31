@@ -2,15 +2,12 @@ package project.forAll.domain.board;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 import project.forAll.domain.BassDomain;
 import project.forAll.domain.Image;
 import project.forAll.domain.member.Member;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
