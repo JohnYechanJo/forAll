@@ -13,6 +13,7 @@ const PlaceInfoModifyPage3 = () => {
     const location = useLocation();
     const data = { ...location.state };
     const navigate = useNavigate();
+    console.log(data);
     const [dbData, setDbData] = useState({});
 
     const rentWeeksData = ["휴무없음", "매주", "격주(홀수주)", "격주(짝수주)", "매월 첫째주", "매월 둘째주", "매월 셋째주", "매월 넷째주", "매월 마지막주", "매월 말일", "직접지정"];
@@ -20,10 +21,11 @@ const PlaceInfoModifyPage3 = () => {
     const rentTimeFromData = [...Array(25).keys()].map(i => i + "시");
     const rentTimeToData = [...Array(25).keys()].map(i => i + "시");
     const parkAvaliableData = ["주차불가", "1대", "2대", "3대", "4대", "직접 입력"];
-    const [miseenTimeFrom, setMiseenTimeFrom] = useState("");
-    const [miseenTimeTo, setMiseenTimeTo] = useState("");
+
+    const [miseenTimeFrom, setMiseenTimeFrom] = useState(data.ableMiseenStartTime + "시");
+    const [miseenTimeTo, setMiseenTimeTo] = useState(data.ableMiseenFinTime + "시");
     const [rentWeek, setRentWeek] = useState(rentWeeksData[0]);
-    const [rentDays, setRentDays] = useState([]);
+    const [rentDays, setRentDays] = useState( []);
     const [monDay, setMonDay] = useState(false);
     const [tuesDay, setTuesDay] = useState(false);
     const [wednesDay, setWednesDay] = useState(false);
@@ -31,18 +33,18 @@ const PlaceInfoModifyPage3 = () => {
     const [friDay, setFriDay] = useState(false);
     const [saturDay, setSaturDay] = useState(false);
     const [sunDay, setSunDay] = useState(false);
-    const [rentTimeFrom, setRentTimeFrom] = useState("");
-    const [rentTimeTo, setRentTimeTo] = useState("");
-    const [parkAvaliable, setParkAvaliable] = useState("");
-    const [exactPark, setExactPark] = useState();
-    const [elevator, setElevator] = useState();
-    const [table, setTable] = useState();
-    const [seat, setSeat] = useState();
-    const [price, setPrice] = useState();
-    const [trial, setTrial] = useState();
-    const [morningDelivery, setMorningDelivery] = useState();
-    const [workIn, setWorkIn] = useState();
-    const [miseen, setMiseen] = useState();
+    const [rentTimeFrom, setRentTimeFrom] = useState(data.ableStartHour + "시");
+    const [rentTimeTo, setRentTimeTo] = useState(data.ableFinHour + "시");
+    const [parkAvaliable, setParkAvaliable] = useState(parkAvaliableData.includes(data.ableParking) ? data.ableParking : "직접 입력");
+    const [exactPark, setExactPark] = useState(parkAvaliableData.includes(data.ableParking) ? "" : data.ableParking.split("대")[0]);
+    const [elevator, setElevator] = useState(data.haveElevator);
+    const [table, setTable] = useState(data.tableNum);
+    const [seat, setSeat] = useState(data.seatNum);
+    const [price, setPrice] = useState(data.priceSet);
+    const [trial, setTrial] = useState(data.ableTrial);
+    const [morningDelivery, setMorningDelivery] = useState(data.ableEarlyDeliver);
+    const [workIn, setWorkIn] = useState(data.ableWorkIn);
+    const [miseen, setMiseen] = useState(data.ableMiseen);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isTrial, setIsTrial] = useState(false);
     const [isMorningDelivery, setIsMorningDelivery] = useState(false);
@@ -50,7 +52,7 @@ const PlaceInfoModifyPage3 = () => {
     const [isMiseen, setIsMiseen] = useState(false);
     const [formattedPrice, setFormattedPrice] = useState();
     let isPublic = false;
-
+    const [pending, setPending] = useState(false);
     const onChangePark = useCallback((e) => {
         setExactPark(e.target.value);
     }, []);
@@ -89,6 +91,19 @@ const PlaceInfoModifyPage3 = () => {
     const toggleSunDay = useCallback((e) => {
         setSunDay(!sunDay);
     }, [sunDay]);
+
+    useEffect(() => {
+        setRentWeek(data.ableDate.split(" ")[0] === '매월' ? data.ableDate.split(" ")[0] + " " + data.ableDate.split(" ")[1] : data.ableDate.includes('%') ? "직접지정" : data.ableDate.split(" ")[0]);
+        setRentDays(data.ableDate.includes('%') ? data.ableDate.split("%")[1] : [])
+        // setRentDays(!isNaN(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1])  ? res.data.ableDate : res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(","))
+        setMonDay(data.ableDate.split(" ")[data.ableDate.split(' ').length - 1].split(",").includes("월"))
+        setTuesDay(data.ableDate.split(" ")[data.ableDate.split(' ').length - 1].split(",").includes("화"))
+        setWednesDay(data.ableDate.split(" ")[data.ableDate.split(' ').length - 1].split(",").includes("수"))
+        setThursDay(data.ableDate.split(" ")[data.ableDate.split(' ').length - 1].split(",").includes("목"))
+        setFriDay(data.ableDate.split(" ")[data.ableDate.split(' ').length - 1].split(",").includes("금"))
+        setSaturDay(data.ableDate.split(" ")[data.ableDate.split(' ').length - 1].split(",").includes("토"))
+        setSunDay(data.ableDate.split(" ")[data.ableDate.split(' ').length - 1].split(",").includes("일"))
+    }, []);
     const DownloadData = async () => {
         let spaceid;
         await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
@@ -126,20 +141,19 @@ const PlaceInfoModifyPage3 = () => {
                 setSunDay(res.data.ableDate.split(" ")[res.data.ableDate.split(' ').length - 1].split(",").includes("일"))
             }).catch((err) => console.error(err))
     };
-    useEffect(() => {
-        DownloadData();
-    }, []);
     const handleButton = () => {
-        if ((!rentWeek) && (!rentTimeFrom) && (!rentTimeTo)
-            && (!parkAvaliable) && (!elevator) && (!table)
-            && (!seat) && (!price) && (!trial) && (!morningDelivery)
-            && (!workIn) && (!miseen)) {
+        if ((rentWeek) && (rentTimeFrom) && (rentTimeTo)
+            && (parkAvaliable) && (typeof(elevator) === 'boolean') && (table)
+            && (seat) && (price) && (typeof(trial) === 'boolean') && (typeof(morningDelivery) === 'boolean')
+            && (typeof(workIn) === 'boolean') && (typeof(miseen) === 'boolean')) {
             isPublic = true;
             submit();
         }
         else setIsModalOpen(true);
     }
     const submit = () => {
+        if (pending) return;
+        setPending(true);
         const rentDayString = [];
         
         if (monDay) rentDayString.push("월");
@@ -160,9 +174,9 @@ const PlaceInfoModifyPage3 = () => {
                 rentWeek: rentData,
                 rentTimeFrom: rentTimeFrom ? rentTimeFrom.split("시")[0] : "",
                 rentTimeTo: rentTimeTo ? rentTimeTo.split("시")[0] : "",
-                miseenTimeFrom: miseenTimeFrom ? miseenTimeFrom.split("시")[0] : "",
-                miseenTimeTo: miseenTimeTo ? miseenTimeTo.split("시")[0] : "",
-                parkAvaliable: park,
+                ableMiseenStartTime: miseenTimeFrom ? miseenTimeFrom.split("시")[0] : "",
+                ableMiseenFinTime: miseenTimeTo ? miseenTimeTo.split("시")[0] : "",
+                ableParking: park,
                 elevator: elevator,
                 table: table,
                 seat: seat,
@@ -198,10 +212,10 @@ const PlaceInfoModifyPage3 = () => {
                 </div>
                 <ForAllLogo />
                 <div>
-                    {console.log(rentWeek)}
-                    {console.log(rentDays)}
+                    {/*{console.log(rentWeek)}*/}
+                    {/*{console.log(rentDays)}*/}
                     <a>대관 가능일<span style={{ color: '#FF2929' }} >*</span></a>
-                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeeksData.includes(rentWeek) ? rentWeek : "직접지정"} val={rentWeek} width='100%' />
+                    <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} defaultData={rentWeek} val={rentWeek} width='100%' />
                     {rentWeek === "직접지정" ?
                         <input onChange={onChangeDate} placeholder="대관 가능일을 입력해주세요"  className="input" style={{width:'99%',fontSize:'0.625rem',marginTop:'0.5rem'}} defaultValue={rentDays} /> : (rentWeek !== "휴무없음" ?
                             <div style={{ display: 'flex' }} >
@@ -224,11 +238,11 @@ const PlaceInfoModifyPage3 = () => {
                         alignItems: "center",
                     }}>
                         <span>대관 당일 </span>
-                        <span style={{marginLeft: '1rem'}}><DropDown dataArr={rentTimeFromData}
+                        <span style={{marginLeft: '1rem'}}><DropDown dataArr={rentTimeFromData} defaultData={rentTimeFrom}
                                                                      onChange={setRentTimeFrom} placeholder={"00시"}
                                                                      width='6.31444rem'/></span>
                         <span> 부터, 당일 </span>
-                        <span style={{marginLeft: '1rem'}}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo}
+                        <span style={{marginLeft: '1rem'}}><DropDown dataArr={rentTimeToData} onChange={setRentTimeTo} defaultData={rentTimeTo}
                                                                      placeholder={"24시"} width='6.31444rem'/></span>
                         <span> 까지</span>
                     </div>
@@ -283,18 +297,18 @@ const PlaceInfoModifyPage3 = () => {
                 <div>
                     <a>테이블<span style={{ color: '#FF2929' }} >*</span></a>
                     <input className="input fontForRegister" style={{ width: "99%", float: "left" }} onChange={onChangeTable}
-                        placeholder={"최대 테이블 수를 기준으로 입력해주세요"} defaultValue={dbData.tableNum} />
+                        placeholder={"최대 테이블 수를 기준으로 입력해주세요"} defaultValue={data.tableNum} />
                 </div>
                 <div>
                     <a>좌석 수<span style={{ color: '#FF2929' }} >*</span></a>
                     <input className="input fontForRegister" style={{ width: "99%", float: "left"}} onChange={onChangeSeat}
-                        placeholder={"최대 좌석수를 기준으로 입력해주세요"} defaultValue={dbData.seatNum} />
+                        placeholder={"최대 좌석수를 기준으로 입력해주세요"} defaultValue={data.seatNum} />
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }} >
                     <a>가격 설정<span style={{ color: '#FF2929' }} >*</span></a>
                     <div>
                         <input className="input fontForRegister" style={{  width: "99%", float: "left",  marginRight: "2vw" }}
-                            onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} defaultValue={dbData.priceSet} />
+                            onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} defaultValue={data.priceSet} />
                     </div>
                     <div>
                         <h3 style={{ fontSize: '0.875rem' }} >{(seat === undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat <= 10) ? "포 올 권장가격 : ₩150,000원" : "포 올 권장가격 :" + formattedPrice + "원"}</h3 >
@@ -478,9 +492,9 @@ const PlaceInfoModifyPage3 = () => {
                     <div hidden={!miseen}>
                         <div style={{ display: "flex", justifyContent: 'left', alignItems: 'center' }}>
                             <span>대관 전일</span>
-                            <span style={{ marginLeft: '1rem' }} ><DropDown dataArr={rentTimeFromData} onChange={setMiseenTimeFrom} placeholder={"00시"} width="5.25rem" /></span>
+                            <span style={{ marginLeft: '1rem' }} ><DropDown dataArr={rentTimeFromData} onChange={setMiseenTimeFrom} placeholder={"00시"} defaultData={miseenTimeFrom} width="5.25rem" /></span>
                             <span> 부터, 당일 </span>
-                            <span style={{ marginLeft: '1rem' }}><DropDown dataArr={rentTimeToData} onChange={setMiseenTimeTo} placeholder={"24시"} width="5.25rem" /></span>
+                            <span style={{ marginLeft: '1rem' }}><DropDown dataArr={rentTimeToData} onChange={setMiseenTimeTo} placeholder={"24시"} defaultData={miseenTimeTo} width="5.25rem" /></span>
                             <span> 까지</span>
                         </div>
                     </div>

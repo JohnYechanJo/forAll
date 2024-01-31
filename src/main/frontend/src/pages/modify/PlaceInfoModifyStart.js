@@ -8,6 +8,7 @@ import { ModalStyles } from "../../components/ModalStyles";
 import { KitchenFeat } from "../../utils/enums";
 import ForAllLogo from "../../components/ForAllLogo";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
+import ImageUploader from "../../utils/imageUploader";
 const PlaceInfoModifyStart = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({});
@@ -30,6 +31,10 @@ const PlaceInfoModifyStart = () => {
   const [modalIsOpen2, setModalIsOpen2] = useState(false);
   const [modalIsOpen3, setModalIsOpen3] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  useEffect(() => {
+    console.log(webSite);
+  }, [webSite]);
+  const [pending, setPending] = useState(false);
   const downloadData = async () => {
     let spaceid;
     await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
@@ -38,6 +43,7 @@ const PlaceInfoModifyStart = () => {
     axios
       .get("/api/v1/space/" + spaceid)
       .then((res) => {
+        console.log(res.data);
         setData(res.data);
         setPlaceName(res.data.name);
         setFullAddress(res.data.address);
@@ -95,17 +101,22 @@ const PlaceInfoModifyStart = () => {
       setIsModalOpen(true);
     }
   };
-  const submit = () => {
+  const submit = async () => {
+    if (pending) return;
+    setPending(true);
+    const userId = sessionStorage.getItem("user_id");
+    const img = await ImageUploader(imgRepresent, userId);
     navigate("/placeInfoModify2", {
       state: {
+        ...data,
         placeName: placeName,
         placeIntro: placeIntro,
         placeIntroDetail: placeIntroDetail,
         kitchen: kitchen,
         address: fullAddress,
-        webSite: webSite,
+        website: webSite,
         placeInfo: placeInfo,
-        imgRepresent: imgRepresent,
+        imgRepresent: img,
         isPublic: isPublic,
       },
     });
@@ -191,8 +202,8 @@ const PlaceInfoModifyStart = () => {
                       name="kitchen"
                       value={KitchenFeat.Open}
                       style={{
-                        backgroundColor: data.kitchenFeat === KitchenFeat.Open || clicked1 ? "black" : "white",
-                        color: data.kitchenFeat === KitchenFeat.Open || clicked1 ? "white" : "black",
+                        backgroundColor: kitchen === KitchenFeat.Open || clicked1 ? "black" : "white",
+                        color: kitchen === KitchenFeat.Open || clicked1 ? "white" : "black",
                       }}
                       onClick={(event) => {
                         const selected = event.target.value;
@@ -256,8 +267,8 @@ const PlaceInfoModifyStart = () => {
                       name="kitchen"
                       value={KitchenFeat.Face}
                       style={{
-                        backgroundColor: data.kitchenFeat === KitchenFeat.Face || clicked2 ? "black" : "white",
-                        color: data.kitchenFeat === KitchenFeat.Face || clicked2 ? "white" : "black",
+                        backgroundColor: kitchen === KitchenFeat.Face || clicked2 ? "black" : "white",
+                        color: kitchen === KitchenFeat.Face || clicked2 ? "white" : "black",
 
                       }}
                       onClick={(event) => {
@@ -322,8 +333,8 @@ const PlaceInfoModifyStart = () => {
                       name="kitchen"
                       value={KitchenFeat.Close}
                       style={{
-                        backgroundColor: data.kitchenFeat === KitchenFeat.Close || clicked3 ? "black" : "white",
-                        color: data.kitchenFeat === KitchenFeat.Close || clicked3 ? "white" : "black",
+                        backgroundColor: kitchen === KitchenFeat.Close || clicked3 ? "black" : "white",
+                        color: kitchen === KitchenFeat.Close || clicked3 ? "white" : "black",
 
                       }}
                       onClick={(event) => {
@@ -430,7 +441,7 @@ const PlaceInfoModifyStart = () => {
             <a>웹사이트<span style={{ color: '#FF2929' }} >*</span></a>
             <input
               type="text"
-              defaultValue={data.website}
+              value={webSite}
               onChange={(e) => setWebSite(e.target.value)}
               className="input"
             />

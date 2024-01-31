@@ -8,34 +8,36 @@ import { ModalStyles } from "../../components/ModalStyles";
 import axios from "axios";
 import ForAllLogo from "../../components/ForAllLogo";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
+import ImageUploader from "../../utils/imageUploader";
 const PlaceInfoModify2 = () => {
-    const [img1, setImg1] = useState("");
-    const [img2, setImg2] = useState("");
-    const [img3, setImg3] = useState("");
-    const [imgAdditional, setImgAdditional] = useState([]);
-
-    const [kitchen1, setKitchen1] = useState("");
-    const [kitchen2, setKitchen2] = useState("");
-    const [kitchen3, setKitchen3] = useState("");
-    const [kitchenAdditional, setKitchenAdditional] = useState([]);
-
-    const [menu1, setMenu1] = useState("");
-    const [menuAdditional, setMenuAdditional] = useState([]);
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isModalOpen2, setIsModalOpen2] = useState(false);
-    const navigate = useNavigate();
-    const location = useLocation();
-    const data = { ...location.state };
-    const [dbData, setDbData] = useState({});
-    let isPublic = false;
     const getIdx = (arr, idx) => {
         if (!arr) return null;
         else if (arr.length <= idx) return null
         else return arr[idx]
     }
+    const navigate = useNavigate();
+    const location = useLocation();
+    const data = { ...location.state };
+    const [img1, setImg1] = useState(getIdx(data.hallImage, 0));
+    const [img2, setImg2] = useState(getIdx(data.hallImage, 1));
+    const [img3, setImg3] = useState(getIdx(data.hallImage, 2));
+    const [imgAdditional, setImgAdditional] = useState(data.hallImage ? data.hallImage.slice(3) : []);
+
+    const [kitchen1, setKitchen1] = useState(getIdx(data.kitImage, 0));
+    const [kitchen2, setKitchen2] = useState(getIdx(data.kitImage, 1));
+    const [kitchen3, setKitchen3] = useState(getIdx(data.kitImage, 2));
+    const [kitchenAdditional, setKitchenAdditional] = useState(data.kitImage ? data.kitImage.slice(3) : []);
+
+    const [menu1, setMenu1] = useState(getIdx(data.menu, 0));
+    const [menuAdditional, setMenuAdditional] = useState(data.menu ? data.menu.slice(1) : []);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen2, setIsModalOpen2] = useState(false);
+
+    let isPublic = false;
+    const [pending, setPending] = useState(false);
     const handleButton = () => {
-        if ((!img1) && (!img2) && (!img3) && (!kitchen1) && (!kitchen2) && (!kitchen3) && (!menu1) && (!menuAdditional) && (!imgAdditional) && (!kitchenAdditional)) {
+        if ((img1) && (img2) && (img3) && (kitchen1) && (kitchen2) && (kitchen3) && (menu1)) {
             isPublic = true;
             submit();
         }
@@ -43,47 +45,20 @@ const PlaceInfoModify2 = () => {
             setIsModalOpen(true);
         }
     };
-    //dbdata에 db에 저장되어 있는 정보들을 담아서 사용한다.
-    const downloadData = async () => {
-        let spaceid;
-        await axios.get("/api/v1/space/userSpace/" + sessionStorage.getItem("user_id"))
-            .then((res) => spaceid = res.data[0])
-            .catch((err) => console.error(err));
-        axios
-            .get("/api/v1/space/" + spaceid)
-            .then((res) => {
-                setDbData(res.data)
-                setImg1(getIdx(res.data.hallImage, 0));
-                setImg2(getIdx(res.data.hallImage, 1));
-                setImg3(getIdx(res.data.hallImage, 2));
-                setImgAdditional(res.data.hallImage.slice(3));
-                setKitchen1(getIdx(res.data.kitImage, 0));
-                setKitchen2(getIdx(res.data.kitImage, 1));
-                setKitchen3(getIdx(res.data.kitImage, 2));
-                setKitchenAdditional(res.data.kitImage.slice(3));
-                setMenu1(getIdx(res.data.menu, 0));
-                setMenuAdditional(res.data.menu.slice(1));
-            })
-            .catch((err) => console.error(err));
-    };
-    useEffect(() => {
-        downloadData();
-    }, []);
-    const submit = () => {
+    const submit = async () => {
+        if(pending) return;
+        setPending(true);
         data.isPublic = data.isPublic && isPublic;
+        const userId = sessionStorage.getItem("user_id");
+        const hallImage = await Promise.all([img1, img2, img3, ...imgAdditional].map(async (img) => await ImageUploader(img, userId)).filter((i)=>i));
+        const kitImage = await Promise.all([kitchen1, kitchen2, kitchen3, ...kitchenAdditional].map(async (img) => await ImageUploader(img, userId)).filter((i)=>i));
+        const menu = menuAdditional ? await Promise.all([menu1, ...menuAdditional].map(async (img) => await ImageUploader(img, userId)).filter((i)=>i)) : null;
         navigate("/placeInfoModify3", {
             state: {
                 ...data,
-                img1: img1,
-                img2: img2,
-                img3: img3,
-                imgAdditional: imgAdditional,
-                kitchen1: kitchen1,
-                kitchen2: kitchen2,
-                kitchen3: kitchen3,
-                kitchenAdditional: kitchenAdditional,
-                menu1: menu1,
-                menuAdditional: menuAdditional,
+                hallImage:hallImage,
+                kitImage:kitImage,
+                menu:menu
             }
         });
     };

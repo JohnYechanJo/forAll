@@ -11,14 +11,17 @@ const ImageInputs = ({setImg, vals}) => {
     // 기본 이미지 추후 설정 필요
     const BaseImgSrc = "/logo512.png";
 
-    const [img1, setImg1] = useState("");
-    const [img2, setImg2] = useState("");
-    const [img3, setImg3] = useState("");
-    const [img4, setImg4] = useState("");
-    const [img5, setImg5] = useState("");
-    const [img6, setImg6] = useState("");
-    const [img7, setImg7] = useState("");
-    const [img8, setImg8] = useState("");
+    const getIdx = (arr, idx) => {
+        if (!arr) return null;
+        else if (arr.length <= idx) return null
+        else return arr[idx]
+    }
+
+    const [img1, setImg1] = useState(getIdx(vals,0));
+    const [img2, setImg2] = useState(getIdx(vals,1));
+    const [img3, setImg3] = useState(getIdx(vals,2));
+    const [img4, setImg4] = useState(getIdx(vals,3));
+
 
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,14 +31,14 @@ const ImageInputs = ({setImg, vals}) => {
         setImg(vals.filter((_,i) => i !== index));
     };
     useEffect(() => {
-        const imageList=[img1, img2, img3, img4, img5, img6, img7, img8].filter((img)=>img);
+        const imageList=[img1, img2, img3, img4].filter((img)=>img);
         if (imageList.length>0){
             setRepresentImage(imageList[0]);
         }
         else {setRepresentImage('');}
         setImg(imageList);
 
-    }, [img1, img2, img3, img4, img5, img6, img7, img8]);
+    }, [img1, img2, img3, img4]);
     const onErrorImg = (e) => {
         e.target.src = BaseImgSrc;
     }
@@ -95,40 +98,6 @@ const ImageInputs = ({setImg, vals}) => {
                         }}>
                             <a>사진4</a>
                             <ImageInput setImg={setImg4} val={img4}/>
-                        </div>
-                        <div style={{display: 'flex', justifyContent: 'right'}}>
-                            <div style={{display: "flex", flexDirection: "column",}}>
-                                <a>사진5</a>
-                                <div style={{justifyContent: 'center', alignItems: 'flex-end'}}>
-                                    <ImageInput setImg={setImg5} val={img5}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: 'center',
-                            alignItems: 'flex-start'
-                        }}>
-                            <a>사진6</a>
-                            <ImageInput setImg={setImg6} val={img6}/>
-                        </div>
-                        <div style={{display: 'flex', justifyContent: 'right'}}>
-                            <div style={{display: "flex", flexDirection: "column",}}>
-                                <a>사진7</a>
-                                <div style={{justifyContent: 'center', alignItems: 'flex-end'}}>
-                                    <ImageInput setImg={setImg7} val={img7}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: 'center',
-                            alignItems: 'flex-start'
-                        }}>
-                            <a>사진8</a>
-                            <ImageInput setImg={setImg8} val={img8}/>
                         </div>
                     </div>
 

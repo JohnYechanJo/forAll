@@ -42,7 +42,6 @@ const ImagesViewer = ({vals}) => {
                             alt={`image ${index}`}
                         />
                     </div>
-
                 ))}
 
                 <button onClick={() => setIsModalOpen(false)}>닫기</button>

@@ -188,7 +188,7 @@ public class SpaceService extends Service {
         sf.setAbleWorkIn(rent.getAbleWorkIn());
         sf.setAbleMiseen(rent.getAbleMiseen());
         sf.setAbleMiseenStartTime(rent.getAbleMiseenStartTime());
-        sf.setAbleMiseenFinTime(rent.getAbleFinTime());
+        sf.setAbleMiseenFinTime(rent.getAbleMiseenFinTime());
 
         final Kitchen kitchen = space.getKitchen();
         sf.setFireholeNum(kitchen.getFireholeNum());

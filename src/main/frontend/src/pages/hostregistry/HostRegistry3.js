@@ -30,7 +30,7 @@ const HostRegistry3 = () => {
     const [sunDay, setSunDay] = useState(false);
     const [rentTimeFrom, setRentTimeFrom] = useState("");
     const [rentTimeTo, setRentTimeTo] = useState("");
-    const [parkAvaliable, setParkAvaliable] = useState('주차불가');
+    const [parkAvaliable, setParkAvaliable] = useState(parkAvaliableData[0]);
     const [exactPark, setExactPark] = useState();
     const [elevator, setElevator] = useState();
     const [table, setTable] = useState();
@@ -49,7 +49,7 @@ const HostRegistry3 = () => {
     const [isMiseen, setIsMiseen] = useState(false);
     const [formattedPrice, setFormattedPrice] = useState();
     let isPublic = false;
-
+    const [pending, setPending] = useState(false);
 
     const onChangePark = useCallback((e) => {
         setExactPark(e.target.value);
@@ -103,6 +103,8 @@ const HostRegistry3 = () => {
     }
 
     const submit = () => {
+        if(pending) return;
+        setPending(true);
         const rentDayString = [];
         if (monDay) rentDayString.push("월");
         if (tuesDay) rentDayString.push("화");

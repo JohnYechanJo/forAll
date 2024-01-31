@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const ImageUploader = async (image, userId) => {
-    if ((image === null) || (image === undefined) || (image === "")) return null;
+    if (!image) return null;
     if (typeof(image) === 'string') return image;
     const formData = new FormData();
     formData.append('file', image);
