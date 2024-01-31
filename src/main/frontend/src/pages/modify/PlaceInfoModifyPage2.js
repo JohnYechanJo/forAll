@@ -63,19 +63,18 @@ const PlaceInfoModify2 = () => {
         });
     };
     return (
-        <div className="fontForRegister"
+        <div
             style={{
                 display: "flex",
                 justifyContent: "space-around",
                 flexDirection: "column",
-                gap: "1.5rem"
             }}>
-            <header style={{ textAlign: "center" }}><h3>(1/4) 공간 정보</h3></header>
+            <header style={{ textAlign: "center", marginBottom:'-1rem' }}><p>(1/4) 공간 정보</p></header>
             <div style={{ padding: '1rem', width: '100%', boxSizing: 'border-box' }} >
                 <div >
                     <ForAllLogo />
                     <a className="fontForRegister" >홀 사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "1px", backgroundColor: "black",marginBottom:'0' }} />
+                    <hr style={{ height: "2px", backgroundColor: "black",marginBottom:'0' }} />
                     <a className="fontForRegister" style={{ color: '#7B7B7B' }}>홈페이지에 노출될 사진입니다. 오너님의 공간이 돋보일 수 있도록 예쁘게 찍어주세요!</a>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'right' }} >
@@ -107,7 +106,7 @@ const PlaceInfoModify2 = () => {
                 </div>
                 <div>
                     <a className="fontForRegister" >주방 사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "1px", backgroundColor: "black",marginBottom:'0' }} />
+                    <hr style={{ height: "2px", backgroundColor: "black",marginBottom:'0' }} />
                     <a className="fontForRegister" style={{ color: '#7B7B7B' }}>홈페이지에 노출될 사진입니다. 오너님의 공간이 돋보일 수 있도록 예쁘게 찍어주세요!</a>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'right' }} >
@@ -175,7 +174,7 @@ const PlaceInfoModify2 = () => {
                                 메뉴를
                                 올려주세요.</p>
 
-                            <div className="bottom_button_fixed">
+                            <div className="bottom_button_relative">
                                 <a style={{ fontSize: "0.8rem" }} onClick={() => setIsModalOpen2(false)}>닫기</a>
                             </div>
 

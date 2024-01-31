@@ -121,7 +121,7 @@ const PlaceInfoModifyPage4 = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ForAllLogo />
-            <p style={{ textAlign: 'center', fontSize: '0.9375rem' }}>(2/4) 이용 안내</p>
+            <p style={{ textAlign: 'center'}}>(2/4) 이용 안내</p>
             <div style={{
                 display: "flex",
                 flexDirection: "column",
@@ -161,7 +161,7 @@ const PlaceInfoModifyPage4 = () => {
                 {/* 이미지 보여주는 건 다시 건드려야 함 */}
                 <div style={{ width: '100%' }}>
                     <a>추가 사용 가능 기계<span style={{ color: "#FF2929" }} >*</span></a>
-                    <textarea className="input" onChange={onChangeExtraMachine} placeholder={"사용 가능한 기계를 입력해주세요. ex) 수비드 기계"} defaultValue={data.equipExtra} style={{ height: '6.25rem' }} />
+                    <textarea className="input" onChange={onChangeExtraMachine} placeholder={"사용 가능한 기계를 입력해주세요. ex) 수비드 기계"} defaultValue={data.equipExtra} style={{ height: '6.25rem', width: '98%' }} />
                 </div>
                 <div style={{ width: '100%' }} >
                     <a>매장 물품<span style={{ color: "#FF2929" }} >*</span></a>

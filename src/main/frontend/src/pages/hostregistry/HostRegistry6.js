@@ -257,9 +257,9 @@ const HostRegistry6 = () => {
                         <input onChange={onChangeAccountHolder} className="input" style={{width:'97%'}} />
                     </div>
                 </div>
-                <div style={{fontSize:'0.4375rem'}}>
-                <p>- 정확한 정보를 입력했는지 다시 한번 확인해 주세요.</p>
-                <p>- 정산 금액 입금 시, 입금자명은 "포 올"로 확인할 수 있습니다.</p>
+                <div style={{fontSize:'0.4375rem', display: 'flex', flexDirection: 'column' }}>
+                    <a>- 정확한 정보를 입력했는지 다시 한번 확인해 주세요.</a>
+                    <a>- 정산 금액 입금 시, 입금자명은 "포 올"로 확인할 수 있습니다.</a>
                 </div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", padding: "1rem", alignItems: "flex-start"}} className="fontForRegister">

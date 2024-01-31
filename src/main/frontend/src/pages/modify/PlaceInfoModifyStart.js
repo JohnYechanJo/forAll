@@ -125,7 +125,6 @@ const PlaceInfoModifyStart = () => {
   };
   return (
     <div
-      className="fontForRegister"
       style={{
         display: "flex",
         justifyContent: "space-around",
@@ -133,10 +132,10 @@ const PlaceInfoModifyStart = () => {
       }}
     >
       <ForAllLogo />
-      <header style={{ textAlign: "center" }}><h3>(1/4) 공간 정보</h3></header>
+      <header style={{ textAlign: "center" }}><p>(1/4) 공간 정보</p></header>
       <div style={{ padding: '1rem', width: '100%', boxSizing: 'border-box', gap: '1rem', display: 'flex', flexDirection: 'column' }}>
         <div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div className="fontForRegister" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
               <a>공간명을 입력해주세요.<span style={{ color: '#FF2929' }} >*</span></a>
               <hr style={{ height: "2px", backgroundColor: "black" }} />
@@ -154,7 +153,8 @@ const PlaceInfoModifyStart = () => {
                 defaultValue={data.name}
                 onChange={onInputHandler}
                 className="input"
-                maxLength="17"
+                maxLength="18"
+                style={{width: "98%"}}
               />
               <div style={{marginTop: '0.5rem', justifyContent: 'left', display: 'flex'}}>
                 <img src={iImg} alt="iImg"
@@ -177,7 +177,9 @@ const PlaceInfoModifyStart = () => {
                 defaultValue={data.spaceBrief}
                 onChange={onInputHandler2}
                 className="input"
-                maxLength="17"
+                maxLength="18"
+                style={{width: "98%"}}
+
               />
             </div>
 
@@ -194,10 +196,10 @@ const PlaceInfoModifyStart = () => {
                 type="text"
                 defaultValue={data.spaceIntro}
                 className="input"
-                style={{ height: "6.25rem" }}
+                style={{ height: "6.25rem", width: '98%' }}
                 onChange={onInputHandler3}
-                maxLength="299"
-                minLength="19"
+                maxLength="300"
+                minLength="20"
               />
             </div>
             <div>
@@ -410,12 +412,12 @@ const PlaceInfoModifyStart = () => {
               </div>
             </div>
           </div>
-          <div style={{ marginTop: '1.5rem' }} >
+          <div className="fontForRegister" style={{ marginTop: '1.5rem' }} >
             <a>위치 정보<span style={{ color: '#FF2929' }} >*</span></a>
-            <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '1rem' }} />
+            <hr style={{ height: "2px", backgroundColor: "black", marginBottom: '1rem' }} />
             <a>주소(위치)<span style={{ color: '#FF2929' }} >*</span></a>
-            <div>
-              <span className="input" style={{ disabled: true }}>{fullAddress}</span>
+            <div >
+              <span className="input" style={{ disabled: true, width:'98%' }}>{fullAddress}</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }} >
               <a>
@@ -426,7 +428,7 @@ const PlaceInfoModifyStart = () => {
               </a>
             </div>
           </div>
-          <div style={{ marginTop: '1.5rem' }}>
+          <div className="fontForRegister" style={{ marginTop: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
               <a>상세 위치 정보<span style={{ color: '#FF2929' }} >*</span></a>
               <p>
@@ -438,19 +440,22 @@ const PlaceInfoModifyStart = () => {
               type="text"
               defaultValue={data.addressBrief}
               onChange={onInputHandler4}
-              maxLength="17"
+              maxLength="18"
               className="input"
+              style={{width: "98%"}}
             />
             <a>• 작성하신 위치정보는 검색에 영향을 미치지 않습니다.</a>
 
           </div>
-          <div style={{ marginTop: '1.5rem' }}>
+          <div className="fontForRegister" style={{ marginTop: '1.5rem' }}>
             <a>웹사이트<span style={{ color: '#FF2929' }} >*</span></a>
             <input
               type="text"
               value={webSite}
               onChange={(e) => setWebSite(e.target.value)}
               className="input"
+              style={{width: "98%"}}
+
             />
             <div style={{ display: 'flex', flexDirection: 'column' }} >
               <a>
@@ -462,7 +467,7 @@ const PlaceInfoModifyStart = () => {
             </div>
           </div>
           <div style={{ marginTop: '1.5rem' }}>
-            <div style={{ display: 'flex', flexDirection: 'column' }} >
+            <div className="fontForRegister" style={{ display: 'flex', flexDirection: 'column' }} >
               <a>
                 <span>대표 이미지<span style={{ color: '#FF2929' }} >*</span></span>
               </a>

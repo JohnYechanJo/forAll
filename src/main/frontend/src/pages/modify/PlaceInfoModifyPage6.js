@@ -140,30 +140,30 @@ const PlaceInfoModifyPage6 = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ForAllLogo />
-            <p style={{ textAlign: 'center', fontSize: '0.9375rem' }}>(4/4) 예약 및 정산 정보</p>
+            <p style={{ textAlign: 'center' }}>(4/4) 예약 및 정산 정보</p>
             <div >
                 <div style={{ display: "flex", flexDirection: "column", padding: "1rem", alignItems: "flex-start", gap: "1.5rem" }} className="fontForRegister" >
-                    <div style={{ width: "100%" }} >
+                    <div style={{ width: "100%", marginBottom: "-1rem"}} >
                         <a>정산 정보를 입력해 주세요<span style={{ color: "#FF2929" }} >*</span></a>
-                        <hr style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
+                        <hr style={{ height: "2px", backgroundColor: "black", width: "100%" }} />
                     </div>
-                    <div>
+                    <div style={{ marginBottom:"-1rem" }}>
                         <div style={{ display: "flex", justifyContent: "space-between" }} >
                             <p>상호(개인/법인)<span style={{ color: "#FF2929" }} >*</span></p>
                             <p>{tradeName.length}자/28자</p>
                         </div>
-                        <input value={tradeName} defaultValue={data.companyName} disabled={true} className="input" />
+                        <input value={tradeName} defaultValue={data.companyName} disabled={true} className="input" style={{ width: '92vw'}}/>
                     </div>
-                    <div>
+                    <div style={{ marginBottom:"-1rem" }}>
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <p>대표자명<span style={{ color: "#FF2929" }} >*</span></p>
                             <p>{representative.length}자/10자</p>
                         </div>
-                        <input value={representative} defaultValue={data.ceoName} disabled={true} className="input" />
+                        <input value={representative} defaultValue={data.ceoName} disabled={true} className="input" style={{ width: '92vw'}}/>
                     </div>
-                    <div>
+                    <div style={{ marginBottom:"-1rem" }}>
                         <p>사업자 등록번호<span style={{ color: "#FF2929" }} >*</span></p>
-                        <input defaultValue={businessNum} disabled={true} className="input" />
+                        <input defaultValue={businessNum} disabled={true} className="input" style={{ width: '92vw'}}/>
                         <div style={{ padding: "0px 0px", display: "inline-block" }} >
                             <div style={{ padding: "0px 0px", display: "flex", flexDirection: 'column' }} >
                                 <a style={{ color: "red" }} >• 사업자 등록번호는 필수 입력입니다.</a>
@@ -173,13 +173,13 @@ const PlaceInfoModifyPage6 = () => {
                             </div>
                         </div>
                     </div>
-                    <div style={{ height: "9rem" }} >
+                    <div style={{ height: "9rem" , marginBottom:'-1rem'}} >
                         <p>사업자 등록증 첨부<span style={{ color: "#FF2929" }} >*</span></p>
                         <ImageViewer val={license} />
                     </div>
-                    <div>
+                    <div style={{ marginBottom:"-1rem" }}>
                         <a>사업장 주소<span style={{ color: "#FF2929" }} >*</span></a>
-                        <input defaultValue={address} disabled={true} className="input" />
+                        <input defaultValue={address} disabled={true} className="input" style={{ width: '92vw'}}/>
                     </div>
                     <div>
                         <p>정산용 연락처<span style={{ color: "#FF2929" }} >*</span></p>
@@ -193,7 +193,7 @@ const PlaceInfoModifyPage6 = () => {
                 <div style={{ display: "flex", flexDirection: "column", padding: "1rem", alignItems: "flex-start", gap: "1.5rem" }} className="fontForRegister">
                     <div style={{ width: "100%" }} >
                         <a className="fontForRegister" >계좌 정보를 입력해 주세요.<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                        <hr style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
+                        <hr style={{ height: "2px", backgroundColor: "black", width: "100%" }} />
                         <a style={{ fontSize: '0.4375rem' }}>• 법인 사업자는 법인 통장계좌를, 개인 사업자는 사업자 명의의 통장 계좌를 입력해주세요. 포 올을 통해 결제된 금액이 해당 계좌로 정산됩니다.</a>
                     </div>
                     <div>
@@ -211,7 +211,7 @@ const PlaceInfoModifyPage6 = () => {
                             <div style={{display:'flex',flexDirection:'column', marginLeft: '0.63rem'}}>
                                 <a>예금주<span style={{ color: "#FF2929" }} >*</span></a>
                                 <input onChange={onChangeAccountHolder} defaultValue={accountHolder} className="input"
-                                    style={{ width: '100%', }}
+                                    style={{ width: '97%', }}
                                 />
                             </div>
                         </div>
@@ -223,7 +223,7 @@ const PlaceInfoModifyPage6 = () => {
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", padding: "1rem", alignItems: "flex-start" }} className="fontForRegister">
                     <p>환불 기준을 동의해 주세요<span style={{ color: "#FF2929" }} >*</span></p>
-                    <hr style={{ height: "1px", backgroundColor: "black", width: "100%", marginTop: '0' }} />
+                    <hr style={{ height: "2px", backgroundColor: "black", width: "100%", marginTop: '0' }} />
                     <div style={{ display: 'flex', flexDirection: 'column' }} >
                         <a>• 셰프 환불 기준은 아래와 같이 구분됩니다.</a>
                         <a>• 1) 대관 14일 전:100% 환불</a>
@@ -231,7 +231,7 @@ const PlaceInfoModifyPage6 = () => {
                         <a>• 3) 대관 8일 전~5일 전:50% 환불</a>
                         <a>• 4) 대관 4일 전~당일:환불 불가</a>
                     </div>
-                    <hr style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
+                    <hr style={{ height: "2px", backgroundColor: "black", width: "100%" }} />
                 </div>
                 <input type="checkbox" id="agree" checked={isAgree} onChange={() => setIsAgree(!isAgree)} />
                 <label for='agree' style={{ marginLeft: '1rem', display: 'flex', alignItems: 'center' }}>
