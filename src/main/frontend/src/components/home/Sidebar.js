@@ -167,14 +167,14 @@ const Sidebar = ({ width = 18.75, children }) => {
                         <button className="button" onClick={handleSpaceModify} style={{ textAlign: "left", marginLeft: "2rem" }}>공간 정보수정</button>
                     </div>
                     <div style={{
-                        height: "2rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",
+                        height: "2rem", display: "flex", flexDirection: "row",
                         boxShadow: "4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset: "-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                         display: "flex", flexDirection: "column", justifyContent: "space-around", gap: "1.37rem", marginBottom: '2rem'
                     }}>
-                        {sessionStorage.getItem("user_id") ? (<div onClick={logOut}>
-                            <img src={logout} alt="logout" style={{ height: "1.125rem", width: "0.875rem", margin: "auto", border: 'none', backgroundColor: 'white', fontSize: '0.875rem', fontWeight: '700', marginLeft: '2rem' }} />
+                        {sessionStorage.getItem("user_id") ? (<div onClick={logOut} style={{display:'flex',justifyContent:'flex-start',alignItems:'center',marginTop:'1rem'}}>
+                            <img src={logout} alt="logout" style={{ height: "1.125rem", width: "0.875rem",  border: 'none', backgroundColor: 'white', fontSize: '0.875rem', fontWeight: '700', marginLeft: '2rem' }} />
                             <a style={{ marginLeft: '0.5rem' }}>로그아웃</a>
-                        </div>) : (<div onClick={logIn}>
+                        </div>) : (<div onClick={logIn} style={{display:'flex',justifyContent:'flex-start',alignItems:'center'}}>
                             <img src={login} alt="login" style={{ height: "1.125rem", width: "0.875rem", margin: "auto", border: 'none', backgroundColor: 'white', fontSize: '0.875rem', fontWeight: '700', marginLeft: '2rem' }} />
                             <a style={{ marginLeft: '0.5rem' }}>로그인 ㅣ 회원가입</a>
                         </div>)}
