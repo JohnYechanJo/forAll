@@ -4,7 +4,7 @@ const ForAllLogo = () => {
     const navigate = useNavigate();
     return (
         <div >
-            <div style={{ position: 'absolute', left: '1rem', backgroundColor: 'white', display:'flex',flexDirection:'column',top:'0.7rem',zIndex:'100' }}
+            <div style={{ position: 'absolute', left: '1rem', backgroundColor: 'white', display:'flex',flexDirection:'column',top:'0.7rem',}}
             onClick={() => navigate('/')}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="55" height="25" viewBox="0 0 55 25" fill="none">
