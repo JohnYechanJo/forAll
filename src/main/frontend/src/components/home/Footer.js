@@ -7,16 +7,15 @@ const Footer =() => {
             <div style={{
                 display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
                 width: '8.5625rem', height: '4.3125rem', fontSize: '1rem', fontStyle: 'normal',
-                fontWeight: '700', lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                marginLeft: '1.5rem', marginTop: '4.5rem'
+                fontWeight: '700', lineHeight: 'normal', letterSpacing: '-0.01031rem', marginTop: '4.5rem'
             }}>
-                <a onClick={() => navigate("/FAQ")}>• 자주 묻는 질문</a>
-                <a onClick={() => navigate("/EntryPartnerShip")}>• 입점 및 제휴 문의</a>
+                <a onClick={() => navigate("/FAQ")}>&nbsp;&nbsp;&nbsp;&nbsp;• 자주 묻는 질문</a>
+                <a onClick={() => navigate("/EntryPartnerShip")}>&nbsp;&nbsp;&nbsp;&nbsp;• 입점 및 제휴 문의</a>
             </div>
             <div style={{
                 display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
                 width: '12.4375rem', height: '5rem', fontSize: '0.4375rem', fontStyle: 'normal',
-                fontWeight: '700', lineHeight: 'normal', letterSpacing: '-0.01031rem', marginLeft: '1.5rem',
+                fontWeight: '700', lineHeight: 'normal', letterSpacing: '-0.01031rem', marginLeft: '1rem',
                 marginTop: '2.5rem'
             }}>
                 <p style={{ margin: '0.1rem 0' }}>주식회사 포 올</p>
