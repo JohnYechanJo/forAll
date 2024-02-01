@@ -104,7 +104,7 @@ const PlaceInfoModify2 = () => {
                             </div>
                         </div>
                         <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                            <a>추가사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
+                            <a>추가사진</a>
                             <ImageInputs setImg={setImgAdditional} vals={imgAdditional} />
                         </div>
                     </div>
@@ -136,7 +136,7 @@ const PlaceInfoModify2 = () => {
                             </div>
                         </div>
                         <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                            <a>추가사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
+                            <a>추가사진</a>
                             <ImageInputs setImg={setKitchenAdditional} vals={kitchenAdditional} />
                         </div>
                     </div>
@@ -193,7 +193,7 @@ const PlaceInfoModify2 = () => {
                             </div>
                         </div>
                         <div >
-                            <a>추가사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
+                            <a>추가사진</a>
                             <ImageInputs setImg={setMenuAdditional} vals={menuAdditional} />
                         </div>
                     </div>

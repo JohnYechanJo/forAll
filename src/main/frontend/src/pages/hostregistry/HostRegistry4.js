@@ -171,22 +171,28 @@ const HostRegistry4 = () => {
                 <div style={{ display: "grid", gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', justifyContent: 'center', width: '100%' }} >
                     <div style={{ display: 'flex', justifyContent: "right" }}>
                         <div>
-                            <p>앞접시*</p>
+                            <p>앞접시<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></p>
                             <ImageInputs setImg={setSidePlate} vals={sidePlate} />
-                            <input onChange={onChangeCountSidePlate} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} />
+                            <span style={{alignItems: 'center', display:'flex'}}><input onChange={onChangeCountSidePlate} className="input" placeholder={"최대 개수"} style={{ width: '5.3rem' }} />개</span>
                         </div>
                     </div>
                     <div>
-                        <p>물컵*</p>
+                        <p>물컵<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></p>
                         <ImageInputs setImg={setCup} vals={cup} />
-                        <input onChange={onChangeCountCup} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} />
+                        <span style={{alignItems: 'center', display:'flex'}}><input onChange={onChangeCountCup}
+                                                                                    className="input"
+                                                                                    placeholder={"최대 개수"}
+                                                                                    style={{width: '5.3rem'}}/>개</span>
                     </div>
 
                     <div style={{ display: 'flex', justifyContent: "right" }}>
                         <div>
-                            <p>커트러리*</p>
+                            <p>커트러리<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></p>
                             <ImageInputs setImg={setCuttrary} vals={cuttrary} />
-                            <input onChange={onChangeCountCuttrary} className="input" placeholder={"최대 개수"} style={{ width: '6rem' }} />
+                            <span style={{alignItems: 'center', display:'flex'}}><input onChange={onChangeCountCuttrary}
+                                                                                        className="input"
+                                                                                        placeholder={"최대 개수"}
+                                                                                        style={{width: '5.3rem'}}/>개</span>
                         </div>
                     </div>
                 </div>
