@@ -165,6 +165,9 @@ public class MemberService extends Service {
 //        memberPublicDTO.setGender(member.getGender());
         memberPublicDTO.setChefPending(member.getChefPending().toString());
 
+        final Profile profile = profileRepository.findByMember(member).get(0);
+        memberPublicDTO.setProfileImage(profile.getProfilePhoto().getImageName());
+
         return memberPublicDTO;
     }
 

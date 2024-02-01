@@ -1,8 +1,9 @@
 
-import { useState } from "react";
+import React, { useState } from "react";
 import "../../components/Styles.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
+import iImg from "../../components/icons/i.png";
 import { ModalStyles } from "../../components/ModalStyles";
 import { ModalForAddress } from "../../components/ModalForAddress";
 import DaumPost from "../../components/DaumPost";
@@ -37,6 +38,7 @@ const HostRegistry = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [modalOpen1, setModalOpen1] = useState(false);
+    const [pending, setPending] = useState(false);
     const navigate = useNavigate();
     let isPublic = false;
     const modalClose1 = () => {
@@ -77,6 +79,8 @@ const HostRegistry = () => {
         }
     };
     const submit = async () => {
+        if (pending) return;
+        setPending(true);
         const userId = sessionStorage.getItem("user_id");
         const img = await ImageUploader(imgRepresent, userId);
         navigate("/hostRegistry2", {
@@ -98,64 +102,69 @@ const HostRegistry = () => {
     return (
 
         <div
-            className="fontForRegister"
             style={{
                 display: "flex",
                 justifyContent: "space-around",
                 flexDirection: "column",
 
             }}>
-            <header style={{ textAlign: "center" }}><h3>(1/4) 공간 정보</h3></header>
+            <header style={{ textAlign: "center",marginBottom:"-0.5rem" }}><p>(1/4) 공간 정보</p></header>
             <ForAllLogo />
-            <div style={{ width: '100%', padding: '1rem', boxSizing: 'border-box', gap: '1rem', display: 'flex', flexDirection: 'column' }} >
+            <div style={{ width: '100%', padding: '1rem', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }} >
                 <div >
                     <div style={{ gap: '1rem', display: 'flex', flexDirection: 'column' }}>
-                        <div>
-                            <a>공간명을 입력해주세요.<span style={{ color: '#FF2929' }} >*</span></a>
-                            <hr style={{ height: "1px", backgroundColor: "black" }} />
+                        <div style={{ marginBottom:"-1rem" }}>
+                            <a className="fontForRegister">공간명을 입력해주세요.<span style={{ color: '#FF2929' }} >*</span></a>
+                            <hr style={{ height: "2px", backgroundColor: "black" }} />
                         </div>
-                        <div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
-                                <a>공간명<span style={{ color: '#FF2929' }} >*</span></a>
+                        <div style={{ marginBottom:"-1rem" }}>
+                            <div className="fontForRegister" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                <a className="fontForRegister">공간명<span style={{color: '#FF2929'}}>*</span></a>
                                 <p>
                                     <span>{inputCount}</span>
                                     <span>/18자</span>
                                 </p>
                             </div>
-                            <input type="text" placeholder="오스테리아 로에로" className="input"
-                                onChange={onInputHandler} maxLength="17" />
-                            <a>❕사용 가능한 특수문자: (,),(-),(.),(@),(/)</a>
+
+                            <input type="text" placeholder="오스테리아 로에로" className="input" style={{width: '98%'}}
+                                   onChange={onInputHandler} maxLength="18"/>
+                            <div style={{marginTop: '0.5rem', justifyContent: 'left', display: 'flex'}}>
+                                <img src={iImg} alt="iImg"
+                                     style={{width: '1rem', height: '1rem', flexShrink: 0}}/>
+                                &ensp;
+                                <a className="fontForRegister" style={{paddingTop: "0.05rem"}}>사용 가능한 특수문자: (,),(-),(.),(@),(/)</a>
+                            </div>
                         </div>
-                        <div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
-                                <a>공간 한 줄 소개<span style={{ color: '#FF2929' }} >*</span></a>
-                                <p>
+                        <div style={{ marginBottom:"-1rem" }}>
+                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                <a className="fontForRegister">공간 한 줄 소개<span style={{ color: '#FF2929' }} >*</span></a>
+                                <p className="fontForRegister">
                                     <span>{inputCount2}</span>
                                     <span>/18자</span>
                                 </p>
                             </div>
-                            <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" className="input"
-                                onChange={onInputHandler2} maxLength="17" />
+                            <input type="text" placeholder="이탈리아 전통 가정식을 제공하는 와인바" className="input" style={{width: '98%'}}
+                                onChange={onInputHandler2} maxLength="18" />
                         </div>
                         <div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
-                                <a>공간 소개<span style={{ color: '#FF2929' }} >*</span></a>
-                                <p>
-                                    <span>{inputCount3}</span>
+                                <a className="fontForRegister">공간 소개<span style={{ color: '#FF2929' }} >*</span></a>
+                                <p className="fontForRegister">
+                                    <span >{inputCount3}</span>
                                     <span>/300자</span>
                                     <span style={{ color: "red" }}>(최소 20자)</span>
                                 </p>
                             </div>
-                            <textarea type="text" placeholder="공간에 대한 설명을 기재해주세요." style={{ height: "6.25rem" }}
-                                onChange={onInputHandler3} maxLength="299" minLength="19"
+                            <textarea type="text" placeholder="공간에 대한 설명을 기재해주세요." style={{ height: "6.25rem", width:" 98%" }}
+                                onChange={onInputHandler3} maxLength="300" minLength="20"
                                 className="input"
                             />
                         </div>
                         <div>
-                            <a>주방 특성<span style={{ color: '#FF2929' }} >*</span></a>
-                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
+                            <a className="fontForRegister">주방 특성<span style={{ color: '#FF2929' }} >*</span></a>
+                            <div className="fontForRegister" style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
                                 <div style={{ flexDirection: "column", display: "flex" }}>
-                                    <div>
+                                    <div className="fontForRegister">
                                         <button className="square_button"
                                             name="kitchen"
                                             value={KitchenFeat.Open}
@@ -208,7 +217,7 @@ const HostRegistry = () => {
                                                     대면형보다 더 긴밀한 커뮤니케이션이 가능하며, 요리를 하는 동시에 식사가 가능한 형태를 띕니다.
                                                 </p>
                                             </div>
-                                            <div class="bottom_button_fixed">
+                                            <div class="bottom_button_relative">
                                                 <a onClick={() => setModalIsOpen1(false)}>닫기</a>
                                             </div>
 
@@ -275,7 +284,7 @@ const HostRegistry = () => {
                                                 }}>•&ensp;식탁이 따로 놓여 있지만, 음식을 만드는 사람의 얼굴을 보며
                                                     대화를 나눌 수 있는 구조입니다.</p>
                                             </div>
-                                            <div class="bottom_button_fixed">
+                                            <div class="bottom_button_relative">
                                                 <a onClick={() => setModalIsOpen2(false)}>닫기</a>
                                             </div>
                                         </Modal>
@@ -347,7 +356,7 @@ const HostRegistry = () => {
                                                     paddingRight: "5%"
                                                 }}>•&ensp;홀에서는 어수선한 모습이 보이지 않아 쾌적한 매장 환경이 만들어집니다.</p>
                                             </div>
-                                            <div class="bottom_button_fixed">
+                                            <div class="bottom_button_relative">
                                                 <a onClick={() => setModalIsOpen3(false)}>닫기</a>
                                             </div>
 
@@ -360,11 +369,11 @@ const HostRegistry = () => {
                                 </div>
                             </div>
                         </div>
-                        <div style={{ marginTop: '1.5rem' }} >
+                        <div className="fontForRegister" style={{ marginTop: '1.5rem' }} >
                             <a>위치 정보<span style={{ color: '#FF2929' }} >*</span></a>
-                            <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '1rem' }} />
+                            <hr style={{ height: "2px", backgroundColor: "black", marginBottom: '1rem' }} />
                             <a>주소(위치)<span style={{ color: '#FF2929' }} >*</span></a>
-                            <div style={{ display: 'flex' }} >
+                            <div style={{ display: 'flex' ,marginBottom:"-1rem" }} >
                                 <input value={address} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '80%',height:'1.875rem' }} className="inputForRegister" />
                                 <Modal isOpen={modalOpen1} >
                                     <DaumPost setAddress={(e) => {
@@ -385,7 +394,7 @@ const HostRegistry = () => {
                                             setAddressDetail(e.target.value);
                                             setFullAddress(address + " " + e.target.value);
                                         }}
-                                        style={{ marginTop: '1.5rem' }}
+                                        style={{ marginTop: '1.5rem' , width: '98%' }}
                                         className="input"
                                     />
                                 </span>
@@ -399,7 +408,7 @@ const HostRegistry = () => {
                                 </a>
                             </div>
                         </div>
-                        <div>
+                        <div className="fontForRegister">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
                                 <a>상세 위치 정보<span style={{ color: '#FF2929' }} >*</span></a>
                                 <p>
@@ -408,18 +417,18 @@ const HostRegistry = () => {
                                 </p>
                             </div>
                             <input type="text" placeholder="ex.성수역 4번출구 도보 1분 거리"
-                                className="input"
-                                onChange={onInputHandler4} maxLength="17" />
+                                className="input" style={{width: '98%'}}
+                                onChange={onInputHandler4} maxLength="18" />
                             <div style={{ display: 'flex', flexDirection: 'column' }} >
                                 <a>
                                     • 작성하신 위치정보는 검색에 영향을 미치지 않습니다.
                                 </a>
                             </div>
                         </div>
-                        <div>
+                        <div className="fontForRegister">
                             <a>웹사이트<span style={{ color: '#FF2929' }} >*</span></a>
                             <input type="text" placeholder="웹사이트 URL을 입력해주세요."
-                                className="input"
+                                className="input" style={{width: '98%'}}
                                 onChange={(e) => setWebSite(e.target.value)} />
                             <div style={{ display: 'flex', flexDirection: 'column' }} >
                                 <a>
@@ -430,7 +439,7 @@ const HostRegistry = () => {
                                 </a>
                             </div>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column' }} >
+                        <div className="fontForRegister" style={{ display: 'flex', flexDirection: 'column' }} >
                             <a>
                                 <span>대표 이미지<span style={{ color: '#FF2929' }} >*</span></span>
                             </a>
@@ -503,10 +512,29 @@ const HostRegistry = () => {
                             </button>
                         </div>
                     </Modal>
+                    <Modal isOpen={pending} ariaHideApp={false} style={SmallModalStyles}>
+                        <div style={{
+                            justifyContent: "center", alignItems: "center",
+                            fontFamily: "Noto Sans KR",
+                            color: " #000",
+                            fontSize: "1.25rem",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "normal",
+
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+
+                        }}>
+                            <a style={{fontSize: '0.9375rem'}}>현재 입력사항을 업로드 중입니다.</a>
+                            <p style={{fontSize: '0.9375rem'}}>잠시만 기다려주세요.</p>
+                        </div>
+                    </Modal>
                     <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={"주소는 필수입력사항입니다."} />
                 </div>
             </div>
-            <div style={{ display: 'flex', width: '100vw', margin: '0px', marginTop: '4rem' }}>
+            <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem' }}>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#FF4F4F", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
                     onClick={() => navigate(-1)}
                 >

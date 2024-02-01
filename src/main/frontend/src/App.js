@@ -85,6 +85,8 @@ import AdminProfile from "./pages/admin/AdminProfile";
 import AdminChefInfo from "./pages/admin/AdminChefInfo";
 import AdminPlaceReservationCheck from "./pages/admin/AdminPlaceReservationCheck";
 import ReservationCancelPage from './pages/Reservation/ReservationCancel';
+import ServiceCenterChatPage from "./pages/chat/ServiceCenterChatPage";
+import AdminChatRoom from "./pages/admin/AdminChatRoom";
 
 function App() {
   return (
@@ -135,12 +137,9 @@ function App() {
         <Route path="/rentSpaceComplete" element={<RentSpaceComplete />} />
         <Route path="/chatList" element={<ChatRoomListPage />} />
         <Route path="/chatRoom" element={<ChatRoomPage />} />
+          <Route path="/serviceChatRoom" element={<ServiceCenterChatPage />} />
         <Route path="/profile/:id" element={<ProfileViewPage />} />
         <Route path="/mypost" element={<MyPostPage />} />
-
-
-        <Route path="/chatList" element={<ChatRoomListPage />} />
-        <Route path="/chatRoom" element={<ChatRoomPage />} />
         <Route path="/postList" element={<PostListViewPage />} />
         <Route path="/post/:id" element={<PostViewPage />} />
         <Route path="/post/edit" element={<PostEditPage />} />
@@ -167,11 +166,11 @@ function App() {
           <Route path="/adminspaceViewPage4" element={<AdminSpaceViewPage4 />}/>
           <Route path="/adminspaceViewPage5" element={<AdminSpaceViewPage5 />}/>
           <Route path="/adminspaceViewPage6" element={<AdminSpaceViewPage6 />}/>
-
             <Route path="/adminchefViewPage1" element={<AdminSignedUp />} />
             <Route path="/adminchefViewPage2" element={<AdminProfile />} />
           <Route path="/adminchefViewPage3" element={<AdminChefInfo />} />
           <Route path="/adminreservationViewPage1" element={<AdminPlaceReservationCheck />} />
+          <Route path="/adminChatRoom" element={<AdminChatRoom />} />
           <Route path="/reservationCancel" element={<ReservationCancelPage />} />
       </Routes>
   );

@@ -8,7 +8,6 @@ import project.forAll.domain.Image;
 import project.forAll.domain.member.Profile;
 import project.forAll.domain.member.Member;
 
-import project.forAll.dto.MemberPublicDTO;
 import project.forAll.dto.ProfilePublicDTO;
 import project.forAll.form.ProfileForm;
 import project.forAll.repository.member.ProfileRepository;

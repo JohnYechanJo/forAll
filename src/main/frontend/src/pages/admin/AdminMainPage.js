@@ -7,15 +7,21 @@ import {useLocation, useNavigate} from "react-router-dom";
 const AdminMainPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const data = { ...location.state };
-    console.log(data);
+    const pagedata = { ...location.state };
     const [tableName, setTableName] = useState("대기중");
-    const [category, setCategory] = useState(data.category ? data.category : "space");
-    const [state, setState] = useState(data.state ? data.state : SpaceState.PENDING);
+    const [category, setCategory] = useState(pagedata.category ? pagedata.category : "space");
+    const [state, setState] = useState(pagedata.state ? pagedata.state : SpaceState.PENDING);
     const [dataList, setDataList] = useState([]);
     useEffect(() => {
-        axios.get("/api/v1/admin/" + category+"List/"+state).then((res) => setDataList(res.data))
-            .catch((err) => console.error(err));
+        if (category === "service"){
+            axios.get("/api/v1/admin/chatList")
+                .then((res) => setDataList(res.data))
+                .catch((err) => console.error(err));
+        }
+        else{
+            axios.get("/api/v1/admin/" + category+"List/"+state).then((res) => setDataList(res.data))
+                .catch((err) => console.error(err));
+        }
         if (state === "Pending") setTableName("대기중");
         else if(state === "Approve") setTableName("승인");
         else if(state === "Reject") setTableName("거절");
@@ -31,6 +37,18 @@ const AdminMainPage = () => {
         setCategory(category);
         setState(state);
     };
+    const handleViewPage = (data) => {
+        if (category === "service"){
+            navigate("/adminChatRoom", {state: data})
+        }
+        else{
+            navigate("/admin"+category+"ViewPage1", {state: {
+                    ...data,
+                    category: category,
+                    state: state
+                }});
+        }
+    }
     return(
         <div style={{display:"flex"}}>
             <div className={"sidebar"}>
@@ -55,13 +73,10 @@ const AdminMainPage = () => {
                     <p onClick={()=>setStates("reservation", ReservationState.REJECT)}>거절한 예약</p>
                 </div>
                 <div>
-                    <a className="font-normal" >예약 취소</a>
-                    <p onClick={()=>setStates("reservation", ReservationState.CANCELPENDING)}>대기중</p>
-                    <p onClick={()=>setStates("reservation", ReservationState.CANCELAPPROVE)}>승인한 예약취소</p>
-                    <p onClick={()=>setStates("reservation", ReservationState.CANCELREJECT)}>거절한 예약취소</p>
+                    <a className="font-normal" onClick={()=>setStates("reservation", ReservationState.CANCEL)} >예약 취소</a>
                 </div>
                 <div>
-                    <a className="font-normal" >고객 센터</a>
+                    <a onClick={()=>setStates("service")} className="font-normal" >고객 센터</a>
                 </div>
             </div>
             <div className={"container"}>
@@ -76,12 +91,8 @@ const AdminMainPage = () => {
                 {dataList ? (
                     dataList.map((data, idx) => (
                         <div key={idx} className={"row"}>
-                            <p style={{marginLeft:'2rem'}} >{data.name}</p>
-                            <p onClick={()=>navigate("/admin"+category+"ViewPage1", {state: {
-                                    ...data,
-                                    category: category,
-                                    state: state
-                                }})}
+                            <p style={{marginLeft:'2rem'}} >{data.name ? data.name : data.userId1}</p>
+                            <p onClick={() => handleViewPage(data)}
                                 style={{color:'table_gray',textDecorationLine:'underline'}}
                                 >더보기</p>
                             {state === "Pending" ? (

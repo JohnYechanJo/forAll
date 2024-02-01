@@ -10,6 +10,7 @@ import ImageViewer from "../../components/ImageViewer";
 import clip from "../../components/icons/clip.png";
 import pencilImg from "../../components/icons/pencil.jpg";
 import ImagePreView from "../../components/ImagePreView";
+import xmark from "../../components/icons/xmark.png";
 const PostEditPage = () => {
     const location = useLocation();
     const data = {...location.state};
@@ -83,7 +84,7 @@ const PostEditPage = () => {
                     <label>
                         <input type={"file"}
                                accept="image/*"
-                               onChange={(e) => setImageList(Array.from(e.target.files))}
+                               onChange={(e) => setImageList([...imageList, ...Array.from(e.target.files)] )}
                                style={{display: "none"}}
                                multiple={true}
                         />
@@ -108,7 +109,14 @@ const PostEditPage = () => {
                 <div>
                     {imageList ? imageList.map((img, idx) => (
                         <div key={idx}>
-                            <ImagePreView img={img}/>
+                            <div style={{display:"flex"}}>
+                                <ImagePreView img={img}/>
+                                <div onClick={()=>setImageList(imageList.filter((i) => i !== img))}>
+                                    <a>
+                                        <img src={xmark} alt="xmark" style={{width:"1.5rem", height:"1.5rem"}} />
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     )) : null}
                 </div>

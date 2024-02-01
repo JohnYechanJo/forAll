@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 
 import "../../components/Styles.css";
@@ -52,9 +52,13 @@ const HostRegistry2 = () => {
         setPending(true);
         const userId = sessionStorage.getItem("user_id");
         data.isPublic = data.isPublic && isPublic;
-        const hallImage = await Promise.all([img1, img2, img3, ...imgAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const kitImage = await Promise.all([kitchen1, kitchen2, kitchen3, ...kitchenAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const menu = await Promise.all([menu1, ...menuAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const [hallImage, kitImage, menu] = await Promise.all(
+            [
+                Promise.all([img1, img2, img3, ...imgAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId))),
+                Promise.all([kitchen1, kitchen2, kitchen3, ...kitchenAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId))),
+                Promise.all([menu1, ...menuAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId)))
+            ]
+        )
         navigate("/hostRegistry3", {
             state: {
                 ...data,
@@ -71,14 +75,13 @@ const HostRegistry2 = () => {
                 display: "flex",
                 justifyContent: "space-around",
                 flexDirection: "column",
-                gap: "1.5rem"
             }}>
-            <header style={{ textAlign: "center" }}><p>(1/4) 공간 정보</p></header>
-            <div style={{ padding: '1rem', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <header style={{ textAlign: "center",marginBottom:"-0.5rem" }}><p>(1/4) 공간 정보</p></header>
+            <div style={{ padding: '1rem', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div >
                     <ForAllLogo />
                     <a className="fontForRegister" >홀 사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '0' }} />
+                    <hr style={{ height: "2px", backgroundColor: "black", marginBottom: '0' }} />
                     <a className="fontForRegister" style={{ color: '#7B7B7B' }}>홈페이지에 노출될 사진입니다. 오너님의 공간이 돋보일 수 있도록 예쁘게 찍어주세요!</a>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'right' }} >
@@ -110,7 +113,7 @@ const HostRegistry2 = () => {
                 </div>
                 <div>
                     <a className="fontForRegister" >주방 사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '0' }} />
+                    <hr style={{ height: "2px", backgroundColor: "black", marginBottom: '0' }} />
                     <a className="fontForRegister" style={{ color: '#7B7B7B' }}>홈페이지에 노출될 사진입니다. 오너님의 공간이 돋보일 수 있도록 예쁘게 찍어주세요!</a>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'right' }} >
@@ -142,7 +145,7 @@ const HostRegistry2 = () => {
                 </div>
                 <div>
                     <a className="fontForRegister" >메뉴 사진<span className="fontForRegister" style={{ color: "#FF2929" }} >*</span></a>
-                    <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '0' }} />
+                    <hr style={{ height: "2px", backgroundColor: "black", marginBottom: '0' }} />
                     <button style={{
                         border: "none",
                         backgroundColor: "white",
@@ -256,6 +259,25 @@ const HostRegistry2 = () => {
                         >
                             넘어가기
                         </button>
+                    </div>
+                </Modal>
+                <Modal isOpen={pending} ariaHideApp={false} style={SmallModalStyles}>
+                    <div style={{
+                        justifyContent: "center", alignItems: "center",
+                        fontFamily: "Noto Sans KR",
+                        color: " #000",
+                        fontSize: "1.25rem",
+                        fontStyle: "normal",
+                        fontWeight: "400",
+                        lineHeight: "normal",
+
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+
+                    }}>
+                        <a style={{fontSize: '0.9375rem'}}>현재 입력사항을 업로드 중입니다.</a>
+                        <p style={{fontSize: '0.9375rem'}}>잠시만 기다려주세요.</p>
                     </div>
                 </Modal>
             </div>

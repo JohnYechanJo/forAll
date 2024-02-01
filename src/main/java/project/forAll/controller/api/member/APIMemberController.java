@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class APIMemberController extends APIController {
+public class  APIMemberController extends APIController {
 
     private final MemberService memberService;
     private final MemberRepository memberRepository;

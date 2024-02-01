@@ -45,7 +45,7 @@ const UseTermsTemplate = ({setIsUseTermsChecked}) => {
         }
     }, [userAgree,infoCollect,infoThird,ageOver14]);
     return (
-        <div className="fontForRegister" style={{fontWeight:'350',display:'inline-flex',flexDirection:'column',justifyContent:"flex-start",width:"100%",padding:'1rem',boxSizing:'border-box' }} >
+        <div className="fontForRegister" style={{fontWeight:'350',display:'inline-flex',flexDirection:'column',justifyContent:"flex-start",width:"100%",padding:'2%',boxSizing:'border-box' }} >
             <p className="fontForRegister">이용약관동의<span style={{color:'#FF2929'}}>*</span></p>
             <p style={{marginBottom:'2rem'}} >
                 <div style={{display:'flex',alignItems:"end"}} >

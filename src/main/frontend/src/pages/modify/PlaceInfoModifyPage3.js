@@ -9,6 +9,7 @@ import axios from "axios";
 import ForAllLogo from "../../components/ForAllLogo";
 import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
 import { set } from "date-fns";
+import {SmallModalStyles} from "../../components/SmallModalStyles";
 const PlaceInfoModifyPage3 = () => {
     const location = useLocation();
     const data = { ...location.state };
@@ -198,17 +199,16 @@ const PlaceInfoModifyPage3 = () => {
         setFormattedPrice(formattedPrice);
     }, [seat]);
     return (
-        <div className="fontForRegister"
+        <div
             style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: '1.5rem'
             }}>
-            <header style={{ textAlign: "center" }}><h3>(2/4) 이용 안내</h3></header>
-            <div style={{ padding: '1rem', width: '100%', boxSizing: 'border-box', gap: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
+            <header style={{ textAlign: "center" }}><p>(2/4) 이용 안내</p></header>
+            <div  className="fontForRegister" style={{ padding: '1rem', width: '100%', boxSizing: 'border-box', gap: '1rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
                 <div>
                     <a>이용 정보를 입력해주세요.<span style={{ color: '#FF2929' }} >*</span></a>
-                    <hr style={{ height: "1px", backgroundColor: "black", width: '100%' }} />
+                    <hr style={{ height: "2px", backgroundColor: "black", width: '100%' }} />
                 </div>
                 <ForAllLogo />
                 <div>
@@ -311,13 +311,13 @@ const PlaceInfoModifyPage3 = () => {
                             onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} defaultValue={data.priceSet} />
                     </div>
                     <div>
-                        <h3 style={{ fontSize: '0.875rem' }} >{(seat === undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat <= 10) ? "포 올 권장가격 : ₩150,000원" : "포 올 권장가격 :" + formattedPrice + "원"}</h3 >
+                        <a style={{ fontSize: '0.875rem' }} >{(seat === undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat <= 10) ? "포 올 권장가격 : ₩150,000원" : "포 올 권장가격 :" + formattedPrice + "원"}</a >
                     </div>
                 </div>
 
                 <div>
                     <a>가능 여부<span style={{ color: '#FF2929' }} >*</span></a>
-                    <hr style={{ height: "1px", backgroundColor: "black" }} />
+                    <hr style={{ height: "2px", backgroundColor: "black" }} />
                 </div>
                 <div>
                     <a>트라이얼<span style={{ color: '#FF2929' }} >*</span></a>
@@ -445,7 +445,7 @@ const PlaceInfoModifyPage3 = () => {
                                 이용자에게 <a
                                     style={{ textDecorationLine: "underline" }}>사용할 수 있는 냉장고</a>를 비워주어 공간 확보를 부탁드립니다.
                             </p>
-                            <div class="bottom_button_fixed">
+                            <div class="bottom_button_relative">
                                 <a style={{ fontSize: "0.8rem" }} onClick={() => setIsMorningDelivery(false)}>닫기</a>
                             </div>
                         </div>
@@ -520,7 +520,7 @@ const PlaceInfoModifyPage3 = () => {
                             <p style={{ textAlign: 'left', paddingLeft: "5%", paddingRight: "5%" }}>•&ensp;팝업 레스토랑에서
                                 고객에게 식사를 제공하기 전에 사전 준비를 완벽하게 해야 하므로 필요한 준비과정입니다.
                             </p>
-                            <div class="bottom_button_fixed">
+                            <div class="bottom_button_relative">
                                 <a style={{ fontSize: "0.8rem" }} onClick={() => setIsMiseen(false)}>닫기</a>
                             </div>
                         </div>
@@ -588,7 +588,7 @@ const PlaceInfoModifyPage3 = () => {
                                 style={{ color: "red" }}>안심하세요! </a><a>팝업 레스토랑은 배너 또는 공지를 통해 공간과 무관한 영업이 진행된다는 점이 명시됩니다.
                             </a>
                             </p>
-                            <div className="bottom_button_fixed">
+                            <div className="bottom_button_relative">
                                 <a style={{ fontSize: "0.8rem" }} onClick={() => setIsWorkIn(false)}>닫기</a>
                             </div>
                         </div>
@@ -608,17 +608,64 @@ const PlaceInfoModifyPage3 = () => {
                         onClick={() => handleButton()}
                 >다음</button>
             </div>
-            <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalStyles} >
-                <p style={{ fontSize: '0.9375rem' }}>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
-                <p style={{ fontSize: '0.9375rem' }}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
-                <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem', borderTop: '1px solid #C4C4C4' }}>
-                    <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                        onClick={() => setIsModalOpen(false)}
+            <Modal isOpen={isModalOpen} ariaHideApp={false} style={SmallModalStyles}>
+                <div style={{
+                    justifyContent: "center", alignItems: "center",
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+
+                }}>
+                    <a style={{fontSize: '0.9375rem'}}>현재 필수 입력사항이 모두 기입되지 않았습니다.</a>
+                    <p style={{fontSize: '0.9375rem'}}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                </div>
+                <div style={{
+                    display: 'flex',
+                    width: '100%',
+                    margin: '0px',
+                    marginTop: '4rem',
+                    bottom: '0',
+                    position: 'fixed',
+                    fontSize: "0.9375rem",
+                    fontWeight: "400"
+                }}>
+                    <button style={{
+                        backgroundColor: "#FF4F4F",
+
+                        width: '50%',
+                        bottom: '0',
+                        height: '3.125rem',
+                        color: 'white',
+                        border: 'none',
+                        lineHeight: '1.875rem',
+                        textAlign: 'center'
+                    }}
+                            onClick={() => setIsModalOpen(false)}
                     >
-                        뒤로</button>
-                    <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                        onClick={() => submit()}
-                    >다음</button>
+                        마저 입력하기
+                    </button>
+                    <button style={{
+                        backgroundColor: "#000",
+
+                        width: '50%',
+                        bottom: '0',
+                        height: '3.125rem',
+                        color: 'white',
+                        border: 'none',
+                        lineHeight: '1.875rem',
+                        textAlign: 'center'
+                    }}
+                            onClick={() => submit()}
+                    >
+                        넘어가기
+                    </button>
                 </div>
             </Modal>
         </div>

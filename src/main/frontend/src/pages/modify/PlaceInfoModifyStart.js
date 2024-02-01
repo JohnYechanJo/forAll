@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/home/Header";
 import axios from "axios";
 import ImageInput from "../../components/ImageInput";
@@ -9,6 +9,9 @@ import { KitchenFeat } from "../../utils/enums";
 import ForAllLogo from "../../components/ForAllLogo";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 import ImageUploader from "../../utils/imageUploader";
+import iImg from "../../components/icons/i.png";
+import {SmallModalStyles} from "../../components/SmallModalStyles";
+
 const PlaceInfoModifyStart = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({});
@@ -123,7 +126,6 @@ const PlaceInfoModifyStart = () => {
   };
   return (
     <div
-      className="fontForRegister"
       style={{
         display: "flex",
         justifyContent: "space-around",
@@ -131,10 +133,10 @@ const PlaceInfoModifyStart = () => {
       }}
     >
       <ForAllLogo />
-      <header style={{ textAlign: "center" }}><h3>(1/4) 공간 정보</h3></header>
+      <header style={{ textAlign: "center" }}><p>(1/4) 공간 정보</p></header>
       <div style={{ padding: '1rem', width: '100%', boxSizing: 'border-box', gap: '1rem', display: 'flex', flexDirection: 'column' }}>
         <div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div className="fontForRegister" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
               <a>공간명을 입력해주세요.<span style={{ color: '#FF2929' }} >*</span></a>
               <hr style={{ height: "2px", backgroundColor: "black" }} />
@@ -152,14 +154,20 @@ const PlaceInfoModifyStart = () => {
                 defaultValue={data.name}
                 onChange={onInputHandler}
                 className="input"
-                maxLength="17"
+                maxLength="18"
+                style={{width: "98%"}}
               />
-              <a>❕사용 가능한 특수문자: (,),(-),(.),(@),(/)</a>
+              <div style={{marginTop: '0.5rem', justifyContent: 'left', display: 'flex'}}>
+                <img src={iImg} alt="iImg"
+                     style={{width: '1rem', height: '1rem', flexShrink: 0}}/>
+                &ensp;
+                <a style={{paddingTop: "0.05rem"}}>사용 가능한 특수문자: (,),(-),(.),(@),(/)</a>
+              </div>
             </div>
 
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
-                <a>공간 한 줄 소개<span style={{ color: '#FF2929' }} >*</span></a>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <a>공간 한 줄 소개<span style={{color: '#FF2929'}}>*</span></a>
                 <p>
                   <span>{placeIntro.length}</span>
                   <span>/18자</span>
@@ -170,7 +178,9 @@ const PlaceInfoModifyStart = () => {
                 defaultValue={data.spaceBrief}
                 onChange={onInputHandler2}
                 className="input"
-                maxLength="17"
+                maxLength="18"
+                style={{width: "98%"}}
+
               />
             </div>
 
@@ -187,10 +197,10 @@ const PlaceInfoModifyStart = () => {
                 type="text"
                 defaultValue={data.spaceIntro}
                 className="input"
-                style={{ height: "6.25rem" }}
+                style={{ height: "6.25rem", width: '98%' }}
                 onChange={onInputHandler3}
-                maxLength="299"
-                minLength="19"
+                maxLength="300"
+                minLength="20"
               />
             </div>
             <div>
@@ -267,8 +277,8 @@ const PlaceInfoModifyStart = () => {
                       name="kitchen"
                       value={KitchenFeat.Face}
                       style={{
-                        backgroundColor: kitchen === KitchenFeat.Face || clicked2 ? "black" : "white",
-                        color: kitchen === KitchenFeat.Face || clicked2 ? "white" : "black",
+                        backgroundColor: data.kitchenFeat === KitchenFeat.Face || clicked2 ? "black" : "white",
+                        color: data.kitchenFeat === KitchenFeat.Face || clicked2 ? "white" : "black",
 
                       }}
                       onClick={(event) => {
@@ -403,12 +413,12 @@ const PlaceInfoModifyStart = () => {
               </div>
             </div>
           </div>
-          <div style={{ marginTop: '1.5rem' }} >
+          <div className="fontForRegister" style={{ marginTop: '1.5rem' }} >
             <a>위치 정보<span style={{ color: '#FF2929' }} >*</span></a>
-            <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '1rem' }} />
+            <hr style={{ height: "2px", backgroundColor: "black", marginBottom: '1rem' }} />
             <a>주소(위치)<span style={{ color: '#FF2929' }} >*</span></a>
-            <div>
-              <span className="input" style={{ disabled: true }}>{fullAddress}</span>
+            <div >
+              <span className="input" style={{ disabled: true, width:'98%' }}>{fullAddress}</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }} >
               <a>
@@ -419,7 +429,7 @@ const PlaceInfoModifyStart = () => {
               </a>
             </div>
           </div>
-          <div style={{ marginTop: '1.5rem' }}>
+          <div className="fontForRegister" style={{ marginTop: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
               <a>상세 위치 정보<span style={{ color: '#FF2929' }} >*</span></a>
               <p>
@@ -431,19 +441,22 @@ const PlaceInfoModifyStart = () => {
               type="text"
               defaultValue={data.addressBrief}
               onChange={onInputHandler4}
-              maxLength="17"
+              maxLength="18"
               className="input"
+              style={{width: "98%"}}
             />
             <a>• 작성하신 위치정보는 검색에 영향을 미치지 않습니다.</a>
 
           </div>
-          <div style={{ marginTop: '1.5rem' }}>
+          <div className="fontForRegister" style={{ marginTop: '1.5rem' }}>
             <a>웹사이트<span style={{ color: '#FF2929' }} >*</span></a>
             <input
               type="text"
               value={webSite}
               onChange={(e) => setWebSite(e.target.value)}
               className="input"
+              style={{width: "98%"}}
+
             />
             <div style={{ display: 'flex', flexDirection: 'column' }} >
               <a>
@@ -455,7 +468,7 @@ const PlaceInfoModifyStart = () => {
             </div>
           </div>
           <div style={{ marginTop: '1.5rem' }}>
-            <div style={{ display: 'flex', flexDirection: 'column' }} >
+            <div className="fontForRegister" style={{ display: 'flex', flexDirection: 'column' }} >
               <a>
                 <span>대표 이미지<span style={{ color: '#FF2929' }} >*</span></span>
               </a>
@@ -489,6 +502,25 @@ const PlaceInfoModifyStart = () => {
             <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
               onClick={() => submit()}
             >다음</button>
+          </div>
+        </Modal>
+        <Modal isOpen={pending} ariaHideApp={false} style={SmallModalStyles}>
+          <div style={{
+            justifyContent: "center", alignItems: "center",
+            fontFamily: "Noto Sans KR",
+            color: " #000",
+            fontSize: "1.25rem",
+            fontStyle: "normal",
+            fontWeight: "400",
+            lineHeight: "normal",
+
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+
+          }}>
+            <a style={{fontSize: '0.9375rem'}}>현재 입력사항을 업로드 중입니다.</a>
+            <p style={{fontSize: '0.9375rem'}}>잠시만 기다려주세요.</p>
           </div>
         </Modal>
       </div>

@@ -4,9 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import project.forAll.domain.BassDomain;
 import project.forAll.domain.Image;
-import project.forAll.domain.member.Member;
-import project.forAll.domain.reservation.ReservationState;
-import project.forAll.domain.space.Space;
 
 import javax.persistence.*;
 import java.util.List;

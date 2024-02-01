@@ -9,6 +9,8 @@ import project.forAll.controller.SessionManager;
 import project.forAll.controller.api.APIController;
 import project.forAll.domain.alarm.Alarm;
 import project.forAll.domain.alarm.AlarmCategory;
+import project.forAll.domain.chat.ChatRoom;
+import project.forAll.domain.chat.ChatRoomCategory;
 import project.forAll.domain.member.ChefPending;
 import project.forAll.domain.member.Member;
 import project.forAll.domain.reservation.Reservation;
@@ -18,9 +20,12 @@ import project.forAll.domain.space.SpacePending;
 import project.forAll.dto.admin.*;
 import project.forAll.form.AlarmForm;
 import project.forAll.form.ArticleForm;
+import project.forAll.form.ChatRoomForm;
+import project.forAll.repository.chat.ChatRoomRepository;
 import project.forAll.repository.reservation.ReservationRepository;
 import project.forAll.repository.member.MemberRepository;
 import project.forAll.repository.space.SpaceRepository;
+import project.forAll.service.Chat.ChatRoomService;
 import project.forAll.service.MemberService;
 import project.forAll.service.ReservationService;
 import project.forAll.service.SpaceService;
@@ -43,9 +48,12 @@ public class APIAdminController extends APIController {
     private final SpaceService spaceService;
     private final ReservationService reservationService;
     private final ReservationRepository reservationRepository;
+    private final ChatRoomService chatRoomService;
+    private final ChatRoomRepository chatRoomRepository;
     // 알림 기능 때문에 추가
     private final AlarmService alarmService;
     private final ZoneTime zoneTime;
+
 
     @GetMapping("/admin/reservation/{id}")
     public ResponseEntity getReservation(@PathVariable Long id){
@@ -79,6 +87,17 @@ public class APIAdminController extends APIController {
             return new ResponseEntity(reservations.stream().map(reservation -> AdminReservationDTO.build(reservation)).toList(), HttpStatus.OK);
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Could not get reservation list : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("/admin/chatList")
+    public ResponseEntity getChatRoomList(){
+        try{
+            List<ChatRoom> chatRoomList = chatRoomRepository.findByCategory(ChatRoomCategory.ServiceCenter);
+            List<ChatRoomForm> chatRoomForms = chatRoomList.stream().map(chatRoom -> chatRoomService.service(chatRoom, "Service Center")).toList();
+
+            return new ResponseEntity(chatRoomForms, HttpStatus.OK);
+        }catch (final Exception e){
+            return new ResponseEntity(errorResponse("Could not get chat Room list : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
     @PostMapping("/admin/space")

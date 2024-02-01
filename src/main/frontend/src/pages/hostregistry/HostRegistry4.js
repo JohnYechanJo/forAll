@@ -1,7 +1,7 @@
 import DropDown from "../../components/DropDown";
 import ImageInputs from "../../components/ImageInputs";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Modal from "react-modal";
 import { ModalStyles } from "../../components/ModalStyles";
 import ForAllLogo from "../../components/ForAllLogo";
@@ -89,9 +89,11 @@ const HostRegistry4 = () => {
         if (dishWasher) equip.push("식기세척기");
         if (iceMaker) equip.push("제빙기");
         data.isPublic = data.isPublic && isPublic;
-        const plateImage = await Promise.all(sidePlate.map(async (img) => await ImageUploader(img, userId)));
-        const cupImage = await Promise.all(cup.map(async (img) => await ImageUploader(img, userId)));
-        const cutleryImage = await Promise.all(cuttrary.map(async (img) => await ImageUploader(img, userId)));
+        const [plateImage, cupImage, cutleryImage] = await Promise.all([
+            Promise.all(sidePlate.map(async (img) => await ImageUploader(img, userId))),
+            Promise.all(cup.map(async (img) => await ImageUploader(img, userId))),
+            Promise.all(cuttrary.map(async (img) => await ImageUploader(img, userId)))
+        ]);
         navigate("/hostRegistry5", {
             state: {
                 ...data,
@@ -113,7 +115,7 @@ const HostRegistry4 = () => {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ForAllLogo />
             {console.log(data)}
-            <p style={{ textAlign: 'center', fontSize: '0.9375rem' }}>(2/4) 이용 안내</p>
+            <p style={{ textAlign: 'center'}}>(2/4) 이용 안내</p>
             <div style={{
                 display: "flex",
                 flexDirection: "column",
@@ -160,7 +162,7 @@ const HostRegistry4 = () => {
 
                 <div style={{ width: '100%' }}>
                     <a>추가 사용 가능 기계<span style={{ color: "#FF2929" }} >*</span></a>
-                    <textarea onChange={onChangeExtraMachine} placeholder={"사용할 수 있는 기계를 입력해주세요. ex) 수비드 기계"} className="input" style={{ height: '6.25rem' }} />
+                    <textarea onChange={onChangeExtraMachine} placeholder={"사용할 수 있는 기계를 입력해주세요. ex) 수비드 기계"} className="input" style={{ height: '6.25rem' , width: '98%'}} />
                 </div>
                 <div style={{ width: '100%' }} >
                     <a>매장 물품<span style={{ color: "#FF2929" }} >*</span></a>
@@ -189,7 +191,7 @@ const HostRegistry4 = () => {
                     </div>
                 </div>
             </div>
-            <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem' }}>
+            <div style={{ display: 'flex', width: '101%', margin: '0px', marginTop: '4rem' }}>
                 <button style={{ marginLeft: 'auto', backgroundColor: "#FF4F4F", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
                     onClick={() => navigate(-1, data)}
                 >
@@ -256,6 +258,25 @@ const HostRegistry4 = () => {
                     >
                         넘어가기
                     </button>
+                </div>
+            </Modal>
+            <Modal isOpen={pending} ariaHideApp={false} style={SmallModalStyles}>
+                <div style={{
+                    justifyContent: "center", alignItems: "center",
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+
+                }}>
+                    <a style={{fontSize: '0.9375rem'}}>현재 입력사항을 업로드 중입니다.</a>
+                    <p style={{fontSize: '0.9375rem'}}>잠시만 기다려주세요.</p>
                 </div>
             </Modal>
         </div>

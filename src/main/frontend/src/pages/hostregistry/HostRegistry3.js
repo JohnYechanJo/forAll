@@ -149,21 +149,19 @@ const HostRegistry3 = () => {
     }, [seat]);
     return (
         <div
-            className="fontForRegister"
             style={{
                 display: "flex",
                 justifyContent: "space-around",
-                flexDirection: "column",
-                gap: "1.5rem"
+                flexDirection: "column"
             }}>
-            <header style={{ textAlign: "center" }}><h3>(2/4) 이용 안내</h3></header>
-            <div style={{ padding: '1rem', width: '100%', boxSizing: 'border-box', gap: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }} >
-                <div>
+            <header style={{ textAlign: "center" }}><p>(2/4) 이용 안내</p></header>
+            <div style={{ padding: '1rem', width: '100%', boxSizing: 'border-box', gap: '1rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }} >
+                <div className="fontForRegister" style={{ marginBottom:"-1rem" }}>
                     <a>이용 정보를 입력해주세요.<span style={{ color: '#FF2929' }} >*</span></a>
                     <hr style={{ height: "2px", backgroundColor: "black", width: '100%' }} />
                 </div>
                 <ForAllLogo />
-                <div >
+                <div className="fontForRegister">
                     {console.log(rentWeek)}
                     {console.log(rentDays)}
                     <a>대관 가능일<span style={{ color: '#FF2929' }} >*</span></a>
@@ -182,7 +180,7 @@ const HostRegistry3 = () => {
                             : null)}
                 </div>
 
-                <div>
+                <div className="fontForRegister">
                     <a>입•퇴실 시간<span style={{color: '#FF2929'}}>*</span></a>
 
                     <div style={{
@@ -200,7 +198,7 @@ const HostRegistry3 = () => {
                         <span> 까지</span>
                     </div>
                 </div>
-                <div>
+                <div className="fontForRegister">
                     <a>주차 여부<span style={{color: '#FF2929'}}>*</span></a>
                     <DropDown dataArr={parkAvaliableData} onChange={setParkAvaliable} placeholder={"주차 여부를 선택"}
                               defaultData={'주차불가'} width='100%'/>
@@ -216,7 +214,7 @@ const HostRegistry3 = () => {
                         </div>
                     ) : null}
                 </div>
-                <div style={{ justifyContent: 'left' }}>
+                <div className="fontForRegister" style={{ justifyContent: 'left' }}>
                     <a>엘리베이터 여부<span style={{ color: '#FF2929' }} >*</span></a>
                     <div style={{
                         display: "flex",
@@ -253,28 +251,28 @@ const HostRegistry3 = () => {
 
 
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column' }} >
+                <div className="fontForRegister" style={{ display: 'flex', flexDirection: 'column' }} >
                     <a>테이블<span style={{ color: '#FF2929' }} >*</span></a>
                     <input className="input fontForRegister" onChange={onChangeTable} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "99%", float: "left" }}
                         placeholder={"최대 테이블 수를 기준으로 입력해주세요"} />
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div className="fontForRegister" style={{ display: 'flex', flexDirection: 'column' }}>
                     <a>좌석 수<span style={{ color: '#FF2929' }} >*</span></a>
                     <input className="input fontForRegister" onChange={onChangeSeat} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "99%", float: "left" }}
                         placeholder={"최대 좌석수를 기준으로 입력해주세요"} />
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div className="fontForRegister" style={{ display: 'flex', flexDirection: 'column' }}>
                     <a>가격 설정<span style={{ color: '#FF2929' }} >*</span></a>
                     <input className="input fontForRegister" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "99%", float: "left" }}
                         onChange={onChangePrice} placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"} />
-                    <h3 style={{ fontSize: '0.875rem' }} >{(seat === undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat <= 10) ? "포 올 권장가격 : ₩150,000원" : "포 올 권장가격 :" + formattedPrice + "원"}</h3>
+                    <a style={{ fontSize: '0.875rem' }} >{(seat === undefined || seat === "") ? "포 올 권장가격 : ₩" : (seat <= 10) ? "포 올 권장가격 : ₩150,000원" : "포 올 권장가격 :" + formattedPrice + "원"}</a>
                 </div>
-                <div>
+                <div className="fontForRegister">
                     <a>가능 여부<span style={{ color: '#FF2929' }} >*</span></a>
                     <hr style={{ height: "2px", backgroundColor: "black" }} />
                 </div>
 
-                <div>
+                <div className="fontForRegister">
                     <a>트라이얼<span style={{ color: '#FF2929' }} >*</span></a>
                     <div style={{
                         display: "flex",
@@ -345,7 +343,7 @@ const HostRegistry3 = () => {
                 </div>
 
 
-                <div>
+                <div className="fontForRegister">
                     <a>재료 새벽 배달<span style={{ color: '#FF2929' }} >*</span></a>
                     <div style={{
                         display: "flex",
@@ -403,7 +401,7 @@ const HostRegistry3 = () => {
                                 이용자에게 <a
                                     style={{ textDecorationLine: "underline" }}>사용할 수 있는 냉장고</a>를 비워주어 공간 확보를 부탁드립니다.
                             </p>
-                            <div class="bottom_button_fixed">
+                            <div class="bottom_button_relative">
                                 <a style={{ fontSize: "0.8rem" }} onClick={() => setIsMorningDelivery(false)}>닫기</a>
                             </div>
                         </div>
@@ -414,7 +412,7 @@ const HostRegistry3 = () => {
                     </button>
                 </div>
 
-                <div>
+                <div className="fontForRegister">
                     <a>미장<span style={{ color: '#FF2929' }} >*</span></a>
                     <div style={{
                         display: "flex",
@@ -478,7 +476,7 @@ const HostRegistry3 = () => {
                             <p style={{ textAlign: 'left', paddingLeft: "5%", paddingRight: "5%" }}>•&ensp;팝업 레스토랑에서
                                 고객에게 식사를 제공하기 전에 사전 준비를 완벽하게 해야 하므로 필요한 준비과정입니다.
                             </p>
-                            <div class="bottom_button_fixed">
+                            <div class="bottom_button_relative">
                                 <a style={{ fontSize: "0.8rem" }} onClick={() => setIsMiseen(false)}>닫기</a>
                             </div>
                         </div>
@@ -489,7 +487,7 @@ const HostRegistry3 = () => {
                     </button>
                 </div>
 
-                <div>
+                <div className="fontForRegister">
                     <a>워크인<span style={{ color: '#FF2929' }} >*</span></a>
                     <div style={{
                         display: "flex",
@@ -546,7 +544,7 @@ const HostRegistry3 = () => {
                                 style={{ color: "red" }}>안심하세요! </a><a>팝업 레스토랑은 배너 또는 공지를 통해 공간과 무관한 영업이 진행된다는 점이 명시됩니다.
                                 </a>
                             </p>
-                            <div className="bottom_button_fixed">
+                            <div className="bottom_button_relative">
                                 <a style={{ fontSize: "0.8rem" }} onClick={() => setIsWorkIn(false)}>닫기</a>
                             </div>
                         </div>

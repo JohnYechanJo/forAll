@@ -2,10 +2,7 @@ package project.forAll.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import project.forAll.domain.Image;
 
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
 import java.util.List;
 
 @Getter @Setter

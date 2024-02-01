@@ -1,13 +1,14 @@
 import DropDown from "../../components/DropDown";
 import ImageInputs from "../../components/ImageInputs";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Modal from "react-modal";
 import axios from "axios";
 import "../../components/Styles.css";
 import ForAllLogo from "../../components/ForAllLogo";
 import { ModalStyles } from "../../components/ModalStyles";
 import ImageUploader from "../../utils/imageUploader";
+import {SmallModalStyles} from "../../components/SmallModalStyles";
 const PlaceInfoModifyPage4 = () => {
     const location = useLocation();
     const data = { ...location.state };
@@ -97,10 +98,11 @@ const PlaceInfoModifyPage4 = () => {
         data.isPublic = data.isPublic && isPublic;
         const userId = sessionStorage.getItem("user_id");
 
-        const plateImage = sidePlate ? await Promise.all(sidePlate.map(async (img) => await ImageUploader(img, userId))) : null;
-        const cupImage = cup ? await Promise.all(cup.map(async (img) => await ImageUploader(img, userId))) : null;
-        const cutleryImage = cuttrary ? await Promise.all(cuttrary.map(async (img) => await ImageUploader(img, userId))) : null;
-        console.log(cupImage);
+        const [plateImage, cupImage, cutleryImage] = await Promise.all([
+            Promise.all(sidePlate.map(async (img) => await ImageUploader(img, userId))),
+            Promise.all(cup.map(async (img) => await ImageUploader(img, userId))),
+            Promise.all(cuttrary.map(async (img) => await ImageUploader(img, userId)))
+        ]);
         navigate("/placeInfoModify5", {
             state: {
                 ...data,
@@ -121,7 +123,7 @@ const PlaceInfoModifyPage4 = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ForAllLogo />
-            <p style={{ textAlign: 'center', fontSize: '0.9375rem' }}>(2/4) 이용 안내</p>
+            <p style={{ textAlign: 'center'}}>(2/4) 이용 안내</p>
             <div style={{
                 display: "flex",
                 flexDirection: "column",
@@ -161,7 +163,7 @@ const PlaceInfoModifyPage4 = () => {
                 {/* 이미지 보여주는 건 다시 건드려야 함 */}
                 <div style={{ width: '100%' }}>
                     <a>추가 사용 가능 기계<span style={{ color: "#FF2929" }} >*</span></a>
-                    <textarea className="input" onChange={onChangeExtraMachine} placeholder={"사용 가능한 기계를 입력해주세요. ex) 수비드 기계"} defaultValue={data.equipExtra} style={{ height: '6.25rem' }} />
+                    <textarea className="input" onChange={onChangeExtraMachine} placeholder={"사용 가능한 기계를 입력해주세요. ex) 수비드 기계"} defaultValue={data.equipExtra} style={{ height: '6.25rem', width: '98%' }} />
                 </div>
                 <div style={{ width: '100%' }} >
                     <a>매장 물품<span style={{ color: "#FF2929" }} >*</span></a>
@@ -199,17 +201,83 @@ const PlaceInfoModifyPage4 = () => {
                     onClick={() => handleButton()}
                 >다음</button>
             </div>
-            <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalStyles} >
-                <p style={{ fontSize: '0.9375rem' }}>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
-                <p style={{ fontSize: '0.9375rem' }}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
-                <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem', borderTop: '1px solid #C4C4C4' }}>
-                    <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                        onClick={() => setIsModalOpen(false)}
+            <Modal isOpen={isModalOpen} ariaHideApp={false} style={SmallModalStyles}>
+                <div style={{
+                    justifyContent: "center", alignItems: "center",
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+
+                }}>
+                    <a style={{fontSize: '0.9375rem'}}>현재 필수 입력사항이 모두 기입되지 않았습니다.</a>
+                    <p style={{fontSize: '0.9375rem'}}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                </div>
+                <div style={{
+                    display: 'flex',
+                    width: '100%',
+                    margin: '0px',
+                    marginTop: '4rem',
+                    bottom: '0',
+                    position: 'fixed',
+                    fontSize: "0.9375rem",
+                    fontWeight: "400"
+                }}>
+                    <button style={{
+                        backgroundColor: "#FF4F4F",
+
+                        width: '50%',
+                        bottom: '0',
+                        height: '3.125rem',
+                        color: 'white',
+                        border: 'none',
+                        lineHeight: '1.875rem',
+                        textAlign: 'center'
+                    }}
+                            onClick={() => setIsModalOpen(false)}
                     >
-                        뒤로</button>
-                    <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
-                        onClick={() => submit()}
-                    >다음</button>
+                        마저 입력하기
+                    </button>
+                    <button style={{
+                        backgroundColor: "#000",
+
+                        width: '50%',
+                        bottom: '0',
+                        height: '3.125rem',
+                        color: 'white',
+                        border: 'none',
+                        lineHeight: '1.875rem',
+                        textAlign: 'center'
+                    }}
+                            onClick={() => submit()}
+                    >
+                        넘어가기
+                    </button>
+                </div>
+            </Modal>
+            <Modal isOpen={pending} ariaHideApp={false} style={SmallModalStyles}>
+                <div style={{
+                    justifyContent: "center", alignItems: "center",
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+
+                }}>
+                    <a style={{fontSize: '0.9375rem'}}>현재 입력사항을 업로드 중입니다.</a>
+                    <p style={{fontSize: '0.9375rem'}}>잠시만 기다려주세요.</p>
                 </div>
             </Modal>
         </div>

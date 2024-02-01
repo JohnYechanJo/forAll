@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import project.forAll.domain.BassDomain;
 import project.forAll.domain.Image;
-import project.forAll.domain.space.Place;
 
 import javax.persistence.*;
 import java.util.ArrayList;

@@ -4,11 +4,9 @@ import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 import  './Banner.css'
 import {useEffect} from "react";
-import {AddressUtil} from "../utils/AddressUtil"; // 나중에 Styles.css로 합쳐도 무방
+import {AddressUtil} from "../utils/AddressUtil";
+import {GetImageUri} from "../utils/GetImage"; // 나중에 Styles.css로 합쳐도 무방
 const Banner = ({dataSet, navigate}) => {
-    // 왜인지는 모르겠는데 얘만 process 접근이 안됨
-    // const SpringAppUrl = process.env.SPRING_APP_URL;
-    const spring_app_url = "http://localhost:8080";
     SwiperCore.use([Autoplay]);
 
     const handleClick = (data) => {
@@ -20,7 +18,7 @@ const Banner = ({dataSet, navigate}) => {
                 spaceBetween={50}
                 slidesPerView={2}
                 autoplay={{delay: 0, disableOnInteraction: false}}
-                speed={2000} // 넘어가는 속도
+                speed={1000} // 넘어가는 속도
                 loop={true}
             >
                 {dataSet ? dataSet.map((data, idx) => {
@@ -31,7 +29,7 @@ const Banner = ({dataSet, navigate}) => {
                             }}>
                                 <img
                                     style={{objectFit:"cover", objectPosition:"center", width:"100%", height:"100%", display:"block"}}
-                                    src={spring_app_url + "/api/v1/image/"+data.mainImage}
+                                    src={GetImageUri(data.mainImage)}
                                     alt={"image"}
                                 />
                             </div>

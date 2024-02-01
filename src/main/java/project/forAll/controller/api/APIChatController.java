@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import project.forAll.controller.SessionManager;
 import project.forAll.domain.alarm.Alarm;
 import project.forAll.domain.chat.ChatRoom;
+import project.forAll.domain.chat.ChatRoomCategory;
 import project.forAll.domain.chat.Message;
 import project.forAll.dto.ChatDto;
 import project.forAll.form.ChatRoomForm;
 import project.forAll.form.MessageForm;
+import project.forAll.repository.chat.ChatRoomRepository;
+import project.forAll.repository.member.ChefProfileRepository;
 import project.forAll.service.Chat.ChatRoomService;
 import project.forAll.service.Chat.MessageService;
 import project.forAll.service.MemberService;
@@ -31,6 +34,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class APIChatController extends APIController{
     private final ChatRoomService chatRoomService;
+    private final ChatRoomRepository chatRoomRepository;
     private final MessageService messageService;
     private final SimpMessagingTemplate messagingTemplate;
     private final SessionManager sessionManager;
@@ -90,6 +94,15 @@ public class APIChatController extends APIController{
             return new ResponseEntity(chatRoomService.of(chatRoom, null), HttpStatus.OK);
         }catch (final Exception e){
             return new ResponseEntity(errorResponse("Could not join Chat Room : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("/chat/join/service/{userId}")
+    public ResponseEntity joinServiceChatRoom(@PathVariable String userId){
+        try{
+            final ChatRoom chatRoom = chatRoomService.getServiceCenterChatRoom(userId);
+            return new ResponseEntity(chatRoomService.service(chatRoom, null), HttpStatus.OK);
+        }catch (final Exception e){
+            return new ResponseEntity(errorResponse("Could not join ServiceCenter Chat Room : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 

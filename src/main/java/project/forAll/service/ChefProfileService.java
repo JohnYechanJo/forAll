@@ -7,13 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import project.forAll.domain.Image;
 import project.forAll.domain.member.ChefProfile;
 import project.forAll.domain.member.Member;
-import project.forAll.domain.member.Profile;
 import project.forAll.dto.ChefProfilePublicDTO;
-import project.forAll.dto.ProfilePublicDTO;
 import project.forAll.form.ChefProfileForm;
-import project.forAll.form.ProfileForm;
 import project.forAll.repository.member.ChefProfileRepository;
-import project.forAll.repository.member.ProfileRepository;
 
 import java.util.List;
 

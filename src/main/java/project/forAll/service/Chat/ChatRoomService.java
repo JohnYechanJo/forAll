@@ -46,6 +46,18 @@ public class ChatRoomService extends Service {
             return newRoom;
         }else return chatRoom.get(0);
     }
+    public ChatRoom getServiceCenterChatRoom(String userId){
+        List<ChatRoom> chatRooms = chatRoomRepository.findByUsersLoginIdAndCategory(userId, ChatRoomCategory.ServiceCenter);
+        if (chatRooms.isEmpty()){
+            final ChatRoom newRoom = new ChatRoom();
+            List<Member> users = new ArrayList<>();
+            users.add(memberService.findByLoginId(userId));
+            newRoom.setUsers(users);
+            newRoom.setCategory(ChatRoomCategory.ServiceCenter);
+            save(newRoom);
+            return newRoom;
+        }else return chatRooms.get(0);
+    }
     public List<ChatRoom> getCategorizedChatRoom(String userId, String category){
         return chatRoomRepository.findByUsersLoginIdAndCategory(userId, ChatRoomCategory.parse(category));
     }
@@ -63,8 +75,26 @@ public class ChatRoomService extends Service {
     public ChatRoomForm of(final ChatRoom chatRoom, final String userId){
         final ChatRoomForm form = new ChatRoomForm();
         form.setId(chatRoom.getId());
-        form.setUserId1(chatRoom.getUsers().get(0).getLoginId());
-        form.setUserId2(chatRoom.getUsers().get(1).getLoginId());
+        if (!chatRoom.getUsers().isEmpty()){
+            form.setUserId1(chatRoom.getUsers().get(0).getLoginId());
+            form.setUserId2(chatRoom.getUsers().get(1).getLoginId());
+        }
+        form.setCategory(chatRoom.getCategory().toString());
+        List<Message> messages = messageRepository.findByChatRoom(chatRoom);
+        if (!messages.isEmpty()){
+            Message lastMessage = messages.get(messages.size()-1);
+            form.setLastMessage(lastMessage.isImage() ? "사진" : lastMessage.getMessageContent());
+            form.setSendTime(lastMessage.getSendTime());
+            if (userId != null) form.setNotReadCount(messages.stream().filter(message -> !message.isReadFlag() && message.getTargetId().equals(userId)).count());
+        }
+        return form;
+    }
+
+    public ChatRoomForm service(final ChatRoom chatRoom, final String userId){
+        final ChatRoomForm form = new ChatRoomForm();
+        form.setId(chatRoom.getId());
+        if (!chatRoom.getUsers().isEmpty()) form.setUserId1(chatRoom.getUsers().get(0).getLoginId());
+        form.setUserId2("Service Center");
         form.setCategory(chatRoom.getCategory().toString());
         List<Message> messages = messageRepository.findByChatRoom(chatRoom);
         if (!messages.isEmpty()){
