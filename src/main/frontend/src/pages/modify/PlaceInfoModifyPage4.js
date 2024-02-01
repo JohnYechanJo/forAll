@@ -98,10 +98,11 @@ const PlaceInfoModifyPage4 = () => {
         data.isPublic = data.isPublic && isPublic;
         const userId = sessionStorage.getItem("user_id");
 
-        const plateImage = sidePlate ? await Promise.all(sidePlate.map(async (img) => await ImageUploader(img, userId))) : null;
-        const cupImage = cup ? await Promise.all(cup.map(async (img) => await ImageUploader(img, userId))) : null;
-        const cutleryImage = cuttrary ? await Promise.all(cuttrary.map(async (img) => await ImageUploader(img, userId))) : null;
-        console.log(cupImage);
+        const [plateImage, cupImage, cutleryImage] = await Promise.all([
+            Promise.all(sidePlate.map(async (img) => await ImageUploader(img, userId))),
+            Promise.all(cup.map(async (img) => await ImageUploader(img, userId))),
+            Promise.all(cuttrary.map(async (img) => await ImageUploader(img, userId)))
+        ]);
         navigate("/placeInfoModify5", {
             state: {
                 ...data,

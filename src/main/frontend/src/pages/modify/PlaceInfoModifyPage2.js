@@ -51,9 +51,13 @@ const PlaceInfoModify2 = () => {
         setPending(true);
         data.isPublic = data.isPublic && isPublic;
         const userId = sessionStorage.getItem("user_id");
-        const hallImage = await Promise.all([img1, img2, img3, ...imgAdditional].map(async (img) => await ImageUploader(img, userId)).filter((i)=>i));
-        const kitImage = await Promise.all([kitchen1, kitchen2, kitchen3, ...kitchenAdditional].map(async (img) => await ImageUploader(img, userId)).filter((i)=>i));
-        const menu = menuAdditional ? await Promise.all([menu1, ...menuAdditional].map(async (img) => await ImageUploader(img, userId)).filter((i)=>i)) : null;
+        const [hallImage, kitImage, menu] = await Promise.all(
+            [
+                Promise.all([img1, img2, img3, ...imgAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId))),
+                Promise.all([kitchen1, kitchen2, kitchen3, ...kitchenAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId))),
+                Promise.all([menu1, ...menuAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId)))
+            ]
+        )
         navigate("/placeInfoModify3", {
             state: {
                 ...data,

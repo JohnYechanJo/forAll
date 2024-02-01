@@ -38,6 +38,7 @@ const HostRegistry = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [modalOpen1, setModalOpen1] = useState(false);
+    const [pending, setPending] = useState(false);
     const navigate = useNavigate();
     let isPublic = false;
     const modalClose1 = () => {
@@ -78,6 +79,8 @@ const HostRegistry = () => {
         }
     };
     const submit = async () => {
+        if (pending) return;
+        setPending(true);
         const userId = sessionStorage.getItem("user_id");
         const img = await ImageUploader(imgRepresent, userId);
         navigate("/hostRegistry2", {

@@ -89,9 +89,11 @@ const HostRegistry4 = () => {
         if (dishWasher) equip.push("식기세척기");
         if (iceMaker) equip.push("제빙기");
         data.isPublic = data.isPublic && isPublic;
-        const plateImage = await Promise.all(sidePlate.map(async (img) => await ImageUploader(img, userId)));
-        const cupImage = await Promise.all(cup.map(async (img) => await ImageUploader(img, userId)));
-        const cutleryImage = await Promise.all(cuttrary.map(async (img) => await ImageUploader(img, userId)));
+        const [plateImage, cupImage, cutleryImage] = await Promise.all([
+            Promise.all(sidePlate.map(async (img) => await ImageUploader(img, userId))),
+            Promise.all(cup.map(async (img) => await ImageUploader(img, userId))),
+            Promise.all(cuttrary.map(async (img) => await ImageUploader(img, userId)))
+        ]);
         navigate("/hostRegistry5", {
             state: {
                 ...data,

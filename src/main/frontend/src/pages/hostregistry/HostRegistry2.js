@@ -52,9 +52,13 @@ const HostRegistry2 = () => {
         setPending(true);
         const userId = sessionStorage.getItem("user_id");
         data.isPublic = data.isPublic && isPublic;
-        const hallImage = await Promise.all([img1, img2, img3, ...imgAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const kitImage = await Promise.all([kitchen1, kitchen2, kitchen3, ...kitchenAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
-        const menu = await Promise.all([menu1, ...menuAdditional].filter((img) => typeof (img) === 'object').map(async (img) => await ImageUploader(img, userId)));
+        const [hallImage, kitImage, menu] = await Promise.all(
+            [
+                Promise.all([img1, img2, img3, ...imgAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId))),
+                Promise.all([kitchen1, kitchen2, kitchen3, ...kitchenAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId))),
+                Promise.all([menu1, ...menuAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId)))
+            ]
+        )
         navigate("/hostRegistry3", {
             state: {
                 ...data,
