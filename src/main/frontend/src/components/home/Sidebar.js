@@ -18,6 +18,7 @@ const Sidebar = ({ width = 18.75, children }) => {
     const navigate = useNavigate();
     const [profileImage, setProfileImage] = useState("");
     const id = sessionStorage.getItem("user_id");
+
     // button 클릭 시 토글
     const toggleMenu = () => {
         if (xPosition < 0) {
@@ -68,12 +69,16 @@ const Sidebar = ({ width = 18.75, children }) => {
     const handleChefModify = () => {
         if (id === null) navigate("/login");
         else if ([ChefState.PENDING, ChefState.APPROVE].includes(userData.chefPending)) navigate("/chefInfoModify");
-        //셰프 등록을 먼저 하라는 내용 띄우기
+        else {
+            navigate("/chefRegistryFirst");
+        }
     }
     const handleSpaceModify = () => {
         if (id === null) navigate("/login");
         else if ([SpaceState.PENDING, SpaceState.APPROVE].includes(userData.spacePending)) navigate("/placeInfoModify");
-        //공간 등록을 먼저 하라는 내용 띄우기
+        else {
+            navigate("/hostRegistryFirst");
+        }
     }
     const handleServiceCenter = () => {
         if (id === null) navigate("/login");
