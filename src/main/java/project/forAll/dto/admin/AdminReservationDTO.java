@@ -7,6 +7,7 @@ import project.forAll.domain.space.Space;
 
 @Getter @Setter
 public class AdminReservationDTO {
+    private Long id; // 아이디
     private String image; // 사진
     private String address; // 주소
     private String name; // 이름
@@ -21,6 +22,7 @@ public class AdminReservationDTO {
 
     public static AdminReservationDTO build(Reservation reservation){
         final AdminReservationDTO dto = new AdminReservationDTO();
+        dto.setId(reservation.getId());
         dto.setImage(reservation.getSpace().getPlace().getMainImage().getImageName());
         dto.setAddress(reservation.getSpace().getPlace().getAddress());
         dto.setName(reservation.getSpace().getPlace().getName());
