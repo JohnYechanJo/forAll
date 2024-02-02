@@ -224,7 +224,7 @@ const PostViewPage = ({postList}) => {
                                 <div style={{
                                     display: 'flex', flexDirection: 'column', justifyContent: 'center',
                                     alignItems: 'flex-start', margin: 0, width: '100%',
-                                    height: '4.25rem', flexShrink: 0, border: '1px solid rgba(196, 196, 196, 0.20)',
+                                    flexShrink: 0, border: '1px solid rgba(196, 196, 196, 0.20)',
                                     background: '#FFF'
                                 }}>
                                     <p style={{
@@ -289,18 +289,18 @@ const PostViewPage = ({postList}) => {
                                             border: '1px solid rgba(196, 196, 196, 0.20)'}}>
                                             <div style={{
                                                 display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                                                alignItems: 'flex-start', marginLeft: '2rem'
+                                                alignItems: 'flex-start', marginLeft: '2rem', wordBreak:"break-all"
                                             }}>
                                                 <p style={{
                                                     fontSize: '0.75rem', fontStyle: 'normal', fontWeight: '400',
                                                     lineHeight: 'normal', letterSpacing: '-0.01031rem',
                                                     margin: '0.31rem 0 0 0', color: '#0788FF'
                                                 }}>{recomment.userId}{recomment.userId === data.userId ? (<span style={{color: "#FF2929"}}> 작성자</span>) : null}</p>
-                                                <p style={{
+                                                <a style={{
                                                     fontSize: '0.75rem', fontStyle: 'normal',
                                                     fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                                    margin: 0
-                                                }}>{recomment.text}</p>
+                                                    margin: 0, marginRight:"1rem"
+                                                }}>{recomment.text}</a>
                                                 <div style={{
                                                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                                                     fontSize: '0.75rem', fontStyle: 'normal', fontWeight: '400',
