@@ -27,7 +27,7 @@ const ReservationListPage = () => {
             id: id,
             reason: postContent,
             cancelTime: TimeUtil.now()
-        }).then(()=>redirect("/reservationList"));
+        }).then(()=>navigate(0));
     };
     const handleAssurance = (data) => {
         console.log(data);
