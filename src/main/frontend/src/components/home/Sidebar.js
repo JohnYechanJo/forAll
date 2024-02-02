@@ -143,7 +143,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                         display: "flex", flexDirection: "column", justifyContent: "space-evenly", 
                     }}>
                         <button className="button" onClick={handleReservationList} style={{ textAlign: "left", marginLeft: "2rem" }}>예약 정보</button>
-                        <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }}>찜한내역</button>
+                        <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }}>찜한 내역</button>
                     </div>
                     <div style={{
                         height: "6.25rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",

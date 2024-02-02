@@ -70,13 +70,23 @@ const ChefRegistry = () => {
                 </div>
                 <div>
                     <a>최근 경력을 최소 1개 입력해주세요.</a>
+                    <div style={{display:'flex'}} >
                     <input type="text" placeholder="안심하세요! 언제든지 프로필을 수정할 수 있어요."
-                        style={{ width: "90vw" }}
+                        style={{ width: "80%" }}
                         className="input"
+                        value={inputText}
                         onKeyDown={(e) => { activeEnter(e) }}
                         onChange={(e) => {
                             setInputText(e.target.value);
-                        }} />
+                        }}
+                        />
+                    <button style={{height:'1.875rem',width:'3.4375rem',backgroundColor:'black',color:'white',borderRadius:'0.375rem',marginLeft:'0.31rem'}} onClick={()=>{
+                        const temp = [...career];
+                        setCareer(temp.concat(inputText));
+                        setInputText("");
+                        
+                    }} className="buttonForRegister" >입력하기</button>
+                    </div>
                     <div>
                         {career.map((item, index) => (
                             <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -103,7 +113,7 @@ const ChefRegistry = () => {
                                         right: '0%',
                                         bottom: "15%",
                                         border: 'none',
-                                        backgroundColor: 'white',
+                                        backgroundColor: 'transparent',
                                     }}
                                     onClick={() => {
                                         const newCareer = [...career];
