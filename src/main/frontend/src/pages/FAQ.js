@@ -15,7 +15,9 @@ import "../style/mainpage.css";
 const FAQ = () => {
     const navigate = useNavigate();
     const [postList, setPostList] = useState([]);
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return(
         <div style={{width: '100%', alignItems: "center"}}>
             <div className="header" style={{backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}

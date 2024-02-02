@@ -12,7 +12,9 @@ import "../style/mainpage.css";
 
 const EntryPartnership = () => {
     const navigate = useNavigate();
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return(
         <div>
             <div className="header" style={{width: '100%', alignItems: "center",backgroundColor:"white"}}> {/*헤더에 뒤로가기 버튼 집어넣기*/}
