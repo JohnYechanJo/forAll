@@ -53,9 +53,9 @@ const PlaceInfoModify2 = () => {
         const userId = sessionStorage.getItem("user_id");
         const [hallImage, kitImage, menu] = await Promise.all(
             [
-                Promise.all([img1, img2, img3, ...imgAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId))),
-                Promise.all([kitchen1, kitchen2, kitchen3, ...kitchenAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId))),
-                Promise.all([menu1, ...menuAdditional].filter((img) => typeof (img) === 'object').map( (img) =>  ImageUploader(img, userId)))
+                Promise.all([img1, img2, img3, ...imgAdditional].map( (img) =>  ImageUploader(img, userId))),
+                Promise.all([kitchen1, kitchen2, kitchen3, ...kitchenAdditional].map( (img) =>  ImageUploader(img, userId))),
+                Promise.all([menu1, ...menuAdditional].map( (img) =>  ImageUploader(img, userId)))
             ]
         )
         navigate("/placeInfoModify3", {

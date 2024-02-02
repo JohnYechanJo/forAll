@@ -37,6 +37,9 @@ const PlaceInfoModifyPage6 = () => {
     const [modalOpen1, setModalOpen1] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [isPhoneOpen, setIsPhoneOpen]=useState(false);
+
+
     const [pending, setPending] = useState(false);
     const businessNum = data.businessNum;
     const onChangeTradeName = useCallback((e) => {
@@ -64,14 +67,23 @@ const PlaceInfoModifyPage6 = () => {
     const onChangeAccountHolder = useCallback((e) => {
         setAccountHolder(e.target.value);
     }, []);
+
+    const regPhone1 = /^01[016789]$/;
+    const regPhone2 = /^\d{3,4}$/;
+    const regPhone3 = /^\d{4}$/;
+
     const handleButton = () => {
         if (isAgree === false) setIsAlertOpen(true);
-        else if ((phone1 !== "") && (phone2 !== "") && (phone3 !== "") && (account !== "") && (accountHolder)) {
+        else if ((regPhone1.test(phone1)) && (regPhone2.test(phone2)) && (regPhone3.test(phone3)) && (account !== "") && (accountHolder)) {
             isPublic = true;
             submit();
+        }else if ((regPhone1.test(phone1)) || (regPhone2.test(phone2)) || (regPhone3.test(phone3))){
+            setIsPhoneOpen(true);
         }
         else setIsModalOpen(true);
     };
+
+
     const submit = async () => {
         if(pending) return;
         setPending(true);
@@ -134,7 +146,10 @@ const PlaceInfoModifyPage6 = () => {
             closeGuide: data.closeGuide,
             closeImage: closeImage
         })
-            .then((res) => setModalOpen1(true))
+            .then((res) => {
+                setPending(false);
+                setModalOpen1(true);
+            })
             .catch((err) => console.error(err));
 
     };
@@ -306,6 +321,50 @@ const PlaceInfoModifyPage6 = () => {
                             onClick={() => submit()}
                     >
                         넘어가기
+                    </button>
+                </div>
+            </Modal>
+            <Modal isOpen={isPhoneOpen} ariaHideApp={false} style={SmallModalStyles}>
+                <div style={{
+                    justifyContent: "center", alignItems: "center",
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+
+                }}>
+                    <a style={{fontSize: '0.9375rem'}}>유효한 연락처를 입력하지 않았습니다.</a>
+                </div>
+                <div style={{
+                    display: 'flex',
+                    width: '100%',
+                    margin: '0px',
+                    marginTop: '4rem',
+                    bottom: '0',
+                    position: 'fixed',
+                    fontSize: "0.9375rem",
+                    fontWeight: "400"
+                }}>
+                    <button style={{
+                        backgroundColor: "#FF4F4F",
+
+                        width: '100%',
+                        bottom: '0',
+                        height: '3.125rem',
+                        color: 'white',
+                        border: 'none',
+                        lineHeight: '1.875rem',
+                        textAlign: 'center'
+                    }}
+                            onClick={() => setIsPhoneOpen(false)}
+                    >
+                        마저 입력하기
                     </button>
                 </div>
             </Modal>

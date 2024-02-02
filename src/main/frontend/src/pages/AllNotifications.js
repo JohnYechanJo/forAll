@@ -1,5 +1,5 @@
 import {ReservationState} from "../utils/enums";
-import {useNavigate} from "react-router-dom";
+import {redirect, useNavigate} from "react-router-dom";
 import React, {useCallback, useEffect, useState} from "react";
 import {TimeUtil} from "../utils/TimeUtil";
 import axios from "axios";
@@ -21,10 +21,10 @@ const AllNotifications = () => {
         alarmList.forEach((alarm) => {
             if(alarm.id) axios.get("/api/v1/alarm/check/"+alarm.id);
         });
-        window.location.reload();
+        navigate(0);
     },[]);
     const deleteAlarm = (alarm) => {
-        if(alarm.id) axios.get("/api/v1/alarm/check/"+alarm.id).then(()=>window.location.reload());
+        if(alarm.id) axios.get("/api/v1/alarm/check/"+alarm.id).then(()=>navigate(0));
         else setAlarmList(alarmList.filter((a) => a.id !== alarm.id)) //채팅의 경우
     }
     // const handleAssurance = (data) => {

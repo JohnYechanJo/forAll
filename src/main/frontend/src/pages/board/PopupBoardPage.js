@@ -6,7 +6,7 @@ import HomeTemplate from "../../components/home/HomeTemplate";
 import ArticleListTemplate from "../../components/board/ArticleListTemplate";
 import {TimeUtil} from "../../utils/TimeUtil";
 import ImageUploader from "../../utils/imageUploader";
-import {useNavigate} from "react-router-dom";
+import {redirect, useNavigate} from "react-router-dom";
 import ImageViewer from "../../components/ImageViewer";
 import ImagePreView from "../../components/ImagePreView";
 import updownImg from "../../components/icons/updown.jpg";
@@ -37,7 +37,7 @@ const PopupBoardPage = () => {
             category: BoardCategory.Popup,
             postImage: imageList,
             userId: userId
-        }).then(() => window.location.reload())
+        }).then(() => navigate(0))
             .catch((err) => console.error(err));
     };
 

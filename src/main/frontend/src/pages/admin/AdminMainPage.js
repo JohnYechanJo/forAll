@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {ChefState, ReservationState, SpaceState} from "../../utils/enums";
 import axios from "axios";
 import "./AdminMainPage.css";
-import {useLocation, useNavigate} from "react-router-dom";
+import {redirect, useLocation, useNavigate} from "react-router-dom";
 
 const AdminMainPage = () => {
     const navigate = useNavigate();
@@ -30,7 +30,7 @@ const AdminMainPage = () => {
         axios.post("/api/v1/admin/"+category, {
             id: id,
             state: state,
-        }).then(()=>window.location.reload())
+        }).then(()=>navigate(0))
             .catch((err) => console.error(err));
     };
     const setStates = (category, state) => {

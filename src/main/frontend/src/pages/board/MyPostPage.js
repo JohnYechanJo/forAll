@@ -4,7 +4,7 @@ import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import ArticleListTemplate from "../../components/board/ArticleListTemplate";
 import {TimeUtil} from "../../utils/TimeUtil";
-import {useNavigate} from "react-router-dom";
+import {redirect, useNavigate} from "react-router-dom";
 import {ExplanationModalStyles} from "../../components/ExplanationModalStyles";
 import Modal from "react-modal";
 
@@ -24,10 +24,10 @@ const MyPostPage = () => {
         setIsEraseFew(true);
     }
     const deleteAll = useCallback(()=>{
-        axios.get("/api/v1/articles/deleteAll").then(()=>window.location.reload());
+        axios.get("/api/v1/articles/deleteAll").then(()=> navigate(0));
     },[]);
     const deleteSelect = ()=>{
-        axios.get("/api/v1/articles/delete/"+selectPost.id).then(()=>window.location.reload());
+        axios.get("/api/v1/articles/delete/"+selectPost.id).then(()=>navigate(0));
     };
     useEffect(() => {
         axios.get("/api/v1/articles/user/" + sessionStorage.getItem("user_id"))
