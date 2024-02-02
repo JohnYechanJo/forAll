@@ -60,7 +60,7 @@ const Sidebar = ({ width = 18.75, children }) => {
     }
     const handleSpaceRegistry = () => {
         if (id === null) navigate("/login");
-        else if(userData.registedSpace) navigate("/placeInfoModify");
+        else if(userData.registedSpace) navigate("/placeInfoModifyStart");
         else navigate("/hostRegistry");
     }
     const handlePersonalInfoModify = () => {
@@ -76,7 +76,7 @@ const Sidebar = ({ width = 18.75, children }) => {
     }
     const handleSpaceModify = () => {
         if (id === null) navigate("/login");
-        else if (userData.registedSpace) navigate("/placeInfoModify");
+        else if (userData.registedSpace) navigate("/placeInfoModifyStart");
         else {
             navigate("/hostRegistryFirst");
         }
