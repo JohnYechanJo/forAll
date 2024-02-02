@@ -58,6 +58,12 @@ public class MemberService extends Service {
             throw new IllegalStateException("중복된 이메일입니다.");
         }
     }
+    public void validateDuplicatePhone(String phone) {
+        List<Member> findMember = memberRepository.findByPhoneNum(phone);
+        if (!findMember.isEmpty()) {
+            throw new IllegalStateException("중복된 전화번호입니다.");
+        }
+    }
 
     /* 필요하다면 admin 사이트를 위해서??
     public List<Member> getAllMembers() {

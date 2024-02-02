@@ -66,10 +66,10 @@ const RecipeBoardPage = () => {
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     width: '100%', height: '3.125rem', flexShrink: 0, border: '1px solid #C4C4C4', background: '#FFF'
                 }}>
-                    <h1 style={{
-                        fontSize: '0.875rem', fontStyle: 'normal', fontWeight: '700', lineHeight: 'normal',
+                    <a style={{
+                        fontSize: '1.25rem', fontStyle: 'normal', fontWeight: '400', lineHeight: 'normal',
                         letterSpacing: '-0.01031rem', marginLeft: '0.1rem'
-                    }}>• 레시피</h1>
+                    }}>&ensp;• 레시피</a>
                     <img src={updownImg} alt="updownImg" style={{
                         width: '0.625rem', height: '0.625rem',
                         flexShrink: 0, marginRight: '1rem'

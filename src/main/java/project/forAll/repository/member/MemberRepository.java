@@ -12,6 +12,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     // List<Member>보다 Member가 더 자연스럽긴 함
     List<Member> findByLoginId(String loginId);
     List<Member> findByEmail(String email);
+    List<Member> findByPhoneNum(String phoneNum);
     List<Member> findByLoginIdAndPhoneNum(String loginId, String phoneNum);
     List<Member> findByNameAndPhoneNum(String name, String phoneNum);
     List<Member> findByLoginIdAndLoginPw(String loginId, String loginPw);

@@ -20,35 +20,35 @@ const ArticleListTemplate = ({postList, preview=false, userPost=false, isErase, 
                                 width: '100%', flexShrink: 0}}>
                                 <div onClick={() => navigate("/post/" + post.id)}
                                     style={{width:"100%",
-                                    alignItems: 'flex-start', margin: '1.19rem 0 1.19rem 1.5rem'}}>
+                                    alignItems: 'flex-start', margin: '0.5rem 0 0.5rem 1.5rem'}}>
                                     <div style={{display:"flex", justifyContent:"space-between"}}>
-                                            <p style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '700',
+                                            <p style={{fontSize: '0.75rem', fontStyle: 'normal', fontWeight: '700',
                                                 lineHeight: 'normal', letterSpacing: '-0.01031rem',
                                                 margin: 0}}>{post.title}</p>
                                     </div>
                                     
-                                    {!preview ? <p style={{fontSize: '0.625rem', fontStyle: 'normal',
+                                    {!preview ? <p style={{fontSize: '0.75rem', fontStyle: 'normal',
                                         fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
                                         margin: 0}}>{StringUtil.postPreViewContent(post.content)}</p> : null}
-                                    {!preview ? <p style={{fontSize: '0.625rem', fontStyle: 'normal',
+                                    {!preview ? <p style={{fontSize: '0.75rem', fontStyle: 'normal',
                                         fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
                                         color: '#0788FF', margin: 0}}>{post.userId}</p> : null}
                                     <div style={{display: 'flex', alignItems: 'center',
-                                        fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '400',
+                                        fontSize: '0.75rem', fontStyle: 'normal', fontWeight: '400',
                                         lineHeight: 'normal', letterSpacing: '-0.01031rem', marginTop: '0.1rem'}}>
                                         <div style={{display: 'flex', alignItems: 'center', padding: 0}}>
                                             <img src={clockImg} alt="clockImg"
-                                                 style={{width: '0.45006rem', height: '0.4375rem', flexShrink: 0}}/>
+                                                 style={{width: '0.75rem', height: '0.75rem', flexShrink: 0}}/>
                                             <p style={{margin: '0 0.51rem 0 0'}}>{TimeUtil.getDiffStr(post.writtenAt)}</p>
                                         </div>
                                         <div style={{display: 'flex', alignItems: 'center'}}>
                                             <img src={likeImg} alt="likeImg"
-                                                 style={{width: '0.45006rem', height: '0.4375rem', flexShrink: 0, padding: 0}}/>
+                                                 style={{width: '0.75rem', height: '0.75rem', flexShrink: 0, padding: 0}}/>
                                             <p style={{margin: '0 0.51rem 0 0'}}>{post.recommend != 0 ? post.recommend : "좋아요"}</p>
                                         </div>
                                         <div style={{display: 'flex', alignItems: 'center'}}>
                                             <img src={commentImg} alt="commentImg"
-                                                  style={{width: '0.45006rem', height: '0.4375rem', flexShrink: 0}}/>
+                                                  style={{width: '0.75rem', height: '0.75rem', flexShrink: 0}}/>
                                             <p style={{margin: '0 0.51rem 0 0'}}>{post.comments ? post.comments.length : 0}</p>
                                         </div>
                                     </div>
@@ -57,14 +57,14 @@ const ArticleListTemplate = ({postList, preview=false, userPost=false, isErase, 
                                     <div style={{width:"5rem"}}>
                                         {isErase ? (
                                                 <p onClick={()=>deletePost(post)}
-                                                   style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
+                                                   style={{fontSize: '0.75rem', fontStyle: 'normal', fontWeight: '500',
                                                        lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                                       margin: 0, paddingRight:"1rem"}}>삭제하기</p>) :
+                                                       margin: 0, paddingRight:"1rem", textDecorationLine:'underline'}}>삭제하기</p>) :
                                             (
                                                 <p onClick={()=>navigate("/post/edit",{state:post})}
-                                                   style={{fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
+                                                   style={{fontSize: '0.75rem', fontStyle: 'normal', fontWeight: '500',
                                                        lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                                       margin: 0, paddingRight:"1rem"}}>수정하기</p>)}
+                                                       margin: 0, paddingRight:"1rem", textDecorationLine:'underline'}}>수정하기</p>)}
                                     </div>
                                 ) : null
                                 }
