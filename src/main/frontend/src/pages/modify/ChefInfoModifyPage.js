@@ -58,13 +58,6 @@ const ChefInfoModifyPage = () => {
                 navigate("/error");
             })
     }, [])
-    const activeEnter = (e) => {
-        if (e.key === "Enter") {
-            const temp = [...career];
-            setCareer(temp.concat(e.target.value));
-            e.target.value = "";
-        }
-    }
     return (
         <div className="fontForRegister"
             style={{
@@ -85,7 +78,6 @@ const ChefInfoModifyPage = () => {
                         style={{ width: "80%" }}
                         className="input"
                         value={inputText}
-                        onKeyDown={(e) => { activeEnter(e) }}
                         onChange={(e) => {
                             setInputText(e.target.value);
                         }} />

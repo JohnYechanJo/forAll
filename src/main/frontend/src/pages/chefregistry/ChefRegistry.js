@@ -46,13 +46,7 @@ const ChefRegistry = () => {
             navigate("/chefRegistryChecking");
         }).catch((err) => console.error(err));
     };
-    const activeEnter = (e) => {
-        if (e.key === "Enter") {
-            const temp = [...career];
-            setCareer(temp.concat(e.target.value));
-            e.target.value = "";
-        }
-    }
+
     return (
         <div
             style={{
@@ -75,7 +69,6 @@ const ChefRegistry = () => {
                         style={{ width: "80%" }}
                         className="input"
                         value={inputText}
-                        onKeyDown={(e) => { activeEnter(e) }}
                         onChange={(e) => {
                             setInputText(e.target.value);
                         }}

@@ -181,7 +181,7 @@ const PostViewPage = ({postList}) => {
                 </div>
                 <ImageSlider images={data.postImage}/>
                 <p style={{fontSize: '0.75rem', fontStyle: 'normal', fontWeight: '400', lineHeight: 'normal',
-                    letterSpacing: '-0.01031rem'}}>{data.content}</p>
+                    letterSpacing: '-0.01031rem',wordBreak:'break-all',marginRight:'1rem'}}>{data.content}</p>
             </div>
             <div style={{
                 width: '100%', height: '3.125rem', flexShrink: 0, border: '1px solid #C4C4C4',
@@ -235,7 +235,7 @@ const PostViewPage = ({postList}) => {
                                     <p style={{
                                         fontSize: '0.75rem', fontStyle: 'normal',
                                         fontWeight: '400', lineHeight: 'normal', letterSpacing: '-0.01031rem',
-                                        margin: '0 0 0 1rem'
+                                        margin: '0 0 0 1rem',wordBreak:'break-all',marginRight:'1rem'
                                     }}>{comment.text}</p>
                                     <div style={{
                                         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
