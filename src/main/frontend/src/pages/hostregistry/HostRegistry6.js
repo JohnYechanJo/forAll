@@ -39,6 +39,7 @@ const HostRegistry6 = () => {
     const [modalOpen1, setModalOpen1] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [isPhoneOpen, setIsPhoneOpen]=useState(false);
 
     const [pending, setPending] = useState(false);
 
@@ -77,14 +78,20 @@ const HostRegistry6 = () => {
         setAccountHolder(e.target.value);
     }, []);
 
+    const regPhone1 = /^01[016789]$/;
+    const regPhone2 = /^\d{3,4}$/;
+    const regPhone3 = /^\d{4}$/;
+
     const handleButton = () => {
         if ((tradeName === "") || (representative === "") || (registNum1 === "") || (registNum2 === "") || (registNum3 === "") || (license === "") || (address === "") || (exactAddress === "") || (isAgree === false)) {
             setIsAlertOpen(true);
         } else if ((tradeName !== "") && (representative !== "") && (registNum1 !== "") && (registNum2 !== "") && (registNum3 !== "")
-            && (license !== undefined) && (address !== undefined) && (exactAddress !== "") 
-            && (phone1 !== "") && (phone2 !== "") && (phone3 !== "") && (account !== "") && (accountHolder !== undefined)) {
+            && (license !== undefined) && (address !== undefined) && (exactAddress !== "") && (accountHolder !== undefined)
+            && (regPhone1.test(phone1)) && (regPhone2.test(phone2)) && (regPhone3.test(phone3))){
             isPublic = true;
             submit();
+        }else if ((regPhone1.test(phone1)) || (regPhone2.test(phone2)) || (regPhone3.test(phone3))){
+            setIsPhoneOpen(true);
         }
         else setIsModalOpen(true);
     };
@@ -229,17 +236,18 @@ const HostRegistry6 = () => {
                     </p>
                 </div>
                 <div>
-                    <p>정산용 연락처<span style={{ color: "#FF2929" }} >*</span></p>
-                    <div style={{ display: "flex",alignItems:'center',justifyContent:'space-between' }} >
-                        <input value={phone1} onChange={onChangePhone1} className="input" style={{ width: "30%" }} />-
-                        <input value={phone2} onChange={onChangePhone2} className="input" style={{ width: "30%" }} />-
-                        <input value={phone3} onChange={onChangePhone3} className="input" style={{ width: "30%" }} />
+                    <p>정산용 연락처<span style={{color: "#FF2929"}}>*</span></p>
+                    <div style={{display: "flex", alignItems: 'center', justifyContent: 'space-between'}}>
+                        <input value={phone1} onChange={onChangePhone1} className="input" style={{width: "30%"}}/>-
+                        <input value={phone2} onChange={onChangePhone2} className="input" style={{width: "30%"}}/>-
+                        <input value={phone3} onChange={onChangePhone3} className="input" style={{width: "30%"}}/>
                     </div>
                 </div>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", padding: "1rem", alignItems: "flex-start"}} className="fontForRegister">
-                <div style={{ width: "100%" }} >
-                    <a>계좌 정보를 입력해 주세요<span style={{ color: "#FF2929" }} >*</span></a>
+            <div style={{display: "flex", flexDirection: "column", padding: "1rem", alignItems: "flex-start"}}
+                 className="fontForRegister">
+                <div style={{width: "100%"}}>
+                <a>계좌 정보를 입력해 주세요<span style={{ color: "#FF2929" }} >*</span></a>
                     <hr style={{ height: "2px", backgroundColor: "black", width: "100%" }} />
                     <a style={{fontSize:'0.4375rem'}} >• 법인 사업자는 법인 통장계좌를, 개인 사업자는 사업자 명의의 통장 계좌를 입력해주세요. 포 올을 통해 결제된 금액이 해당 계좌로 정산됩니다.</a>
                 </div>
@@ -344,6 +352,50 @@ const HostRegistry6 = () => {
                             onClick={() => submit()}
                     >
                         넘어가기
+                    </button>
+                </div>
+            </Modal>
+            <Modal isOpen={isPhoneOpen} ariaHideApp={false} style={SmallModalStyles}>
+                <div style={{
+                    justifyContent: "center", alignItems: "center",
+                    fontFamily: "Noto Sans KR",
+                    color: " #000",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+
+                }}>
+                    <a style={{fontSize: '0.9375rem'}}>유효한 연락처를 입력하지 않았습니다.</a>
+                </div>
+                <div style={{
+                    display: 'flex',
+                    width: '100%',
+                    margin: '0px',
+                    marginTop: '4rem',
+                    bottom: '0',
+                    position: 'fixed',
+                    fontSize: "0.9375rem",
+                    fontWeight: "400"
+                }}>
+                    <button style={{
+                        backgroundColor: "#FF4F4F",
+
+                        width: '100%',
+                        bottom: '0',
+                        height: '3.125rem',
+                        color: 'white',
+                        border: 'none',
+                        lineHeight: '1.875rem',
+                        textAlign: 'center'
+                    }}
+                            onClick={() => setIsPhoneOpen(false)}
+                    >
+                        마저 입력하기
                     </button>
                 </div>
             </Modal>
