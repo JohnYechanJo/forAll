@@ -181,7 +181,7 @@ const HostRegistry2 = () => {
                                 메뉴를
                                 올려주세요.</p>
 
-                            <div className="bottom_button_fixed">
+                            <div className="bottom_button_relative">
                                 <a style={{ fontSize: "0.8rem" }} onClick={() => setIsModalOpen2(false)}>닫기</a>
                             </div>
 
