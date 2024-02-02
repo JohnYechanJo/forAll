@@ -25,6 +25,8 @@ public class MemberPublicDTO {
     private Gender gender;
     // 셰프 펜딩 여부
     private String chefPending;
+    // 공간 등록 여부
+    private Boolean registedSpace;
     // 프로필 이미지
     private String profileImage;
 }

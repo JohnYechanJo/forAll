@@ -10,6 +10,7 @@ import project.forAll.domain.member.Gender;
 
 
 import project.forAll.domain.member.Profile;
+import project.forAll.domain.space.Space;
 import project.forAll.dto.MemberPublicDTO;
 
 
@@ -18,6 +19,7 @@ import project.forAll.form.MemberForm;
 import project.forAll.repository.member.ChefProfileRepository;
 import project.forAll.repository.member.MemberRepository;
 import project.forAll.repository.member.ProfileRepository;
+import project.forAll.repository.space.SpaceRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +34,8 @@ public class MemberService extends Service {
     private ProfileRepository profileRepository;
     @Autowired
     private ChefProfileRepository chefProfileRepository;
+    @Autowired
+    private SpaceRepository spaceRepository;
 
     @Override
     protected JpaRepository getRepository() {
@@ -174,6 +178,8 @@ public class MemberService extends Service {
         final Profile profile = profileRepository.findByMember(member).get(0);
         memberPublicDTO.setProfileImage(profile.getProfilePhoto().getImageName());
 
+        List<Space> spaces = spaceRepository.findByMember(member);
+        memberPublicDTO.setRegistedSpace(!spaces.isEmpty());
         return memberPublicDTO;
     }
 
