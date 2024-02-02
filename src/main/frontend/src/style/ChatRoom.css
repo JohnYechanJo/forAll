@@ -112,6 +112,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    & a{
+        margin: 1rem;
+    }
 }
 .chat_my_message{
     margin:0;
@@ -132,6 +135,9 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+    & a{
+        margin: 1rem;
     }
 }
 .chat_container{

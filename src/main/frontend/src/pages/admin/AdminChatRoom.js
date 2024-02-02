@@ -112,14 +112,14 @@ const AdminChatRoom = () => {
                                     <div className={"chat_partner_id"}>{partner}</div>
                                     {message.isImage ? (
                                         <ImageViewer val={message.messageContent}/>
-                                    ) : (<div className={"chat_partner_message"}><p>{message.messageContent}</p></div>)}
+                                    ) : (<div className={"chat_partner_message"}><a>{message.messageContent}</a></div>)}
                                 </div>
                             </div>
                         ):(
                             <div className={"chat_message_container"} style={{justifyContent:"right"}}>
                                 {message.isImage ? (
                                     <ImageViewer val={message.messageContent}/>
-                                ) : (<div className={"chat_my_message"}><p>{message.messageContent}</p></div>)}
+                                ) : (<div className={"chat_my_message"}><a>{message.messageContent}</a></div>)}
                             </div>
                         )}
                     </div>
