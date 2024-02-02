@@ -28,8 +28,8 @@ const HostRegistry3 = () => {
     const [friDay, setFriDay] = useState(false);
     const [saturDay, setSaturDay] = useState(false);
     const [sunDay, setSunDay] = useState(false);
-    const [rentTimeFrom, setRentTimeFrom] = useState("");
-    const [rentTimeTo, setRentTimeTo] = useState("");
+    const [rentTimeFrom, setRentTimeFrom] = useState("0시");
+    const [rentTimeTo, setRentTimeTo] = useState("0시");
     const [parkAvaliable, setParkAvaliable] = useState(parkAvaliableData[0]);
     const [exactPark, setExactPark] = useState();
     const [elevator, setElevator] = useState();
@@ -40,8 +40,8 @@ const HostRegistry3 = () => {
     const [morningDelivery, setMorningDelivery] = useState();
     const [workIn, setWorkIn] = useState();
     const [miseen, setMiseen] = useState();
-    const [miseenTimeFrom, setMiseenTimeFrom] = useState("");
-    const [miseenTimeTo, setMiseenTimeTo] = useState("");
+    const [miseenTimeFrom, setMiseenTimeFrom] = useState("0시");
+    const [miseenTimeTo, setMiseenTimeTo] = useState("0시");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isTrial, setIsTrial] = useState(false);
     const [isMorningDelivery, setIsMorningDelivery] = useState(false);
