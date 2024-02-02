@@ -36,7 +36,7 @@ const ChatBoardPage = () => {
             category: BoardCategory.Chat,
             postImage: imageList,
             userId: userId
-        }).then(() => window.location.reload())
+        }).then(() => navigate("/chat", {replace:true}))
             .catch((err) => console.error(err));
     };
 

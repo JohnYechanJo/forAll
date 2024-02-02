@@ -30,7 +30,7 @@ const AdminMainPage = () => {
         axios.post("/api/v1/admin/"+category, {
             id: id,
             state: state,
-        }).then(()=>window.location.reload())
+        }).then(()=>navigate("/admin", {replace:true}))
             .catch((err) => console.error(err));
     };
     const setStates = (category, state) => {

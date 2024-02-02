@@ -24,10 +24,10 @@ const MyPostPage = () => {
         setIsEraseFew(true);
     }
     const deleteAll = useCallback(()=>{
-        axios.get("/api/v1/articles/deleteAll").then(()=>window.location.reload());
+        axios.get("/api/v1/articles/deleteAll").then(()=>navigate("/mypost", {replace:true}));
     },[]);
     const deleteSelect = ()=>{
-        axios.get("/api/v1/articles/delete/"+selectPost.id).then(()=>window.location.reload());
+        axios.get("/api/v1/articles/delete/"+selectPost.id).then(()=>navigate("/mypost", {replace:true}));
     };
     useEffect(() => {
         axios.get("/api/v1/articles/user/" + sessionStorage.getItem("user_id"))

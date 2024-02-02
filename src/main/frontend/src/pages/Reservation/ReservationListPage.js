@@ -27,7 +27,7 @@ const ReservationListPage = () => {
             id: id,
             reason: postContent,
             cancelTime: TimeUtil.now()
-        }).then(()=>window.location.reload());
+        }).then(()=>navigate("/reservationList", {replace:true}));
     };
     const handleAssurance = (data) => {
         console.log(data);

@@ -21,10 +21,10 @@ const AllNotifications = () => {
         alarmList.forEach((alarm) => {
             if(alarm.id) axios.get("/api/v1/alarm/check/"+alarm.id);
         });
-        window.location.reload();
+        navigate("/allNotifications", {replace:true});
     },[]);
     const deleteAlarm = (alarm) => {
-        if(alarm.id) axios.get("/api/v1/alarm/check/"+alarm.id).then(()=>window.location.reload());
+        if(alarm.id) axios.get("/api/v1/alarm/check/"+alarm.id).then(()=>navigate("/allNotifications", {replace:true}));
         else setAlarmList(alarmList.filter((a) => a.id !== alarm.id)) //채팅의 경우
     }
     // const handleAssurance = (data) => {
