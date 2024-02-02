@@ -13,7 +13,7 @@ export const ModalStyles = {
         border: '1px solid'+ '#C4C4C4',
         background: '#FFF',
         textAlign: 'center',
-
+        zIndex: '1000'
     },
     overlay: {
         backgroundColor: 'rgba(0, 0, 0, 0.75)' 

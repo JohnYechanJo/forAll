@@ -17,6 +17,7 @@ import PlaceInfoModifyPage4 from './pages/modify/PlaceInfoModifyPage4';
 import PlaceInfoModifyPage6 from './pages/modify/PlaceInfoModifyPage6';
 import ErrorPage from "./pages/ErrorPage";
 import MainPage from "./pages/MainPage";
+import HostRegistryFirst from './pages/hostregistry/HostRegistryFirst';
 import HostRegistry from "./pages/hostregistry/HostRegistry";
 import HostRegistry2 from "./pages/hostregistry/HostRegistry2";
 import HostRegistry3 from "./pages/hostregistry/HostRegistry3";
@@ -30,6 +31,7 @@ import GuestRegistry from "./pages/signup/GuestRegistry";
 
 
 import LoginHandeler from "./pages/LoginHandeler";
+import ChefRegistryFirst from './pages/chefregistry/ChefRegistryFirst';
 import ChefRegistry from './pages/chefregistry/ChefRegistry';
 import ChefRegistryCheckingPage from './pages/chefregistry/ChefRegistryChecking';
 import ChefInfoModifyPage from './pages/modify/ChefInfoModifyPage';
@@ -115,6 +117,7 @@ function App() {
         <Route path="/placeInfoModifyComplete" element={<PlaceInfoModifyCompletePage />}/>
 
         <Route path="/hostRegistryStart" element={<HostRegistryStartPage />}/>
+        <Route path="/hostRegistryFirst" element={<HostRegistryFirst />} />
         <Route path="/hostRegistry" element={<HostRegistry />} />
         <Route path="/hostRegistry2" element={<HostRegistry2 />} />
         <Route path="/hostRegistry3" element={<HostRegistry3 />}/>
@@ -148,6 +151,7 @@ function App() {
         <Route path="/recipe" element={<RecipeBoardPage />} />
         <Route path="/error" element={<ErrorPage />}/>
         <Route path="/notification" element={<Notification />}/>
+        <Route path="/chefRegistryFirst" element={<ChefRegistryFirst />} />
         <Route path="/chefRegistry" element={<ChefRegistry />} />
         <Route path="/chefRegistryChecking" element={<ChefRegistryCheckingPage />} />
         <Route path="/FAQ" element={<FAQ />} />

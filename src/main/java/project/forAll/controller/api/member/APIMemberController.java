@@ -102,6 +102,15 @@ public class  APIMemberController extends APIController {
             return new ResponseEntity(errorResponse("Duplicated email : " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("/members/checkPhone/{phone}")
+    public ResponseEntity checkDuplicatedPhone(@PathVariable("phone") final String phone){
+        try {
+            memberService.validateDuplicatePhone(phone);
+            return new ResponseEntity(phone, HttpStatus.OK);
+        } catch(final Exception e) {
+            return new ResponseEntity(errorResponse("Duplicated phone number : " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @PutMapping("/members")
     public ResponseEntity editMember(@RequestBody final MemberForm form, HttpServletRequest request){

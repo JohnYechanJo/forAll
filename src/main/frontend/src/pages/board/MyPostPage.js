@@ -43,10 +43,10 @@ const MyPostPage = () => {
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 width: '100%', height: '3.125rem', flexShrink: 0, border: '1px solid #C4C4C4', background: '#FFF'
             }}>
-                <h1 style={{
-                    fontSize: '0.875rem', fontStyle: 'normal', fontWeight: '700', lineHeight: 'normal',
+                <a style={{
+                    fontSize: '1.25rem', fontStyle: 'normal', fontWeight: '400', lineHeight: 'normal',
                     letterSpacing: '-0.01031rem', marginLeft: '0.1rem'
-                }}>• 내가 쓴 글</h1>
+                }}>&ensp;• 내가 쓴 글</a>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <Modal
                         isOpen={isEraseAll}
@@ -116,7 +116,7 @@ const MyPostPage = () => {
                     </Modal>
                     <p onClick={() => setIsEraseAll(true)}
                        style={{
-                           fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
+                           fontSize: '0.75rem', fontStyle: 'normal', fontWeight: '500',
                            lineHeight: 'normal', letterSpacing: '-0.01031rem', textDecorationLine: 'underline',
                            marginRight: '0.5rem'
                        }}>전체 삭제</p>
@@ -183,7 +183,7 @@ const MyPostPage = () => {
                     </Modal>
                     <p onClick={() => setSelectErase(true)}
                        style={{
-                           fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
+                           fontSize: '0.75rem', fontStyle: 'normal', fontWeight: '500',
                            lineHeight: 'normal', letterSpacing: '-0.01031rem', textDecorationLine: 'underline',
                            marginRight: '0.5rem'
                        }}>선택 삭제</p>

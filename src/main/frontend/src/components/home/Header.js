@@ -1,8 +1,7 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import '../Styles.css';
-import { useRef } from "react";
 import "../../style/mainpage.css";
-import forAllLogo from "../icons/forAllLogo.png";
+
 
 const Header = () => {
     const navigate = useNavigate();

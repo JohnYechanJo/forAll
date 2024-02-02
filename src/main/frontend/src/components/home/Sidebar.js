@@ -18,6 +18,7 @@ const Sidebar = ({ width = 18.75, children }) => {
     const navigate = useNavigate();
     const [profileImage, setProfileImage] = useState("");
     const id = sessionStorage.getItem("user_id");
+
     // button 클릭 시 토글
     const toggleMenu = () => {
         if (xPosition < 0) {
@@ -68,12 +69,16 @@ const Sidebar = ({ width = 18.75, children }) => {
     const handleChefModify = () => {
         if (id === null) navigate("/login");
         else if ([ChefState.PENDING, ChefState.APPROVE].includes(userData.chefPending)) navigate("/chefInfoModify");
-        //셰프 등록을 먼저 하라는 내용 띄우기
+        else {
+            navigate("/chefRegistryFirst");
+        }
     }
     const handleSpaceModify = () => {
         if (id === null) navigate("/login");
         else if ([SpaceState.PENDING, SpaceState.APPROVE].includes(userData.spacePending)) navigate("/placeInfoModify");
-        //공간 등록을 먼저 하라는 내용 띄우기
+        else {
+            navigate("/hostRegistryFirst");
+        }
     }
     const handleServiceCenter = () => {
         if (id === null) navigate("/login");
@@ -115,7 +120,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                         display: "flex",
                         justifyContent: "flex-end",
                     }}>
-                        <div style={{ backgroundColor: "transparent", marginRight: '1rem' }}>
+                        <div style={{ backgroundColor: "transparent", marginRight: '1rem', marginTop: '1rem' }}>
                             <img src={alarm} alt="alarm" style={{ width: "0.99931rem", height: "1.5rem", marginRight: '1rem', objectFit: "contain" }} onClick={() => navigate("/allNotifications")} />
                             <img src={xmark} alt="xmark" style={{ width: "1.5rem", height: "1.5rem", objectFit: "contain" }} onClick={() => toggleMenu()} />
                         </div>
@@ -135,7 +140,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     <div style={{
                         height: "6.25rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",
                         boxShadow: "4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset: "-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                        display: "flex", flexDirection: "column", justifyContent: "space-evenly", gap: "1rem"
+                        display: "flex", flexDirection: "column", justifyContent: "space-evenly", 
                     }}>
                         <button className="button" onClick={handleReservationList} style={{ textAlign: "left", marginLeft: "2rem" }}>예약 정보</button>
                         <button className="button" style={{ textAlign: "left", marginLeft: "2rem" }}>찜한내역</button>
@@ -143,7 +148,7 @@ const Sidebar = ({ width = 18.75, children }) => {
                     <div style={{
                         height: "6.25rem", display: "flex", flexDirection: "row", border: "1px solid rgba(196,196,196,0.2)",
                         boxShadow: "4px -4px 4px 0px rgba(0, 0, 0, 0.25)", inset: "-4px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                        display: "flex", flexDirection: "column", justifyContent: "space-evenly", gap: "rem"
+                        display: "flex", flexDirection: "column", justifyContent: "space-evenly",
                     }} >
                         <button className="button" onClick={handleChefRegistry} style={{ textAlign: "left", marginLeft: "2rem" }}>셰프 등록하기</button>
                         <button className="button" onClick={handleSpaceRegistry} style={{ textAlign: "left", marginLeft: "2rem" }}>공간 등록하기</button>
