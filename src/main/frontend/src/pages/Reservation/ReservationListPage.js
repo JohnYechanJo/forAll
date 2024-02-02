@@ -4,7 +4,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import {TimeUtil} from "../../utils/TimeUtil";
 import {AddressUtil} from "../../utils/AddressUtil";
-import {useNavigate} from "react-router-dom";
+import {redirect, useNavigate} from "react-router-dom";
 import {ReservationState} from "../../utils/enums";
 import Modal from "react-modal";
 import {CancelReasonModalStyles} from "../../components/CancelReasonModalStyles";
@@ -27,7 +27,7 @@ const ReservationListPage = () => {
             id: id,
             reason: postContent,
             cancelTime: TimeUtil.now()
-        }).then(()=>navigate("/reservationList", {replace:true}));
+        }).then(()=>redirect("/reservationList"));
     };
     const handleAssurance = (data) => {
         console.log(data);

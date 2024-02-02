@@ -6,7 +6,7 @@ import HomeTemplate from "../../components/home/HomeTemplate";
 import ArticleListTemplate from "../../components/board/ArticleListTemplate";
 import {TimeUtil} from "../../utils/TimeUtil";
 import ImageUploader from "../../utils/imageUploader";
-import {useNavigate} from "react-router-dom";
+import {redirect, useNavigate} from "react-router-dom";
 import ImagePreView from "../../components/ImagePreView";
 import updownImg from "../../components/icons/updown.jpg";
 import pencilImg from "../../components/icons/pencil.jpg";
@@ -37,7 +37,7 @@ const RecipeBoardPage = () => {
             category: BoardCategory.Recipe,
             postImage: imageList,
             userId: userId
-        }).then(() => navigate("/recipe", {replace:true}))
+        }).then(() => redirect("/recipe"))
             .catch((err) => console.error(err));
     };
 
