@@ -146,7 +146,10 @@ const PlaceInfoModifyPage6 = () => {
             closeGuide: data.closeGuide,
             closeImage: closeImage
         })
-            .then((res) => setModalOpen1(true))
+            .then((res) => {
+                setPending(false);
+                setModalOpen1(true);
+            })
             .catch((err) => console.error(err));
 
     };
