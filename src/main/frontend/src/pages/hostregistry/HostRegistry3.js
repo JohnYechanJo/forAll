@@ -52,15 +52,43 @@ const HostRegistry3 = () => {
     const [pending, setPending] = useState(false);
 
     const onChangePark = useCallback((e) => {
+        let value = e.target.value;
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 2) {
+            value = value.slice(0, -1);
+        }
+        // 입력값을 갱신합니다.
+        e.target.value = value;
         setExactPark(e.target.value);
     }, []);
     const onChangeTable = useCallback((e) => {
+        let value = e.target.value;
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 2) {
+            value = value.slice(0, -1);
+        }
+        // 입력값을 갱신합니다.
+        e.target.value = value;
         setTable(e.target.value);
     }, []);
     const onChangeSeat = useCallback((e) => {
+        let value = e.target.value;
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 2) {
+            value = value.slice(0, -1);
+        }
+        // 입력값을 갱신합니다.
+        e.target.value = value;
         setSeat(e.target.value);
     }, []);
     const onChangePrice = useCallback((e) => {
+        let value = e.target.value;
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 7) {
+            value = value.slice(0, -1);
+        }
+        // 입력값을 갱신합니다.
+        e.target.value = value;
         setPrice(e.target.value);
     }, []);
     const onChangeDate = useCallback((e) => {
@@ -260,7 +288,7 @@ const HostRegistry3 = () => {
                         <div>
                             <div style={{ display: 'flex', width: '100%', alignItems: 'center', marginTop: '0.5rem' }}>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <input  onChange={onChangePark} onChange={onInputChange2} className="input" type="number" style={{ width: '10vw' }}  />
+                                    <input  onChange={onChangePark} className="input" type="number" style={{ width: '10vw' }}  />
                                     <a>대</a>
                                 </div>
                             </div>
@@ -313,7 +341,6 @@ const HostRegistry3 = () => {
                         <span className="fontForRegister" style={{ display: 'flex', alignItems: 'center' }}><input
                             type="number"
                             onChange={onChangeTable}
-                            onChange={onInputChange2}
                             className="input"
                             placeholder={"최대 테이블 수를 기준으로 입력해주세요"}
                             style={{ width: '100%' }} />개</span>
@@ -325,7 +352,6 @@ const HostRegistry3 = () => {
                         <span className="fontForRegister" style={{ display: 'flex', alignItems: 'center' }}><input
                             type="number"
                             onChange={onChangeSeat}
-                            onChange={onInputChange2}
                             className="input"
                             placeholder={"최대 좌석수를 기준으로 입력해주세요"}
                             style={{ width: '100%' }} />개</span>
@@ -337,7 +363,6 @@ const HostRegistry3 = () => {
                         <span className="fontForRegister" style={{ display: 'flex', alignItems: 'center' }}><input
                         type="number"
                             onChange={onChangePrice}
-                            onChange={onInputChange7}
                             className="input"
                             placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"}
                             style={{ width: '100%' }} />원</span>

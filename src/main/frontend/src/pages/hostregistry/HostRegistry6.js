@@ -73,8 +73,17 @@ const HostRegistry6 = () => {
     }, []);
     const onChangeAccount = useCallback((e) => {
         const reg = /^[0-9]*$/;
-        if (reg.test(e.target.value))
+        if (reg.test(e.target.value)){
+            let value = e.target.value;
+
+            if (isNaN(value) || value.length > 14) {
+                value = value.slice(0, -1);
+            }
+
+            // 입력값을 갱신합니다.
+            e.target.value = value;
             setAccount(e.target.value);
+        }
     }, []);
     const onChangeAccountHolder = useCallback((e) => {
         setAccountHolder(e.target.value);
@@ -273,7 +282,7 @@ const HostRegistry6 = () => {
                     </div>
                     <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}} >
                         <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
-                        <input onChange={onChangeAccount} onChange={onInputChange14} value={account}  className="input" style={{width:'100%'}} placeholder={"예: 45410201376503"} />
+                        <input onChange={onChangeAccount} value={account}  className="input" style={{width:'100%'}} placeholder={"예: 45410201376503"} />
                     </div>
                     <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}}>
                         <a>예금주<span style={{ color: "#FF2929" }} >*</span></a>
