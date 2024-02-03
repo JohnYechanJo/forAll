@@ -72,7 +72,10 @@ const HostRegistry6 = () => {
         if (e.target.value.length <= 4) setPhone3(e.target.value);
     }, []);
     const onChangeAccount = useCallback((e) => {
-        setAccount(e.target.value);
+        // const filteredValue = e.target.value.replace(/[^0-9-]/g, '');
+        const reg = /^[0-9-]*$/;
+        if (reg.test(e.target.value))
+            setAccount(e.target.value);
     }, []);
     const onChangeAccountHolder = useCallback((e) => {
         setAccountHolder(e.target.value);
@@ -198,9 +201,9 @@ const HostRegistry6 = () => {
                 <div style={{ marginBottom:"-1rem" }}>
                     <p>사업자 등록번호<span style={{ color: "#FF2929" }} >*</span></p>
                     <div style={{ display: "flex",alignItems:'center',justifyContent:'space-between' }} >
-                        <input value={registNum1} onChange={onChangeRegistNum1} className="input" style={{ width: "30%" }} />-
-                        <input value={registNum2} onChange={onChangeRegistNum2} className="input" style={{ width: "30%" }} />-
-                        <input value={registNum3} onChange={onChangeRegistNum3} className="input" style={{ width: "30%" }} />
+                        <input type="number" value={registNum1} onChange={onChangeRegistNum1} className="input" style={{ width: "30%" }} />-
+                        <input type="number" value={registNum2} onChange={onChangeRegistNum2} className="input" style={{ width: "30%" }} />-
+                        <input type="number" value={registNum3} onChange={onChangeRegistNum3} className="input" style={{ width: "30%" }} />
                     </div>
                     <div style={{ padding: "0px 0px", display: "flex", flexDirection: 'column' }} >
                         <a style={{ color: "red" }} >• 사업자 등록번호는 필수 입력입니다.</a>
@@ -232,15 +235,15 @@ const HostRegistry6 = () => {
                     <button onClick={() => setModalOpen1(true)} style={{ width: "3.4375rem", height: "1.875rem", fontSize: "0.625rem", backgroundColor: "black", color: "white", borderRadius: '0.375rem', }} >주소등록</button>
                     </div>
                     <p>
-                        <input onChange={onChangeExactAddress} placeholder={"상세 주소"} style={{ marginTop: '0.62rem' }} value={exactAddress} className="input" style={{width:"92vw"}}/>
+                        <input onChange={onChangeExactAddress} placeholder={"상세 주소"} style={{ marginTop: '0.62rem',width:'92vw' }} value={exactAddress} className="input" />
                     </p>
                 </div>
                 <div>
                     <p>정산용 연락처<span style={{color: "#FF2929"}}>*</span></p>
                     <div style={{display: "flex", alignItems: 'center', justifyContent: 'space-between'}}>
-                        <input value={phone1} onChange={onChangePhone1} className="input" style={{width: "30%"}}/>-
-                        <input value={phone2} onChange={onChangePhone2} className="input" style={{width: "30%"}}/>-
-                        <input value={phone3} onChange={onChangePhone3} className="input" style={{width: "30%"}}/>
+                        <input value={phone1} type="number" onChange={onChangePhone1} className="input" style={{width: "30%"}}/>-
+                        <input value={phone2} type="number" onChange={onChangePhone2} className="input" style={{width: "30%"}}/>-
+                        <input value={phone3} type="number" onChange={onChangePhone3} className="input" style={{width: "30%"}}/>
                     </div>
                 </div>
             </div>
@@ -258,7 +261,7 @@ const HostRegistry6 = () => {
                     </div>
                     <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}} >
                         <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
-                        <input onChange={onChangeAccount} className="input" style={{width:'100%'}} placeholder={"454102-01-376503"} />
+                        <input onChange={onChangeAccount} value={account}  className="input" style={{width:'100%'}} placeholder={"454102-01-376503"} />
                     </div>
                     <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}}>
                         <a>예금주<span style={{ color: "#FF2929" }} >*</span></a>
