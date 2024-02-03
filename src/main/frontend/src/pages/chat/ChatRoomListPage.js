@@ -46,7 +46,7 @@ const ChatRoomListPage = () => {
                                     </div>
                                     <div style={{display:"flex", justifyContent:"space-between", height:"50%"}}>
                                         <div style={{textAlign:"left"}}>
-                                            <div className={"chat_room_last_message"}>{StringUtil.postPreViewContent(chat.lastMessage)}</div>
+                                            <div className={"chat_room_last_message"}>{chat.lastMessage ? StringUtil.postPreViewContent(chat.lastMessage) : ""}</div>
                                         </div>
                                         {chat.notReadCount > 0 ? (
                                             <div style={{textAlign:"right"}}>
@@ -81,7 +81,7 @@ const ChatRoomListPage = () => {
                                     </div>
                                     <div style={{display:"flex", justifyContent:"space-between", height:"50%"}}>
                                         <div style={{textAlign:"left"}}>
-                                            <div className={"chat_room_last_message"}>{StringUtil.postPreViewContent(chat.lastMessage)}</div>
+                                            <div className={"chat_room_last_message"}>{chat.lastMessage ? StringUtil.postPreViewContent(chat.lastMessage) : ""}</div>
                                         </div>
                                         {chat.notReadCount > 0 ? (
                                             <div style={{textAlign:"right"}}>
