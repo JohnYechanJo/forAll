@@ -72,8 +72,7 @@ const HostRegistry6 = () => {
         if (e.target.value.length <= 4) setPhone3(e.target.value);
     }, []);
     const onChangeAccount = useCallback((e) => {
-        // const filteredValue = e.target.value.replace(/[^0-9-]/g, '');
-        const reg = /^[0-9-]*$/;
+        const reg = /^[0-9]*$/;
         if (reg.test(e.target.value))
             setAccount(e.target.value);
     }, []);
