@@ -8,7 +8,7 @@ import "../../components/Styles.css";
 import ForAllLogo from "../../components/ForAllLogo";
 import { ModalStyles } from "../../components/ModalStyles";
 import ImageUploader from "../../utils/imageUploader";
-import {SmallModalStyles} from "../../components/SmallModalStyles";
+import { SmallModalStyles } from "../../components/SmallModalStyles";
 const PlaceInfoModifyPage4 = () => {
     const location = useLocation();
     const data = { ...location.state };
@@ -21,11 +21,11 @@ const PlaceInfoModifyPage4 = () => {
     const [firePit, setFirePit] = useState(data.fireholeNum ? data.fireholeNum + "개" : firePitData[0]);
     const [capacity, setCapacity] = useState(data.capacity);
     const [exactFirePit, setExactFirePit] = useState(data.fireholeNum ? data.fireholeNum : "");
-    const [fryer, setFryer] = useState(data.equip ? data.equip.includes("튀김기"): false);
-    const [oven, setOven] = useState(data.equip ? data.equip.includes("오븐"): false);
-    const [dishWasher, setDishWasher] = useState(data.equip ? data.equip.includes("식기세척기"): false);
-    const [iceMaker, setIceMaker] = useState(data.equip ? data.equip.includes("제빙기"): false);
-    const [someThing, setSomeThing] = useState(data.equip ? data.equip.includes("냉장고"): false);
+    const [fryer, setFryer] = useState(data.equip ? data.equip.includes("튀김기") : false);
+    const [oven, setOven] = useState(data.equip ? data.equip.includes("오븐") : false);
+    const [dishWasher, setDishWasher] = useState(data.equip ? data.equip.includes("식기세척기") : false);
+    const [iceMaker, setIceMaker] = useState(data.equip ? data.equip.includes("제빙기") : false);
+    const [someThing, setSomeThing] = useState(data.equip ? data.equip.includes("냉장고") : false);
     const [extraMachine, setExtraMachine] = useState(data.equipExtra);
     const [sidePlate, setSidePlate] = useState(data.plateImage ? data.plateImage : []);
     const [countSidePlate, setCountSidePlate] = useState(data.plateNum);
@@ -86,7 +86,7 @@ const PlaceInfoModifyPage4 = () => {
         }
         else setIsModalOpen(true);
     };
-    const submit = async() => {
+    const submit = async () => {
         if (pending) return;
         setPending(true);
         const equip = [];
@@ -123,7 +123,7 @@ const PlaceInfoModifyPage4 = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ForAllLogo />
-            <p style={{ textAlign: 'center'}}>(2/4) 이용 안내</p>
+            <p style={{ textAlign: 'center' }}>(2/4) 이용 안내</p>
             <div style={{
                 display: "flex",
                 flexDirection: "column",
@@ -141,14 +141,14 @@ const PlaceInfoModifyPage4 = () => {
                     <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={(firePit > 6) ? "직접 입력" : firePit + "개"} width='100%' />
                     {(firePit > 6) ? (
                         <div>
-                            <span><input onChange={onChangeFirePit} defaultValue={data.fireholeNum} style={{ width: "10vw" }} />개 </span>
+                            <span><input type="number" onChange={onChangeFirePit} defaultValue={data.fireholeNum} style={{ width: "10vw" }} />개 </span>
                             {exactFirePit < 7 ? <p>7 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
                         </div>
                     ) : null}
                 </div>
                 <div style={{ width: '95%' }} >
                     <a>주방 수용 인원 수<span style={{ color: "#FF2929" }} >*</span></a>
-                    <span style={{ display: 'flex', alignItems: 'center' }}><input defaultValue={capacity} onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{width: '100%' }} className="input" />명</span>
+                    <span style={{ display: 'flex', alignItems: 'center' }}><input defaultValue={capacity} type="number" onChange={onChangeCapacity} placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{ width: '100%' }} className="input" />명</span>
                 </div>
                 <div style={{ width: '100%' }}>
                     <a>주방기계<span style={{ color: "#FF2929" }} >*</span></a>
@@ -170,34 +170,37 @@ const PlaceInfoModifyPage4 = () => {
                     <hr style={{ height: "2px", backgroundColor: "black", width: '100%' }} />
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', justifyContent: 'center', width: '100%' }} >
-                    <div style={{display:'flex',justifyContent:"right"}}>
+                    <div style={{ display: 'flex', justifyContent: "right" }}>
                         <div>
-                        <p>앞접시<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></p>
-                        <ImageInputs setImg={setSidePlate} vals={sidePlate} />
-                            <span style={{alignItems: 'center', display:'flex'}}><input
+                            <p>앞접시<span className="fontForRegister" style={{ color: "#FF2929" }}>*</span></p>
+                            <ImageInputs setImg={setSidePlate} vals={sidePlate} />
+                            <span style={{ alignItems: 'center', display: 'flex' }}><input
+                                type="number"
                                 onChange={onChangeCountSidePlate} className="input" placeholder={"최대 개수"}
-                                style={{width: '5.3rem'}} defaultValue={data.plateNum}/>개</span>
+                                style={{ width: '5.3rem' }} defaultValue={data.plateNum} />개</span>
                         </div>
                     </div>
                     <div>
-                        <p>물컵<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></p>
+                        <p>물컵<span className="fontForRegister" style={{ color: "#FF2929" }}>*</span></p>
                         <ImageInputs setImg={setCup} vals={cup} />
-                        <span style={{alignItems: 'center', display:'flex'}}><input onChange={onChangeCountCup}
-                                                                                    className="input"
-                                                                                    placeholder={"최대 개수"}
-                                                                                    style={{width: '5.3rem'}}
-                                                                                    defaultValue={data.cupNum}/>개</span>
+                        <span style={{ alignItems: 'center', display: 'flex' }}><input onChange={onChangeCountCup}
+                            type="number"
+                            className="input"
+                            placeholder={"최대 개수"}
+                            style={{ width: '5.3rem' }}
+                            defaultValue={data.cupNum} />개</span>
                     </div>
 
-                    <div style={{display:'flex',justifyContent:"right"}}>
+                    <div style={{ display: 'flex', justifyContent: "right" }}>
                         <div>
-                        <p>커트러리<span className="fontForRegister" style={{color: "#FF2929"}}>*</span></p>
-                        <ImageInputs setImg={setCuttrary} vals={cuttrary} />
-                            <span style={{alignItems: 'center', display:'flex'}}><input onChange={onChangeCountCuttrary}
-                                                                                        className="input"
-                                                                                        placeholder={"최대 개수"}
-                                                                                        style={{width: '5.3rem'}}
-                                                                                        defaultValue={data.cutleryNum}/>개</span>
+                            <p>커트러리<span className="fontForRegister" style={{ color: "#FF2929" }}>*</span></p>
+                            <ImageInputs setImg={setCuttrary} vals={cuttrary} />
+                            <span style={{ alignItems: 'center', display: 'flex' }}><input onChange={onChangeCountCuttrary}
+                            type="number"
+                                className="input"
+                                placeholder={"최대 개수"}
+                                style={{ width: '5.3rem' }}
+                                defaultValue={data.cutleryNum} />개</span>
                         </div>
                     </div>
                 </div>
@@ -226,8 +229,8 @@ const PlaceInfoModifyPage4 = () => {
                     flexDirection: "column",
 
                 }}>
-                    <a style={{fontSize: '0.9375rem'}}>현재 필수 입력사항이 모두 기입되지 않았습니다.</a>
-                    <p style={{fontSize: '0.9375rem'}}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                    <a style={{ fontSize: '0.9375rem' }}>현재 필수 입력사항이 모두 기입되지 않았습니다.</a>
+                    <p style={{ fontSize: '0.9375rem' }}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
                 </div>
                 <div style={{
                     display: 'flex',
@@ -250,7 +253,7 @@ const PlaceInfoModifyPage4 = () => {
                         lineHeight: '1.875rem',
                         textAlign: 'center'
                     }}
-                            onClick={() => setIsModalOpen(false)}
+                        onClick={() => setIsModalOpen(false)}
                     >
                         마저 입력하기
                     </button>
@@ -265,7 +268,7 @@ const PlaceInfoModifyPage4 = () => {
                         lineHeight: '1.875rem',
                         textAlign: 'center'
                     }}
-                            onClick={() => submit()}
+                        onClick={() => submit()}
                     >
                         넘어가기
                     </button>
@@ -286,8 +289,8 @@ const PlaceInfoModifyPage4 = () => {
                     flexDirection: "column",
 
                 }}>
-                    <a style={{fontSize: '0.9375rem'}}>현재 입력사항을 업로드 중입니다.</a>
-                    <p style={{fontSize: '0.9375rem'}}>잠시만 기다려주세요.</p>
+                    <a style={{ fontSize: '0.9375rem' }}>현재 입력사항을 업로드 중입니다.</a>
+                    <p style={{ fontSize: '0.9375rem' }}>잠시만 기다려주세요.</p>
                 </div>
             </Modal>
         </div>
