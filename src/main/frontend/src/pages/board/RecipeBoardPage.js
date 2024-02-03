@@ -37,7 +37,7 @@ const RecipeBoardPage = () => {
             category: BoardCategory.Recipe,
             postImage: imageList,
             userId: userId
-        }).then(() => navigate("/"))
+        }).then(() => window.location.reload())
             .catch((err) => console.error(err));
     };
 

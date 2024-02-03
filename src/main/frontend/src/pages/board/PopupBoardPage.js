@@ -37,7 +37,7 @@ const PopupBoardPage = () => {
             category: BoardCategory.Popup,
             postImage: imageList,
             userId: userId
-        }).then(() => navigate("/"))
+        }).then(() => window.location.reload())
             .catch((err) => console.error(err));
     };
 
