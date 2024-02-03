@@ -116,7 +116,7 @@ const HostRegistry3 = () => {
 
         const rentDaysdata = rentDayString.length !== 0 ? rentDayString.map((day) => day.toString().split(" ").slice(0, 4).join(" ")).join(",") : rentDays;
         const rentData = rentWeek !== "직접지정" ? rentWeek + " " + rentDayString.join(",") : '직접지정' + '%' + rentDaysdata;
-        const park = parkAvaliableData.includes(parkAvaliable) ? parkAvaliable : exactPark + "대";
+        const park = parkAvaliable === "직접 입력" ? exactPark + "대" : parkAvaliable;
         data.isPublic = data.isPublic && isPublic;
         navigate("/hostRegistry4", {
             state: {

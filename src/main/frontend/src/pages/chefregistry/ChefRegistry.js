@@ -73,7 +73,7 @@ const ChefRegistry = () => {
                             setInputText(e.target.value);
                         }}
                         />
-                    <button style={{height:'1.875rem',width:'3.4375rem',backgroundColor:'black',color:'white',borderRadius:'0.375rem',marginLeft:'0.31rem'}} onClick={()=>{
+                    <button style={{height:'1.875rem',width:'3.4375rem',backgroundColor:'black',color:'white',borderRadius:'0.375rem',marginLeft:'0.31rem',padding:'0px'}} onClick={()=>{
                         const temp = [...career];
                         setCareer(temp.concat(inputText));
                         setInputText("");
