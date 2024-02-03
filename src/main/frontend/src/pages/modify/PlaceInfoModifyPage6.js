@@ -77,12 +77,24 @@ const PlaceInfoModifyPage6 = () => {
         else if ((regPhone1.test(phone1)) && (regPhone2.test(phone2)) && (regPhone3.test(phone3)) && (account !== "") && (accountHolder)) {
             isPublic = true;
             submit();
-        }else if ((regPhone1.test(phone1)) || (regPhone2.test(phone2)) || (regPhone3.test(phone3))){
+        }else if (!(regPhone1.test(phone1)) || !(regPhone2.test(phone2)) || !(regPhone3.test(phone3))){
             setIsPhoneOpen(true);
         }
         else setIsModalOpen(true);
     };
 
+    // 입력을 처리하는 이벤트 핸들러
+    const onInputChange14 = (event) => {
+        let value = event.target.value;
+
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 14) {
+            value = value.slice(0, -1);
+        }
+
+        // 입력값을 갱신합니다.
+        event.target.value = value;
+    }
 
     const submit = async () => {
         if(pending) return;
@@ -220,7 +232,7 @@ const PlaceInfoModifyPage6 = () => {
                             </div>
                             <div style={{display:'flex',flexDirection:'column', marginLeft: '0.63rem'}}>
                                 <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
-                                <input onChange={onChangeAccount} placeholder={"454102-01-376503"} defaultValue={account} className="input"
+                                <input onChange={onChangeAccount} onChange={onInputChange14} placeholder={"예: 45410201376503"} defaultValue={account} className="input"
                                     style={{ width: '100%', height: "1.875rem", flexShrink: "0" }}
                                 />
                             </div>

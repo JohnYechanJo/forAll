@@ -111,6 +111,20 @@ const HostRegistry4 = () => {
         })
     };
 
+    // 입력을 처리하는 이벤트 핸들러
+    const onInputChange2 = (event) => {
+        let value = event.target.value;
+
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 2) {
+            value = value.slice(0, -1);
+        }
+
+        // 입력값을 갱신합니다.
+        event.target.value = value;
+    }
+
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ForAllLogo />
@@ -135,7 +149,7 @@ const HostRegistry4 = () => {
                     {firePit === "직접 입력" ? (
                         <div>
                             <div style={{ display: 'flex', width: '100%', alignItems: 'center', marginTop: '0.5rem' }} >
-                                <input onChange={onChangeFirePit} className="input" style={{ width: "10vw" }} type="number" />
+                                <input onChange={onChangeFirePit} onChange={onInputChange2} className="input" style={{ width: "10vw" }} type="number" />
                                 <a>개 </a>
                             </div>
                             <p>{exactFirePit < 7 ? <p>7 이상의 숫자만 입력해주세요.</p> : null}</p>
@@ -145,7 +159,7 @@ const HostRegistry4 = () => {
                 <div style={{ width: '95%' }}>
                     <a>주방 수용 인원 수<span style={{ color: "#FF2929" }} >*</span></a>
                     <div>
-                        <span style={{ display: 'flex', alignItems: 'center' }} ><input type="number" val={capacity} onChange={onChangeCapacity} className="input" placeholder={"주방이 수용할 수 있는 최대 인원수를 입력해 주세요."} style={{ width: '100%' }} />명</span>
+                        <span style={{ display: 'flex', alignItems: 'center' }} ><input type="number" val={capacity} onChange={onChangeCapacity} onChange={onInputChange2} className="input" placeholder={"주방이 수용할 수 있는 최대 인원수를 입력해 주세요."} style={{ width: '100%' }} />명</span>
                     </div>
                 </div>
                 <div style={{ width: '100%' }}>
@@ -162,7 +176,7 @@ const HostRegistry4 = () => {
 
                 <div style={{ width: '100%' }}>
                     <a>추가 사용 가능 기계<span style={{ color: "#FF2929" }} >*</span></a>
-                    <textarea onChange={onChangeExtraMachine} placeholder={"사용할 수 있는 기계를 입력해주세요. ex) 수비드 기계"} className="input" style={{ height: '6.25rem', width: '98%' }} />
+                    <textarea maxLength="50" onChange={onChangeExtraMachine} placeholder={"사용할 수 있는 기계를 입력해주세요. ex) 수비드 기계"} className="input" style={{ height: '6.25rem', width: '98%' }} />
                 </div>
                 <div style={{ width: '100%' }} >
                     <a>매장 물품<span style={{ color: "#FF2929" }} >*</span></a>
@@ -173,14 +187,14 @@ const HostRegistry4 = () => {
                         <div>
                             <p>앞접시<span className="fontForRegister" style={{ color: "#FF2929" }}>*</span></p>
                             <ImageInputs setImg={setSidePlate} vals={sidePlate} />
-                            <span style={{ alignItems: 'center', display: 'flex' }}><input onChange={onChangeCountSidePlate} type="number" className="input" placeholder={"최대 개수"} style={{ width: '5.3rem' }} />개</span>
+                            <span style={{ alignItems: 'center', display: 'flex' }}><input onChange={onChangeCountSidePlate} onChange={onInputChange2} type="number" className="input" placeholder={"최대 개수"} style={{ width: '5.3rem' }} />개</span>
                         </div>
                     </div>
                     <div>
                         <p>물컵<span className="fontForRegister" style={{ color: "#FF2929" }}>*</span></p>
                         <ImageInputs setImg={setCup} vals={cup} />
-                        <span style={{ alignItems: 'center', display: 'flex' }}><input onChange={onChangeCountCup}
-                            className="input"
+                        <span style={{ alignItems: 'center', display: 'flex' }}><input onChange={onChangeCountCup} onChange={onInputChange2}
+                                                                                       className="input"
                             placeholder={"최대 개수"}
                             type="number"
                             style={{ width: '5.3rem' }} />개</span>
@@ -190,8 +204,8 @@ const HostRegistry4 = () => {
                         <div>
                             <p>커트러리<span className="fontForRegister" style={{ color: "#FF2929" }}>*</span></p>
                             <ImageInputs setImg={setCuttrary} vals={cuttrary} />
-                            <span style={{ alignItems: 'center', display: 'flex' }}><input onChange={onChangeCountCuttrary}
-                                type="number"
+                            <span style={{ alignItems: 'center', display: 'flex' }}><input onChange={onChangeCountCuttrary} onChange={onInputChange2}
+                                                                                           type="number"
                                 className="input"
                                 placeholder={"최대 개수"}
                                 style={{ width: '5.3rem' }} />개</span>
