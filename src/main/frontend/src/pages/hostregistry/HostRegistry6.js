@@ -175,6 +175,19 @@ const HostRegistry6 = () => {
             setExactAddress("");
         }
     };
+
+    // 입력을 처리하는 이벤트 핸들러
+    const onInputChange14 = (event) => {
+        let value = event.target.value;
+
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 14) {
+            value = value.slice(0, -1);
+        }
+
+        // 입력값을 갱신합니다.
+        event.target.value = value;
+    }
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ForAllLogo />
@@ -261,7 +274,7 @@ const HostRegistry6 = () => {
                     </div>
                     <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}} >
                         <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
-                        <input onChange={onChangeAccount} value={account}  className="input" style={{width:'100%'}} placeholder={"454102-01-376503"} />
+                        <input onChange={onChangeAccount} onChange={onInputChange14} value={account}  className="input" style={{width:'100%'}} placeholder={"예: 45410201376503"} />
                     </div>
                     <div style={{display:'flex',flexDirection:'column',marginLeft:'1rem'}}>
                         <a>예금주<span style={{ color: "#FF2929" }} >*</span></a>
