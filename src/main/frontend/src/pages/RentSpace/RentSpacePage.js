@@ -85,7 +85,7 @@ const RentSpacePage = () => {
             <div style={{marginBottom: "2rem"}}>
                 <div className={"space_title"}
                      style={{paddingLeft: "1rem"}}>{AddressUtil.extraction(data.address)} | {data.name}</div>
-                <p style={{margin: "1rem"}}>{data.priceSet}원 | {data.ableDate}</p>
+                <p style={{margin: "1rem"}}>{data.priceSet}원 | {data.ableDate ? (data.ableDate.includes("%") ? data.ableDate.split("%")[1] : data.ableDate) : ""}</p>
                 {/*Todo : 관리자 채팅 연결*/}
                 <div style={{display: "flex", justifyContent: "space-between"}}>
                     <p style={{marginLeft: "1rem"}}>*영업일 대관 시 800,000원 | 별도 문의 바람</p>

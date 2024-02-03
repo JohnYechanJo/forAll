@@ -6,7 +6,7 @@ const Footer =() => {
         <div>
             <div style={{
                 display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                width: '8.5625rem', height: '4.3125rem', fontSize: '1rem', fontStyle: 'normal',
+                width: '15.5625rem', height: '4.3125rem', fontSize: '1rem', fontStyle: 'normal',
                 fontWeight: '700', lineHeight: 'normal', letterSpacing: '-0.01031rem', marginTop: '4.5rem'
             }}>
                 <a onClick={() => navigate("/FAQ")}>&nbsp;&nbsp;&nbsp;&nbsp;• 자주 묻는 질문</a>
