@@ -27,7 +27,7 @@ const ReservationListPage = () => {
             id: id,
             reason: postContent,
             cancelTime: TimeUtil.now()
-        }).then(()=>navigate(0));
+        }).then(()=>navigate("/"));
     };
     const handleAssurance = (data) => {
         console.log(data);
@@ -179,7 +179,7 @@ const ReservationListPage = () => {
                     lineHeight: "normal"
                 }}>
 
-                    <div className="bottom_button_fixed">
+                    <div className="bottom_button_relative">
                         <a style={{fontSize: "0.8rem"}} onClick={() => {
                             deleteSelect(selectReservation.id);
                             setIsErase(false)

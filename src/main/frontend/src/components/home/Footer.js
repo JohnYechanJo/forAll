@@ -14,7 +14,7 @@ const Footer =() => {
             </div>
             <div style={{
                 display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
-                width: '12.4375rem', height: '5rem', fontSize: '0.4375rem', fontStyle: 'normal',
+                width: '20rem', height: '5rem', fontSize: '0.4375rem', fontStyle: 'normal',
                 fontWeight: '700', lineHeight: 'normal', letterSpacing: '-0.01031rem', marginLeft: '1rem',
                 marginTop: '2.5rem'
             }}>

@@ -56,7 +56,8 @@ public class APIChefProfileController extends APIController {
             if (savedMember == null) throw new Exception("No member with loginId " + userId);
 
             final ChefProfile chefProfile = chefProfileService.findByMember(savedMember);
-            return new ResponseEntity(ChefProfileForm.cf(chefProfile), HttpStatus.OK);
+            if (chefProfile == null) return new ResponseEntity("",HttpStatus.OK);
+            else return new ResponseEntity(ChefProfileForm.cf(chefProfile), HttpStatus.OK);
         } catch (final Exception e) {
             return new ResponseEntity(errorResponse("Could not get profile : " + e.getMessage()),
                     HttpStatus.BAD_REQUEST);

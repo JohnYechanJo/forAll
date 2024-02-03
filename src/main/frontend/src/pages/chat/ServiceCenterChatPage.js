@@ -96,7 +96,7 @@ const ServiceCenterChatPage = () => {
                             <img src={arrowleft} alt="sidebar" style={{width:"0.5rem", height:"0.9rem", paddingLeft:"0.5rem", paddingRight:"1.5rem", margin: "auto"}} />
                         </div>
                         <div style={{alignItems:"center", display:"flex"}}>
-                            <div className={"chat_partner_id"}>{"고객센터"}</div>
+                            <div className={"chat_partner_id"}>{"포 올"}</div>
                         </div>
 
                     </div>
@@ -114,17 +114,17 @@ const ServiceCenterChatPage = () => {
                         {message.senderId === partner ? (
                             <div className={"chat_message_container"}>
                                 <div>
-                                    <div className={"chat_partner_id"}>{"고객센터"}</div>
+                                    <div className={"chat_partner_id"}>{"포 올"}</div>
                                     {message.isImage ? (
                                         <ImageViewer val={message.messageContent}/>
-                                    ) : (<div className={"chat_partner_message"}><p>{message.messageContent}</p></div>)}
+                                    ) : (<div className={"chat_partner_message"}><a>{message.messageContent}</a></div>)}
                                 </div>
                             </div>
                         ):(
                             <div className={"chat_message_container"} style={{justifyContent:"right"}}>
                                 {message.isImage ? (
                                     <ImageViewer val={message.messageContent}/>
-                                ) : (<div className={"chat_my_message"}><p>{message.messageContent}</p></div>)}
+                                ) : (<div className={"chat_my_message"}><a>{message.messageContent}</a></div>)}
                             </div>
                         )}
                     </div>

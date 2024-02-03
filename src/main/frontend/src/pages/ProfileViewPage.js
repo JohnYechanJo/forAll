@@ -30,8 +30,7 @@ const ProfileViewPage = () => {
         axios.get("/api/v1/profile/public/" + params.id)
             .then((res) => setProfile(res.data))
             .catch((err) => console.error(err));
-        const userId = sessionStorage.getItem("user_id");
-        axios.get("/api/v1/chefProfile/user/" + userId)
+        axios.get("/api/v1/chefProfile/user/" + params.id)
             .then((res) => {
                 setCareer(res.data.career ? res.data.career : []);
             })
