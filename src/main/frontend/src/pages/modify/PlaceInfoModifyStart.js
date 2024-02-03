@@ -10,7 +10,7 @@ import ForAllLogo from "../../components/ForAllLogo";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
 import ImageUploader from "../../utils/imageUploader";
 import iImg from "../../components/icons/i.png";
-import {SmallModalStyles} from "../../components/SmallModalStyles";
+import { SmallModalStyles } from "../../components/SmallModalStyles";
 
 const PlaceInfoModifyStart = () => {
   const navigate = useNavigate();
@@ -155,19 +155,19 @@ const PlaceInfoModifyStart = () => {
                 onChange={onInputHandler}
                 className="input"
                 maxLength="18"
-                style={{width: "98%"}}
+                style={{ width: "98%" }}
               />
-              <div style={{marginTop: '0.5rem', justifyContent: 'left', display: 'flex'}}>
+              <div style={{ marginTop: '0.5rem', justifyContent: 'left', display: 'flex' }}>
                 <img src={iImg} alt="iImg"
-                     style={{width: '1rem', height: '1rem', flexShrink: 0}}/>
+                  style={{ width: '1rem', height: '1rem', flexShrink: 0 }} />
                 &ensp;
-                <a style={{paddingTop: "0.05rem"}}>사용 가능한 특수문자: (,),(-),(.),(@),(/)</a>
+                <a style={{ paddingTop: "0.05rem" }}>사용 가능한 특수문자: (,),(-),(.),(@),(/)</a>
               </div>
             </div>
 
             <div>
-              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <a>공간 한 줄 소개<span style={{color: '#FF2929'}}>*</span></a>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <a>공간 한 줄 소개<span style={{ color: '#FF2929' }}>*</span></a>
                 <p>
                   <span>{placeIntro.length}</span>
                   <span>/18자</span>
@@ -179,7 +179,7 @@ const PlaceInfoModifyStart = () => {
                 onChange={onInputHandler2}
                 className="input"
                 maxLength="18"
-                style={{width: "98%"}}
+                style={{ width: "98%" }}
 
               />
             </div>
@@ -418,7 +418,7 @@ const PlaceInfoModifyStart = () => {
             <hr style={{ height: "2px", backgroundColor: "black", marginBottom: '1rem' }} />
             <a>주소(위치)<span style={{ color: '#FF2929' }} >*</span></a>
             <div >
-              <span className="input" style={{ disabled: true, width:'98%' }}>{fullAddress}</span>
+              <span className="input" style={{ disabled: true, width: '98%' }}>{fullAddress}</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }} >
               <a>
@@ -443,7 +443,7 @@ const PlaceInfoModifyStart = () => {
               onChange={onInputHandler4}
               maxLength="18"
               className="input"
-              style={{width: "98%"}}
+              style={{ width: "98%" }}
             />
             <a>• 작성하신 위치정보는 검색에 영향을 미치지 않습니다.</a>
 
@@ -455,7 +455,7 @@ const PlaceInfoModifyStart = () => {
               value={webSite}
               onChange={(e) => setWebSite(e.target.value)}
               className="input"
-              style={{width: "98%"}}
+              style={{ width: "98%" }}
 
             />
             <div style={{ display: 'flex', flexDirection: 'column' }} >
@@ -491,17 +491,64 @@ const PlaceInfoModifyStart = () => {
           onClick={() => handleButton()}
         >다음</button>
 
-        <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalStyles} >
-          <p style={{ fontSize: '0.9375rem' }}>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
-          <p style={{ fontSize: '0.9375rem' }}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
-          <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem', borderTop: '1px solid #C4C4C4' }}>
-            <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+        <Modal isOpen={isModalOpen} ariaHideApp={false} style={SmallModalStyles}>
+          <div style={{
+            justifyContent: "center", alignItems: "center",
+            fontFamily: "Noto Sans KR",
+            color: " #000",
+            fontSize: "1.25rem",
+            fontStyle: "normal",
+            fontWeight: "400",
+            lineHeight: "normal",
+
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+
+          }}>
+            <a style={{ fontSize: '0.9375rem' }}>현재 필수 입력사항이 모두 기입되지 않았습니다.</a>
+            <p style={{ fontSize: '0.9375rem' }}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+          </div>
+          <div style={{
+            display: 'flex',
+            width: '100%',
+            margin: '0px',
+            marginTop: '4rem',
+            bottom: '0',
+            position: 'fixed',
+            fontSize: "0.9375rem",
+            fontWeight: "400"
+          }}>
+            <button style={{
+              backgroundColor: "#FF4F4F",
+
+              width: '50%',
+              bottom: '0',
+              height: '3.125rem',
+              color: 'white',
+              border: 'none',
+              lineHeight: '1.875rem',
+              textAlign: 'center'
+            }}
               onClick={() => setIsModalOpen(false)}
             >
-              뒤로</button>
-            <button style={{ marginLeft: 'auto', backgroundColor: "white", width: '50%', bottom: '0', height: '3.125rem', color: 'black', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+              마저 입력하기
+            </button>
+            <button style={{
+              backgroundColor: "#000",
+
+              width: '50%',
+              bottom: '0',
+              height: '3.125rem',
+              color: 'white',
+              border: 'none',
+              lineHeight: '1.875rem',
+              textAlign: 'center'
+            }}
               onClick={() => submit()}
-            >다음</button>
+            >
+              넘어가기
+            </button>
           </div>
         </Modal>
         <Modal isOpen={pending} ariaHideApp={false} style={SmallModalStyles}>
@@ -519,8 +566,8 @@ const PlaceInfoModifyStart = () => {
             flexDirection: "column",
 
           }}>
-            <a style={{fontSize: '0.9375rem'}}>현재 입력사항을 업로드 중입니다.</a>
-            <p style={{fontSize: '0.9375rem'}}>잠시만 기다려주세요.</p>
+            <a style={{ fontSize: '0.9375rem' }}>현재 입력사항을 업로드 중입니다.</a>
+            <p style={{ fontSize: '0.9375rem' }}>잠시만 기다려주세요.</p>
           </div>
         </Modal>
       </div>

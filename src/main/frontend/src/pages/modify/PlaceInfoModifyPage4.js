@@ -184,7 +184,7 @@ const PlaceInfoModifyPage4 = () => {
                 <div style={{ width: '100%' }} >
                     <a>화구<span style={{ color: "#FF2929" }} >*</span></a>
                     <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={(firePit > 6) ? "직접 입력" : firePit + "개"} width='100%' />
-                    {(firePit > 6) ? (
+                    {(firePit === '직접 입력') ? (
                         <div>
                             <span><input type="number" onChange={onChangeFirePit} defaultValue={data.fireholeNum} style={{ width: "10vw" }} />개 </span>
                             {exactFirePit < 7 ? <p>7 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
