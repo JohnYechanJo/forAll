@@ -65,9 +65,19 @@ const PlaceInfoModifyPage6 = () => {
         setAccount(e.target.value);
     }, []);
     const onChangeAccountHolder = useCallback((e) => {
-        setAccountHolder(e.target.value);
-    }, []);
+        const reg = /^[0-9]*$/;
+        if (reg.test(e.target.value)){
+            let value = e.target.value;
 
+            if (isNaN(value) || value.length > 14) {
+                value = value.slice(0, -1);
+            }
+
+            // 입력값을 갱신합니다.
+            e.target.value = value;
+            setAccount(e.target.value);
+        }
+    }, []);
     const regPhone1 = /^01[016789]$/;
     const regPhone2 = /^\d{3,4}$/;
     const regPhone3 = /^\d{4}$/;
@@ -232,7 +242,7 @@ const PlaceInfoModifyPage6 = () => {
                             </div>
                             <div style={{display:'flex',flexDirection:'column', marginLeft: '0.63rem'}}>
                                 <a>계좌번호<span style={{ color: "#FF2929" }} >*</span></a>
-                                <input onChange={onChangeAccount} onChange={onInputChange14} placeholder={"예: 45410201376503"} defaultValue={account} className="input"
+                                <input onChange={onChangeAccount} placeholder={"예: 45410201376503"} defaultValue={account} className="input"
                                     style={{ width: '100%', height: "1.875rem", flexShrink: "0" }}
                                 />
                             </div>
