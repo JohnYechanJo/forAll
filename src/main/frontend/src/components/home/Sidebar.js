@@ -88,17 +88,21 @@ const Sidebar = ({ width = 18.75, children }) => {
     useEffect(() => {
         const userId = sessionStorage.getItem("user_id");
         if (userId) {
-            axios.get("/api/v1/members/public/" + userId)
-                .then((res) => {
-                    console.log(res.data);
-                    setUserData(res.data);
+            axios.get("/api/v1/members/checkSession")
+                .then(() => {
+                        axios.get("/api/v1/members/public/" + userId)
+                            .then((res) => {
+                                setUserData(res.data);
+                            })
+                            .catch((err) => console.error(err));
+                        axios.get("/api/v1/profile/" + userId)
+                            .then((res) => {
+                                setProfileImage(res.data.profilePhoto);
+                            })
+                            .catch((err) => console.error(err));
                 })
-                .catch((err) => console.error(err));
-            axios.get("/api/v1/profile/" + userId)
-                .then((res) => {
-                    setProfileImage(res.data.profilePhoto);
-                })
-                .catch((err) => console.error(err));
+                .catch(()=>logOut());
+
         }
     }, []);
 

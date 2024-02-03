@@ -173,4 +173,11 @@ public class  APIMemberController extends APIController {
             return new ResponseEntity(errorResponse("Could not check member was chef :" + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/members/checkSession")
+    public ResponseEntity checkLogInSession(HttpServletRequest request){
+        String loginId = (String) sessionManager.getSession(request);
+        if (loginId == null) return new ResponseEntity("Session expired", HttpStatus.BAD_REQUEST);
+        else return new ResponseEntity("Session exist", HttpStatus.OK);
+    }
 }
