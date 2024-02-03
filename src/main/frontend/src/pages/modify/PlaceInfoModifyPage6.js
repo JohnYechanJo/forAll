@@ -77,7 +77,7 @@ const PlaceInfoModifyPage6 = () => {
         else if ((regPhone1.test(phone1)) && (regPhone2.test(phone2)) && (regPhone3.test(phone3)) && (account !== "") && (accountHolder)) {
             isPublic = true;
             submit();
-        }else if ((regPhone1.test(phone1)) || (regPhone2.test(phone2)) || (regPhone3.test(phone3))){
+        }else if (!(regPhone1.test(phone1)) || !(regPhone2.test(phone2)) || !(regPhone3.test(phone3))){
             setIsPhoneOpen(true);
         }
         else setIsModalOpen(true);
