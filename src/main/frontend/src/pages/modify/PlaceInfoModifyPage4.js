@@ -40,26 +40,30 @@ const PlaceInfoModifyPage4 = () => {
     const onChangeFirePit = useCallback((e) => {
         let value = e.target.value;
 
-            // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
-            if (isNaN(value) || value.length > 2) {
-                value = value.slice(0, -1);
-            }
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 2) {
+            value = value.slice(0, -1);
+        }
 
-            // 입력값을 갱신합니다.
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
             e.target.value = value;
-        setExactFirePit(e.target.value);
+            setExactFirePit(e.target.value);
+        }
     }, []);
     const onChangeCapacity = useCallback((e) => {
         let value = e.target.value;
 
-            // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
-            if (isNaN(value) || value.length > 2) {
-                value = value.slice(0, -1);
-            }
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 2) {
+            value = value.slice(0, -1);
+        }
 
-            // 입력값을 갱신합니다.
-            e.target.value = value;
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
+        e.target.value = value;
         setCapacity(e.target.value);
+        }
     }, []);
     const toggleFryer = useCallback(() => {
         if (fryer === true) setFryer(false);
@@ -87,39 +91,43 @@ const PlaceInfoModifyPage4 = () => {
     const onChangeCountSidePlate = useCallback((e) => {
         let value = e.target.value;
 
-            // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
-            if (isNaN(value) || value.length > 2) {
-                value = value.slice(0, -1);
-            }
-
-            // 입력값을 갱신합니다.
-            e.target.value = value;
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 2) {
+            value = value.slice(0, -1);
+        }
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
+        e.target.value = value;
         setCountSidePlate(e.target.value);
+        }
     }, []);
     const onChangeCountCup = useCallback((e) => {
         let value = e.target.value;
 
-            // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
-            if (isNaN(value) || value.length > 2) {
-                value = value.slice(0, -1);
-            }
-
-            // 입력값을 갱신합니다.
-            e.target.value = value;
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 2) {
+            value = value.slice(0, -1);
+        }
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
+        e.target.value = value;
         setCountCup(e.target.value);
+        }
     }, []);
     const onChangeCountCuttrary = useCallback((e) => {
         let value = e.target.value;
 
-            // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
-            if (isNaN(value) || value.length > 2) {
-                value = value.slice(0, -1);
-            }
-
-            // 입력값을 갱신합니다.
-            e.target.value = value;
+        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
+        if (isNaN(value) || value.length > 2) {
+            value = value.slice(0, -1);
+        }
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
+        e.target.value = value;
         setCountCuttrary(e.target.value);
+        }
     }, []);
+
     useEffect(() => {
         console.log(firePit);
     }, [firePit]);
@@ -186,14 +194,14 @@ const PlaceInfoModifyPage4 = () => {
                     <DropDown dataArr={firePitData} onChange={setFirePit} placeholder={"화구 개수를 선택해주세요"} defaultData={(firePit > 6) ? "직접 입력" : firePit + "개"} width='100%' />
                     {(firePit === '직접 입력') ? (
                         <div>
-                            <span><input type="number" onChange={onChangeFirePit} defaultValue={data.fireholeNum} style={{ width: "10vw" }} />개 </span>
+                            <span><input onChange={onChangeFirePit} defaultValue={data.fireholeNum} style={{ width: "10vw" }} />개 </span>
                             {exactFirePit < 7 ? <p>7 이상의 숫자만 입력하여주세요. 직접입력의 층수는 '지상'으로 적용됩니다</p> : null}
                         </div>
                     ) : null}
                 </div>
                 <div style={{ width: '95%' }} >
                     <a>주방 수용 인원 수<span style={{ color: "#FF2929" }} >*</span></a>
-                    <span style={{ display: 'flex', alignItems: 'center' }}><input defaultValue={capacity} type="number" onChange={onChangeCapacity}  placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{ width: '100%' }} className="input" />명</span>
+                    <span style={{ display: 'flex', alignItems: 'center' }}><input defaultValue={capacity} onChange={onChangeCapacity}  placeholder={"주방이 수용 가능한 최대 인원 수를 입력해주세요."} style={{ width: '100%' }} className="input" />명</span>
                 </div>
                 <div style={{ width: '100%' }}>
                     <a>주방기계<span style={{ color: "#FF2929" }} >*</span></a>
@@ -220,7 +228,7 @@ const PlaceInfoModifyPage4 = () => {
                             <p>앞접시<span className="fontForRegister" style={{ color: "#FF2929" }}>*</span></p>
                             <ImageInputs setImg={setSidePlate} vals={sidePlate} />
                             <span style={{ alignItems: 'center', display: 'flex' }}><input
-                                type="number"
+                               
                                 onChange={onChangeCountSidePlate} className="input" placeholder={"최대 개수"}
                                 style={{ width: '5.3rem' }} defaultValue={data.plateNum} />개</span>
                         </div>
@@ -229,7 +237,7 @@ const PlaceInfoModifyPage4 = () => {
                         <p>물컵<span className="fontForRegister" style={{ color: "#FF2929" }}>*</span></p>
                         <ImageInputs setImg={setCup} vals={cup} />
                         <span style={{ alignItems: 'center', display: 'flex' }}><input onChange={onChangeCountCup} 
-                                                                                       type="number"
+                                                                                      
                             className="input"
                             placeholder={"최대 개수"}
                             style={{ width: '5.3rem' }}
@@ -241,7 +249,7 @@ const PlaceInfoModifyPage4 = () => {
                             <p>커트러리<span className="fontForRegister" style={{ color: "#FF2929" }}>*</span></p>
                             <ImageInputs setImg={setCuttrary} vals={cuttrary} />
                             <span style={{ alignItems: 'center', display: 'flex' }}><input onChange={onChangeCountCuttrary} 
-                                                                                           type="number"
+                                                                                          
                                 className="input"
                                 placeholder={"최대 개수"}
                                 style={{ width: '5.3rem' }}

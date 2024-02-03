@@ -42,29 +42,32 @@ const PlaceInfoModifyPage6 = () => {
 
     const [pending, setPending] = useState(false);
     const businessNum = data.businessNum;
-    const onChangeTradeName = useCallback((e) => {
-        if (e.target.value.length <= 28) setTradeName(e.target.value);
-    }, []);
-    const onChangeRepresentative = useCallback((e) => {
-        if (e.target.value.length <= 10) setRepresentative(e.target.value);
-    }, []);
-    const onChangeExactAddress = useCallback((e) => {
-        setExactAddress(e.target.value);
-    }, []);
 
     const onChangePhone1 = useCallback((e) => {
-        if (e.target.value.length <= 3) setPhone1(e.target.value);
+        if (e.target.value.length <= 3) {
+            const reg = /^[0-9]*$/;
+            if (reg.test(e.target.value)) {
+                setPhone1(e.target.value);
+            }
+        };
     }, []);
     const onChangePhone2 = useCallback((e) => {
-        if (e.target.value.length <= 4) setPhone2(e.target.value);
+        if (e.target.value.length <= 4) {
+            const reg = /^[0-9]*$/;
+            if (reg.test(e.target.value)) {
+                setPhone2(e.target.value);
+            }
+        };
     }, []);
     const onChangePhone3 = useCallback((e) => {
-        if (e.target.value.length <= 4) setPhone3(e.target.value);
+        if (e.target.value.length <= 4) {
+            const reg = /^[0-9]*$/;
+            if (reg.test(e.target.value)) {
+                setPhone3(e.target.value);
+            }
+        };
     }, []);
     const onChangeAccount = useCallback((e) => {
-        setAccount(e.target.value);
-    }, []);
-    const onChangeAccountHolder = useCallback((e) => {
         const reg = /^[0-9]*$/;
         if (reg.test(e.target.value)){
             let value = e.target.value;
@@ -72,11 +75,12 @@ const PlaceInfoModifyPage6 = () => {
             if (isNaN(value) || value.length > 14) {
                 value = value.slice(0, -1);
             }
-
             // 입력값을 갱신합니다.
             e.target.value = value;
-            setAccount(e.target.value);
-        }
+        setAccount(e.target.value);}
+    }, []);
+    const onChangeAccountHolder = useCallback((e) => {
+        setAccountHolder(e.target.value);
     }, []);
     const regPhone1 = /^01[016789]$/;
     const regPhone2 = /^\d{3,4}$/;
@@ -93,18 +97,6 @@ const PlaceInfoModifyPage6 = () => {
         else setIsModalOpen(true);
     };
 
-    // 입력을 처리하는 이벤트 핸들러
-    const onInputChange14 = (event) => {
-        let value = event.target.value;
-
-        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
-        if (isNaN(value) || value.length > 14) {
-            value = value.slice(0, -1);
-        }
-
-        // 입력값을 갱신합니다.
-        event.target.value = value;
-    }
 
     const submit = async () => {
         if(pending) return;

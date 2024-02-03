@@ -60,9 +60,11 @@ const PlaceInfoModifyPage3 = () => {
         if (isNaN(value) || value.length > 2) {
             value = value.slice(0, -1);
         }
-        // 입력값을 갱신합니다.
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
         e.target.value = value;
         setExactPark(e.target.value);
+        }
     }, []);
     const onChangeTable = useCallback((e) => {
         let value = e.target.value;
@@ -70,9 +72,11 @@ const PlaceInfoModifyPage3 = () => {
         if (isNaN(value) || value.length > 2) {
             value = value.slice(0, -1);
         }
-        // 입력값을 갱신합니다.
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
         e.target.value = value;
         setTable(e.target.value);
+        }
     }, []);
     const onChangeSeat = useCallback((e) => {
         let value = e.target.value;
@@ -81,18 +85,22 @@ const PlaceInfoModifyPage3 = () => {
             value = value.slice(0, -1);
         }
         // 입력값을 갱신합니다.
-        e.target.value = value;
-        setSeat(e.target.value);
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
+            e.target.value = value;
+            setSeat(e.target.value);
+        }
     }, []);
     const onChangePrice = useCallback((e) => {
         let value = e.target.value;
-        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
         if (isNaN(value) || value.length > 7) {
             value = value.slice(0, -1);
         }
-        // 입력값을 갱신합니다.
-        e.target.value = value;
-        setPrice(e.target.value);
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
+            e.target.value = value;
+            setPrice(e.target.value);
+        }
     }, []);
 
     const onChangeDate = useCallback((e) => {
@@ -337,7 +345,7 @@ const PlaceInfoModifyPage3 = () => {
                         <div style={{ marginTop: '0.5rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <input className="input" style={{ width: '10vw' }} onChange={onChangePark} 
-                                       type="number"
+                                       
                                     value={exactPark} />
                                 <a>대</a>
                             </div>
@@ -382,7 +390,7 @@ const PlaceInfoModifyPage3 = () => {
                     <a className="fontForRegister">테이블<span style={{ color: "#FF2929" }}>*</span></a>
                     <div>
                         <span className="fontForRegister" style={{ display: 'flex', alignItems: 'center' }}><input
-                            type="number"
+                            
                             onChange={onChangeTable}
                             defaultValue={data.tableNum}
                             className="input"
@@ -394,7 +402,7 @@ const PlaceInfoModifyPage3 = () => {
                     <a className="fontForRegister">좌석 수<span style={{ color: "#FF2929" }}>*</span></a>
                     <div>
                         <span className="fontForRegister" style={{ display: 'flex', alignItems: 'center' }}><input
-                            type="number"
+                            
                             onChange={onChangeSeat}
                             defaultValue={data.seatNum}
                             className="input"
@@ -407,7 +415,7 @@ const PlaceInfoModifyPage3 = () => {
                     <a className="fontForRegister">가격 설정<span style={{ color: "#FF2929" }}>*</span></a>
                     <div>
                         <span className="fontForRegister" style={{ display: 'flex', alignItems: 'center' }}><input
-                            type="number"
+                            
                             onChange={onChangePrice}
                             defaultValue={data.priceSet}
                             className="input"

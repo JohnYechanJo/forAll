@@ -50,26 +50,50 @@ const HostRegistry6 = () => {
         if (e.target.value.length <= 10) setRepresentative(e.target.value);
     }, []);
     const onChangeRegistNum1 = useCallback((e) => {
-        if (e.target.value.length <= 3) setRegistNum1(e.target.value);
+        if (e.target.value.length <= 3) {
+            const reg = /^[0-9]*$/;
+            if (reg.test(e.target.value))
+            setRegistNum1(e.target.value);
+        };
     }, []);
     const onChangeRegistNum2 = useCallback((e) => {
-        if (e.target.value.length <= 2) setRegistNum2(e.target.value);
+        if (e.target.value.length <= 2) {
+            const reg = /^[0-9]*$/;
+            if (reg.test(e.target.value))
+            setRegistNum2(e.target.value);
+        };
     }, []);
     const onChangeRegistNum3 = useCallback((e) => {
-        if (e.target.value.length <= 5) setRegistNum3(e.target.value);
+        if (e.target.value.length <= 5) {
+            const reg = /^[0-9]*$/;
+            if (reg.test(e.target.value))
+            setRegistNum3(e.target.value);
+        };
     }, []);
     const onChangeExactAddress = useCallback((e) => {
         setExactAddress(e.target.value);
     }, []);
 
     const onChangePhone1 = useCallback((e) => {
-        if (e.target.value.length <= 3) setPhone1(e.target.value);
+        if (e.target.value.length <= 3) {
+            const reg = /^[0-9]*$/;
+            if (reg.test(e.target.value))
+            setPhone1(e.target.value);
+        }
     }, []);
     const onChangePhone2 = useCallback((e) => {
-        if (e.target.value.length <= 4) setPhone2(e.target.value);
+        if (e.target.value.length <= 4) {
+            const reg = /^[0-9]*$/;
+            if (reg.test(e.target.value))
+            setPhone2(e.target.value)
+        };
     }, []);
     const onChangePhone3 = useCallback((e) => {
-        if (e.target.value.length <= 4) setPhone3(e.target.value);
+        if (e.target.value.length <= 4) {
+            const reg = /^[0-9]*$/;
+            if (reg.test(e.target.value))
+            setPhone3(e.target.value)
+        };
     }, []);
     const onChangeAccount = useCallback((e) => {
         const reg = /^[0-9]*$/;
@@ -79,7 +103,6 @@ const HostRegistry6 = () => {
             if (isNaN(value) || value.length > 14) {
                 value = value.slice(0, -1);
             }
-
             // 입력값을 갱신합니다.
             e.target.value = value;
             setAccount(e.target.value);
@@ -222,9 +245,9 @@ const HostRegistry6 = () => {
                 <div style={{ marginBottom:"-1rem" }}>
                     <p>사업자 등록번호<span style={{ color: "#FF2929" }} >*</span></p>
                     <div style={{ display: "flex",alignItems:'center',justifyContent:'space-between' }} >
-                        <input type="number" value={registNum1} onChange={onChangeRegistNum1} className="input" style={{ width: "30%" }} />-
-                        <input type="number" value={registNum2} onChange={onChangeRegistNum2} className="input" style={{ width: "30%" }} />-
-                        <input type="number" value={registNum3} onChange={onChangeRegistNum3} className="input" style={{ width: "30%" }} />
+                        <input value={registNum1} onChange={onChangeRegistNum1} className="input" style={{ width: "30%" }} />-
+                        <input value={registNum2} onChange={onChangeRegistNum2} className="input" style={{ width: "30%" }} />-
+                        <input value={registNum3} onChange={onChangeRegistNum3} className="input" style={{ width: "30%" }} />
                     </div>
                     <div style={{ padding: "0px 0px", display: "flex", flexDirection: 'column' }} >
                         <a style={{ color: "red" }} >• 사업자 등록번호는 필수 입력입니다.</a>
@@ -262,9 +285,9 @@ const HostRegistry6 = () => {
                 <div>
                     <p>정산용 연락처<span style={{color: "#FF2929"}}>*</span></p>
                     <div style={{display: "flex", alignItems: 'center', justifyContent: 'space-between'}}>
-                        <input value={phone1} type="number" onChange={onChangePhone1} className="input" style={{width: "30%"}}/>-
-                        <input value={phone2} type="number" onChange={onChangePhone2} className="input" style={{width: "30%"}}/>-
-                        <input value={phone3} type="number" onChange={onChangePhone3} className="input" style={{width: "30%"}}/>
+                        <input value={phone1} onChange={onChangePhone1} className="input" style={{width: "30%"}}/>-
+                        <input value={phone2} onChange={onChangePhone2} className="input" style={{width: "30%"}}/>-
+                        <input value={phone3} onChange={onChangePhone3} className="input" style={{width: "30%"}}/>
                     </div>
                 </div>
             </div>

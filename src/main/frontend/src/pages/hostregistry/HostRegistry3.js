@@ -57,9 +57,11 @@ const HostRegistry3 = () => {
         if (isNaN(value) || value.length > 2) {
             value = value.slice(0, -1);
         }
-        // 입력값을 갱신합니다.
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
         e.target.value = value;
         setExactPark(e.target.value);
+        }
     }, []);
     const onChangeTable = useCallback((e) => {
         let value = e.target.value;
@@ -67,9 +69,11 @@ const HostRegistry3 = () => {
         if (isNaN(value) || value.length > 2) {
             value = value.slice(0, -1);
         }
-        // 입력값을 갱신합니다.
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
         e.target.value = value;
         setTable(e.target.value);
+        }
     }, []);
     const onChangeSeat = useCallback((e) => {
         let value = e.target.value;
@@ -78,18 +82,22 @@ const HostRegistry3 = () => {
             value = value.slice(0, -1);
         }
         // 입력값을 갱신합니다.
-        e.target.value = value;
-        setSeat(e.target.value);
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
+            e.target.value = value;
+            setSeat(e.target.value);
+        }
     }, []);
     const onChangePrice = useCallback((e) => {
         let value = e.target.value;
-        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
         if (isNaN(value) || value.length > 7) {
             value = value.slice(0, -1);
         }
-        // 입력값을 갱신합니다.
-        e.target.value = value;
-        setPrice(e.target.value);
+        const reg = /^[0-9]*$/;
+        if (reg.test(value)) {
+            e.target.value = value;
+            setPrice(e.target.value);
+        }
     }, []);
     const onChangeDate = useCallback((e) => {
         setRentDays(e.target.value);
@@ -176,31 +184,6 @@ const HostRegistry3 = () => {
         setFormattedPrice(formattedPrice);
     }, [seat]);
 
-    // 입력을 처리하는 이벤트 핸들러
-    const onInputChange2 = (event) => {
-        let value = event.target.value;
-
-        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
-        if (isNaN(value) || value.length > 2) {
-            value = value.slice(0, -1);
-        }
-
-        // 입력값을 갱신합니다.
-        event.target.value = value;
-    }
-// 입력을 처리하는 이벤트 핸들러
-    const onInputChange7 = (event) => {
-        let value = event.target.value;
-
-        // 입력된 값이 숫자가 아닌 경우 또는 길이가 2를 초과하는 경우 마지막 문자를 삭제합니다.
-        if (isNaN(value) || value.length > 7) {
-            value = value.slice(0, -1);
-        }
-
-        // 입력값을 갱신합니다.
-        event.target.value = value;
-    }
-
     return (
         <div
             style={{
@@ -230,36 +213,36 @@ const HostRegistry3 = () => {
                     <DropDown dataArr={rentWeeksData} onChange={setRentWeek} placeholder={"휴무없음"} width='100%' />
                     {rentWeek === "직접지정" ?
                         <input onChange={onChangeDate} placeholder="대관 가능일을 입력해주세요"
-                               maxLength="20"
-                               className="input" style={{
-                            width: '99%',
-                            fontSize: '0.625rem',
-                            marginTop: '0.5rem'
-                        }} /> : (rentWeek !== "휴무없음" ?
-                            <div style={{ display: 'flex' }}>
-                                <div className={monDay ? "btn_selected_square" : "btn_not_selected_square"}
-                                    onClick={toggleMonday}>월
+                            maxLength="20"
+                            className="input" style={{
+                                width: '99%',
+                                fontSize: '0.625rem',
+                                marginTop: '0.5rem'
+                            }} /> : (rentWeek !== "휴무없음" ?
+                                <div style={{ display: 'flex' }}>
+                                    <div className={monDay ? "btn_selected_square" : "btn_not_selected_square"}
+                                        onClick={toggleMonday}>월
+                                    </div>
+                                    <div className={tuesDay ? "btn_selected_square" : "btn_not_selected_square"}
+                                        onClick={toggleTuesDay}>화
+                                    </div>
+                                    <div className={wednesDay ? "btn_selected_square" : "btn_not_selected_square"}
+                                        onClick={toggleWednesDay}>수
+                                    </div>
+                                    <div className={thursDay ? "btn_selected_square" : "btn_not_selected_square"}
+                                        onClick={toggleThursDay}>목
+                                    </div>
+                                    <div className={friDay ? "btn_selected_square" : "btn_not_selected_square"}
+                                        onClick={toggleFriDay}>금
+                                    </div>
+                                    <div className={saturDay ? "btn_selected_square" : "btn_not_selected_square"}
+                                        onClick={toggleSaturDay}>토
+                                    </div>
+                                    <div className={sunDay ? "btn_selected_square" : "btn_not_selected_square"}
+                                        onClick={toggleSunDay}>일
+                                    </div>
                                 </div>
-                                <div className={tuesDay ? "btn_selected_square" : "btn_not_selected_square"}
-                                    onClick={toggleTuesDay}>화
-                                </div>
-                                <div className={wednesDay ? "btn_selected_square" : "btn_not_selected_square"}
-                                    onClick={toggleWednesDay}>수
-                                </div>
-                                <div className={thursDay ? "btn_selected_square" : "btn_not_selected_square"}
-                                    onClick={toggleThursDay}>목
-                                </div>
-                                <div className={friDay ? "btn_selected_square" : "btn_not_selected_square"}
-                                    onClick={toggleFriDay}>금
-                                </div>
-                                <div className={saturDay ? "btn_selected_square" : "btn_not_selected_square"}
-                                    onClick={toggleSaturDay}>토
-                                </div>
-                                <div className={sunDay ? "btn_selected_square" : "btn_not_selected_square"}
-                                    onClick={toggleSunDay}>일
-                                </div>
-                            </div>
-                            : null)}
+                                : null)}
                 </div>
 
                 <div className="fontForRegister">
@@ -288,7 +271,7 @@ const HostRegistry3 = () => {
                         <div>
                             <div style={{ display: 'flex', width: '100%', alignItems: 'center', marginTop: '0.5rem' }}>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <input  onChange={onChangePark} className="input" type="number" style={{ width: '10vw' }}  />
+                                    <input onChange={onChangePark} className="input"  style={{ width: '10vw' }} />
                                     <a>대</a>
                                 </div>
                             </div>
@@ -339,7 +322,7 @@ const HostRegistry3 = () => {
                     <a className="fontForRegister">테이블<span style={{ color: "#FF2929" }}>*</span></a>
                     <div>
                         <span className="fontForRegister" style={{ display: 'flex', alignItems: 'center' }}><input
-                            type="number"
+                            
                             onChange={onChangeTable}
                             className="input"
                             placeholder={"최대 테이블 수를 기준으로 입력해주세요"}
@@ -350,7 +333,7 @@ const HostRegistry3 = () => {
                     <a className="fontForRegister">좌석 수<span style={{ color: "#FF2929" }}>*</span></a>
                     <div>
                         <span className="fontForRegister" style={{ display: 'flex', alignItems: 'center' }}><input
-                            type="number"
+                            
                             onChange={onChangeSeat}
                             className="input"
                             placeholder={"최대 좌석수를 기준으로 입력해주세요"}
@@ -361,7 +344,7 @@ const HostRegistry3 = () => {
                     <a className="fontForRegister">가격 설정<span style={{ color: "#FF2929" }}>*</span></a>
                     <div>
                         <span className="fontForRegister" style={{ display: 'flex', alignItems: 'center' }}><input
-                        type="number"
+                            
                             onChange={onChangePrice}
                             className="input"
                             placeholder={"포 올 권장기준에 참고하여 가격을 설정해주세요"}
