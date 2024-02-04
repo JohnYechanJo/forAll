@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import project.forAll.domain.BassDomain;
 import project.forAll.domain.Image;
+import project.forAll.domain.member.ChefPending;
 import project.forAll.domain.member.Member;
 
 import javax.persistence.*;
@@ -44,5 +45,7 @@ public class Space extends BassDomain {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "closeImage_id")
     private List<Image> closeImage = new ArrayList<>();
-    private boolean isPublic;
+
+    // 공간 펜딩 여부
+    private SpacePending spacePending;
 }

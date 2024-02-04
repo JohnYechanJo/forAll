@@ -8,9 +8,9 @@ export const SmallModalStyles = {
         transform: 'translate(-50%, -50%)',
         backgroundColor: 'white',
         color: 'black',
-        width: '10.9375rem',
-        height: '3.125rem',
-        flexShrink: '0',
+        width: '80%',
+        height: '15rem',
+
         border: '1px solid'+ '#C4C4C4',
         alignItems: 'center',
         display: 'flex',

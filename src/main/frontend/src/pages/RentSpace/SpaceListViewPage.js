@@ -6,6 +6,7 @@ import Sidebar from "../../components/home/Sidebar";
 import HomeTemplate from "../../components/home/HomeTemplate";
 import {AddressUtil} from "../../utils/AddressUtil";
 import pointer from "../../components/icons/pointer.png";
+import Header from "../../components/home/Header";
 
 const SpaceListViewPage = () => {
     const navigate = useNavigate();
@@ -23,12 +24,13 @@ const SpaceListViewPage = () => {
                 <button className="button">대관하기</button>
                 <button className="button" onClick={()=>navigate("/",{state:{focus:"board"}})}>커뮤니티</button>
             </div>
+            <Header/>
             <Sidebar/>
             <HomeTemplate />
             <div>
                 {data ? data.map((data, idx) =>
                     (<div key={idx} style={{width:"100%"}} onClick={()=>navigate("/rentSpace/"+data.id)}>
-                        <ImageViewer val={data.mainImage} />
+                        <ImageViewer val={data.mainImage} isfixed />
                         <div style={{paddingLeft:"1rem"}}>
                             <p style={{margin:0,fontSize:"1rem",fontWeight:"500"}}>{data.priceSet}원</p>
                             <div style={{display:"flex"}}>

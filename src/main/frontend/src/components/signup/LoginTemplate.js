@@ -50,13 +50,16 @@ const LoginTemplate = () => {
         }
     }
     return (
-        <div style={{display:"flex",flexDirection:"column" , alignItems:"center",justifyContent:"center",padding:'1rem',gap:'4rem'}} >
-            <div style={{display:"flex",flexDirection:"column", margin:"1rem",alignItems:"center",justifyContent:"center"}} >
+        <div style={{display:"flex",flexDirection:"column" , alignItems:"center",justifyContent:"center",padding:'1rem'}} >
+            <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center",
+                margin:"1rem"}} >
                 <input
                     placeholder="아이디 입력"
                     className="input"
                     value={id}
                     onChange={onChangeId}
+                    style={{width: '19.375rem', height: '3.125rem', flexShrink: 0, padding: '0 1.25rem',
+                        marginBottom: '0.5rem'}}
                 />
                 <input
                     placeholder="비밀번호 입력"
@@ -64,13 +67,18 @@ const LoginTemplate = () => {
                     type="password"
                     value={passwd}
                     onChange={onChangePw}
+                    style={{width: '19.375rem', height: '3.125rem', flexShrink: 0, padding: '0 1.25rem',
+                        marginBottom: '4rem'}}
                 />
             </div>
             <div>
                 <div style={{display:'flex',flexDirection:'column'}}>
-                    <button onClick={() => logIn()} style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',backgroundColor:'#616161',marginBottom:'0.5rem'}} >로그인</button>
+                    <button onClick={() => logIn()} style={{width: "22rem", height: '3.125rem',
+                        flexShrink: 0, backgroundColor: '#616161',
+                        marginBottom: '0.5rem'}}>로그인</button>
                     <Link to="/signUp">
-                        <button style={{width:"21.875rem",height:'3.125rem',flexShrink:'0',border:'1px solid #000',backgroundColor:'white'}}>회원가입</button>
+                        <button style={{width: "22rem", height: '3.125rem', flexShrink: '0',
+                            border: '1px solid #000', backgroundColor: 'white'}}>회원가입</button>
                     </Link>
                 </div>
                 <div  style={{
@@ -81,6 +89,7 @@ const LoginTemplate = () => {
                     fontWeight:"500",
                     lineHeight:"1.375rem",
                     textDecorationLine:"underline",
+                    marginTop: '0.5rem'
                 }}>
                     <Link to="/searchId"><span style={{
                         color: "#B0B0B0",

@@ -66,7 +66,7 @@
 
 .inputForRegister {
     width: 21.875rem;
-    height: 1.875rem;
+    height: 2.5rem;
     flex-shrink: 0;
     border: 1px solid #D9D9D9;
     background: #FFF;
@@ -75,11 +75,12 @@
 
 .buttonForRegister {
     width: 7.125rem;
-    height: 2.4375rem;
+    height: 2.5rem;
     flex-shrink: 0;
     border: 1px solid #7B7B7B;
     background: #FFF;
     margin-left: 0.94rem;
+    font-size: 0.625rem;
 }
 
 .fontForRegister {
@@ -87,7 +88,7 @@
     font-family: "Noto Sans KR";
     font-size: 0.625rem;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
 }
 
@@ -111,6 +112,16 @@
     width: 6.875rem;
     height: 1.875rem;
     flex-shrink: 0;
+}
+.bottom_button {
+    height: 3.125rem;
+    width: 101%;
+    border:none;
+    color: white;
+    position: relative;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .bottom_button_fixed {
@@ -154,7 +165,48 @@
     display: flex;
     justify-content: center;
 }
+.approve_fixed {
 
+    margin-bottom: 2.75rem;
+    color: black;
+    position: absolute;
+    bottom: 0;
+    right: 5%;
+    transform: translateX(-50%);
+    text-align: right;
+    background-color: #FFF;
+    flex-shrink: 0;
+
+    font-weight: 700;
+    line-height: normal;
+
+    display: flex;
+    justify-content: right;
+    font-size: 0.9375rem;
+
+    text-decoration-line: underline;
+}
+.approve_relative {
+
+    margin-bottom: 2.75rem;
+    color: black;
+    position: relative;
+    bottom: 0;
+    right: 5%;
+    transform: translateX(-50%);
+    text-align: right;
+    background-color: #FFF;
+    flex-shrink: 0;
+
+    font-weight: 700;
+    line-height: normal;
+
+    display: flex;
+    justify-content: right;
+    font-size: 0.9375rem;
+
+    text-decoration-line: underline;
+}
 input[type="checkbox"] {
     display: none;
 }

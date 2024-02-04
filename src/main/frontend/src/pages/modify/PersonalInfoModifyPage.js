@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
+import Header from "../../components/home/Header";
 import PersonalInfoModifyInputTemplate from "../../components/modify/PersonalInfoModifyInputTemplate";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -8,6 +8,7 @@ import "../../components/Styles.css";
 import UseTermsTemplate from "../../components/signup/UseTermsTemplate";
 import * as regularExpressions from "../../utils/regularExpressions";
 import Alert from "../../components/Alert";
+
 const PersonalModify = () => {
     const navigate = useNavigate();
     const [pw, setPw] = useState('');
@@ -168,12 +169,38 @@ const PersonalModify = () => {
                     setIsUseTermsChecked={setIsUseTermsChecked}
                 />
             </div>
-            <div style={{ display: 'flex', width: '100%', margin: '0px', marginTop: '4rem' }}>
-                <button style={{ marginLeft: 'auto', backgroundColor: "#FF4F4F", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+            <div style={{
+                display: 'flex',
+                width: '100%',
+                margin: '0px',
+                marginTop: '4rem',
+
+                fontSize: "0.9375rem",
+                fontWeight: "400"
+            }}>
+                <button style={{
+                    marginLeft: 'auto',
+                    backgroundColor: "#FF4F4F",
+                    width: '50%',
+                    bottom: '0',
+                    height: '3.125rem',
+                    color: 'white',
+                    border: 'none',
+                    lineHeight: '1.875rem',
+                    textAlign: 'center' }}
                         onClick={() => navigate('/')}
                 >
                     이전</button>
-                <button style={{ marginLeft: 'auto', backgroundColor: "#525252", width: '50%', bottom: '0', height: '3.125rem', color: 'white', border: 'none', lineHeight: '1.875rem', textAlign: 'center' }}
+                <button style={{
+                    marginLeft: 'auto',
+                    backgroundColor: "#525252",
+                    width: '50%',
+                    bottom: '0',
+                    height: '3.125rem',
+                    color: 'white',
+                    border: 'none',
+                    lineHeight: '1.875rem',
+                    textAlign: 'center' }}
                         onClick={() => handleButton()}
                 >다음</button>
             </div>

@@ -93,6 +93,7 @@
 }
 .chat_partner_message{
     margin:0;
+    display: flex;
     color: #000;
     font-family: "Noto Sans KR";
     font-size: 0.9rem;
@@ -103,9 +104,16 @@
     border-radius: 0.3125rem;
     border: 1px solid rgba(196, 196, 196, 0.20);
     background: #FFF;
+    & p{
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 .chat_my_message{
     margin:0;
+    display: flex;
     color: #000;
     font-family: "Noto Sans KR";
     font-size: 0.9rem;
@@ -115,6 +123,12 @@
     letter-spacing: -0.01031rem;
     border-radius: 0.3125rem;
     background: #FFE147;
+    & p{
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 .chat_container{
     overflow:auto;

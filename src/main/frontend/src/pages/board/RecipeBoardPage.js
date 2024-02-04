@@ -12,6 +12,7 @@ import updownImg from "../../components/icons/updown.jpg";
 import pencilImg from "../../components/icons/pencil.jpg";
 import ImageViewer from "../../components/ImageViewer";
 import clip from "../../components/icons/clip.png";
+import Header from "../../components/home/Header";
 
 const RecipeBoardPage = () => {
     const navigate = useNavigate();
@@ -56,6 +57,7 @@ const RecipeBoardPage = () => {
                 <button className="button">대관하기</button>
                 <button className="button">커뮤니티</button>
             </div>
+            <Header/>
             <Sidebar/>
             <HomeTemplate />
             <div>
@@ -92,8 +94,6 @@ const RecipeBoardPage = () => {
                             fontSize: '0.625rem', fontStyle: 'normal', fontWeight: '500',
                             lineHeight: 'normal', letterSpacing: '-0.01031rem'
                         }}>새 글을 작성해주세요!</p>
-                        {/*<a onClick={() => setNewPost(true)}*/}
-                        {/*    disabled={!sessionStorage.getItem("user_id")}>새 글을 작성해주세요!</a>*/}
                     </div>
                 </div>
                 <div>

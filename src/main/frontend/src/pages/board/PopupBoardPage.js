@@ -12,6 +12,7 @@ import ImagePreView from "../../components/ImagePreView";
 import updownImg from "../../components/icons/updown.jpg";
 import pencilImg from "../../components/icons/pencil.jpg";
 import clip from "../../components/icons/clip.png";
+import Header from "../../components/home/Header";
 
 const PopupBoardPage = () => {
     const navigate = useNavigate();
@@ -56,6 +57,7 @@ const PopupBoardPage = () => {
                 <button className="button" onClick={() => navigate("/",{state: {focus: "space"}})}>대관하기</button>
                 <button className="button">커뮤니티</button>
             </div>
+            <Header/>
             <Sidebar/>
             <HomeTemplate />
             <div>

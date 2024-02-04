@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
+import Header from "../../components/home/Header";
 import PersonalInfoModifyInputTemplate from "../../components/modify/PersonalInfoModifyInputTemplate";
 import { useEffect, useState } from "react";
 import { Gender } from "../../utils/enums";

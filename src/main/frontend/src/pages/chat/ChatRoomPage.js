@@ -26,7 +26,6 @@ const ChatRoomPage = () => {
     const [partnerData, setPartnerData] = useState();
     const [inputMessage, setInputMessage] = useState("");
     const [inputImage, setInputImage] = useState();
-    const [inputIsImage, setInputIsImage] = useState(false);
     const onChangeMessage = useCallback((e) => {
         setInputMessage(e.target.value);
     }, []);
@@ -81,16 +80,26 @@ const ChatRoomPage = () => {
             targetId: data.partner,
             chatRoomId: roomId,
             sendTime:  new Date().toJSON(),
-            isImage: inputIsImage
+            isImage: false
         };
-        if (inputIsImage){
-            chatMessage.messageContent = await ImageUploader(inputImage, sessionStorage.getItem("user_id"));
-        }
         client.current.send("/pub/chat/sendMessage", {}, JSON.stringify(chatMessage));
         setInputMessage("");
-        setInputIsImage(false);
-
     };
+    const sendImage = async () => {
+        if (!isConnected) return;
+        const chatMessage = {
+            messageContent: await ImageUploader(inputImage, sessionStorage.getItem("user_id")),
+            senderId: sessionStorage.getItem("user_id"),
+            targetId: data.partner,
+            chatRoomId: roomId,
+            sendTime:  new Date().toJSON(),
+            isImage: true
+        };
+        client.current.send("/pub/chat/sendMessage", {}, JSON.stringify(chatMessage));
+    };
+    useDidMountEffect(() => {
+        sendImage();
+    }, [inputImage]);
     return(
         <div>
             <div style={{position:"fixed", width:"100%"}}>
@@ -134,14 +143,14 @@ const ChatRoomPage = () => {
                                     <div className={"chat_partner_id"}>{partner}</div>
                                     {message.isImage ? (
                                         <ImageViewer val={message.messageContent}/>
-                                    ) : (<div className={"chat_partner_message"}>{message.messageContent}</div>)}
+                                    ) : (<div className={"chat_partner_message"}><p>{message.messageContent}</p></div>)}
                                 </div>
                             </div>
                         ):(
-                            <div>
+                            <div className={"chat_message_container"} style={{justifyContent:"right"}}>
                                 {message.isImage ? (
                                     <ImageViewer val={message.messageContent}/>
-                                ) : (<div className={"chat_my_message"}>{message.messageContent}</div>)}
+                                ) : (<div className={"chat_my_message"}><p>{message.messageContent}</p></div>)}
                             </div>
                         )}
                     </div>
@@ -156,7 +165,6 @@ const ChatRoomPage = () => {
                                accept="image/*"
                                onChange={(e) => {
                                    setInputImage(e.target.files[0]);
-                                   setInputIsImage(true);
                                }}
                                style={{display: "none"}}
                         />

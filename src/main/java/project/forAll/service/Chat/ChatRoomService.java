@@ -69,7 +69,7 @@ public class ChatRoomService extends Service {
         List<Message> messages = messageRepository.findByChatRoom(chatRoom);
         if (!messages.isEmpty()){
             Message lastMessage = messages.get(messages.size()-1);
-            form.setLastMessage(lastMessage.getMessageContent());
+            form.setLastMessage(lastMessage.isImage() ? "사진" : lastMessage.getMessageContent());
             form.setSendTime(lastMessage.getSendTime());
             if (userId != null) form.setNotReadCount(messages.stream().filter(message -> !message.isReadFlag() && message.getTargetId().equals(userId)).count());
         }

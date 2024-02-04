@@ -31,7 +31,7 @@ const RentSpaceComplete = () => {
                     <span style={{ fontSize: "0.938rem", fontWeight: "400", marginLeft: '1rem' }} >{email}</span>
                 </div>
             </div>
-            <button onClick={() => { navigate("/"); }} className="bottom_button" style={{ backgroundColor: "black", position: "fixed", width:"100%", height:"3.12rem", color:"white", bottom:0 }} >확인</button>
+            <button onClick={() => { navigate("/"); }} className="bottom_button" style={{ backgroundColor: "black", position: "fixed", width:"101%", height:"3.12rem", color:"white", bottom:0 }} >확인</button>
         </div>
     )
 };

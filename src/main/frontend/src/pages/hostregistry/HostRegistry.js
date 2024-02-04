@@ -11,6 +11,7 @@ import ForAllLogo from "../../components/ForAllLogo";
 import ImageInput from "../../components/ImageInput";
 import Alert from "../../components/Alert";
 import { ExplanationModalStyles } from "../../components/ExplanationModalStyles";
+import {SmallModalStyles} from "../../components/SmallModalStyles";
 const HostRegistry = () => {
     const [inputCount, setInputCount] = useState(0);
     const [inputCount2, setInputCount2] = useState(0);
@@ -197,13 +198,13 @@ const HostRegistry = () => {
                                                 <hr style={{ height: "1px", backgroundColor: "black" }} />
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;주방, 홀이 하나로 결합된 형태입니다.</p>
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;주방과 홀이 결합되면서 음식을 만드는 사람과 가까이할 수 있어
                                                     대면형보다 더 긴밀한 커뮤니케이션이 가능하며, 요리를 하는 동시에 식사가 가능한 형태를 띕니다.
                                                 </p>
@@ -265,13 +266,13 @@ const HostRegistry = () => {
                                                 <hr style={{ height: "1px", backgroundColor: "black" }} />
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;부엌과 다이닝룸이 한 공간에 자리하는 형태입니다.</p>
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;식탁이 따로 놓여 있지만, 음식을 만드는 사람의 얼굴을 보며
                                                     대화를 나눌 수 있는 구조입니다.</p>
                                             </div>
@@ -332,19 +333,19 @@ const HostRegistry = () => {
                                                 <hr style={{ height: "1px", backgroundColor: "black" }} />
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;차분하게 조리와 정리에 전념할 수 있습니다.</p>
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;또한, 조리할 때 발생하는 오염과 냄새, 연기, 소리 등이 거실에 비교적 전달이 되지 않습니다.
                                                 </p>
                                                 <p style={{
                                                     textAlign: 'left',
-                                                    paddingLeft: "1rem",
-                                                    paddingRight: "1rem"
+                                                    paddingLeft: "5%",
+                                                    paddingRight: "5%"
                                                 }}>•&ensp;홀에서는 어수선한 모습이 보이지 않아 쾌적한 매장 환경이 만들어집니다.</p>
                                             </div>
                                             <div class="bottom_button_fixed">
@@ -362,18 +363,18 @@ const HostRegistry = () => {
                         </div>
                         <div style={{ marginTop: '1.5rem' }} >
                             <a>위치 정보<span style={{ color: '#FF2929' }} >*</span></a>
-                            <hr style={{ height: "1px", backgroundColor: "black",marginBottom:'1rem' }} />
+                            <hr style={{ height: "1px", backgroundColor: "black", marginBottom: '1rem' }} />
                             <a>주소(위치)<span style={{ color: '#FF2929' }} >*</span></a>
-                            <div style={{display:'flex'}} >
-                            <input value={address} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '80%' }} className="inputForRegister" />
-                            <Modal isOpen={modalOpen1} >
-                                <DaumPost setAddress={(e) => {
-                                    setAddress(e);
-                                    setModalOpen1(false);
-                                }} />
-                                <button onClick={() => setModalOpen1(false)}>닫기</button>
-                            </Modal>
-                            <button onClick={() => setModalOpen1(true)} style={{ width: "3.4375rem", height: "1.875rem", fontSize: "0.625rem", backgroundColor: "black", color: "white", borderRadius: '0.375rem', marginLeft: '0.31rem' }} >주소등록</button>
+                            <div style={{ display: 'flex' }} >
+                                <input value={address} disabled={true} placeholder="실제 서비스가 되는 공간의 주소를 입력해주세요." style={{ width: '80%' }} className="inputForRegister" />
+                                <Modal isOpen={modalOpen1} >
+                                    <DaumPost setAddress={(e) => {
+                                        setAddress(e);
+                                        setModalOpen1(false);
+                                    }} />
+                                    <button onClick={() => setModalOpen1(false)}>닫기</button>
+                                </Modal>
+                                <button onClick={() => setModalOpen1(true)} style={{ width: "3.4375rem", height: "1.875rem", fontSize: "0.625rem", backgroundColor: "black", color: "white", borderRadius: '0.375rem', marginLeft: '0.31rem' }} >주소등록</button>
                             </div>
                             <div>
                                 <span>{(address !== null) ? address : null} </span>
@@ -407,7 +408,7 @@ const HostRegistry = () => {
                                     <span>/18자</span>
                                 </p>
                             </div>
-                            <input type="text" placeholder="ex.성수역 4번출구 도보 1분 거리" 
+                            <input type="text" placeholder="ex.성수역 4번출구 도보 1분 거리"
                                 className="input"
                                 onChange={onInputHandler4} maxLength="17" />
                             <div style={{ display: 'flex', flexDirection: 'column' }} >
@@ -418,7 +419,7 @@ const HostRegistry = () => {
                         </div>
                         <div>
                             <a>웹사이트<span style={{ color: '#FF2929' }} >*</span></a>
-                            <input type="text" placeholder="웹사이트 URL을 입력해주세요." 
+                            <input type="text" placeholder="웹사이트 URL을 입력해주세요."
                                 className="input"
                                 onChange={(e) => setWebSite(e.target.value)} />
                             <div style={{ display: 'flex', flexDirection: 'column' }} >
@@ -443,11 +444,65 @@ const HostRegistry = () => {
                         </div>
                     </div>
 
-                    <Modal isOpen={isModalOpen} style={ModalStyles} ariaHideApp={false}>
-                        <p>현재 필수 입력사항이 모두 기입되지 않았습니다.</p>
-                        <p>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
-                        <button onClick={() => setIsModalOpen(false)}>뒤로</button>
-                        <button onClick={() => submit()}>다음</button>
+                    <Modal isOpen={isModalOpen} ariaHideApp={false} style={SmallModalStyles}>
+                        <div style={{
+                            justifyContent: "center", alignItems: "center",
+                            fontFamily: "Noto Sans KR",
+                            color: " #000",
+                            fontSize: "1.25rem",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "normal",
+
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+
+                        }}>
+                            <a style={{fontSize: '0.9375rem'}}>현재 필수 입력사항이 모두 기입되지 않았습니다.</a>
+                            <p style={{fontSize: '0.9375rem'}}>이 경우 해당 공간은 '비공개' 상태로 등록되며, 게스트들에게 노출되지 않습니다.</p>
+                        </div>
+                        <div style={{
+                            display: 'flex',
+                            width: '100%',
+                            margin: '0px',
+                            marginTop: '4rem',
+                            bottom: '0',
+                            position: 'fixed',
+                            fontSize: "0.9375rem",
+                            fontWeight: "400"
+                        }}>
+                            <button style={{
+                                backgroundColor: "#FF4F4F",
+
+                                width: '50%',
+                                bottom: '0',
+                                height: '3.125rem',
+                                color: 'white',
+                                border: 'none',
+                                lineHeight: '1.875rem',
+                                textAlign: 'center'
+                            }}
+                                    onClick={() => setIsModalOpen(false)}
+                            >
+                                마저 입력하기
+                            </button>
+                            <button style={{
+                                backgroundColor: "#000",
+
+                                width: '50%',
+                                bottom: '0',
+                                height: '3.125rem',
+                                color: 'white',
+                                border: 'none',
+                                lineHeight: '1.875rem',
+                                textAlign: 'center'
+                            }}
+                                    onClick={() => submit()}
+                            >
+                                넘어가기
+                            </button>
+                        </div>
                     </Modal>
                     <Alert isOpen={isAlertOpen} setIsOpen={setIsAlertOpen} content={"주소는 필수입력사항입니다."} />
                 </div>

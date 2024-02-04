@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from "../components/home/Header";
 import SearchIdTemplate from "../components/SearchIdTemplate";
 import {useState} from "react";
 import * as regularExpressions from "../utils/regularExpressions";
